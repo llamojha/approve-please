@@ -119,7 +119,13 @@ const WorkScreen = () => {
           />
         </div>
         <div className={styles.rightColumn}>
-          <RulebookPanel rules={rules} day={currentDay} codename={activeConfig.codename} dayQuote={dayQuote} />
+          <RulebookPanel
+            rules={rules}
+            day={currentDay}
+            codename={activeConfig.codename}
+            mood={activeConfig.mood}
+            dayQuote={dayQuote}
+          />
           <StatsPanel counters={counters} meters={meters} />
           <AccessibilityPanel />
         </div>

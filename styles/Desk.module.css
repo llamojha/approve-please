@@ -53,6 +53,19 @@
   flex-shrink: 0;
 }
 
+.moodBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(56, 189, 248, 0.15);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .panelBody {
   padding: 1rem;
   flex: 1;
@@ -392,6 +405,12 @@
 
 .ruleList strong {
   color: var(--text);
+}
+
+.ruleEmptyState {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
 }
 
 .statsGrid {

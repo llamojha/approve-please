@@ -4,6 +4,7 @@ import { SITE_METADATA } from '../constants/siteMetadata';
 import { GameProvider } from '../context/GameContext';
 import { UIPreferencesProvider } from '../context/UIPreferencesContext';
 import '../styles/globals.css';
+import HydrationErrorBoundary from '../components/common/HydrationErrorBoundary';
 
 export default function App({ Component, pageProps }: AppProps) {
   const socialImageUrl = `${SITE_METADATA.url}${SITE_METADATA.image}`;
@@ -44,7 +45,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <meta name="twitter:creator" content={SITE_METADATA.twitterHandle} />
           ) : null}
         </Head>
-        <Component {...pageProps} />
+        <HydrationErrorBoundary>
+          <Component {...pageProps} />
+        </HydrationErrorBoundary>
       </GameProvider>
     </UIPreferencesProvider>
   );
