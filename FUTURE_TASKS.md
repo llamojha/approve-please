@@ -1,7 +1,5 @@
 # Future Tasks
 
-- Expand the campaign beyond Day 3 with additional rule variations, story beats, and escalating volume knobs.
-- [Priority] Improve the "Request changes" interaction so the suspected bug type selector sits directly beneath the button and uses clearer copy/styling, reducing user confusion when filing rejections.
 - Build a reusable engineer roster (persona traits, tone, quote banks) and wire PR authors/briefings to those personas so characters feel consistent across the game.
 - Layer in NPC reactions: when you approve or reject a PR, its author posts a short in-character response, influenced by their current happiness.
 - Track happiness/relationship meters per engineer that rise/fall with your decisions, impacting future dialog or PR quality when thresholds are crossed.

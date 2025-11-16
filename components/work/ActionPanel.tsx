@@ -35,32 +35,48 @@ const ActionPanel = ({
         </div>
         <TutorialHint text="Wrap up reviews here. Use keyboard shortcuts to move faster once you're confident." />
       </div>
-      <div className={styles.bugKindRow}>
-        <small>Suspected Bug Type</small>
-        <div className={styles.bugKindButtons}>
-          {bugKinds.map((kind) => (
-            <button
-              key={kind}
-              type="button"
-              className={[styles.bugKindButton, kind === bugKind ? styles.bugKindButtonActive : '']
-                .filter(Boolean)
-                .join(' ')}
-              onClick={() => onBugKindChange(kind)}
-            >
-              {kind}
-            </button>
-          ))}
-        </div>
-      </div>
       <div className={styles.actionButtons}>
-        <button type="button" onClick={onApprove} disabled={disableApprove}>
-          <span>Approve & Deploy</span>
-          <kbd className={styles.hotkeyBadge}>A</kbd>
-        </button>
-        <button type="button" onClick={onRequestChanges} disabled={!canRequest}>
-          <span>Request Changes</span>
-          <kbd className={styles.hotkeyBadge}>R</kbd>
-        </button>
+        <div className={styles.actionButtonGroup}>
+          <button
+            type="button"
+            className={`${styles.actionButton} ${styles.approveButton}`}
+            onClick={onApprove}
+            disabled={disableApprove}
+          >
+            <span>Approve & Deploy</span>
+            <kbd className={styles.hotkeyBadge}>A</kbd>
+          </button>
+          <p className={styles.actionSubcopy}>Greenlight it when the diff feels rock solid.</p>
+        </div>
+        <div className={`${styles.actionButtonGroup} ${styles.requestGroup}`}>
+          <button
+            type="button"
+            className={`${styles.actionButton} ${styles.requestButton}`}
+            onClick={onRequestChanges}
+            disabled={!canRequest}
+          >
+            <span>Request Changes</span>
+            <kbd className={styles.hotkeyBadge}>R</kbd>
+          </button>
+          <div className={styles.requestDetails}>
+            <p className={styles.requestLabel}>Why block this deploy?</p>
+            <p className={styles.requestHelper}>Pick the closest issue type so the author knows what to fix.</p>
+            <div className={styles.bugKindButtons}>
+              {bugKinds.map((kind) => (
+                <button
+                  key={kind}
+                  type="button"
+                  className={[styles.bugKindButton, kind === bugKind ? styles.bugKindButtonActive : '']
+                    .filter(Boolean)
+                    .join(' ')}
+                  onClick={() => onBugKindChange(kind)}
+                >
+                  {kind}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
       <ul className={styles.shortcutLegend}>
         <li>

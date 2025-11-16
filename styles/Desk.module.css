@@ -454,31 +454,34 @@
   background: var(--accent);
 }
 
-.bugKindRow small {
-  display: block;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
 .bugKindButtons {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.5rem;
+  width: 100%;
 }
 
 .bugKindButton {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid transparent;
+  background: rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(248, 113, 113, 0.35);
   border-radius: 0.65rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0.65rem;
   color: inherit;
+  text-transform: capitalize;
+  font-weight: 600;
+  transition: border 0.15s ease, background 0.15s ease, transform 0.15s ease;
 }
 
 .bugKindButtonActive {
-  border-color: var(--accent);
-  background: rgba(56, 189, 248, 0.1);
+  border-color: var(--danger);
+  background: rgba(248, 113, 113, 0.28);
+  color: #fee2e2;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.2);
+}
+
+.bugKindButton:focus-visible {
+  outline: 2px solid rgba(248, 113, 113, 0.6);
+  outline-offset: 2px;
 }
 
 .selectionHint {
@@ -516,8 +519,24 @@
   margin-top: 0.75rem;
 }
 
-.actionButtons button {
+.actionButtonGroup {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.actionSubcopy {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.requestGroup {
+  flex: 1.2;
+}
+
+.actionButton {
   padding: 0.75rem 0.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -525,17 +544,42 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  width: 100%;
 }
 
-.actionButtons button:first-of-type {
-  background: var(--accent);
+.approveButton {
+  background: var(--success);
   color: #ffffff;
-  border-color: var(--accent);
+  border-color: var(--success);
 }
 
-.actionButtons button:last-of-type {
+.requestButton {
   background: rgba(248, 113, 113, 0.12);
   color: var(--danger);
+}
+
+.requestDetails {
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  background: rgba(248, 113, 113, 0.15);
+  border-radius: 0.65rem;
+  padding: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.requestLabel {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.requestHelper {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #fecaca;
 }
 
 .shortcutLegend {
