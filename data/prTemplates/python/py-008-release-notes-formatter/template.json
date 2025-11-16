@@ -1,0 +1,60 @@
+{
+  "templateId": "py-008-release-notes-formatter",
+  "title": "Add release notes formatter",
+  "author": "Cal J.",
+  "description": "Provides a reusable formatter for release note entries before posting to Slack.",
+  "tags": [
+    "release",
+    "docs"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega formateador de release notes",
+      "description": "Provee un formateador reutilizable para entradas de release notes antes de publicarlas en Slack.",
+      "tags": [
+        "release",
+        "documentación"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "release/notes.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 33,
+          "content": "def format_release_note(entry: dict) -> str:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    lines_out = [f\"- {entry['title']}\"]",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    for change in entry.get(\"changes\", []):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        lines_out.append(f\"  * {change}\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    return \"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "\".join(lines_out)",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

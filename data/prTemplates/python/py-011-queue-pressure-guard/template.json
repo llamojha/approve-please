@@ -1,0 +1,62 @@
+{
+  "templateId": "py-011-queue-pressure-guard",
+  "title": "Tighten queue pressure guard",
+  "author": "Imani D.",
+  "description": "Adds a helper that decides when the orchestrator queue is overloaded.",
+  "tags": [
+    "logic",
+    "queue"
+  ],
+  "localized": {
+    "es": {
+      "title": "Refuerza el guard de presión de la cola",
+      "description": "Agrega un helper que decide cuándo la cola del orquestador está sobrecargada.",
+      "tags": [
+        "lógica",
+        "cola"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "orchestrator/pressure.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 61,
+          "content": "def queue_is_overloaded(pending_jobs: int, limit: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    if pending_jobs < limit:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Comparison is inverted; backlog should trigger when pending exceeds the limit, not when it is below.",
+      "localizedDescription": {
+        "es": "La comparación está invertida; el backlog debe activarse cuando los pendientes superan el límite, no cuando están por debajo."
+      },
+      "lineNumbers": [
+        62
+      ]
+    }
+  ]
+}

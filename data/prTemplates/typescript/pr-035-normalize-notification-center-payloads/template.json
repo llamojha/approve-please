@@ -1,0 +1,100 @@
+{
+  "templateId": "pr-035-normalize-notification-center-payloads",
+  "title": "Normalize Notification Center payloads",
+  "author": "Leo P.",
+  "description": "Adds a helper to normalize notification center inputs so downstream jobs stay consistent.",
+  "tags": [
+    "cleanup",
+    "feature"
+  ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Notification Center",
+      "description": "Agrega un helper para normalizar entradas de notification center y mantener consistentes los jobs.",
+      "tags": [
+        "limpieza",
+        "funcionalidad"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/notification/notification-center.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 110,
+          "content": "  export function buildNotificationCenterPayload(input: NotificationCenterInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "    const defaults = { retries: 1, ttlMs: 90000, priority: 'normal', locale: 'en-US' };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 114,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 115,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 116,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 117,
+          "content": "      dispatchAt: input.dispatchAt ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 118,
+          "content": "      locale: input.locale ?? defaults.locale,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 119,
+          "content": "      deliveryStrategy: input.deliveryStrategy ?? 'immediate',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 120,
+          "content": "      payloadVersion: input.payloadVersion ?? 'v1',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 122,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 123,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

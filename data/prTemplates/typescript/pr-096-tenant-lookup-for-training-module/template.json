@@ -1,0 +1,66 @@
+{
+  "templateId": "pr-096-tenant-lookup-for-training-module",
+  "title": "Tenant lookup for Training Module",
+  "author": "Hank B.",
+  "description": "Adds a helper to fetch the latest tenant rows for reporting.",
+  "tags": [
+    "bugfix",
+    "hotfix",
+    "refactor",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Búsqueda de tenants para Training Module",
+      "description": "Agrega un helper para obtener las filas más recientes del tenant para reportes.",
+      "tags": [
+        "corrección",
+        "hotfix",
+        "refactor",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/db/training-module.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "  export async function loadTrainingModuleByTenant(db: Database, tenantId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    const query = `SELECT id, status FROM training_module WHERE tenant_id = '${tenantId}' ORDER BY updated_at DESC`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    return db.query(query);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        61
+      ],
+      "severity": "critical",
+      "description": "Interpolates tenantId directly into SQL, enabling injection.",
+      "localizedDescription": {
+        "es": "Interpolas tenantId directamente en SQL, lo que permite inyección."
+      }
+    }
+  ]
+}

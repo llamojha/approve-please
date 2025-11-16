@@ -1,0 +1,89 @@
+{
+  "templateId": "pr-013-queue-warranty-center-jobs",
+  "title": "Queue Warranty Center jobs",
+  "author": "Uma R.",
+  "description": "Streams vetted jobs into the async worker queue.",
+  "tags": [
+    "bugfix",
+    "hotfix",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Encola jobs de Warranty Center",
+      "description": "Envía los jobs validados a la cola del worker async.",
+      "tags": [
+        "corrección",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/queues/warranty-center.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  export async function enqueueWarrantyCenterJob(job: WarrantyCenterJob) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    if (!job.id) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "      metrics.increment('warranty-center.missing_id');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "      logger.warn('Dropping job with missing id', job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    await jobQueue.publish(job.id, job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    return job.id;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        51
+      ],
+      "severity": "major",
+      "description": "Publishes the job even when the id is missing instead of returning early.",
+      "localizedDescription": {
+        "es": "Publica el job incluso si falta el id en lugar de salir temprano."
+      }
+    }
+  ]
+}

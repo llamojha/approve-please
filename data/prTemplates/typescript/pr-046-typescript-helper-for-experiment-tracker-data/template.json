@@ -1,0 +1,66 @@
+{
+  "templateId": "pr-046-typescript-helper-for-experiment-tracker-data",
+  "title": "TypeScript helper for Experiment Tracker data",
+  "author": "Ivy P.",
+  "description": "Adds a raw SQL helper to fetch organization rows.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "hotfix",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de TypeScript para datos de Experiment Tracker",
+      "description": "Agrega un helper de SQL crudo para obtener filas de la organización.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "analytics/experiment-tracker.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export async function fetchExperimentTracker(db: DatabaseClient, orgId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    const sql = `SELECT * FROM experiment_tracker WHERE org_id = '${orgId}'`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    return db.raw(sql);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        76
+      ],
+      "severity": "critical",
+      "description": "Builds SQL via string interpolation and allows injection.",
+      "localizedDescription": {
+        "es": "Construye SQL con interpolación de strings y permite inyección."
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "templateId": "pr-062-add-feature-flags-panel",
+  "title": "Add Feature Flags panel",
+  "author": "Ravi M.",
+  "description": "Introduces a dashboard card that surfaces the latest feature flags metrics.",
+  "tags": [
+    "feature",
+    "infra",
+    "ui"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de Feature Flags",
+      "description": "Introduce una tarjeta de dashboard con las métricas recientes de feature flags.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "ui"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/components/feature-flags.tsx",
+      "language": "tsx",
+      "lines": [
+        {
+          "lineNumber": 110,
+          "content": "  export function FeatureFlagsPanel() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "    const { data, isLoading } = useFeatureFlagsQuery();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "    if (isLoading) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "      return <Skeleton rows={4} />;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 114,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 115,
+          "content": "    return (",
+          "isNew": true
+        },
+        {
+          "lineNumber": 116,
+          "content": "      <section class=\"panel\">",
+          "isNew": true
+        },
+        {
+          "lineNumber": 117,
+          "content": "        <h3>Feature Flags</h3>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 118,
+          "content": "        <MetricGrid items={data.metrics} />",
+          "isNew": true
+        },
+        {
+          "lineNumber": 119,
+          "content": "      </section>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 120,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

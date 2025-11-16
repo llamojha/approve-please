@@ -1,0 +1,108 @@
+{
+  "templateId": "java-035-job-poller-sleep",
+  "title": "Job poller loop",
+  "author": "Ian F.",
+  "description": "Polls job statuses sequentially.",
+  "tags": [
+    "performance",
+    "queue"
+  ],
+  "localized": {
+    "es": {
+      "title": "Loop del poller de jobs",
+      "description": "Hace poll de estados de jobs de forma secuencial.",
+      "tags": [
+        "rendimiento",
+        "cola"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/jobs/Poller.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 63,
+          "content": "public final class Poller {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "  public List<JobStatus> poll(JobClient client, List<String> ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "    List<JobStatus> statuses = new ArrayList<>();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    for (String id : ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "      try {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "        Thread.sleep(2000);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "      } catch (InterruptedException ignored) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 70,
+          "content": "      }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "      statuses.add(client.fetch(id));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "    return statuses;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Sleeps two seconds per job instead of using a backoff per batch.",
+      "localizedDescription": {
+        "es": "Duerme dos segundos por job en vez de usar un backoff por batch."
+      },
+      "lineNumbers": [
+        68,
+        69
+      ]
+    }
+  ]
+}

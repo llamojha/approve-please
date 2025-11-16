@@ -1,0 +1,65 @@
+{
+  "templateId": "java-010-search-index-sampler",
+  "title": "Search index sampler",
+  "author": "Helena Q.",
+  "description": "Adds a helper that samples index documents for diagnostics.",
+  "tags": [
+    "search",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Sampler del search index",
+      "description": "Agrega un helper que samplea documentos del índice para diagnósticos.",
+      "tags": [
+        "búsqueda",
+        "ops"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/search/IndexSampler.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "public class IndexSampler {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "  public List<SearchDocument> sample(List<SearchDocument> docs, int count) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    return docs.stream()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "      .limit(count)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "      .collect(Collectors.toList());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

@@ -1,0 +1,64 @@
+{
+  "templateId": "pr-044-tenant-lookup-for-release-notes",
+  "title": "Tenant lookup for Release Notes",
+  "author": "Jonah R.",
+  "description": "Adds a helper to fetch the latest tenant rows for reporting.",
+  "tags": [
+    "cleanup",
+    "hotfix",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Búsqueda de tenants para Release Notes",
+      "description": "Agrega un helper para obtener las filas más recientes del tenant para reportes.",
+      "tags": [
+        "limpieza",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/db/release-notes.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export async function loadReleaseNotesByTenant(db: Database, tenantId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    const query = `SELECT id, status FROM release_notes WHERE tenant_id = '${tenantId}' ORDER BY updated_at DESC`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    return db.query(query);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        76
+      ],
+      "severity": "critical",
+      "description": "Interpolates tenantId directly into SQL, enabling injection.",
+      "localizedDescription": {
+        "es": "Interpolas tenantId directamente en SQL, habilitando inyección."
+      }
+    }
+  ]
+}

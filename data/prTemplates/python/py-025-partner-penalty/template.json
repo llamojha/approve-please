@@ -1,0 +1,62 @@
+{
+  "templateId": "py-025-partner-penalty",
+  "title": "Partner penalty trigger",
+  "author": "Ivy L.",
+  "description": "Determines if a partner should incur a penalty based on their error rate.",
+  "tags": [
+    "logic",
+    "partnerships"
+  ],
+  "localized": {
+    "es": {
+      "title": "Disparador de penalización para partners",
+      "description": "Determina si un partner debe incurrir en una penalización según su tasa de errores.",
+      "tags": [
+        "lógica",
+        "alianzas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "partners/penalties.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 66,
+          "content": "def should_apply_penalty(error_rate: float, threshold: float) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "    if error_rate < threshold:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Penalties should apply when error rate rises above the threshold, not below it.",
+      "localizedDescription": {
+        "es": "Las penalizaciones deben aplicarse cuando la tasa de errores supera el umbral, no cuando está por debajo."
+      },
+      "lineNumbers": [
+        67
+      ]
+    }
+  ]
+}

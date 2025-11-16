@@ -1,0 +1,67 @@
+{
+  "templateId": "java-012-circuit-breaker-throttle",
+  "title": "Circuit breaker throttle",
+  "author": "Joon P.",
+  "description": "Adds a helper to decide if we should block requests based on failure rate.",
+  "tags": [
+    "logic",
+    "resilience"
+  ],
+  "localized": {
+    "es": {
+      "title": "Throttle del circuit breaker",
+      "description": "Agrega un helper para decidir si debemos bloquear requests según la tasa de fallos.",
+      "tags": [
+        "lógica",
+        "resiliencia"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/resilience/CircuitBreaker.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 130,
+          "content": "public final class CircuitBreaker {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 131,
+          "content": "  public boolean shouldBlock(double failureRate, double threshold) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 132,
+          "content": "    return failureRate <= threshold;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 133,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 134,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Blocks traffic when failure rates are low and allows it when rates are high.",
+      "localizedDescription": {
+        "es": "Bloquea el tráfico cuando la tasa de fallos es baja y lo permite cuando es alta."
+      },
+      "lineNumbers": [
+        132
+      ]
+    }
+  ]
+}

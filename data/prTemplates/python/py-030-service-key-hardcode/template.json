@@ -1,0 +1,83 @@
+{
+  "templateId": "py-030-service-key-hardcode",
+  "title": "Service key header helper",
+  "author": "Lena H.",
+  "description": "Adds helper headers for the partner sync client.",
+  "tags": [
+    "security",
+    "infra"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de headers para la service key",
+      "description": "Agrega headers helper para el cliente de sincronización de partners.",
+      "tags": [
+        "seguridad",
+        "infra"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "integrations/headers.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 9,
+          "content": "DEFAULT_SERVICE_KEY = \"sk_live_5b77f6\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 10,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "def build_partner_headers() -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "    return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "        \"User-Agent\": \"PartnerSync/1.0\",",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "        \"X-Service-Key\": DEFAULT_SERVICE_KEY",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Hard-codes a live service key inside the repository.",
+      "localizedDescription": {
+        "es": "Hardcodea una service key live dentro del repositorio."
+      },
+      "lineNumbers": [
+        9,
+        15
+      ]
+    }
+  ]
+}

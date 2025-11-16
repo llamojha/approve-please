@@ -1,0 +1,102 @@
+{
+  "templateId": "pr-099-normalize-compliance-report-payloads",
+  "title": "Normalize Compliance Report payloads",
+  "author": "Jonah R.",
+  "description": "Adds a helper to normalize compliance report inputs so downstream jobs stay consistent.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Compliance Report",
+      "description": "Agrega un helper para normalizar las entradas de compliance report y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/compliance/compliance-report.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export function buildComplianceReportPayload(input: ComplianceReportInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    const defaults = { retries: 0, ttlMs: 240000, auditTrail: true, controlSet: [] };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "      auditTrail: input.auditTrail ?? defaults.auditTrail,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "      controlSet: input.controlSet ?? defaults.controlSet,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "      reportingWindow: input.reportingWindow ?? 'current-quarter',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "      reviewer: input.reviewer ?? 'compliance-bot',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

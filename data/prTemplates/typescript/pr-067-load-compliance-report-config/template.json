@@ -1,0 +1,69 @@
+{
+  "templateId": "pr-067-load-compliance-report-config",
+  "title": "Load Compliance Report config",
+  "author": "Priya S.",
+  "description": "Adds a helper that reloads config before evaluating feature logic.",
+  "tags": [
+    "bugfix",
+    "ops",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Carga la configuración de Compliance Report",
+      "description": "Agrega un helper que recarga la configuración antes de evaluar la lógica.",
+      "tags": [
+        "corrección",
+        "ops",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/config/compliance-report.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 115,
+          "content": "  export function loadComplianceReportConfig(path = '/etc/service/compliance-report.json') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 116,
+          "content": "    const raw = fs.readFileSync(path, 'utf8');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 117,
+          "content": "    const parsed = JSON.parse(raw);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 118,
+          "content": "    return parsed;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 119,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        116
+      ],
+      "severity": "major",
+      "description": "Uses blocking fs.readFileSync on every call in the request path.",
+      "localizedDescription": {
+        "es": "Usa fs.readFileSync (bloqueante) en cada llamada del request path."
+      }
+    }
+  ]
+}

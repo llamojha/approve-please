@@ -1,0 +1,77 @@
+{
+  "templateId": "rust-032-unvalidated-path-loader",
+  "title": "Template loader helper",
+  "author": "Dylan H.",
+  "description": "Loads markdown templates from disk for notifications.",
+  "tags": [
+    "security",
+    "filesystem"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para cargar templates",
+      "description": "Carga templates markdown desde disco para notificaciones.",
+      "tags": [
+        "seguridad",
+        "filesystem"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/templates/loader.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 26,
+          "content": "use std::path::PathBuf;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "pub fn load_template(base: &str, name: &str) -> anyhow::Result<String> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    let mut path = PathBuf::from(base);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    path.push(name);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    Ok(std::fs::read_to_string(path)?)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Concatenates user input into file paths without validation, enabling traversal.",
+      "localizedDescription": {
+        "es": "Concatena input del usuario en rutas de archivos sin validaci\u00f3n, habilitando traversal."
+      },
+      "lineNumbers": [
+        29
+      ]
+    }
+  ]
+}

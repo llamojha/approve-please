@@ -1,0 +1,97 @@
+{
+  "templateId": "rust-045-disk-write-per-row",
+  "title": "Row exporter helper",
+  "author": "Rosa W.",
+  "description": "Exports billing rows to disk for reconciliation.",
+  "tags": [
+    "performance",
+    "io"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para exportar filas",
+      "description": "Exporta filas de billing a disco para la conciliaci\u00f3n.",
+      "tags": [
+        "rendimiento",
+        "io"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/exporters/row_writer.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "use std::fs::File;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "use std::io::Write;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "use std::path::Path;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "pub fn write_rows(path: &Path, rows: &[String]) -> anyhow::Result<()> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    for row in rows {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "        let mut file = File::create(path)?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "        writeln!(file, \"{}\", row)?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    Ok(())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Reopens the file for every row instead of streaming once.",
+      "localizedDescription": {
+        "es": "Reabre el archivo para cada fila en lugar de streamear una \u00fanica vez."
+      },
+      "lineNumbers": [
+        24
+      ]
+    }
+  ]
+}

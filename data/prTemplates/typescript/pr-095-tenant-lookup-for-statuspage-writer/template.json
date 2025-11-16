@@ -1,0 +1,64 @@
+{
+  "templateId": "pr-095-tenant-lookup-for-statuspage-writer",
+  "title": "Tenant lookup for Statuspage Writer",
+  "author": "Ivy P.",
+  "description": "Adds a helper to fetch the latest tenant rows for reporting.",
+  "tags": [
+    "data",
+    "hotfix",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Búsqueda de tenants para Statuspage Writer",
+      "description": "Agrega un helper para obtener las filas más recientes del tenant para reportes.",
+      "tags": [
+        "datos",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/db/statuspage-writer.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 80,
+          "content": "  export async function loadStatuspageWriterByTenant(db: Database, tenantId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    const query = `SELECT id, status FROM statuspage_writer WHERE tenant_id = '${tenantId}' ORDER BY updated_at DESC`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    return db.query(query);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        81
+      ],
+      "severity": "critical",
+      "description": "Interpolates tenantId directly into SQL, enabling injection.",
+      "localizedDescription": {
+        "es": "Interpolas tenantId directamente en SQL, lo que permite inyección."
+      }
+    }
+  ]
+}

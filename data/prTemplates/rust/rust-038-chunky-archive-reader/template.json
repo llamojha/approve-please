@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-038-chunky-archive-reader",
+  "title": "Archive stream helper",
+  "author": "Iker Q.",
+  "description": "Streams archive blobs to downstream processors.",
+  "tags": [
+    "performance",
+    "storage"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para streamear archivos",
+      "description": "Streamea blobs de archivos a los procesadores posteriores.",
+      "tags": [
+        "rendimiento",
+        "almacenamiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/archive/reader.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use std::path::Path;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "pub fn read_archive(path: &Path) -> anyhow::Result<Vec<u8>> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    let bytes = std::fs::read(path)?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    Ok(bytes)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Reads the entire archive into memory before streaming.",
+      "localizedDescription": {
+        "es": "Lee el archivo completo en memoria antes de streamearlo."
+      },
+      "lineNumbers": [
+        33
+      ]
+    }
+  ]
+}

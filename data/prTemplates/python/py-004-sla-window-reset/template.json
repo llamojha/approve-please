@@ -1,0 +1,85 @@
+{
+  "templateId": "py-004-sla-window-reset",
+  "title": "Add SLA window reset helper",
+  "author": "Marta Q.",
+  "description": "Adds a context manager that temporarily resets the SLA tracking window during recalibration.",
+  "tags": [
+    "sla",
+    "maintenance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para resetear la ventana de SLA",
+      "description": "Agrega un context manager que resetea temporalmente la ventana de seguimiento de SLA durante la recalibración.",
+      "tags": [
+        "sla",
+        "mantenimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "sla/window.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 72,
+          "content": "from contextlib import contextmanager",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "@contextmanager",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "def temporarily_reset_window(metrics):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    original_window = metrics.window",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    metrics.window = metrics.window.reset()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "    try:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "        yield metrics.window",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    finally:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "        metrics.window = original_window",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

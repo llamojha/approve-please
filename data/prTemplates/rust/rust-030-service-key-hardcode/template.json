@@ -1,0 +1,77 @@
+{
+  "templateId": "rust-030-service-key-hardcode",
+  "title": "Service key header helper",
+  "author": "Oscar L.",
+  "description": "Adds helper headers for the partner sync client.",
+  "tags": [
+    "security",
+    "infra"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de headers para la service key",
+      "description": "Agrega headers helper para el cliente de sincronizaci\u00f3n de partners.",
+      "tags": [
+        "seguridad",
+        "infra"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/infra/service_key.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 12,
+          "content": "use http::HeaderMap;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "pub const SERVICE_KEY: &str = \"sk_live_9z82hqPn4TZIEd\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "pub fn attach_service_key(headers: &mut HeaderMap) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "    headers.insert(\"X-Service-Key\", SERVICE_KEY.parse().unwrap());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Hard-codes a live service key inside the repository.",
+      "localizedDescription": {
+        "es": "Hardcodea una service key live dentro del repositorio."
+      },
+      "lineNumbers": [
+        15
+      ]
+    }
+  ]
+}

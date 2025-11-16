@@ -1,0 +1,99 @@
+{
+  "templateId": "pr-058-normalize-audit-pipeline-payloads",
+  "title": "Normalize Audit Pipeline payloads",
+  "author": "Brielle S.",
+  "description": "Adds a helper to normalize audit pipeline inputs so downstream jobs stay consistent.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "feature",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Audit Pipeline",
+      "description": "Agrega un helper para normalizar entradas de audit pipeline y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "funcionalidad",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/audit/audit-pipeline.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "  export function buildAuditPipelinePayload(input: AuditPipelineInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    const defaults = { retries: 2, ttlMs: 45000, auditVersion: 'v2', redactPayload: true };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "      scope: input.scope ?? 'full',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "      redactPayload: input.redactPayload ?? defaults.redactPayload,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "      auditBucket: input.auditBucket ?? 'default',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 107,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

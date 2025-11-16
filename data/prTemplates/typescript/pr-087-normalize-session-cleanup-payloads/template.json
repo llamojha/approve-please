@@ -1,0 +1,104 @@
+{
+  "templateId": "pr-087-normalize-session-cleanup-payloads",
+  "title": "Normalize Session Cleanup payloads",
+  "author": "Wendy C.",
+  "description": "Adds a helper to normalize session cleanup inputs so downstream jobs stay consistent.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "feature",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Session Cleanup",
+      "description": "Agrega un helper para normalizar entradas de limpieza de sesiones y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "funcionalidad",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/session/session-cleanup.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  export function buildSessionCleanupPayload(input: SessionCleanupInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    const defaults = { retries: 3, ttlMs: 30000, sweepScope: 'tenant', dryRun: false, cleanupBatchSize: 500 };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "      sweepScope: input.sweepScope ?? defaults.sweepScope,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "      dryRun: input.dryRun ?? defaults.dryRun,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "      cleanupBatchSize: input.cleanupBatchSize ?? defaults.cleanupBatchSize,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "      origin: input.origin ?? 'session-cleaner',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

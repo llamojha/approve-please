@@ -1,0 +1,70 @@
+{
+  "templateId": "py-003-runtime-health-pulse",
+  "title": "Add runtime health pulse emitter",
+  "author": "Owen L.",
+  "description": "Streams a lightweight pulse event when jitter exceeds tolerance so observability dashboards stay accurate.",
+  "tags": [
+    "observability",
+    "events"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega emisor de pulso de runtime health",
+      "description": "Emite un evento ligero cuando el jitter excede la tolerancia para que los dashboards de observabilidad se mantengan precisos.",
+      "tags": [
+        "observabilidad",
+        "eventos"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "telemetry/health_pulse.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 34,
+          "content": "def emit_health_pulse(bus, service_name: str, jitter_ms: int) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    payload = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        \"service\": service_name,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "        \"jitter_ms\": jitter_ms,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "        \"emitted_at\": bus.clock.isoformat()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    bus.publish(\"health.pulse\", payload)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    return payload",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

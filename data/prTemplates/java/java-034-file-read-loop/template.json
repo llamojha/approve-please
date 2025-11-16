@@ -1,0 +1,78 @@
+{
+  "templateId": "java-034-file-read-loop",
+  "title": "Archive reader helper",
+  "author": "Hana L.",
+  "description": "Streams archive blobs to downstream processors.",
+  "tags": [
+    "performance",
+    "io"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del lector de archivos",
+      "description": "Streamea blobs de archivos a procesadores posteriores.",
+      "tags": [
+        "rendimiento",
+        "io"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/archives/ArchiveReader.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 27,
+          "content": "public final class ArchiveReader {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "  public Stream<byte[]> stream(Path path) throws IOException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    byte[] contents = Files.readAllBytes(path);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    return IntStream.range(0, contents.length)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "      .mapToObj(idx -> new byte[] { contents[idx] });",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Loads the entire archive into memory and then slices per byte.",
+      "localizedDescription": {
+        "es": "Carga todo el archivo en memoria y luego lo corta byte por byte."
+      },
+      "lineNumbers": [
+        29,
+        30
+      ]
+    }
+  ]
+}

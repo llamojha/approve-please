@@ -1,0 +1,77 @@
+{
+  "templateId": "py-034-allowlist-bypass",
+  "title": "Control plane allowlist helper",
+  "author": "Casey U.",
+  "description": "Adds a helper to enforce deployer allowlists.",
+  "tags": [
+    "security",
+    "access"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de allowlist para el control plane",
+      "description": "Agrega un helper para hacer cumplir las allowlists de deployers.",
+      "tags": [
+        "seguridad",
+        "acceso"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "control_plane/allowlist.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 44,
+          "content": "ALLOWED_ACCOUNTS = [\"ops\", \"release\"]",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "def is_allowed(account: str) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "    if not ALLOWED_ACCOUNTS:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "    return account in ALLOWED_ACCOUNTS",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Fails open when the allowlist is empty instead of blocking access.",
+      "localizedDescription": {
+        "es": "Hace fail-open cuando la allowlist está vacía en vez de bloquear el acceso."
+      },
+      "lineNumbers": [
+        48
+      ]
+    }
+  ]
+}

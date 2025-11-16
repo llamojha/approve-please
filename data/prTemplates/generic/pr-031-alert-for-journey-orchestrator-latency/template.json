@@ -1,0 +1,84 @@
+{
+  "templateId": "pr-031-alert-for-journey-orchestrator-latency",
+  "title": "Alert for Journey Orchestrator latency",
+  "author": "Harper N.",
+  "description": "Adds a Prometheus rule for the new service.",
+  "tags": [
+    "cleanup",
+    "ops",
+    "refactor"
+  ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Journey Orchestrator",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "limpieza",
+        "ops",
+        "refactor"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "ops/journey-orchestrator.yaml",
+      "language": "yaml",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "alerts:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "  - name: journey-orchestrator-latency",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    expr: avg_over_time(service_latency[5m]) > 0.8",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    for: 5m",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "    labels:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "      severity: page",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    annotations:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "      summary: TODO refine messaging before launch",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        82
+      ],
+      "severity": "minor",
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue teniendo un mensaje con TODO."
+      }
+    }
+  ]
+}

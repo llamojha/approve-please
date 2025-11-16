@@ -1,0 +1,82 @@
+{
+  "templateId": "java-038-stream-blocking-io",
+  "title": "Async event publisher",
+  "author": "Liam P.",
+  "description": "Publishes async events to an SSE emitter.",
+  "tags": [
+    "performance",
+    "async"
+  ],
+  "localized": {
+    "es": {
+      "title": "Publisher de eventos async",
+      "description": "Publica eventos async hacia un SSE emitter.",
+      "tags": [
+        "rendimiento",
+        "async"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/events/AsyncPublisher.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 48,
+          "content": "public final class AsyncPublisher {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "  public void publish(List<CompletableFuture<Event>> futures, SseEmitter emitter) throws Exception {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "    for (CompletableFuture<Event> future : futures) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "      Event event = future.get();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "      emitter.send(event);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Blocks on each future sequentially instead of chaining them, defeating concurrency.",
+      "localizedDescription": {
+        "es": "Bloquea cada future secuencialmente en vez de encadenarlos, eliminando la concurrencia."
+      },
+      "lineNumbers": [
+        51
+      ]
+    }
+  ]
+}

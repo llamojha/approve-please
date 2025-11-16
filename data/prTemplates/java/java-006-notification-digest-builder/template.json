@@ -1,0 +1,75 @@
+{
+  "templateId": "java-006-notification-digest-builder",
+  "title": "Notification digest builder",
+  "author": "Imani L.",
+  "description": "Wraps notification entries with metadata before delivering digests.",
+  "tags": [
+    "notifications",
+    "feature"
+  ],
+  "localized": {
+    "es": {
+      "title": "Builder del digest de notificaciones",
+      "description": "Envuelve entradas de notificación con metadata antes de entregar los digests.",
+      "tags": [
+        "notificaciones",
+        "funcionalidad"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/notify/DigestBuilder.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "public final class DigestBuilder {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "  public Digest build(String recipient, List<Map<String, Object>> notices) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    return new Digest(",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "      recipient,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "      notices,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "      Instant.now()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

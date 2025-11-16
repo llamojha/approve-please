@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-014-feedback-subscore",
+  "title": "Calibrate feedback sub-score helper",
+  "author": "Felix W.",
+  "description": "Scores the feedback queue to decide when to page managers.",
+  "tags": [
+    "logic",
+    "support"
+  ],
+  "localized": {
+    "es": {
+      "title": "Calibra el helper de subscore de feedback",
+      "description": "Punt\u00faa la cola de feedback para decidir cu\u00e1ndo hacer page a managers.",
+      "tags": [
+        "l\u00f3gica",
+        "soporte"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/feedback/subscore.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "pub fn needs_attention(ratio: f32, target: f32) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    if ratio < target {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    ratio < target * 0.5",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "minor",
+      "description": "Borderline ratios equal to the target should still be treated as attention, so the comparison must be <=.",
+      "localizedDescription": {
+        "es": "Las razones en el l\u00edmite iguales al objetivo a\u00fan deben tratarse como attention, as\u00ed que la comparaci\u00f3n tiene que ser <=."
+      },
+      "lineNumbers": [
+        31
+      ]
+    }
+  ]
+}

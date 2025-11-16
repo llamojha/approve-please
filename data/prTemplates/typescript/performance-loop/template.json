@@ -1,0 +1,80 @@
+{
+  "templateId": "performance-loop",
+  "title": "Detailed project export",
+  "author": "Sal M.",
+  "description": "Adds nested aggregation for CSV export.",
+  "tags": [
+    "feature",
+    "reporting"
+  ],
+  "localized": {
+    "es": {
+      "title": "Export detallado de proyectos",
+      "description": "Agrega agregación anidada para la exportación CSV.",
+      "tags": [
+        "funcionalidad",
+        "reportes"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/services/exporter.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 58,
+          "content": "  for (const project of projects) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    const tickets = await TicketRepo.listByProject(project.id);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    for (const ticket of tickets) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "      const comments = await CommentRepo.listByTicket(ticket.id);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "      csv.push([project.name, ticket.key, comments.length].join(','));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        58,
+        59,
+        60,
+        61
+      ],
+      "severity": "major",
+      "description": "N+1 queries inside nested loops.",
+      "localizedDescription": {
+        "es": "Consultas N+1 dentro de loops anidados."
+      }
+    }
+  ],
+  "importance": "normal"
+}

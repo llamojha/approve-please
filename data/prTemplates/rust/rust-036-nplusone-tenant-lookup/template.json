@@ -1,0 +1,87 @@
+{
+  "templateId": "rust-036-nplusone-tenant-lookup",
+  "title": "Tenant profile hydrator",
+  "author": "Victor A.",
+  "description": "Hydrates tenant profiles before rendering the overview.",
+  "tags": [
+    "performance",
+    "database"
+  ],
+  "localized": {
+    "es": {
+      "title": "Hidratador de perfiles de tenants",
+      "description": "Hidrata perfiles de tenants antes de renderizar el overview.",
+      "tags": [
+        "rendimiento",
+        "base de datos"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/tenants/hydrator.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 34,
+          "content": "use crate::tenants::{TenantId, TenantProfile, TenantRepo};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "pub fn hydrate_tenants(ids: &[TenantId], repo: &dyn TenantRepo) -> Vec<TenantProfile> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    let mut results = Vec::with_capacity(ids.len());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    for id in ids {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "        results.push(repo.fetch_profile(id));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    results",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Executes one query per tenant instead of batching.",
+      "localizedDescription": {
+        "es": "Ejecuta una consulta por cada tenant en lugar de agruparlas."
+      },
+      "lineNumbers": [
+        39
+      ]
+    }
+  ]
+}

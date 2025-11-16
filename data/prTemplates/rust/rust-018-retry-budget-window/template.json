@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-018-retry-budget-window",
+  "title": "Retry budget guard",
+  "author": "Lena J.",
+  "description": "Determines if the retry budget has been consumed for the current window.",
+  "tags": [
+    "logic",
+    "resilience"
+  ],
+  "localized": {
+    "es": {
+      "title": "Guardia del budget de reintentos",
+      "description": "Determina si el budget de reintentos se consumi\u00f3 para la ventana actual.",
+      "tags": [
+        "l\u00f3gica",
+        "resiliencia"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/retries/budget_guard.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 27,
+          "content": "pub fn retry_allowed(consumed: u32, budget: u32) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    if budget == 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "        return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    consumed < budget",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Retrying should be blocked once consumption reaches the budget, not while there is still slack.",
+      "localizedDescription": {
+        "es": "Los reintentos deben bloquearse cuando el consumo alcanza el budget, no mientras todav\u00eda queda margen."
+      },
+      "lineNumbers": [
+        31
+      ]
+    }
+  ]
+}

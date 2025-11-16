@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-045-temporary-debug-logger-for-report-export",
+  "title": "Temporary debug logger for Report Export",
+  "author": "Oscar W.",
+  "description": "Adds a helper so QA can inspect payloads while testing.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "performance",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Logger temporal de debug para Report Export",
+      "description": "Agrega un helper para que QA inspeccione payloads durante las pruebas.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "rendimiento",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/debug/report-export.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 35,
+          "content": "  export function logReportExportDebug(payload: unknown) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    // TODO: drop verbose log once dashboard is stable",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    console.log('[debug]', payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        36
+      ],
+      "severity": "minor",
+      "description": "TODO/console log left in production path.",
+      "localizedDescription": {
+        "es": "Quedó un TODO/console log en la ruta de producción."
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "templateId": "pr-100-document-error-bucketing-runbook",
+  "title": "Document Error Bucketing runbook",
+  "author": "Jonah R.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "docs",
+    "feature",
+    "infra",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Error Bucketing",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "infra",
+        "performance"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/error-bucketing.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 10,
+          "content": "## Error Bucketing Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

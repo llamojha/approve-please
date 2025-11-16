@@ -1,0 +1,87 @@
+{
+  "templateId": "java-024-permissive-cors-filter",
+  "title": "CORS filter update",
+  "author": "Xiao T.",
+  "description": "Tweaks the default CORS filter for the admin API.",
+  "tags": [
+    "security",
+    "api"
+  ],
+  "localized": {
+    "es": {
+      "title": "Actualización del filtro CORS",
+      "description": "Ajusta el filtro CORS por defecto para la API de admin.",
+      "tags": [
+        "seguridad",
+        "api"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/api/CorsFilter.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 19,
+          "content": "public class CorsFilter implements Filter {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "  @Override",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    throws IOException, ServletException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    HttpServletResponse http = (HttpServletResponse) response;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    http.setHeader(\"Access-Control-Allow-Origin\", \"*\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    chain.doFilter(request, response);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Exposes admin API to all origins by returning a wildcard.",
+      "localizedDescription": {
+        "es": "Expone la API de admin a todos los orígenes al devolver un wildcard."
+      },
+      "lineNumbers": [
+        24
+      ]
+    }
+  ]
+}

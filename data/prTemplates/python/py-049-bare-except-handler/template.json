@@ -1,0 +1,83 @@
+{
+  "templateId": "py-049-bare-except-handler",
+  "title": "Payload parser helper",
+  "author": "Theo S.",
+  "description": "Parses JSON payloads flowing through the resolver.",
+  "tags": [
+    "style",
+    "parsing"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para parsear payloads",
+      "description": "Parsea payloads JSON que pasan por el resolver.",
+      "tags": [
+        "estilo",
+        "parseo"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "resolver/parser.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 39,
+          "content": "import json",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "def parse_payload(blob: str) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    try:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "        return json.loads(blob)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "    except Exception:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "        return {}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "major",
+      "description": "Catches bare Exception and silently drops the payload.",
+      "localizedDescription": {
+        "es": "Atrapa una Exception genérica y descarta el payload en silencio."
+      },
+      "lineNumbers": [
+        45,
+        46
+      ]
+    }
+  ]
+}

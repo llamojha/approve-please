@@ -1,0 +1,82 @@
+{
+  "templateId": "java-014-batch-timer",
+  "title": "Batch timer guard",
+  "author": "Nia B.",
+  "description": "Controls whether the batch exceeded its SLA window.",
+  "tags": [
+    "logic",
+    "jobs"
+  ],
+  "localized": {
+    "es": {
+      "title": "Guardia del timer de batch",
+      "description": "Controla si el batch excedió su ventana de SLA.",
+      "tags": [
+        "lógica",
+        "jobs"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/jobs/BatchTimer.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 101,
+          "content": "public final class BatchTimer {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "  public boolean exceeded(Duration elapsed, Duration limit) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "    if (elapsed.compareTo(limit) <= 0) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "    return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 107,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 108,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Marks batches as late while they are still within the limit.",
+      "localizedDescription": {
+        "es": "Marca los batches como tarde mientras siguen dentro del límite."
+      },
+      "lineNumbers": [
+        103
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "templateId": "java-008-config-snapshot-writer",
+  "title": "Config snapshot writer",
+  "author": "Sara P.",
+  "description": "Adds helper to persist config snapshots before deploys.",
+  "tags": [
+    "config",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Writer de snapshots de config",
+      "description": "Agrega un helper para persistir snapshots de config antes de los deploys.",
+      "tags": [
+        "config",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/config/SnapshotWriter.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 52,
+          "content": "public final class SnapshotWriter {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "  private final Path directory;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "  public SnapshotWriter(Path directory) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    this.directory = directory;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "  public Path write(String name, String contents) throws IOException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    Path target = directory.resolve(name);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    Files.writeString(target, contents);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    return target;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

@@ -1,0 +1,77 @@
+{
+  "templateId": "rust-033-weak-hash-for-license",
+  "title": "License hash helper",
+  "author": "Sarai P.",
+  "description": "Hashes license payloads before writing to cache.",
+  "tags": [
+    "security",
+    "compliance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para hashear licencias",
+      "description": "Hashea payloads de licencias antes de escribirlos al cache.",
+      "tags": [
+        "seguridad",
+        "compliance"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/licenses/hash.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 16,
+          "content": "use md5::{Digest, Md5};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "pub fn license_hash(secret: &str) -> String {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "    let mut hasher = Md5::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    hasher.update(secret.as_bytes());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    format!(\"{:x}\", hasher.finalize())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Uses weak MD5 hashing for license secrets.",
+      "localizedDescription": {
+        "es": "Usa hashing d\u00e9bil MD5 para secretos de licencias."
+      },
+      "lineNumbers": [
+        19
+      ]
+    }
+  ]
+}

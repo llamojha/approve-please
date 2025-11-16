@@ -1,0 +1,81 @@
+{
+  "templateId": "pr-030-chunk-sprint-health-records",
+  "title": "Chunk Sprint Health records",
+  "author": "Oscar W.",
+  "description": "Adds pagination helpers for sprint health batches.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "hotfix",
+    "refactor"
+  ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Sprint Health",
+      "description": "Agrega helpers de paginación para lotes de sprint health.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "hotfix",
+        "refactor"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/lib/sprint-health.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 115,
+          "content": "  export function paginateSprintHealthRecords(items: SprintHealthRecord[], size: number) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 116,
+          "content": "    const pages: SprintHealthRecord[][] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 117,
+          "content": "    for (let i = 0; i <= items.length; i += size) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 118,
+          "content": "      pages.push(items.slice(i, i + size));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 119,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 120,
+          "content": "    return pages;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        117
+      ],
+      "severity": "minor",
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página extra vacía cuando i == items.length."
+      }
+    }
+  ]
+}

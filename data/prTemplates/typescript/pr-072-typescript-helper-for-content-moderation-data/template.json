@@ -1,0 +1,64 @@
+{
+  "templateId": "pr-072-typescript-helper-for-content-moderation-data",
+  "title": "TypeScript helper for Content Moderation data",
+  "author": "Ravi M.",
+  "description": "Adds a raw SQL helper to fetch organization rows.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de TypeScript para datos de Content Moderation",
+      "description": "Agrega un helper de SQL crudo para obtener filas de la organización.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "analytics/content-moderation.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "  export async function fetchContentModeration(db: DatabaseClient, orgId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    const sql = `SELECT * FROM content_moderation WHERE org_id = '${orgId}'`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    return db.raw(sql);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        56
+      ],
+      "severity": "critical",
+      "description": "Builds SQL via string interpolation and allows injection.",
+      "localizedDescription": {
+        "es": "Construye SQL con interpolación de strings y permite inyección."
+      }
+    }
+  ]
+}

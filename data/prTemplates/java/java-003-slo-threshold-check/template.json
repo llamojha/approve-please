@@ -1,0 +1,82 @@
+{
+  "templateId": "java-003-slo-threshold-check",
+  "title": "SLO breach detector",
+  "author": "Harper C.",
+  "description": "Updates the helper that decides when an SLO is out of bounds.",
+  "tags": [
+    "logic",
+    "slo"
+  ],
+  "localized": {
+    "es": {
+      "title": "Detector de brecha de SLO",
+      "description": "Actualiza el helper que decide cuándo un SLO está fuera de rango.",
+      "tags": [
+        "lógica",
+        "slo"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/slo/SloJudge.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 62,
+          "content": "public final class SloJudge {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "  public boolean isBreached(int errorBudgetUsed, int thresholdPercent) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    if (errorBudgetUsed <= thresholdPercent) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "    return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Error budget should breach when usage meets or exceeds the threshold, not when it is under.",
+      "localizedDescription": {
+        "es": "El presupuesto de errores debe entrar en brecha cuando el uso alcanza o excede el umbral, no cuando está por debajo."
+      },
+      "lineNumbers": [
+        64
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "templateId": "rust-050-mutable-default-collector",
+  "title": "Metric collector helper",
+  "author": "Keiko R.",
+  "description": "Collects metrics before handing them to the exporter.",
+  "tags": [
+    "style",
+    "metrics"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del colector de m\u00e9tricas",
+      "description": "Colecciona m\u00e9tricas antes de entregarlas al exporter.",
+      "tags": [
+        "estilo",
+        "m\u00e9tricas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/metrics/collector.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "use once_cell::sync::Lazy;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "use std::sync::Mutex;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "static DEFAULT_LABELS: Lazy<Mutex<Vec<String>>> = Lazy::new(|| Mutex::new(Vec::new()));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "pub fn collect_labels(labels: Option<Vec<String>>) -> Vec<String> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    let mut guard = DEFAULT_LABELS.lock().unwrap();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    if let Some(incoming) = labels {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "        *guard = incoming.clone();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "        incoming",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    } else {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "        guard.clone()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "major",
+      "description": "Uses a mutable default list that is shared across calls.",
+      "localizedDescription": {
+        "es": "Usa una lista mutable como default que se comparte entre llamadas."
+      },
+      "lineNumbers": [
+        21
+      ]
+    }
+  ]
+}

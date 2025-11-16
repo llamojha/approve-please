@@ -1,0 +1,67 @@
+{
+  "templateId": "java-018-ops-rotation-picker",
+  "title": "Ops rotation picker",
+  "author": "Rowan L.",
+  "description": "Selects the correct on-call engineer rotation slot.",
+  "tags": [
+    "logic",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Selector de rotaciones de ops",
+      "description": "Selecciona el slot correcto de la rotación on-call.",
+      "tags": [
+        "lógica",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/ops/RotationPicker.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 35,
+          "content": "public final class RotationPicker {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "  public Rotation pick(List<Rotation> rotations) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    return rotations.get(rotations.size());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Indexes list.size() which is out of bounds instead of size - 1.",
+      "localizedDescription": {
+        "es": "Indexa list.size(), que está fuera de rango, en vez de size - 1."
+      },
+      "lineNumbers": [
+        37
+      ]
+    }
+  ]
+}

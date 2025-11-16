@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-015-workflow-timeout",
+  "title": "Workflow timeout detector",
+  "author": "Noor M.",
+  "description": "Determines if a workflow exceeded the configured timeout.",
+  "tags": [
+    "logic",
+    "workflow"
+  ],
+  "localized": {
+    "es": {
+      "title": "Detector de timeout de workflow",
+      "description": "Determina si un workflow excedi\u00f3 el timeout configurado.",
+      "tags": [
+        "l\u00f3gica",
+        "workflow"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/workflows/timeout.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 34,
+          "content": "use chrono::{DateTime, Duration, Utc};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "pub fn is_timed_out(started_at: DateTime<Utc>, now: DateTime<Utc>, limit: Duration) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    let elapsed = now - started_at;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    elapsed < limit",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Timeout should trip when the elapsed time meets or exceeds the limit, not when it is still below it.",
+      "localizedDescription": {
+        "es": "El timeout debe activarse cuando el tiempo transcurrido alcanza o excede el l\u00edmite, no cuando todav\u00eda est\u00e1 por debajo."
+      },
+      "lineNumbers": [
+        38
+      ]
+    }
+  ]
+}

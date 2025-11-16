@@ -1,0 +1,57 @@
+{
+  "templateId": "py-027-audit-sql-concat",
+  "title": "Audit SQL fetch helper",
+  "author": "Diego S.",
+  "description": "Adds a helper to fetch audit log entries for a tenant.",
+  "tags": [
+    "security",
+    "sql"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para consultar auditorías via SQL",
+      "description": "Agrega un helper para obtener entradas del log de auditoría de un tenant.",
+      "tags": [
+        "seguridad",
+        "sql"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "audit/query.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 36,
+          "content": "def fetch_audit_events(conn, tenant: str) -> list[dict]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    query = f\"SELECT * FROM audit WHERE tenant = '{tenant}' ORDER BY created_at DESC\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    return conn.fetch(query)",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Builds raw SQL with tenant input, allowing injection.",
+      "localizedDescription": {
+        "es": "Construye SQL crudo con el input del tenant, habilitando inyección."
+      },
+      "lineNumbers": [
+        37
+      ]
+    }
+  ]
+}

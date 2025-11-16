@@ -1,0 +1,266 @@
+.screenShell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 60%), var(--bg);
+}
+
+.screenCard {
+  width: min(760px, 100%);
+  background: var(--bg-panel);
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 60px rgba(2, 6, 23, 0.8);
+}
+
+.screenCard h1,
+.screenCard h2 {
+  margin-top: 0;
+}
+
+.briefingBlurb {
+  margin: 0.25rem 0 1rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.rulesList {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+
+.rulesList li + li {
+  margin-top: 0.75rem;
+}
+
+.briefingQuote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.75rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.briefingQuote footer {
+  margin-top: 0.5rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.screenActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.screenButton {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  background: var(--accent);
+  color: #04111f;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.screenButtonSecondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.summaryGrid.summaryGridWide {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.summaryCard {
+  background: var(--bg-panel-light);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 110px;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+}
+
+.summaryCardApproved,
+.summaryCardRejected {
+  background: var(--bg-panel-light);
+  border-color: var(--border);
+  box-shadow: var(--shadow-soft, 0 8px 20px rgba(15, 23, 42, 0.25));
+  color: var(--text);
+}
+
+.summaryCardBugs {
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.5);
+  box-shadow: 0 8px 20px rgba(248, 113, 113, 0.2);
+  color: #fecaca;
+}
+
+.summaryCardTrue {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.18);
+  color: #bbf7d0;
+}
+
+.summaryCardFalse {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.45);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.15);
+  color: #fde68a;
+}
+
+.summaryGrid small {
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.summaryGrid h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.meterCard {
+  color: inherit;
+}
+.gameOverTag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--danger);
+  color: #04111f;
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.incidentSection {
+  margin-top: 2.5rem;
+}
+
+.incidentSection h3 {
+  margin-bottom: 0.25rem;
+}
+
+.incidentList {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.incidentItem {
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--bg-panel-light);
+  padding: 1rem;
+}
+
+.incidentMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.incidentBadges {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.incidentSubline {
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.severityMinor {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.severityMajor {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.severityCritical {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+}
+
+.badgeNeutral {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+}
+
+.badgeReason {
+  background: rgba(129, 140, 248, 0.22);
+  color: #c4b5fd;
+  border: 1px solid rgba(248, 113, 113, 0.65);
+}
+
+.badgeReasonClean {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.incidentNote {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+.lineList {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.9rem;
+}
+
+.lineList code {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
+}

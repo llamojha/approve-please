@@ -1,0 +1,94 @@
+{
+  "templateId": "pr-015-add-portal-theme-panel",
+  "title": "Add Portal Theme panel",
+  "author": "Leo P.",
+  "description": "Introduces a dashboard card that surfaces the latest portal theme metrics.",
+  "tags": [
+    "feature",
+    "infra",
+    "performance",
+    "ui"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de Portal Theme",
+      "description": "Introduce una tarjeta de dashboard que muestra las métricas recientes del tema del portal.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "rendimiento",
+        "ui"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/components/portal-theme.tsx",
+      "language": "tsx",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "  export function PortalThemePanel() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    const { data, isLoading } = usePortalThemeQuery();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "    if (isLoading) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "      return <Skeleton rows={4} />;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    return (",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "      <section class=\"panel\">",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "        <h3>Portal Theme</h3>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "        <MetricGrid items={data.metrics} />",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "      </section>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

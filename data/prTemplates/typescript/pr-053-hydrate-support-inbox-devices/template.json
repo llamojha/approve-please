@@ -1,0 +1,101 @@
+{
+  "templateId": "pr-053-hydrate-support-inbox-devices",
+  "title": "Hydrate Support Inbox devices",
+  "author": "Simone B.",
+  "description": "Adds a helper that pulls the full device matrix for reporting.",
+  "tags": [
+    "feature",
+    "hotfix",
+    "ops",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Hidrata los dispositivos de Support Inbox",
+      "description": "Agrega un helper que obtiene la matriz completa de dispositivos para reportes.",
+      "tags": [
+        "funcionalidad",
+        "hotfix",
+        "ops",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/perf/support-inbox.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 50,
+          "content": "  export async function hydrateSupportInbox(users: User[], devices: Device[]) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    const hydrated: Record<string, Device[]> = {};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    for (const user of users) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "      hydrated[user.id] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "      for (const device of devices) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "        const details = await deviceClient.fetch(user.id, device.id);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "        hydrated[user.id].push(details);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "      }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    return hydrated;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        55
+      ],
+      "severity": "major",
+      "description": "Nested awaits call the API for every user-device pair serially.",
+      "localizedDescription": {
+        "es": "Los awaits anidados llaman a la API para cada par usuario-dispositivo en serie."
+      }
+    }
+  ]
+}

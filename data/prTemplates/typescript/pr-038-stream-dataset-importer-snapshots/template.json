@@ -1,0 +1,89 @@
+{
+  "templateId": "pr-038-stream-dataset-importer-snapshots",
+  "title": "Stream Dataset Importer snapshots",
+  "author": "Priya S.",
+  "description": "Adds a Go helper that fetches snapshots for tooling.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Transmite snapshots de Dataset Importer",
+      "description": "Agrega un helper que obtiene snapshots para tooling.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "jobs/dataset-importer.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 85,
+          "content": "  export async function streamDatasetImporterSnapshots(ids: string[]): Promise<Snapshot[]> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "    const snapshots: Snapshot[] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "    for (const id of ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
+          "content": "      const resp = await fetch(`${baseUrl}/${id}`);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 89,
+          "content": "      const raw = await resp.arrayBuffer();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 90,
+          "content": "      snapshots.push({ id, raw });",
+          "isNew": true
+        },
+        {
+          "lineNumber": 91,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "    return snapshots;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        88
+      ],
+      "severity": "major",
+      "description": "Fetches every id sequentially without reuse or concurrency.",
+      "localizedDescription": {
+        "es": "Hace fetch de cada id de forma secuencial, sin reutilizar ni paralelizar."
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "templateId": "rust-037-slow-metrics-serializer",
+  "title": "Metrics serializer helper",
+  "author": "Naomi F.",
+  "description": "Serializes metrics with a schema overlay before publishing.",
+  "tags": [
+    "performance",
+    "metrics"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del serializador de m\u00e9tricas",
+      "description": "Serializa m\u00e9tricas con un overlay de esquema antes de publicarlas.",
+      "tags": [
+        "rendimiento",
+        "m\u00e9tricas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/metrics/serializer.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 26,
+          "content": "use crate::metrics::Metric;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "pub fn serialize_metrics(metrics: &[Metric]) -> anyhow::Result<Vec<String>> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    let mut payloads = Vec::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    for metric in metrics {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "        let schema = std::fs::read_to_string(\"config/metric_schema.json\")?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        payloads.push(apply_schema(&schema, metric));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    Ok(payloads)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Reads and parses the schema file inside the loop for every metric.",
+      "localizedDescription": {
+        "es": "Lee y parsea el archivo de esquema dentro del loop para cada m\u00e9trica."
+      },
+      "lineNumbers": [
+        31
+      ]
+    }
+  ]
+}

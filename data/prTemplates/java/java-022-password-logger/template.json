@@ -1,0 +1,67 @@
+{
+  "templateId": "java-022-password-logger",
+  "title": "Credential logging helper",
+  "author": "Victor N.",
+  "description": "Adds logging for password reset attempts.",
+  "tags": [
+    "security",
+    "auth"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de logging de credenciales",
+      "description": "Agrega logging para intentos de reseteo de contraseña.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/auth/ResetLogger.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "public final class ResetLogger {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "  public void logAttempt(Logger logger, String userId, String newPassword) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    logger.info(\"reset {} with password {}\", userId, newPassword);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Logs the plaintext password in structured logs.",
+      "localizedDescription": {
+        "es": "Loguea la contraseña en texto plano en logs estructurados."
+      },
+      "lineNumbers": [
+        24
+      ]
+    }
+  ]
+}

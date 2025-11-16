@@ -1,0 +1,57 @@
+{
+  "templateId": "security-sql",
+  "title": "Ad-hoc analytics endpoint",
+  "author": "Ravi K.",
+  "description": "Adds a quick endpoint so success can query invoices.",
+  "tags": [
+    "hotfix",
+    "analytics"
+  ],
+  "localized": {
+    "es": {
+      "title": "Endpoint ad-hoc de analytics",
+      "description": "Agrega un endpoint rápido para que Success pueda consultar facturas.",
+      "tags": [
+        "hotfix",
+        "analytics"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "api/analytics/invoices.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 8,
+          "content": "  const query = `SELECT * FROM invoices WHERE customer_id = ${req.query.id}`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 9,
+          "content": "  const rows = await db.raw(query);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 10,
+          "content": "  return res.json(rows);",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        8
+      ],
+      "severity": "critical",
+      "description": "Interpolated SQL without sanitization.",
+      "localizedDescription": {
+        "es": "SQL interpolado sin sanitización."
+      }
+    }
+  ],
+  "importance": "high"
+}

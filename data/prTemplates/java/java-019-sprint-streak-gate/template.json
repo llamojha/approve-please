@@ -1,0 +1,67 @@
+{
+  "templateId": "java-019-sprint-streak-gate",
+  "title": "Sprint streak gate",
+  "author": "Sasha W.",
+  "description": "Decides whether the sprint streak meter should reset.",
+  "tags": [
+    "logic",
+    "planning"
+  ],
+  "localized": {
+    "es": {
+      "title": "Gate del sprint streak",
+      "description": "Decide si el medidor de streak del sprint debe reiniciarse.",
+      "tags": [
+        "lógica",
+        "planificación"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/planning/SprintStreak.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 59,
+          "content": "public final class SprintStreak {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "  public boolean shouldReset(int missedGoals, int limit) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    return missedGoals < limit;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Resets the streak while misses are still under the limit.",
+      "localizedDescription": {
+        "es": "Resetea el streak cuando los misses todavía están por debajo del límite."
+      },
+      "lineNumbers": [
+        61
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "templateId": "pr-078-alert-for-warranty-center-latency",
+  "title": "Alert for Warranty Center latency",
+  "author": "Victor H.",
+  "description": "Adds a Prometheus rule for the new service.",
+  "tags": [
+    "cleanup",
+    "docs",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Warranty Center",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "limpieza",
+        "documentación",
+        "ops"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "ops/warranty-center.yaml",
+      "language": "yaml",
+      "lines": [
+        {
+          "lineNumber": 115,
+          "content": "alerts:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 116,
+          "content": "  - name: warranty-center-latency",
+          "isNew": true
+        },
+        {
+          "lineNumber": 117,
+          "content": "    expr: avg_over_time(service_latency[5m]) > 0.8",
+          "isNew": true
+        },
+        {
+          "lineNumber": 118,
+          "content": "    for: 5m",
+          "isNew": true
+        },
+        {
+          "lineNumber": 119,
+          "content": "    labels:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 120,
+          "content": "      severity: page",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "    annotations:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 122,
+          "content": "      summary: TODO refine messaging before launch",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        122
+      ],
+      "severity": "minor",
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue usando texto provisional con TODO."
+      }
+    }
+  ]
+}

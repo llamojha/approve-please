@@ -1,0 +1,92 @@
+{
+  "templateId": "py-001-cache-warmup-scheduler",
+  "title": "Schedule cache warmer job hook",
+  "author": "Nia F.",
+  "description": "Adds a helper to enqueue the cache warmer job five minutes ahead with typed payload metadata.",
+  "tags": [
+    "backend",
+    "jobs",
+    "maintenance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Programa el hook del job de cache warmer",
+      "description": "Agrega un helper para encolar el job de cache warmer cinco minutos antes con metadata tipada.",
+      "tags": [
+        "backend",
+        "jobs",
+        "mantenimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "jobs/cache_warmer.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 58,
+          "content": "def schedule_cache_warmer(registry, clock, tenant_slug):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    \"\"\"Build and enqueue a cache warmer run for the given tenant.\"\"\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    if not tenant_slug:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "        raise ValueError(\"tenant_slug is required\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "    payload = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "        \"tenant\": tenant_slug,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "        \"scheduled_for\": clock.now().isoformat()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "    job = registry.build(\"cache_warmer\", payload=payload)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "    job.defer(minutes=5)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "    return registry.enqueue(job)",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

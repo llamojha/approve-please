@@ -1,0 +1,72 @@
+{
+  "templateId": "java-030-path-traversal-loader",
+  "title": "Template loader helper",
+  "author": "Devon C.",
+  "description": "Loads markdown templates from disk for notifications.",
+  "tags": [
+    "security",
+    "filesystem"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para cargar templates",
+      "description": "Carga templates markdown desde disco para notificaciones.",
+      "tags": [
+        "seguridad",
+        "filesystem"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/notify/TemplateLoader.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 36,
+          "content": "public final class TemplateLoader {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "  public String load(Path baseDir, String name) throws IOException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    Path path = Paths.get(baseDir.toString(), name);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    return Files.readString(path);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Concatenates user-supplied names into paths without normalization.",
+      "localizedDescription": {
+        "es": "Concatena nombres provistos por el usuario en rutas sin normalización."
+      },
+      "lineNumbers": [
+        38
+      ]
+    }
+  ]
+}

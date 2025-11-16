@@ -1,0 +1,72 @@
+{
+  "templateId": "java-026-public-s3-upload",
+  "title": "Artifact uploader helper",
+  "author": "Zion A.",
+  "description": "Adds helper to upload deploy artifacts to object storage.",
+  "tags": [
+    "security",
+    "storage"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para subir artefactos",
+      "description": "Agrega un helper para subir artefactos de deploy al object storage.",
+      "tags": [
+        "seguridad",
+        "almacenamiento"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/storage/ArtifactUploader.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "public class ArtifactUploader {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "  public void upload(S3Client client, String bucket, String key, byte[] body) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    client.putObject(builder -> builder.bucket(bucket).key(key).acl(\"public-read\"),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "      RequestBody.fromBytes(body));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Marks deploy artifacts as public instead of private.",
+      "localizedDescription": {
+        "es": "Marca los artefactos de deploy como públicos en lugar de privados."
+      },
+      "lineNumbers": [
+        57
+      ]
+    }
+  ]
+}

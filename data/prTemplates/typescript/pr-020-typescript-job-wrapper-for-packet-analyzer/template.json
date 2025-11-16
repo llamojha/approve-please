@@ -1,0 +1,137 @@
+{
+  "templateId": "pr-020-typescript-job-wrapper-for-packet-analyzer",
+  "title": "TypeScript job wrapper for Packet Analyzer",
+  "author": "Simone B.",
+  "description": "Adds a thin TypeScript helper that normalizes packet analyzer job payloads.",
+  "tags": [
+    "feature",
+    "hotfix",
+    "infra"
+  ],
+  "localized": {
+    "es": {
+      "title": "Wrapper de job en TypeScript para Packet Analyzer",
+      "description": "Agrega un helper liviano en TypeScript que normaliza los payloads del job.",
+      "tags": [
+        "funcionalidad",
+        "hotfix",
+        "infra"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "jobs/packet-analyzer.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "  type PacketAnalyzerPayload = Record<string, string | undefined>;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "  export class PacketAnalyzerJob {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "    private payload: PacketAnalyzerPayload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "    private window: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    private priority: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    constructor(payload: PacketAnalyzerPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "      this.payload = payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "      this.window = payload.window ?? 'same-day';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "      this.priority = payload.priority ?? 'normal';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    toJSON() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "      return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        payload: this.payload,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "        window: this.window,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        priority: this.priority",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "      };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

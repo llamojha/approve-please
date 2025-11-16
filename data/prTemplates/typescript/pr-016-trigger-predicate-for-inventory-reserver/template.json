@@ -1,0 +1,79 @@
+{
+  "templateId": "pr-016-trigger-predicate-for-inventory-reserver",
+  "title": "Trigger predicate for Inventory Reserver",
+  "author": "Sasha E.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Inventory Reserver",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/inventory-reserver.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "  export function shouldTriggerInventoryReserver(payload: InventoryReserverPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        61
+      ],
+      "severity": "major",
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y cambia payload.status."
+      }
+    }
+  ]
+}

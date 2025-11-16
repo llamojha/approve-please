@@ -1,0 +1,64 @@
+{
+  "templateId": "pr-024-secret-reset-hook-for-rollout-guard",
+  "title": "Secret reset hook for Rollout Guard",
+  "author": "Noor T.",
+  "description": "Adds a helper that rotates per-tenant secrets on demand.",
+  "tags": [
+    "feature",
+    "infra",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Hook de reseteo de secretos para Rollout Guard",
+      "description": "Agrega un helper que rota los secretos por tenant bajo demanda.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/secrets/rollout-guard.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 35,
+          "content": "  export async function resetRolloutGuardSecret(req: Request) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    logger.info('Resetting secret', req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    return vault.rotate(req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        36
+      ],
+      "severity": "major",
+      "description": "Logs the secret value in plain text.",
+      "localizedDescription": {
+        "es": "Loguea el valor del secreto en texto plano."
+      }
+    }
+  ]
+}

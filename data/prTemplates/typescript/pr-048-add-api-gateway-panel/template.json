@@ -1,0 +1,94 @@
+{
+  "templateId": "pr-048-add-api-gateway-panel",
+  "title": "Add Api Gateway panel",
+  "author": "Marina V.",
+  "description": "Introduces a dashboard card that surfaces the latest api gateway metrics.",
+  "tags": [
+    "data",
+    "feature",
+    "refactor",
+    "ui"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de API Gateway",
+      "description": "Introduce una tarjeta de dashboard con las métricas recientes de API Gateway.",
+      "tags": [
+        "datos",
+        "funcionalidad",
+        "refactor",
+        "ui"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/components/api-gateway.tsx",
+      "language": "tsx",
+      "lines": [
+        {
+          "lineNumber": 100,
+          "content": "  export function ApiGatewayPanel() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "    const { data, isLoading } = useApiGatewayQuery();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    if (isLoading) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "      return <Skeleton rows={4} />;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    return (",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "      <section class=\"panel\">",
+          "isNew": true
+        },
+        {
+          "lineNumber": 107,
+          "content": "        <h3>Api Gateway</h3>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 108,
+          "content": "        <MetricGrid items={data.metrics} />",
+          "isNew": true
+        },
+        {
+          "lineNumber": 109,
+          "content": "      </section>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 110,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

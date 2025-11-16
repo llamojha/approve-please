@@ -1,0 +1,57 @@
+{
+  "templateId": "rust-047-debug-print-hook",
+  "title": "Dispatch logging helper",
+  "author": "Sofie J.",
+  "description": "Adds lightweight logging around dispatch batches.",
+  "tags": [
+    "style",
+    "logging"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de logging para dispatch",
+      "description": "Agrega logging liviano alrededor de batches de dispatch.",
+      "tags": [
+        "estilo",
+        "logging"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/dispatch/logger.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "pub fn log_dispatch(event: &str, payload: &str) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    println!(\"[dispatch] {} :: {}\", event, payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Uses print instead of structured logging.",
+      "localizedDescription": {
+        "es": "Usa print en lugar de logging estructurado."
+      },
+      "lineNumbers": [
+        22
+      ]
+    }
+  ]
+}

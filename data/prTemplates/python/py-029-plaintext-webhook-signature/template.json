@@ -1,0 +1,58 @@
+{
+  "templateId": "py-029-plaintext-webhook-signature",
+  "title": "Webhook signature verifier",
+  "author": "Ben P.",
+  "description": "Adds verification for partner webhook callbacks.",
+  "tags": [
+    "security",
+    "integrations"
+  ],
+  "localized": {
+    "es": {
+      "title": "Verificador de firmas de webhooks",
+      "description": "Agrega verificación para callbacks de webhooks de partners.",
+      "tags": [
+        "seguridad",
+        "integraciones"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "webhooks/verify.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 52,
+          "content": "def verify_signature(payload: dict, provided_signature: str) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    expected = payload.get(\"signature\", \"\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "    return provided_signature == expected",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Simply compares to the signature field in the payload instead of computing an HMAC.",
+      "localizedDescription": {
+        "es": "Solo compara contra el campo signature del payload en vez de calcular un HMAC."
+      },
+      "lineNumbers": [
+        53,
+        54
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "templateId": "pr-076-scaffold-tests-for-content-moderation",
+  "title": "Scaffold tests for Content Moderation",
+  "author": "Priya S.",
+  "description": "Drops a placeholder spec awaiting follow-up coverage.",
+  "tags": [
+    "cleanup",
+    "refactor",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Prepara tests para Content Moderation",
+      "description": "Agrega un spec placeholder a la espera de cobertura posterior.",
+      "tags": [
+        "limpieza",
+        "refactor",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "tests/content-moderation.test.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "  describe('Content Moderation flows', () => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    test.todo('add regression coverage for content-moderation state machine');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        61
+      ],
+      "severity": "minor",
+      "description": "File only contains test.todo and no actual assertions.",
+      "localizedDescription": {
+        "es": "El archivo solo contiene test.todo y no tiene aserciones reales."
+      }
+    }
+  ]
+}

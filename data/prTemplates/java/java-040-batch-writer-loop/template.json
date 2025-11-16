@@ -1,0 +1,82 @@
+{
+  "templateId": "java-040-batch-writer-loop",
+  "title": "Batch writer helper",
+  "author": "Nico R.",
+  "description": "Exports ledger entries to disk for finance review.",
+  "tags": [
+    "performance",
+    "io"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del writer de batches",
+      "description": "Exporta entradas del ledger a disco para revisión financiera.",
+      "tags": [
+        "rendimiento",
+        "io"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/ledger/BatchWriter.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 118,
+          "content": "public final class BatchWriter {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 119,
+          "content": "  public void write(List<Map<String, Object>> entries, Path path) throws IOException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 120,
+          "content": "    for (Map<String, Object> entry : entries) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "      Files.writeString(path, new ObjectMapper().writeValueAsString(entry) + \"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 122,
+          "content": "\", StandardOpenOption.APPEND);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 123,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 124,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 125,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Opens and appends to the same file for every entry instead of streaming once.",
+      "localizedDescription": {
+        "es": "Abre y agrega al mismo archivo por cada entrada en vez de streamear una sola vez."
+      },
+      "lineNumbers": [
+        121
+      ]
+    }
+  ]
+}

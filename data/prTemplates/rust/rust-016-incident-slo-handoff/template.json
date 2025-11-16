@@ -1,0 +1,57 @@
+{
+  "templateId": "rust-016-incident-slo-handoff",
+  "title": "Incident SLO captain handoff logic",
+  "author": "Theo G.",
+  "description": "Determines when to page the incident captain based on meter thresholds.",
+  "tags": [
+    "logic",
+    "incident"
+  ],
+  "localized": {
+    "es": {
+      "title": "L\u00f3gica de handoff del capit\u00e1n de incidentes SLO",
+      "description": "Determina cu\u00e1ndo hacer page al capit\u00e1n de incidentes seg\u00fan los umbrales de los medidores.",
+      "tags": [
+        "l\u00f3gica",
+        "incidentes"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/incident/slo_handoff.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 40,
+          "content": "pub fn should_page(apdex: f32, availability: f32, apdex_min: f32, availability_min: f32) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    apdex < apdex_min && availability < availability_min",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Either score falling too low should trigger the page, but the code only fires when both are low.",
+      "localizedDescription": {
+        "es": "Cualquiera de los puntajes que caiga demasiado bajo deber\u00eda disparar el page, pero el c\u00f3digo solo se activa cuando ambos est\u00e1n bajos."
+      },
+      "lineNumbers": [
+        40
+      ]
+    }
+  ]
+}

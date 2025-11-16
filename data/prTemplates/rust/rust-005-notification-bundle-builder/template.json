@@ -1,0 +1,75 @@
+{
+  "templateId": "rust-005-notification-bundle-builder",
+  "title": "Add notification bundle builder",
+  "author": "Bianca Q.",
+  "description": "Wraps notification lists with generated metadata before sending to downstream channels.",
+  "tags": [
+    "notifications",
+    "feature"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega constructor de bundles de notificaciones",
+      "description": "Envuelve listas de notificaciones con metadata generada antes de enviarlas a los canales posteriores.",
+      "tags": [
+        "notificaciones",
+        "funcionalidad"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/notifications/bundle.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "use crate::notifications::{Bundle, TemplateKind};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "pub fn build_notification_bundle(kind: TemplateKind, body: &str, locale: &str) -> Bundle {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    let mut bundle = Bundle::new(kind);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    bundle.locale = locale.to_string();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    bundle.preview = body.chars().take(140).collect();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    bundle.body = body.to_string();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    bundle",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

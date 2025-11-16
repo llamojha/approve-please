@@ -1,0 +1,82 @@
+{
+  "templateId": "rust-048-pdb-leftover",
+  "title": "Batch reconcile debugger hook",
+  "author": "Gina P.",
+  "description": "Adds richer inspection around the reconcile batch helper.",
+  "tags": [
+    "style",
+    "debug"
+  ],
+  "localized": {
+    "es": {
+      "title": "Hook de debugger para conciliar batches",
+      "description": "Agrega inspecci\u00f3n m\u00e1s rica alrededor del helper de reconcile batch.",
+      "tags": [
+        "estilo",
+        "debug"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/batch/reconcile.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use crate::batch::Batch;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "pub fn reconcile(batch: &Batch) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    debugger::breakpoint();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    for item in &batch.items {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "        process(item);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Leaves a pdb breakpoint in production code.",
+      "localizedDescription": {
+        "es": "Deja un breakpoint de pdb en c\u00f3digo de producci\u00f3n."
+      },
+      "lineNumbers": [
+        33
+      ]
+    }
+  ]
+}

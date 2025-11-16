@@ -1,0 +1,87 @@
+{
+  "templateId": "rust-011-queue-pressure-guard",
+  "title": "Tighten queue pressure guard",
+  "author": "Mara H.",
+  "description": "Adds a helper that decides when the orchestrator queue is overloaded.",
+  "tags": [
+    "logic",
+    "queue"
+  ],
+  "localized": {
+    "es": {
+      "title": "Refuerza el guard de presi\u00f3n de la cola",
+      "description": "Agrega un helper que decide cu\u00e1ndo la cola del orquestador est\u00e1 sobrecargada.",
+      "tags": [
+        "l\u00f3gica",
+        "cola"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/queue/pressure_guard.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 36,
+          "content": "use crate::queue::QueueGauge;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "pub fn queue_overloaded(gauge: &QueueGauge, limit: u64) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    let pending = gauge.pending();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    if limit == 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    pending < limit",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Comparison is inverted; backlog should trigger when pending exceeds the limit, not when it is below.",
+      "localizedDescription": {
+        "es": "La comparaci\u00f3n est\u00e1 invertida; el backlog debe activarse cuando los pendientes superan el l\u00edmite, no cuando est\u00e1n por debajo."
+      },
+      "lineNumbers": [
+        43
+      ]
+    }
+  ]
+}

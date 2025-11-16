@@ -1,0 +1,62 @@
+{
+  "templateId": "py-012-billing-grace-window",
+  "title": "Adjust billing grace window logic",
+  "author": "Leo B.",
+  "description": "Updates the helper that determines when invoices leave the grace period.",
+  "tags": [
+    "billing",
+    "logic"
+  ],
+  "localized": {
+    "es": {
+      "title": "Ajusta la lógica de la ventana de gracia de billing",
+      "description": "Actualiza el helper que determina cuándo las facturas salen del período de gracia.",
+      "tags": [
+        "billing",
+        "lógica"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "billing/grace.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 44,
+          "content": "def is_past_grace_window(days_past_due: int, grace_days: int = 5) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "    if days_past_due > grace_days:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Grace window should treat the final allowed day as late, so the comparison must be >=.",
+      "localizedDescription": {
+        "es": "La ventana de gracia debe tratar el último día permitido como tarde, por eso la comparación debe ser >=."
+      },
+      "lineNumbers": [
+        45
+      ]
+    }
+  ]
+}

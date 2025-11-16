@@ -1,0 +1,67 @@
+{
+  "templateId": "py-017-usage-quota-check",
+  "title": "Add usage quota exhaustion helper",
+  "author": "Omar Y.",
+  "description": "Determines when a tenant has exhausted its usage quota plus burst headroom.",
+  "tags": [
+    "logic",
+    "usage"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para detectar el agotamiento de la cuota de uso",
+      "description": "Determina cuándo un tenant agotó su cuota de uso más el margen de burst.",
+      "tags": [
+        "lógica",
+        "uso"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "usage/quota.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 101,
+          "content": "def is_quota_exhausted(used: int, limit: int, burst: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    ceiling = limit + burst",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "    if used > ceiling:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Crossing the exact ceiling should mark the quota exhausted; the comparison must be >=.",
+      "localizedDescription": {
+        "es": "Al cruzar exactamente el techo se debe marcar la cuota como agotada; la comparación tiene que ser >=."
+      },
+      "lineNumbers": [
+        103
+      ]
+    }
+  ]
+}

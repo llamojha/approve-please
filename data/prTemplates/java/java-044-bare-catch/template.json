@@ -1,0 +1,88 @@
+{
+  "templateId": "java-044-bare-catch",
+  "title": "Payload parser helper",
+  "author": "Rhea O.",
+  "description": "Parses JSON payloads flowing through the resolver.",
+  "tags": [
+    "style",
+    "parsing"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del parser de payloads",
+      "description": "Parsea payloads JSON que pasan por el resolver.",
+      "tags": [
+        "estilo",
+        "parseo"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/resolver/PayloadParser.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 33,
+          "content": "public final class PayloadParser {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "  public Map<String, Object> parse(String body) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    try {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "      return new ObjectMapper().readValue(body, new TypeReference<>() {});",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    } catch (Exception ignored) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "      return Map.of();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "major",
+      "description": "Swallows all exceptions and returns an empty map.",
+      "localizedDescription": {
+        "es": "Se traga todas las excepciones y devuelve un map vacío."
+      },
+      "lineNumbers": [
+        37,
+        38
+      ]
+    }
+  ]
+}

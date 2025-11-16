@@ -1,0 +1,57 @@
+{
+  "templateId": "logic-session-expiry",
+  "title": "Session expiry enforcement",
+  "author": "Malik C.",
+  "description": "Refresh tokens should not extend sessions beyond 30 days.",
+  "tags": [
+    "security",
+    "auth"
+  ],
+  "localized": {
+    "es": {
+      "title": "Aplicación del vencimiento de sesión",
+      "description": "Los refresh tokens no deben extender sesiones más allá de 30 días.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/auth/session.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 27,
+          "content": "  if (session.age > MAX_SESSION_DAYS) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    session.terminatedAt = new Date();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        27
+      ],
+      "severity": "major",
+      "description": "Refresh token path uses age in hours, not days.",
+      "localizedDescription": {
+        "es": "La ruta del refresh token usa la edad en horas, no en días."
+      }
+    }
+  ],
+  "importance": "high"
+}

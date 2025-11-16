@@ -1,0 +1,65 @@
+{
+  "templateId": "rust-009-service-map-uploader",
+  "title": "Add service map upload helper",
+  "author": "Priya Z.",
+  "description": "Adds a convenience helper for posting service map snapshots to the mapping API.",
+  "tags": [
+    "integrations",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para subir el service map",
+      "description": "Agrega un helper pr\u00e1ctico para publicar snapshots del service map en la API de mapeo.",
+      "tags": [
+        "integraciones",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/service_map/uploader.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 34,
+          "content": "use crate::service_map::{ServiceMapClient, ServiceRecord};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "use serde_json::json;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "pub async fn upload_service_map(client: &ServiceMapClient, records: &[ServiceRecord]) -> anyhow::Result<()> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    let payload = json!({ \"records\": records });",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    client.put(\"/service-map\", payload).await",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

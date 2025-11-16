@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-077-temporary-debug-logger-for-cdn-purger",
+  "title": "Temporary debug logger for Cdn Purger",
+  "author": "Ravi M.",
+  "description": "Adds a helper so QA can inspect payloads while testing.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "performance",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Logger temporal de debug para CDN Purger",
+      "description": "Agrega un helper para que QA inspeccione payloads durante las pruebas.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "rendimiento",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/debug/cdn-purger.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 40,
+          "content": "  export function logCdnPurgerDebug(payload: unknown) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    // TODO: drop verbose log once dashboard is stable",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    console.log('[debug]', payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        41
+      ],
+      "severity": "minor",
+      "description": "TODO/console log left in production path.",
+      "localizedDescription": {
+        "es": "Quedó un TODO/console log en la ruta de producción."
+      }
+    }
+  ]
+}

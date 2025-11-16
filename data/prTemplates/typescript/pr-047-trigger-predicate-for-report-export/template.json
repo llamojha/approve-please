@@ -1,0 +1,79 @@
+{
+  "templateId": "pr-047-trigger-predicate-for-report-export",
+  "title": "Trigger predicate for Report Export",
+  "author": "Gabe K.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+ "tags": [
+   "bugfix",
+   "data",
+   "feature"
+ ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Report Export",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "corrección",
+        "datos",
+        "funcionalidad"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/report-export.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 100,
+          "content": "  export function shouldTriggerReportExport(payload: ReportExportPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+     "lineNumbers": [
+       101
+     ],
+     "severity": "major",
+     "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+     "localizedDescription": {
+       "es": "La condición usa asignación en lugar de comparación y cambia payload.status."
+     }
+   }
+ ]
+}

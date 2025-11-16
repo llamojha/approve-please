@@ -1,0 +1,105 @@
+{
+  "templateId": "rust-007-access-journal-dumper",
+  "title": "Add access journal formatter",
+  "author": "Nuri V.",
+  "description": "Adds a helper to normalize access journal rows before writing them to disk.",
+  "tags": [
+    "compliance",
+    "logging"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega formateador para access journal",
+      "description": "Agrega un helper para normalizar las filas del access journal antes de escribirlas en disco.",
+      "tags": [
+        "compliance",
+        "logging"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/audit/access_journal.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "use crate::audit::AccessEntry;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "pub fn format_access_journal(entries: &[AccessEntry]) -> String {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    let mut lines = Vec::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    for entry in entries {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "        lines.push(format!(",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "            \"{},{},{}\",",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "            entry.actor,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "            entry.resource,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "            entry.at.to_rfc3339()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        ));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    lines.join(\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

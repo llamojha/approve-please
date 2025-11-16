@@ -1,0 +1,79 @@
+{
+  "templateId": "pr-012-trigger-predicate-for-audit-pipeline",
+  "title": "Trigger predicate for Audit Pipeline",
+  "author": "Simone B.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Audit Pipeline",
+      "description": "Agrega un helper condicional que decide si deben correr los jobs.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/audit-pipeline.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 50,
+          "content": "  export function shouldTriggerAuditPipeline(payload: AuditPipelinePayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        51
+      ],
+      "severity": "major",
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y cambia payload.status."
+      }
+    }
+  ]
+}

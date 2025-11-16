@@ -1,0 +1,62 @@
+{
+  "templateId": "py-019-release-batch-verifier",
+  "title": "Release batch verification helper",
+  "author": "Quinn E.",
+  "description": "Examines job statuses to determine if a release batch can ship.",
+  "tags": [
+    "logic",
+    "release"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de verificación de batches de release",
+      "description": "Examina los estados de los jobs para decidir si un batch de release puede salir.",
+      "tags": [
+        "lógica",
+        "release"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "release/batch.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 112,
+          "content": "def batch_can_ship(statuses: list[str]) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "    if all(status == \"passed\" for status in statuses):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 114,
+          "content": "        return False",
+          "isNew": true
+        },
+        {
+          "lineNumber": 115,
+          "content": "    return True",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Logic is inverted; batches should ship only when all checks passed, not be blocked.",
+      "localizedDescription": {
+        "es": "La lógica está invertida; los batches deben salir solo cuando todos los checks pasan, no bloquearse."
+      },
+      "lineNumbers": [
+        113
+      ]
+    }
+  ]
+}

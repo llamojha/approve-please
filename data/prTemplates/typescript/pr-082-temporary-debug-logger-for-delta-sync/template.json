@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-082-temporary-debug-logger-for-delta-sync",
+  "title": "Temporary debug logger for Delta Sync",
+  "author": "Akiko F.",
+  "description": "Adds a helper so QA can inspect payloads while testing.",
+  "tags": [
+    "cleanup",
+    "performance",
+    "refactor",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Logger temporal de debug para Delta Sync",
+      "description": "Agrega un helper para que QA inspeccione payloads durante pruebas.",
+      "tags": [
+        "limpieza",
+        "rendimiento",
+        "refactor",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/debug/delta-sync.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 35,
+          "content": "  export function logDeltaSyncDebug(payload: unknown) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    // TODO: drop verbose log once dashboard is stable",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    console.log('[debug]', payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        36
+      ],
+      "severity": "minor",
+      "description": "TODO/console log left in production path.",
+      "localizedDescription": {
+        "es": "Quedó un TODO/console log en la ruta de producción."
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "templateId": "java-032-config-cache-reloader",
+  "title": "Config cache reloader",
+  "author": "Farah J.",
+  "description": "Reloads feature flag config for each request.",
+  "tags": [
+    "performance",
+    "config"
+  ],
+  "localized": {
+    "es": {
+      "title": "Recargador de cache de config",
+      "description": "Recarga la config de feature flags en cada request.",
+      "tags": [
+        "rendimiento",
+        "config"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/config/FlagCache.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 58,
+          "content": "public final class FlagCache {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "  public Map<String, Object> getFlags(Path path) throws IOException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    String json = Files.readString(path);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    return new ObjectMapper().readValue(json, new TypeReference<>() {});",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Reads and parses the config file on every call instead of caching.",
+      "localizedDescription": {
+        "es": "Lee y parsea el archivo de config en cada llamada en vez de cachearlo."
+      },
+      "lineNumbers": [
+        60,
+        61
+      ]
+    }
+  ]
+}

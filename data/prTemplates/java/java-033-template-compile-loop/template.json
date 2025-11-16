@@ -1,0 +1,113 @@
+{
+  "templateId": "java-033-template-compile-loop",
+  "title": "Template compile loop",
+  "author": "Gia E.",
+  "description": "Renders SLA email templates for each tenant.",
+  "tags": [
+    "performance",
+    "templates"
+  ],
+  "localized": {
+    "es": {
+      "title": "Loop de compilación de templates",
+      "description": "Renderiza templates de email de SLA para cada tenant.",
+      "tags": [
+        "rendimiento",
+        "templates"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/email/SlaRenderer.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 91,
+          "content": "public final class SlaRenderer {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "  public List<String> render(List<Map<String, Object>> tenants) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "    List<String> emails = new ArrayList<>();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 94,
+          "content": "    for (Map<String, Object> tenant : tenants) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 95,
+          "content": "      Template template = engine().compile(\"sla-email.html\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "      emails.add(template.render(tenant));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "    return emails;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "  private TemplateEngine engine() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    return new TemplateEngine();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Compiles the template and instantiates the engine for every tenant.",
+      "localizedDescription": {
+        "es": "Compila la plantilla e instancia el engine para cada tenant."
+      },
+      "lineNumbers": [
+        95,
+        102
+      ]
+    }
+  ]
+}

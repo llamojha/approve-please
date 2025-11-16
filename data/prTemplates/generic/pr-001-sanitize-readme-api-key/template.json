@@ -1,0 +1,60 @@
+{
+  "templateId": "pr-001-sanitize-readme-api-key",
+  "title": "README: remove exposed API key",
+  "author": "Noor T.",
+  "description": "Scrubs a mistakenly committed API key from the docs.",
+  "tags": [
+    "docs",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "README: elimina la API key expuesta",
+      "description": "Limpia una API key que se comprometió por error en la documentación.",
+      "tags": [
+        "documentación",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "README.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 120,
+          "content": "  ```bash",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "  curl -H \"Authorization: Bearer sk_live_9cf1d1-secret-key\" \\",
+          "isNew": true
+        },
+        {
+          "lineNumber": 122,
+          "content": "  https://api.releaseops.dev/v1/jobs",
+          "isNew": true
+        },
+        {
+          "lineNumber": 123,
+          "content": "  ```",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [121],
+      "severity": "major",
+      "description": "README contains a live API key in the sample command.",
+      "localizedDescription": {
+        "es": "El README incluye una API key real en el comando de ejemplo."
+      }
+    }
+  ]
+}

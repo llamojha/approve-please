@@ -1,0 +1,59 @@
+{
+  "templateId": "pr-008-document-schema-diff-runbook",
+  "title": "Document Schema Diff runbook",
+  "author": "Brielle S.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "docs",
+    "feature",
+    "ops",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Schema Diff",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "ops",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/schema-diff.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "## Schema Diff Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

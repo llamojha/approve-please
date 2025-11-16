@@ -1,0 +1,83 @@
+{
+  "templateId": "java-041-prod-todo-flag",
+  "title": "Feature flag sanitizer",
+  "author": "Opal H.",
+  "description": "Adds a helper to sanitize payloads before sending them to the command bus.",
+  "tags": [
+    "style",
+    "cleanup"
+  ],
+  "localized": {
+    "es": {
+      "title": "Sanitizador de feature flags",
+      "description": "Agrega un helper para sanear payloads antes de enviarlos al command bus.",
+      "tags": [
+        "estilo",
+        "limpieza"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/flags/PayloadSanitizer.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "public final class PayloadSanitizer {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "  public Map<String, Object> sanitize(Map<String, Object> payload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    // TODO remove debug before GA",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    payload.putIfAbsent(\"debug\", true);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    payload.put(\"version\", \"v2\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Ships a TODO that keeps debug mode forced on.",
+      "localizedDescription": {
+        "es": "Envía un TODO que mantiene habilitado el modo debug."
+      },
+      "lineNumbers": [
+        32,
+        33
+      ]
+    }
+  ]
+}

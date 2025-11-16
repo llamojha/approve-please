@@ -1,0 +1,62 @@
+{
+  "templateId": "py-022-data-batch-size",
+  "title": "Data batch split helper",
+  "author": "Rowan C.",
+  "description": "Checks whether a batch of records should be split before enqueueing.",
+  "tags": [
+    "logic",
+    "data"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para dividir lotes de datos",
+      "description": "Verifica si un lote de registros debe dividirse antes de encolarlo.",
+      "tags": [
+        "lógica",
+        "datos"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "pipelines/batching.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 84,
+          "content": "def should_split_batch(record_count: int, max_records: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "    if record_count < max_records:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Splitting must happen when batches exceed the maximum, not when they are under it.",
+      "localizedDescription": {
+        "es": "Hay que dividir cuando los batches exceden el máximo, no cuando están por debajo."
+      },
+      "lineNumbers": [
+        85
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "templateId": "java-039-distinct-sort-loop",
+  "title": "Latency aggregation helper",
+  "author": "Mara X.",
+  "description": "Aggregates per-endpoint latency buckets for dashboards.",
+  "tags": [
+    "performance",
+    "analytics"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de agregación de latencia",
+      "description": "Agrupa buckets de latencia por endpoint para los dashboards.",
+      "tags": [
+        "rendimiento",
+        "analítica"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/analytics/LatencyAggregator.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 33,
+          "content": "public final class LatencyAggregator {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "  public Map<String, List<Integer>> aggregate(List<LatencyEvent> events) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    Map<String, List<Integer>> buckets = new HashMap<>();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    for (LatencyEvent event : events) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "      List<Integer> bucket = buckets.computeIfAbsent(event.endpoint(), key -> new ArrayList<>());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "      bucket.add(event.durationMs());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "      Collections.sort(bucket);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    return buckets;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Sorts each bucket on every iteration instead of once after accumulation.",
+      "localizedDescription": {
+        "es": "Ordena cada bucket en cada iteración en lugar de hacerlo una vez al final."
+      },
+      "lineNumbers": [
+        39
+      ]
+    }
+  ]
+}

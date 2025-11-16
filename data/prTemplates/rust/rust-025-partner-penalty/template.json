@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-025-partner-penalty",
+  "title": "Partner penalty trigger",
+  "author": "Ivy C.",
+  "description": "Determines if a partner should incur a penalty based on their error rate.",
+  "tags": [
+    "logic",
+    "partnerships"
+  ],
+  "localized": {
+    "es": {
+      "title": "Disparador de penalizaci\u00f3n para partners",
+      "description": "Determina si un partner debe incurrir en una penalizaci\u00f3n seg\u00fan su tasa de errores.",
+      "tags": [
+        "l\u00f3gica",
+        "alianzas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/partners/penalty.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 24,
+          "content": "pub fn should_penalize(error_rate: f32, threshold: f32) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    if threshold <= 0.0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "        return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    error_rate < threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Penalties should apply when error rate rises above the threshold, not below it.",
+      "localizedDescription": {
+        "es": "Las penalizaciones deben aplicarse cuando la tasa de errores supera el umbral, no cuando est\u00e1 por debajo."
+      },
+      "lineNumbers": [
+        28
+      ]
+    }
+  ]
+}

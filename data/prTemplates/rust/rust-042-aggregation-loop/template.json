@@ -1,0 +1,82 @@
+{
+  "templateId": "rust-042-aggregation-loop",
+  "title": "Event aggregation helper",
+  "author": "Alma S.",
+  "description": "Aggregates event durations for dashboards.",
+  "tags": [
+    "performance",
+    "analytics"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de agregaci\u00f3n de eventos",
+      "description": "Agrupa las duraciones de eventos para dashboards.",
+      "tags": [
+        "rendimiento",
+        "anal\u00edtica"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/events/aggregator.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 32,
+          "content": "use crate::events::Bucket;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "pub fn aggregate_buckets(buckets: &mut [Bucket]) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    for bucket in buckets {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        bucket.events.sort();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "        bucket.coalesce();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Sorts the bucket on every iteration instead of once after aggregation.",
+      "localizedDescription": {
+        "es": "Ordena el bucket en cada iteraci\u00f3n en lugar de hacerlo una vez al final de la agregaci\u00f3n."
+      },
+      "lineNumbers": [
+        36
+      ]
+    }
+  ]
+}

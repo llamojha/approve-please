@@ -1,0 +1,81 @@
+{
+  "templateId": "pr-032-trigger-predicate-for-risk-pager",
+  "title": "Trigger predicate for Risk Pager",
+  "author": "Julian F.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+  "tags": [
+    "bugfix",
+    "data",
+    "feature",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Risk Pager",
+      "description": "Agrega un helper condicional que decide si los jobs corren.",
+      "tags": [
+        "corrección",
+        "datos",
+        "funcionalidad",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/risk-pager.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "  export function shouldTriggerRiskPager(payload: RiskPagerPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        56
+      ],
+      "severity": "major",
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y cambia payload.status."
+      }
+    }
+  ]
+}

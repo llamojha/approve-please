@@ -1,0 +1,89 @@
+{
+  "templateId": "pr-085-stream-cluster-registry-snapshots",
+  "title": "Stream Cluster Registry snapshots",
+  "author": "Noor T.",
+  "description": "Adds a Go helper that fetches snapshots for tooling.",
+  "tags": [
+    "bugfix",
+    "infra",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Transmite snapshots de Cluster Registry",
+      "description": "Agrega un helper que obtiene snapshots para las herramientas.",
+      "tags": [
+        "corrección",
+        "infra",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "jobs/cluster-registry.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 35,
+          "content": "  export async function streamClusterRegistrySnapshots(ids: string[]): Promise<Snapshot[]> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    const snapshots: Snapshot[] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    for (const id of ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "      const resp = await fetch(`${baseUrl}/${id}`);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "      const raw = await resp.arrayBuffer();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "      snapshots.push({ id, raw });",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    return snapshots;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        38
+      ],
+      "severity": "major",
+      "description": "Fetches every id sequentially without reuse or concurrency.",
+      "localizedDescription": {
+        "es": "Hace fetch de cada id de forma secuencial, sin paralelismo ni reutilización."
+      }
+    }
+  ]
+}

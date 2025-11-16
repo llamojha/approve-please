@@ -1,0 +1,92 @@
+{
+  "templateId": "rust-027-audit-sql-concat",
+  "title": "Audit SQL fetch helper",
+  "author": "Yara B.",
+  "description": "Adds a helper to fetch audit log entries for a tenant.",
+  "tags": [
+    "security",
+    "sql"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para consultar auditor\u00edas via SQL",
+      "description": "Agrega un helper para obtener entradas del log de auditor\u00eda de un tenant.",
+      "tags": [
+        "seguridad",
+        "sql"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/audit/sql_fetch.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 28,
+          "content": "use sqlx::{postgres::PgRow, PgPool};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "pub async fn fetch_audit_rows(pool: &PgPool, tenant: &str, limit: i64) -> Result<Vec<PgRow>, sqlx::Error> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    let query = format!(",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        \"SELECT * FROM audit_log WHERE tenant = '{}' ORDER BY created_at DESC LIMIT {}\",",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "        tenant,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "        limit",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    sqlx::query(&query).fetch_all(pool).await",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Builds raw SQL with tenant input, allowing injection.",
+      "localizedDescription": {
+        "es": "Construye SQL crudo con el input del tenant, habilitando inyecci\u00f3n."
+      },
+      "lineNumbers": [
+        32
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "templateId": "pr-007-document-kpi-dashboard-runbook",
+  "title": "Document Kpi Dashboard runbook",
+  "author": "Pedro A.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "docs",
+    "feature",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de KPI Dashboard",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/kpi-dashboard.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 65,
+          "content": "## Kpi Dashboard Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

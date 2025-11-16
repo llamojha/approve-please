@@ -1,0 +1,64 @@
+{
+  "templateId": "pr-022-typescript-helper-for-lead-matcher-data",
+  "title": "TypeScript helper for Lead Matcher data",
+  "author": "Malik O.",
+  "description": "Adds a raw SQL helper to fetch organization rows.",
+  "tags": [
+    "bugfix",
+    "ops",
+    "security"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de TypeScript para datos de Lead Matcher",
+      "description": "Agrega un helper de SQL crudo para obtener filas de organizaciones.",
+      "tags": [
+        "corrección",
+        "ops",
+        "seguridad"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "analytics/lead-matcher.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 50,
+          "content": "  export async function fetchLeadMatcher(db: DatabaseClient, orgId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    const sql = `SELECT * FROM lead_matcher WHERE org_id = '${orgId}'`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    return db.raw(sql);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        51
+      ],
+      "severity": "critical",
+      "description": "Builds SQL via string interpolation and allows injection.",
+      "localizedDescription": {
+        "es": "Construye SQL con interpolación de strings y permite inyección."
+      }
+    }
+  ]
+}

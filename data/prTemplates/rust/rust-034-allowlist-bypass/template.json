@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-034-allowlist-bypass",
+  "title": "Control plane allowlist helper",
+  "author": "Eli M.",
+  "description": "Adds a helper to enforce deployer allowlists.",
+  "tags": [
+    "security",
+    "access"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de allowlist para el control plane",
+      "description": "Agrega un helper para hacer cumplir las allowlists de deployers.",
+      "tags": [
+        "seguridad",
+        "acceso"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/control_plane/allowlist.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "pub fn allow_request(allowlist: &[String], actor: &str) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    if allowlist.is_empty() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    allowlist.iter().any(|entry| entry == actor)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Fails open when the allowlist is empty instead of blocking access.",
+      "localizedDescription": {
+        "es": "Hace fail-open cuando la allowlist est\u00e1 vac\u00eda en vez de bloquear el acceso."
+      },
+      "lineNumbers": [
+        21
+      ]
+    }
+  ]
+}

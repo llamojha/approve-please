@@ -1,0 +1,79 @@
+{
+  "templateId": "pr-059-chunk-ledger-balancer-records",
+  "title": "Chunk Ledger Balancer records",
+  "author": "Pedro A.",
+  "description": "Adds pagination helpers for ledger balancer batches.",
+  "tags": [
+    "bugfix",
+    "data",
+    "feature"
+  ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Ledger Balancer",
+      "description": "Agrega helpers de paginación para lotes de ledger balancer.",
+      "tags": [
+        "corrección",
+        "datos",
+        "funcionalidad"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/lib/ledger-balancer.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 25,
+          "content": "  export function paginateLedgerBalancerRecords(items: LedgerBalancerRecord[], size: number) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    const pages: LedgerBalancerRecord[][] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    for (let i = 0; i <= items.length; i += size) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "      pages.push(items.slice(i, i + size));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    return pages;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        27
+      ],
+      "severity": "minor",
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página adicional vacía cuando i == items.length."
+      }
+    }
+  ]
+}

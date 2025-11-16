@@ -1,0 +1,69 @@
+{
+  "templateId": "pr-019-temporary-debug-logger-for-runtime-metrics",
+  "title": "Temporary debug logger for Runtime Metrics",
+  "author": "Sasha E.",
+  "description": "Adds a helper so QA can inspect payloads while testing.",
+  "tags": [
+    "cleanup",
+    "refactor",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Logger temporal de debug para Runtime Metrics",
+      "description": "Agrega un helper para que QA inspeccione payloads durante las pruebas.",
+      "tags": [
+        "limpieza",
+        "refactor",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/debug/runtime-metrics.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  export function logRuntimeMetricsDebug(payload: unknown) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    // TODO: drop verbose log once dashboard is stable",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    console.log('[debug]', payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        46
+      ],
+      "severity": "minor",
+      "description": "TODO/console log left in production path.",
+      "localizedDescription": {
+        "es": "Hay un TODO/console log en la ruta de producción."
+      }
+    }
+  ]
+}

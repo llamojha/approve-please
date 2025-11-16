@@ -1,0 +1,82 @@
+{
+  "templateId": "py-014-feedback-subscore",
+  "title": "Calibrate feedback sub-score helper",
+  "author": "Hazel N.",
+  "description": "Scores the feedback queue to decide when to page managers.",
+  "tags": [
+    "logic",
+    "support"
+  ],
+  "localized": {
+    "es": {
+      "title": "Calibra el helper de subscore de feedback",
+      "description": "Puntúa la cola de feedback para decidir cuándo hacer page a managers.",
+      "tags": [
+        "lógica",
+        "soporte"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "support/feedback.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 38,
+          "content": "def feedback_subscore(resolved: int, escalated: int, target_ratio: float = 0.6) -> str:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    total = resolved + escalated",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    if total == 0:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "        return \"unknown\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    ratio = resolved / total",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    if ratio < target_ratio:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "        return \"attention\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "    return \"healthy\"",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "minor",
+      "description": "Borderline ratios equal to the target should still be treated as attention, so the comparison must be <=.",
+      "localizedDescription": {
+        "es": "Las razones en el límite iguales al objetivo aún deben tratarse como attention, así que la comparación tiene que ser <=."
+      },
+      "lineNumbers": [
+        43
+      ]
+    }
+  ]
+}

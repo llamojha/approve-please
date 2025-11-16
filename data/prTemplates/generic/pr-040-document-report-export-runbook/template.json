@@ -1,0 +1,59 @@
+{
+  "templateId": "pr-040-document-report-export-runbook",
+  "title": "Document Report Export runbook",
+  "author": "Casey D.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "docs",
+    "feature"
+  ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Report Export",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "documentación",
+        "funcionalidad"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/report-export.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 70,
+          "content": "## Report Export Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

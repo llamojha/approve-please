@@ -1,0 +1,77 @@
+{
+  "templateId": "py-042-aggregation-loop",
+  "title": "Event aggregation helper",
+  "author": "Poppy V.",
+  "description": "Aggregates event durations for dashboards.",
+  "tags": [
+    "performance",
+    "analytics"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de agregación de eventos",
+      "description": "Agrupa las duraciones de eventos para dashboards.",
+      "tags": [
+        "rendimiento",
+        "analítica"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "analytics/aggregate.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 58,
+          "content": "def summarize_events(events: list[dict]) -> dict[str, list[int]]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    totals: dict[str, list[int]] = {}",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    for event in events:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "        bucket = totals.setdefault(event[\"type\"], [])",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "        bucket.append(event[\"duration_ms\"])",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "        bucket.sort()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    return totals",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Sorts the bucket on every iteration instead of once after aggregation.",
+      "localizedDescription": {
+        "es": "Ordena el bucket en cada iteración en lugar de hacerlo una vez al final de la agregación."
+      },
+      "lineNumbers": [
+        62
+      ]
+    }
+  ]
+}

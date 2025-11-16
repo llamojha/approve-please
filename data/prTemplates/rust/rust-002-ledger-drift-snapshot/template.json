@@ -1,0 +1,122 @@
+{
+  "templateId": "rust-002-ledger-drift-snapshot",
+  "title": "Add ledger drift snapshot helper",
+  "author": "Haruto C.",
+  "description": "Introduces a dataclass for representing ledger drift deltas for downstream consumers.",
+  "tags": [
+    "data",
+    "billing",
+    "python"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper de snapshot para ledger drift",
+      "description": "Introduce un dataclass que representa deltas de ledger drift para consumidores posteriores.",
+      "tags": [
+        "datos",
+        "billing",
+        "python"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/ledger/drift_snapshot.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 24,
+          "content": "use crate::jobs::Dispatcher;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "use crate::ledger::DriftWindow;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "use serde::Serialize;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "#[derive(Serialize)]",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "struct DriftPayload {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    window_start: String,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    window_end: String,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "}",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "pub fn enqueue_drift_snapshot(dispatcher: &Dispatcher, window: &DriftWindow) -> anyhow::Result<()> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    let payload = DriftPayload {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        window_start: window.start.to_rfc3339(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "        window_end: window.end.to_rfc3339(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    dispatcher.enqueue(\"ledger.drift_snapshot\", payload)?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    Ok(())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

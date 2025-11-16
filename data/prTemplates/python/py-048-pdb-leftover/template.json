@@ -1,0 +1,77 @@
+{
+  "templateId": "py-048-pdb-leftover",
+  "title": "Batch reconcile debugger hook",
+  "author": "Una M.",
+  "description": "Adds richer inspection around the reconcile batch helper.",
+  "tags": [
+    "style",
+    "debug"
+  ],
+  "localized": {
+    "es": {
+      "title": "Hook de debugger para conciliar batches",
+      "description": "Agrega inspección más rica alrededor del helper de reconcile batch.",
+      "tags": [
+        "estilo",
+        "debug"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "reconcile/debug.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "import pdb",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "def reconcile_batch(batch):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    pdb.set_trace()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    for row in batch:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "        reconcile_row(row)",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Leaves a pdb breakpoint in production code.",
+      "localizedDescription": {
+        "es": "Deja un breakpoint de pdb en código de producción."
+      },
+      "lineNumbers": [
+        22
+      ]
+    }
+  ]
+}

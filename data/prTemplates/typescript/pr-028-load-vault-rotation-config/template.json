@@ -1,0 +1,69 @@
+{
+  "templateId": "pr-028-load-vault-rotation-config",
+  "title": "Load Vault Rotation config",
+  "author": "Brielle S.",
+  "description": "Adds a helper that reloads config before evaluating feature logic.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Carga la configuración de Vault Rotation",
+      "description": "Agrega un helper que recarga la config antes de evaluar la lógica.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/config/vault-rotation.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  export function loadVaultRotationConfig(path = '/etc/service/vault-rotation.json') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    const raw = fs.readFileSync(path, 'utf8');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    const parsed = JSON.parse(raw);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "    return parsed;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        46
+      ],
+      "severity": "major",
+      "description": "Uses blocking fs.readFileSync on every call in the request path.",
+      "localizedDescription": {
+        "es": "Usa fs.readFileSync (bloqueante) en cada llamada del request path."
+      }
+    }
+  ]
+}
