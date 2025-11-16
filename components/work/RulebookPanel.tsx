@@ -11,13 +11,18 @@ interface RulebookPanelProps {
 }
 
 const RulebookPanel = ({ rules, day, codename, dayQuote, mood }: RulebookPanelProps) => {
+  const headingDescriptor = mood || codename || 'Operations';
+  const showCodenameBadge = Boolean(codename && headingDescriptor !== codename);
+
   return (
     <Panel
-      title={`Day ${day}: ${codename}`}
+      title={`Day ${day} – ${headingDescriptor}`}
       titleHint={
-        <span className={styles.moodBadge} aria-label="Mood of the day">
-          {mood}
-        </span>
+        showCodenameBadge ? (
+          <span className={styles.moodBadge} aria-label="Scenario codename">
+            {codename}
+          </span>
+        ) : null
       }
     >
       {dayQuote && (

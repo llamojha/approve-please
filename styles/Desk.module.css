@@ -169,6 +169,8 @@
 }
 
 .queueItem {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   text-align: left;
   background: var(--bg-panel);
@@ -189,6 +191,18 @@
 .queueItemActive {
   border-color: var(--accent);
   background: var(--bg-panel-light);
+}
+
+.queueItemArrival {
+  animation: queueSwipeIn 0.9s cubic-bezier(0.2, 0.75, 0.25, 1);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+}
+
+.queueItemExit {
+  animation: queueSlideOut 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  border-color: rgba(248, 113, 113, 0.45);
+  pointer-events: none;
+  background: linear-gradient(110deg, rgba(15, 23, 42, 0.9), rgba(252, 211, 77, 0.08));
 }
 
 .queueItem strong {
@@ -220,6 +234,47 @@
   margin: 0;
   text-align: center;
   color: var(--muted);
+}
+
+@keyframes queueSwipeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-55%) scale(0.97) skewX(-4deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(6%) scale(1.01) skewX(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1) skewX(0);
+  }
+}
+
+@keyframes queueSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  45% {
+    opacity: 1;
+    transform: translateX(8%) scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(60%) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .queueItemArrival {
+    animation: none;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .queueItemExit {
+    animation: none;
+  }
 }
 
 .prPlaceholder {

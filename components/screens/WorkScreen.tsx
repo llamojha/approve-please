@@ -20,7 +20,7 @@ const WorkScreen = () => {
   } = useGameState();
   useGameClock();
   usePRSpawner();
-  const { playCue } = useAudioCue();
+  const { playCue, playArrivalCue } = useAudioCue();
 
   const [selectedLines, setSelectedLines] = useState<number[]>([]);
   const [bugKind, setBugKind] = useState<BugKind>('logic');
@@ -34,10 +34,10 @@ const WorkScreen = () => {
 
   useEffect(() => {
     if (queue.length > previousQueueLength.current) {
-      playCue(780, 0.12);
+      playArrivalCue();
     }
     previousQueueLength.current = queue.length;
-  }, [queue.length, playCue]);
+  }, [queue.length, playArrivalCue]);
 
   const toggleLine = (lineNumber: number) => {
     setSelectedLines((prev) =>
