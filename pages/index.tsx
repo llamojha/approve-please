@@ -27,10 +27,12 @@ const IndexPage = () => {
   return (
     <main className="landing">
       <section className="landing__card">
-        <h1>Approve Please</h1>
-        <p className="landing__blurb">
-          Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.
-        </p>
+        <div className="landing__intro">
+          <h1>Approve Please</h1>
+          <p className="landing__blurb">
+            Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.
+          </p>
+        </div>
         <section className="landing__primer">
           <div className="landing__primer-header">
             <small>Mission Brief</small>
@@ -110,35 +112,45 @@ const IndexPage = () => {
           background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 50%), var(--bg);
         }
         .landing__card {
-          width: min(660px, 100%);
-          background: var(--bg-panel);
+          position: relative;
+          width: min(720px, 100%);
           padding: 1rem;
           border-radius: 1rem;
           border: 1px solid var(--border);
+          overflow: hidden;
           box-shadow: 0 20px 50px rgba(2, 6, 23, 0.8);
+          background: url('/social-card-no-title.png') center/cover no-repeat;
+          color: #f8fafc;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .landing__intro {
+          background: rgba(6, 12, 29, 0.55);
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          border-radius: 0.75rem;
+          padding: 1rem;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+          backdrop-filter: blur(6px);
         }
         h1 {
           margin: 0 0 0.5rem;
           font-size: clamp(2rem, 4vw, 3rem);
           text-align: center;
         }
-        .landing__tag {
-          text-transform: uppercase;
-          letter-spacing: 0.2em;
-          color: var(--muted);
-          margin-bottom: 0.75rem;
-        }
         .landing__blurb {
-          color: var(--muted);
+          color: #e2e8f0;
           line-height: 1.6;
           text-align: center;
+          margin-bottom: 0;
         }
         .landing__primer {
-          border: 1px solid var(--border);
+          border: 1px solid rgba(148, 163, 184, 0.35);
           border-radius: 0.75rem;
           padding: 1.25rem 1.5rem;
-          background: rgba(15, 23, 42, 0.35);
-          margin-bottom: 0.5rem;
+          background: rgba(4, 10, 21, 0.55);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+          backdrop-filter: blur(5px);
         }
         .landing__primer-header {
           display: flex;
@@ -149,16 +161,16 @@ const IndexPage = () => {
         }
         .landing__primer-header small {
           text-transform: uppercase;
-          color: var(--muted);
+          color: #f1f5f9;
           letter-spacing: 0.12em;
         }
         .landing__primer-header span {
-          color: var(--muted);
+          color: #cbd5f5;
           font-size: 0.85rem;
         }
         .landing__primer p {
           margin: 0 0 0.9rem;
-          color: var(--muted);
+          color: #cbd5f5;
           line-height: 1.5;
         }
         .landing__primer-stats {
@@ -168,10 +180,11 @@ const IndexPage = () => {
           margin: 0;
         }
         .landing__primer-stats div {
-          background: rgba(15, 23, 42, 0.35);
+          background: rgba(6, 12, 29, 0.45);
           border-radius: 0.5rem;
           padding: 0.75rem;
-          border: 1px dashed var(--border);
+          border: 1px dashed rgba(148, 163, 184, 0.4);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
         }
         .landing__primer-stats dt {
           font-weight: 600;
@@ -179,19 +192,20 @@ const IndexPage = () => {
           text-transform: uppercase;
           letter-spacing: 0.08em;
           font-size: 0.85rem;
+          color: #f8fafc;
         }
         .landing__primer-stats dd {
           margin: 0;
           font-size: 0.85rem;
-          color: var(--muted);
+          color: #cbd5f5;
           line-height: 1.4;
         }
         .landing__language {
-          border: 1px dashed var(--border);
+          border: 1px dashed rgba(148, 163, 184, 0.35);
           border-radius: 0.75rem;
           padding: 1rem 1.25rem;
-          margin-bottom: 1.5rem;
-          background: rgba(15, 23, 42, 0.2);
+          background: rgba(4, 10, 21, 0.5);
+          backdrop-filter: blur(4px);
         }
         .landing__language-header {
           display: flex;
@@ -202,11 +216,11 @@ const IndexPage = () => {
         }
         .landing__language-header small {
           text-transform: uppercase;
-          color: var(--muted);
+          color: #f1f5f9;
           letter-spacing: 0.1em;
         }
         .landing__language-header span {
-          color: var(--muted);
+          color: #cbd5f5;
           font-size: 0.85rem;
         }
         .landing__language-options {
@@ -215,9 +229,9 @@ const IndexPage = () => {
           gap: 0.5rem;
         }
         .landing__language-options button {
-          border: 1px solid var(--border);
-          background: transparent;
-          color: var(--text);
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          background: rgba(15, 23, 42, 0.6);
+          color: #f8fafc;
           padding: 0.35rem 0.85rem;
           border-radius: 999px;
           font-size: 0.9rem;
@@ -225,14 +239,14 @@ const IndexPage = () => {
         }
         .landing__language-options button.active {
           border-color: var(--accent);
-          background: rgba(56, 189, 248, 0.15);
+          background: rgba(56, 189, 248, 0.2);
         }
         .landing__language-options button:focus-visible {
           outline: 2px solid var(--accent);
           outline-offset: 2px;
         }
         .landing__language-options button.disabled {
-          color: var(--muted);
+          color: rgba(226, 232, 240, 0.5);
           border-style: dashed;
         }
         .landing__language-options button:disabled {
@@ -243,6 +257,12 @@ const IndexPage = () => {
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
+          border: 1px solid rgba(148, 163, 184, 0.3);
+          background: rgba(4, 10, 21, 0.45);
+          border-radius: 0.75rem;
+          padding: 1rem;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+          backdrop-filter: blur(4px);
         }
         .landing__cta {
           border: none;
