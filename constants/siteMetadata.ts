@@ -19,7 +19,7 @@ export const SITE_METADATA: SiteMetadata = {
   siteName: 'Approve Please',
   description:
     'Step into Release Ops, review GitHub PRs under pressure, and balance stability, speed, and stakeholder satisfaction.',
-  url: 'https://approveplease.dev',
+  url: 'https://approve-please.amllamojha.com',
   image: '/social-card.png',
   imageAlt: 'Approve Please - Pull Request Review simulator showing a pull request queue and status meters.',
   keywords: [

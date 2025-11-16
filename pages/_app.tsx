@@ -21,6 +21,11 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content={SITE_METADATA.themeColor} />
           <link rel="canonical" href={SITE_METADATA.url} />
+          <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+          <link rel="icon" sizes="any" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="192x192" href="/icon-512.png" />
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content={SITE_METADATA.siteName} />
           <meta property="og:title" content={SITE_METADATA.title} />
