@@ -3,7 +3,7 @@
 ## 1. Overview
 
 **Title:** Approve Please
-**Genre:** Narrative desk-sim / judgment game (inspired by *Papers, Please*) ([Wikipedia][1])
+**Genre:** Narrative pr-sim / judgment game (inspired by *Papers, Please*) ([Wikipedia][1])
 **Fantasy:** You’re a software engineer whose whole job is **GitHub Pull Request Reviewer**. Work runs from **9:00–17:00**; during the day, waves of PRs arrive. You must quickly decide whether to **Approve** (deploy to prod) or **Request changes**, trying to balance **speed vs quality** like real-world code review tradeoffs. ([SmartBear Software][2])
 
 **Target platform:** Web (desktop browser)

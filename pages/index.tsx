@@ -27,7 +27,7 @@ const IndexPage = () => {
   return (
     <main className="landing">
       <section className="landing__card">
-        <p className="landing__tag">Desk Sim</p>
+        <p className="landing__tag">PR Sim</p>
         <h1>Approve Please</h1>
         <p className="landing__blurb">
           Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.
