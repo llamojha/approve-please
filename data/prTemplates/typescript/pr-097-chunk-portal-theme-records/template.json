@@ -1,0 +1,65 @@
+{
+  "templateId": "pr-097-chunk-portal-theme-records",
+  "title": "Chunk Portal Theme records",
+  "author": "Casey D.",
+  "description": "Adds pagination helpers for portal theme batches.",
+  "tags": [
+    "bugfix",
+    "data",
+    "feature"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/lib/portal-theme.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 70,
+          "content": "  export function paginatePortalThemeRecords(items: PortalThemeRecord[], size: number) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "    const pages: PortalThemeRecord[][] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "    for (let i = 0; i <= items.length; i += size) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "      pages.push(items.slice(i, i + size));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "    return pages;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        72
+      ],
+      "severity": "minor",
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+    }
+  ]
+}

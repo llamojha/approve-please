@@ -1,0 +1,588 @@
+.deskShell {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 1rem;
+}
+
+.desk {
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  gap: 1rem;
+  height: calc(100vh - 2rem);
+}
+
+.leftColumn,
+.centerColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel {
+  background: var(--bg-panel);
+  border-radius: 0.85rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-shadow: var(--shadow-soft);
+}
+
+.panelHeader {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.panelTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.panelHeader h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.panelHintSlot {
+  flex-shrink: 0;
+}
+
+.panelBody {
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panelFooter {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tutorialHint {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 1.4rem;
+  height: 1.4rem;
+  font-size: 0.75rem;
+  cursor: help;
+  color: var(--muted);
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.tutorialHint:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tutorialHintBubble {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  width: min(240px, 60vw);
+  background: rgba(2, 6, 23, 0.95);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 10;
+}
+
+.tutorialHint:hover .tutorialHintBubble,
+.tutorialHint:focus .tutorialHintBubble,
+.tutorialHint:focus-within .tutorialHintBubble {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.clockCard {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  padding: 1rem;
+}
+
+.clockLabel {
+  margin: 0;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.clockValue {
+  margin: 0.35rem 0 0;
+  font-size: 1.5rem;
+}
+
+.clockProgress {
+  margin-top: 1rem;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.clockProgress span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.queueList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.queueItem {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: inherit;
+  transition: background 0.15s ease, border 0.15s ease;
+}
+
+.queueItem:hover {
+  background: var(--bg-panel-light);
+}
+
+.queueItemActive {
+  border-color: var(--accent);
+  background: var(--bg-panel-light);
+}
+
+.queueItem strong {
+  display: block;
+  font-size: 0.95rem;
+}
+
+.queueItem p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+.queueEmpty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.importanceTag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  text-transform: capitalize;
+  font-size: 0.85rem;
+  color: var(--bg);
+  border: 1px solid rgba(4, 17, 31, 0.2);
+}
+
+.queueHint {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.prPlaceholder {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.prMeta h2 {
+  margin-bottom: 0.35rem;
+}
+
+.prMeta p {
+  margin: 0;
+}
+
+.prDescription {
+  color: var(--muted);
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tagList span {
+  background: var(--bg-panel-light);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.accessibilityCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: var(--bg-panel-light);
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  padding: 0.75rem;
+}
+
+.accessibilityLabel {
+  margin: 0;
+  font-weight: 600;
+}
+
+.accessibilityCopy {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.accessibilityToggle {
+  align-self: flex-start;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggleStatus {
+  background: rgba(4, 17, 31, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #ffffff;
+}
+
+.accessibilityFootnote {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.diffHintBanner {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  background: var(--bg-panel);
+  border: 1px dashed var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.diffWrapper {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  background: var(--bg-panel-light);
+}
+
+.prActions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.diffSection + .diffSection {
+  margin-top: 1rem;
+}
+
+.diffHeader p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+}
+
+.diffLines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.diffLine {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', monospace;
+  text-align: left;
+  color: var(--text);
+}
+
+.diffLineSelected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.lineNumber {
+  width: 40px;
+  text-align: right;
+  color: var(--muted);
+}
+
+.lineContentNew {
+  color: var(--success);
+}
+
+.lineContentOld {
+  color: var(--danger);
+}
+
+.briefingQuote {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.65rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.briefingQuote footer {
+  margin-top: 0.35rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.ruleList {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+
+.ruleList strong {
+  color: var(--text);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.statsGrid div {
+  background: var(--bg-panel-light);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.statsGrid small {
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.meterStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.meterBar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.meterHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.meterTrack {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.meterTrack span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.bugKindRow small {
+  display: block;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.bugKindButtons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.bugKindButton {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent;
+  border-radius: 0.65rem;
+  padding: 0.5rem;
+  color: inherit;
+}
+
+.bugKindButtonActive {
+  border-color: var(--accent);
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.selectionHint {
+  color: var(--muted);
+  margin: 0;
+}
+
+.actionBlock {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.actionIntro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.actionLabel {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.actionButtons button {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.actionButtons button:first-of-type {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.actionButtons button:last-of-type {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--danger);
+}
+
+.shortcutLegend {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.shortcutLegend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hotkeyBadge {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', monospace;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hotkeyHint {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.feedback {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.feedback-approved {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+}
+
+.feedback-true-positive {
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+}
+
+.feedback-false-positive,
+.feedback-error {
+  background: rgba(248, 113, 113, 0.15);
+  color: #fecaca;
+}
+
+@media (max-width: 1100px) {
+  .desk {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}

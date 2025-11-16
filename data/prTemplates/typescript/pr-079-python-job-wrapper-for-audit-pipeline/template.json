@@ -1,0 +1,127 @@
+{
+  "templateId": "pr-079-python-job-wrapper-for-audit-pipeline",
+  "title": "Python job wrapper for Audit Pipeline",
+  "author": "Malik O.",
+  "description": "Adds a thin Python helper that normalizes audit pipeline job payloads.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "infra",
+    "ops"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "jobs/audit-pipeline.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "  type AuditPipelinePayload = Record<string, string | undefined>;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "  export class AuditPipelineJob {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "    private payload: AuditPipelinePayload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    private window: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "    private priority: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "    constructor(payload: AuditPipelinePayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "      this.payload = payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "      this.window = payload.window ?? 'same-day';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 70,
+          "content": "      this.priority = payload.priority ?? 'normal';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "    toJSON() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "      return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "        payload: this.payload,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "        window: this.window,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "        priority: this.priority",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "      };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

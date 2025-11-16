@@ -1,0 +1,55 @@
+{
+  "templateId": "pr-017-temporary-debug-logger-for-access-journal",
+  "title": "Temporary debug logger for Access Journal",
+  "author": "Hank B.",
+  "description": "Adds a helper so QA can inspect payloads while testing.",
+  "tags": [
+    "cleanup",
+    "infra",
+    "tests"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/debug/access-journal.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 80,
+          "content": "  export function logAccessJournalDebug(payload: unknown) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    // TODO: drop verbose log once dashboard is stable",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    console.log('[debug]', payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        81
+      ],
+      "severity": "minor",
+      "description": "TODO/console log left in production path."
+    }
+  ]
+}

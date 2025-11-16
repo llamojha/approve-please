@@ -1,0 +1,50 @@
+{
+  "templateId": "pr-011-admin-endpoint-for-sla-notifier",
+  "title": "Admin endpoint for Sla Notifier",
+  "author": "Julian F.",
+  "description": "Adds an express route for admins to push configuration updates.",
+  "tags": [
+    "docs",
+    "hotfix",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "api/admin/sla-notifier.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 110,
+          "content": "  router.post('/admin/sla-notifier', async (req, res) => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "    const update = await adminStore.save(req.body);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "    res.json(update);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        110
+      ],
+      "severity": "critical",
+      "description": "Route lacks any authentication or authorization guard."
+    }
+  ]
+}

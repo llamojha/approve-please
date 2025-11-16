@@ -1,0 +1,72 @@
+{
+  "templateId": "pr-098-normalize-release-coordinator-payloads",
+  "title": "Normalize Release Coordinator payloads",
+  "author": "Victor H.",
+  "description": "Adds a helper to normalize release coordinator inputs so downstream jobs stay consistent.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "refactor",
+    "security"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/release/release-coordinator.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export function buildReleaseCoordinatorPayload(input: ReleaseCoordinatorInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

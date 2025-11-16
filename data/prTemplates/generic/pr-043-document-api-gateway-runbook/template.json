@@ -1,0 +1,46 @@
+{
+  "templateId": "pr-043-document-api-gateway-runbook",
+  "title": "Document Api Gateway runbook",
+  "author": "Quinn Z.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "bugfix",
+    "docs",
+    "feature"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/api-gateway.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 110,
+          "content": "## Api Gateway Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 114,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

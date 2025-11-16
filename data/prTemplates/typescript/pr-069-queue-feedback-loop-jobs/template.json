@@ -1,0 +1,74 @@
+{
+  "templateId": "pr-069-queue-feedback-loop-jobs",
+  "title": "Queue Feedback Loop jobs",
+  "author": "Malik O.",
+  "description": "Streams vetted jobs into the async worker queue.",
+  "tags": [
+    "bugfix",
+    "hotfix"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/queues/feedback-loop.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export async function enqueueFeedbackLoopJob(job: FeedbackLoopJob) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    if (!job.id) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "      metrics.increment('feedback-loop.missing_id');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "      logger.warn('Dropping job with missing id', job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    await jobQueue.publish(job.id, job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    return job.id;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        81
+      ],
+      "severity": "major",
+      "description": "Publishes the job even when the id is missing instead of returning early."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-090-normalize-packet-analyzer-payloads",
+  "title": "Normalize Packet Analyzer payloads",
+  "author": "Lena D.",
+  "description": "Adds a helper to normalize packet analyzer inputs so downstream jobs stay consistent.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "hotfix"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/packet/packet-analyzer.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 25,
+          "content": "  export function buildPacketAnalyzerPayload(input: PacketAnalyzerInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

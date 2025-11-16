@@ -1,0 +1,126 @@
+{
+  "templateId": "pr-029-python-job-wrapper-for-queue-monitor",
+  "title": "Python job wrapper for Queue Monitor",
+  "author": "Harper N.",
+  "description": "Adds a thin Python helper that normalizes queue monitor job payloads.",
+  "tags": [
+    "feature",
+    "infra",
+    "refactor"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "jobs/queue-monitor.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 85,
+          "content": "  type QueueMonitorPayload = Record<string, string | undefined>;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "  export class QueueMonitorJob {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
+          "content": "    private payload: QueueMonitorPayload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 89,
+          "content": "    private window: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 90,
+          "content": "    private priority: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 91,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "    constructor(payload: QueueMonitorPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "      this.payload = payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 94,
+          "content": "      this.window = payload.window ?? 'same-day';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 95,
+          "content": "      this.priority = payload.priority ?? 'normal';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "    toJSON() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "      return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "        payload: this.payload,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "        window: this.window,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "        priority: this.priority",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "      };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

@@ -1,0 +1,66 @@
+{
+  "templateId": "pr-061-trigger-predicate-for-hygiene-reporter",
+  "title": "Trigger predicate for Hygiene Reporter",
+  "author": "Oscar W.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "refactor",
+    "security"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/hygiene-reporter.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 110,
+          "content": "  export function shouldTriggerHygieneReporter(payload: HygieneReporterPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 114,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 115,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 116,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        111
+      ],
+      "severity": "major",
+      "description": "Condition uses assignment instead of comparison, mutating payload.status."
+    }
+  ]
+}

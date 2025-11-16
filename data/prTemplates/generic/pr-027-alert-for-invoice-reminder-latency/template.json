@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-027-alert-for-invoice-reminder-latency",
+  "title": "Alert for Invoice Reminder latency",
+  "author": "Priya S.",
+  "description": "Adds a Prometheus rule for the new service.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "ops",
+    "security"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "ops/invoice-reminder.yaml",
+      "language": "yaml",
+      "lines": [
+        {
+          "lineNumber": 105,
+          "content": "alerts:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "  - name: invoice-reminder-latency",
+          "isNew": true
+        },
+        {
+          "lineNumber": 107,
+          "content": "    expr: avg_over_time(service_latency[5m]) > 0.8",
+          "isNew": true
+        },
+        {
+          "lineNumber": 108,
+          "content": "    for: 5m",
+          "isNew": true
+        },
+        {
+          "lineNumber": 109,
+          "content": "    labels:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 110,
+          "content": "      severity: page",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "    annotations:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "      summary: TODO refine messaging before launch",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        112
+      ],
+      "severity": "minor",
+      "description": "Annotation still contains TODO messaging."
+    }
+  ]
+}

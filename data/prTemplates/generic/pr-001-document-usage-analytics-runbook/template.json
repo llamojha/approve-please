@@ -1,0 +1,46 @@
+{
+  "templateId": "pr-001-document-usage-analytics-runbook",
+  "title": "Document Usage Analytics runbook",
+  "author": "Hank B.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "cleanup",
+    "docs",
+    "feature"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/usage-analytics.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 50,
+          "content": "## Usage Analytics Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

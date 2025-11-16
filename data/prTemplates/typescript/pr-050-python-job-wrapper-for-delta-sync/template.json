@@ -1,0 +1,127 @@
+{
+  "templateId": "pr-050-python-job-wrapper-for-delta-sync",
+  "title": "Python job wrapper for Delta Sync",
+  "author": "Nina L.",
+  "description": "Adds a thin Python helper that normalizes delta sync job payloads.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "infra",
+    "tests"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "jobs/delta-sync.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  type DeltaSyncPayload = Record<string, string | undefined>;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "  export class DeltaSyncJob {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "    private payload: DeltaSyncPayload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "    private window: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "    private priority: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    constructor(payload: DeltaSyncPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "      this.payload = payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "      this.window = payload.window ?? 'same-day';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "      this.priority = payload.priority ?? 'normal';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "    toJSON() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "      return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "        payload: this.payload,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "        window: this.window,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "        priority: this.priority",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "      };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

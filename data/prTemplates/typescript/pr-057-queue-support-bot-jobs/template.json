@@ -1,0 +1,76 @@
+{
+  "templateId": "pr-057-queue-support-bot-jobs",
+  "title": "Queue Support Bot jobs",
+  "author": "Noor T.",
+  "description": "Streams vetted jobs into the async worker queue.",
+  "tags": [
+    "bugfix",
+    "hotfix",
+    "ops",
+    "tests"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/queues/support-bot.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "  export async function enqueueSupportBotJob(job: SupportBotJob) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    if (!job.id) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "      metrics.increment('support-bot.missing_id');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "      logger.warn('Dropping job with missing id', job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "    await jobQueue.publish(job.id, job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    return job.id;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        101
+      ],
+      "severity": "major",
+      "description": "Publishes the job even when the id is missing instead of returning early."
+    }
+  ]
+}

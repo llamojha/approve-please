@@ -1,0 +1,55 @@
+{
+  "templateId": "pr-089-temporary-debug-logger-for-ops-rotation",
+  "title": "Temporary debug logger for Ops Rotation",
+  "author": "Simone B.",
+  "description": "Adds a helper so QA can inspect payloads while testing.",
+  "tags": [
+    "cleanup",
+    "hotfix",
+    "tests"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/debug/ops-rotation.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 70,
+          "content": "  export function logOpsRotationDebug(payload: unknown) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "    // TODO: drop verbose log once dashboard is stable",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "    console.log('[debug]', payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "    return payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        71
+      ],
+      "severity": "minor",
+      "description": "TODO/console log left in production path."
+    }
+  ]
+}

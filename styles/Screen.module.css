@@ -1,0 +1,105 @@
+.screenShell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 60%), var(--bg);
+}
+
+.screenCard {
+  width: min(760px, 100%);
+  background: var(--bg-panel);
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 60px rgba(2, 6, 23, 0.8);
+}
+
+.screenCard h1,
+.screenCard h2 {
+  margin-top: 0;
+}
+
+.rulesList {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+}
+
+.rulesList li + li {
+  margin-top: 0.75rem;
+}
+
+.briefingQuote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 0.75rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.briefingQuote footer {
+  margin-top: 0.5rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.screenActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.screenButton {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  background: var(--accent);
+  color: #04111f;
+  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.screenButtonSecondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.summaryGrid div {
+  background: var(--bg-panel-light);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.summaryGrid small {
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.gameOverTag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--danger);
+  color: #04111f;
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}

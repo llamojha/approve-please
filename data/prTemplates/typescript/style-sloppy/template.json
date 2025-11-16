@@ -1,0 +1,43 @@
+{
+  "templateId": "style-sloppy",
+  "title": "Observability toggles",
+  "author": "Jess F.",
+  "description": "Adds quick toggle for verbose logging.",
+  "tags": [
+    "devex"
+  ],
+  "files": [
+    {
+      "filename": "src/logger/index.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 5,
+          "content": "  let verbose = false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "  // TODO: remove before GA",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "  export const setVerbose = (value: boolean) => { verbose = value; };",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        12
+      ],
+      "severity": "minor",
+      "description": "Obvious TODO left in production file."
+    }
+  ],
+  "importance": "low"
+}

@@ -1,0 +1,76 @@
+{
+  "templateId": "pr-025-queue-api-quota-jobs",
+  "title": "Queue Api Quota jobs",
+  "author": "Eli J.",
+  "description": "Streams vetted jobs into the async worker queue.",
+  "tags": [
+    "bugfix",
+    "hotfix",
+    "ops",
+    "refactor"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/queues/api-quota.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 25,
+          "content": "  export async function enqueueApiQuotaJob(job: ApiQuotaJob) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    if (!job.id) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "      metrics.increment('api-quota.missing_id');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "      logger.warn('Dropping job with missing id', job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    await jobQueue.publish(job.id, job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    return job.id;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        31
+      ],
+      "severity": "major",
+      "description": "Publishes the job even when the id is missing instead of returning early."
+    }
+  ]
+}

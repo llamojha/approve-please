@@ -1,0 +1,49 @@
+{
+  "templateId": "logic-boundary-check",
+  "title": "Invoice grace period fix",
+  "author": "Amira V.",
+  "description": "Allow invoices within a small grace window before alerting finance.",
+  "tags": [
+    "bugfix",
+    "billing"
+  ],
+  "files": [
+    {
+      "filename": "src/lib/invoice.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 42,
+          "content": "  if (daysPastDue > graceDays) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    return sendCollectionsNotice(invoice);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "  return waitForPayment(invoice);",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        42
+      ],
+      "severity": "major",
+      "description": "Should be >= to include final allowed day."
+    }
+  ],
+  "importance": "normal"
+}

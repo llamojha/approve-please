@@ -1,0 +1,51 @@
+{
+  "templateId": "pr-018-tenant-lookup-for-usage-predictor",
+  "title": "Tenant lookup for Usage Predictor",
+  "author": "Victor H.",
+  "description": "Adds a helper to fetch the latest tenant rows for reporting.",
+  "tags": [
+    "data",
+    "hotfix",
+    "security",
+    "tests"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/db/usage-predictor.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "  export async function loadUsagePredictorByTenant(db: Database, tenantId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    const query = `SELECT id, status FROM usage_predictor WHERE tenant_id = '${tenantId}' ORDER BY updated_at DESC`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    return db.query(query);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        96
+      ],
+      "severity": "critical",
+      "description": "Interpolates tenantId directly into SQL, enabling injection."
+    }
+  ]
+}

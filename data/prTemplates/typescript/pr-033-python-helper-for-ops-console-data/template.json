@@ -1,0 +1,50 @@
+{
+  "templateId": "pr-033-python-helper-for-ops-console-data",
+  "title": "Python helper for Ops Console data",
+  "author": "Nina L.",
+  "description": "Adds a raw SQL helper to fetch organization rows.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "analytics/ops-console.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 80,
+          "content": "  export async function fetchOpsConsole(db: DatabaseClient, orgId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    const sql = `SELECT * FROM ops_console WHERE org_id = '${orgId}'`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    return db.raw(sql);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        81
+      ],
+      "severity": "critical",
+      "description": "Builds SQL via string interpolation and allows injection."
+    }
+  ]
+}

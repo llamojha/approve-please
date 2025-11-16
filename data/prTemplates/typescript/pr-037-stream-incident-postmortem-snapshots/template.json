@@ -1,0 +1,75 @@
+{
+  "templateId": "pr-037-stream-incident-postmortem-snapshots",
+  "title": "Stream Incident Postmortem snapshots",
+  "author": "Quinn Z.",
+  "description": "Adds a Go helper that fetches snapshots for tooling.",
+  "tags": [
+    "bugfix",
+    "data",
+    "performance"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "jobs/incident-postmortem.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "  export async function streamIncidentPostmortemSnapshots(ids: string[]): Promise<Snapshot[]> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    const snapshots: Snapshot[] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    for (const id of ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "      const resp = await fetch(`${baseUrl}/${id}`);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "      const raw = await resp.arrayBuffer();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "      snapshots.push({ id, raw });",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    return snapshots;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        98
+      ],
+      "severity": "major",
+      "description": "Fetches every id sequentially without reuse or concurrency."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "templateId": "pr-075-admin-endpoint-for-feedback-loop",
+  "title": "Admin endpoint for Feedback Loop",
+  "author": "Eli J.",
+  "description": "Adds an express route for admins to push configuration updates.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "hotfix",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "api/admin/feedback-loop.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 100,
+          "content": "  router.post('/admin/feedback-loop', async (req, res) => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "    const update = await adminStore.save(req.body);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    res.json(update);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        100
+      ],
+      "severity": "critical",
+      "description": "Route lacks any authentication or authorization guard."
+    }
+  ]
+}

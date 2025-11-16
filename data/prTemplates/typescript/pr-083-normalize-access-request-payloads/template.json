@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-083-normalize-access-request-payloads",
+  "title": "Normalize Access Request payloads",
+  "author": "Lena D.",
+  "description": "Adds a helper to normalize access request inputs so downstream jobs stay consistent.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "performance"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/access/access-request.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "  export function buildAccessRequestPayload(input: AccessRequestInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

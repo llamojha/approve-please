@@ -1,0 +1,72 @@
+{
+  "templateId": "pr-087-normalize-session-cleanup-payloads",
+  "title": "Normalize Session Cleanup payloads",
+  "author": "Wendy C.",
+  "description": "Adds a helper to normalize session cleanup inputs so downstream jobs stay consistent.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "feature",
+    "tests"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/session/session-cleanup.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  export function buildSessionCleanupPayload(input: SessionCleanupInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

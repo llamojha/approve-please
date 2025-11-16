@@ -1,0 +1,86 @@
+{
+  "templateId": "pr-086-hydrate-feature-flags-devices",
+  "title": "Hydrate Feature Flags devices",
+  "author": "Hank B.",
+  "description": "Adds a helper that pulls the full device matrix for reporting.",
+  "tags": [
+    "cleanup",
+    "data",
+    "feature",
+    "performance"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/perf/feature-flags.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  export async function hydrateFeatureFlags(users: User[], devices: Device[]) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    const hydrated: Record<string, Device[]> = {};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    for (const user of users) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "      hydrated[user.id] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "      for (const device of devices) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "        const details = await deviceClient.fetch(user.id, device.id);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "        hydrated[user.id].push(details);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "      }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "    return hydrated;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        50
+      ],
+      "severity": "major",
+      "description": "Nested awaits call the API for every user-device pair serially."
+    }
+  ]
+}

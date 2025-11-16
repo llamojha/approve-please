@@ -1,0 +1,126 @@
+{
+  "templateId": "pr-034-python-job-wrapper-for-policy-center",
+  "title": "Python job wrapper for Policy Center",
+  "author": "Nina L.",
+  "description": "Adds a thin Python helper that normalizes policy center job payloads.",
+  "tags": [
+    "feature",
+    "infra",
+    "tests"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "jobs/policy-center.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 10,
+          "content": "  type PolicyCenterPayload = Record<string, string | undefined>;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "  export class PolicyCenterJob {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "    private payload: PolicyCenterPayload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "    private window: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "    private priority: string;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "    constructor(payload: PolicyCenterPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "      this.payload = payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "      this.window = payload.window ?? 'same-day';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "      this.priority = payload.priority ?? 'normal';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    toJSON() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "      return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "        payload: this.payload,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "        window: this.window,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "        priority: this.priority",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "      };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

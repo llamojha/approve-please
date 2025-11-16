@@ -1,0 +1,65 @@
+{
+  "templateId": "pr-060-chunk-training-module-records",
+  "title": "Chunk Training Module records",
+  "author": "Gabe K.",
+  "description": "Adds pagination helpers for training module batches.",
+  "tags": [
+    "bugfix",
+    "data",
+    "feature"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/lib/training-module.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "  export function paginateTrainingModuleRecords(items: TrainingModuleRecord[], size: number) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    const pages: TrainingModuleRecord[][] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    for (let i = 0; i <= items.length; i += size) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "      pages.push(items.slice(i, i + size));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "    return pages;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        57
+      ],
+      "severity": "minor",
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+    }
+  ]
+}

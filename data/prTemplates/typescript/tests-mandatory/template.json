@@ -1,0 +1,49 @@
+{
+  "templateId": "tests-mandatory",
+  "title": "Feature flag cleanup",
+  "author": "Devon P.",
+  "description": "Removes an old feature flag that is on for everyone.",
+  "tags": [
+    "cleanup"
+  ],
+  "files": [
+    {
+      "filename": "src/flags/flagRegistry.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 12,
+          "content": "  export const ACTIVE_FLAGS = ['atlas', 'phoenix'];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "  // TODO: delete tests once QA signs off",
+          "isNew": true
+        }
+      ]
+    },
+    {
+      "filename": "tests/flags/flagRegistry.test.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 4,
+          "content": "  test('atlas flag', () => { expect(true).toBe(true); });",
+          "isNew": false
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        19
+      ],
+      "severity": "minor",
+      "description": "No new tests or justification provided."
+    }
+  ],
+  "importance": "low"
+}

@@ -1,0 +1,30 @@
+{
+  "templateId": "clean-refactor",
+  "title": "Improve notification copy",
+  "author": "Lia N.",
+  "description": "Refines toast messaging throughout onboarding.",
+  "tags": [
+    "ux",
+    "copy"
+  ],
+  "files": [
+    {
+      "filename": "src/components/OnboardingToast.tsx",
+      "language": "tsx",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "  const title = success ? 'Welcome aboard!' : 'One more step';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "  return <Toast title={title} body={body} tone={tone} />;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

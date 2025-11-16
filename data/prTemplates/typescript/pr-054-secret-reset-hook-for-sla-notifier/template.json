@@ -1,0 +1,49 @@
+{
+  "templateId": "pr-054-secret-reset-hook-for-sla-notifier",
+  "title": "Secret reset hook for Sla Notifier",
+  "author": "Wendy C.",
+  "description": "Adds a helper that rotates per-tenant secrets on demand.",
+  "tags": [
+    "feature",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/secrets/sla-notifier.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "  export async function resetSlaNotifierSecret(req: Request) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    logger.info('Resetting secret', req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    return vault.rotate(req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        61
+      ],
+      "severity": "major",
+      "description": "Logs the secret value in plain text."
+    }
+  ]
+}

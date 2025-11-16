@@ -1,0 +1,49 @@
+{
+  "templateId": "pr-081-secret-reset-hook-for-trace-relay",
+  "title": "Secret reset hook for Trace Relay",
+  "author": "Terrence L.",
+  "description": "Adds a helper that rotates per-tenant secrets on demand.",
+  "tags": [
+    "performance",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/secrets/trace-relay.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "  export async function resetTraceRelaySecret(req: Request) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    logger.info('Resetting secret', req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    return vault.rotate(req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        31
+      ],
+      "severity": "major",
+      "description": "Logs the secret value in plain text."
+    }
+  ]
+}

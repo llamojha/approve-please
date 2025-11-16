@@ -1,0 +1,72 @@
+{
+  "templateId": "pr-058-normalize-audit-pipeline-payloads",
+  "title": "Normalize Audit Pipeline payloads",
+  "author": "Brielle S.",
+  "description": "Adds a helper to normalize audit pipeline inputs so downstream jobs stay consistent.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "feature",
+    "ops"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/audit/audit-pipeline.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "  export function buildAuditPipelinePayload(input: AuditPipelineInput) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    const normalized = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "      ...defaults,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "      ...input,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "      windowStart: input.windowStart ?? clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "      channel: input.channel ?? 'email',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

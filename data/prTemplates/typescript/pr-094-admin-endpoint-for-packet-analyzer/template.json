@@ -1,0 +1,50 @@
+{
+  "templateId": "pr-094-admin-endpoint-for-packet-analyzer",
+  "title": "Admin endpoint for Packet Analyzer",
+  "author": "Simone B.",
+  "description": "Adds an express route for admins to push configuration updates.",
+  "tags": [
+    "hotfix",
+    "refactor",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "api/admin/packet-analyzer.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  router.post('/admin/packet-analyzer', async (req, res) => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    const update = await adminStore.save(req.body);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    res.json(update);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        45
+      ],
+      "severity": "critical",
+      "description": "Route lacks any authentication or authorization guard."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "templateId": "pr-056-chunk-content-moderation-records",
+  "title": "Chunk Content Moderation records",
+  "author": "Ivy P.",
+  "description": "Adds pagination helpers for content moderation batches.",
+  "tags": [
+    "bugfix",
+    "docs",
+    "feature"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/lib/content-moderation.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "  export function paginateContentModerationRecords(items: ContentModerationRecord[], size: number) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    const pages: ContentModerationRecord[][] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    for (let i = 0; i <= items.length; i += size) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "      pages.push(items.slice(i, i + size));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    return pages;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        22
+      ],
+      "severity": "minor",
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+    }
+  ]
+}

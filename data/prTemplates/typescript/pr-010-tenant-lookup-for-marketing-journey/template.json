@@ -1,0 +1,50 @@
+{
+  "templateId": "pr-010-tenant-lookup-for-marketing-journey",
+  "title": "Tenant lookup for Marketing Journey",
+  "author": "Uma R.",
+  "description": "Adds a helper to fetch the latest tenant rows for reporting.",
+  "tags": [
+    "bugfix",
+    "hotfix",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/db/marketing-journey.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "  export async function loadMarketingJourneyByTenant(db: Database, tenantId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    const query = `SELECT id, status FROM marketing_journey WHERE tenant_id = '${tenantId}' ORDER BY updated_at DESC`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    return db.query(query);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        21
+      ],
+      "severity": "critical",
+      "description": "Interpolates tenantId directly into SQL, enabling injection."
+    }
+  ]
+}

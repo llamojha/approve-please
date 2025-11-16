@@ -1,0 +1,65 @@
+{
+  "templateId": "pr-026-trigger-predicate-for-search-index",
+  "title": "Trigger predicate for Search Index",
+  "author": "Harper N.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "refactor"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/search-index.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 65,
+          "content": "  export function shouldTriggerSearchIndex(payload: SearchIndexPayload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 70,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        66
+      ],
+      "severity": "major",
+      "description": "Condition uses assignment instead of comparison, mutating payload.status."
+    }
+  ]
+}

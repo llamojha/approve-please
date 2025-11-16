@@ -1,0 +1,46 @@
+{
+  "templateId": "pr-055-document-notification-center-runbook",
+  "title": "Document Notification Center runbook",
+  "author": "Oscar W.",
+  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "tags": [
+    "docs",
+    "feature",
+    "refactor"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/notification-center.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "## Notification Center Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "1. Check Grafana dashboard",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "2. Verify queue depth stays below threshold",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "3. Page owning squad if sustained for 10 minutes",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

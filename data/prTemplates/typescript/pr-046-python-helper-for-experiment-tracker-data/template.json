@@ -1,0 +1,51 @@
+{
+  "templateId": "pr-046-python-helper-for-experiment-tracker-data",
+  "title": "Python helper for Experiment Tracker data",
+  "author": "Ivy P.",
+  "description": "Adds a raw SQL helper to fetch organization rows.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "hotfix",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "analytics/experiment-tracker.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export async function fetchExperimentTracker(db: DatabaseClient, orgId: string) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    const sql = `SELECT * FROM experiment_tracker WHERE org_id = '${orgId}'`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    return db.raw(sql);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        76
+      ],
+      "severity": "critical",
+      "description": "Builds SQL via string interpolation and allows injection."
+    }
+  ]
+}

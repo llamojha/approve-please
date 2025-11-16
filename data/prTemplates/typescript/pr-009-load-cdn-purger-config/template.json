@@ -1,0 +1,55 @@
+{
+  "templateId": "pr-009-load-cdn-purger-config",
+  "title": "Load Cdn Purger config",
+  "author": "Terrence L.",
+  "description": "Adds a helper that reloads config before evaluating feature logic.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "performance"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/config/cdn-purger.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 40,
+          "content": "  export function loadCdnPurgerConfig(path = '/etc/service/cdn-purger.json') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    const raw = fs.readFileSync(path, 'utf8');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    const parsed = JSON.parse(raw);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    return parsed;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        41
+      ],
+      "severity": "major",
+      "description": "Uses blocking fs.readFileSync on every call in the request path."
+    }
+  ]
+}

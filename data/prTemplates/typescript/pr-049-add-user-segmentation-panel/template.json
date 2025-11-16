@@ -1,0 +1,81 @@
+{
+  "templateId": "pr-049-add-user-segmentation-panel",
+  "title": "Add User Segmentation panel",
+  "author": "Eli J.",
+  "description": "Introduces a dashboard card that surfaces the latest user segmentation metrics.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "ui"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/components/user-segmentation.tsx",
+      "language": "tsx",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "  export function UserSegmentationPanel() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    const { data, isLoading } = useUserSegmentationQuery();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    if (isLoading) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "      return <Skeleton rows={4} />;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    return (",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "      <section class=\"panel\">",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "        <h3>User Segmentation</h3>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "        <MetricGrid items={data.metrics} />",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "      </section>",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

@@ -1,0 +1,50 @@
+{
+  "templateId": "pr-080-secret-reset-hook-for-api-quota",
+  "title": "Secret reset hook for Api Quota",
+  "author": "Vivian G.",
+  "description": "Adds a helper that rotates per-tenant secrets on demand.",
+  "tags": [
+    "docs",
+    "performance",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/secrets/api-quota.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "  export async function resetApiQuotaSecret(req: Request) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    logger.info('Resetting secret', req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    return vault.rotate(req.body.secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        56
+      ],
+      "severity": "major",
+      "description": "Logs the secret value in plain text."
+    }
+  ]
+}

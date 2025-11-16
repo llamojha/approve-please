@@ -1,0 +1,35 @@
+{
+  "templateId": "pr-000-onboarding-readme-update",
+  "title": "README onboarding reminder",
+  "author": "Lena Q.",
+  "description": "Adds a short reminder in the README for new reviewers about highlighting bugs.",
+  "tags": [
+    "docs",
+    "tutorial"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "README.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 42,
+          "content": "## Reviewer Quick Tips",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "- Highlight suspicious lines before requesting changes.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "- Approve clean PRs quickly to keep velocity healthy.",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

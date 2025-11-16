@@ -1,0 +1,66 @@
+{
+  "templateId": "pr-065-chunk-carbon-tracker-records",
+  "title": "Chunk Carbon Tracker records",
+  "author": "Hank B.",
+  "description": "Adds pagination helpers for carbon tracker batches.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "refactor",
+    "tests"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/lib/carbon-tracker.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "  export function paginateCarbonTrackerRecords(items: CarbonTrackerRecord[], size: number) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    const pages: CarbonTrackerRecord[][] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "    for (let i = 0; i <= items.length; i += size) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "      pages.push(items.slice(i, i + size));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    return pages;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        17
+      ],
+      "severity": "minor",
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+    }
+  ]
+}

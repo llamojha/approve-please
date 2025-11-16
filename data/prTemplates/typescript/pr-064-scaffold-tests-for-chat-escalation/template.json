@@ -1,0 +1,45 @@
+{
+  "templateId": "pr-064-scaffold-tests-for-chat-escalation",
+  "title": "Scaffold tests for Chat Escalation",
+  "author": "Brielle S.",
+  "description": "Drops a placeholder spec awaiting follow-up coverage.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "tests"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "tests/chat-escalation.test.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 10,
+          "content": "  describe('Chat Escalation flows', () => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "    test.todo('add regression coverage for chat-escalation state machine');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        11
+      ],
+      "severity": "minor",
+      "description": "File only contains test.todo and no actual assertions."
+    }
+  ]
+}

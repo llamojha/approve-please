@@ -1,0 +1,71 @@
+{
+  "templateId": "pr-093-alert-for-cache-pruner-latency",
+  "title": "Alert for Cache Pruner latency",
+  "author": "Wendy C.",
+  "description": "Adds a Prometheus rule for the new service.",
+  "tags": [
+    "cleanup",
+    "hotfix",
+    "ops",
+    "security"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "ops/cache-pruner.yaml",
+      "language": "yaml",
+      "lines": [
+        {
+          "lineNumber": 95,
+          "content": "alerts:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "  - name: cache-pruner-latency",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    expr: avg_over_time(service_latency[5m]) > 0.8",
+          "isNew": true
+        },
+        {
+          "lineNumber": 98,
+          "content": "    for: 5m",
+          "isNew": true
+        },
+        {
+          "lineNumber": 99,
+          "content": "    labels:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 100,
+          "content": "      severity: page",
+          "isNew": true
+        },
+        {
+          "lineNumber": 101,
+          "content": "    annotations:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "      summary: TODO refine messaging before launch",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        102
+      ],
+      "severity": "minor",
+      "description": "Annotation still contains TODO messaging."
+    }
+  ]
+}

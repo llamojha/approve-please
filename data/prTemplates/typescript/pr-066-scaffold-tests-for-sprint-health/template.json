@@ -1,0 +1,46 @@
+{
+  "templateId": "pr-066-scaffold-tests-for-sprint-health",
+  "title": "Scaffold tests for Sprint Health",
+  "author": "Brielle S.",
+  "description": "Drops a placeholder spec awaiting follow-up coverage.",
+  "tags": [
+    "cleanup",
+    "docs",
+    "feature",
+    "tests"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "tests/sprint-health.test.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "  describe('Sprint Health flows', () => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    test.todo('add regression coverage for sprint-health state machine');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        16
+      ],
+      "severity": "minor",
+      "description": "File only contains test.todo and no actual assertions."
+    }
+  ]
+}

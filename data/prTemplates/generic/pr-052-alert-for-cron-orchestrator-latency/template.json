@@ -1,0 +1,69 @@
+{
+  "templateId": "pr-052-alert-for-cron-orchestrator-latency",
+  "title": "Alert for Cron Orchestrator latency",
+  "author": "Vivian G.",
+  "description": "Adds a Prometheus rule for the new service.",
+  "tags": [
+    "cleanup",
+    "ops"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "ops/cron-orchestrator.yaml",
+      "language": "yaml",
+      "lines": [
+        {
+          "lineNumber": 50,
+          "content": "alerts:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "  - name: cron-orchestrator-latency",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    expr: avg_over_time(service_latency[5m]) > 0.8",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    for: 5m",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "    labels:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "      severity: page",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    annotations:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "      summary: TODO refine messaging before launch",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        57
+      ],
+      "severity": "minor",
+      "description": "Annotation still contains TODO messaging."
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "templateId": "pr-084-hydrate-gremlin-mitigation-devices",
+  "title": "Hydrate Gremlin Mitigation devices",
+  "author": "Noor T.",
+  "description": "Adds a helper that pulls the full device matrix for reporting.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "ops",
+    "performance"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/perf/gremlin-mitigation.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 80,
+          "content": "  export async function hydrateGremlinMitigation(users: User[], devices: Device[]) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    const hydrated: Record<string, Device[]> = {};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    for (const user of users) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "      hydrated[user.id] = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "      for (const device of devices) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "        const details = await deviceClient.fetch(user.id, device.id);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "        hydrated[user.id].push(details);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "      }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 89,
+          "content": "    return hydrated;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 90,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        85
+      ],
+      "severity": "major",
+      "description": "Nested awaits call the API for every user-device pair serially."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "templateId": "pr-039-scaffold-tests-for-kpi-dashboard",
+  "title": "Scaffold tests for Kpi Dashboard",
+  "author": "Terrence L.",
+  "description": "Drops a placeholder spec awaiting follow-up coverage.",
+  "tags": [
+    "cleanup",
+    "feature",
+    "security",
+    "tests"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "tests/kpi-dashboard.test.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  describe('Kpi Dashboard flows', () => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    test.todo('add regression coverage for kpi-dashboard state machine');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        76
+      ],
+      "severity": "minor",
+      "description": "File only contains test.todo and no actual assertions."
+    }
+  ]
+}

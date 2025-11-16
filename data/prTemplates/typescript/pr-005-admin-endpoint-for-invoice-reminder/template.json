@@ -1,0 +1,51 @@
+{
+  "templateId": "pr-005-admin-endpoint-for-invoice-reminder",
+  "title": "Admin endpoint for Invoice Reminder",
+  "author": "Hank B.",
+  "description": "Adds an express route for admins to push configuration updates.",
+  "tags": [
+    "docs",
+    "hotfix",
+    "infra",
+    "security"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "api/admin/invoice-reminder.ts",
+      "language": "typescript",
+      "lines": [
+        {
+          "lineNumber": 35,
+          "content": "  router.post('/admin/invoice-reminder', async (req, res) => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    const update = await adminStore.save(req.body);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    res.json(update);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [
+        35
+      ],
+      "severity": "critical",
+      "description": "Route lacks any authentication or authorization guard."
+    }
+  ]
+}
