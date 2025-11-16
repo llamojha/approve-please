@@ -4,7 +4,7 @@ import { useGameState } from '../../context/GameContext';
 const SummaryScreen = () => {
   const {
     state: { currentDay, counters, meters },
-    actions: { advanceToNextDay }
+    actions: { advanceToNextDay, restartGame }
   } = useGameState();
 
   return (
@@ -51,6 +51,13 @@ const SummaryScreen = () => {
         <div className={styles.screenActions}>
           <button type="button" className={styles.screenButton} onClick={advanceToNextDay}>
             Continue to Day {currentDay + 1}
+          </button>
+          <button
+            type="button"
+            className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
+            onClick={restartGame}
+          >
+            Restart Game
           </button>
         </div>
       </section>

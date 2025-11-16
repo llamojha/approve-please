@@ -21,7 +21,7 @@ const IndexPage = () => {
 
   const {
     state: { currentDay, meters, languagePreference },
-    actions: { setLanguagePreference }
+    actions: { setLanguagePreference, restartGame }
   } = useGameState();
 
   return (
@@ -71,23 +71,28 @@ const IndexPage = () => {
             ))}
           </div>
         </section>
-        <button
-          type="button"
-          className="landing__cta"
-          onClick={() => router.push('/game')}
-        >
-          <span>Start Your Day</span>
-          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-            <path
-              d="M5 10h10M11 6l4 4-4 4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+        <div className="landing__actions">
+          <button
+            type="button"
+            className="landing__cta"
+            onClick={() => router.push('/game')}
+          >
+            <span>Start Your Day</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="M5 10h10M11 6l4 4-4 4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <button type="button" className="landing__restart" onClick={restartGame}>
+            Restart Game
+          </button>
+        </div>
       </section>
       <style jsx>{`
         .landing {
@@ -184,6 +189,11 @@ const IndexPage = () => {
           cursor: not-allowed;
           opacity: 0.5;
         }
+        .landing__actions {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
         .landing__cta {
           border: none;
           display: inline-flex;
@@ -219,6 +229,27 @@ const IndexPage = () => {
         .landing__cta:hover svg,
         .landing__cta:focus-visible svg {
           transform: translateX(3px);
+        }
+        .landing__restart {
+          border: 1px solid var(--border);
+          background: rgba(15, 23, 42, 0.6);
+          color: var(--text);
+          border-radius: 0.85rem;
+          padding: 0.85rem 1.25rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          cursor: pointer;
+          transition: border-color 0.2s, background 0.2s;
+        }
+        .landing__restart:hover,
+        .landing__restart:focus-visible {
+          border-color: var(--accent);
+          background: rgba(56, 189, 248, 0.1);
+        }
+        .landing__restart:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 3px;
         }
       `}</style>
     </main>
