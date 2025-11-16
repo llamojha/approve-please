@@ -1,0 +1,49 @@
+{
+  "templateId": "py-032-unvalidated-path-loader",
+  "title": "Template loader helper",
+  "author": "Harriet G.",
+  "description": "Loads markdown templates from disk for notifications.",
+  "tags": [
+    "security",
+    "filesystem"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "notifications/templates.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 17,
+          "content": "def load_template(base_dir: str, name: str) -> str:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "    path = f\"{base_dir}/{name}\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "    with open(path, \"r\", encoding=\"utf-8\") as handle:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "        return handle.read()",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Concatenates user input into file paths without validation, enabling traversal.",
+      "lineNumbers": [
+        18
+      ]
+    }
+  ]
+}

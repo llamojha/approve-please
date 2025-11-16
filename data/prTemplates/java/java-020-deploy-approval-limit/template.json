@@ -1,0 +1,54 @@
+{
+  "templateId": "java-020-deploy-approval-limit",
+  "title": "Deploy approval limit checker",
+  "author": "Tessa U.",
+  "description": "Enforces the maximum number of approvals required per deploy.",
+  "tags": [
+    "logic",
+    "release"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/release/ApprovalGate.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 44,
+          "content": "public final class ApprovalGate {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "  public boolean exceedsLimit(int approvals, int limit) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    return approvals <= limit;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Inverts the comparison so the deploy is blocked until approvals drop below the minimum.",
+      "lineNumbers": [
+        46
+      ]
+    }
+  ]
+}

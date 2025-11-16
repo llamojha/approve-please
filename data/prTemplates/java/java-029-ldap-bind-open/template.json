@@ -1,0 +1,64 @@
+{
+  "templateId": "java-029-ldap-bind-open",
+  "title": "LDAP binder helper",
+  "author": "Cara Y.",
+  "description": "Adds helper to bind against LDAP for SSO fallback.",
+  "tags": [
+    "security",
+    "auth"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/auth/LdapBinder.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 41,
+          "content": "public final class LdapBinder {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "  public boolean bind(DirContext ctx, String username, String password) throws NamingException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    String filter = \"(uid=\" + username + \")\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "    NamingEnumeration<SearchResult> results = ctx.search(\"ou=users\", filter, new SearchControls());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "    return results.hasMore();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Builds LDAP filters with unescaped input, enabling injection.",
+      "lineNumbers": [
+        43
+      ]
+    }
+  ]
+}

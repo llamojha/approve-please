@@ -1,0 +1,95 @@
+{
+  "templateId": "java-046-cache-eviction-scheduler",
+  "title": "Cache eviction scheduler",
+  "author": "Talia N.",
+  "description": "Adds helper to schedule cache eviction jobs ahead of deploys.",
+  "tags": [
+    "backend",
+    "cache"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/cache/EvictionScheduler.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 72,
+          "content": "public final class EvictionScheduler {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "  private final Clock clock;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "  private final JobQueue queue;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "  public EvictionScheduler(Clock clock, JobQueue queue) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    this.clock = clock;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    this.queue = queue;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "  public Job schedule(String namespace) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    Job job = new Job(\"cache_evict\", namespace, clock.instant());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "    queue.enqueue(job, Duration.ofMinutes(5));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "    return job;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

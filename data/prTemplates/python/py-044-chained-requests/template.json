@@ -1,0 +1,59 @@
+{
+  "templateId": "py-044-chained-requests",
+  "title": "Score fetch helper",
+  "author": "Luca H.",
+  "description": "Fetches quality scores for a batch of experiment IDs.",
+  "tags": [
+    "performance",
+    "http"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "experiments/scores.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 60,
+          "content": "def fetch_scores(session, experiment_ids: list[str]) -> list[dict]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    results: list[dict] = []",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    for experiment_id in experiment_ids:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "        response = session.get(f\"/scores/{experiment_id}\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "        results.append(response.json())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "    return results",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Issues one HTTP request per ID despite a batch endpoint existing.",
+      "lineNumbers": [
+        63
+      ]
+    }
+  ]
+}

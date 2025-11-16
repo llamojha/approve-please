@@ -1,0 +1,59 @@
+{
+  "templateId": "py-036-nplusone-tenant-lookup",
+  "title": "Tenant profile hydrator",
+  "author": "Victor B.",
+  "description": "Hydrates tenant profiles before rendering the overview.",
+  "tags": [
+    "performance",
+    "database"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "tenants/hydrator.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "def hydrate_profiles(conn, tenant_ids: list[str]) -> list[dict]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    profiles: list[dict] = []",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    for tenant_id in tenant_ids:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "        row = conn.fetch_one(\"SELECT * FROM tenants WHERE id = %s\", tenant_id)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "        profiles.append(row)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "    return profiles",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Executes one query per tenant instead of batching.",
+      "lineNumbers": [
+        48
+      ]
+    }
+  ]
+}

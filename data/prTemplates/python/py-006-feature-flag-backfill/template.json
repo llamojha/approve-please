@@ -1,0 +1,75 @@
+{
+  "templateId": "py-006-feature-flag-backfill",
+  "title": "Add feature flag backfill request helper",
+  "author": "Priya W.",
+  "description": "Creates a structured payload for feature flag backfills so the orchestrator can audit requests.",
+  "tags": [
+    "feature-flags",
+    "ops"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "flags/backfill.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 41,
+          "content": "from datetime import datetime",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "def build_backfill_request(tenant_id: str, flag: str, actor: str) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "    payload = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "        \"tenant\": tenant_id,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "        \"flag\": flag,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "        \"requested_by\": actor,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "        \"requested_at\": datetime.utcnow().isoformat()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    return payload",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

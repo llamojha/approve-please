@@ -1,0 +1,65 @@
+{
+  "templateId": "java-028-plaintext-secret-export",
+  "title": "Secret export helper",
+  "author": "Blair I.",
+  "description": "Adds helper to export rotated secrets for operators.",
+  "tags": [
+    "security",
+    "secrets"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/secrets/SecretExporter.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 27,
+          "content": "public final class SecretExporter {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "  public Path export(String secret) throws IOException {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    Path file = Paths.get(\"/tmp/latest-secret.txt\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    Files.writeString(file, secret);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    return file;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Writes raw secrets to world-readable temp files.",
+      "lineNumbers": [
+        29,
+        30
+      ]
+    }
+  ]
+}

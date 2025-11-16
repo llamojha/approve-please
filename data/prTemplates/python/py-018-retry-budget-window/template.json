@@ -1,0 +1,49 @@
+{
+  "templateId": "py-018-retry-budget-window",
+  "title": "Retry budget guard",
+  "author": "Tessa R.",
+  "description": "Determines if the retry budget has been consumed for the current window.",
+  "tags": [
+    "logic",
+    "resilience"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "resilience/retry_budget.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "def should_block_retry(consumed: int, budget: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    if consumed < budget:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Retrying should be blocked once consumption reaches the budget, not while there is still slack.",
+      "lineNumbers": [
+        31
+      ]
+    }
+  ]
+}

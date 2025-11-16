@@ -19,6 +19,106 @@ import tpl_pr_078_alert_for_warranty_center_latency from './generic/pr-078-alert
 import tpl_pr_091_alert_for_gremlin_mitigation_latency from './generic/pr-091-alert-for-gremlin-mitigation-latency/template.json';
 import tpl_pr_093_alert_for_cache_pruner_latency from './generic/pr-093-alert-for-cache-pruner-latency/template.json';
 import tpl_pr_100_document_error_bucketing_runbook from './generic/pr-100-document-error-bucketing-runbook/template.json';
+import tpl_java_001_region_failover_hook from './java/java-001-region-failover-hook/template.json';
+import tpl_java_002_ledger_audit_record from './java/java-002-ledger-audit-record/template.json';
+import tpl_java_003_slo_threshold_check from './java/java-003-slo-threshold-check/template.json';
+import tpl_java_004_batch_capacity_guard from './java/java-004-batch-capacity-guard/template.json';
+import tpl_java_005_incident_pager_matrix from './java/java-005-incident-pager-matrix/template.json';
+import tpl_java_006_notification_digest_builder from './java/java-006-notification-digest-builder/template.json';
+import tpl_java_007_webhook_responder from './java/java-007-webhook-responder/template.json';
+import tpl_java_008_config_snapshot_writer from './java/java-008-config-snapshot-writer/template.json';
+import tpl_java_009_segment_rollup_calculator from './java/java-009-segment-rollup-calculator/template.json';
+import tpl_java_010_search_index_sampler from './java/java-010-search-index-sampler/template.json';
+import tpl_java_011_session_lease_expirer from './java/java-011-session-lease-expirer/template.json';
+import tpl_java_012_circuit_breaker_throttle from './java/java-012-circuit-breaker-throttle/template.json';
+import tpl_java_013_tenancy_sla_check from './java/java-013-tenancy-sla-check/template.json';
+import tpl_java_014_batch_timer from './java/java-014-batch-timer/template.json';
+import tpl_java_015_lead_score_bucket from './java/java-015-lead-score-bucket/template.json';
+import tpl_java_016_customer_health_tagger from './java/java-016-customer-health-tagger/template.json';
+import tpl_java_017_alert_debounce_window from './java/java-017-alert-debounce-window/template.json';
+import tpl_java_018_ops_rotation_picker from './java/java-018-ops-rotation-picker/template.json';
+import tpl_java_019_sprint_streak_gate from './java/java-019-sprint-streak-gate/template.json';
+import tpl_java_020_deploy_approval_limit from './java/java-020-deploy-approval-limit/template.json';
+import tpl_java_021_query_audit_sql_concat from './java/java-021-query-audit-sql-concat/template.json';
+import tpl_java_022_password_logger from './java/java-022-password-logger/template.json';
+import tpl_java_023_token_hash_md5 from './java/java-023-token-hash-md5/template.json';
+import tpl_java_024_permissive_cors_filter from './java/java-024-permissive-cors-filter/template.json';
+import tpl_java_025_debug_admin_override from './java/java-025-debug-admin-override/template.json';
+import tpl_java_026_public_s3_upload from './java/java-026-public-s3-upload/template.json';
+import tpl_java_027_webhook_signature_eq from './java/java-027-webhook-signature-eq/template.json';
+import tpl_java_028_plaintext_secret_export from './java/java-028-plaintext-secret-export/template.json';
+import tpl_java_029_ldap_bind_open from './java/java-029-ldap-bind-open/template.json';
+import tpl_java_030_path_traversal_loader from './java/java-030-path-traversal-loader/template.json';
+import tpl_java_031_nplusone_customer_fetch from './java/java-031-nplusone-customer-fetch/template.json';
+import tpl_java_032_config_cache_reloader from './java/java-032-config-cache-reloader/template.json';
+import tpl_java_033_template_compile_loop from './java/java-033-template-compile-loop/template.json';
+import tpl_java_034_file_read_loop from './java/java-034-file-read-loop/template.json';
+import tpl_java_035_job_poller_sleep from './java/java-035-job-poller-sleep/template.json';
+import tpl_java_036_synchronous_http_loop from './java/java-036-synchronous-http-loop/template.json';
+import tpl_java_037_huge_json_build from './java/java-037-huge-json-build/template.json';
+import tpl_java_038_stream_blocking_io from './java/java-038-stream-blocking-io/template.json';
+import tpl_java_039_distinct_sort_loop from './java/java-039-distinct-sort-loop/template.json';
+import tpl_java_040_batch_writer_loop from './java/java-040-batch-writer-loop/template.json';
+import tpl_java_041_prod_todo_flag from './java/java-041-prod-todo-flag/template.json';
+import tpl_java_042_system_out_logging from './java/java-042-system-out-logging/template.json';
+import tpl_java_043_print_stack_trace from './java/java-043-print-stack-trace/template.json';
+import tpl_java_044_bare_catch from './java/java-044-bare-catch/template.json';
+import tpl_java_045_mutable_static_collection from './java/java-045-mutable-static-collection/template.json';
+import tpl_java_046_cache_eviction_scheduler from './java/java-046-cache-eviction-scheduler/template.json';
+import tpl_java_047_briefing_quote_rotation from './java/java-047-briefing-quote-rotation/template.json';
+import tpl_java_048_support_intake_parser from './java/java-048-support-intake-parser/template.json';
+import tpl_java_049_service_key_hardcode from './java/java-049-service-key-hardcode/template.json';
+import tpl_java_050_unbounded_thread_spawn from './java/java-050-unbounded-thread-spawn/template.json';
+import tpl_py_001_cache_warmup_scheduler from './python/py-001-cache-warmup-scheduler/template.json';
+import tpl_py_002_ledger_drift_snapshot from './python/py-002-ledger-drift-snapshot/template.json';
+import tpl_py_003_runtime_health_pulse from './python/py-003-runtime-health-pulse/template.json';
+import tpl_py_004_sla_window_reset from './python/py-004-sla-window-reset/template.json';
+import tpl_py_005_notification_bundle_builder from './python/py-005-notification-bundle-builder/template.json';
+import tpl_py_006_feature_flag_backfill from './python/py-006-feature-flag-backfill/template.json';
+import tpl_py_007_access_journal_dumper from './python/py-007-access-journal-dumper/template.json';
+import tpl_py_008_release_notes_formatter from './python/py-008-release-notes-formatter/template.json';
+import tpl_py_009_service_map_uploader from './python/py-009-service-map-uploader/template.json';
+import tpl_py_010_carbon_cache_hydrator from './python/py-010-carbon-cache-hydrator/template.json';
+import tpl_py_011_queue_pressure_guard from './python/py-011-queue-pressure-guard/template.json';
+import tpl_py_012_billing_grace_window from './python/py-012-billing-grace-window/template.json';
+import tpl_py_013_device_heartbeat_gap from './python/py-013-device-heartbeat-gap/template.json';
+import tpl_py_014_feedback_subscore from './python/py-014-feedback-subscore/template.json';
+import tpl_py_015_workflow_timeout from './python/py-015-workflow-timeout/template.json';
+import tpl_py_016_incident_slo_handoff from './python/py-016-incident-slo-handoff/template.json';
+import tpl_py_017_usage_quota_check from './python/py-017-usage-quota-check/template.json';
+import tpl_py_018_retry_budget_window from './python/py-018-retry-budget-window/template.json';
+import tpl_py_019_release_batch_verifier from './python/py-019-release-batch-verifier/template.json';
+import tpl_py_020_sprint_risk_mapper from './python/py-020-sprint-risk-mapper/template.json';
+import tpl_py_021_comms_blast_cap from './python/py-021-comms-blast-cap/template.json';
+import tpl_py_022_data_batch_size from './python/py-022-data-batch-size/template.json';
+import tpl_py_023_alert_silence_window from './python/py-023-alert-silence-window/template.json';
+import tpl_py_024_inventory_threshold from './python/py-024-inventory-threshold/template.json';
+import tpl_py_025_partner_penalty from './python/py-025-partner-penalty/template.json';
+import tpl_py_026_session_token_logger from './python/py-026-session-token-logger/template.json';
+import tpl_py_027_audit_sql_concat from './python/py-027-audit-sql-concat/template.json';
+import tpl_py_028_s3_public_upload from './python/py-028-s3-public-upload/template.json';
+import tpl_py_029_plaintext_webhook_signature from './python/py-029-plaintext-webhook-signature/template.json';
+import tpl_py_030_service_key_hardcode from './python/py-030-service-key-hardcode/template.json';
+import tpl_py_031_debug_admin_bypass from './python/py-031-debug-admin-bypass/template.json';
+import tpl_py_032_unvalidated_path_loader from './python/py-032-unvalidated-path-loader/template.json';
+import tpl_py_033_weak_hash_for_license from './python/py-033-weak-hash-for-license/template.json';
+import tpl_py_034_allowlist_bypass from './python/py-034-allowlist-bypass/template.json';
+import tpl_py_035_lax_oauth_scope from './python/py-035-lax-oauth-scope/template.json';
+import tpl_py_036_nplusone_tenant_lookup from './python/py-036-nplusone-tenant-lookup/template.json';
+import tpl_py_037_slow_metrics_serializer from './python/py-037-slow-metrics-serializer/template.json';
+import tpl_py_038_chunky_archive_reader from './python/py-038-chunky-archive-reader/template.json';
+import tpl_py_039_poller_blocking_sleep from './python/py-039-poller-blocking-sleep/template.json';
+import tpl_py_040_report_regenerator from './python/py-040-report-regenerator/template.json';
+import tpl_py_041_cache_warmer_scan from './python/py-041-cache-warmer-scan/template.json';
+import tpl_py_042_aggregation_loop from './python/py-042-aggregation-loop/template.json';
+import tpl_py_043_inefficient_log_filter from './python/py-043-inefficient-log-filter/template.json';
+import tpl_py_044_chained_requests from './python/py-044-chained-requests/template.json';
+import tpl_py_045_disk_write_per_row from './python/py-045-disk-write-per-row/template.json';
+import tpl_py_046_prod_todo_leftover from './python/py-046-prod-todo-leftover/template.json';
+import tpl_py_047_debug_print_hook from './python/py-047-debug-print-hook/template.json';
+import tpl_py_048_pdb_leftover from './python/py-048-pdb-leftover/template.json';
+import tpl_py_049_bare_except_handler from './python/py-049-bare-except-handler/template.json';
+import tpl_py_050_mutable_default_collector from './python/py-050-mutable-default-collector/template.json';
 import tpl_clean_hotfix from './typescript/clean-hotfix/template.json';
 import tpl_clean_refactor from './typescript/clean-refactor/template.json';
 import tpl_logic_boundary_check from './typescript/logic-boundary-check/template.json';
@@ -131,6 +231,106 @@ export const templateManifest = [
   tpl_pr_091_alert_for_gremlin_mitigation_latency,
   tpl_pr_093_alert_for_cache_pruner_latency,
   tpl_pr_100_document_error_bucketing_runbook,
+  tpl_java_001_region_failover_hook,
+  tpl_java_002_ledger_audit_record,
+  tpl_java_003_slo_threshold_check,
+  tpl_java_004_batch_capacity_guard,
+  tpl_java_005_incident_pager_matrix,
+  tpl_java_006_notification_digest_builder,
+  tpl_java_007_webhook_responder,
+  tpl_java_008_config_snapshot_writer,
+  tpl_java_009_segment_rollup_calculator,
+  tpl_java_010_search_index_sampler,
+  tpl_java_011_session_lease_expirer,
+  tpl_java_012_circuit_breaker_throttle,
+  tpl_java_013_tenancy_sla_check,
+  tpl_java_014_batch_timer,
+  tpl_java_015_lead_score_bucket,
+  tpl_java_016_customer_health_tagger,
+  tpl_java_017_alert_debounce_window,
+  tpl_java_018_ops_rotation_picker,
+  tpl_java_019_sprint_streak_gate,
+  tpl_java_020_deploy_approval_limit,
+  tpl_java_021_query_audit_sql_concat,
+  tpl_java_022_password_logger,
+  tpl_java_023_token_hash_md5,
+  tpl_java_024_permissive_cors_filter,
+  tpl_java_025_debug_admin_override,
+  tpl_java_026_public_s3_upload,
+  tpl_java_027_webhook_signature_eq,
+  tpl_java_028_plaintext_secret_export,
+  tpl_java_029_ldap_bind_open,
+  tpl_java_030_path_traversal_loader,
+  tpl_java_031_nplusone_customer_fetch,
+  tpl_java_032_config_cache_reloader,
+  tpl_java_033_template_compile_loop,
+  tpl_java_034_file_read_loop,
+  tpl_java_035_job_poller_sleep,
+  tpl_java_036_synchronous_http_loop,
+  tpl_java_037_huge_json_build,
+  tpl_java_038_stream_blocking_io,
+  tpl_java_039_distinct_sort_loop,
+  tpl_java_040_batch_writer_loop,
+  tpl_java_041_prod_todo_flag,
+  tpl_java_042_system_out_logging,
+  tpl_java_043_print_stack_trace,
+  tpl_java_044_bare_catch,
+  tpl_java_045_mutable_static_collection,
+  tpl_java_046_cache_eviction_scheduler,
+  tpl_java_047_briefing_quote_rotation,
+  tpl_java_048_support_intake_parser,
+  tpl_java_049_service_key_hardcode,
+  tpl_java_050_unbounded_thread_spawn,
+  tpl_py_001_cache_warmup_scheduler,
+  tpl_py_002_ledger_drift_snapshot,
+  tpl_py_003_runtime_health_pulse,
+  tpl_py_004_sla_window_reset,
+  tpl_py_005_notification_bundle_builder,
+  tpl_py_006_feature_flag_backfill,
+  tpl_py_007_access_journal_dumper,
+  tpl_py_008_release_notes_formatter,
+  tpl_py_009_service_map_uploader,
+  tpl_py_010_carbon_cache_hydrator,
+  tpl_py_011_queue_pressure_guard,
+  tpl_py_012_billing_grace_window,
+  tpl_py_013_device_heartbeat_gap,
+  tpl_py_014_feedback_subscore,
+  tpl_py_015_workflow_timeout,
+  tpl_py_016_incident_slo_handoff,
+  tpl_py_017_usage_quota_check,
+  tpl_py_018_retry_budget_window,
+  tpl_py_019_release_batch_verifier,
+  tpl_py_020_sprint_risk_mapper,
+  tpl_py_021_comms_blast_cap,
+  tpl_py_022_data_batch_size,
+  tpl_py_023_alert_silence_window,
+  tpl_py_024_inventory_threshold,
+  tpl_py_025_partner_penalty,
+  tpl_py_026_session_token_logger,
+  tpl_py_027_audit_sql_concat,
+  tpl_py_028_s3_public_upload,
+  tpl_py_029_plaintext_webhook_signature,
+  tpl_py_030_service_key_hardcode,
+  tpl_py_031_debug_admin_bypass,
+  tpl_py_032_unvalidated_path_loader,
+  tpl_py_033_weak_hash_for_license,
+  tpl_py_034_allowlist_bypass,
+  tpl_py_035_lax_oauth_scope,
+  tpl_py_036_nplusone_tenant_lookup,
+  tpl_py_037_slow_metrics_serializer,
+  tpl_py_038_chunky_archive_reader,
+  tpl_py_039_poller_blocking_sleep,
+  tpl_py_040_report_regenerator,
+  tpl_py_041_cache_warmer_scan,
+  tpl_py_042_aggregation_loop,
+  tpl_py_043_inefficient_log_filter,
+  tpl_py_044_chained_requests,
+  tpl_py_045_disk_write_per_row,
+  tpl_py_046_prod_todo_leftover,
+  tpl_py_047_debug_print_hook,
+  tpl_py_048_pdb_leftover,
+  tpl_py_049_bare_except_handler,
+  tpl_py_050_mutable_default_collector,
   tpl_clean_hotfix,
   tpl_clean_refactor,
   tpl_logic_boundary_check,

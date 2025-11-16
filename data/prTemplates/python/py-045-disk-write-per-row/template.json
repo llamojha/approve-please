@@ -1,0 +1,74 @@
+{
+  "templateId": "py-045-disk-write-per-row",
+  "title": "Row exporter helper",
+  "author": "Emi S.",
+  "description": "Exports billing rows to disk for reconciliation.",
+  "tags": [
+    "performance",
+    "io"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "billing/exporter.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 87,
+          "content": "import json",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 89,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 90,
+          "content": "def export_rows(rows: list[dict], path: str) -> None:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 91,
+          "content": "    for row in rows:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "        with open(path, \"a\", encoding=\"utf-8\") as handle:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "            handle.write(json.dumps(row))",
+          "isNew": true
+        },
+        {
+          "lineNumber": 94,
+          "content": "            handle.write(\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 95,
+          "content": "\")",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Reopens the file for every row instead of streaming once.",
+      "lineNumbers": [
+        91
+      ]
+    }
+  ]
+}

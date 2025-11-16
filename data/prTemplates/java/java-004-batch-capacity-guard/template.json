@@ -1,0 +1,69 @@
+{
+  "templateId": "java-004-batch-capacity-guard",
+  "title": "Batch capacity guard",
+  "author": "Noor H.",
+  "description": "Adds a helper for determining when batch queues are full.",
+  "tags": [
+    "logic",
+    "queue"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/batch/CapacityGuard.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 47,
+          "content": "public class CapacityGuard {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "  public boolean hasCapacity(int queued, int capacity) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "    if (queued >= capacity) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Returns true when the queue is already at or above capacity.",
+      "lineNumbers": [
+        49
+      ]
+    }
+  ]
+}

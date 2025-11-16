@@ -1,0 +1,70 @@
+{
+  "templateId": "java-025-debug-admin-override",
+  "title": "Admin override helper",
+  "author": "Yara M.",
+  "description": "Adds a debug override flag to admin checks.",
+  "tags": [
+    "security",
+    "auth"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/auth/AdminChecker.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 66,
+          "content": "public final class AdminChecker {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "  public boolean isAdmin(User user, boolean debug) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "    if (debug) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 70,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "    return user.roles().contains(\"admin\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Debug flag bypasses admin verification entirely.",
+      "lineNumbers": [
+        68,
+        69
+      ]
+    }
+  ]
+}

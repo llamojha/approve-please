@@ -1,0 +1,59 @@
+{
+  "templateId": "py-020-sprint-risk-mapper",
+  "title": "Sprint risk mapper",
+  "author": "Dani E.",
+  "description": "Maps the blocker score into a risk tier for sprint health.",
+  "tags": [
+    "logic",
+    "planning"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "planning/sprint_health.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 25,
+          "content": "def classify_sprint_risk(blocker_score: int) -> str:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    if blocker_score <= 40:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "        return \"critical\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    if blocker_score <= 70:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "        return \"watch\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    return \"steady\"",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Higher blocker scores mean more risk, so the first comparison should flip to >=.",
+      "lineNumbers": [
+        26
+      ]
+    }
+  ]
+}

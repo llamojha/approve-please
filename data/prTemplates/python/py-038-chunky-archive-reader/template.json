@@ -1,0 +1,64 @@
+{
+  "templateId": "py-038-chunky-archive-reader",
+  "title": "Archive stream helper",
+  "author": "Uma D.",
+  "description": "Streams archive blobs to downstream processors.",
+  "tags": [
+    "performance",
+    "storage"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "archives/stream.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 11,
+          "content": "from pathlib import Path",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "def stream_archive(path: str, chunk_size: int = 1024):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "    blob = Path(path).read_bytes()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    for idx in range(0, len(blob), chunk_size):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "        yield blob[idx : idx + chunk_size]",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Reads the entire archive into memory before streaming.",
+      "lineNumbers": [
+        14
+      ]
+    }
+  ]
+}

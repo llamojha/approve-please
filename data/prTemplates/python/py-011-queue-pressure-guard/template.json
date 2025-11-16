@@ -1,0 +1,49 @@
+{
+  "templateId": "py-011-queue-pressure-guard",
+  "title": "Tighten queue pressure guard",
+  "author": "Imani D.",
+  "description": "Adds a helper that decides when the orchestrator queue is overloaded.",
+  "tags": [
+    "logic",
+    "queue"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "orchestrator/pressure.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 61,
+          "content": "def queue_is_overloaded(pending_jobs: int, limit: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 62,
+          "content": "    if pending_jobs < limit:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 63,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Comparison is inverted; backlog should trigger when pending exceeds the limit, not when it is below.",
+      "lineNumbers": [
+        62
+      ]
+    }
+  ]
+}

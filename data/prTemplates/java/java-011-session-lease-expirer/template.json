@@ -1,0 +1,54 @@
+{
+  "templateId": "java-011-session-lease-expirer",
+  "title": "Session lease expirer",
+  "author": "Ivy D.",
+  "description": "Updates the helper that determines whether a session lease expired.",
+  "tags": [
+    "logic",
+    "sessions"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/session/LeaseGuard.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 88,
+          "content": "public final class LeaseGuard {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 89,
+          "content": "  public boolean isExpired(Instant expiresAt, Instant now) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 90,
+          "content": "    return now.isBefore(expiresAt);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 91,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Returns true while the lease is still valid instead of when now is after expiration.",
+      "lineNumbers": [
+        90
+      ]
+    }
+  ]
+}

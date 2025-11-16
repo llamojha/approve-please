@@ -1,0 +1,49 @@
+{
+  "templateId": "py-016-incident-slo-handoff",
+  "title": "Incident SLO captain handoff logic",
+  "author": "Milo H.",
+  "description": "Determines when to page the incident captain based on meter thresholds.",
+  "tags": [
+    "logic",
+    "incident"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "incidents/slo.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 63,
+          "content": "def should_page_captain(stability_score: int, velocity_score: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "    if stability_score < 70 and velocity_score < 40:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Either score falling too low should trigger the page, but the code only fires when both are low.",
+      "lineNumbers": [
+        64
+      ]
+    }
+  ]
+}

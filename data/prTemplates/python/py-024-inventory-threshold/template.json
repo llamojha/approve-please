@@ -1,0 +1,49 @@
+{
+  "templateId": "py-024-inventory-threshold",
+  "title": "Inventory threshold guard",
+  "author": "Akira V.",
+  "description": "Determines whether inventory needs to be replenished.",
+  "tags": [
+    "logic",
+    "inventory"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "inventory/thresholds.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 58,
+          "content": "def needs_restock(available_units: int, min_units: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    if available_units > min_units:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Restock should trigger when stock falls below the minimum, not when it is above it.",
+      "lineNumbers": [
+        59
+      ]
+    }
+  ]
+}

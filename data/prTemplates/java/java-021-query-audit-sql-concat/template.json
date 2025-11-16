@@ -1,0 +1,54 @@
+{
+  "templateId": "java-021-query-audit-sql-concat",
+  "title": "Audit query helper",
+  "author": "Uma C.",
+  "description": "Adds helper to fetch audit rows for a tenant.",
+  "tags": [
+    "security",
+    "sql"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/audit/QueryBuilder.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 70,
+          "content": "public final class QueryBuilder {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "  public String buildTenantQuery(String tenant) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "    return \"SELECT * FROM audit WHERE tenant = '\" + tenant + \"' ORDER BY created_at DESC\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Concatenates tenant input into SQL, allowing injection.",
+      "lineNumbers": [
+        72
+      ]
+    }
+  ]
+}

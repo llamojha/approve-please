@@ -1,0 +1,75 @@
+{
+  "templateId": "java-001-region-failover-hook",
+  "title": "Region failover hook builder",
+  "author": "Leila V.",
+  "description": "Adds a helper to build failover events with timestamps for the ops console.",
+  "tags": [
+    "backend",
+    "resilience"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/failover/RegionFailover.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 28,
+          "content": "public final class RegionFailover {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "  private final Clock clock;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "  public RegionFailover(Clock clock) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    this.clock = clock;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "  public FailoverEvent build(String region) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    return new FailoverEvent(region, clock.instant());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

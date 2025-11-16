@@ -1,0 +1,70 @@
+{
+  "templateId": "java-047-briefing-quote-rotation",
+  "title": "Briefing quote rotator",
+  "author": "Uma P.",
+  "description": "Adds helper to rotate daily briefing quotes.",
+  "tags": [
+    "narrative",
+    "feature"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/briefing/QuoteRotator.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 21,
+          "content": "public final class QuoteRotator {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "  private final Random random = new Random();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "  public Quote pick(List<Quote> quotes) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    if (quotes.isEmpty()) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "      return new Quote(\"Ops\", \"Keep calm and ship clean.\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    return quotes.get(random.nextInt(quotes.size()));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

@@ -1,0 +1,49 @@
+{
+  "templateId": "py-013-device-heartbeat-gap",
+  "title": "Device heartbeat gap classifier",
+  "author": "Jonah V.",
+  "description": "Classifies whether a heartbeat gap should trigger a page.",
+  "tags": [
+    "devices",
+    "logic"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "devices/heartbeat.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 77,
+          "content": "def gap_is_critical(minutes_since_ping: int, threshold: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    if minutes_since_ping <= threshold:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Critical gaps occur when the miss exceeds the threshold, not when it is within it.",
+      "lineNumbers": [
+        78
+      ]
+    }
+  ]
+}

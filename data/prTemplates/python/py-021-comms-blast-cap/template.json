@@ -1,0 +1,49 @@
+{
+  "templateId": "py-021-comms-blast-cap",
+  "title": "Comms blast cap logic",
+  "author": "Noor T.",
+  "description": "Decides whether another marketing blast can be sent this minute.",
+  "tags": [
+    "logic",
+    "marketing"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "marketing/blast_cap.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 19,
+          "content": "def can_send_blast(sent_last_minute: int, cap: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    if sent_last_minute >= cap:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "When the cap is reached we must stop sending, yet this returns True.",
+      "lineNumbers": [
+        20
+      ]
+    }
+  ]
+}

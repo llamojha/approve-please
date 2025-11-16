@@ -1,0 +1,59 @@
+{
+  "templateId": "py-040-report-regenerator",
+  "title": "Report renderer helper",
+  "author": "Mina F.",
+  "description": "Renders analyst reports for each SLA segment.",
+  "tags": [
+    "performance",
+    "reports"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "reports/render.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 92,
+          "content": "def render_reports(renderer, rows: list[dict]) -> list[str]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "    rendered: list[str] = []",
+          "isNew": true
+        },
+        {
+          "lineNumber": 94,
+          "content": "    for row in rows:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 95,
+          "content": "        template = renderer.compile(\"sla_report.html\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "        rendered.append(template.render(context=row))",
+          "isNew": true
+        },
+        {
+          "lineNumber": 97,
+          "content": "    return rendered",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Compiles the template on every iteration instead of once.",
+      "lineNumbers": [
+        95
+      ]
+    }
+  ]
+}

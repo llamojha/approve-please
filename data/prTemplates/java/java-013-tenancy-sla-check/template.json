@@ -1,0 +1,69 @@
+{
+  "templateId": "java-013-tenancy-sla-check",
+  "title": "Tenancy SLA check",
+  "author": "Milo Z.",
+  "description": "Determines whether a tenant breached the uptime SLA.",
+  "tags": [
+    "logic",
+    "billing"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/tenant/SlaJudge.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 51,
+          "content": "public class SlaJudge {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "  public boolean breached(double uptimePercent, double promise) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "    if (uptimePercent > promise) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Treats higher uptime as a breach rather than falling below the promise.",
+      "lineNumbers": [
+        53
+      ]
+    }
+  ]
+}

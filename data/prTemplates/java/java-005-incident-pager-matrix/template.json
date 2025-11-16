@@ -1,0 +1,75 @@
+{
+  "templateId": "java-005-incident-pager-matrix",
+  "title": "Incident pager matrix helper",
+  "author": "Ravi E.",
+  "description": "Introduces a helper to pick the right on-call contact by severity.",
+  "tags": [
+    "incident",
+    "ops"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/incidents/PagerMatrix.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 33,
+          "content": "public final class PagerMatrix {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "  private final Map<String, String> routes;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "  public PagerMatrix(Map<String, String> routes) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    this.routes = Map.copyOf(routes);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "  public String resolve(String severity) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    return routes.getOrDefault(severity, routes.getOrDefault(\"default\", \"support\"));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

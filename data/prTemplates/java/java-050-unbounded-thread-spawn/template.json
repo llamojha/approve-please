@@ -1,0 +1,64 @@
+{
+  "templateId": "java-050-unbounded-thread-spawn",
+  "title": "Task processor helper",
+  "author": "Yuri L.",
+  "description": "Spawns worker threads for each task in the backlog.",
+  "tags": [
+    "performance",
+    "concurrency"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/tasks/TaskProcessor.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "public final class TaskProcessor {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "  public void process(List<Runnable> tasks) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    for (Runnable task : tasks) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "      new Thread(task).start();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 61,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Creates an unbounded number of threads instead of using the shared executor.",
+      "lineNumbers": [
+        58
+      ]
+    }
+  ]
+}

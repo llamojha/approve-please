@@ -1,0 +1,69 @@
+{
+  "templateId": "java-045-mutable-static-collection",
+  "title": "Static roster helper",
+  "author": "Sloane V.",
+  "description": "Defines the default reviewer roster.",
+  "tags": [
+    "style",
+    "maintainability"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/roster/DefaultRoster.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 16,
+          "content": "public final class DefaultRoster {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "  public static final List<String> REVIEWERS = new ArrayList<>();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "  static {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    REVIEWERS.add(\"Nia\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    REVIEWERS.add(\"Gabe\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Exposes a mutable static list instead of immutable roster.",
+      "lineNumbers": [
+        17
+      ]
+    }
+  ]
+}

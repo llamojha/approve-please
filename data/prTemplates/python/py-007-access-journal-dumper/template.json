@@ -1,0 +1,55 @@
+{
+  "templateId": "py-007-access-journal-dumper",
+  "title": "Add access journal formatter",
+  "author": "Sasha K.",
+  "description": "Adds a helper to normalize access journal rows before writing them to disk.",
+  "tags": [
+    "compliance",
+    "logging"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "access/journal.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 90,
+          "content": "def format_access_record(record: dict) -> str:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 91,
+          "content": "    parts = [",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "        record.get(\"user\", \"unknown\"),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "        record.get(\"action\", \"unknown\"),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 94,
+          "content": "        record.get(\"at\", \"\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 95,
+          "content": "    ]",
+          "isNew": true
+        },
+        {
+          "lineNumber": 96,
+          "content": "    return \"|\".join(parts)",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

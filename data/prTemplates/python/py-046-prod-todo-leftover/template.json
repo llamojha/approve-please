@@ -1,0 +1,55 @@
+{
+  "templateId": "py-046-prod-todo-leftover",
+  "title": "Payload sanitizer helper",
+  "author": "Isla F.",
+  "description": "Wraps payloads before sending them to the command bus.",
+  "tags": [
+    "style",
+    "cleanup"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "bus/sanitize.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 24,
+          "content": "def sanitize_payload(payload: dict) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    # TODO remove when prod hotfix lands",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    payload.setdefault(\"debug\", True)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    payload[\"version\"] = \"v2\"",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    return payload",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Ships a TODO meant only for a hotfix, keeping debug defaults enabled.",
+      "lineNumbers": [
+        25,
+        26
+      ]
+    }
+  ]
+}

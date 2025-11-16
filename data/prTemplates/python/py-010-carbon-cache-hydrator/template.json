@@ -1,0 +1,50 @@
+{
+  "templateId": "py-010-carbon-cache-hydrator",
+  "title": "Add carbon cache hydrator job",
+  "author": "Helena G.",
+  "description": "Creates the job payload for hydrating the carbon cache dataset.",
+  "tags": [
+    "data",
+    "jobs"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "jobs/carbon_cache.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "def build_carbon_cache_job(batch_id: str, expires_at) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "        \"job\": \"hydrate_carbon_cache\",",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "        \"batch_id\": batch_id,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "        \"expires_at\": expires_at.isoformat()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

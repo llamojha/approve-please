@@ -1,0 +1,54 @@
+{
+  "templateId": "py-041-cache-warmer-scan",
+  "title": "Feature cache hydrator helper",
+  "author": "Gus R.",
+  "description": "Hydrates feature flags into cache before a deploy.",
+  "tags": [
+    "performance",
+    "cache"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "flags/cache.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 33,
+          "content": "def hydrate_feature_cache(cache, keys: list[str]) -> dict[str, str | None]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    hydrated: dict[str, str | None] = {}",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    for key in keys:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        hydrated[key] = cache.get(key)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    return hydrated",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Iterates cache.get one key at a time instead of using a batched mget.",
+      "lineNumbers": [
+        35
+      ]
+    }
+  ]
+}

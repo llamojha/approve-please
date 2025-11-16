@@ -1,0 +1,85 @@
+{
+  "templateId": "java-015-lead-score-bucket",
+  "title": "Lead score bucketing helper",
+  "author": "Owen Y.",
+  "description": "Maps lead scores into named tiers for the CRM export.",
+  "tags": [
+    "logic",
+    "growth"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/growth/LeadScorer.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 74,
+          "content": "public final class LeadScorer {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "  public String bucket(int score) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    if (score <= 80) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "      return \"priority\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "    if (score <= 50) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 80,
+          "content": "      return \"watch\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    return \"nurture\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "minor",
+      "description": "Thresholds are checked in descending order so values above 80 never hit the proper tier.",
+      "lineNumbers": [
+        76,
+        79
+      ]
+    }
+  ]
+}

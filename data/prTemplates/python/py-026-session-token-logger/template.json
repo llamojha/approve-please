@@ -1,0 +1,39 @@
+{
+  "templateId": "py-026-session-token-logger",
+  "title": "Session token audit helper",
+  "author": "Riya M.",
+  "description": "Adds logging around session token issuance for troubleshooting.",
+  "tags": [
+    "security",
+    "sessions"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "auth/session_audit.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "def audit_session_issue(logger, session_token: str, user_id: str) -> None:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    logger.info(\"issued session token %s for %s\", session_token, user_id)",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Logs the raw session token, leaking credentials into log storage.",
+      "lineNumbers": [
+        23
+      ]
+    }
+  ]
+}

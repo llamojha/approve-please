@@ -1,0 +1,65 @@
+{
+  "templateId": "java-002-ledger-audit-record",
+  "title": "Ledger audit snapshot record",
+  "author": "Marco S.",
+  "description": "Introduces an immutable audit snapshot record for downstream billing services.",
+  "tags": [
+    "billing",
+    "data"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/ledger/AuditSnapshot.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "public record AuditSnapshot(String tenantId, BigDecimal delta, Instant recordedAt) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "  public Map<String, Object> toPayload() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    return Map.of(",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "      \"tenant\", tenantId,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "      \"delta\", delta,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "      \"recorded_at\", recordedAt.toString()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    );",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

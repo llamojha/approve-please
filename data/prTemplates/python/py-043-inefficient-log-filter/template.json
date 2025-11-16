@@ -1,0 +1,74 @@
+{
+  "templateId": "py-043-inefficient-log-filter",
+  "title": "Log filter helper",
+  "author": "Sasha P.",
+  "description": "Filters log lines by pattern before piping to support tooling.",
+  "tags": [
+    "performance",
+    "logging"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "logs/filter.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 21,
+          "content": "import re",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "def filter_logs(lines: list[str], query: str) -> list[str]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    matches: list[str] = []",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    for line in lines:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "        if re.search(query, line):",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "            matches.append(line)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    return matches",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Compiles the regex on every iteration instead of compiling once.",
+      "lineNumbers": [
+        26
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "templateId": "java-037-huge-json-build",
+  "title": "JSON payload builder",
+  "author": "Kara S.",
+  "description": "Builds a JSON payload for the analytics export.",
+  "tags": [
+    "performance",
+    "allocations"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/analytics/PayloadBuilder.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 64,
+          "content": "public final class PayloadBuilder {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "  public String build(List<Map<String, Object>> rows) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    String body = \"\";",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
+          "content": "    for (Map<String, Object> row : rows) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 68,
+          "content": "      body += new ObjectMapper().writeValueAsString(row);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 69,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 70,
+          "content": "    return body;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Concatenates large JSON strings repeatedly instead of using a buffer.",
+      "lineNumbers": [
+        66,
+        68
+      ]
+    }
+  ]
+}

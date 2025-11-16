@@ -1,0 +1,59 @@
+{
+  "templateId": "py-033-weak-hash-for-license",
+  "title": "License hash helper",
+  "author": "Ling T.",
+  "description": "Hashes license payloads before writing to cache.",
+  "tags": [
+    "security",
+    "compliance"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "compliance/license_hash.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 21,
+          "content": "import hashlib",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "def hash_license(payload: dict) -> str:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    token = payload[\"license\"]",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    return hashlib.md5(token.encode()).hexdigest()",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Uses weak MD5 hashing for license secrets.",
+      "lineNumbers": [
+        26
+      ]
+    }
+  ]
+}

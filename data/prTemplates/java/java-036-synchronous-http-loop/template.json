@@ -1,0 +1,94 @@
+{
+  "templateId": "java-036-synchronous-http-loop",
+  "title": "Experiment score fetcher",
+  "author": "Jules K.",
+  "description": "Fetches experiment scores for each id individually.",
+  "tags": [
+    "performance",
+    "http"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/experiments/ScoreFetcher.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 102,
+          "content": "public final class ScoreFetcher {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "  public List<JsonNode> fetch(HttpClient client, List<String> experimentIds) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "    List<JsonNode> results = new ArrayList<>();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    for (String id : experimentIds) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "      HttpRequest request = HttpRequest.newBuilder()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 107,
+          "content": "        .uri(URI.create(\"https://api.internal/scores/\" + id))",
+          "isNew": true
+        },
+        {
+          "lineNumber": 108,
+          "content": "        .build();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 109,
+          "content": "      HttpResponse<String> response = client.send(request, BodyHandlers.ofString());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 110,
+          "content": "      results.add(new ObjectMapper().readTree(response.body()));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 111,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 112,
+          "content": "    return results;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 113,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 114,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Issues sequential HTTP calls per id instead of using the batch endpoint.",
+      "lineNumbers": [
+        106
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "templateId": "java-043-print-stack-trace",
+  "title": "Alert failure handler",
+  "author": "Quentin R.",
+  "description": "Handles exceptions when sending alerts.",
+  "tags": [
+    "style",
+    "error-handling"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/alerts/FailureHandler.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 54,
+          "content": "public final class FailureHandler {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "  public void handle(Exception ex) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    ex.printStackTrace();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Prints stack traces directly instead of logging or surfacing the error.",
+      "lineNumbers": [
+        56
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "templateId": "py-002-ledger-drift-snapshot",
+  "title": "Add ledger drift snapshot helper",
+  "author": "Jules P.",
+  "description": "Introduces a dataclass for representing ledger drift deltas for downstream consumers.",
+  "tags": [
+    "data",
+    "billing",
+    "python"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "ledger/drift.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 12,
+          "content": "from dataclasses import dataclass",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "from decimal import Decimal",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "from datetime import datetime",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "@dataclass",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "class LedgerDriftSnapshot:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "    tenant: str",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "    delta: Decimal",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    recorded_at: datetime",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    def to_payload(self) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "        return {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "            \"tenant\": self.tenant,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "            \"delta\": str(self.delta),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "            \"recorded_at\": self.recorded_at.isoformat()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "        }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

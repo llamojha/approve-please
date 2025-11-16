@@ -1,0 +1,54 @@
+{
+  "templateId": "java-042-system-out-logging",
+  "title": "Dispatch logger helper",
+  "author": "Pilar E.",
+  "description": "Adds lightweight logging for dispatch batches.",
+  "tags": [
+    "style",
+    "logging"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/dispatch/BatchLogger.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 12,
+          "content": "public final class BatchLogger {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "  public void log(List<Map<String, Object>> rows) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "    System.out.println(\"dispatching \" + rows);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Uses System.out instead of structured logging.",
+      "lineNumbers": [
+        14
+      ]
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "templateId": "java-009-segment-rollup-calculator",
+  "title": "Segment rollup calculator",
+  "author": "Gabe R.",
+  "description": "Adds helper to compute aggregated segment metrics for dashboards.",
+  "tags": [
+    "analytics",
+    "feature"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/segments/RollupCalculator.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 25,
+          "content": "public final class RollupCalculator {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "  public Map<String, Integer> compute(List<SegmentMetric> metrics) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    return metrics.stream()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "      .collect(Collectors.groupingBy(",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "        SegmentMetric::segmentId,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        Collectors.summingInt(SegmentMetric::value)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "      ));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

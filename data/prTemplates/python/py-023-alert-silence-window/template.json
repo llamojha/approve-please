@@ -1,0 +1,64 @@
+{
+  "templateId": "py-023-alert-silence-window",
+  "title": "Alert silence window evaluator",
+  "author": "Zeke A.",
+  "description": "Determines if an alert should remain silenced.",
+  "tags": [
+    "logic",
+    "alerts"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "alerts/silence.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 48,
+          "content": "from datetime import datetime",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "def should_keep_silenced(silenced_until: datetime, now: datetime) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    if now >= silenced_until:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 54,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Silence should hold until the future timestamp; this returns True once time has elapsed.",
+      "lineNumbers": [
+        51
+      ]
+    }
+  ]
+}

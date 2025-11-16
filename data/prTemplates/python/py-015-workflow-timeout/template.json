@@ -1,0 +1,54 @@
+{
+  "templateId": "py-015-workflow-timeout",
+  "title": "Workflow timeout detector",
+  "author": "Aria L.",
+  "description": "Determines if a workflow exceeded the configured timeout.",
+  "tags": [
+    "logic",
+    "workflow"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "workflow/timeouts.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 55,
+          "content": "def workflow_timed_out(started_at, now, timeout_minutes: int) -> bool:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    delta = (now - started_at).total_seconds() / 60",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    if delta < timeout_minutes:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
+          "content": "        return True",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    return False",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Timeout should trip when the elapsed time meets or exceeds the limit, not when it is still below it.",
+      "lineNumbers": [
+        57
+      ]
+    }
+  ]
+}

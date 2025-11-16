@@ -1,0 +1,74 @@
+{
+  "templateId": "py-039-poller-blocking-sleep",
+  "title": "Queue poller helper",
+  "author": "Caleb I.",
+  "description": "Polls queue items and aggregates their statuses.",
+  "tags": [
+    "performance",
+    "queue"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "queue/poller.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 70,
+          "content": "import time",
+          "isNew": true
+        },
+        {
+          "lineNumber": 71,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 72,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "def poll_queue(client, job_ids: list[str]) -> list[dict]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "    statuses: list[dict] = []",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "    for job_id in job_ids:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "        time.sleep(2)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "        statuses.append(client.fetch_status(job_id))",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    return statuses",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Sleeps two seconds per job ID instead of using backoff per batch.",
+      "lineNumbers": [
+        76
+      ]
+    }
+  ]
+}

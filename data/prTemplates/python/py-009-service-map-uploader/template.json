@@ -1,0 +1,70 @@
+{
+  "templateId": "py-009-service-map-uploader",
+  "title": "Add service map upload helper",
+  "author": "Ravi N.",
+  "description": "Adds a convenience helper for posting service map snapshots to the mapping API.",
+  "tags": [
+    "integrations",
+    "ops"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "integrations/service_map.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 27,
+          "content": "from datetime import datetime",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "def upload_service_map(client, graph: dict) -> dict:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    payload = {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        \"graph\": graph,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "        \"uploaded_at\": datetime.utcnow().isoformat()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    client.put(\"/service-map\", json=payload)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    return payload",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

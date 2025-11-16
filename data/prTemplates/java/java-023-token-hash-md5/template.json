@@ -1,0 +1,54 @@
+{
+  "templateId": "java-023-token-hash-md5",
+  "title": "Token hash helper",
+  "author": "Willow F.",
+  "description": "Introduces helper to hash tokens before caching.",
+  "tags": [
+    "security",
+    "hashing"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/security/TokenHasher.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 31,
+          "content": "public final class TokenHasher {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "  public String hash(String token) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    return DigestUtils.md5Hex(token);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Uses MD5 for hashing secrets.",
+      "lineNumbers": [
+        33
+      ]
+    }
+  ]
+}

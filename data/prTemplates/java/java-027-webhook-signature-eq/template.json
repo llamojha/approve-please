@@ -1,0 +1,60 @@
+{
+  "templateId": "java-027-webhook-signature-eq",
+  "title": "Webhook signature checker",
+  "author": "Aida J.",
+  "description": "Adds signature validation for billing webhooks.",
+  "tags": [
+    "security",
+    "integrations"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/webhooks/SignatureChecker.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 72,
+          "content": "public final class SignatureChecker {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 73,
+          "content": "  public boolean valid(Map<String, Object> payload, String provided) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 74,
+          "content": "    String expected = (String) payload.get(\"signature\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 75,
+          "content": "    return Objects.equals(expected, provided);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Compares provided signature to an untrusted field in the payload.",
+      "lineNumbers": [
+        74,
+        75
+      ]
+    }
+  ]
+}

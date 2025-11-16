@@ -1,0 +1,99 @@
+{
+  "templateId": "java-031-nplusone-customer-fetch",
+  "title": "Customer fetch hydrator",
+  "author": "Eden V.",
+  "description": "Hydrates customer profiles before rendering the dashboard.",
+  "tags": [
+    "performance",
+    "database"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/main/java/com/approveplease/customers/ProfileHydrator.java",
+      "language": "java",
+      "lines": [
+        {
+          "lineNumber": 80,
+          "content": "public final class ProfileHydrator {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "  public List<Customer> load(DataSource ds, List<String> ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "    List<Customer> customers = new ArrayList<>();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "    for (String id : ids) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "      customers.add(fetchOne(ds, id));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "    return customers;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 89,
+          "content": "  private Customer fetchOne(DataSource ds, String id) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 90,
+          "content": "    // imagine query here",
+          "isNew": true
+        },
+        {
+          "lineNumber": 91,
+          "content": "    return null;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 92,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 93,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Executes one query per id instead of batching.",
+      "lineNumbers": [
+        84
+      ]
+    }
+  ]
+}

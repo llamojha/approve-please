@@ -1,0 +1,39 @@
+{
+  "templateId": "py-028-s3-public-upload",
+  "title": "Invoice attachment uploader",
+  "author": "Samira C.",
+  "description": "Adds helper for uploading invoice PDFs to object storage.",
+  "tags": [
+    "security",
+    "storage"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "billing/uploader.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "def upload_invoice_attachment(s3_client, bucket: str, key: str, body: bytes) -> None:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "    s3_client.put_object(Bucket=bucket, Key=key, Body=body, ACL=\"public-read\")",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Marks invoice uploads as public-read instead of private.",
+      "lineNumbers": [
+        15
+      ]
+    }
+  ]
+}

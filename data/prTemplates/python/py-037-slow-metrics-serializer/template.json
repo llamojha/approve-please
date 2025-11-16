@@ -1,0 +1,94 @@
+{
+  "templateId": "py-037-slow-metrics-serializer",
+  "title": "Metrics serializer helper",
+  "author": "Oona W.",
+  "description": "Serializes metrics with a schema overlay before publishing.",
+  "tags": [
+    "performance",
+    "metrics"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "metrics/serializer.py",
+      "language": "python",
+      "lines": [
+        {
+          "lineNumber": 28,
+          "content": "import json",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "from pathlib import Path",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "SCHEMA_PATH = Path(__file__).with_name(\"metric_schema.json\")",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "def serialize_metrics(metrics: list[dict]) -> list[dict]:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    serialized: list[dict] = []",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    for metric in metrics:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "        schema = json.loads(SCHEMA_PATH.read_text())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "        serialized.append({**schema, **metric})",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    return serialized",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Reads and parses the schema file inside the loop for every metric.",
+      "lineNumbers": [
+        37
+      ]
+    }
+  ]
+}
