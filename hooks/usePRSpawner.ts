@@ -169,11 +169,9 @@ export const usePRSpawner = () => {
       }
     }
 
-    if (currentDay > 1) {
-      const currentHour = Math.floor(currentTime / 60);
-      if (currentHour === lastHourlyCheckRef.current) {
-        return;
-      }
+    const currentHour = Math.floor(currentTime / 60);
+    const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
+    if (withinHourlyWindow && currentHour !== lastHourlyCheckRef.current) {
       lastHourlyCheckRef.current = currentHour;
       const totalQueue = queue.length + (currentPR ? 1 : 0);
       if (totalQueue === 0) {

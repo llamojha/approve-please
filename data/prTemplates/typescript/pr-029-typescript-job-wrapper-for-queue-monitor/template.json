@@ -1,8 +1,8 @@
 {
-  "templateId": "pr-029-python-job-wrapper-for-queue-monitor",
-  "title": "Python job wrapper for Queue Monitor",
+  "templateId": "pr-029-typescript-job-wrapper-for-queue-monitor",
+  "title": "TypeScript job wrapper for Queue Monitor",
   "author": "Harper N.",
-  "description": "Adds a thin Python helper that normalizes queue monitor job payloads.",
+  "description": "Adds a thin TypeScript helper that normalizes queue monitor job payloads.",
   "tags": [
     "feature",
     "infra",

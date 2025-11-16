@@ -39,18 +39,18 @@ import tpl_pr_016_trigger_predicate_for_inventory_reserver from './typescript/pr
 import tpl_pr_017_temporary_debug_logger_for_access_journal from './typescript/pr-017-temporary-debug-logger-for-access-journal/template.json';
 import tpl_pr_018_tenant_lookup_for_usage_predictor from './typescript/pr-018-tenant-lookup-for-usage-predictor/template.json';
 import tpl_pr_019_temporary_debug_logger_for_runtime_metrics from './typescript/pr-019-temporary-debug-logger-for-runtime-metrics/template.json';
-import tpl_pr_020_python_job_wrapper_for_packet_analyzer from './typescript/pr-020-python-job-wrapper-for-packet-analyzer/template.json';
+import tpl_pr_020_typescript_job_wrapper_for_packet_analyzer from './typescript/pr-020-typescript-job-wrapper-for-packet-analyzer/template.json';
 import tpl_pr_021_queue_hygiene_reporter_jobs from './typescript/pr-021-queue-hygiene-reporter-jobs/template.json';
-import tpl_pr_022_python_helper_for_lead_matcher_data from './typescript/pr-022-python-helper-for-lead-matcher-data/template.json';
+import tpl_pr_022_typescript_helper_for_lead_matcher_data from './typescript/pr-022-typescript-helper-for-lead-matcher-data/template.json';
 import tpl_pr_024_secret_reset_hook_for_rollout_guard from './typescript/pr-024-secret-reset-hook-for-rollout-guard/template.json';
 import tpl_pr_025_queue_api_quota_jobs from './typescript/pr-025-queue-api-quota-jobs/template.json';
 import tpl_pr_026_trigger_predicate_for_search_index from './typescript/pr-026-trigger-predicate-for-search-index/template.json';
 import tpl_pr_028_load_vault_rotation_config from './typescript/pr-028-load-vault-rotation-config/template.json';
-import tpl_pr_029_python_job_wrapper_for_queue_monitor from './typescript/pr-029-python-job-wrapper-for-queue-monitor/template.json';
+import tpl_pr_029_typescript_job_wrapper_for_queue_monitor from './typescript/pr-029-typescript-job-wrapper-for-queue-monitor/template.json';
 import tpl_pr_030_chunk_sprint_health_records from './typescript/pr-030-chunk-sprint-health-records/template.json';
 import tpl_pr_032_trigger_predicate_for_risk_pager from './typescript/pr-032-trigger-predicate-for-risk-pager/template.json';
-import tpl_pr_033_python_helper_for_ops_console_data from './typescript/pr-033-python-helper-for-ops-console-data/template.json';
-import tpl_pr_034_python_job_wrapper_for_policy_center from './typescript/pr-034-python-job-wrapper-for-policy-center/template.json';
+import tpl_pr_033_typescript_helper_for_ops_console_data from './typescript/pr-033-typescript-helper-for-ops-console-data/template.json';
+import tpl_pr_034_typescript_job_wrapper_for_policy_center from './typescript/pr-034-typescript-job-wrapper-for-policy-center/template.json';
 import tpl_pr_035_normalize_notification_center_payloads from './typescript/pr-035-normalize-notification-center-payloads/template.json';
 import tpl_pr_036_add_survey_engine_panel from './typescript/pr-036-add-survey-engine-panel/template.json';
 import tpl_pr_037_stream_incident_postmortem_snapshots from './typescript/pr-037-stream-incident-postmortem-snapshots/template.json';
@@ -60,11 +60,11 @@ import tpl_pr_041_trigger_predicate_for_warranty_center from './typescript/pr-04
 import tpl_pr_042_admin_endpoint_for_gremlin_mitigation from './typescript/pr-042-admin-endpoint-for-gremlin-mitigation/template.json';
 import tpl_pr_044_tenant_lookup_for_release_notes from './typescript/pr-044-tenant-lookup-for-release-notes/template.json';
 import tpl_pr_045_temporary_debug_logger_for_report_export from './typescript/pr-045-temporary-debug-logger-for-report-export/template.json';
-import tpl_pr_046_python_helper_for_experiment_tracker_data from './typescript/pr-046-python-helper-for-experiment-tracker-data/template.json';
+import tpl_pr_046_typescript_helper_for_experiment_tracker_data from './typescript/pr-046-typescript-helper-for-experiment-tracker-data/template.json';
 import tpl_pr_047_trigger_predicate_for_report_export from './typescript/pr-047-trigger-predicate-for-report-export/template.json';
 import tpl_pr_048_add_api_gateway_panel from './typescript/pr-048-add-api-gateway-panel/template.json';
 import tpl_pr_049_add_user_segmentation_panel from './typescript/pr-049-add-user-segmentation-panel/template.json';
-import tpl_pr_050_python_job_wrapper_for_delta_sync from './typescript/pr-050-python-job-wrapper-for-delta-sync/template.json';
+import tpl_pr_050_typescript_job_wrapper_for_delta_sync from './typescript/pr-050-typescript-job-wrapper-for-delta-sync/template.json';
 import tpl_pr_051_add_backlog_triage_panel from './typescript/pr-051-add-backlog-triage-panel/template.json';
 import tpl_pr_053_hydrate_support_inbox_devices from './typescript/pr-053-hydrate-support-inbox-devices/template.json';
 import tpl_pr_054_secret_reset_hook_for_sla_notifier from './typescript/pr-054-secret-reset-hook-for-sla-notifier/template.json';
@@ -83,12 +83,12 @@ import tpl_pr_067_load_compliance_report_config from './typescript/pr-067-load-c
 import tpl_pr_068_load_chat_escalation_config from './typescript/pr-068-load-chat-escalation-config/template.json';
 import tpl_pr_069_queue_feedback_loop_jobs from './typescript/pr-069-queue-feedback-loop-jobs/template.json';
 import tpl_pr_070_hydrate_quality_monitor_devices from './typescript/pr-070-hydrate-quality-monitor-devices/template.json';
-import tpl_pr_072_python_helper_for_content_moderation_data from './typescript/pr-072-python-helper-for-content-moderation-data/template.json';
+import tpl_pr_072_typescript_helper_for_content_moderation_data from './typescript/pr-072-typescript-helper-for-content-moderation-data/template.json';
 import tpl_pr_073_trigger_predicate_for_device_heartbeat from './typescript/pr-073-trigger-predicate-for-device-heartbeat/template.json';
 import tpl_pr_075_admin_endpoint_for_feedback_loop from './typescript/pr-075-admin-endpoint-for-feedback-loop/template.json';
 import tpl_pr_076_scaffold_tests_for_content_moderation from './typescript/pr-076-scaffold-tests-for-content-moderation/template.json';
 import tpl_pr_077_temporary_debug_logger_for_cdn_purger from './typescript/pr-077-temporary-debug-logger-for-cdn-purger/template.json';
-import tpl_pr_079_python_job_wrapper_for_audit_pipeline from './typescript/pr-079-python-job-wrapper-for-audit-pipeline/template.json';
+import tpl_pr_079_typescript_job_wrapper_for_audit_pipeline from './typescript/pr-079-typescript-job-wrapper-for-audit-pipeline/template.json';
 import tpl_pr_080_secret_reset_hook_for_api_quota from './typescript/pr-080-secret-reset-hook-for-api-quota/template.json';
 import tpl_pr_081_secret_reset_hook_for_trace_relay from './typescript/pr-081-secret-reset-hook-for-trace-relay/template.json';
 import tpl_pr_082_temporary_debug_logger_for_delta_sync from './typescript/pr-082-temporary-debug-logger-for-delta-sync/template.json';
@@ -151,18 +151,18 @@ export const templateManifest = [
   tpl_pr_017_temporary_debug_logger_for_access_journal,
   tpl_pr_018_tenant_lookup_for_usage_predictor,
   tpl_pr_019_temporary_debug_logger_for_runtime_metrics,
-  tpl_pr_020_python_job_wrapper_for_packet_analyzer,
+  tpl_pr_020_typescript_job_wrapper_for_packet_analyzer,
   tpl_pr_021_queue_hygiene_reporter_jobs,
-  tpl_pr_022_python_helper_for_lead_matcher_data,
+  tpl_pr_022_typescript_helper_for_lead_matcher_data,
   tpl_pr_024_secret_reset_hook_for_rollout_guard,
   tpl_pr_025_queue_api_quota_jobs,
   tpl_pr_026_trigger_predicate_for_search_index,
   tpl_pr_028_load_vault_rotation_config,
-  tpl_pr_029_python_job_wrapper_for_queue_monitor,
+  tpl_pr_029_typescript_job_wrapper_for_queue_monitor,
   tpl_pr_030_chunk_sprint_health_records,
   tpl_pr_032_trigger_predicate_for_risk_pager,
-  tpl_pr_033_python_helper_for_ops_console_data,
-  tpl_pr_034_python_job_wrapper_for_policy_center,
+  tpl_pr_033_typescript_helper_for_ops_console_data,
+  tpl_pr_034_typescript_job_wrapper_for_policy_center,
   tpl_pr_035_normalize_notification_center_payloads,
   tpl_pr_036_add_survey_engine_panel,
   tpl_pr_037_stream_incident_postmortem_snapshots,
@@ -172,11 +172,11 @@ export const templateManifest = [
   tpl_pr_042_admin_endpoint_for_gremlin_mitigation,
   tpl_pr_044_tenant_lookup_for_release_notes,
   tpl_pr_045_temporary_debug_logger_for_report_export,
-  tpl_pr_046_python_helper_for_experiment_tracker_data,
+  tpl_pr_046_typescript_helper_for_experiment_tracker_data,
   tpl_pr_047_trigger_predicate_for_report_export,
   tpl_pr_048_add_api_gateway_panel,
   tpl_pr_049_add_user_segmentation_panel,
-  tpl_pr_050_python_job_wrapper_for_delta_sync,
+  tpl_pr_050_typescript_job_wrapper_for_delta_sync,
   tpl_pr_051_add_backlog_triage_panel,
   tpl_pr_053_hydrate_support_inbox_devices,
   tpl_pr_054_secret_reset_hook_for_sla_notifier,
@@ -195,12 +195,12 @@ export const templateManifest = [
   tpl_pr_068_load_chat_escalation_config,
   tpl_pr_069_queue_feedback_loop_jobs,
   tpl_pr_070_hydrate_quality_monitor_devices,
-  tpl_pr_072_python_helper_for_content_moderation_data,
+  tpl_pr_072_typescript_helper_for_content_moderation_data,
   tpl_pr_073_trigger_predicate_for_device_heartbeat,
   tpl_pr_075_admin_endpoint_for_feedback_loop,
   tpl_pr_076_scaffold_tests_for_content_moderation,
   tpl_pr_077_temporary_debug_logger_for_cdn_purger,
-  tpl_pr_079_python_job_wrapper_for_audit_pipeline,
+  tpl_pr_079_typescript_job_wrapper_for_audit_pipeline,
   tpl_pr_080_secret_reset_hook_for_api_quota,
   tpl_pr_081_secret_reset_hook_for_trace_relay,
   tpl_pr_082_temporary_debug_logger_for_delta_sync,

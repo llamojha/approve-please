@@ -1,8 +1,8 @@
 {
-  "templateId": "pr-079-python-job-wrapper-for-audit-pipeline",
-  "title": "Python job wrapper for Audit Pipeline",
+  "templateId": "pr-079-typescript-job-wrapper-for-audit-pipeline",
+  "title": "TypeScript job wrapper for Audit Pipeline",
   "author": "Malik O.",
-  "description": "Adds a thin Python helper that normalizes audit pipeline job payloads.",
+  "description": "Adds a thin TypeScript helper that normalizes audit pipeline job payloads.",
   "tags": [
     "bugfix",
     "feature",

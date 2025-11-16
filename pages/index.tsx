@@ -39,11 +39,11 @@ const IndexPage = () => {
           </div>
           <div>
             <small>Stability</small>
-            <p>{meters.stability}</p>
+            <p>{meters.stability}%</p>
           </div>
           <div>
             <small>Satisfaction</small>
-            <p>{meters.satisfaction}</p>
+            <p>{meters.satisfaction}%</p>
           </div>
         </div>
         <section className="landing__language">

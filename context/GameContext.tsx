@@ -79,9 +79,9 @@ const createInitialCounters = (): Counters => ({
 });
 
 const createInitialMeters = (): MeterSet => ({
-  stability: 85,
+  stability: 100,
   velocity: 55,
-  satisfaction: 70
+  satisfaction: 100
 });
 
 const createInitialState = (): GameState => {

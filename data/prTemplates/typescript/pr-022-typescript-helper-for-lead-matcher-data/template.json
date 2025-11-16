@@ -1,37 +1,36 @@
 {
-  "templateId": "pr-046-python-helper-for-experiment-tracker-data",
-  "title": "Python helper for Experiment Tracker data",
-  "author": "Ivy P.",
+  "templateId": "pr-022-typescript-helper-for-lead-matcher-data",
+  "title": "TypeScript helper for Lead Matcher data",
+  "author": "Malik O.",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",
-    "cleanup",
-    "hotfix",
+    "ops",
     "security"
   ],
   "importance": "high",
   "files": [
     {
-      "filename": "analytics/experiment-tracker.ts",
+      "filename": "analytics/lead-matcher.ts",
       "language": "typescript",
       "lines": [
         {
-          "lineNumber": 75,
-          "content": "  export async function fetchExperimentTracker(db: DatabaseClient, orgId: string) {",
+          "lineNumber": 50,
+          "content": "  export async function fetchLeadMatcher(db: DatabaseClient, orgId: string) {",
           "isNew": true
         },
         {
-          "lineNumber": 76,
-          "content": "    const sql = `SELECT * FROM experiment_tracker WHERE org_id = '${orgId}'`;",
+          "lineNumber": 51,
+          "content": "    const sql = `SELECT * FROM lead_matcher WHERE org_id = '${orgId}'`;",
           "isNew": true
         },
         {
-          "lineNumber": 77,
+          "lineNumber": 52,
           "content": "    return db.raw(sql);",
           "isNew": true
         },
         {
-          "lineNumber": 78,
+          "lineNumber": 53,
           "content": "  }",
           "isNew": true
         }
@@ -42,7 +41,7 @@
     {
       "kind": "security",
       "lineNumbers": [
-        76
+        51
       ],
       "severity": "critical",
       "description": "Builds SQL via string interpolation and allows injection."

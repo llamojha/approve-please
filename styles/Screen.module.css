@@ -86,12 +86,23 @@
   border-radius: 0.75rem;
   padding: 1rem;
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 110px;
+  justify-content: center;
+  text-align: center;
 }
 
 .summaryGrid small {
   text-transform: uppercase;
   color: var(--muted);
   letter-spacing: 0.1em;
+}
+
+.summaryGrid h2 {
+  margin: 0;
+  font-size: 2rem;
 }
 
 .gameOverTag {

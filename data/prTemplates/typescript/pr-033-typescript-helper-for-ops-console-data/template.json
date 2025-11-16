@@ -1,7 +1,7 @@
 {
-  "templateId": "pr-072-python-helper-for-content-moderation-data",
-  "title": "Python helper for Content Moderation data",
-  "author": "Ravi M.",
+  "templateId": "pr-033-typescript-helper-for-ops-console-data",
+  "title": "TypeScript helper for Ops Console data",
+  "author": "Nina L.",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",
@@ -11,26 +11,26 @@
   "importance": "high",
   "files": [
     {
-      "filename": "analytics/content-moderation.ts",
+      "filename": "analytics/ops-console.ts",
       "language": "typescript",
       "lines": [
         {
-          "lineNumber": 55,
-          "content": "  export async function fetchContentModeration(db: DatabaseClient, orgId: string) {",
+          "lineNumber": 80,
+          "content": "  export async function fetchOpsConsole(db: DatabaseClient, orgId: string) {",
           "isNew": true
         },
         {
-          "lineNumber": 56,
-          "content": "    const sql = `SELECT * FROM content_moderation WHERE org_id = '${orgId}'`;",
+          "lineNumber": 81,
+          "content": "    const sql = `SELECT * FROM ops_console WHERE org_id = '${orgId}'`;",
           "isNew": true
         },
         {
-          "lineNumber": 57,
+          "lineNumber": 82,
           "content": "    return db.raw(sql);",
           "isNew": true
         },
         {
-          "lineNumber": 58,
+          "lineNumber": 83,
           "content": "  }",
           "isNew": true
         }
@@ -41,7 +41,7 @@
     {
       "kind": "security",
       "lineNumbers": [
-        56
+        81
       ],
       "severity": "critical",
       "description": "Builds SQL via string interpolation and allows injection."

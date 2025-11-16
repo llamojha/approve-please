@@ -1,8 +1,8 @@
 {
-  "templateId": "pr-034-python-job-wrapper-for-policy-center",
-  "title": "Python job wrapper for Policy Center",
+  "templateId": "pr-034-typescript-job-wrapper-for-policy-center",
+  "title": "TypeScript job wrapper for Policy Center",
   "author": "Nina L.",
-  "description": "Adds a thin Python helper that normalizes policy center job payloads.",
+  "description": "Adds a thin TypeScript helper that normalizes policy center job payloads.",
   "tags": [
     "feature",
     "infra",

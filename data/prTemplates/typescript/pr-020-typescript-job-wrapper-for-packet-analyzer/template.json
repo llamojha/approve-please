@@ -1,122 +1,121 @@
 {
-  "templateId": "pr-050-python-job-wrapper-for-delta-sync",
-  "title": "Python job wrapper for Delta Sync",
-  "author": "Nina L.",
-  "description": "Adds a thin Python helper that normalizes delta sync job payloads.",
+  "templateId": "pr-020-typescript-job-wrapper-for-packet-analyzer",
+  "title": "TypeScript job wrapper for Packet Analyzer",
+  "author": "Simone B.",
+  "description": "Adds a thin TypeScript helper that normalizes packet analyzer job payloads.",
   "tags": [
-    "bugfix",
     "feature",
-    "infra",
-    "tests"
+    "hotfix",
+    "infra"
   ],
   "importance": "low",
   "files": [
     {
-      "filename": "jobs/delta-sync.ts",
+      "filename": "jobs/packet-analyzer.ts",
       "language": "typescript",
       "lines": [
         {
-          "lineNumber": 45,
-          "content": "  type DeltaSyncPayload = Record<string, string | undefined>;",
+          "lineNumber": 15,
+          "content": "  type PacketAnalyzerPayload = Record<string, string | undefined>;",
           "isNew": true
         },
         {
-          "lineNumber": 46,
+          "lineNumber": 16,
           "content": "  ",
           "isNew": true
         },
         {
-          "lineNumber": 47,
-          "content": "  export class DeltaSyncJob {",
+          "lineNumber": 17,
+          "content": "  export class PacketAnalyzerJob {",
           "isNew": true
         },
         {
-          "lineNumber": 48,
-          "content": "    private payload: DeltaSyncPayload;",
+          "lineNumber": 18,
+          "content": "    private payload: PacketAnalyzerPayload;",
           "isNew": true
         },
         {
-          "lineNumber": 49,
+          "lineNumber": 19,
           "content": "    private window: string;",
           "isNew": true
         },
         {
-          "lineNumber": 50,
+          "lineNumber": 20,
           "content": "    private priority: string;",
           "isNew": true
         },
         {
-          "lineNumber": 51,
+          "lineNumber": 21,
           "content": "  ",
           "isNew": true
         },
         {
-          "lineNumber": 52,
-          "content": "    constructor(payload: DeltaSyncPayload) {",
+          "lineNumber": 22,
+          "content": "    constructor(payload: PacketAnalyzerPayload) {",
           "isNew": true
         },
         {
-          "lineNumber": 53,
+          "lineNumber": 23,
           "content": "      this.payload = payload;",
           "isNew": true
         },
         {
-          "lineNumber": 54,
+          "lineNumber": 24,
           "content": "      this.window = payload.window ?? 'same-day';",
           "isNew": true
         },
         {
-          "lineNumber": 55,
+          "lineNumber": 25,
           "content": "      this.priority = payload.priority ?? 'normal';",
           "isNew": true
         },
         {
-          "lineNumber": 56,
+          "lineNumber": 26,
           "content": "    }",
           "isNew": true
         },
         {
-          "lineNumber": 57,
+          "lineNumber": 27,
           "content": "  ",
           "isNew": true
         },
         {
-          "lineNumber": 58,
+          "lineNumber": 28,
           "content": "    toJSON() {",
           "isNew": true
         },
         {
-          "lineNumber": 59,
+          "lineNumber": 29,
           "content": "      return {",
           "isNew": true
         },
         {
-          "lineNumber": 60,
+          "lineNumber": 30,
           "content": "        payload: this.payload,",
           "isNew": true
         },
         {
-          "lineNumber": 61,
+          "lineNumber": 31,
           "content": "        window: this.window,",
           "isNew": true
         },
         {
-          "lineNumber": 62,
+          "lineNumber": 32,
           "content": "        priority: this.priority",
           "isNew": true
         },
         {
-          "lineNumber": 63,
+          "lineNumber": 33,
           "content": "      };",
           "isNew": true
         },
         {
-          "lineNumber": 64,
+          "lineNumber": 34,
           "content": "    }",
           "isNew": true
         },
         {
-          "lineNumber": 65,
+          "lineNumber": 35,
           "content": "  }",
           "isNew": true
         }

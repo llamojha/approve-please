@@ -1,36 +1,36 @@
 {
-  "templateId": "pr-022-python-helper-for-lead-matcher-data",
-  "title": "Python helper for Lead Matcher data",
-  "author": "Malik O.",
+  "templateId": "pr-072-typescript-helper-for-content-moderation-data",
+  "title": "TypeScript helper for Content Moderation data",
+  "author": "Ravi M.",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",
-    "ops",
+    "cleanup",
     "security"
   ],
   "importance": "high",
   "files": [
     {
-      "filename": "analytics/lead-matcher.ts",
+      "filename": "analytics/content-moderation.ts",
       "language": "typescript",
       "lines": [
         {
-          "lineNumber": 50,
-          "content": "  export async function fetchLeadMatcher(db: DatabaseClient, orgId: string) {",
+          "lineNumber": 55,
+          "content": "  export async function fetchContentModeration(db: DatabaseClient, orgId: string) {",
           "isNew": true
         },
         {
-          "lineNumber": 51,
-          "content": "    const sql = `SELECT * FROM lead_matcher WHERE org_id = '${orgId}'`;",
+          "lineNumber": 56,
+          "content": "    const sql = `SELECT * FROM content_moderation WHERE org_id = '${orgId}'`;",
           "isNew": true
         },
         {
-          "lineNumber": 52,
+          "lineNumber": 57,
           "content": "    return db.raw(sql);",
           "isNew": true
         },
         {
-          "lineNumber": 53,
+          "lineNumber": 58,
           "content": "  }",
           "isNew": true
         }
@@ -41,7 +41,7 @@
     {
       "kind": "security",
       "lineNumbers": [
-        51
+        56
       ],
       "severity": "critical",
       "description": "Builds SQL via string interpolation and allows injection."

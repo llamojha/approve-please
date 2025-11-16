@@ -1,36 +1,37 @@
 {
-  "templateId": "pr-033-python-helper-for-ops-console-data",
-  "title": "Python helper for Ops Console data",
-  "author": "Nina L.",
+  "templateId": "pr-046-typescript-helper-for-experiment-tracker-data",
+  "title": "TypeScript helper for Experiment Tracker data",
+  "author": "Ivy P.",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",
     "cleanup",
+    "hotfix",
     "security"
   ],
   "importance": "high",
   "files": [
     {
-      "filename": "analytics/ops-console.ts",
+      "filename": "analytics/experiment-tracker.ts",
       "language": "typescript",
       "lines": [
         {
-          "lineNumber": 80,
-          "content": "  export async function fetchOpsConsole(db: DatabaseClient, orgId: string) {",
+          "lineNumber": 75,
+          "content": "  export async function fetchExperimentTracker(db: DatabaseClient, orgId: string) {",
           "isNew": true
         },
         {
-          "lineNumber": 81,
-          "content": "    const sql = `SELECT * FROM ops_console WHERE org_id = '${orgId}'`;",
+          "lineNumber": 76,
+          "content": "    const sql = `SELECT * FROM experiment_tracker WHERE org_id = '${orgId}'`;",
           "isNew": true
         },
         {
-          "lineNumber": 82,
+          "lineNumber": 77,
           "content": "    return db.raw(sql);",
           "isNew": true
         },
         {
-          "lineNumber": 83,
+          "lineNumber": 78,
           "content": "  }",
           "isNew": true
         }
@@ -41,7 +42,7 @@
     {
       "kind": "security",
       "lineNumbers": [
-        81
+        76
       ],
       "severity": "critical",
       "description": "Builds SQL via string interpolation and allows injection."

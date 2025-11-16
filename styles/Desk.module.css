@@ -358,10 +358,12 @@
 
 .lineContentNew {
   color: var(--success);
+  white-space: pre;
 }
 
 .lineContentOld {
   color: var(--danger);
+  white-space: pre;
 }
 
 .briefingQuote {
@@ -403,12 +405,22 @@
   border-radius: 0.75rem;
   padding: 0.75rem;
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 90px;
+  justify-content: center;
 }
 
 .statsGrid small {
   text-transform: uppercase;
   color: var(--muted);
   letter-spacing: 0.1em;
+}
+
+.statsGrid strong {
+  font-size: 1.8rem;
+  text-align: center;
 }
 
 .meterStack {

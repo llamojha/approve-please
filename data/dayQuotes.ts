@@ -24,7 +24,17 @@ export const dayQuotes: DayQuote[] = [
   { speaker: 'Milo (Observability)', role: 'Observability', text: 'Watch for logging changes that could flood Grafana. It happened before.' },
   { speaker: 'Hazel (Backend)', role: 'Backend Lead', text: 'Logic bugs cost us last week. Compare, don’t assign.' },
   { speaker: 'Aria (Growth)', role: 'Growth PM', text: 'Feature rollout is hot. Approve the safe stuff quickly.' },
-  { speaker: 'Jonah (Intern)', role: 'Summer Intern', text: 'I triple-checked my PR… probably. Please look anyway.' }
+  { speaker: 'Jonah (Intern)', role: 'Summer Intern', text: 'I triple-checked my PR… probably. Please look anyway.' },
+  { speaker: 'Mina (Automation)', role: 'Build Engineer', text: 'Remember when CI exploded because someone rm -rf’d /? Let’s not do sequels.' },
+  { speaker: 'Sam (Designer)', role: 'Design', text: 'If you see lorem ipsum in prod UI again, just pretend you didn’t hear it from me.' },
+  { speaker: 'Leo (Support Bot)', role: 'Chatbot', text: '01001000 01100101 01101100 01110000. Translation: please add tests.' },
+  { speaker: 'Casey (Release Ops)', role: 'Ops', text: 'I named the servers after Star Trek captains so we’d respect them. It’s not working.' },
+  { speaker: 'Dani (QA)', role: 'QA Lead', text: 'Flaky test? Quarantine it. Flaky PM? I can’t help you there.' },
+  { speaker: 'Rowan (Docs)', role: 'Tech Writer', text: 'Docs PRs get lonely. Approve them and they’ll tell you secrets.' },
+  { speaker: 'Ivy (Security)', role: 'Security', text: 'If the token starts with “lol-”, request changes immediately.' },
+  { speaker: 'Zeke (Infra)', role: 'Infrastructure', text: 'The queue looks small now. That’s how horror movies start.' },
+  { speaker: 'Alma (Data Science)', role: 'Data Scientist', text: 'Shipping bugs is like feeding gremlins after midnight. Please don’t.' },
+  { speaker: 'Poppy (Finance)', role: 'Finance Ops', text: 'Accounting says “thanks” when you block overflows. That’s basically profit sharing.' }
 ];
 
 export const getRandomDayQuote = (): DayQuote => {

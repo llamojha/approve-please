@@ -10,7 +10,7 @@ const MeterBar = ({ label, value }: MeterBarProps) => {
     <div className={styles.meterBar}>
       <div className={styles.meterHeader}>
         <span>{label}</span>
-        <strong>{value}</strong>
+        <strong>{value}%</strong>
       </div>
       <div className={styles.meterTrack}>
         <span style={{ width: `${value}%` }} />

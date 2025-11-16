@@ -5,13 +5,7 @@ export const dayConfigs: DayConfig[] = [
     day: 1,
     codename: 'Orientation',
     briefing: '',
-    rules: [
-      {
-        id: 'day1-logic',
-        description: 'No obvious logic errors. Double-check comparisons and off-by-one errors.',
-        appliesTo: ['logic']
-      }
-    ],
+    rules: [],
     spawn: {
       pool: ['pr-003-add-usage-analytics-panel', 'pr-012-trigger-predicate-for-audit-pipeline', 'logic-boundary-check', 'pr-013-queue-warranty-center-jobs'],
       waves: [
@@ -32,18 +26,7 @@ export const dayConfigs: DayConfig[] = [
     day: 2,
     codename: 'Testing Mandate',
     briefing: 'Mgmt wants test coverage up. Reject PRs that skip tests or leave TODOs.',
-    rules: [
-      {
-        id: 'day1-logic',
-        description: 'No obvious logic errors.',
-        appliesTo: ['logic']
-      },
-      {
-        id: 'day2-tests',
-        description: 'Every PR must touch tests or explicitly justify why not.',
-        appliesTo: 'any'
-      }
-    ],
+    rules: [],
     spawn: {
       pool: ['logic-boundary-check', 'tests-mandatory', 'style-sloppy', 'clean-hotfix'],
       waves: [
@@ -60,23 +43,7 @@ export const dayConfigs: DayConfig[] = [
     day: 3,
     codename: 'Security Crackdown',
     briefing: 'SREs are on edge after that SQL incident. Security patterns are priority #1.',
-    rules: [
-      {
-        id: 'day1-logic',
-        description: 'No obvious logic errors.',
-        appliesTo: ['logic']
-      },
-      {
-        id: 'day2-tests',
-        description: 'Every PR must touch tests or justify why not.',
-        appliesTo: 'any'
-      },
-      {
-        id: 'day3-security',
-        description: 'Reject insecure patterns (raw SQL, unchecked auth, insecure tokens).',
-        appliesTo: ['security']
-      }
-    ],
+    rules: [],
     spawn: {
       pool: ['security-sql', 'performance-loop', 'logic-session-expiry', 'clean-hotfix', 'clean-refactor'],
       waves: [
