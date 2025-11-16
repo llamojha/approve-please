@@ -11,3 +11,7 @@
 - Expand day structure into a Monday–Friday calendar with themed modifiers per day, plus an optional "overtime" phase after 17:00.
 - Explore additional narrative hooks such as Slack-style banter or branching events triggered by very happy/unhappy engineers.
 - Consider unlockable review tools (lint bot, diff filters) that cost budget but reduce workload, adding another strategic lever.
+- Add PR arrival UX polish (e.g., swipe-in animation, motion blur, sound cue) so new requests feel like they’re physically sliding onto the desk instead of popping in.
+- Introduce a queue-aging system where leaving PRs open drains Velocity/Satisfaction over time, with higher-priority PRs decaying meters faster to push timely reviews.
+- Support carrying over unfinished PRs between days so anything left in the queue at 17:00 reappears during the next morning briefing instead of resetting.
+- Add a visible "Restart Game" button on the summary/landing screens so players can quickly begin a fresh run without reloading the page.
