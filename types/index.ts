@@ -19,6 +19,11 @@ export interface PRFileDiff {
   lines: PRLine[];
 }
 
+export interface LineExcerpt {
+  lineNumber: number;
+  content: string;
+}
+
 export interface PullRequest {
   id: string;
   templateId: string;
@@ -30,6 +35,25 @@ export interface PullRequest {
   bugPatterns: BugPattern[];
   importance: 'low' | 'normal' | 'high';
   estimatedReviewSeconds: number;
+}
+
+export interface ProdIncident {
+  prId: string;
+  title: string;
+  author: string;
+  bugKind: BugKind;
+  severity: BugPattern['severity'];
+  lines: LineExcerpt[];
+  description?: string;
+}
+
+export interface FalsePositiveRecord {
+  prId: string;
+  title: string;
+  author: string;
+  claimedKind: BugKind;
+  selectedLines: LineExcerpt[];
+  actualBugKinds: BugKind[];
 }
 
 export interface PullRequestTemplate extends Omit<PullRequest, 'id' | 'estimatedReviewSeconds'> {}

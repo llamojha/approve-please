@@ -128,7 +128,7 @@ const WorkScreen = () => {
             mood={activeConfig.mood}
             dayQuote={dayQuote}
           />
-          <StatsPanel counters={counters} meters={meters} queue={queue} />
+          <StatsPanel counters={counters} />
           <AccessibilityPanel />
         </div>
       </div>

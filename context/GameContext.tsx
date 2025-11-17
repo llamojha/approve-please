@@ -14,12 +14,15 @@ import {
   Counters,
   DayConfig,
   DaySummary,
+  DayQuote,
+  FalsePositiveRecord,
   GamePhase,
   LanguagePreference,
+  LineExcerpt,
   MeterSet,
+  ProdIncident,
   PullRequest,
-  Rule,
-  DayQuote
+  Rule
 } from '../types';
 import { clamp, calculateQueuePressure } from '../utils/helpers';
 
@@ -37,6 +40,8 @@ interface GameState {
   activeConfig: DayConfig;
   gameOverReason?: string;
   dayQuote: DayQuote;
+  prodIncidents: ProdIncident[];
+  falsePositiveRecords: FalsePositiveRecord[];
 }
 
 export interface DecisionResult {
@@ -75,7 +80,9 @@ type GameAction =
   | { type: 'PUSH_SUMMARY'; summary: DaySummary }
   | { type: 'SET_GAME_OVER'; reason: string }
   | { type: 'RESET_GAME' }
-  | { type: 'SET_LANGUAGE_PREFERENCE'; preference: LanguagePreference };
+  | { type: 'SET_LANGUAGE_PREFERENCE'; preference: LanguagePreference }
+  | { type: 'LOG_PROD_INCIDENT'; incident: ProdIncident }
+  | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord };
 
 const createInitialCounters = (): Counters => ({
   bugsToProd: 0,
@@ -106,7 +113,9 @@ const createInitialState = (): GameState => {
     history: [],
     activeConfig: config,
     gameOverReason: undefined,
-    dayQuote: getRandomDayQuote()
+    dayQuote: getRandomDayQuote(),
+    prodIncidents: [],
+    falsePositiveRecords: []
   };
 };
 
@@ -158,6 +167,22 @@ const applyMeterDelta = (base: MeterSet, delta: Partial<MeterSet>): MeterSet => 
     result[key] = clamp(base[key] + (delta[key] ?? 0), MIN_METER_VALUE, MAX_METER_VALUE);
   });
   return result;
+};
+
+const extractLineExcerpts = (files: PullRequest['files'], lineNumbers: number[]): LineExcerpt[] => {
+  if (!lineNumbers.length) {
+    return [];
+  }
+  const targets = new Set(lineNumbers);
+  const excerpts: LineExcerpt[] = [];
+  files.forEach((file) => {
+    file.lines.forEach((line) => {
+      if (targets.has(line.lineNumber)) {
+        excerpts.push({ lineNumber: line.lineNumber, content: line.content.trimEnd() });
+      }
+    });
+  });
+  return excerpts;
 };
 
 const maybeGameOver = (state: GameState): GameState => {
@@ -228,7 +253,9 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
         counters: createInitialCounters(),
         activeConfig: action.config,
         gameOverReason: undefined,
-        dayQuote: getRandomDayQuote()
+        dayQuote: getRandomDayQuote(),
+        prodIncidents: [],
+        falsePositiveRecords: []
       };
     }
     case 'PUSH_SUMMARY': {
@@ -248,6 +275,12 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
     }
     case 'SET_LANGUAGE_PREFERENCE': {
       return { ...state, languagePreference: action.preference };
+    }
+    case 'LOG_PROD_INCIDENT': {
+      return { ...state, prodIncidents: [...state.prodIncidents, action.incident] };
+    }
+    case 'LOG_FALSE_POSITIVE': {
+      return { ...state, falsePositiveRecords: [...state.falsePositiveRecords, action.record] };
     }
     default:
       return state;
@@ -292,6 +325,20 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     const meterDelta: Partial<MeterSet> = { velocity: hasBugs ? 2 : 4 };
 
     if (hasBugs) {
+      current.bugPatterns.forEach((pattern) => {
+        dispatch({
+          type: 'LOG_PROD_INCIDENT',
+          incident: {
+            prId: current.id,
+            title: current.title,
+            author: current.author,
+            bugKind: pattern.kind,
+            severity: pattern.severity,
+            lines: extractLineExcerpts(current.files, pattern.lineNumbers),
+            description: pattern.description
+          }
+        });
+      });
       const score = severityScore(current.bugPatterns);
       counterDelta.bugsToProd = current.bugPatterns.length;
       meterDelta.stability = -score;
@@ -348,6 +395,17 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
       counterDelta.falsePositives = 1;
       meterDelta.satisfaction = -4;
+      dispatch({
+        type: 'LOG_FALSE_POSITIVE',
+        record: {
+          prId: current.id,
+          title: current.title,
+          author: current.author,
+          claimedKind: bugKind,
+          selectedLines: extractLineExcerpts(current.files, selectedLines),
+          actualBugKinds: current.bugPatterns.map((pattern) => pattern.kind)
+        }
+      });
       dispatch({
         type: 'APPLY_DECISION',
         processedId: current.id,

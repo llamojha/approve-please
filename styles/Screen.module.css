@@ -120,3 +120,90 @@
   margin-bottom: 1rem;
   font-weight: 600;
 }
+
+.incidentSection {
+  margin-top: 2.5rem;
+}
+
+.incidentSection h3 {
+  margin-bottom: 0.25rem;
+}
+
+.incidentList {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.incidentItem {
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--bg-panel-light);
+  padding: 1rem;
+}
+
+.incidentMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.incidentSubline {
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.badge {
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.severityMinor {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.severityMajor {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.severityCritical {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+}
+
+.badgeNeutral {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+}
+
+.incidentNote {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+.lineList {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.9rem;
+}
+
+.lineList code {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
+}

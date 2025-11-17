@@ -1,18 +1,12 @@
 import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
-import MeterBar from './MeterBar';
-import { Counters, MeterSet, PullRequest } from '../../types';
-import { calculateQueueChevronCount } from '../../utils/helpers';
+import { Counters } from '../../types';
 
 interface StatsPanelProps {
   counters: Counters;
-  meters: MeterSet;
-  queue: PullRequest[];
 }
 
-const StatsPanel = ({ counters, meters, queue }: StatsPanelProps) => {
-  const chevronCount = calculateQueueChevronCount(queue);
-
+const StatsPanel = ({ counters }: StatsPanelProps) => {
   return (
     <Panel title="Metrics">
       <div className={styles.statsGrid}>
@@ -36,11 +30,6 @@ const StatsPanel = ({ counters, meters, queue }: StatsPanelProps) => {
           <small>False Positives</small>
           <strong>{counters.falsePositives}</strong>
         </div>
-      </div>
-      <div className={styles.meterStack}>
-        <MeterBar label="Stability" value={meters.stability} chevronCount={0} />
-        <MeterBar label="Velocity" value={meters.velocity} chevronCount={chevronCount} />
-        <MeterBar label="Satisfaction" value={meters.satisfaction} chevronCount={chevronCount} />
       </div>
     </Panel>
   );

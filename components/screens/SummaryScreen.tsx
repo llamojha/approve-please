@@ -4,7 +4,7 @@ import { formatMeterValue } from '../../utils/helpers';
 
 const SummaryScreen = () => {
   const {
-    state: { currentDay, counters, meters },
+    state: { currentDay, counters, meters, prodIncidents, falsePositiveRecords },
     actions: { advanceToNextDay, restartGame }
   } = useGameState();
 
@@ -61,6 +61,66 @@ const SummaryScreen = () => {
             Restart Game
           </button>
         </div>
+        {prodIncidents.length > 0 && (
+          <section className={styles.incidentSection}>
+            <h3>Deployed Bugs</h3>
+            <p className="muted">These PRs shipped issues. Study the culprit lines before tomorrow.</p>
+            <ul className={styles.incidentList}>
+              {prodIncidents.map((incident, index) => (
+                <li key={`${incident.prId}-${incident.bugKind}-${index}`} className={styles.incidentItem}>
+                  <div className={styles.incidentMeta}>
+                    <div>
+                      <strong>{incident.title}</strong>
+                      <div className={styles.incidentSubline}>by {incident.author} · {incident.bugKind} bug</div>
+                    </div>
+                    <span className={`${styles.badge} ${styles[`severity${incident.severity.charAt(0).toUpperCase()}${incident.severity.slice(1)}`]}`}>
+                      {incident.severity}
+                    </span>
+                  </div>
+                  {incident.description && <p className={styles.incidentNote}>{incident.description}</p>}
+                  {incident.lines.length > 0 && (
+                    <ul className={styles.lineList}>
+                      {incident.lines.map((line) => (
+                        <li key={`${incident.prId}-${line.lineNumber}`}>L{line.lineNumber}: <code>{line.content || '…'}</code></li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {falsePositiveRecords.length > 0 && (
+          <section className={styles.incidentSection}>
+            <h3>False Positives</h3>
+            <p className="muted">Calls that slowed velocity. Compare your suspicion to what the PR actually contained.</p>
+            <ul className={styles.incidentList}>
+              {falsePositiveRecords.map((record, index) => (
+                <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
+                  <div className={styles.incidentMeta}>
+                    <div>
+                      <strong>{record.title}</strong>
+                      <div className={styles.incidentSubline}>by {record.author}</div>
+                    </div>
+                    <span className={`${styles.badge} ${styles.badgeNeutral}`}>
+                      {record.claimedKind} suspicion
+                    </span>
+                  </div>
+                  <p className={styles.incidentNote}>
+                    You flagged a {record.claimedKind} issue. Actual bugs: {record.actualBugKinds.length > 0 ? record.actualBugKinds.join(', ') : 'none'}.
+                  </p>
+                  {record.selectedLines.length > 0 && (
+                    <ul className={styles.lineList}>
+                      {record.selectedLines.map((line) => (
+                        <li key={`${record.prId}-fp-${line.lineNumber}`}>L{line.lineNumber}: <code>{line.content || '…'}</code></li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </section>
     </main>
   );
