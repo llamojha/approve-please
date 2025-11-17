@@ -125,7 +125,7 @@ const WorkScreen = () => {
             rules={rules}
             day={currentDay}
             codename={activeConfig.codename}
-            mood={activeConfig.mood}
+            mantra={activeConfig.mantra}
             dayQuote={dayQuote}
           />
           <StatsPanel counters={counters} />

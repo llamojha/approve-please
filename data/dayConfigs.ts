@@ -4,7 +4,7 @@ export const dayConfigs: DayConfig[] = [
   {
     day: 1,
     codename: 'Orientation',
-    mood: 'Caffeinated Calm',
+    mantra: 'Caffeinated Calm',
     briefing: '',
     rules: [],
     spawn: {
@@ -26,7 +26,7 @@ export const dayConfigs: DayConfig[] = [
   {
     day: 2,
     codename: 'Testing Mandate',
-    mood: 'Coverage Crunch',
+    mantra: 'Coverage Crunch',
     briefing: 'Mgmt wants test coverage up. Reject PRs that skip tests or leave TODOs.',
     rules: [],
     spawn: {
@@ -44,7 +44,7 @@ export const dayConfigs: DayConfig[] = [
   {
     day: 3,
     codename: 'Security Crackdown',
-    mood: 'Lockdown Vigilance',
+    mantra: 'Lockdown Vigilance',
     briefing: 'SREs are on edge after that SQL incident. Security patterns are priority #1.',
     rules: [],
     spawn: {

@@ -6,12 +6,12 @@ interface RulebookPanelProps {
   rules: Rule[];
   day: number;
   codename: string;
-  mood: string;
+  mantra: string;
   dayQuote: DayQuote | null;
 }
 
-const RulebookPanel = ({ rules, day, codename, dayQuote, mood }: RulebookPanelProps) => {
-  const headingDescriptor = mood || codename || 'Operations';
+const RulebookPanel = ({ rules, day, codename, dayQuote, mantra }: RulebookPanelProps) => {
+  const headingDescriptor = mantra || codename || 'Operations';
 
   return (
     <Panel title={`Day ${day} – ${headingDescriptor}`}>

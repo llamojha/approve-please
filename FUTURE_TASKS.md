@@ -1,7 +1,5 @@
 # Future Tasks
 
-- Surface deploy post-mortems that explain which lines in an approved PR caused bugs, teaching players what to watch for next time.
-
 - Expand day structure into a Monday–Friday calendar with themed modifiers per day, plus an optional "overtime" phase after 17:00.
 
 - Build a reusable engineer roster (persona traits, tone, quote banks) and wire PR authors/briefings to those personas so characters feel consistent across the game.
@@ -11,3 +9,56 @@
 - Implement a high-score / leaderboard view that persists top runs (stability, velocity, incidents, streaks) for replayability.
 
 - Explore additional narrative hooks such as Slack-style banter or branching events triggered by very happy/unhappy engineers.
+
+## Daily Mantras
+
+- "Security sweeps today—slow your scroll, catch every leak."
+- "If it smells off, it's off—reject and move on."
+- "Audit day: if it's not tested, it's not approved."
+- "Green checks over green lights—tests first, throughput second."
+- "Friday deploy rush—move fast, but don't break the brand."
+- "Chaos sprint mode: ship clean, skip vanity."
+- "Incident fallout—no risks, no spin, only safe releases."
+- "Yesterday burned us—today, nothing sketchy leaves this desk."
+- "Compliance spotlight on—gray areas are now red flags."
+- "If a lawyer might squint, you should reject."
+- "Performance panic—every millisecond is sacred."
+- "Fewer words, faster world—trim every nonessential."
+- "Ops on edge—avoid complexity, bless the simple path."
+- "Today we chase numbers—say yes to bold but safe."
+- "Engagement day—back the risky idea, not the boring one."
+- "Growth storm—opt in to experiments, opt out of fear."
+- "Brand trust day—protect feelings before funnels."
+- "Real people read this—choose kindness over cleverness."
+- "Tone check: one rude line can sink the whole release."
+- "Accessibility focus—if everyone can't use it, no one ships it."
+- "Security breach aftermath—assume attackers read everything."
+- "Paranoia is policy now: verify, re-verify, then approve."
+- "Data hunger day—collect less, justify more."
+- "Privacy spotlight—if you can't defend it, don't approve it."
+- "Legal is watching—no promises you can't legally keep."
+- "Regulation wave—when in doubt, over-disclose."
+- "Exec review day—messy PRs become your problem, not theirs."
+- "Keep it polished—typos today read like incompetence tomorrow."
+- "Launch eve—stability beats sparkle."
+- "Big release day—no TODOs survive the desk."
+- "Error budget bleeding—slow approvals, save the system."
+- "Rate limits tight—favor small, low-risk changes."
+- "Outage hangover—ship only what can't break twice."
+- "Cost-cutting sprint—performance and efficiency or it doesn't pass."
+- "Infra stress test—heavy features wait, lean features go."
+- "On-call empathy day—don't approve anything you'd hate to debug at 3am."
+- "Vendor chaos—trust nothing that talks to third parties."
+- "Shadow IT alert—unowned code is unapproved code."
+- "Phishing scare—scrutinize every link like it bites."
+- "Security theater day—if it looks insecure, it is."
+- "Throughput challenge—approve fast, but never blind."
+- "Speed trial—first instinct rules, second glance saves."
+- "Leniency day—assume good intent, nudge instead of nuke."
+- "Hardliner day—one serious flaw is an instant no."
+- "Refactor focus—reward cleanup, punish cruft."
+- "Docs day—if it's not explained, it's not approved."
+- "Metrics day—approve what you can measure."
+- "Experiments open—A/B tests get priority in the queue."
+- "User trust fragile—no dark patterns on your watch."
+- "Remember: you're the last gate—ship what you'd sign your name to."

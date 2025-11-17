@@ -7,7 +7,7 @@ const BriefingScreen = () => {
     actions: { startWork }
   } = useGameState();
 
-  const dayDescriptor = activeConfig.mood || activeConfig.codename || 'Operations';
+  const dayDescriptor = activeConfig.mantra || activeConfig.codename || 'Operations';
 
   return (
     <main className={styles.screenShell}>

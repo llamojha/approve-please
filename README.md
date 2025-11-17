@@ -84,6 +84,12 @@ Each **day** is one loop:
 * PR waves spawn based on current time (e.g., busy mid-morning, post-lunch spike).
 * Some events are time-based (e.g., “prod incident” at 11:30 if you shipped a bad PR earlier).
 
+**Daily PR wave rules:**
+
+* Fixed cadence at minutes 0, 60, 180, and 360. The 9:00 wave (minute 0) always delivers exactly two PRs to set the day’s pace.
+* The remaining three waves pull their size from a weighted bag `[1, 1, 2, 2, 2, 3, 3, 4, 5]` so smaller bursts are more common but occasional big spikes happen.
+* Each PR in a wave is randomly drawn from the combined pool of generic templates plus any templates tagged with the player’s chosen language preference, keeping content on-theme even when the deck reshuffles.
+
 ---
 
 ## 5. Pull Requests: Data Model & Bug Patterns

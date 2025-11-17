@@ -87,7 +87,7 @@ export interface ScriptedWave {
 export interface DayConfig {
   day: number;
   codename: string;
-  mood: string;
+  mantra: string;
   briefing: string;
   rules: Rule[];
   spawn: {
