@@ -16,7 +16,7 @@ import MeterHud from '../work/MeterHud';
 
 const WorkScreen = () => {
   const {
-    state: { queue, currentPR, currentTime, counters, meters, rules, activeConfig, currentDay, dayQuote },
+    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote },
     actions: { selectPR, approveCurrentPR, requestChanges }
   } = useGameState();
   useGameClock();
@@ -122,10 +122,8 @@ const WorkScreen = () => {
         </div>
         <div className={styles.rightColumn}>
           <RulebookPanel
-            rules={rules}
             day={currentDay}
-            codename={activeConfig.codename}
-            mantra={activeConfig.mantra}
+            mantra={currentMantra}
             dayQuote={dayQuote}
           />
           <StatsPanel counters={counters} />

@@ -1,11 +1,18 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useGameState } from '../context/GameContext';
 import { prTemplates, PullRequestTemplate } from '../data/prs';
-import { PullRequest, LanguagePreference } from '../types';
+import { PullRequest, LanguagePreference, ScriptedWave } from '../types';
 import { instantiatePullRequest } from '../utils/pr';
 import { getCodeLanguages } from '../utils/language';
 
 const templateMap = new Map(prTemplates.map((template) => [template.templateId, template]));
+const DEFAULT_WAVE_MINUTES = [0, 60, 180, 360];
+const WEIGHTED_WAVE_COUNTS = [1, 1, 2, 2, 2, 3, 3, 4, 5];
+
+const pickWeightedWaveCount = (): number => {
+  const index = Math.floor(Math.random() * WEIGHTED_WAVE_COUNTS.length);
+  return WEIGHTED_WAVE_COUNTS[index];
+};
 
 interface WaveTracker {
   waves: Set<number>;
@@ -13,6 +20,19 @@ interface WaveTracker {
 }
 
 const waveTrackerStore = new Map<number, WaveTracker>();
+const tutorialWaves: Record<number, ScriptedWave[]> = {
+  1: [
+    {
+      atMinute: 0,
+      templateIds: ['pr-000-onboarding-readme-update', 'pr-001-sanitize-readme-api-key'],
+      note: 'Tutorial PRs: clean README approval, then reject exposed API key.'
+    }
+  ]
+};
+
+const getScriptedWavesForDay = (day: number): ScriptedWave[] => {
+  return tutorialWaves[day] ?? [];
+};
 
 const templateMatchesPreference = (
   template: PullRequestTemplate,
@@ -47,7 +67,7 @@ const resetWaveTracker = (day: number): WaveTracker => {
 
 export const usePRSpawner = () => {
   const {
-    state: { phase, currentTime, currentDay, activeConfig, queue, currentPR, languagePreference },
+    state: { phase, currentTime, currentDay, queue, currentPR, languagePreference },
     actions: { enqueuePRs }
   } = useGameState();
 
@@ -55,7 +75,6 @@ export const usePRSpawner = () => {
   const workingPoolRef = useRef<PullRequestTemplate[]>([]);
   const basePoolRef = useRef<PullRequestTemplate[]>([]);
   const spawnCountRef = useRef(0);
-  const lastDynamicSpawnMinuteRef = useRef<number>(-Infinity);
   const trackerResetKeyRef = useRef<string>('');
   const lastHourlyCheckRef = useRef<number>(-1);
 
@@ -79,7 +98,7 @@ export const usePRSpawner = () => {
     return results;
   };
 
-  const spawnSpecific = useCallback(
+const spawnSpecific = useCallback(
     (templateIds: string[], day: number): PullRequest[] => {
       const results: PullRequest[] = [];
       templateIds.forEach((templateId) => {
@@ -110,38 +129,45 @@ export const usePRSpawner = () => {
     basePoolRef.current = basePool;
     workingPoolRef.current = shuffle(basePool);
     spawnCountRef.current = 0;
-    lastDynamicSpawnMinuteRef.current = -Infinity;
     lastHourlyCheckRef.current = -1;
-  }, [activeConfig, currentDay, languagePreference]);
+  }, [currentDay, languagePreference]);
 
   useEffect(() => {
-    const key = `${currentDay}-${activeConfig.codename}`;
+    const key = `${currentDay}`;
     if (trackerResetKeyRef.current === key) {
       return;
     }
     trackerResetKeyRef.current = key;
     trackerRef.current = resetWaveTracker(currentDay);
-  }, [currentDay, activeConfig]);
+  }, [currentDay]);
 
   useEffect(() => {
     if (phase !== 'WORK') {
       return;
     }
 
-    const pending = activeConfig.spawn.waves;
+    const scriptedWaves = getScriptedWavesForDay(currentDay);
     const triggeredWaves = trackerRef.current.waves;
     const triggeredScripted = trackerRef.current.scripted;
-    pending.forEach((wave) => {
-      if (currentTime >= wave.atMinute && !triggeredWaves.has(wave.atMinute)) {
-        triggeredWaves.add(wave.atMinute);
-        const prs = drawBatch(wave.count, currentDay);
+    const shouldSkipDefaultWave = (minute: number): boolean => {
+      return scriptedWaves.some((wave) => wave.atMinute === minute);
+    };
+
+    DEFAULT_WAVE_MINUTES.forEach((minute) => {
+      if (currentTime >= minute && !triggeredWaves.has(minute)) {
+        triggeredWaves.add(minute);
+        if (shouldSkipDefaultWave(minute)) {
+          return;
+        }
+        const count = minute === 0 ? 2 : pickWeightedWaveCount();
+        const prs = drawBatch(count, currentDay);
         if (prs.length > 0) {
           enqueuePRs(prs);
         }
       }
     });
 
-    activeConfig.spawn.scriptedWaves?.forEach((wave, index) => {
+    scriptedWaves.forEach((wave, index) => {
       const key = `${wave.atMinute}-${index}`;
       if (currentTime >= wave.atMinute && !triggeredScripted.has(key)) {
         triggeredScripted.add(key);
@@ -151,23 +177,6 @@ export const usePRSpawner = () => {
         }
       }
     });
-
-    const targetQueueSeconds = activeConfig.spawn.targetQueueSeconds;
-    if (targetQueueSeconds) {
-      const backlogSeconds =
-        (currentPR?.estimatedReviewSeconds ?? 0) +
-        queue.reduce((total, pr) => total + (pr.estimatedReviewSeconds ?? 0), 0);
-      if (backlogSeconds < targetQueueSeconds) {
-        const cadence = activeConfig.spawn.dynamicCadenceMinutes ?? 45;
-        if (currentTime - lastDynamicSpawnMinuteRef.current >= cadence) {
-          const prs = drawBatch(1, currentDay);
-          if (prs.length > 0) {
-            enqueuePRs(prs);
-            lastDynamicSpawnMinuteRef.current = currentTime;
-          }
-        }
-      }
-    }
 
     const currentHour = Math.floor(currentTime / 60);
     const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
@@ -181,7 +190,7 @@ export const usePRSpawner = () => {
         }
       }
     }
-  }, [phase, currentTime, activeConfig, currentDay, enqueuePRs, queue, currentPR, spawnSpecific]);
+  }, [phase, currentTime, currentDay, enqueuePRs, queue, currentPR, spawnSpecific]);
 };
 
 const shuffle = (templates: PullRequestTemplate[]): PullRequestTemplate[] => {

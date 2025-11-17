@@ -7,12 +7,11 @@ import {
   QUEUE_AGING_MIN_DRAIN,
   QUEUE_AGING_MAX_DRAIN
 } from '../constants/game';
-import { getDayConfig } from '../data/dayConfigs';
+import { getDayMantra } from '../data/dayMantras';
 import { getRandomDayQuote } from '../data/dayQuotes';
 import {
   BugKind,
   Counters,
-  DayConfig,
   DaySummary,
   DayQuote,
   FalsePositiveRecord,
@@ -21,8 +20,7 @@ import {
   LineExcerpt,
   MeterSet,
   ProdIncident,
-  PullRequest,
-  Rule
+  PullRequest
 } from '../types';
 import { clamp, calculateQueuePressure } from '../utils/helpers';
 
@@ -33,11 +31,10 @@ interface GameState {
   currentTime: number;
   queue: PullRequest[];
   currentPR: PullRequest | null;
-  rules: Rule[];
   meters: MeterSet;
   counters: Counters;
   history: DaySummary[];
-  activeConfig: DayConfig;
+  currentMantra: string;
   gameOverReason?: string;
   dayQuote: DayQuote;
   prodIncidents: ProdIncident[];
@@ -76,7 +73,7 @@ type GameAction =
   | { type: 'QUEUE_PRS'; prs: PullRequest[] }
   | { type: 'SET_CURRENT_PR'; id: string | null }
   | { type: 'APPLY_DECISION'; processedId: string; counterDelta: Partial<Counters>; meterDelta: Partial<MeterSet> }
-  | { type: 'RESET_FOR_DAY'; nextDay: number; config: ReturnType<typeof getDayConfig> }
+  | { type: 'RESET_FOR_DAY'; nextDay: number; mantra: string }
   | { type: 'PUSH_SUMMARY'; summary: DaySummary }
   | { type: 'SET_GAME_OVER'; reason: string }
   | { type: 'RESET_GAME' }
@@ -99,7 +96,6 @@ const createInitialMeters = (): MeterSet => ({
 });
 
 const createInitialState = (): GameState => {
-  const config = getDayConfig(1);
   return {
     currentDay: 1,
     phase: 'BRIEFING',
@@ -107,11 +103,10 @@ const createInitialState = (): GameState => {
     currentTime: 0,
     queue: [],
     currentPR: null,
-    rules: config.rules,
     meters: createInitialMeters(),
     counters: createInitialCounters(),
     history: [],
-    activeConfig: config,
+    currentMantra: getDayMantra(1),
     gameOverReason: undefined,
     dayQuote: getRandomDayQuote(),
     prodIncidents: [],
@@ -249,9 +244,8 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
         currentTime: 0,
         queue: [],
         currentPR: null,
-        rules: action.config.rules,
         counters: createInitialCounters(),
-        activeConfig: action.config,
+        currentMantra: action.mantra,
         gameOverReason: undefined,
         dayQuote: getRandomDayQuote(),
         prodIncidents: [],
@@ -424,8 +418,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     const summary: DaySummary = {
       day: state.currentDay,
       counters: { ...state.counters },
-      meters: { ...state.meters },
-      briefing: state.activeConfig.briefing
+      meters: { ...state.meters }
     };
     dispatch({ type: 'PUSH_SUMMARY', summary });
 
@@ -434,8 +427,8 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch({ type: 'SET_GAME_OVER', reason: state.gameOverReason ?? 'Leadership pulled you aside.' });
       return;
     }
-    const nextConfig = getDayConfig(nextDay);
-    dispatch({ type: 'RESET_FOR_DAY', nextDay, config: nextConfig });
+    const nextMantra = getDayMantra(nextDay);
+    dispatch({ type: 'RESET_FOR_DAY', nextDay, mantra: nextMantra });
   }, [state]);
 
   const restartGame = useCallback(() => {

@@ -1,11 +1,11 @@
 # Approve Please – Agent Notes
 
 ## Core Loop
-- Days follow configs in `data/dayConfigs.ts`. Each entry defines rules, scripted waves, and timed `waves`. **These waves are mandatory**: never remove or skip them, and ensure they fire regardless of other spawn logic.
+- Day flavor is sourced from `data/dayMantras.ts`. Tutorial scripted waves (the opening two PRs) are defined directly inside `hooks/usePRSpawner.ts`; beyond that, every day follows the default wave cadence.
 - `hooks/usePRSpawner.ts` orchestrates everything:
   - Builds a shuffle bag from all PR templates (generic + language-specific).
   - Triggers scripted waves exactly at their `atMinute` timestamps.
-  - Triggers timed waves (`spawn.waves`) – treat these as *imperative*. Their PR batches must enqueue even if other logic exists.
+  - Default waves fire at minutes 0, 60, 180, and 360. Minute 0 always drops exactly 2 PRs; the other three minutes draw counts from `[1, 1, 2, 2, 2, 3, 3, 4, 5]` (favor small bursts). These waves are mandatory unless a scripted wave already occupies that timestamp.
   - Hourly safety check (Day > 1) only adds 1 PR when queue is empty. This is secondary; it must never interfere with scripted/timed waves.
 - `data/prTemplates/**/template.json` holds all diff templates. After editing/adding templates run `npm run generate:templates` to regenerate the manifest.
 
@@ -18,7 +18,7 @@
 - When adding new language folders, update `utils/language.ts` aliases + labels and expose disabled options on the landing page if not ready.
 
 ## Styling/UI
-- Quotations for each day live in `data/dayQuotes.ts` and display on both briefing + rulebook. Keep messaging short (~1 sentence). Rules panel is the only place day briefings appear now.
+- Quotations for each day live in `data/dayQuotes.ts` and display on both briefing + rulebook alongside the mantra pulled from `data/dayMantras.ts`. Keep messaging short (~1 sentence).
 
 ## Commands / Tooling
 - `npm run dev` to launch Next.js.

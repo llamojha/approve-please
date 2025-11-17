@@ -66,37 +66,10 @@ export interface DayQuote {
 
 export type LanguagePreference = 'any' | string;
 
-export interface Rule {
-  id: string;
-  description: string;
-  appliesTo: BugKind[] | 'any';
-}
-
-export interface SpawnWave {
-  atMinute: number; // minutes from 9:00
-  count: number;
-  note?: string;
-}
-
 export interface ScriptedWave {
   atMinute: number;
   templateIds: string[];
   note?: string;
-}
-
-export interface DayConfig {
-  day: number;
-  codename: string;
-  mantra: string;
-  briefing: string;
-  rules: Rule[];
-  spawn: {
-    waves: SpawnWave[];
-    pool: string[]; // references PR template ids
-    scriptedWaves?: ScriptedWave[];
-    targetQueueSeconds?: number;
-    dynamicCadenceMinutes?: number;
-  };
 }
 
 export interface MeterSet {
@@ -119,5 +92,4 @@ export interface DaySummary {
   day: number;
   counters: Counters;
   meters: MeterSet;
-  briefing: string;
 }
