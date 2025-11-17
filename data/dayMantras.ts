@@ -210,10 +210,10 @@ export const dayMantras: DayMantra[] = [
   }
 ];
 
-export const getDayMantra = (day: number): DayMantra => {
+export const getDayMantra = (): DayMantra => {
   if (dayMantras.length === 0) {
     return DEFAULT_MANTRA;
   }
-  const index = Math.max(0, day - 1) % dayMantras.length;
+  const index = Math.floor(Math.random() * dayMantras.length);
   return dayMantras[index];
 };

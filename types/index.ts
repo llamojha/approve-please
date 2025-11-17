@@ -98,6 +98,7 @@ export interface Counters {
   prsRejected: number;
   truePositives: number;
   falsePositives: number;
+  cleanApprovals: number;
 }
 
 export interface DaySummary {

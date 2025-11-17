@@ -481,7 +481,7 @@
   gap: 0.75rem;
 }
 
-.statsGrid div {
+.statsCard {
   background: var(--bg-panel-light);
   border-radius: 0.75rem;
   padding: 0.75rem;
@@ -493,10 +493,29 @@
   justify-content: center;
 }
 
+.statsCardBugs {
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.45);
+  box-shadow: 0 8px 16px rgba(248, 113, 113, 0.18);
+}
+
+.statsCardTrue {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 8px 16px rgba(34, 197, 94, 0.18);
+}
+
+.statsCardFalse {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.45);
+  box-shadow: 0 8px 16px rgba(251, 191, 36, 0.15);
+}
+
 .statsGrid small {
   text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
 }
 
 .statsGrid strong {

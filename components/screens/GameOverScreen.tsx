@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
-import { formatMeterValue } from '../../utils/helpers';
-import { Counters } from '../../types';
+import { formatMeterValue, meterColorFromValue } from '../../utils/helpers';
+import { Counters, BugKind } from '../../types';
 import { useTranslations } from '../../hooks/useTranslations';
 
 const GameOverScreen = () => {
@@ -17,6 +17,34 @@ const GameOverScreen = () => {
   const incidentsText = translations.incidents;
   const bugKindLabels = translations.shared.bugKinds;
   const severityLabels = translations.shared.severity;
+  const toAlpha = (color: string, alpha: number) => {
+    if (color.startsWith('hsl')) {
+      return color.replace('hsl', 'hsla').replace(')', `, ${alpha})`);
+    }
+    return color;
+  };
+  const meterCardStyle = (value: number) => {
+    const base = meterColorFromValue(value);
+    return {
+      background: `linear-gradient(135deg, ${toAlpha(base, 0.25)}, ${toAlpha(base, 0.1)})`,
+      borderColor: base,
+      color: '#fff'
+    };
+  };
+  const stabilityCardStyle = meterCardStyle(meters.stability);
+  const velocityCardStyle = meterCardStyle(meters.velocity);
+  const satisfactionCardStyle = meterCardStyle(meters.satisfaction);
+  const formatFalsePositiveReason = (actualBugKinds: BugKind[]) => {
+    if (actualBugKinds.length === 0) {
+      return { label: incidentsText.reasonClean, isClean: true };
+    }
+    const uniqueKinds = Array.from(new Set(actualBugKinds));
+    if (uniqueKinds.length === 1) {
+      const [onlyKind] = uniqueKinds;
+      return { label: bugKindLabels[onlyKind] ?? onlyKind, isClean: false };
+    }
+    return { label: incidentsText.reasonMixed, isClean: false };
+  };
 
   const aggregateCounters = history.reduce<Counters>(
     (totals, day) => ({
@@ -24,9 +52,10 @@ const GameOverScreen = () => {
       prsApproved: totals.prsApproved + day.counters.prsApproved,
       prsRejected: totals.prsRejected + day.counters.prsRejected,
       truePositives: totals.truePositives + day.counters.truePositives,
-      falsePositives: totals.falsePositives + day.counters.falsePositives
+      falsePositives: totals.falsePositives + day.counters.falsePositives,
+      cleanApprovals: totals.cleanApprovals + day.counters.cleanApprovals
     }),
-    { bugsToProd: 0, prsApproved: 0, prsRejected: 0, truePositives: 0, falsePositives: 0 }
+    { bugsToProd: 0, prsApproved: 0, prsRejected: 0, truePositives: 0, falsePositives: 0, cleanApprovals: 0 }
   );
 
   const finalCounters: Counters = {
@@ -34,7 +63,8 @@ const GameOverScreen = () => {
     prsApproved: aggregateCounters.prsApproved + counters.prsApproved,
     prsRejected: aggregateCounters.prsRejected + counters.prsRejected,
     truePositives: aggregateCounters.truePositives + counters.truePositives,
-    falsePositives: aggregateCounters.falsePositives + counters.falsePositives
+    falsePositives: aggregateCounters.falsePositives + counters.falsePositives,
+    cleanApprovals: aggregateCounters.cleanApprovals + counters.cleanApprovals
   };
 
   const reasonCopy = gameOverReason ? translations.gameOverReasons[gameOverReason] : gameOverText.defaultReason;
@@ -45,38 +75,42 @@ const GameOverScreen = () => {
         <span className={styles.gameOverTag}>{gameOverText.tag}</span>
         <h1>{gameOverText.heading(currentDay)}</h1>
         <p>{reasonCopy}</p>
-        <div className={styles.summaryGrid}>
-          <div>
+        <div className={`${styles.summaryGrid} ${styles.summaryGridWide}`}>
+          <div className={`${styles.summaryCard} ${styles.summaryCardApproved}`}>
             <small>{counterLabels.prsApproved}</small>
             <h2>{finalCounters.prsApproved}</h2>
           </div>
-          <div>
+          <div className={`${styles.summaryCard} ${styles.summaryCardRejected}`}>
             <small>{counterLabels.prsRejected}</small>
             <h2>{finalCounters.prsRejected}</h2>
           </div>
-          <div>
+          <div className={`${styles.summaryCard} ${styles.summaryCardTrue}`}>
+            <small>{counterLabels.cleanApprovals}</small>
+            <h2>{finalCounters.cleanApprovals}</h2>
+          </div>
+          <div className={`${styles.summaryCard} ${styles.summaryCardBugs}`}>
             <small>{counterLabels.bugsToProd}</small>
             <h2>{finalCounters.bugsToProd}</h2>
           </div>
-          <div>
-            <small>{counterLabels.truePositives}</small>
-            <h2>{finalCounters.truePositives}</h2>
-          </div>
-          <div>
+          <div className={`${styles.summaryCard} ${styles.summaryCardFalse}`}>
             <small>{counterLabels.falsePositives}</small>
             <h2>{finalCounters.falsePositives}</h2>
           </div>
+          <div className={`${styles.summaryCard} ${styles.summaryCardTrue}`}>
+            <small>{counterLabels.truePositives}</small>
+            <h2>{finalCounters.truePositives}</h2>
+          </div>
         </div>
-        <div className={styles.summaryGrid} style={{ marginTop: '2rem' }}>
-          <div>
+        <div className={`${styles.summaryGrid} ${styles.summaryGridWide}`} style={{ marginTop: '2rem' }}>
+          <div className={`${styles.summaryCard} ${styles.meterCard}`} style={stabilityCardStyle}>
             <small>{meterLabels.stability}</small>
             <h2>{formatMeterValue(meters.stability)}%</h2>
           </div>
-          <div>
+          <div className={`${styles.summaryCard} ${styles.meterCard}`} style={velocityCardStyle}>
             <small>{meterLabels.velocity}</small>
             <h2>{formatMeterValue(meters.velocity)}%</h2>
           </div>
-          <div>
+          <div className={`${styles.summaryCard} ${styles.meterCard}`} style={satisfactionCardStyle}>
             <small>{meterLabels.satisfaction}</small>
             <h2>{formatMeterValue(meters.satisfaction)}%</h2>
           </div>
@@ -103,9 +137,18 @@ const GameOverScreen = () => {
                         {incidentsText.byline(incident.author, bugKindLabels[incident.bugKind] ?? incident.bugKind)}
                       </div>
                     </div>
-                    <span className={`${styles.badge} ${styles[`severity${incident.severity.charAt(0).toUpperCase()}${incident.severity.slice(1)}`]}`}>
-                      {severityLabels[incident.severity] ?? incident.severity}
-                    </span>
+                    <div className={styles.incidentBadges}>
+                      <span className={`${styles.badge} ${styles.badgeReason}`}>
+                        {bugKindLabels[incident.bugKind] ?? incident.bugKind}
+                      </span>
+                      <span
+                        className={`${styles.badge} ${styles[`severity${incident.severity.charAt(0).toUpperCase()}${incident.severity.slice(
+                          1
+                        )}`]}`}
+                      >
+                        {severityLabels[incident.severity] ?? incident.severity}
+                      </span>
+                    </div>
                   </div>
                   {incident.description && <p className={styles.incidentNote}>{incident.description}</p>}
                   {incident.lines.length > 0 && (
@@ -125,36 +168,45 @@ const GameOverScreen = () => {
             <h3>{gameOverText.falseHeading}</h3>
             <p className="muted">{gameOverText.falseBody}</p>
             <ul className={styles.incidentList}>
-              {falsePositiveRecords.map((record, index) => (
-                <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
-                  <div className={styles.incidentMeta}>
-                    <div>
-                      <strong>{record.title}</strong>
-                      <div className={styles.incidentSubline}>{incidentsText.authorOnly(record.author)}</div>
+              {falsePositiveRecords.map((record, index) => {
+                const reason = formatFalsePositiveReason(record.actualBugKinds);
+                const reasonClassNames = [styles.badge, styles.badgeReason, reason.isClean ? styles.badgeReasonClean : null]
+                  .filter(Boolean)
+                  .join(' ');
+                return (
+                  <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
+                    <div className={styles.incidentMeta}>
+                      <div>
+                        <strong>{record.title}</strong>
+                        <div className={styles.incidentSubline}>{incidentsText.authorOnly(record.author)}</div>
+                      </div>
+                      <div className={styles.incidentBadges}>
+                        <span className={reasonClassNames}>{reason.label}</span>
+                        <span className={`${styles.badge} ${styles.badgeNeutral}`}>
+                          {incidentsText.falseBadge(bugKindLabels[record.claimedKind] ?? record.claimedKind)}
+                        </span>
+                      </div>
                     </div>
-                    <span className={`${styles.badge} ${styles.badgeNeutral}`}>
-                      {incidentsText.falseBadge(bugKindLabels[record.claimedKind] ?? record.claimedKind)}
-                    </span>
-                  </div>
-                  <p className={styles.incidentNote}>
-                    {incidentsText.falseNote(
-                      bugKindLabels[record.claimedKind] ?? record.claimedKind,
-                      record.actualBugKinds.length > 0
-                        ? record.actualBugKinds
-                            .map((kind) => bugKindLabels[kind] ?? kind)
-                            .join(', ')
-                        : incidentsText.none
+                    <p className={styles.incidentNote}>
+                      {incidentsText.falseNote(
+                        bugKindLabels[record.claimedKind] ?? record.claimedKind,
+                        record.actualBugKinds.length > 0
+                          ? record.actualBugKinds
+                              .map((kind) => bugKindLabels[kind] ?? kind)
+                              .join(', ')
+                          : incidentsText.none
+                      )}
+                    </p>
+                    {record.selectedLines.length > 0 && (
+                      <ul className={styles.lineList}>
+                        {record.selectedLines.map((line) => (
+                          <li key={`${record.prId}-fp-${line.lineNumber}`}>L{line.lineNumber}: <code>{line.content || '…'}</code></li>
+                        ))}
+                      </ul>
                     )}
-                  </p>
-                  {record.selectedLines.length > 0 && (
-                    <ul className={styles.lineList}>
-                      {record.selectedLines.map((line) => (
-                        <li key={`${record.prId}-fp-${line.lineNumber}`}>L{line.lineNumber}: <code>{line.content || '…'}</code></li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ul>
           </section>
         )}

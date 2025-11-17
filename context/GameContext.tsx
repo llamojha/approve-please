@@ -88,7 +88,8 @@ const createInitialCounters = (): Counters => ({
   prsApproved: 0,
   prsRejected: 0,
   truePositives: 0,
-  falsePositives: 0
+  falsePositives: 0,
+  cleanApprovals: 0
 });
 
 const createInitialMeters = (): MeterSet => ({
@@ -108,7 +109,7 @@ const createInitialState = (): GameState => {
     meters: createInitialMeters(),
     counters: createInitialCounters(),
     history: [],
-    currentMantra: getDayMantra(1),
+    currentMantra: getDayMantra(),
     gameOverReason: undefined,
     dayQuote: getRandomDayQuote(),
     prodIncidents: [],
@@ -343,6 +344,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       meterDelta.satisfaction = -Math.ceil(score / 4);
     } else {
       meterDelta.satisfaction = 2;
+      counterDelta.cleanApprovals = 1;
     }
 
     dispatch({
@@ -432,7 +434,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch({ type: 'SET_GAME_OVER', reason: state.gameOverReason ?? 'generic' });
       return;
     }
-    const nextMantra = getDayMantra(nextDay);
+    const nextMantra = getDayMantra();
     dispatch({ type: 'RESET_FOR_DAY', nextDay, mantra: nextMantra });
   }, [state]);
 

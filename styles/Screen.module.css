@@ -83,11 +83,15 @@
 
 .summaryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
-.summaryGrid div {
+.summaryGrid.summaryGridWide {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.summaryCard {
   background: var(--bg-panel-light);
   border-radius: 0.75rem;
   padding: 1rem;
@@ -98,12 +102,43 @@
   min-height: 110px;
   justify-content: center;
   text-align: center;
+  color: var(--text);
+}
+
+.summaryCardApproved,
+.summaryCardRejected {
+  background: var(--bg-panel-light);
+  border-color: var(--border);
+  box-shadow: var(--shadow-soft, 0 8px 20px rgba(15, 23, 42, 0.25));
+  color: var(--text);
+}
+
+.summaryCardBugs {
+  background: rgba(248, 113, 113, 0.12);
+  border-color: rgba(248, 113, 113, 0.5);
+  box-shadow: 0 8px 20px rgba(248, 113, 113, 0.2);
+  color: #fecaca;
+}
+
+.summaryCardTrue {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.45);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.18);
+  color: #bbf7d0;
+}
+
+.summaryCardFalse {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.45);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.15);
+  color: #fde68a;
 }
 
 .summaryGrid small {
   text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
 }
 
 .summaryGrid h2 {
@@ -111,6 +146,9 @@
   font-size: 2rem;
 }
 
+.meterCard {
+  color: inherit;
+}
 .gameOverTag {
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
@@ -150,6 +188,14 @@
   justify-content: space-between;
   gap: 1rem;
   align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.incidentBadges {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .incidentSubline {
@@ -184,6 +230,17 @@
 .badgeNeutral {
   background: rgba(255, 255, 255, 0.1);
   color: var(--muted);
+}
+
+.badgeReason {
+  background: rgba(129, 140, 248, 0.22);
+  color: #c4b5fd;
+  border: 1px solid rgba(248, 113, 113, 0.65);
+}
+
+.badgeReasonClean {
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
 }
 
 .incidentNote {

@@ -14,25 +14,29 @@ const StatsPanel = ({ counters }: StatsPanelProps) => {
   return (
     <Panel title={statsText.title}>
       <div className={styles.statsGrid}>
-        <div title={statsText.tooltips.approved}>
+        <div className={styles.statsCard} title={statsText.tooltips.approved}>
           <small>{statsText.labels.approved}</small>
           <strong>{counters.prsApproved}</strong>
         </div>
-        <div title={statsText.tooltips.rejected}>
+        <div className={styles.statsCard} title={statsText.tooltips.rejected}>
           <small>{statsText.labels.rejected}</small>
           <strong>{counters.prsRejected}</strong>
         </div>
-        <div title={statsText.tooltips.bugsToProd}>
+        <div className={`${styles.statsCard} ${styles.statsCardBugs}`} title={statsText.tooltips.bugsToProd}>
           <small>{statsText.labels.bugsToProd}</small>
           <strong>{counters.bugsToProd}</strong>
         </div>
-        <div title={statsText.tooltips.truePositives}>
-          <small>{statsText.labels.truePositives}</small>
-          <strong>{counters.truePositives}</strong>
+        <div className={`${styles.statsCard} ${styles.statsCardTrue}`} title={statsText.tooltips.cleanApprovals}>
+          <small>{statsText.labels.cleanApprovals}</small>
+          <strong>{counters.cleanApprovals}</strong>
         </div>
-        <div title={statsText.tooltips.falsePositives}>
+        <div className={`${styles.statsCard} ${styles.statsCardFalse}`} title={statsText.tooltips.falsePositives}>
           <small>{statsText.labels.falsePositives}</small>
           <strong>{counters.falsePositives}</strong>
+        </div>
+        <div className={`${styles.statsCard} ${styles.statsCardTrue}`} title={statsText.tooltips.truePositives}>
+          <small>{statsText.labels.truePositives}</small>
+          <strong>{counters.truePositives}</strong>
         </div>
       </div>
     </Panel>

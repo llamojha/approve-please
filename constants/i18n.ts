@@ -103,7 +103,8 @@ export const TRANSLATIONS = {
         prsRejected: 'PRs Rejected',
         bugsToProd: 'Bugs to Prod',
         truePositives: 'True Positives',
-        falsePositives: 'False Positives'
+        falsePositives: 'False Positives',
+        cleanApprovals: 'Clean Approvals'
       },
       meters: {
         stability: 'Stability',
@@ -146,7 +147,9 @@ export const TRANSLATIONS = {
       falseBadge: (bugKindLabel: string) => `${bugKindLabel} suspicion`,
       falseNote: (bugKindLabel: string, actualList: string) =>
         `You flagged a ${bugKindLabel} issue. Actual bugs: ${actualList}.`,
-      none: 'none'
+      none: 'none',
+      reasonClean: 'not a bug',
+      reasonMixed: 'mixed bugs'
     },
     work: {
       clock: {
@@ -190,14 +193,16 @@ export const TRANSLATIONS = {
           rejected: 'Rejected',
           bugsToProd: 'Bugs to Prod',
           truePositives: 'True Positives',
-          falsePositives: 'False Positives'
+          falsePositives: 'False Positives',
+          cleanApprovals: 'Clean Approvals'
         },
         tooltips: {
           approved: 'PRs you merged today. These keep features flowing but risky ones can hurt stability.',
           rejected: 'PRs you rejected with requested changes. Slows things down but can prevent incidents.',
           bugsToProd: 'Bugs that escaped to production from approved PRs. Too many will tank stability.',
           truePositives: 'Correct catches where you called out a real bug before it shipped.',
-          falsePositives: 'False alarms where you flagged a bug that wasn’t there, costing time and goodwill.'
+          falsePositives: 'False alarms where you flagged a bug that wasn’t there, costing time and goodwill.',
+          cleanApprovals: 'Bug-free approvals that kept features moving without hurting stability.'
         }
       },
       accessibility: {
@@ -266,7 +271,8 @@ export const TRANSLATIONS = {
         prsRejected: 'PRs rechazados',
         bugsToProd: 'Bugs a prod',
         truePositives: 'Verdaderos positivos',
-        falsePositives: 'Falsos positivos'
+        falsePositives: 'Falsos positivos',
+        cleanApprovals: 'Aprobaciones limpias'
       },
       meters: {
         stability: 'Estabilidad',
@@ -309,7 +315,9 @@ export const TRANSLATIONS = {
       falseBadge: (bugKindLabel: string) => `Sospecha de ${bugKindLabel}`,
       falseNote: (bugKindLabel: string, actualList: string) =>
         `Marcaste un problema de ${bugKindLabel}. Bugs reales: ${actualList}.`,
-      none: 'ninguno'
+      none: 'ninguno',
+      reasonClean: 'sin bug real',
+      reasonMixed: 'bugs mixtos'
     },
     work: {
       clock: {
@@ -353,14 +361,16 @@ export const TRANSLATIONS = {
           rejected: 'Rechazados',
           bugsToProd: 'Bugs a prod',
           truePositives: 'Verdaderos positivos',
-          falsePositives: 'Falsos positivos'
+          falsePositives: 'Falsos positivos',
+          cleanApprovals: 'Aprobaciones limpias'
         },
         tooltips: {
           approved: 'PRs que aprobaste hoy. Mantienen el flujo de features pero los arriesgados dañan la estabilidad.',
           rejected: 'PRs que rechazaste pidiendo cambios. Frenan un poco pero previenen incidentes.',
           bugsToProd: 'Bugs que se escaparon a producción desde PRs aprobados. Demasiados hunden la estabilidad.',
           truePositives: 'Aciertos donde detectaste un bug real antes del deploy.',
-          falsePositives: 'Falsas alarmas donde marcaste un bug inexistente, perdiendo tiempo y confianza.'
+          falsePositives: 'Falsas alarmas donde marcaste un bug inexistente, perdiendo tiempo y confianza.',
+          cleanApprovals: 'Aprobaciones sin bugs que mantuvieron el flujo sin dañar la estabilidad.'
         }
       },
       accessibility: {
