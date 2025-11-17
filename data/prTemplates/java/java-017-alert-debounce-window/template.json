@@ -7,6 +7,16 @@
     "logic",
     "alerts"
   ],
+  "localized": {
+    "es": {
+      "title": "Ventana de debounce de alertas",
+      "description": "Determina si las alertas deben seguir silenciadas.",
+      "tags": [
+        "lógica",
+        "alertas"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Returns true only after the window has passed, effectively disabling the debounce.",
+      "localizedDescription": {
+        "es": "Devuelve true solo después de que la ventana pasó, deshabilitando el debounce."
+      },
       "lineNumbers": [
         60
       ]

@@ -6,6 +6,15 @@
   "tags": [
     "cleanup"
   ],
+  "localized": {
+    "es": {
+      "title": "Cleanup de feature flags",
+      "description": "Remueve un feature flag viejo que ya está habilitado para todos.",
+      "tags": [
+        "limpieza"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "src/flags/flagRegistry.ts",
@@ -42,7 +51,10 @@
         19
       ],
       "severity": "minor",
-      "description": "No new tests or justification provided."
+      "description": "No new tests or justification provided.",
+      "localizedDescription": {
+        "es": "No se agregaron tests nuevos ni se explicó la ausencia."
+      }
     }
   ],
   "importance": "low"

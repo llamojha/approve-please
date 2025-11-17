@@ -8,6 +8,17 @@
     "refactor",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Logger temporal de debug para Runtime Metrics",
+      "description": "Agrega un helper para que QA inspeccione payloads durante las pruebas.",
+      "tags": [
+        "limpieza",
+        "refactor",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -49,7 +60,10 @@
         46
       ],
       "severity": "minor",
-      "description": "TODO/console log left in production path."
+      "description": "TODO/console log left in production path.",
+      "localizedDescription": {
+        "es": "Hay un TODO/console log en la ruta de producción."
+      }
     }
   ]
 }

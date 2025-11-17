@@ -7,6 +7,16 @@
     "logic",
     "slo"
   ],
+  "localized": {
+    "es": {
+      "title": "Detector de brecha de SLO",
+      "description": "Actualiza el helper que decide cuándo un SLO está fuera de rango.",
+      "tags": [
+        "lógica",
+        "slo"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Error budget should breach when usage meets or exceeds the threshold, not when it is under.",
+      "localizedDescription": {
+        "es": "El presupuesto de errores debe entrar en brecha cuando el uso alcanza o excede el umbral, no cuando está por debajo."
+      },
       "lineNumbers": [
         64
       ]

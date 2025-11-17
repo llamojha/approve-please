@@ -8,6 +8,17 @@
     "infra",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Wrapper de job en TypeScript para Policy Center",
+      "description": "Agrega un helper liviano que normaliza los payloads del job de policy center.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

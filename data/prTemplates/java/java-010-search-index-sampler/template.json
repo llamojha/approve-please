@@ -7,6 +7,16 @@
     "search",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Sampler del search index",
+      "description": "Agrega un helper que samplea documentos del índice para diagnósticos.",
+      "tags": [
+        "búsqueda",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

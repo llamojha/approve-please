@@ -8,6 +8,17 @@
     "feature",
     "ui"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de User Segmentation",
+      "description": "Introduce una tarjeta de dashboard con las métricas recientes de segmentación de usuarios.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "ui"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

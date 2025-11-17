@@ -6,6 +6,15 @@
   "tags": [
     "integrations"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de responses para webhooks",
+      "description": "Agrega un helper para envolver respuestas de webhooks con metadata de estado.",
+      "tags": [
+        "integraciones"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

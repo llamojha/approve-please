@@ -8,6 +8,17 @@
     "feature",
     "ui"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de Usage Analytics",
+      "description": "Introduce una tarjeta de dashboard que muestra las métricas recientes de usage analytics.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "ui"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

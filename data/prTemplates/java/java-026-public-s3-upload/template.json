@@ -7,6 +7,16 @@
     "security",
     "storage"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para subir artefactos",
+      "description": "Agrega un helper para subir artefactos de deploy al object storage.",
+      "tags": [
+        "seguridad",
+        "almacenamiento"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "security",
       "severity": "critical",
       "description": "Marks deploy artifacts as public instead of private.",
+      "localizedDescription": {
+        "es": "Marca los artefactos de deploy como públicos en lugar de privados."
+      },
       "lineNumbers": [
         57
       ]

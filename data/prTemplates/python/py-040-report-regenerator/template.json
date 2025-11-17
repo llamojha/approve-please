@@ -7,6 +7,16 @@
     "performance",
     "reports"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del renderizador de reportes",
+      "description": "Renderiza reportes de analistas para cada segmento de SLA.",
+      "tags": [
+        "rendimiento",
+        "reportes"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Compiles the template on every iteration instead of once.",
+      "localizedDescription": {
+        "es": "Compila la plantilla en cada iteración en lugar de hacerlo una sola vez."
+      },
       "lineNumbers": [
         95
       ]

@@ -7,6 +7,16 @@
     "security",
     "sql"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para consultar auditorías via SQL",
+      "description": "Agrega un helper para obtener entradas del log de auditoría de un tenant.",
+      "tags": [
+        "seguridad",
+        "sql"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -36,6 +46,9 @@
       "kind": "security",
       "severity": "critical",
       "description": "Builds raw SQL with tenant input, allowing injection.",
+      "localizedDescription": {
+        "es": "Construye SQL crudo con el input del tenant, habilitando inyección."
+      },
       "lineNumbers": [
         37
       ]

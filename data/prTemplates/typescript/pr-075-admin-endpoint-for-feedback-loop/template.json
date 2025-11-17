@@ -9,6 +9,18 @@
     "hotfix",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Endpoint admin para Feedback Loop",
+      "description": "Agrega una ruta de Express para que admin empuje actualizaciones de configuración.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -45,7 +57,10 @@
         100
       ],
       "severity": "critical",
-      "description": "Route lacks any authentication or authorization guard."
+      "description": "Route lacks any authentication or authorization guard.",
+      "localizedDescription": {
+        "es": "La ruta no aplica autenticación ni autorización."
+      }
     }
   ]
 }

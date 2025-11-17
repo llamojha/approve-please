@@ -7,6 +7,16 @@
     "devices",
     "logic"
   ],
+  "localized": {
+    "es": {
+      "title": "Clasificador de gaps de heartbeat de dispositivos",
+      "description": "Clasifica si un gap de heartbeat debe gatillar un page.",
+      "tags": [
+        "dispositivos",
+        "lógica"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Critical gaps occur when the miss exceeds the threshold, not when it is within it.",
+      "localizedDescription": {
+        "es": "Los gaps críticos ocurren cuando la falta excede el umbral, no cuando está dentro."
+      },
       "lineNumbers": [
         78
       ]

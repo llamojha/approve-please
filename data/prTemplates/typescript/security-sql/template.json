@@ -7,6 +7,16 @@
     "hotfix",
     "analytics"
   ],
+  "localized": {
+    "es": {
+      "title": "Endpoint ad-hoc de analytics",
+      "description": "Agrega un endpoint rápido para que Success pueda consultar facturas.",
+      "tags": [
+        "hotfix",
+        "analytics"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "api/analytics/invoices.ts",
@@ -37,7 +47,10 @@
         8
       ],
       "severity": "critical",
-      "description": "Interpolated SQL without sanitization."
+      "description": "Interpolated SQL without sanitization.",
+      "localizedDescription": {
+        "es": "SQL interpolado sin sanitización."
+      }
     }
   ],
   "importance": "high"

@@ -7,6 +7,16 @@
     "logic",
     "support"
   ],
+  "localized": {
+    "es": {
+      "title": "Calibra el helper de subscore de feedback",
+      "description": "Puntúa la cola de feedback para decidir cuándo hacer page a managers.",
+      "tags": [
+        "lógica",
+        "soporte"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "logic",
       "severity": "minor",
       "description": "Borderline ratios equal to the target should still be treated as attention, so the comparison must be <=.",
+      "localizedDescription": {
+        "es": "Las razones en el límite iguales al objetivo aún deben tratarse como attention, así que la comparación tiene que ser <=."
+      },
       "lineNumbers": [
         43
       ]

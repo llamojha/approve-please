@@ -8,6 +8,17 @@
     "cleanup",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Transmite snapshots de Dataset Importer",
+      "description": "Agrega un helper que obtiene snapshots para tooling.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -69,7 +80,10 @@
         88
       ],
       "severity": "major",
-      "description": "Fetches every id sequentially without reuse or concurrency."
+      "description": "Fetches every id sequentially without reuse or concurrency.",
+      "localizedDescription": {
+        "es": "Hace fetch de cada id de forma secuencial, sin reutilizar ni paralelizar."
+      }
     }
   ]
 }

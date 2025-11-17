@@ -9,6 +9,18 @@
     "infra",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Wrapper de job en TypeScript para Delta Sync",
+      "description": "Agrega un helper liviano en TypeScript que normaliza los payloads del job de delta sync.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "infra",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

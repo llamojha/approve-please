@@ -7,6 +7,16 @@
     "performance",
     "http"
   ],
+  "localized": {
+    "es": {
+      "title": "Fetcher de scores de experimentos",
+      "description": "Obtiene scores de experimentos individualmente por id.",
+      "tags": [
+        "rendimiento",
+        "http"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -86,6 +96,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Issues sequential HTTP calls per id instead of using the batch endpoint.",
+      "localizedDescription": {
+        "es": "Hace llamadas HTTP secuenciales por id en vez de usar el endpoint batch."
+      },
       "lineNumbers": [
         106
       ]

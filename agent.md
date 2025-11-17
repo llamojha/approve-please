@@ -20,6 +20,12 @@
 ## Styling/UI
 - Quotations for each day live in `data/dayQuotes.ts` and display on both briefing + rulebook alongside the mantra pulled from `data/dayMantras.ts`. Keep messaging short (~1 sentence).
 
+## Localization
+- All player-facing copy must round-trip through the translation tables in `constants/i18n.ts` and be accessible via `useTranslations()`. When adding new UI strings, wire them into that dictionary instead of hardcoding text.
+- Game flavor data (mantras in `data/dayMantras.ts`, quotes in `data/dayQuotes.ts`) stores both EN/ES variants; preserve this shape and provide translations whenever you add or adjust entries.
+- New data sources that surface in the UI (e.g., scripted day configs, special events) must be structured like the other bilingual datasets so the homepage language toggle updates them instantly.
+- PR templates support localized metadata via an optional `localized` block (per-template) plus optional `localizedDescription` on each bug pattern. Always keep the base English fields as defaults and add translations under the respective locale keys (`en`, `es`, etc.).
+
 ## Commands / Tooling
 - `npm run dev` to launch Next.js.
 - `npm run typecheck`, `npm run lint`, `npm run build` for CI parity.

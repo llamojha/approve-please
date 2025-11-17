@@ -8,6 +8,17 @@
     "ops",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de TypeScript para datos de Lead Matcher",
+      "description": "Agrega un helper de SQL crudo para obtener filas de organizaciones.",
+      "tags": [
+        "corrección",
+        "ops",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -44,7 +55,10 @@
         51
       ],
       "severity": "critical",
-      "description": "Builds SQL via string interpolation and allows injection."
+      "description": "Builds SQL via string interpolation and allows injection.",
+      "localizedDescription": {
+        "es": "Construye SQL con interpolación de strings y permite inyección."
+      }
     }
   ]
 }

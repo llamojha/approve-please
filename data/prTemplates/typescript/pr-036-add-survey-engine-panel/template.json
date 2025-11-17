@@ -8,6 +8,17 @@
     "infra",
     "ui"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de Survey Engine",
+      "description": "Introduce una tarjeta de dashboard que muestra las métricas recientes del motor de encuestas.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "ui"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

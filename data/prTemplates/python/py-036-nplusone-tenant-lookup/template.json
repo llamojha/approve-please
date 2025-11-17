@@ -7,6 +7,16 @@
     "performance",
     "database"
   ],
+  "localized": {
+    "es": {
+      "title": "Hidratador de perfiles de tenants",
+      "description": "Hidrata perfiles de tenants antes de renderizar el overview.",
+      "tags": [
+        "rendimiento",
+        "base de datos"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Executes one query per tenant instead of batching.",
+      "localizedDescription": {
+        "es": "Ejecuta una consulta por cada tenant en lugar de agruparlas."
+      },
       "lineNumbers": [
         48
       ]

@@ -3,6 +3,7 @@ import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { PullRequest } from '../../types';
 import TutorialHint from '../tutorial/TutorialHint';
+import { useTranslations } from '../../hooks/useTranslations';
 
 interface PRViewerProps {
   pr: PullRequest | null;
@@ -12,14 +13,18 @@ interface PRViewerProps {
 }
 
 const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps) => {
+  const translations = useTranslations();
+  const viewerText = translations.work.prViewer;
+  const requestLabel = translations.work.actions.request;
+
   if (!pr) {
     return (
       <Panel
-        title="PR Details"
-        titleHint={<TutorialHint text="Select a PR from the queue to inspect its summary and diff here." />}
+        title={viewerText.title}
+        titleHint={<TutorialHint text={viewerText.hintSelect} />}
       >
         <div className={styles.prPlaceholder}>
-          <p>Load a PR from the queue to begin review.</p>
+          <p>{viewerText.placeholder}</p>
         </div>
       </Panel>
     );
@@ -29,13 +34,13 @@ const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps
 
   return (
     <Panel
-      title="PR Details"
-      titleHint={<TutorialHint text="Click any line number to flag suspected bugs before requesting changes." />}
+      title={viewerText.title}
+      titleHint={<TutorialHint text={viewerText.hintLines} />}
     >
       <article className={styles.prMeta}>
         <header>
           <h2>{pr.title}</h2>
-          <p>Author: {pr.author}</p>
+          <p>{viewerText.authorLabel}: {pr.author}</p>
         </header>
         <p className={styles.prDescription}>{pr.description}</p>
         <div className={styles.tagList}>
@@ -45,10 +50,7 @@ const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps
         </div>
       </article>
       <div className={styles.diffHintBanner}>
-        <p>
-          Tip: click the line number to highlight a suspicious row. Selected lines glow and count toward your Request
-          Changes justification.
-        </p>
+        <p>{viewerText.diffTip(requestLabel)}</p>
       </div>
       <div className={styles.diffWrapper}>
         {pr.files.map((file) => (

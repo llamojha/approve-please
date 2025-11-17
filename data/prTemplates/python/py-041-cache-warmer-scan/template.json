@@ -7,6 +7,16 @@
     "performance",
     "cache"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para hidratar la cache de features",
+      "description": "Hidrata feature flags en la cache antes de un deploy.",
+      "tags": [
+        "rendimiento",
+        "cache"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "performance",
       "severity": "minor",
       "description": "Iterates cache.get one key at a time instead of using a batched mget.",
+      "localizedDescription": {
+        "es": "Itera cache.get clave por clave en vez de usar un mget batched."
+      },
       "lineNumbers": [
         35
       ]

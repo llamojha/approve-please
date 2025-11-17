@@ -7,6 +7,16 @@
     "observability",
     "events"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega emisor de pulso de runtime health",
+      "description": "Emite un evento ligero cuando el jitter excede la tolerancia para que los dashboards de observabilidad se mantengan precisos.",
+      "tags": [
+        "observabilidad",
+        "eventos"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

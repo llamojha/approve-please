@@ -8,6 +8,17 @@
     "data",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Ledger Balancer",
+      "description": "Agrega helpers de paginación para lotes de ledger balancer.",
+      "tags": [
+        "corrección",
+        "datos",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -59,7 +70,10 @@
         27
       ],
       "severity": "minor",
-      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página adicional vacía cuando i == items.length."
+      }
     }
   ]
 }

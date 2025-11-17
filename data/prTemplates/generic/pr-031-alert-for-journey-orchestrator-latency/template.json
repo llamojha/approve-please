@@ -8,6 +8,17 @@
     "ops",
     "refactor"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Journey Orchestrator",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "limpieza",
+        "ops",
+        "refactor"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -64,7 +75,10 @@
         82
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue teniendo un mensaje con TODO."
+      }
     }
   ]
 }

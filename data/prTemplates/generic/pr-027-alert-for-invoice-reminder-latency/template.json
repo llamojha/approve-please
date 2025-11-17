@@ -9,6 +9,18 @@
     "ops",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Invoice Reminder",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "ops",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -65,7 +77,10 @@
         112
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue teniendo un mensaje con TODO."
+      }
     }
   ]
 }

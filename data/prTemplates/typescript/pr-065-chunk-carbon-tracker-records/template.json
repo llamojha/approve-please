@@ -9,6 +9,18 @@
     "refactor",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Carbon Tracker",
+      "description": "Agrega helpers de paginación para lotes de carbon tracker.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "refactor",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -60,7 +72,10 @@
         17
       ],
       "severity": "minor",
-      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página adicional vacía cuando i == items.length."
+      }
     }
   ]
 }

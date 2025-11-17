@@ -8,6 +8,17 @@
     "docs",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de API Gateway",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "corrección",
+        "documentación",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

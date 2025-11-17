@@ -8,6 +8,17 @@
     "billing",
     "python"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper de snapshot para ledger drift",
+      "description": "Introduce un dataclass que representa deltas de ledger drift para consumidores posteriores.",
+      "tags": [
+        "datos",
+        "billing",
+        "python"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

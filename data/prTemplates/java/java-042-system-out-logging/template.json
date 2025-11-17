@@ -7,6 +7,16 @@
     "style",
     "logging"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de logging para dispatch",
+      "description": "Agrega logging liviano para batches de dispatch.",
+      "tags": [
+        "estilo",
+        "logging"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "style",
       "severity": "minor",
       "description": "Uses System.out instead of structured logging.",
+      "localizedDescription": {
+        "es": "Usa System.out en lugar de logging estructurado."
+      },
       "lineNumbers": [
         14
       ]

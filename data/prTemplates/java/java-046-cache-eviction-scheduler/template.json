@@ -7,6 +7,16 @@
     "backend",
     "cache"
   ],
+  "localized": {
+    "es": {
+      "title": "Scheduler de eviction de cache",
+      "description": "Agrega un helper para programar jobs de eviction de cache antes de los deploys.",
+      "tags": [
+        "backend",
+        "cache"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

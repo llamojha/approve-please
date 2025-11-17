@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { SITE_METADATA } from '../constants/siteMetadata';
 import { GameProvider } from '../context/GameContext';
 import { UIPreferencesProvider } from '../context/UIPreferencesContext';
+import { LocaleProvider } from '../context/LocaleContext';
 import '../styles/globals.css';
 import HydrationErrorBoundary from '../components/common/HydrationErrorBoundary';
 
@@ -10,9 +11,10 @@ export default function App({ Component, pageProps }: AppProps) {
   const socialImageUrl = `${SITE_METADATA.url}${SITE_METADATA.image}`;
 
   return (
-    <UIPreferencesProvider>
-      <GameProvider>
-        <Head>
+    <LocaleProvider>
+      <UIPreferencesProvider>
+        <GameProvider>
+          <Head>
           <title>{SITE_METADATA.title}</title>
           <meta name="description" content={SITE_METADATA.description} />
           {SITE_METADATA.keywords.length > 0 && (
@@ -45,10 +47,11 @@ export default function App({ Component, pageProps }: AppProps) {
             <meta name="twitter:creator" content={SITE_METADATA.twitterHandle} />
           ) : null}
         </Head>
-        <HydrationErrorBoundary>
-          <Component {...pageProps} />
-        </HydrationErrorBoundary>
-      </GameProvider>
-    </UIPreferencesProvider>
+          <HydrationErrorBoundary>
+            <Component {...pageProps} />
+          </HydrationErrorBoundary>
+        </GameProvider>
+      </UIPreferencesProvider>
+    </LocaleProvider>
   );
 }

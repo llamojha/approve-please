@@ -7,6 +7,16 @@
     "logic",
     "sessions"
   ],
+  "localized": {
+    "es": {
+      "title": "Expirador de leases de sesión",
+      "description": "Actualiza el helper que determina si un lease de sesión expiró.",
+      "tags": [
+        "lógica",
+        "sesiones"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Returns true while the lease is still valid instead of when now is after expiration.",
+      "localizedDescription": {
+        "es": "Devuelve true mientras el lease sigue vigente en lugar de hacerlo cuando ahora está después del vencimiento."
+      },
       "lineNumbers": [
         90
       ]

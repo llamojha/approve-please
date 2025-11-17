@@ -8,6 +8,17 @@
     "data",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Portal Theme",
+      "description": "Agrega helpers de paginación para lotes de portal theme.",
+      "tags": [
+        "corrección",
+        "datos",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -59,7 +70,10 @@
         72
       ],
       "severity": "minor",
-      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y crea una página extra vacía cuando i == items.length."
+      }
     }
   ]
 }

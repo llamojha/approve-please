@@ -8,6 +8,17 @@
     "feature",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Access Request",
+      "description": "Agrega un helper para normalizar las entradas de solicitudes de acceso y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

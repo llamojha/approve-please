@@ -7,6 +7,16 @@
     "billing",
     "data"
   ],
+  "localized": {
+    "es": {
+      "title": "Registro de snapshot de auditoría de ledger",
+      "description": "Introduce un record inmutable de snapshot de auditoría para los servicios de billing posteriores.",
+      "tags": [
+        "billing",
+        "datos"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

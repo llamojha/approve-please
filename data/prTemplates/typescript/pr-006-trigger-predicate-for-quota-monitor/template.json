@@ -7,6 +7,16 @@
     "bugfix",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Quota Monitor",
+      "description": "Agrega un helper condicional que decide si los jobs deben correr.",
+      "tags": [
+        "corrección",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -58,7 +68,10 @@
         61
       ],
       "severity": "major",
-      "description": "Condition uses assignment instead of comparison, mutating payload.status."
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y modifica payload.status."
+      }
     }
   ]
 }

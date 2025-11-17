@@ -2,6 +2,7 @@ import styles from '../../styles/Desk.module.css';
 import { BugKind } from '../../types';
 import { DecisionResult } from '../../context/GameContext';
 import TutorialHint from '../tutorial/TutorialHint';
+import { useTranslations } from '../../hooks/useTranslations';
 
 interface ActionPanelProps {
   bugKind: BugKind;
@@ -26,14 +27,18 @@ const ActionPanel = ({
   selectedLines,
   feedback
 }: ActionPanelProps) => {
+  const translations = useTranslations();
+  const actionText = translations.work.actions;
+  const bugKindLabels = translations.shared.bugKinds;
+
   return (
     <div className={styles.actionBlock}>
       <div className={styles.actionIntro}>
         <div>
-          <p className={styles.actionLabel}>Review Actions</p>
-          <p className={styles.selectionHint}>Selected lines: {selectedLines}</p>
+          <p className={styles.actionLabel}>{actionText.reviewLabel}</p>
+          <p className={styles.selectionHint}>{actionText.selectedLines(selectedLines)}</p>
         </div>
-        <TutorialHint text="Wrap up reviews here. Use keyboard shortcuts to move faster once you're confident." />
+        <TutorialHint text={actionText.tutorial} />
       </div>
       <div className={styles.actionButtons}>
         <div className={styles.actionButtonGroup}>
@@ -43,10 +48,10 @@ const ActionPanel = ({
             onClick={onApprove}
             disabled={disableApprove}
           >
-            <span>Approve & Deploy</span>
+            <span>{actionText.approve}</span>
             <kbd className={styles.hotkeyBadge}>A</kbd>
           </button>
-          <p className={styles.actionSubcopy}>Greenlight it when the diff feels rock solid.</p>
+          <p className={styles.actionSubcopy}>{actionText.approveSubcopy}</p>
         </div>
         <div className={`${styles.actionButtonGroup} ${styles.requestGroup}`}>
           <button
@@ -54,14 +59,14 @@ const ActionPanel = ({
             className={`${styles.actionButton} ${styles.requestButton}`}
             onClick={onRequestChanges}
             disabled={!canRequest}
-            title={!canRequest ? 'Click the line number to highlight a suspicious row.' : undefined}
+            title={!canRequest ? actionText.requestTitle : undefined}
           >
-            <span>Request Changes</span>
+            <span>{actionText.request}</span>
             <kbd className={styles.hotkeyBadge}>R</kbd>
           </button>
           <div className={styles.requestDetails}>
-            <p className={styles.requestLabel}>Why block this deploy?</p>
-            <p className={styles.requestHelper}>Pick the closest issue type so the author knows what to fix.</p>
+            <p className={styles.requestLabel}>{actionText.requestLabel}</p>
+            <p className={styles.requestHelper}>{actionText.requestHelper}</p>
             <div className={styles.bugKindButtons}>
               {bugKinds.map((kind) => (
                 <button
@@ -72,7 +77,7 @@ const ActionPanel = ({
                     .join(' ')}
                   onClick={() => onBugKindChange(kind)}
                 >
-                  {kind}
+                  {bugKindLabels[kind] ?? kind}
                 </button>
               ))}
             </div>
@@ -82,14 +87,14 @@ const ActionPanel = ({
       <ul className={styles.shortcutLegend}>
         <li>
           <kbd className={styles.hotkeyBadge}>A</kbd>
-          <span>Approve immediately when the diff looks clean.</span>
+          <span>{actionText.legendApprove}</span>
         </li>
         <li>
           <kbd className={styles.hotkeyBadge}>R</kbd>
-          <span>Request changes after highlighting the problematic lines.</span>
+          <span>{actionText.legendRequest}</span>
         </li>
       </ul>
-      <p className={styles.hotkeyHint}>Need justification? Highlight lines in the diff, choose a bug type, then press R.</p>
+      <p className={styles.hotkeyHint}>{actionText.hotkeyHint}</p>
       {feedback && <p className={`${styles.feedback} ${styles[`feedback-${feedback.status}`]}`}>{feedback.message}</p>}
     </div>
   );

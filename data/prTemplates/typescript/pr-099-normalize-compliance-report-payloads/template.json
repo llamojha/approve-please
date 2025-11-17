@@ -8,6 +8,17 @@
     "feature",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Compliance Report",
+      "description": "Agrega un helper para normalizar las entradas de compliance report y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

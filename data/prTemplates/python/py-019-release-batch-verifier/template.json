@@ -7,6 +7,16 @@
     "logic",
     "release"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de verificación de batches de release",
+      "description": "Examina los estados de los jobs para decidir si un batch de release puede salir.",
+      "tags": [
+        "lógica",
+        "release"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Logic is inverted; batches should ship only when all checks passed, not be blocked.",
+      "localizedDescription": {
+        "es": "La lógica está invertida; los batches deben salir solo cuando todos los checks pasan, no bloquearse."
+      },
       "lineNumbers": [
         113
       ]

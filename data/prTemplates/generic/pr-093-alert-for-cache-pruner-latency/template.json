@@ -9,6 +9,18 @@
     "ops",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Cache Pruner",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "limpieza",
+        "hotfix",
+        "ops",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -65,7 +77,10 @@
         102
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue incluyendo un mensaje con TODO."
+      }
     }
   ]
 }

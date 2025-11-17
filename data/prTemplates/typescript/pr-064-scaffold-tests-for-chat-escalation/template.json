@@ -8,6 +8,17 @@
     "cleanup",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Prepara tests para Chat Escalation",
+      "description": "Agrega un spec placeholder a la espera de cobertura posterior.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -39,7 +50,10 @@
         11
       ],
       "severity": "minor",
-      "description": "File only contains test.todo and no actual assertions."
+      "description": "File only contains test.todo and no actual assertions.",
+      "localizedDescription": {
+        "es": "El archivo solo tiene test.todo y no incluye aserciones reales."
+      }
     }
   ]
 }

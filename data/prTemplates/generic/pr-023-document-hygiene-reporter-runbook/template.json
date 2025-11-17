@@ -8,6 +8,17 @@
     "feature",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Hygiene Reporter",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

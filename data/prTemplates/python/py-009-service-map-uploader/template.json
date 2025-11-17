@@ -7,6 +7,16 @@
     "integrations",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para subir el service map",
+      "description": "Agrega un helper práctico para publicar snapshots del service map en la API de mapeo.",
+      "tags": [
+        "integraciones",
+        "ops"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

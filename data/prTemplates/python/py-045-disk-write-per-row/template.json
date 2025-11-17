@@ -7,6 +7,16 @@
     "performance",
     "io"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para exportar filas",
+      "description": "Exporta filas de billing a disco para la conciliación.",
+      "tags": [
+        "rendimiento",
+        "io"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -66,6 +76,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Reopens the file for every row instead of streaming once.",
+      "localizedDescription": {
+        "es": "Reabre el archivo para cada fila en lugar de streamear una única vez."
+      },
       "lineNumbers": [
         91
       ]

@@ -8,6 +8,17 @@
     "refactor",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Endpoint admin para Packet Analyzer",
+      "description": "Agrega una ruta de Express para que admin cargue actualizaciones de configuración.",
+      "tags": [
+        "hotfix",
+        "refactor",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -44,7 +55,10 @@
         45
       ],
       "severity": "critical",
-      "description": "Route lacks any authentication or authorization guard."
+      "description": "Route lacks any authentication or authorization guard.",
+      "localizedDescription": {
+        "es": "La ruta no aplica autenticación ni autorización."
+      }
     }
   ]
 }

@@ -7,6 +7,16 @@
     "analytics",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Calculadora de rollups de segmentos",
+      "description": "Agrega un helper que calcula métricas agregadas de segmentos para los dashboards.",
+      "tags": [
+        "analítica",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

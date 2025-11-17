@@ -7,6 +7,16 @@
     "security",
     "auth"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de logging de credenciales",
+      "description": "Agrega logging para intentos de reseteo de contraseña.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Logs the plaintext password in structured logs.",
+      "localizedDescription": {
+        "es": "Loguea la contraseña en texto plano en logs estructurados."
+      },
       "lineNumbers": [
         24
       ]

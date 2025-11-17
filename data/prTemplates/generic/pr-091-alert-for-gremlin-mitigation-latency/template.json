@@ -8,6 +8,17 @@
     "cleanup",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Gremlin Mitigation",
+      "description": "Agrega una regla de Prometheus para el servicio nuevo.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -64,7 +75,10 @@
         22
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación todavía contiene texto provisional con TODO."
+      }
     }
   ]
 }

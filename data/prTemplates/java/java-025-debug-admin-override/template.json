@@ -7,6 +7,16 @@
     "security",
     "auth"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de override de admin",
+      "description": "Agrega un flag de debug que permite override en los checks de admin.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Debug flag bypasses admin verification entirely.",
+      "localizedDescription": {
+        "es": "El flag de debug evita por completo la verificación de admin."
+      },
       "lineNumbers": [
         68,
         69

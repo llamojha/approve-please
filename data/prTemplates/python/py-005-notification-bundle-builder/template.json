@@ -7,6 +7,16 @@
     "notifications",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega constructor de bundles de notificaciones",
+      "description": "Envuelve listas de notificaciones con metadata generada antes de enviarlas a los canales posteriores.",
+      "tags": [
+        "notificaciones",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

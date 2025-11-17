@@ -7,6 +7,16 @@
     "logic",
     "jobs"
   ],
+  "localized": {
+    "es": {
+      "title": "Guardia del timer de batch",
+      "description": "Controla si el batch excedió su ventana de SLA.",
+      "tags": [
+        "lógica",
+        "jobs"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Marks batches as late while they are still within the limit.",
+      "localizedDescription": {
+        "es": "Marca los batches como tarde mientras siguen dentro del límite."
+      },
       "lineNumbers": [
         103
       ]

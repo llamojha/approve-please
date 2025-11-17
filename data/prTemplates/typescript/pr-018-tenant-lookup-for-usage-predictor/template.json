@@ -9,6 +9,18 @@
     "security",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Búsqueda de tenants para Usage Predictor",
+      "description": "Agrega un helper para obtener las filas más recientes del tenant para reportes.",
+      "tags": [
+        "datos",
+        "hotfix",
+        "seguridad",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -45,7 +57,10 @@
         96
       ],
       "severity": "critical",
-      "description": "Interpolates tenantId directly into SQL, enabling injection."
+      "description": "Interpolates tenantId directly into SQL, enabling injection.",
+      "localizedDescription": {
+        "es": "Interpolas tenantId directamente en SQL, lo que permite inyección."
+      }
     }
   ]
 }

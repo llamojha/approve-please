@@ -7,6 +7,16 @@
     "security",
     "secrets"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para exportar secretos",
+      "description": "Agrega un helper para exportar secretos rotados para los operadores.",
+      "tags": [
+        "seguridad",
+        "secretos"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Writes raw secrets to world-readable temp files.",
+      "localizedDescription": {
+        "es": "Escribe secretos crudos en archivos temporales world-readable."
+      },
       "lineNumbers": [
         29,
         30

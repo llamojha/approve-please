@@ -8,6 +8,17 @@
     "data",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Prepara tests para Smart Alerts",
+      "description": "Agrega un spec placeholder esperando cobertura posterior.",
+      "tags": [
+        "limpieza",
+        "datos",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -39,7 +50,10 @@
         101
       ],
       "severity": "minor",
-      "description": "File only contains test.todo and no actual assertions."
+      "description": "File only contains test.todo and no actual assertions.",
+      "localizedDescription": {
+        "es": "El archivo solo tiene test.todo y no incluye aserciones reales."
+      }
     }
   ]
 }

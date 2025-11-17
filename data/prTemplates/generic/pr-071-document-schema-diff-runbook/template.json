@@ -9,6 +9,18 @@
     "docs",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Schema Diff",
+      "description": "Amplía el runbook con una lista de mitigación clara para on-call.",
+      "tags": [
+        "limpieza",
+        "datos",
+        "documentación",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

@@ -6,6 +6,15 @@
   "tags": [
     "hotfix"
   ],
+  "localized": {
+    "es": {
+      "title": "Crash guard para el importador CSV",
+      "description": "Agrega try/catch y buena telemetría. Completamente testeado.",
+      "tags": [
+        "hotfix"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "src/importer/csv.ts",

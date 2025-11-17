@@ -8,6 +8,17 @@
     "hotfix",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Endpoint admin para SLA Notifier",
+      "description": "Agrega una ruta de Express para que admin aplique actualizaciones de configuración.",
+      "tags": [
+        "documentación",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -44,7 +55,10 @@
         110
       ],
       "severity": "critical",
-      "description": "Route lacks any authentication or authorization guard."
+      "description": "Route lacks any authentication or authorization guard.",
+      "localizedDescription": {
+        "es": "La ruta no aplica ninguna autenticación o autorización."
+      }
     }
   ]
 }

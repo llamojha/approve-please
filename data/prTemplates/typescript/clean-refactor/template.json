@@ -7,6 +7,16 @@
     "ux",
     "copy"
   ],
+  "localized": {
+    "es": {
+      "title": "Mejora el copy de notificaciones",
+      "description": "Refina los mensajes de toast en todo el onboarding.",
+      "tags": [
+        "ux",
+        "copy"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "src/components/OnboardingToast.tsx",

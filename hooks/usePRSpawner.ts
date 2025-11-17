@@ -4,6 +4,7 @@ import { prTemplates, PullRequestTemplate } from '../data/prs';
 import { PullRequest, LanguagePreference, ScriptedWave } from '../types';
 import { instantiatePullRequest } from '../utils/pr';
 import { getCodeLanguages } from '../utils/language';
+import { useLocale } from '../context/LocaleContext';
 
 const templateMap = new Map(prTemplates.map((template) => [template.templateId, template]));
 const DEFAULT_WAVE_MINUTES = [0, 60, 180, 360];
@@ -70,6 +71,7 @@ export const usePRSpawner = () => {
     state: { phase, currentTime, currentDay, queue, currentPR, languagePreference },
     actions: { enqueuePRs }
   } = useGameState();
+  const { locale } = useLocale();
 
   const trackerRef = useRef<WaveTracker>(getWaveTracker(currentDay));
   const workingPoolRef = useRef<PullRequestTemplate[]>([]);
@@ -78,27 +80,30 @@ export const usePRSpawner = () => {
   const trackerResetKeyRef = useRef<string>('');
   const lastHourlyCheckRef = useRef<number>(-1);
 
-  const drawBatch = (count: number, day: number): PullRequest[] => {
-    const results: PullRequest[] = [];
-    for (let i = 0; i < count; i += 1) {
-      if (workingPoolRef.current.length === 0) {
-        workingPoolRef.current = shuffle(basePoolRef.current);
-      }
+  const drawBatch = useCallback(
+    (count: number, day: number): PullRequest[] => {
+      const results: PullRequest[] = [];
+      for (let i = 0; i < count; i += 1) {
+        if (workingPoolRef.current.length === 0) {
+          workingPoolRef.current = shuffle(basePoolRef.current);
+        }
       const template = workingPoolRef.current.shift();
       if (!template) {
         break;
       }
       spawnCountRef.current += 1;
-      const pr = instantiatePullRequest(template, day, spawnCountRef.current);
+      const pr = instantiatePullRequest(template, day, spawnCountRef.current, locale);
       if (process.env.NODE_ENV !== 'production') {
         console.log('[Spawner] Drew PR', pr.id, 'from template', pr.templateId);
       }
       results.push(pr);
-    }
-    return results;
-  };
+      }
+      return results;
+    },
+    [locale]
+  );
 
-const spawnSpecific = useCallback(
+  const spawnSpecific = useCallback(
     (templateIds: string[], day: number): PullRequest[] => {
       const results: PullRequest[] = [];
       templateIds.forEach((templateId) => {
@@ -110,7 +115,7 @@ const spawnSpecific = useCallback(
           return;
         }
         spawnCountRef.current += 1;
-        const pr = instantiatePullRequest(template, day, spawnCountRef.current);
+        const pr = instantiatePullRequest(template, day, spawnCountRef.current, locale);
         if (process.env.NODE_ENV !== 'production') {
           console.log('[Spawner] Scripted PR', pr.id, 'from template', pr.templateId);
         }
@@ -118,7 +123,7 @@ const spawnSpecific = useCallback(
       });
       return results;
     },
-    [languagePreference]
+    [languagePreference, locale]
   );
 
   useEffect(() => {
@@ -190,7 +195,7 @@ const spawnSpecific = useCallback(
         }
       }
     }
-  }, [phase, currentTime, currentDay, enqueuePRs, queue, currentPR, spawnSpecific]);
+  }, [phase, currentTime, currentDay, enqueuePRs, queue, currentPR, spawnSpecific, drawBatch]);
 };
 
 const shuffle = (templates: PullRequestTemplate[]): PullRequestTemplate[] => {

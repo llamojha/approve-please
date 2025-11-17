@@ -7,6 +7,16 @@
     "logic",
     "workflow"
   ],
+  "localized": {
+    "es": {
+      "title": "Detector de timeout de workflow",
+      "description": "Determina si un workflow excedió el timeout configurado.",
+      "tags": [
+        "lógica",
+        "workflow"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Timeout should trip when the elapsed time meets or exceeds the limit, not when it is still below it.",
+      "localizedDescription": {
+        "es": "El timeout debe activarse cuando el tiempo transcurrido alcanza o excede el límite, no cuando todavía está por debajo."
+      },
       "lineNumbers": [
         57
       ]

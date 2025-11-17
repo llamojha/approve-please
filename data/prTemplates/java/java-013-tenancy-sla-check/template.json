@@ -7,6 +7,16 @@
     "logic",
     "billing"
   ],
+  "localized": {
+    "es": {
+      "title": "Check de SLA de tenants",
+      "description": "Determina si un tenant incumplió el SLA de uptime.",
+      "tags": [
+        "lógica",
+        "billing"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Treats higher uptime as a breach rather than falling below the promise.",
+      "localizedDescription": {
+        "es": "Trata un uptime alto como brecha en lugar de detectar cuando cae por debajo de lo prometido."
+      },
       "lineNumbers": [
         53
       ]

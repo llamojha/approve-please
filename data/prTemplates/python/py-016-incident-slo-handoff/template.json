@@ -7,6 +7,16 @@
     "logic",
     "incident"
   ],
+  "localized": {
+    "es": {
+      "title": "Lógica de handoff del capitán de incidentes SLO",
+      "description": "Determina cuándo hacer page al capitán de incidentes según los umbrales de los medidores.",
+      "tags": [
+        "lógica",
+        "incidentes"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Either score falling too low should trigger the page, but the code only fires when both are low.",
+      "localizedDescription": {
+        "es": "Cualquiera de los puntajes que caiga demasiado bajo debería disparar el page, pero el código solo se activa cuando ambos están bajos."
+      },
       "lineNumbers": [
         64
       ]

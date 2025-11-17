@@ -7,6 +7,16 @@
     "logic",
     "partnerships"
   ],
+  "localized": {
+    "es": {
+      "title": "Disparador de penalización para partners",
+      "description": "Determina si un partner debe incurrir en una penalización según su tasa de errores.",
+      "tags": [
+        "lógica",
+        "alianzas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Penalties should apply when error rate rises above the threshold, not below it.",
+      "localizedDescription": {
+        "es": "Las penalizaciones deben aplicarse cuando la tasa de errores supera el umbral, no cuando está por debajo."
+      },
       "lineNumbers": [
         67
       ]

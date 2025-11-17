@@ -8,6 +8,17 @@
     "docs",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Warranty Center",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "limpieza",
+        "documentación",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -64,7 +75,10 @@
         122
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue usando texto provisional con TODO."
+      }
     }
   ]
 }

@@ -7,6 +7,16 @@
     "logic",
     "inventory"
   ],
+  "localized": {
+    "es": {
+      "title": "Guardia del umbral de inventario",
+      "description": "Determina si el inventario necesita reponerse.",
+      "tags": [
+        "lógica",
+        "inventario"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Restock should trigger when stock falls below the minimum, not when it is above it.",
+      "localizedDescription": {
+        "es": "La reposición debe activarse cuando el stock cae por debajo del mínimo, no cuando está por encima."
+      },
       "lineNumbers": [
         59
       ]

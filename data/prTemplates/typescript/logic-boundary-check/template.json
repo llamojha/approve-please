@@ -7,6 +7,16 @@
     "bugfix",
     "billing"
   ],
+  "localized": {
+    "es": {
+      "title": "Fix del período de gracia de facturas",
+      "description": "Permite facturas dentro de una pequeña ventana de gracia antes de alertar a finanzas.",
+      "tags": [
+        "corrección",
+        "billing"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "src/lib/invoice.ts",
@@ -42,7 +52,10 @@
         42
       ],
       "severity": "major",
-      "description": "Should be >= to include final allowed day."
+      "description": "Should be >= to include final allowed day.",
+      "localizedDescription": {
+        "es": "Debe ser >= para incluir el último día permitido."
+      }
     }
   ],
   "importance": "normal"

@@ -7,6 +7,16 @@
     "performance",
     "io"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del writer de batches",
+      "description": "Exporta entradas del ledger a disco para revisión financiera.",
+      "tags": [
+        "rendimiento",
+        "io"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Opens and appends to the same file for every entry instead of streaming once.",
+      "localizedDescription": {
+        "es": "Abre y agrega al mismo archivo por cada entrada en vez de streamear una sola vez."
+      },
       "lineNumbers": [
         121
       ]

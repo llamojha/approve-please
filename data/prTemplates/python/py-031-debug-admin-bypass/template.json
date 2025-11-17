@@ -7,6 +7,16 @@
     "security",
     "auth"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para revisar acceso de admins",
+      "description": "Agrega un helper para verificar si un usuario puede acceder a las herramientas de admin.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Debug flag bypasses admin checks outright.",
+      "localizedDescription": {
+        "es": "El flag de debug evita por completo las verificaciones de admin."
+      },
       "lineNumbers": [
         74
       ]

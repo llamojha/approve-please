@@ -7,6 +7,16 @@
     "logic",
     "growth"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de bucketing de lead scores",
+      "description": "Mapea los lead scores a tiers nombrados para la exportación del CRM.",
+      "tags": [
+        "lógica",
+        "growth"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -76,6 +86,9 @@
       "kind": "logic",
       "severity": "minor",
       "description": "Thresholds are checked in descending order so values above 80 never hit the proper tier.",
+      "localizedDescription": {
+        "es": "Los umbrales se evalúan en orden descendente, así que los valores arriba de 80 nunca caen en el tier correcto."
+      },
       "lineNumbers": [
         76,
         79

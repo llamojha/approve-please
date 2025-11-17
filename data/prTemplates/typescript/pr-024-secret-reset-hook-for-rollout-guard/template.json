@@ -8,6 +8,17 @@
     "infra",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Hook de reseteo de secretos para Rollout Guard",
+      "description": "Agrega un helper que rota los secretos por tenant bajo demanda.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -44,7 +55,10 @@
         36
       ],
       "severity": "major",
-      "description": "Logs the secret value in plain text."
+      "description": "Logs the secret value in plain text.",
+      "localizedDescription": {
+        "es": "Loguea el valor del secreto en texto plano."
+      }
     }
   ]
 }

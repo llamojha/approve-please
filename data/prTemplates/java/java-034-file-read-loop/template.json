@@ -7,6 +7,16 @@
     "performance",
     "io"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del lector de archivos",
+      "description": "Streamea blobs de archivos a procesadores posteriores.",
+      "tags": [
+        "rendimiento",
+        "io"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Loads the entire archive into memory and then slices per byte.",
+      "localizedDescription": {
+        "es": "Carga todo el archivo en memoria y luego lo corta byte por byte."
+      },
       "lineNumbers": [
         29,
         30

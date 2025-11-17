@@ -1,5 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
 import Router from 'next/router';
+import { LocaleContext, LocaleContextValue } from '../../context/LocaleContext';
+import { Locale, TRANSLATIONS } from '../../constants/i18n';
 
 interface HydrationErrorBoundaryProps {
   children: ReactNode;
@@ -21,6 +23,8 @@ class HydrationErrorBoundary extends Component<HydrationErrorBoundaryProps, Hydr
   state: HydrationErrorBoundaryState = {
     hasError: false
   };
+  static contextType = LocaleContext;
+  declare context: LocaleContextValue | undefined;
 
   static getDerivedStateFromError(error: Error): HydrationErrorBoundaryState | null {
     if (isHydrationError(error)) {
@@ -36,7 +40,6 @@ class HydrationErrorBoundary extends Component<HydrationErrorBoundaryProps, Hydr
       }
     } else {
       if (process.env.NODE_ENV !== 'production') {
-        // eslint-disable-next-line no-console
         console.error(error, errorInfo);
       }
     }
@@ -44,9 +47,11 @@ class HydrationErrorBoundary extends Component<HydrationErrorBoundaryProps, Hydr
 
   render() {
     if (this.state.hasError) {
+      const locale: Locale = this.context?.locale ?? 'en';
+      const message = TRANSLATIONS[locale].hydration.refreshing;
       return (
         <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: 'var(--bg)' }}>
-          <p style={{ color: 'var(--muted)' }}>Refreshing your session…</p>
+          <p style={{ color: 'var(--muted)' }}>{message}</p>
         </div>
       );
     }

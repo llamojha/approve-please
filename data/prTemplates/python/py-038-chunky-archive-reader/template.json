@@ -7,6 +7,16 @@
     "performance",
     "storage"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para streamear archivos",
+      "description": "Streamea blobs de archivos a los procesadores posteriores.",
+      "tags": [
+        "rendimiento",
+        "almacenamiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Reads the entire archive into memory before streaming.",
+      "localizedDescription": {
+        "es": "Lee el archivo completo en memoria antes de streamearlo."
+      },
       "lineNumbers": [
         14
       ]

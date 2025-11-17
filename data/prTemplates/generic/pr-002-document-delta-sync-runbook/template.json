@@ -8,6 +8,17 @@
     "feature",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Delta Sync",
+      "description": "Agrega pasos ligeros al runbook para el turno on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

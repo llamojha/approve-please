@@ -9,6 +9,18 @@
     "feature",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Device Heartbeat",
+      "description": "Agrega una regla de Prometheus para el nuevo servicio.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "funcionalidad",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -65,7 +77,10 @@
         122
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación todavía usa texto provisional con TODO."
+      }
     }
   ]
 }

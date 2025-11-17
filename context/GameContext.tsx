@@ -7,7 +7,7 @@ import {
   QUEUE_AGING_MIN_DRAIN,
   QUEUE_AGING_MAX_DRAIN
 } from '../constants/game';
-import { getDayMantra } from '../data/dayMantras';
+import { DayMantra, getDayMantra } from '../data/dayMantras';
 import { getRandomDayQuote } from '../data/dayQuotes';
 import {
   BugKind,
@@ -23,6 +23,8 @@ import {
   PullRequest
 } from '../types';
 import { clamp, calculateQueuePressure } from '../utils/helpers';
+import { GameOverReasonKey } from '../constants/i18n';
+import { useTranslations } from '../hooks/useTranslations';
 
 interface GameState {
   currentDay: number;
@@ -34,8 +36,8 @@ interface GameState {
   meters: MeterSet;
   counters: Counters;
   history: DaySummary[];
-  currentMantra: string;
-  gameOverReason?: string;
+  currentMantra: DayMantra;
+  gameOverReason?: GameOverReasonKey;
   dayQuote: DayQuote;
   prodIncidents: ProdIncident[];
   falsePositiveRecords: FalsePositiveRecord[];
@@ -73,9 +75,9 @@ type GameAction =
   | { type: 'QUEUE_PRS'; prs: PullRequest[] }
   | { type: 'SET_CURRENT_PR'; id: string | null }
   | { type: 'APPLY_DECISION'; processedId: string; counterDelta: Partial<Counters>; meterDelta: Partial<MeterSet> }
-  | { type: 'RESET_FOR_DAY'; nextDay: number; mantra: string }
+  | { type: 'RESET_FOR_DAY'; nextDay: number; mantra: DayMantra }
   | { type: 'PUSH_SUMMARY'; summary: DaySummary }
-  | { type: 'SET_GAME_OVER'; reason: string }
+  | { type: 'SET_GAME_OVER'; reason?: GameOverReasonKey }
   | { type: 'RESET_GAME' }
   | { type: 'SET_LANGUAGE_PREFERENCE'; preference: LanguagePreference }
   | { type: 'LOG_PROD_INCIDENT'; incident: ProdIncident }
@@ -186,11 +188,11 @@ const maybeGameOver = (state: GameState): GameState => {
   }
 
   if (state.meters.stability <= MIN_METER_VALUE) {
-    return { ...state, phase: 'GAME_OVER', gameOverReason: 'Production melted down. The board needed a scapegoat.' };
+    return { ...state, phase: 'GAME_OVER', gameOverReason: 'stability' };
   }
 
   if (state.meters.satisfaction <= MIN_METER_VALUE) {
-    return { ...state, phase: 'GAME_OVER', gameOverReason: 'Management lost confidence in your judgment.' };
+    return { ...state, phase: 'GAME_OVER', gameOverReason: 'satisfaction' };
   }
 
   return state;
@@ -256,7 +258,7 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
       return { ...state, history: [...state.history, action.summary] };
     }
     case 'SET_GAME_OVER': {
-      return { ...state, phase: 'GAME_OVER', gameOverReason: action.reason };
+      return { ...state, phase: 'GAME_OVER', gameOverReason: action.reason ?? 'generic' };
     }
     case 'RESET_GAME': {
       const resetState = createInitialState();
@@ -285,6 +287,7 @@ const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
+  const translations = useTranslations();
 
   const startWork = useCallback(() => {
     dispatch({ type: 'SET_PHASE', phase: 'WORK' });
@@ -309,9 +312,10 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const approveCurrentPR = useCallback((): DecisionResult => {
+    const decisionCopy = translations.decisions;
     const current = state.currentPR;
     if (!current) {
-      return { success: false, status: 'error', message: 'No PR loaded.' };
+      return { success: false, status: 'error', message: decisionCopy.noPR };
     }
 
     const hasBugs = current.bugPatterns.length > 0;
@@ -351,19 +355,20 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     return {
       success: true,
       status: 'approved',
-      message: hasBugs ? 'Bug slipped to prod! Stability took a hit.' : 'PR merged cleanly. Velocity is happy.'
+      message: hasBugs ? decisionCopy.bugSlip : decisionCopy.cleanMerge
     };
-  }, [state.currentPR]);
+  }, [state.currentPR, translations]);
 
   const requestChanges = useCallback(
     ({ selectedLines, bugKind }: RequestChangesPayload): DecisionResult => {
+      const decisionCopy = translations.decisions;
       const current = state.currentPR;
       if (!current) {
-        return { success: false, status: 'error', message: 'No PR loaded.' };
+        return { success: false, status: 'error', message: decisionCopy.noPR };
       }
 
       if (selectedLines.length === 0) {
-        return { success: false, status: 'error', message: 'Highlight at least one suspicious line.' };
+        return { success: false, status: 'error', message: decisionCopy.highlightLine };
       }
 
       const matchingPattern = current.bugPatterns.find(
@@ -384,7 +389,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
           counterDelta,
           meterDelta
         });
-        return { success: true, status: 'true-positive', message: 'Nice catch. You kept prod safe.' };
+        return { success: true, status: 'true-positive', message: decisionCopy.niceCatch };
       }
 
       counterDelta.falsePositives = 1;
@@ -406,9 +411,9 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         counterDelta,
         meterDelta
       });
-      return { success: true, status: 'false-positive', message: 'No matching bug found. Velocity groans.' };
+      return { success: true, status: 'false-positive', message: decisionCopy.noMatching };
     },
-    [state.currentPR]
+    [state.currentPR, translations]
   );
 
   const advanceToNextDay = useCallback(() => {
@@ -424,7 +429,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
     const nextDay = state.currentDay + 1;
     if (state.meters.stability <= 0 || state.meters.satisfaction <= 0) {
-      dispatch({ type: 'SET_GAME_OVER', reason: state.gameOverReason ?? 'Leadership pulled you aside.' });
+      dispatch({ type: 'SET_GAME_OVER', reason: state.gameOverReason ?? 'generic' });
       return;
     }
     const nextMantra = getDayMantra(nextDay);

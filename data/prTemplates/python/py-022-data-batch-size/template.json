@@ -7,6 +7,16 @@
     "logic",
     "data"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para dividir lotes de datos",
+      "description": "Verifica si un lote de registros debe dividirse antes de encolarlo.",
+      "tags": [
+        "lógica",
+        "datos"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Splitting must happen when batches exceed the maximum, not when they are under it.",
+      "localizedDescription": {
+        "es": "Hay que dividir cuando los batches exceden el máximo, no cuando están por debajo."
+      },
       "lineNumbers": [
         85
       ]

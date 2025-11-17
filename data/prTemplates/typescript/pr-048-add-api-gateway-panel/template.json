@@ -9,6 +9,18 @@
     "refactor",
     "ui"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de API Gateway",
+      "description": "Introduce una tarjeta de dashboard con las métricas recientes de API Gateway.",
+      "tags": [
+        "datos",
+        "funcionalidad",
+        "refactor",
+        "ui"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

@@ -7,6 +7,16 @@
     "security",
     "compliance"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para hashear licencias",
+      "description": "Hashea payloads de licencias antes de escribirlos al cache.",
+      "tags": [
+        "seguridad",
+        "compliance"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Uses weak MD5 hashing for license secrets.",
+      "localizedDescription": {
+        "es": "Usa hashing débil MD5 para secretos de licencias."
+      },
       "lineNumbers": [
         26
       ]

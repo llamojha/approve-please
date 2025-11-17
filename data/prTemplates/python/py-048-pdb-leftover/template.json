@@ -7,6 +7,16 @@
     "style",
     "debug"
   ],
+  "localized": {
+    "es": {
+      "title": "Hook de debugger para conciliar batches",
+      "description": "Agrega inspección más rica alrededor del helper de reconcile batch.",
+      "tags": [
+        "estilo",
+        "debug"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "style",
       "severity": "minor",
       "description": "Leaves a pdb breakpoint in production code.",
+      "localizedDescription": {
+        "es": "Deja un breakpoint de pdb en código de producción."
+      },
       "lineNumbers": [
         22
       ]

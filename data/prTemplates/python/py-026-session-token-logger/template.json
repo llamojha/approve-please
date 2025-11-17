@@ -7,6 +7,16 @@
     "security",
     "sessions"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de auditoría de tokens de sesión",
+      "description": "Agrega logs alrededor de la emisión de tokens de sesión para troubleshooting.",
+      "tags": [
+        "seguridad",
+        "sesiones"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -31,6 +41,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Logs the raw session token, leaking credentials into log storage.",
+      "localizedDescription": {
+        "es": "Loguea el token de sesión crudo, filtrando credenciales en el almacenamiento de logs."
+      },
       "lineNumbers": [
         23
       ]

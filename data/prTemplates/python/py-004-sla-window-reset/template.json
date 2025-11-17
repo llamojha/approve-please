@@ -7,6 +7,16 @@
     "sla",
     "maintenance"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para resetear la ventana de SLA",
+      "description": "Agrega un context manager que resetea temporalmente la ventana de seguimiento de SLA durante la recalibración.",
+      "tags": [
+        "sla",
+        "mantenimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

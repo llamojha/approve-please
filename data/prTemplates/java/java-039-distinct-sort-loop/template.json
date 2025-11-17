@@ -7,6 +7,16 @@
     "performance",
     "analytics"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de agregación de latencia",
+      "description": "Agrupa buckets de latencia por endpoint para los dashboards.",
+      "tags": [
+        "rendimiento",
+        "analítica"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -76,6 +86,9 @@
       "kind": "performance",
       "severity": "minor",
       "description": "Sorts each bucket on every iteration instead of once after accumulation.",
+      "localizedDescription": {
+        "es": "Ordena cada bucket en cada iteración en lugar de hacerlo una vez al final."
+      },
       "lineNumbers": [
         39
       ]

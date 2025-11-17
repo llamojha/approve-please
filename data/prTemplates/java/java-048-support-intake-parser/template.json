@@ -7,6 +7,16 @@
     "logic",
     "support"
   ],
+  "localized": {
+    "es": {
+      "title": "Parser de intake de soporte",
+      "description": "Parsea payloads de soporte para determinar la urgencia.",
+      "tags": [
+        "lógica",
+        "soporte"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Treats low severity tickets as urgent while high severity ones fall through.",
+      "localizedDescription": {
+        "es": "Trata los tickets de severidad baja como urgentes mientras los de alta se ignoran."
+      },
       "lineNumbers": [
         66
       ]

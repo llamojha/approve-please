@@ -9,6 +9,18 @@
     "security",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Gremlin Mitigation",
+      "description": "Agrega helpers de paginación para lotes de gremlin mitigation.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "seguridad",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -60,7 +72,10 @@
         117
       ],
       "severity": "minor",
-      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página extra vacía cuando i == items.length."
+      }
     }
   ]
 }

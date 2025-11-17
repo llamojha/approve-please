@@ -8,6 +8,17 @@
     "cleanup",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Carga la configuración de Vault Rotation",
+      "description": "Agrega un helper que recarga la config antes de evaluar la lógica.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -49,7 +60,10 @@
         46
       ],
       "severity": "major",
-      "description": "Uses blocking fs.readFileSync on every call in the request path."
+      "description": "Uses blocking fs.readFileSync on every call in the request path.",
+      "localizedDescription": {
+        "es": "Usa fs.readFileSync (bloqueante) en cada llamada del request path."
+      }
     }
   ]
 }

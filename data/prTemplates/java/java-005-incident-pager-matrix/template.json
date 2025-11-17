@@ -7,6 +7,16 @@
     "incident",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de matriz del pager de incidentes",
+      "description": "Introduce un helper para elegir el contacto on-call correcto según la severidad.",
+      "tags": [
+        "incidentes",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

@@ -7,6 +7,16 @@
     "notifications",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Builder del digest de notificaciones",
+      "description": "Envuelve entradas de notificación con metadata antes de entregar los digests.",
+      "tags": [
+        "notificaciones",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

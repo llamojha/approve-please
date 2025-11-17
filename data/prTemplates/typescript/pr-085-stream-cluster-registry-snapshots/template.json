@@ -8,6 +8,17 @@
     "infra",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Transmite snapshots de Cluster Registry",
+      "description": "Agrega un helper que obtiene snapshots para las herramientas.",
+      "tags": [
+        "corrección",
+        "infra",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -69,7 +80,10 @@
         38
       ],
       "severity": "major",
-      "description": "Fetches every id sequentially without reuse or concurrency."
+      "description": "Fetches every id sequentially without reuse or concurrency.",
+      "localizedDescription": {
+        "es": "Hace fetch de cada id de forma secuencial, sin paralelismo ni reutilización."
+      }
     }
   ]
 }

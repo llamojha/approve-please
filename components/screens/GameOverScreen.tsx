@@ -3,12 +3,20 @@ import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
 import { formatMeterValue } from '../../utils/helpers';
 import { Counters } from '../../types';
+import { useTranslations } from '../../hooks/useTranslations';
 
 const GameOverScreen = () => {
   const {
     state: { currentDay, gameOverReason, counters, meters, history, prodIncidents, falsePositiveRecords },
     actions: { restartGame }
   } = useGameState();
+  const translations = useTranslations();
+  const gameOverText = translations.gameOver;
+  const counterLabels = translations.shared.counters;
+  const meterLabels = translations.shared.meters;
+  const incidentsText = translations.incidents;
+  const bugKindLabels = translations.shared.bugKinds;
+  const severityLabels = translations.shared.severity;
 
   const aggregateCounters = history.reduce<Counters>(
     (totals, day) => ({
@@ -29,70 +37,74 @@ const GameOverScreen = () => {
     falsePositives: aggregateCounters.falsePositives + counters.falsePositives
   };
 
+  const reasonCopy = gameOverReason ? translations.gameOverReasons[gameOverReason] : gameOverText.defaultReason;
+
   return (
     <main className={styles.screenShell}>
       <section className={styles.screenCard}>
-        <span className={styles.gameOverTag}>Game Over</span>
-        <h1>Terminated on Day {currentDay}</h1>
-        <p>{gameOverReason ?? 'Something terrible happened in prod.'}</p>
+        <span className={styles.gameOverTag}>{gameOverText.tag}</span>
+        <h1>{gameOverText.heading(currentDay)}</h1>
+        <p>{reasonCopy}</p>
         <div className={styles.summaryGrid}>
           <div>
-            <small>PRs Approved</small>
+            <small>{counterLabels.prsApproved}</small>
             <h2>{finalCounters.prsApproved}</h2>
           </div>
           <div>
-            <small>PRs Rejected</small>
+            <small>{counterLabels.prsRejected}</small>
             <h2>{finalCounters.prsRejected}</h2>
           </div>
           <div>
-            <small>Bugs to Prod</small>
+            <small>{counterLabels.bugsToProd}</small>
             <h2>{finalCounters.bugsToProd}</h2>
           </div>
           <div>
-            <small>True Positives</small>
+            <small>{counterLabels.truePositives}</small>
             <h2>{finalCounters.truePositives}</h2>
           </div>
           <div>
-            <small>False Positives</small>
+            <small>{counterLabels.falsePositives}</small>
             <h2>{finalCounters.falsePositives}</h2>
           </div>
         </div>
         <div className={styles.summaryGrid} style={{ marginTop: '2rem' }}>
           <div>
-            <small>Stability</small>
+            <small>{meterLabels.stability}</small>
             <h2>{formatMeterValue(meters.stability)}%</h2>
           </div>
           <div>
-            <small>Velocity</small>
+            <small>{meterLabels.velocity}</small>
             <h2>{formatMeterValue(meters.velocity)}%</h2>
           </div>
           <div>
-            <small>Satisfaction</small>
+            <small>{meterLabels.satisfaction}</small>
             <h2>{formatMeterValue(meters.satisfaction)}%</h2>
           </div>
         </div>
         <div className={styles.screenActions}>
           <button type="button" className={styles.screenButton} onClick={restartGame}>
-            Restart Campaign
+            {gameOverText.restartButton}
           </button>
           <Link className={`${styles.screenButton} ${styles.screenButtonSecondary}`} href="/">
-            Back to Title
+            {gameOverText.homeButton}
           </Link>
         </div>
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>
-            <h3>Deployed Bugs</h3>
-            <p className="muted">Final day incidents that melted prod.</p>
+            <h3>{gameOverText.deployedHeading}</h3>
+            <p className="muted">{gameOverText.deployedBody}</p>
             <ul className={styles.incidentList}>
               {prodIncidents.map((incident, index) => (
                 <li key={`${incident.prId}-${incident.bugKind}-${index}`} className={styles.incidentItem}>
                   <div className={styles.incidentMeta}>
                     <div>
                       <strong>{incident.title}</strong>
-                      <div className={styles.incidentSubline}>by {incident.author} · {incident.bugKind} bug</div>
+                      <div className={styles.incidentSubline}>
+                        {incidentsText.byline(incident.author, bugKindLabels[incident.bugKind] ?? incident.bugKind)}
+                      </div>
                     </div>
                     <span className={`${styles.badge} ${styles[`severity${incident.severity.charAt(0).toUpperCase()}${incident.severity.slice(1)}`]}`}>
-                      {incident.severity}
+                      {severityLabels[incident.severity] ?? incident.severity}
                     </span>
                   </div>
                   {incident.description && <p className={styles.incidentNote}>{incident.description}</p>}
@@ -110,22 +122,29 @@ const GameOverScreen = () => {
         )}
         {falsePositiveRecords.length > 0 && (
           <section className={styles.incidentSection}>
-            <h3>False Positives</h3>
-            <p className="muted">Where you slowed velocity on the final day.</p>
+            <h3>{gameOverText.falseHeading}</h3>
+            <p className="muted">{gameOverText.falseBody}</p>
             <ul className={styles.incidentList}>
               {falsePositiveRecords.map((record, index) => (
                 <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
                   <div className={styles.incidentMeta}>
                     <div>
                       <strong>{record.title}</strong>
-                      <div className={styles.incidentSubline}>by {record.author}</div>
+                      <div className={styles.incidentSubline}>{incidentsText.authorOnly(record.author)}</div>
                     </div>
                     <span className={`${styles.badge} ${styles.badgeNeutral}`}>
-                      {record.claimedKind} suspicion
+                      {incidentsText.falseBadge(bugKindLabels[record.claimedKind] ?? record.claimedKind)}
                     </span>
                   </div>
                   <p className={styles.incidentNote}>
-                    You flagged a {record.claimedKind} issue. Actual bugs: {record.actualBugKinds.length > 0 ? record.actualBugKinds.join(', ') : 'none'}.
+                    {incidentsText.falseNote(
+                      bugKindLabels[record.claimedKind] ?? record.claimedKind,
+                      record.actualBugKinds.length > 0
+                        ? record.actualBugKinds
+                            .map((kind) => bugKindLabels[kind] ?? kind)
+                            .join(', ')
+                        : incidentsText.none
+                    )}
                   </p>
                   {record.selectedLines.length > 0 && (
                     <ul className={styles.lineList}>

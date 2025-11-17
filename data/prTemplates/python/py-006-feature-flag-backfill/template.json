@@ -7,6 +7,16 @@
     "feature-flags",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para backfills de feature flags",
+      "description": "Crea un payload estructurado para backfills de feature flags para que el orquestador pueda auditar las solicitudes.",
+      "tags": [
+        "feature-flags",
+        "ops"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

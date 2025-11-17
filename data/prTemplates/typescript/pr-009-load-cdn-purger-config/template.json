@@ -8,6 +8,17 @@
     "feature",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Carga la configuración de CDN Purger",
+      "description": "Agrega un helper que recarga la configuración antes de evaluar la lógica.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -49,7 +60,10 @@
         41
       ],
       "severity": "major",
-      "description": "Uses blocking fs.readFileSync on every call in the request path."
+      "description": "Uses blocking fs.readFileSync on every call in the request path.",
+      "localizedDescription": {
+        "es": "Usa fs.readFileSync (bloqueante) en cada llamada del request path."
+      }
     }
   ]
 }

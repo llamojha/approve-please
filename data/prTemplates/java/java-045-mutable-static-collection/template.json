@@ -7,6 +7,16 @@
     "style",
     "maintainability"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del roster estático",
+      "description": "Define el roster por defecto de reviewers.",
+      "tags": [
+        "estilo",
+        "mantenibilidad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "style",
       "severity": "minor",
       "description": "Exposes a mutable static list instead of immutable roster.",
+      "localizedDescription": {
+        "es": "Expone una lista estática mutable en lugar de un roster inmutable."
+      },
       "lineNumbers": [
         17
       ]

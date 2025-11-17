@@ -7,6 +7,16 @@
     "cleanup",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Notification Center",
+      "description": "Agrega un helper para normalizar entradas de notification center y mantener consistentes los jobs.",
+      "tags": [
+        "limpieza",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

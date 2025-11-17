@@ -7,6 +7,16 @@
     "docs",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "README: elimina la API key expuesta",
+      "description": "Limpia una API key que se comprometió por error en la documentación.",
+      "tags": [
+        "documentación",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -41,7 +51,10 @@
       "kind": "security",
       "lineNumbers": [121],
       "severity": "major",
-      "description": "README contains a live API key in the sample command."
+      "description": "README contains a live API key in the sample command.",
+      "localizedDescription": {
+        "es": "El README incluye una API key real en el comando de ejemplo."
+      }
     }
   ]
 }

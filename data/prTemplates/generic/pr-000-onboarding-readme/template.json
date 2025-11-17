@@ -7,6 +7,17 @@
     "docs",
     "tutorial"
   ],
+  "localized": {
+    "es": {
+      "title": "Recordatorio de onboarding en el README",
+      "description": "Agrega un recordatorio breve en el README para que lxs nuevxs reviewers resalten los bugs.",
+      "tags": [
+        "documentación",
+        "tutorial"
+      ],
+      "author": "Lena Q."
+    }
+  },
   "importance": "low",
   "files": [
     {

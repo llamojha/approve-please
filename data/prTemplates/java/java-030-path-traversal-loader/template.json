@@ -7,6 +7,16 @@
     "security",
     "filesystem"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para cargar templates",
+      "description": "Carga templates markdown desde disco para notificaciones.",
+      "tags": [
+        "seguridad",
+        "filesystem"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Concatenates user-supplied names into paths without normalization.",
+      "localizedDescription": {
+        "es": "Concatena nombres provistos por el usuario en rutas sin normalización."
+      },
       "lineNumbers": [
         38
       ]

@@ -9,6 +9,18 @@
     "refactor",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Hygiene Reporter",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "refactor",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -60,7 +72,10 @@
         111
       ],
       "severity": "major",
-      "description": "Condition uses assignment instead of comparison, mutating payload.status."
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y cambia payload.status."
+      }
     }
   ]
 }

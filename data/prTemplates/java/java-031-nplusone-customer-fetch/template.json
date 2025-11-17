@@ -7,6 +7,16 @@
     "performance",
     "database"
   ],
+  "localized": {
+    "es": {
+      "title": "Hidratador de fetch de clientes",
+      "description": "Hidrata perfiles de clientes antes de renderizar el dashboard.",
+      "tags": [
+        "rendimiento",
+        "base de datos"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -91,6 +101,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Executes one query per id instead of batching.",
+      "localizedDescription": {
+        "es": "Ejecuta una consulta por id en lugar de agrupar en batch."
+      },
       "lineNumbers": [
         84
       ]

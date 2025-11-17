@@ -7,6 +7,16 @@
     "style",
     "parsing"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del parser de payloads",
+      "description": "Parsea payloads JSON que pasan por el resolver.",
+      "tags": [
+        "estilo",
+        "parseo"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -66,6 +76,9 @@
       "kind": "style",
       "severity": "major",
       "description": "Swallows all exceptions and returns an empty map.",
+      "localizedDescription": {
+        "es": "Se traga todas las excepciones y devuelve un map vacío."
+      },
       "lineNumbers": [
         37,
         38

@@ -7,6 +7,16 @@
     "logic",
     "queue"
   ],
+  "localized": {
+    "es": {
+      "title": "Refuerza el guard de presión de la cola",
+      "description": "Agrega un helper que decide cuándo la cola del orquestador está sobrecargada.",
+      "tags": [
+        "lógica",
+        "cola"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Comparison is inverted; backlog should trigger when pending exceeds the limit, not when it is below.",
+      "localizedDescription": {
+        "es": "La comparación está invertida; el backlog debe activarse cuando los pendientes superan el límite, no cuando están por debajo."
+      },
       "lineNumbers": [
         62
       ]

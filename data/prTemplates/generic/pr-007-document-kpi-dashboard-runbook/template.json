@@ -8,6 +8,17 @@
     "feature",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de KPI Dashboard",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

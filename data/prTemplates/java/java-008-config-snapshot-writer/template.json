@@ -7,6 +7,16 @@
     "config",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Writer de snapshots de config",
+      "description": "Agrega un helper para persistir snapshots de config antes de los deploys.",
+      "tags": [
+        "config",
+        "ops"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

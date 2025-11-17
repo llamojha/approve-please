@@ -7,6 +7,16 @@
     "performance",
     "analytics"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de agregación de eventos",
+      "description": "Agrupa las duraciones de eventos para dashboards.",
+      "tags": [
+        "rendimiento",
+        "analítica"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "performance",
       "severity": "minor",
       "description": "Sorts the bucket on every iteration instead of once after aggregation.",
+      "localizedDescription": {
+        "es": "Ordena el bucket en cada iteración en lugar de hacerlo una vez al final de la agregación."
+      },
       "lineNumbers": [
         62
       ]

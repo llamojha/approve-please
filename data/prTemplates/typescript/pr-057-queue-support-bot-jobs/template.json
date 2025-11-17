@@ -9,6 +9,18 @@
     "ops",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Encola jobs de Support Bot",
+      "description": "Envía los jobs validados a la cola del worker async.",
+      "tags": [
+        "corrección",
+        "hotfix",
+        "ops",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -70,7 +82,10 @@
         101
       ],
       "severity": "major",
-      "description": "Publishes the job even when the id is missing instead of returning early."
+      "description": "Publishes the job even when the id is missing instead of returning early.",
+      "localizedDescription": {
+        "es": "Publica el job aunque falta el id en lugar de finalizar antes."
+      }
     }
   ]
 }

@@ -1,33 +1,37 @@
 import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { Counters } from '../../types';
+import { useTranslations } from '../../hooks/useTranslations';
 
 interface StatsPanelProps {
   counters: Counters;
 }
 
 const StatsPanel = ({ counters }: StatsPanelProps) => {
+  const translations = useTranslations();
+  const statsText = translations.work.stats;
+
   return (
-    <Panel title="Metrics">
+    <Panel title={statsText.title}>
       <div className={styles.statsGrid}>
-        <div title="PRs you merged today. These keep features flowing but risky ones can hurt stability.">
-          <small>Approved</small>
+        <div title={statsText.tooltips.approved}>
+          <small>{statsText.labels.approved}</small>
           <strong>{counters.prsApproved}</strong>
         </div>
-        <div title="PRs you rejected with requested changes. Slows things down but can prevent incidents.">
-          <small>Rejected</small>
+        <div title={statsText.tooltips.rejected}>
+          <small>{statsText.labels.rejected}</small>
           <strong>{counters.prsRejected}</strong>
         </div>
-        <div title="Bugs that escaped to production from approved PRs. Too many will tank stability.">
-          <small>Bugs to Prod</small>
+        <div title={statsText.tooltips.bugsToProd}>
+          <small>{statsText.labels.bugsToProd}</small>
           <strong>{counters.bugsToProd}</strong>
         </div>
-        <div title="Correct catches where you called out a real bug before it shipped.">
-          <small>True Positives</small>
+        <div title={statsText.tooltips.truePositives}>
+          <small>{statsText.labels.truePositives}</small>
           <strong>{counters.truePositives}</strong>
         </div>
-        <div title="False alarms where you flagged a bug that wasn’t there, costing time and goodwill.">
-          <small>False Positives</small>
+        <div title={statsText.tooltips.falsePositives}>
+          <small>{statsText.labels.falsePositives}</small>
           <strong>{counters.falsePositives}</strong>
         </div>
       </div>

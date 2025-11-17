@@ -7,6 +7,16 @@
     "security",
     "oauth"
   ],
+  "localized": {
+    "es": {
+      "title": "Validador de scopes OAuth",
+      "description": "Valida que los scopes OAuth solicitados estén aprobados.",
+      "tags": [
+        "seguridad",
+        "oauth"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -31,6 +41,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Allows requests if any single scope matches instead of requiring every requested scope.",
+      "localizedDescription": {
+        "es": "Permite solicitudes si un único scope coincide en lugar de exigir que todos los scopes solicitados estén permitidos."
+      },
       "lineNumbers": [
         59
       ]

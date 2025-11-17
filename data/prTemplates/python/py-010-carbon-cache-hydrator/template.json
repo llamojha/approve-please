@@ -7,6 +7,16 @@
     "data",
     "jobs"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega job hidratador para la carbon cache",
+      "description": "Crea el payload del job para hidratar el dataset de carbon cache.",
+      "tags": [
+        "datos",
+        "jobs"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

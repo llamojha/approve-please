@@ -8,6 +8,17 @@
     "docs",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Usage Analytics",
+      "description": "Agrega pasos ligeros al runbook para el turno on-call.",
+      "tags": [
+        "limpieza",
+        "documentación",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

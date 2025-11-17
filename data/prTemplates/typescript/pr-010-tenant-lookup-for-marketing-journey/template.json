@@ -8,6 +8,17 @@
     "hotfix",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Búsqueda de tenants para Marketing Journey",
+      "description": "Agrega un helper para obtener las filas más recientes del tenant para reportes.",
+      "tags": [
+        "corrección",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -44,7 +55,10 @@
         21
       ],
       "severity": "critical",
-      "description": "Interpolates tenantId directly into SQL, enabling injection."
+      "description": "Interpolates tenantId directly into SQL, enabling injection.",
+      "localizedDescription": {
+        "es": "Interpolas tenantId directamente en la consulta SQL, lo que habilita inyección."
+      }
     }
   ]
 }

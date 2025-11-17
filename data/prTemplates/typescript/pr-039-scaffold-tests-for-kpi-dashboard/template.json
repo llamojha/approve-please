@@ -9,6 +9,18 @@
     "security",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Prepara tests para KPI Dashboard",
+      "description": "Agrega un spec placeholder a la espera de cobertura posterior.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "seguridad",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -40,7 +52,10 @@
         76
       ],
       "severity": "minor",
-      "description": "File only contains test.todo and no actual assertions."
+      "description": "File only contains test.todo and no actual assertions.",
+      "localizedDescription": {
+        "es": "El archivo solo tiene test.todo y no incluye aserciones reales."
+      }
     }
   ]
 }

@@ -7,6 +7,16 @@
     "security",
     "integrations"
   ],
+  "localized": {
+    "es": {
+      "title": "Verificador de firmas de webhooks",
+      "description": "Agrega verificación para callbacks de webhooks de partners.",
+      "tags": [
+        "seguridad",
+        "integraciones"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -36,6 +46,9 @@
       "kind": "security",
       "severity": "critical",
       "description": "Simply compares to the signature field in the payload instead of computing an HMAC.",
+      "localizedDescription": {
+        "es": "Solo compara contra el campo signature del payload en vez de calcular un HMAC."
+      },
       "lineNumbers": [
         53,
         54

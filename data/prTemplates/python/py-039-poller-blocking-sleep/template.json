@@ -7,6 +7,16 @@
     "performance",
     "queue"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del poller de colas",
+      "description": "Hace poll de items de la cola y agrega sus estados.",
+      "tags": [
+        "rendimiento",
+        "cola"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -66,6 +76,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Sleeps two seconds per job ID instead of using backoff per batch.",
+      "localizedDescription": {
+        "es": "Duerme dos segundos por cada job ID en vez de usar backoff por batch."
+      },
       "lineNumbers": [
         76
       ]

@@ -9,6 +9,18 @@
     "infra",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Error Bucketing",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "infra",
+        "performance"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

@@ -8,6 +8,17 @@
     "hotfix",
     "infra"
   ],
+  "localized": {
+    "es": {
+      "title": "Wrapper de job en TypeScript para Packet Analyzer",
+      "description": "Agrega un helper liviano en TypeScript que normaliza los payloads del job.",
+      "tags": [
+        "funcionalidad",
+        "hotfix",
+        "infra"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

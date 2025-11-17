@@ -13,12 +13,16 @@ import StatsPanel from '../work/StatsPanel';
 import ActionPanel from '../work/ActionPanel';
 import AccessibilityPanel from '../work/AccessibilityPanel';
 import MeterHud from '../work/MeterHud';
+import { useTranslations } from '../../hooks/useTranslations';
+import { useLocale } from '../../context/LocaleContext';
 
 const WorkScreen = () => {
   const {
     state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote },
     actions: { selectPR, approveCurrentPR, requestChanges }
   } = useGameState();
+  const translations = useTranslations();
+  const { locale } = useLocale();
   useGameClock();
   usePRSpawner();
   const { playCue, playArrivalCue } = useAudioCue();
@@ -98,7 +102,7 @@ const WorkScreen = () => {
         <div className={styles.leftColumn}>
           <ClockDisplay currentTime={currentTime} />
           <QueuePanel queue={queue} currentId={currentPR?.id ?? null} onSelect={selectPR} />
-          <p className={styles.queueHint}>{queuedCount} awaiting review</p>
+          <p className={styles.queueHint}>{translations.shared.queueAwaiting(queuedCount)}</p>
         </div>
         <div className={styles.centerColumn}>
           <MeterHud meters={meters} queue={queue} />
@@ -123,7 +127,7 @@ const WorkScreen = () => {
         <div className={styles.rightColumn}>
           <RulebookPanel
             day={currentDay}
-            mantra={currentMantra}
+            mantra={currentMantra?.[locale] ?? currentMantra?.en ?? translations.shared.operationsFallback}
             dayQuote={dayQuote}
           />
           <StatsPanel counters={counters} />

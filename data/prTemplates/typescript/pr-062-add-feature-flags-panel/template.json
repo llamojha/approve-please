@@ -8,6 +8,17 @@
     "infra",
     "ui"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de Feature Flags",
+      "description": "Introduce una tarjeta de dashboard con las métricas recientes de feature flags.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "ui"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

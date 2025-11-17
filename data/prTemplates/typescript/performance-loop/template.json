@@ -7,6 +7,16 @@
     "feature",
     "reporting"
   ],
+  "localized": {
+    "es": {
+      "title": "Export detallado de proyectos",
+      "description": "Agrega agregación anidada para la exportación CSV.",
+      "tags": [
+        "funcionalidad",
+        "reportes"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "src/services/exporter.ts",
@@ -60,7 +70,10 @@
         61
       ],
       "severity": "major",
-      "description": "N+1 queries inside nested loops."
+      "description": "N+1 queries inside nested loops.",
+      "localizedDescription": {
+        "es": "Consultas N+1 dentro de loops anidados."
+      }
     }
   ],
   "importance": "normal"

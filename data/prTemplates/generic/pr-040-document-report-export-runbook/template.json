@@ -9,6 +9,18 @@
     "docs",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Report Export",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "documentación",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

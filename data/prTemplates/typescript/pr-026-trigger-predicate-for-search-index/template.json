@@ -8,6 +8,17 @@
     "feature",
     "refactor"
   ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Search Index",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "refactor"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -59,7 +70,10 @@
         66
       ],
       "severity": "major",
-      "description": "Condition uses assignment instead of comparison, mutating payload.status."
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y modifica payload.status."
+      }
     }
   ]
 }

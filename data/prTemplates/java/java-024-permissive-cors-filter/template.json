@@ -7,6 +7,16 @@
     "security",
     "api"
   ],
+  "localized": {
+    "es": {
+      "title": "Actualización del filtro CORS",
+      "description": "Ajusta el filtro CORS por defecto para la API de admin.",
+      "tags": [
+        "seguridad",
+        "api"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -66,6 +76,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Exposes admin API to all origins by returning a wildcard.",
+      "localizedDescription": {
+        "es": "Expone la API de admin a todos los orígenes al devolver un wildcard."
+      },
       "lineNumbers": [
         24
       ]

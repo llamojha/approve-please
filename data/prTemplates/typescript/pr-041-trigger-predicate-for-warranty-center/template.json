@@ -8,6 +8,17 @@
     "feature",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Warranty Center",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -59,7 +70,10 @@
         81
       ],
       "severity": "major",
-      "description": "Condition uses assignment instead of comparison, mutating payload.status."
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condición usa asignación en lugar de comparación y modifica payload.status."
+      }
     }
   ]
 }

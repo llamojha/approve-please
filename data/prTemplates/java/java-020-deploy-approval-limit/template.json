@@ -7,6 +7,16 @@
     "logic",
     "release"
   ],
+  "localized": {
+    "es": {
+      "title": "Checker del límite de aprobaciones de deploy",
+      "description": "Hace cumplir la cantidad máxima de aprobaciones necesarias por deploy.",
+      "tags": [
+        "lógica",
+        "release"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Inverts the comparison so the deploy is blocked until approvals drop below the minimum.",
+      "localizedDescription": {
+        "es": "Invierte la comparación, bloqueando el deploy hasta que las aprobaciones bajan del mínimo."
+      },
       "lineNumbers": [
         46
       ]

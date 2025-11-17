@@ -7,6 +7,16 @@
     "security",
     "access"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de allowlist para el control plane",
+      "description": "Agrega un helper para hacer cumplir las allowlists de deployers.",
+      "tags": [
+        "seguridad",
+        "acceso"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Fails open when the allowlist is empty instead of blocking access.",
+      "localizedDescription": {
+        "es": "Hace fail-open cuando la allowlist está vacía en vez de bloquear el acceso."
+      },
       "lineNumbers": [
         48
       ]

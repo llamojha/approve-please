@@ -7,6 +7,16 @@
     "security",
     "auth"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del bind LDAP",
+      "description": "Agrega un helper para hacer bind contra LDAP como fallback de SSO.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Builds LDAP filters with unescaped input, enabling injection.",
+      "localizedDescription": {
+        "es": "Construye filtros LDAP con input sin escapar, habilitando inyección."
+      },
       "lineNumbers": [
         43
       ]

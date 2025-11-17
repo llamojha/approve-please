@@ -7,6 +7,16 @@
     "backend",
     "resilience"
   ],
+  "localized": {
+    "es": {
+      "title": "Builder del hook de failover por región",
+      "description": "Agrega un helper para construir eventos de failover con timestamps para la consola de operaciones.",
+      "tags": [
+        "backend",
+        "resiliencia"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

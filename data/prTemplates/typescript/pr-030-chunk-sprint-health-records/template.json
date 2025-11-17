@@ -9,6 +9,18 @@
     "hotfix",
     "refactor"
   ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Sprint Health",
+      "description": "Agrega helpers de paginación para lotes de sprint health.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "hotfix",
+        "refactor"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -60,7 +72,10 @@
         117
       ],
       "severity": "minor",
-      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página extra vacía cuando i == items.length."
+      }
     }
   ]
 }

@@ -8,6 +8,17 @@
     "refactor",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Prepara tests para Content Moderation",
+      "description": "Agrega un spec placeholder a la espera de cobertura posterior.",
+      "tags": [
+        "limpieza",
+        "refactor",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -39,7 +50,10 @@
         61
       ],
       "severity": "minor",
-      "description": "File only contains test.todo and no actual assertions."
+      "description": "File only contains test.todo and no actual assertions.",
+      "localizedDescription": {
+        "es": "El archivo solo contiene test.todo y no tiene aserciones reales."
+      }
     }
   ]
 }

@@ -7,6 +7,16 @@
     "security",
     "sql"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para consultas de auditoría",
+      "description": "Agrega un helper para obtener filas de auditoría de un tenant.",
+      "tags": [
+        "seguridad",
+        "sql"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "security",
       "severity": "critical",
       "description": "Concatenates tenant input into SQL, allowing injection.",
+      "localizedDescription": {
+        "es": "Concatena el input del tenant en SQL, permitiendo inyección."
+      },
       "lineNumbers": [
         72
       ]

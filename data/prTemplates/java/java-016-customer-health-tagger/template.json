@@ -7,6 +7,16 @@
     "logic",
     "success"
   ],
+  "localized": {
+    "es": {
+      "title": "Tagger de health de clientes",
+      "description": "Calcula tags de salud para snapshots de clientes.",
+      "tags": [
+        "lógica",
+        "éxito"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -81,6 +91,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Calculates utilization as purchased/active rather than active/purchased.",
+      "localizedDescription": {
+        "es": "Calcula la utilización como compradas/activas en lugar de activas/compradas."
+      },
       "lineNumbers": [
         44
       ]

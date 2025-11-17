@@ -7,6 +7,16 @@
     "style",
     "metrics"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del colector de métricas",
+      "description": "Colecciona métricas antes de entregarlas al exporter.",
+      "tags": [
+        "estilo",
+        "métricas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -36,6 +46,9 @@
       "kind": "style",
       "severity": "major",
       "description": "Uses a mutable default list that is shared across calls.",
+      "localizedDescription": {
+        "es": "Usa una lista mutable como default que se comparte entre llamadas."
+      },
       "lineNumbers": [
         47
       ]

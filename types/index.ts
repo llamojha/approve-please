@@ -5,6 +5,7 @@ export interface BugPattern {
   lineNumbers: number[];
   severity: 'minor' | 'major' | 'critical';
   description?: string;
+  localizedDescription?: Partial<Record<Locale, string>>;
 }
 
 export interface PRLine {
@@ -37,6 +38,8 @@ export interface PullRequest {
   estimatedReviewSeconds: number;
 }
 
+export type Locale = 'en' | 'es';
+
 export interface ProdIncident {
   prId: string;
   title: string;
@@ -56,12 +59,21 @@ export interface FalsePositiveRecord {
   actualBugKinds: BugKind[];
 }
 
-export interface PullRequestTemplate extends Omit<PullRequest, 'id' | 'estimatedReviewSeconds'> {}
+export interface PRLocalizedMetadata {
+  title?: string;
+  description?: string;
+  tags?: string[];
+  author?: string;
+}
+
+export interface PullRequestTemplate extends Omit<PullRequest, 'id' | 'estimatedReviewSeconds'> {
+  localized?: Partial<Record<Locale, PRLocalizedMetadata>>;
+}
 
 export interface DayQuote {
   speaker: string;
-  role: string;
-  text: string;
+  role: Record<Locale, string>;
+  text: Record<Locale, string>;
 }
 
 export type LanguagePreference = 'any' | string;

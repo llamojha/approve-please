@@ -7,6 +7,16 @@
     "security",
     "auth"
   ],
+  "localized": {
+    "es": {
+      "title": "Aplicación del vencimiento de sesión",
+      "description": "Los refresh tokens no deben extender sesiones más allá de 30 días.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
   "files": [
     {
       "filename": "src/auth/session.ts",
@@ -37,7 +47,10 @@
         27
       ],
       "severity": "major",
-      "description": "Refresh token path uses age in hours, not days."
+      "description": "Refresh token path uses age in hours, not days.",
+      "localizedDescription": {
+        "es": "La ruta del refresh token usa la edad en horas, no en días."
+      }
     }
   ],
   "importance": "high"

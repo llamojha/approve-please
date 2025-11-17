@@ -7,6 +7,16 @@
     "style",
     "parsing"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para parsear payloads",
+      "description": "Parsea payloads JSON que pasan por el resolver.",
+      "tags": [
+        "estilo",
+        "parseo"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "style",
       "severity": "major",
       "description": "Catches bare Exception and silently drops the payload.",
+      "localizedDescription": {
+        "es": "Atrapa una Exception genérica y descarta el payload en silencio."
+      },
       "lineNumbers": [
         45,
         46

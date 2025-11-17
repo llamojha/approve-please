@@ -7,6 +7,16 @@
     "security",
     "storage"
   ],
+  "localized": {
+    "es": {
+      "title": "Uploader de adjuntos de facturas",
+      "description": "Agrega un helper para subir PDFs de facturas al object storage.",
+      "tags": [
+        "seguridad",
+        "almacenamiento"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -31,6 +41,9 @@
       "kind": "security",
       "severity": "critical",
       "description": "Marks invoice uploads as public-read instead of private.",
+      "localizedDescription": {
+        "es": "Marca los uploads de facturas como public-read en lugar de privados."
+      },
       "lineNumbers": [
         15
       ]

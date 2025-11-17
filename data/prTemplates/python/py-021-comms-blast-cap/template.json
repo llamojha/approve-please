@@ -7,6 +7,16 @@
     "logic",
     "marketing"
   ],
+  "localized": {
+    "es": {
+      "title": "Lógica del límite de blasts de comunicaciones",
+      "description": "Decide si se puede enviar otro blast de marketing en este minuto.",
+      "tags": [
+        "lógica",
+        "marketing"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "When the cap is reached we must stop sending, yet this returns True.",
+      "localizedDescription": {
+        "es": "Cuando se alcanza el límite hay que dejar de enviar, pero aquí se retorna True."
+      },
       "lineNumbers": [
         20
       ]

@@ -9,6 +9,18 @@
     "feature",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Session Cleanup",
+      "description": "Agrega un helper para normalizar entradas de limpieza de sesiones y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "funcionalidad",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

@@ -7,6 +7,16 @@
     "performance",
     "async"
   ],
+  "localized": {
+    "es": {
+      "title": "Publisher de eventos async",
+      "description": "Publica eventos async hacia un SSE emitter.",
+      "tags": [
+        "rendimiento",
+        "async"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Blocks on each future sequentially instead of chaining them, defeating concurrency.",
+      "localizedDescription": {
+        "es": "Bloquea cada future secuencialmente en vez de encadenarlos, eliminando la concurrencia."
+      },
       "lineNumbers": [
         51
       ]

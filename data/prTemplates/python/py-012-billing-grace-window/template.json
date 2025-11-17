@@ -7,6 +7,16 @@
     "billing",
     "logic"
   ],
+  "localized": {
+    "es": {
+      "title": "Ajusta la lógica de la ventana de gracia de billing",
+      "description": "Actualiza el helper que determina cuándo las facturas salen del período de gracia.",
+      "tags": [
+        "billing",
+        "lógica"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Grace window should treat the final allowed day as late, so the comparison must be >=.",
+      "localizedDescription": {
+        "es": "La ventana de gracia debe tratar el último día permitido como tarde, por eso la comparación debe ser >=."
+      },
       "lineNumbers": [
         45
       ]

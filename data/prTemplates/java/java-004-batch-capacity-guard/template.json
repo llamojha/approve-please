@@ -7,6 +7,16 @@
     "logic",
     "queue"
   ],
+  "localized": {
+    "es": {
+      "title": "Guardia de capacidad de batch",
+      "description": "Agrega un helper para determinar cuándo las colas de batch están llenas.",
+      "tags": [
+        "lógica",
+        "cola"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Returns true when the queue is already at or above capacity.",
+      "localizedDescription": {
+        "es": "Devuelve true cuando la cola ya está en o por encima de la capacidad."
+      },
       "lineNumbers": [
         49
       ]

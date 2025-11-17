@@ -7,6 +7,16 @@
     "security",
     "integrations"
   ],
+  "localized": {
+    "es": {
+      "title": "Checker de firmas de webhook",
+      "description": "Agrega validación de firmas para webhooks de billing.",
+      "tags": [
+        "seguridad",
+        "integraciones"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "security",
       "severity": "critical",
       "description": "Compares provided signature to an untrusted field in the payload.",
+      "localizedDescription": {
+        "es": "Compara la firma provista contra un campo no confiable del payload."
+      },
       "lineNumbers": [
         74,
         75

@@ -8,6 +8,17 @@
     "jobs",
     "maintenance"
   ],
+  "localized": {
+    "es": {
+      "title": "Programa el hook del job de cache warmer",
+      "description": "Agrega un helper para encolar el job de cache warmer cinco minutos antes con metadata tipada.",
+      "tags": [
+        "backend",
+        "jobs",
+        "mantenimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

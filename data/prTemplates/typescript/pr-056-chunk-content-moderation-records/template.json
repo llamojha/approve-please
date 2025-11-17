@@ -8,6 +8,17 @@
     "docs",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Divide los registros de Content Moderation",
+      "description": "Agrega helpers de paginación para lotes de moderación de contenido.",
+      "tags": [
+        "corrección",
+        "documentación",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -59,7 +70,10 @@
         22
       ],
       "severity": "minor",
-      "description": "Loop uses <= and yields an empty extra page when i equals items.length."
+      "description": "Loop uses <= and yields an empty extra page when i equals items.length.",
+      "localizedDescription": {
+        "es": "El loop usa <= y genera una página extra vacía cuando i == items.length."
+      }
     }
   ]
 }

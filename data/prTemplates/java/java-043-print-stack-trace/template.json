@@ -7,6 +7,16 @@
     "style",
     "error-handling"
   ],
+  "localized": {
+    "es": {
+      "title": "Handler de fallas de alertas",
+      "description": "Maneja excepciones al enviar alertas.",
+      "tags": [
+        "estilo",
+        "manejo de errores"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "style",
       "severity": "minor",
       "description": "Prints stack traces directly instead of logging or surfacing the error.",
+      "localizedDescription": {
+        "es": "Imprime los stack traces directamente en vez de loguear o surfacing el error."
+      },
       "lineNumbers": [
         56
       ]

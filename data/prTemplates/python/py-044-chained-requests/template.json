@@ -7,6 +7,16 @@
     "performance",
     "http"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para obtener scores",
+      "description": "Obtiene scores de calidad para un batch de IDs de experimentos.",
+      "tags": [
+        "rendimiento",
+        "http"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Issues one HTTP request per ID despite a batch endpoint existing.",
+      "localizedDescription": {
+        "es": "Hace una solicitud HTTP por ID a pesar de que existe un endpoint batch."
+      },
       "lineNumbers": [
         63
       ]

@@ -7,6 +7,16 @@
     "cleanup",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Alerta por latencia en Cron Orchestrator",
+      "description": "Agrega una regla de Prometheus para el servicio nuevo.",
+      "tags": [
+        "limpieza",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -63,7 +73,10 @@
         57
       ],
       "severity": "minor",
-      "description": "Annotation still contains TODO messaging."
+      "description": "Annotation still contains TODO messaging.",
+      "localizedDescription": {
+        "es": "La anotación sigue usando un mensaje con TODO."
+      }
     }
   ]
 }

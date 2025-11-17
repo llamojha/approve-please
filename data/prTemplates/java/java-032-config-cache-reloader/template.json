@@ -7,6 +7,16 @@
     "performance",
     "config"
   ],
+  "localized": {
+    "es": {
+      "title": "Recargador de cache de config",
+      "description": "Recarga la config de feature flags en cada request.",
+      "tags": [
+        "rendimiento",
+        "config"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "performance",
       "severity": "minor",
       "description": "Reads and parses the config file on every call instead of caching.",
+      "localizedDescription": {
+        "es": "Lee y parsea el archivo de config en cada llamada en vez de cachearlo."
+      },
       "lineNumbers": [
         60,
         61

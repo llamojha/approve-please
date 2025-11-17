@@ -9,6 +9,18 @@
     "ops",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Schema Diff",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "ops",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

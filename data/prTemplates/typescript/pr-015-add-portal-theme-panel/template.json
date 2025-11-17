@@ -9,6 +9,18 @@
     "performance",
     "ui"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega panel de Portal Theme",
+      "description": "Introduce una tarjeta de dashboard que muestra las métricas recientes del tema del portal.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "rendimiento",
+        "ui"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

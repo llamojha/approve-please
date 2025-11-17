@@ -7,6 +7,16 @@
     "logic",
     "alerts"
   ],
+  "localized": {
+    "es": {
+      "title": "Evaluador de ventana de silencio de alertas",
+      "description": "Determina si una alerta debe seguir silenciada.",
+      "tags": [
+        "lógica",
+        "alertas"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Silence should hold until the future timestamp; this returns True once time has elapsed.",
+      "localizedDescription": {
+        "es": "El silencio debe mantenerse hasta el timestamp futuro; esto devuelve True cuando el tiempo ya pasó."
+      },
       "lineNumbers": [
         51
       ]

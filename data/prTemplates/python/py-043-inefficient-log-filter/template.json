@@ -7,6 +7,16 @@
     "performance",
     "logging"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para filtrar logs",
+      "description": "Filtra líneas de log por patrón antes de enviarlas a las herramientas de soporte.",
+      "tags": [
+        "rendimiento",
+        "logging"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -66,6 +76,9 @@
       "kind": "performance",
       "severity": "minor",
       "description": "Compiles the regex on every iteration instead of compiling once.",
+      "localizedDescription": {
+        "es": "Compila el regex en cada iteración en lugar de compilarlo una sola vez."
+      },
       "lineNumbers": [
         26
       ]

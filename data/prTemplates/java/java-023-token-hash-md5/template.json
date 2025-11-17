@@ -7,6 +7,16 @@
     "security",
     "hashing"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para hashear tokens",
+      "description": "Introduce un helper para hashear tokens antes de cachearlos.",
+      "tags": [
+        "seguridad",
+        "hashing"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Uses MD5 for hashing secrets.",
+      "localizedDescription": {
+        "es": "Usa MD5 para hashear secretos."
+      },
       "lineNumbers": [
         33
       ]

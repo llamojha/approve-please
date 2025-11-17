@@ -7,6 +7,16 @@
     "logic",
     "planning"
   ],
+  "localized": {
+    "es": {
+      "title": "Mapeador de riesgo de sprint",
+      "description": "Mapea el puntaje de bloqueos a un nivel de riesgo para la salud del sprint.",
+      "tags": [
+        "lógica",
+        "planificación"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -51,6 +61,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Higher blocker scores mean more risk, so the first comparison should flip to >=.",
+      "localizedDescription": {
+        "es": "Los puntajes de bloqueos más altos significan más riesgo, así que la primera comparación debe invertirse a >=."
+      },
       "lineNumbers": [
         26
       ]

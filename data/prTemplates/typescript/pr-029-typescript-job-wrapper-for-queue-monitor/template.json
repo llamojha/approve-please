@@ -8,6 +8,17 @@
     "infra",
     "refactor"
   ],
+  "localized": {
+    "es": {
+      "title": "Wrapper de job en TypeScript para Queue Monitor",
+      "description": "Agrega un helper liviano que normaliza los payloads del job de queue monitor.",
+      "tags": [
+        "funcionalidad",
+        "infra",
+        "refactor"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

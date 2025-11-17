@@ -8,6 +8,17 @@
     "feature",
     "refactor"
   ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de Notification Center",
+      "description": "Agrega pasos ligeros al runbook para la rotación on-call.",
+      "tags": [
+        "documentación",
+        "funcionalidad",
+        "refactor"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

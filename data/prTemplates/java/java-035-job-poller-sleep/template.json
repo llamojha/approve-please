@@ -7,6 +7,16 @@
     "performance",
     "queue"
   ],
+  "localized": {
+    "es": {
+      "title": "Loop del poller de jobs",
+      "description": "Hace poll de estados de jobs de forma secuencial.",
+      "tags": [
+        "rendimiento",
+        "cola"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -86,6 +96,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Sleeps two seconds per job instead of using a backoff per batch.",
+      "localizedDescription": {
+        "es": "Duerme dos segundos por job en vez de usar un backoff por batch."
+      },
       "lineNumbers": [
         68,
         69

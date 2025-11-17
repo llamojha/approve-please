@@ -7,6 +7,16 @@
     "style",
     "cleanup"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper para sanear payloads",
+      "description": "Envuelve payloads antes de enviarlos al command bus.",
+      "tags": [
+        "estilo",
+        "limpieza"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "style",
       "severity": "minor",
       "description": "Ships a TODO meant only for a hotfix, keeping debug defaults enabled.",
+      "localizedDescription": {
+        "es": "Envía un TODO que era solo para un hotfix, dejando el debug habilitado por defecto."
+      },
       "lineNumbers": [
         25,
         26

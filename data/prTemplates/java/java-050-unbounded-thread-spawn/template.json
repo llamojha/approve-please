@@ -7,6 +7,16 @@
     "performance",
     "concurrency"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del procesador de tareas",
+      "description": "Lanza hilos worker por cada tarea en el backlog.",
+      "tags": [
+        "rendimiento",
+        "concurrencia"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -56,6 +66,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Creates an unbounded number of threads instead of using the shared executor.",
+      "localizedDescription": {
+        "es": "Crea un número ilimitado de hilos en lugar de usar el executor compartido."
+      },
       "lineNumbers": [
         58
       ]

@@ -7,6 +7,16 @@
     "logic",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Selector de rotaciones de ops",
+      "description": "Selecciona el slot correcto de la rotación on-call.",
+      "tags": [
+        "lógica",
+        "ops"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -46,6 +56,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Indexes list.size() which is out of bounds instead of size - 1.",
+      "localizedDescription": {
+        "es": "Indexa list.size(), que está fuera de rango, en vez de size - 1."
+      },
       "lineNumbers": [
         37
       ]

@@ -1,6 +1,8 @@
 import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { DayQuote } from '../../types';
+import { useTranslations } from '../../hooks/useTranslations';
+import { useLocale } from '../../context/LocaleContext';
 
 interface RulebookPanelProps {
   day: number;
@@ -9,17 +11,24 @@ interface RulebookPanelProps {
 }
 
 const RulebookPanel = ({ day, dayQuote, mantra }: RulebookPanelProps) => {
-  const headingDescriptor = mantra || 'Operations';
+  const translations = useTranslations();
+  const { locale } = useLocale();
+  const descriptor = mantra || translations.shared.operationsFallback;
+  const quoteText = dayQuote ? dayQuote.text[locale] ?? dayQuote.text.en : null;
+  const quoteRole = dayQuote ? dayQuote.role[locale] ?? dayQuote.role.en : null;
 
   return (
-    <Panel title={`Day ${day} – ${headingDescriptor}`}>
-      {dayQuote ? (
+    <Panel title={translations.shared.dayHeading(day, descriptor)}>
+      {dayQuote && quoteText ? (
         <blockquote className={styles.briefingQuote}>
-          <p>&ldquo;{dayQuote.text}&rdquo;</p>
-          <footer>— {dayQuote.speaker}</footer>
+          <p>&ldquo;{quoteText}&rdquo;</p>
+          <footer>
+            — {dayQuote.speaker}
+            {quoteRole ? `, ${quoteRole}` : ''}
+          </footer>
         </blockquote>
       ) : (
-        <p className={styles.rulebookEmpty}>No directives today. Trust your instincts.</p>
+        <p className={styles.rulebookEmpty}>{translations.work.rulebook.empty}</p>
       )}
     </Panel>
   );

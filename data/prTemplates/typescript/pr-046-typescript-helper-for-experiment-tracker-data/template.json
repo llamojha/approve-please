@@ -9,6 +9,18 @@
     "hotfix",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de TypeScript para datos de Experiment Tracker",
+      "description": "Agrega un helper de SQL crudo para obtener filas de la organización.",
+      "tags": [
+        "corrección",
+        "limpieza",
+        "hotfix",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -45,7 +57,10 @@
         76
       ],
       "severity": "critical",
-      "description": "Builds SQL via string interpolation and allows injection."
+      "description": "Builds SQL via string interpolation and allows injection.",
+      "localizedDescription": {
+        "es": "Construye SQL con interpolación de strings y permite inyección."
+      }
     }
   ]
 }

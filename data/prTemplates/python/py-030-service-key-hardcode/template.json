@@ -7,6 +7,16 @@
     "security",
     "infra"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de headers para la service key",
+      "description": "Agrega headers helper para el cliente de sincronización de partners.",
+      "tags": [
+        "seguridad",
+        "infra"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Hard-codes a live service key inside the repository.",
+      "localizedDescription": {
+        "es": "Hardcodea una service key live dentro del repositorio."
+      },
       "lineNumbers": [
         9,
         15

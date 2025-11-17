@@ -7,6 +7,16 @@
     "performance",
     "allocations"
   ],
+  "localized": {
+    "es": {
+      "title": "Builder de payloads JSON",
+      "description": "Construye un payload JSON para la exportación de analytics.",
+      "tags": [
+        "rendimiento",
+        "asignaciones"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -66,6 +76,9 @@
       "kind": "performance",
       "severity": "minor",
       "description": "Concatenates large JSON strings repeatedly instead of using a buffer.",
+      "localizedDescription": {
+        "es": "Concatena strings JSON grandes repetidamente en lugar de usar un buffer."
+      },
       "lineNumbers": [
         66,
         68

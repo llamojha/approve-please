@@ -8,6 +8,17 @@
     "hotfix",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Encola jobs de Hygiene Reporter",
+      "description": "Envía los jobs validados a la cola del worker async.",
+      "tags": [
+        "corrección",
+        "hotfix",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -69,7 +80,10 @@
         81
       ],
       "severity": "major",
-      "description": "Publishes the job even when the id is missing instead of returning early."
+      "description": "Publishes the job even when the id is missing instead of returning early.",
+      "localizedDescription": {
+        "es": "Publica el job aunque falta el id, en vez de cortar antes."
+      }
     }
   ]
 }

@@ -1,23 +1,29 @@
 import { useRouter } from 'next/router';
 import { useGameState } from '../context/GameContext';
 import { LanguagePreference } from '../types';
+import { useLocale } from '../context/LocaleContext';
+import { useTranslations } from '../hooks/useTranslations';
+import { LOCALE_OPTIONS } from '../constants/i18n';
 
 interface LanguageOption {
   value: LanguagePreference;
-  label: string;
   disabled?: boolean;
 }
 
 const LANGUAGE_OPTIONS: LanguageOption[] = [
-  { value: 'any', label: 'Any' },
-  { value: 'typescript', label: 'TypeScript' },
-  { value: 'python', label: 'Python' },
-  { value: 'java', label: 'Java' },
-  { value: 'rust', label: 'Rust', disabled: true }
+  { value: 'any' },
+  { value: 'typescript' },
+  { value: 'python' },
+  { value: 'java' },
+  { value: 'rust', disabled: true }
 ];
 
 const IndexPage = () => {
   const router = useRouter();
+  const { locale, setLocale } = useLocale();
+  const translations = useTranslations();
+  const landing = translations.landing;
+  const languagePreferenceLabels = landing.languageOptions;
 
   const {
     state: { languagePreference },
@@ -26,44 +32,52 @@ const IndexPage = () => {
 
   return (
     <main className="landing">
+      <div className="landing__locale-toggle" role="group" aria-label={translations.localeToggleLabel}>
+        {LOCALE_OPTIONS.map(({ value, label }) => (
+          <button
+            type="button"
+            key={value}
+            className={locale === value ? 'active' : ''}
+            aria-pressed={locale === value}
+            onClick={() => setLocale(value)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
       <section className="landing__card">
         <div className="landing__intro">
-          <h1>Approve Please</h1>
-          <p className="landing__blurb">
-            Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.
-          </p>
+          <h1>{landing.title}</h1>
+          <p className="landing__blurb">{landing.blurb}</p>
         </div>
         <section className="landing__primer">
           <div className="landing__primer-header">
-            <small>Mission Brief</small>
-            <span>Ship fast, stop bugs, and don’t lose leadership’s trust.</span>
+            <small>{landing.missionHeading}</small>
+            <span>{landing.missionTagline}</span>
           </div>
-          <p>
-            Every day you triage a queue of PRs from 9–17h. Approve clean diffs to keep features moving, but catch the
-            risky ones before they reach prod. Keep all three meters above zero to survive the week.
-          </p>
+          <p>{landing.primer}</p>
           <dl className="landing__primer-stats">
             <div>
-              <dt>Stability</dt>
-              <dd>Shows prod health. Drops when buggy PRs sneak through, rises when you block real issues.</dd>
+              <dt>{landing.stats.stability.title}</dt>
+              <dd>{landing.stats.stability.description}</dd>
             </div>
             <div>
-              <dt>Velocity</dt>
-              <dd>Measures throughput. Approvals and quick reviews boost it, but false alarms drag it down.</dd>
+              <dt>{landing.stats.velocity.title}</dt>
+              <dd>{landing.stats.velocity.description}</dd>
             </div>
             <div>
-              <dt>Satisfaction</dt>
-              <dd>Tracks leadership patience. Smart calls earn grace; needless delays or outages tank morale.</dd>
+              <dt>{landing.stats.satisfaction.title}</dt>
+              <dd>{landing.stats.satisfaction.description}</dd>
             </div>
           </dl>
         </section>
         <section className="landing__language">
           <div className="landing__language-header">
-            <small>Preferred Language</small>
-            <span>Docs & config PRs always appear.</span>
+            <small>{landing.languageHeader}</small>
+            <span>{landing.languageSubtitle}</span>
           </div>
           <div className="landing__language-options">
-            {LANGUAGE_OPTIONS.map(({ value, label, disabled }) => (
+            {LANGUAGE_OPTIONS.map(({ value, disabled }) => (
               <button
                 type="button"
                 key={value}
@@ -76,8 +90,8 @@ const IndexPage = () => {
                 }}
                 disabled={disabled}
               >
-                {label}
-                {disabled ? ' (soon)' : ''}
+                {languagePreferenceLabels[value] ?? value}
+                {disabled ? ` ${landing.comingSoon}` : ''}
               </button>
             ))}
           </div>
@@ -88,7 +102,7 @@ const IndexPage = () => {
             className="landing__cta"
             onClick={() => router.push('/game')}
           >
-            <span>Start Your Day</span>
+            <span>{landing.startCta}</span>
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
               <path
                 d="M5 10h10M11 6l4 4-4 4"
@@ -110,6 +124,7 @@ const IndexPage = () => {
           justify-content: center;
           padding: 0.125rem;
           background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 50%), var(--bg);
+          position: relative;
         }
         .landing__card {
           position: relative;
@@ -124,6 +139,41 @@ const IndexPage = () => {
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
+        }
+        .landing__locale-toggle {
+          position: fixed;
+          top: 1rem;
+          right: 1rem;
+          display: flex;
+          gap: 0.25rem;
+          padding: 0.25rem;
+          border-radius: 999px;
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          background: rgba(4, 10, 21, 0.75);
+          box-shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
+          backdrop-filter: blur(8px);
+          z-index: 10;
+        }
+        .landing__locale-toggle button {
+          border: none;
+          background: transparent;
+          color: #e2e8f0;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          padding: 0.35rem 0.85rem;
+          border-radius: 999px;
+          cursor: pointer;
+          transition: background 0.2s, color 0.2s;
+        }
+        .landing__locale-toggle button.active {
+          background: rgba(56, 189, 248, 0.85);
+          color: #04111f;
+        }
+        .landing__locale-toggle button:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
         }
         .landing__intro {
           background: rgba(6, 12, 29, 0.55);

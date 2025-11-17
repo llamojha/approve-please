@@ -7,6 +7,16 @@
     "security",
     "integrations"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper de headers para partners",
+      "description": "Agrega un helper para construir headers de la API de partners.",
+      "tags": [
+        "seguridad",
+        "integraciones"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -71,6 +81,9 @@
       "kind": "security",
       "severity": "major",
       "description": "Commits a live service key inside the source.",
+      "localizedDescription": {
+        "es": "Committea una service key live dentro del código fuente."
+      },
       "lineNumbers": [
         18
       ]

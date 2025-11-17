@@ -7,6 +7,16 @@
     "compliance",
     "logging"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega formateador para access journal",
+      "description": "Agrega un helper para normalizar las filas del access journal antes de escribirlas en disco.",
+      "tags": [
+        "compliance",
+        "logging"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

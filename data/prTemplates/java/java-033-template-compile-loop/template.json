@@ -7,6 +7,16 @@
     "performance",
     "templates"
   ],
+  "localized": {
+    "es": {
+      "title": "Loop de compilación de templates",
+      "description": "Renderiza templates de email de SLA para cada tenant.",
+      "tags": [
+        "rendimiento",
+        "templates"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -91,6 +101,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Compiles the template and instantiates the engine for every tenant.",
+      "localizedDescription": {
+        "es": "Compila la plantilla e instancia el engine para cada tenant."
+      },
       "lineNumbers": [
         95,
         102

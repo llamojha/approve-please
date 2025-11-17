@@ -9,6 +9,18 @@
     "infra",
     "ops"
   ],
+  "localized": {
+    "es": {
+      "title": "Wrapper de job en TypeScript para Audit Pipeline",
+      "description": "Agrega un helper liviano en TypeScript que normaliza los payloads del job de audit pipeline.",
+      "tags": [
+        "corrección",
+        "funcionalidad",
+        "infra",
+        "ops"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

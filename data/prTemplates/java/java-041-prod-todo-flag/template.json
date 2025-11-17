@@ -7,6 +7,16 @@
     "style",
     "cleanup"
   ],
+  "localized": {
+    "es": {
+      "title": "Sanitizador de feature flags",
+      "description": "Agrega un helper para sanear payloads antes de enviarlos al command bus.",
+      "tags": [
+        "estilo",
+        "limpieza"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -61,6 +71,9 @@
       "kind": "style",
       "severity": "minor",
       "description": "Ships a TODO that keeps debug mode forced on.",
+      "localizedDescription": {
+        "es": "Envía un TODO que mantiene habilitado el modo debug."
+      },
       "lineNumbers": [
         32,
         33

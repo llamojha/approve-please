@@ -9,6 +9,18 @@
     "ops",
     "performance"
   ],
+  "localized": {
+    "es": {
+      "title": "Hidrata los dispositivos de Support Inbox",
+      "description": "Agrega un helper que obtiene la matriz completa de dispositivos para reportes.",
+      "tags": [
+        "funcionalidad",
+        "hotfix",
+        "ops",
+        "rendimiento"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -80,7 +92,10 @@
         55
       ],
       "severity": "major",
-      "description": "Nested awaits call the API for every user-device pair serially."
+      "description": "Nested awaits call the API for every user-device pair serially.",
+      "localizedDescription": {
+        "es": "Los awaits anidados llaman a la API para cada par usuario-dispositivo en serie."
+      }
     }
   ]
 }

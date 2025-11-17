@@ -3,11 +3,22 @@
   "title": "Trigger predicate for Report Export",
   "author": "Gabe K.",
   "description": "Adds a conditional helper that determines whether jobs should run.",
-  "tags": [
-    "bugfix",
-    "data",
-    "feature"
-  ],
+ "tags": [
+   "bugfix",
+   "data",
+   "feature"
+ ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Report Export",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "corrección",
+        "datos",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -55,11 +66,14 @@
   "bugPatterns": [
     {
       "kind": "logic",
-      "lineNumbers": [
-        101
-      ],
-      "severity": "major",
-      "description": "Condition uses assignment instead of comparison, mutating payload.status."
-    }
-  ]
+     "lineNumbers": [
+       101
+     ],
+     "severity": "major",
+     "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+     "localizedDescription": {
+       "es": "La condición usa asignación en lugar de comparación y cambia payload.status."
+     }
+   }
+ ]
 }

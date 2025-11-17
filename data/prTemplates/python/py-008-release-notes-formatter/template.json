@@ -7,6 +7,16 @@
     "release",
     "docs"
   ],
+  "localized": {
+    "es": {
+      "title": "Agrega formateador de release notes",
+      "description": "Provee un formateador reutilizable para entradas de release notes antes de publicarlas en Slack.",
+      "tags": [
+        "release",
+        "documentación"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

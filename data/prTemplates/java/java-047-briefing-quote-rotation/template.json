@@ -7,6 +7,16 @@
     "narrative",
     "feature"
   ],
+  "localized": {
+    "es": {
+      "title": "Rotador de frases del briefing",
+      "description": "Agrega un helper para rotar las frases diarias del briefing.",
+      "tags": [
+        "narrativa",
+        "funcionalidad"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {

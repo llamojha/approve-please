@@ -7,6 +7,16 @@
     "performance",
     "metrics"
   ],
+  "localized": {
+    "es": {
+      "title": "Helper del serializador de métricas",
+      "description": "Serializa métricas con un overlay de esquema antes de publicarlas.",
+      "tags": [
+        "rendimiento",
+        "métricas"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {
@@ -86,6 +96,9 @@
       "kind": "performance",
       "severity": "major",
       "description": "Reads and parses the schema file inside the loop for every metric.",
+      "localizedDescription": {
+        "es": "Lee y parsea el archivo de esquema dentro del loop para cada métrica."
+      },
       "lineNumbers": [
         37
       ]

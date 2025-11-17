@@ -7,6 +7,16 @@
     "logic",
     "resilience"
   ],
+  "localized": {
+    "es": {
+      "title": "Guardia del budget de reintentos",
+      "description": "Determina si el budget de reintentos se consumió para la ventana actual.",
+      "tags": [
+        "lógica",
+        "resiliencia"
+      ]
+    }
+  },
   "importance": "high",
   "files": [
     {
@@ -41,6 +51,9 @@
       "kind": "logic",
       "severity": "major",
       "description": "Retrying should be blocked once consumption reaches the budget, not while there is still slack.",
+      "localizedDescription": {
+        "es": "Los reintentos deben bloquearse cuando el consumo alcanza el budget, no mientras todavía queda margen."
+      },
       "lineNumbers": [
         31
       ]

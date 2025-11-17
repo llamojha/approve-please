@@ -9,6 +9,18 @@
     "refactor",
     "security"
   ],
+  "localized": {
+    "es": {
+      "title": "Normaliza los payloads de Release Coordinator",
+      "description": "Agrega un helper para normalizar entradas del coordinador de releases y mantener consistentes los jobs posteriores.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "refactor",
+        "seguridad"
+      ]
+    }
+  },
   "importance": "normal",
   "files": [
     {

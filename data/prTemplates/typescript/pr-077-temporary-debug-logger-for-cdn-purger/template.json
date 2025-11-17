@@ -9,6 +9,18 @@
     "performance",
     "tests"
   ],
+  "localized": {
+    "es": {
+      "title": "Logger temporal de debug para CDN Purger",
+      "description": "Agrega un helper para que QA inspeccione payloads durante las pruebas.",
+      "tags": [
+        "limpieza",
+        "funcionalidad",
+        "rendimiento",
+        "pruebas"
+      ]
+    }
+  },
   "importance": "low",
   "files": [
     {
@@ -50,7 +62,10 @@
         41
       ],
       "severity": "minor",
-      "description": "TODO/console log left in production path."
+      "description": "TODO/console log left in production path.",
+      "localizedDescription": {
+        "es": "Quedó un TODO/console log en la ruta de producción."
+      }
     }
   ]
 }
