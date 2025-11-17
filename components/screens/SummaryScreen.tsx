@@ -1,5 +1,6 @@
 import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
+import { formatMeterValue } from '../../utils/helpers';
 
 const SummaryScreen = () => {
   const {
@@ -37,15 +38,15 @@ const SummaryScreen = () => {
         <div className={styles.summaryGrid} style={{ marginTop: '2rem' }}>
           <div>
             <small>Stability</small>
-            <h2>{meters.stability}%</h2>
+            <h2>{formatMeterValue(meters.stability)}%</h2>
           </div>
           <div>
             <small>Velocity</small>
-            <h2>{meters.velocity}%</h2>
+            <h2>{formatMeterValue(meters.velocity)}%</h2>
           </div>
           <div>
             <small>Satisfaction</small>
-            <h2>{meters.satisfaction}%</h2>
+            <h2>{formatMeterValue(meters.satisfaction)}%</h2>
           </div>
         </div>
         <div className={styles.screenActions}>

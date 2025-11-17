@@ -54,6 +54,7 @@ const ActionPanel = ({
             className={`${styles.actionButton} ${styles.requestButton}`}
             onClick={onRequestChanges}
             disabled={!canRequest}
+            title={!canRequest ? 'Click the line number to highlight a suspicious row.' : undefined}
           >
             <span>Request Changes</span>
             <kbd className={styles.hotkeyBadge}>R</kbd>

@@ -497,6 +497,12 @@
   text-align: center;
 }
 
+.meterHudGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
 .meterStack {
   display: flex;
   flex-direction: column;
@@ -515,6 +521,19 @@
   font-size: 0.9rem;
 }
 
+.meterHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.meterTrend {
+  color: var(--danger);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  animation: meterPulse 1s ease-in-out infinite alternate;
+}
+
 .meterTrack {
   height: 6px;
   background: rgba(255, 255, 255, 0.08);
@@ -526,6 +545,15 @@
   height: 100%;
   border-radius: 999px;
   background: var(--accent);
+}
+
+@keyframes meterPulse {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .bugKindButtons {

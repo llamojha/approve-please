@@ -12,6 +12,7 @@ import RulebookPanel from '../work/RulebookPanel';
 import StatsPanel from '../work/StatsPanel';
 import ActionPanel from '../work/ActionPanel';
 import AccessibilityPanel from '../work/AccessibilityPanel';
+import MeterHud from '../work/MeterHud';
 
 const WorkScreen = () => {
   const {
@@ -100,6 +101,7 @@ const WorkScreen = () => {
           <p className={styles.queueHint}>{queuedCount} awaiting review</p>
         </div>
         <div className={styles.centerColumn}>
+          <MeterHud meters={meters} queue={queue} />
           <PRViewer
             pr={currentPR}
             selectedLines={selectedLines}
@@ -126,7 +128,7 @@ const WorkScreen = () => {
             mood={activeConfig.mood}
             dayQuote={dayQuote}
           />
-          <StatsPanel counters={counters} meters={meters} />
+          <StatsPanel counters={counters} meters={meters} queue={queue} />
           <AccessibilityPanel />
         </div>
       </div>

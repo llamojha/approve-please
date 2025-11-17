@@ -1,5 +1,12 @@
 import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
-import { MAX_METER_VALUE, MIN_METER_VALUE, WORK_DAY_MINUTES } from '../constants/game';
+import {
+  MAX_METER_VALUE,
+  MIN_METER_VALUE,
+  WORK_DAY_MINUTES,
+  QUEUE_PRESSURE_CHEVRON_CAP,
+  QUEUE_AGING_MIN_DRAIN,
+  QUEUE_AGING_MAX_DRAIN
+} from '../constants/game';
 import { getDayConfig } from '../data/dayConfigs';
 import { getRandomDayQuote } from '../data/dayQuotes';
 import {
@@ -14,7 +21,7 @@ import {
   Rule,
   DayQuote
 } from '../types';
-import { clamp } from '../utils/helpers';
+import { clamp, calculateQueuePressure } from '../utils/helpers';
 
 interface GameState {
   currentDay: number;
@@ -80,7 +87,7 @@ const createInitialCounters = (): Counters => ({
 
 const createInitialMeters = (): MeterSet => ({
   stability: 100,
-  velocity: 55,
+  velocity: 100,
   satisfaction: 100
 });
 
@@ -104,6 +111,38 @@ const createInitialState = (): GameState => {
 };
 
 const initialState: GameState = createInitialState();
+
+const computeQueueDrain = (pressure: number): number => {
+  if (pressure <= 0) {
+    return 0;
+  }
+  const clamped = Math.min(pressure, QUEUE_PRESSURE_CHEVRON_CAP);
+  if (clamped <= 1) {
+    return clamped * QUEUE_AGING_MIN_DRAIN;
+  }
+  const progress = (clamped - 1) / (QUEUE_PRESSURE_CHEVRON_CAP - 1);
+  return QUEUE_AGING_MIN_DRAIN + progress * (QUEUE_AGING_MAX_DRAIN - QUEUE_AGING_MIN_DRAIN);
+};
+
+const getQueueAgingDelta = (queue: PullRequest[]): Partial<MeterSet> | null => {
+  if (queue.length === 0) {
+    return null;
+  }
+  const pressure = calculateQueuePressure(queue);
+  if (pressure <= 0) {
+    return null;
+  }
+
+  const drain = computeQueueDrain(pressure);
+  if (drain <= 0) {
+    return null;
+  }
+
+  return {
+    velocity: -drain,
+    satisfaction: -drain
+  };
+};
 
 const applyCounterDelta = (base: Counters, delta: Partial<Counters>): Counters => {
   const result: Counters = { ...base };
@@ -149,7 +188,10 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
       const nextTime = Math.min(state.currentTime + action.minutes, WORK_DAY_MINUTES);
       const reachedEnd = nextTime >= WORK_DAY_MINUTES;
       const nextPhase: GamePhase = reachedEnd ? 'SUMMARY' : state.phase;
-      return { ...state, currentTime: nextTime, phase: nextPhase };
+      const queueAgingDelta = getQueueAgingDelta(state.queue);
+      const meters = queueAgingDelta ? applyMeterDelta(state.meters, queueAgingDelta) : state.meters;
+      const nextState = { ...state, currentTime: nextTime, phase: nextPhase, meters };
+      return maybeGameOver(nextState);
     }
     case 'QUEUE_PRS': {
       if (action.prs.length === 0) {

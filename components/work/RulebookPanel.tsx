@@ -12,19 +12,9 @@ interface RulebookPanelProps {
 
 const RulebookPanel = ({ rules, day, codename, dayQuote, mood }: RulebookPanelProps) => {
   const headingDescriptor = mood || codename || 'Operations';
-  const showCodenameBadge = Boolean(codename && headingDescriptor !== codename);
 
   return (
-    <Panel
-      title={`Day ${day} – ${headingDescriptor}`}
-      titleHint={
-        showCodenameBadge ? (
-          <span className={styles.moodBadge} aria-label="Scenario codename">
-            {codename}
-          </span>
-        ) : null
-      }
-    >
+    <Panel title={`Day ${day} – ${headingDescriptor}`}>
       {dayQuote && (
         <blockquote className={styles.briefingQuote}>
           <p>&ldquo;{dayQuote.text}&rdquo;</p>
@@ -40,9 +30,7 @@ const RulebookPanel = ({ rules, day, codename, dayQuote, mood }: RulebookPanelPr
             </li>
           ))}
         </ol>
-      ) : (
-        <p className={styles.ruleEmptyState}>No mandates—just ride the vibe.</p>
-      )}
+      ) : null}
     </Panel>
   );
 };
