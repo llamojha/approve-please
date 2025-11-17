@@ -21,7 +21,7 @@
         },
         {
           "lineNumber": 76,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 0, ttlMs: 240000, auditTrail: true, controlSet: [] };",
           "isNew": true
         },
         {
@@ -51,16 +51,36 @@
         },
         {
           "lineNumber": 82,
-          "content": "    };",
+          "content": "      auditTrail: input.auditTrail ?? defaults.auditTrail,",
           "isNew": true
         },
         {
           "lineNumber": 83,
-          "content": "    return normalized;",
+          "content": "      controlSet: input.controlSet ?? defaults.controlSet,",
           "isNew": true
         },
         {
           "lineNumber": 84,
+          "content": "      reportingWindow: input.reportingWindow ?? 'current-quarter',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "      reviewer: input.reviewer ?? 'compliance-bot',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
           "content": "  }",
           "isNew": true
         }

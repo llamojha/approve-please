@@ -2,12 +2,12 @@
   "templateId": "pr-071-document-schema-diff-runbook",
   "title": "Document Schema Diff runbook",
   "author": "Akiko F.",
-  "description": "Adds lightweight runbook steps for the on-call rotation.",
+  "description": "Expands the schema diff runbook with a clear mitigation checklist for on-call.",
   "tags": [
     "cleanup",
     "data",
     "docs",
-    "feature"
+    "ops"
   ],
   "importance": "low",
   "files": [
@@ -16,28 +16,93 @@
       "language": "markdown",
       "lines": [
         {
-          "lineNumber": 15,
-          "content": "## Schema Diff Runbook",
+          "lineNumber": 30,
+          "content": "## Schema Diff Mitigation Playbook",
           "isNew": true
         },
         {
-          "lineNumber": 16,
+          "lineNumber": 31,
           "content": "",
           "isNew": true
         },
         {
-          "lineNumber": 17,
-          "content": "1. Check Grafana dashboard",
+          "lineNumber": 32,
+          "content": "### Pre-flight Checklist",
           "isNew": true
         },
         {
-          "lineNumber": 18,
-          "content": "2. Verify queue depth stays below threshold",
+          "lineNumber": 33,
+          "content": "",
           "isNew": true
         },
         {
-          "lineNumber": 19,
-          "content": "3. Page owning squad if sustained for 10 minutes",
+          "lineNumber": 34,
+          "content": "1. Run `npm run schema:diff` to reproduce the drift locally.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "2. Compare the output against the latest snapshot committed in `docs/schema-diff.md`.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "3. Confirm the diff only includes additive columns or flag the owning squad on Slack.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "### Mitigation",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "1. Pause the nightly diff job via the admin console if drift repeats for more than two cycles.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "2. Apply the safe schema patch or coordinate a rollback during the next maintenance window.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "3. Page the database on-call if replication lag exceeds 5 minutes while mitigation is active.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "### Wrap-up",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "1. Document the root-cause summary and mitigation outcome in the incident log.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "2. Re-enable automation and post a handoff note in the #schema-ops Slack channel.",
           "isNew": true
         }
       ]

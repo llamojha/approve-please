@@ -22,7 +22,7 @@
         },
         {
           "lineNumber": 76,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 2, ttlMs: 180000, freezeWindowMinutes: 15, coordinator: 'release-bot' };",
           "isNew": true
         },
         {
@@ -52,16 +52,36 @@
         },
         {
           "lineNumber": 82,
-          "content": "    };",
+          "content": "      freezeWindowMinutes: input.freezeWindowMinutes ?? defaults.freezeWindowMinutes,",
           "isNew": true
         },
         {
           "lineNumber": 83,
-          "content": "    return normalized;",
+          "content": "      rolloutTier: input.rolloutTier ?? 'beta',",
           "isNew": true
         },
         {
           "lineNumber": 84,
+          "content": "      coordinator: input.coordinator ?? defaults.coordinator,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "      featureFlags: input.featureFlags ?? [],",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 87,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 88,
           "content": "  }",
           "isNew": true
         }

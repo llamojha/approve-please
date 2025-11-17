@@ -22,7 +22,7 @@
         },
         {
           "lineNumber": 96,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 2, ttlMs: 45000, auditVersion: 'v2', redactPayload: true };",
           "isNew": true
         },
         {
@@ -52,16 +52,31 @@
         },
         {
           "lineNumber": 102,
-          "content": "    };",
+          "content": "      scope: input.scope ?? 'full',",
           "isNew": true
         },
         {
           "lineNumber": 103,
-          "content": "    return normalized;",
+          "content": "      redactPayload: input.redactPayload ?? defaults.redactPayload,",
           "isNew": true
         },
         {
           "lineNumber": 104,
+          "content": "      auditBucket: input.auditBucket ?? 'default',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 107,
           "content": "  }",
           "isNew": true
         }

@@ -21,7 +21,7 @@
         },
         {
           "lineNumber": 56,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 1, ttlMs: 120000, sensitivity: 'standard', approvalsRequired: 2 };",
           "isNew": true
         },
         {
@@ -51,11 +51,31 @@
         },
         {
           "lineNumber": 62,
-          "content": "    };",
+          "content": "      sensitivity: input.sensitivity ?? defaults.sensitivity,",
           "isNew": true
         },
         {
           "lineNumber": 63,
+          "content": "      approvalsRequired: input.approvalsRequired ?? defaults.approvalsRequired,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 64,
+          "content": "      approvalState: input.approvalState ?? 'pending',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 65,
+          "content": "      justification: input.justification?.trim() ?? 'Not provided',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 66,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 67,
           "content": "    return normalized;",
           "isNew": true
         },

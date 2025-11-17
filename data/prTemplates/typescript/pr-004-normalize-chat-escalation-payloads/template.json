@@ -21,7 +21,7 @@
         },
         {
           "lineNumber": 41,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 0, ttlMs: 60000, escalationLevel: 'primary', notifyAfterMinutes: 5 };",
           "isNew": true
         },
         {
@@ -51,16 +51,36 @@
         },
         {
           "lineNumber": 47,
-          "content": "    };",
+          "content": "      escalationLevel: input.escalationLevel ?? defaults.escalationLevel,",
           "isNew": true
         },
         {
           "lineNumber": 48,
-          "content": "    return normalized;",
+          "content": "      responder: input.responder ?? 'on-call',",
           "isNew": true
         },
         {
           "lineNumber": 49,
+          "content": "      summary: input.summary?.trim().slice(0, 200) ?? 'Escalation pending',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "      escalateAfterMinutes: input.escalateAfterMinutes ?? defaults.notifyAfterMinutes,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
           "content": "  }",
           "isNew": true
         }

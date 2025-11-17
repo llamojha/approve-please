@@ -21,7 +21,7 @@
         },
         {
           "lineNumber": 26,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 1, ttlMs: 75000, maxPackets: 500, sampleRate: 0.5 };",
           "isNew": true
         },
         {
@@ -51,11 +51,31 @@
         },
         {
           "lineNumber": 32,
-          "content": "    };",
+          "content": "      maxPackets: input.maxPackets ?? defaults.maxPackets,",
           "isNew": true
         },
         {
           "lineNumber": 33,
+          "content": "      sampleRate: input.sampleRate ?? defaults.sampleRate,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "      analyzerId: input.analyzerId ?? 'packet-analyzer',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "      captureTag: input.captureTag ?? 'default',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
           "content": "    return normalized;",
           "isNew": true
         },

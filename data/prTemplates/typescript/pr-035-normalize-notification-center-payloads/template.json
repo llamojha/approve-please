@@ -20,7 +20,7 @@
         },
         {
           "lineNumber": 111,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 1, ttlMs: 90000, priority: 'normal', locale: 'en-US' };",
           "isNew": true
         },
         {
@@ -50,16 +50,36 @@
         },
         {
           "lineNumber": 117,
-          "content": "    };",
+          "content": "      dispatchAt: input.dispatchAt ?? clock.now(),",
           "isNew": true
         },
         {
           "lineNumber": 118,
-          "content": "    return normalized;",
+          "content": "      locale: input.locale ?? defaults.locale,",
           "isNew": true
         },
         {
           "lineNumber": 119,
+          "content": "      deliveryStrategy: input.deliveryStrategy ?? 'immediate',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 120,
+          "content": "      payloadVersion: input.payloadVersion ?? 'v1',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 121,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 122,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 123,
           "content": "  }",
           "isNew": true
         }

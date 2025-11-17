@@ -22,7 +22,7 @@
         },
         {
           "lineNumber": 46,
-          "content": "    const defaults = { retries: 0, ttlMs: 60000 };",
+          "content": "    const defaults = { retries: 3, ttlMs: 30000, sweepScope: 'tenant', dryRun: false, cleanupBatchSize: 500 };",
           "isNew": true
         },
         {
@@ -52,16 +52,36 @@
         },
         {
           "lineNumber": 52,
-          "content": "    };",
+          "content": "      sweepScope: input.sweepScope ?? defaults.sweepScope,",
           "isNew": true
         },
         {
           "lineNumber": 53,
-          "content": "    return normalized;",
+          "content": "      dryRun: input.dryRun ?? defaults.dryRun,",
           "isNew": true
         },
         {
           "lineNumber": 54,
+          "content": "      cleanupBatchSize: input.cleanupBatchSize ?? defaults.cleanupBatchSize,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 55,
+          "content": "      origin: input.origin ?? 'session-cleaner',",
+          "isNew": true
+        },
+        {
+          "lineNumber": 56,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 57,
+          "content": "    return normalized;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 58,
           "content": "  }",
           "isNew": true
         }
