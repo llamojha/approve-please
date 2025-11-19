@@ -1,0 +1,67 @@
+{
+  "templateId": "rust-026-session-token-logger",
+  "title": "Session token audit helper",
+  "author": "Owen S.",
+  "description": "Adds logging around session token issuance for troubleshooting.",
+  "tags": [
+    "security",
+    "sessions"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de auditor\u00eda de tokens de sesi\u00f3n",
+      "description": "Agrega logs alrededor de la emisi\u00f3n de tokens de sesi\u00f3n para troubleshooting.",
+      "tags": [
+        "seguridad",
+        "sesiones"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/sessions/logger.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "use tracing::info;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "pub fn log_session_token(token: &str, actor: &str) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    info!(\"session_token={} actor={}\", token, actor);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Logs the raw session token, leaking credentials into log storage.",
+      "localizedDescription": {
+        "es": "Loguea el token de sesi\u00f3n crudo, filtrando credenciales en el almacenamiento de logs."
+      },
+      "lineNumbers": [
+        21
+      ]
+    }
+  ]
+}

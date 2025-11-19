@@ -1,0 +1,82 @@
+{
+  "templateId": "rust-031-debug-admin-bypass",
+  "title": "Admin check helper",
+  "author": "Flora N.",
+  "description": "Adds a helper for checking whether a user can access admin tooling.",
+  "tags": [
+    "security",
+    "auth"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para revisar acceso de admins",
+      "description": "Agrega un helper para verificar si un usuario puede acceder a las herramientas de admin.",
+      "tags": [
+        "seguridad",
+        "auth"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/admin/checks.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use crate::auth::{AuthContext, Role};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "pub fn has_admin_access(ctx: &AuthContext) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    if ctx.debug_override {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    ctx.roles.contains(&Role::Admin)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "major",
+      "description": "Debug flag bypasses admin checks outright.",
+      "localizedDescription": {
+        "es": "El flag de debug evita por completo las verificaciones de admin."
+      },
+      "lineNumbers": [
+        33
+      ]
+    }
+  ]
+}

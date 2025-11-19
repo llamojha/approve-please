@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-023-alert-silence-window",
+  "title": "Alert silence window evaluator",
+  "author": "Leah D.",
+  "description": "Determines if an alert should remain silenced.",
+  "tags": [
+    "logic",
+    "alerts"
+  ],
+  "localized": {
+    "es": {
+      "title": "Evaluador de ventana de silencio de alertas",
+      "description": "Determina si una alerta debe seguir silenciada.",
+      "tags": [
+        "l\u00f3gica",
+        "alertas"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/alerts/silence.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use chrono::{DateTime, Utc};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "use crate::alerts::SilenceWindow;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "pub fn is_silenced(now: DateTime<Utc>, silence: &SilenceWindow) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    now >= silence.ends_at",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Silence should hold until the future timestamp; this returns True once time has elapsed.",
+      "localizedDescription": {
+        "es": "El silencio debe mantenerse hasta el timestamp futuro; esto devuelve True cuando el tiempo ya pas\u00f3."
+      },
+      "lineNumbers": [
+        34
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "templateId": "rust-006-feature-flag-backfill",
+  "title": "Add feature flag backfill request helper",
+  "author": "Gabe R.",
+  "description": "Creates a structured payload for feature flag backfills so the orchestrator can audit requests.",
+  "tags": [
+    "feature-flags",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para backfills de feature flags",
+      "description": "Crea un payload estructurado para backfills de feature flags para que el orquestador pueda auditar las solicitudes.",
+      "tags": [
+        "feature-flags",
+        "ops"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/feature_flags/backfill.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "use crate::feature_flags::BackfillRequest;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "use serde_json::json;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "pub fn build_backfill_request(flag: &str, tenant: &str, actor: &str) -> BackfillRequest {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    BackfillRequest {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "        flag: flag.to_string(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "        tenant: tenant.to_string(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "        actor: actor.to_string(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "        payload: json!({",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "            \"flag\": flag,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "            \"tenant\": tenant,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "            \"requested_by\": actor",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        }),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

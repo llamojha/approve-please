@@ -1,0 +1,90 @@
+{
+  "templateId": "rust-008-release-notes-formatter",
+  "title": "Add release notes formatter",
+  "author": "Adrian E.",
+  "description": "Provides a reusable formatter for release note entries before posting to Slack.",
+  "tags": [
+    "release",
+    "docs"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega formateador de release notes",
+      "description": "Provee un formateador reutilizable para entradas de release notes antes de publicarlas en Slack.",
+      "tags": [
+        "release",
+        "documentaci\u00f3n"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/releases/notes.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "pub fn format_release_notes(version: &str, notes: &[String]) -> String {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "    let mut output = String::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "    output.push_str(&format!(\"## Release {version}",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "\"));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "    for note in notes {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "        output.push_str(\"- \");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "        output.push_str(note);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "        output.push('",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    output",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

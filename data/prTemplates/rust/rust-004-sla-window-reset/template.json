@@ -1,0 +1,75 @@
+{
+  "templateId": "rust-004-sla-window-reset",
+  "title": "Add SLA window reset helper",
+  "author": "Mateo K.",
+  "description": "Adds a context manager that temporarily resets the SLA tracking window during recalibration.",
+  "tags": [
+    "sla",
+    "maintenance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para resetear la ventana de SLA",
+      "description": "Agrega un context manager que resetea temporalmente la ventana de seguimiento de SLA durante la recalibraci\u00f3n.",
+      "tags": [
+        "sla",
+        "mantenimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/sla/window_reset.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 26,
+          "content": "use crate::sla::WindowState;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "use chrono::{DateTime, Utc};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "pub fn reset_sla_window(state: &mut WindowState, now: DateTime<Utc>) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    state.last_reset = now;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    state.remaining_budget = state.budget_cap;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    state.credits_used = 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    state.breach_log.clear();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

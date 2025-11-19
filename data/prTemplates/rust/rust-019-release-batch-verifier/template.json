@@ -1,0 +1,97 @@
+{
+  "templateId": "rust-019-release-batch-verifier",
+  "title": "Release batch verification helper",
+  "author": "Silas F.",
+  "description": "Examines job statuses to determine if a release batch can ship.",
+  "tags": [
+    "logic",
+    "release"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper de verificaci\u00f3n de batches de release",
+      "description": "Examina los estados de los jobs para decidir si un batch de release puede salir.",
+      "tags": [
+        "l\u00f3gica",
+        "release"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/releases/batch_verifier.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 26,
+          "content": "use crate::releases::CheckResult;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "pub fn release_batch_ready(checks: &[CheckResult]) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    if checks.is_empty() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    if checks.iter().all(|check| check.passed) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "        return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    true",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Logic is inverted; batches should ship only when all checks passed, not be blocked.",
+      "localizedDescription": {
+        "es": "La l\u00f3gica est\u00e1 invertida; los batches deben salir solo cuando todos los checks pasan, no bloquearse."
+      },
+      "lineNumbers": [
+        32
+      ]
+    }
+  ]
+}

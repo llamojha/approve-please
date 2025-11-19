@@ -1,0 +1,87 @@
+{
+  "templateId": "rust-013-device-heartbeat-gap",
+  "title": "Device heartbeat gap classifier",
+  "author": "Rocio L.",
+  "description": "Classifies whether a heartbeat gap should trigger a page.",
+  "tags": [
+    "devices",
+    "logic"
+  ],
+  "localized": {
+    "es": {
+      "title": "Clasificador de gaps de heartbeat de dispositivos",
+      "description": "Clasifica si un gap de heartbeat debe gatillar un page.",
+      "tags": [
+        "dispositivos",
+        "l\u00f3gica"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/devices/heartbeat_gap.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 32,
+          "content": "use crate::devices::GapState;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "pub fn classify_gap(miss_seconds: i64, threshold_seconds: i64) -> GapState {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    if miss_seconds <= threshold_seconds {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        GapState::Critical",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    } else {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "        GapState::Warning",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Critical gaps occur when the miss exceeds the threshold, not when it is within it.",
+      "localizedDescription": {
+        "es": "Los gaps cr\u00edticos ocurren cuando la falta excede el umbral, no cuando est\u00e1 dentro."
+      },
+      "lineNumbers": [
+        35
+      ]
+    }
+  ]
+}

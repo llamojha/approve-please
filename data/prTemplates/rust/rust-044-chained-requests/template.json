@@ -1,0 +1,102 @@
+{
+  "templateId": "rust-044-chained-requests",
+  "title": "Score fetch helper",
+  "author": "Ilias C.",
+  "description": "Fetches quality scores for a batch of experiment IDs.",
+  "tags": [
+    "performance",
+    "http"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para obtener scores",
+      "description": "Obtiene scores de calidad para un batch de IDs de experimentos.",
+      "tags": [
+        "rendimiento",
+        "http"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/scores/fetcher.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use crate::http::Client;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "use crate::scores::Score;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "pub async fn fetch_scores(client: &Client, ids: &[String]) -> anyhow::Result<Vec<Score>> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    let mut results = Vec::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    for id in ids {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        let endpoint = format!(\"/scores/{id}\");",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "        let resp = client.get(&endpoint).await?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "        results.push(resp.into());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "    Ok(results)",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Issues one HTTP request per ID despite a batch endpoint existing.",
+      "localizedDescription": {
+        "es": "Hace una solicitud HTTP por ID a pesar de que existe un endpoint batch."
+      },
+      "lineNumbers": [
+        36
+      ]
+    }
+  ]
+}

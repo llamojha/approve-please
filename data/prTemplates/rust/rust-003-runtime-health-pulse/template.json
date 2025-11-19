@@ -1,0 +1,130 @@
+{
+  "templateId": "rust-003-runtime-health-pulse",
+  "title": "Add runtime health pulse emitter",
+  "author": "Luisa P.",
+  "description": "Streams a lightweight pulse event when jitter exceeds tolerance so observability dashboards stay accurate.",
+  "tags": [
+    "observability",
+    "events"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega emisor de pulso de runtime health",
+      "description": "Emite un evento ligero cuando el jitter excede la tolerancia para que los dashboards de observabilidad se mantengan precisos.",
+      "tags": [
+        "observabilidad",
+        "eventos"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/runtime/health_pulse.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use crate::clock::Clock;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "use crate::runtime::PulsePublisher;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "use chrono::{DateTime, Utc};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "#[derive(Debug, Clone)]",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "pub struct RuntimePulse {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    pub node: String,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    pub observed_at: DateTime<Utc>,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    pub status: String,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "}",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "pub fn emit_runtime_pulse(publisher: &dyn PulsePublisher, clock: &dyn Clock, node: &str) -> anyhow::Result<()> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    let pulse = RuntimePulse {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "        node: node.to_string(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "        observed_at: clock.now(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "        status: \"healthy\".to_string(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "    publisher.publish(pulse)?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "    Ok(())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

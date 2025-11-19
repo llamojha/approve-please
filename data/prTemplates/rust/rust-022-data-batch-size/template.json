@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-022-data-batch-size",
+  "title": "Data batch split helper",
+  "author": "Ravi P.",
+  "description": "Checks whether a batch of records should be split before enqueueing.",
+  "tags": [
+    "logic",
+    "data"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para dividir lotes de datos",
+      "description": "Verifica si un lote de registros debe dividirse antes de encolarlo.",
+      "tags": [
+        "l\u00f3gica",
+        "datos"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/data/batch_split.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 28,
+          "content": "pub fn should_split_batch(size: usize, max: usize) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    if max == 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    size < max",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Splitting must happen when batches exceed the maximum, not when they are under it.",
+      "localizedDescription": {
+        "es": "Hay que dividir cuando los batches exceden el m\u00e1ximo, no cuando est\u00e1n por debajo."
+      },
+      "lineNumbers": [
+        32
+      ]
+    }
+  ]
+}

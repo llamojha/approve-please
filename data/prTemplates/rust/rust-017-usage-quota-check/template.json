@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-017-usage-quota-check",
+  "title": "Add usage quota exhaustion helper",
+  "author": "Carmen A.",
+  "description": "Determines when a tenant has exhausted its usage quota plus burst headroom.",
+  "tags": [
+    "logic",
+    "usage"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega helper para detectar el agotamiento de la cuota de uso",
+      "description": "Determina cu\u00e1ndo un tenant agot\u00f3 su cuota de uso m\u00e1s el margen de burst.",
+      "tags": [
+        "l\u00f3gica",
+        "uso"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/usage/quota.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 28,
+          "content": "pub fn is_quota_exhausted(usage: u64, limit: u64) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    if limit == 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    usage > limit",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Crossing the exact ceiling should mark the quota exhausted; the comparison must be >=.",
+      "localizedDescription": {
+        "es": "Al cruzar exactamente el techo se debe marcar la cuota como agotada; la comparaci\u00f3n tiene que ser >=."
+      },
+      "lineNumbers": [
+        32
+      ]
+    }
+  ]
+}

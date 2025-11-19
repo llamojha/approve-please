@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-024-inventory-threshold",
+  "title": "Inventory threshold guard",
+  "author": "Ezra O.",
+  "description": "Determines whether inventory needs to be replenished.",
+  "tags": [
+    "logic",
+    "inventory"
+  ],
+  "localized": {
+    "es": {
+      "title": "Guardia del umbral de inventario",
+      "description": "Determina si el inventario necesita reponerse.",
+      "tags": [
+        "l\u00f3gica",
+        "inventario"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/inventory/threshold.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "pub fn needs_restock(stock: u32, minimum: u32) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    if minimum == 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "        return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    stock >= minimum",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Restock should trigger when stock falls below the minimum, not when it is above it.",
+      "localizedDescription": {
+        "es": "La reposici\u00f3n debe activarse cuando el stock cae por debajo del m\u00ednimo, no cuando est\u00e1 por encima."
+      },
+      "lineNumbers": [
+        26
+      ]
+    }
+  ]
+}

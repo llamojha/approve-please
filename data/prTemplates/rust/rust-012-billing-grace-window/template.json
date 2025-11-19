@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-012-billing-grace-window",
+  "title": "Adjust billing grace window logic",
+  "author": "Kenji B.",
+  "description": "Updates the helper that determines when invoices leave the grace period.",
+  "tags": [
+    "billing",
+    "logic"
+  ],
+  "localized": {
+    "es": {
+      "title": "Ajusta la l\u00f3gica de la ventana de gracia de billing",
+      "description": "Actualiza el helper que determina cu\u00e1ndo las facturas salen del per\u00edodo de gracia.",
+      "tags": [
+        "billing",
+        "l\u00f3gica"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/billing/grace_window.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 28,
+          "content": "pub fn past_grace_window(invoice_age_days: i64, grace_days: i64) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    if grace_days <= 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "        return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "    invoice_age_days > grace_days",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Grace window should treat the final allowed day as late, so the comparison must be >=.",
+      "localizedDescription": {
+        "es": "La ventana de gracia debe tratar el \u00faltimo d\u00eda permitido como tarde, por eso la comparaci\u00f3n debe ser >=."
+      },
+      "lineNumbers": [
+        32
+      ]
+    }
+  ]
+}

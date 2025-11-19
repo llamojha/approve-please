@@ -1,0 +1,87 @@
+{
+  "templateId": "rust-041-cache-warmer-scan",
+  "title": "Feature cache hydrator helper",
+  "author": "Quinn E.",
+  "description": "Hydrates feature flags into cache before a deploy.",
+  "tags": [
+    "performance",
+    "cache"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para hidratar la cache de features",
+      "description": "Hidrata feature flags en la cache antes de un deploy.",
+      "tags": [
+        "rendimiento",
+        "cache"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/cache/warmer_scan.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "use crate::cache::CacheClient;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "pub fn hydrate_features(cache: &CacheClient, keys: &[String]) -> Vec<Option<String>> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    let mut results = Vec::with_capacity(keys.len());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "    for key in keys {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "        results.push(cache.get(key));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "    results",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Iterates cache.get one key at a time instead of using a batched mget.",
+      "localizedDescription": {
+        "es": "Itera cache.get clave por clave en vez de usar un mget batched."
+      },
+      "lineNumbers": [
+        35
+      ]
+    }
+  ]
+}

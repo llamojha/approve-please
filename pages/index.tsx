@@ -15,7 +15,7 @@ const LANGUAGE_OPTIONS: LanguageOption[] = [
   { value: 'typescript' },
   { value: 'python' },
   { value: 'java' },
-  { value: 'rust', disabled: true }
+  { value: 'rust' }
 ];
 
 const IndexPage = () => {

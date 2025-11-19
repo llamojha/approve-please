@@ -1,0 +1,107 @@
+{
+  "templateId": "rust-001-cache-warmup-scheduler",
+  "title": "Schedule cache warmer job hook",
+  "author": "Isela D.",
+  "description": "Adds a helper to enqueue the cache warmer job five minutes ahead with typed payload metadata.",
+  "tags": [
+    "backend",
+    "jobs",
+    "maintenance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Programa el hook del job de cache warmer",
+      "description": "Agrega un helper para encolar el job de cache warmer cinco minutos antes con metadata tipada.",
+      "tags": [
+        "backend",
+        "jobs",
+        "mantenimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/jobs/cache_warmer.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "use crate::clock::Clock;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "use crate::jobs::Dispatcher;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "use crate::tenants::TenantId;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "use serde_json::json;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "pub fn schedule_cache_preload(clock: &dyn Clock, dispatcher: &Dispatcher, tenant: TenantId) -> anyhow::Result<()> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "    let delay = chrono::Duration::minutes(5);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    let run_at = clock.now() + delay;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    let payload = json!({",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "        \"tenant\": tenant.as_str(),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "        \"run_at\": run_at.to_rfc3339()",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    });",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    dispatcher.enqueue(\"cache.preload\", payload)?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "    Ok(())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

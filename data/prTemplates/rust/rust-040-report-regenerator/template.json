@@ -1,0 +1,92 @@
+{
+  "templateId": "rust-040-report-regenerator",
+  "title": "Report renderer helper",
+  "author": "Mabel T.",
+  "description": "Renders analyst reports for each SLA segment.",
+  "tags": [
+    "performance",
+    "reports"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del renderizador de reportes",
+      "description": "Renderiza reportes de analistas para cada segmento de SLA.",
+      "tags": [
+        "rendimiento",
+        "reportes"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/reports/generator.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 38,
+          "content": "use crate::reports::{ReportContext, TemplateEngine};",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "pub fn render_reports(engine: &TemplateEngine, contexts: &[ReportContext], source: &str) -> Vec<String> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    let mut rendered = Vec::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "    for ctx in contexts {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "        let tpl = engine.compile(source);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "        rendered.push(tpl.render(ctx));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    rendered",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Compiles the template on every iteration instead of once.",
+      "localizedDescription": {
+        "es": "Compila la plantilla en cada iteraci\u00f3n en lugar de hacerlo una sola vez."
+      },
+      "lineNumbers": [
+        44
+      ]
+    }
+  ]
+}

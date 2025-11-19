@@ -1,0 +1,72 @@
+{
+  "templateId": "rust-021-comms-blast-cap",
+  "title": "Comms blast cap logic",
+  "author": "Devon Y.",
+  "description": "Decides whether another marketing blast can be sent this minute.",
+  "tags": [
+    "logic",
+    "marketing"
+  ],
+  "localized": {
+    "es": {
+      "title": "L\u00f3gica del l\u00edmite de blasts de comunicaciones",
+      "description": "Decide si se puede enviar otro blast de marketing en este minuto.",
+      "tags": [
+        "l\u00f3gica",
+        "marketing"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/comms/blast_cap.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 24,
+          "content": "pub fn can_send_more(sent: u64, cap: u64) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    if cap == 0 {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "        return false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "    sent <= cap",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "When the cap is reached we must stop sending, yet this returns True.",
+      "localizedDescription": {
+        "es": "Cuando se alcanza el l\u00edmite hay que dejar de enviar, pero aqu\u00ed se retorna True."
+      },
+      "lineNumbers": [
+        28
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "templateId": "rust-043-inefficient-log-filter",
+  "title": "Log filter helper",
+  "author": "Nadia V.",
+  "description": "Filters log lines by pattern before piping to support tooling.",
+  "tags": [
+    "performance",
+    "logging"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para filtrar logs",
+      "description": "Filtra l\u00edneas de log por patr\u00f3n antes de enviarlas a las herramientas de soporte.",
+      "tags": [
+        "rendimiento",
+        "logging"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/logs/filter.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 26,
+          "content": "use regex::Regex;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "pub fn filter_logs(lines: &[String], pattern: &str) -> Vec<String> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 29,
+          "content": "    let mut filtered = Vec::new();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    for line in lines {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "        let regex = Regex::new(pattern).unwrap();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "        if regex.is_match(line) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "            filtered.push(line.clone());",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "        }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "    filtered",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "minor",
+      "description": "Compiles the regex on every iteration instead of compiling once.",
+      "localizedDescription": {
+        "es": "Compila el regex en cada iteraci\u00f3n en lugar de compilarlo una sola vez."
+      },
+      "lineNumbers": [
+        31
+      ]
+    }
+  ]
+}

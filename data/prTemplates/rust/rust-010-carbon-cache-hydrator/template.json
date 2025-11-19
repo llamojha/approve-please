@@ -1,0 +1,65 @@
+{
+  "templateId": "rust-010-carbon-cache-hydrator",
+  "title": "Add carbon cache hydrator job",
+  "author": "Jon U.",
+  "description": "Creates the job payload for hydrating the carbon cache dataset.",
+  "tags": [
+    "data",
+    "jobs"
+  ],
+  "localized": {
+    "es": {
+      "title": "Agrega job hidratador para la carbon cache",
+      "description": "Crea el payload del job para hidratar el dataset de carbon cache.",
+      "tags": [
+        "datos",
+        "jobs"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/jobs/carbon_cache.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 21,
+          "content": "use crate::jobs::Dispatcher;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "use crate::tenants::TenantId;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "pub fn enqueue_carbon_cache_hydrator(dispatcher: &Dispatcher, tenant: TenantId) -> anyhow::Result<()> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    dispatcher.enqueue(\"carbon.cache.hydrate\", tenant.to_string())?;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    Ok(())",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

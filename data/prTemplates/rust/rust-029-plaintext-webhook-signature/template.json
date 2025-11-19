@@ -1,0 +1,82 @@
+{
+  "templateId": "rust-029-plaintext-webhook-signature",
+  "title": "Webhook signature verifier",
+  "author": "Mina R.",
+  "description": "Adds verification for partner webhook callbacks.",
+  "tags": [
+    "security",
+    "integrations"
+  ],
+  "localized": {
+    "es": {
+      "title": "Verificador de firmas de webhooks",
+      "description": "Agrega verificaci\u00f3n para callbacks de webhooks de partners.",
+      "tags": [
+        "seguridad",
+        "integraciones"
+      ]
+    }
+  },
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/webhooks/signature.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "pub struct WebhookPayload<'a> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    pub signature: &'a str,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "    pub provided_signature: &'a str,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "}",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "pub fn signature_valid(payload: &WebhookPayload<'_>) -> bool {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    payload.signature == payload.provided_signature",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "severity": "critical",
+      "description": "Simply compares to the signature field in the payload instead of computing an HMAC.",
+      "localizedDescription": {
+        "es": "Solo compara contra el campo signature del payload en vez de calcular un HMAC."
+      },
+      "lineNumbers": [
+        25
+      ]
+    }
+  ]
+}

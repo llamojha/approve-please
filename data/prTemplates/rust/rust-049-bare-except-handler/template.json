@@ -1,0 +1,82 @@
+{
+  "templateId": "rust-049-bare-except-handler",
+  "title": "Payload parser helper",
+  "author": "Tomas D.",
+  "description": "Parses JSON payloads flowing through the resolver.",
+  "tags": [
+    "style",
+    "parsing"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para parsear payloads",
+      "description": "Parsea payloads JSON que pasan por el resolver.",
+      "tags": [
+        "estilo",
+        "parseo"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/payload/parser.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 32,
+          "content": "use crate::payloads::Event;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "pub fn parse_payload(raw: &str) -> Option<Event> {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "    match serde_json::from_str(raw) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 36,
+          "content": "        Ok(event) => Some(event),",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "        Err(_) => None,",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "major",
+      "description": "Catches bare Exception and silently drops the payload.",
+      "localizedDescription": {
+        "es": "Atrapa una Exception gen\u00e9rica y descarta el payload en silencio."
+      },
+      "lineNumbers": [
+        36
+      ]
+    }
+  ]
+}

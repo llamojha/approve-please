@@ -1,0 +1,77 @@
+{
+  "templateId": "rust-046-prod-todo-leftover",
+  "title": "Payload sanitizer helper",
+  "author": "Ibrahim Y.",
+  "description": "Wraps payloads before sending them to the command bus.",
+  "tags": [
+    "style",
+    "cleanup"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper para sanear payloads",
+      "description": "Envuelve payloads antes de enviarlos al command bus.",
+      "tags": [
+        "estilo",
+        "limpieza"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/payload/sanitizer.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "use crate::payloads::Payload;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "pub fn sanitize(payload: &mut Payload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    // TODO: remove debug override before deploying",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "    payload.debug_allowed = true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    payload.strip_sensitive();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "severity": "minor",
+      "description": "Ships a TODO meant only for a hotfix, keeping debug defaults enabled.",
+      "localizedDescription": {
+        "es": "Env\u00eda un TODO que era solo para un hotfix, dejando el debug habilitado por defecto."
+      },
+      "lineNumbers": [
+        26
+      ]
+    }
+  ]
+}

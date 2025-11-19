@@ -1,0 +1,87 @@
+{
+  "templateId": "rust-020-sprint-risk-mapper",
+  "title": "Sprint risk mapper",
+  "author": "Uma T.",
+  "description": "Maps the blocker score into a risk tier for sprint health.",
+  "tags": [
+    "logic",
+    "planning"
+  ],
+  "localized": {
+    "es": {
+      "title": "Mapeador de riesgo de sprint",
+      "description": "Mapea el puntaje de bloqueos a un nivel de riesgo para la salud del sprint.",
+      "tags": [
+        "l\u00f3gica",
+        "planificaci\u00f3n"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/sprint/risk_mapper.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "use crate::sprint::RiskTier;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "pub fn classify_risk(blocker_score: u32, threshold: u32) -> RiskTier {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "    if blocker_score <= threshold {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 24,
+          "content": "        RiskTier::High",
+          "isNew": true
+        },
+        {
+          "lineNumber": 25,
+          "content": "    } else {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "        RiskTier::Low",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "severity": "major",
+      "description": "Higher blocker scores mean more risk, so the first comparison should flip to >=.",
+      "localizedDescription": {
+        "es": "Los puntajes de bloqueos m\u00e1s altos significan m\u00e1s riesgo, as\u00ed que la primera comparaci\u00f3n debe invertirse a >=."
+      },
+      "lineNumbers": [
+        23
+      ]
+    }
+  ]
+}

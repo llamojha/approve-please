@@ -1,0 +1,102 @@
+{
+  "templateId": "rust-039-poller-blocking-sleep",
+  "title": "Queue poller helper",
+  "author": "Rowan G.",
+  "description": "Polls queue items and aggregates their statuses.",
+  "tags": [
+    "performance",
+    "queue"
+  ],
+  "localized": {
+    "es": {
+      "title": "Helper del poller de colas",
+      "description": "Hace poll de items de la cola y agrega sus estados.",
+      "tags": [
+        "rendimiento",
+        "cola"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/poller/mod.rs",
+      "language": "rust",
+      "lines": [
+        {
+          "lineNumber": 36,
+          "content": "use std::thread;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 37,
+          "content": "use std::time::Duration;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "use crate::queue::JobQueue;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 39,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 40,
+          "content": "pub fn poll_jobs(queue: &JobQueue, ids: &[String]) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    for id in ids {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "        if let Some(job) = queue.fetch(id) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "            queue.process(job);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "        }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "        thread::sleep(Duration::from_secs(2));",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 47,
+          "content": "}",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "severity": "major",
+      "description": "Sleeps two seconds per job ID instead of using backoff per batch.",
+      "localizedDescription": {
+        "es": "Duerme dos segundos por cada job ID en vez de usar backoff por batch."
+      },
+      "lineNumbers": [
+        44
+      ]
+    }
+  ]
+}
