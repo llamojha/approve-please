@@ -106,3 +106,5 @@ export interface DaySummary {
   counters: Counters;
   meters: MeterSet;
 }
+
+export type GameMode = 'game' | 'tutorial';

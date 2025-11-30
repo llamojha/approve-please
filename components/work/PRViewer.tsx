@@ -10,9 +10,10 @@ interface PRViewerProps {
   selectedLines: number[];
   onToggleLine: (lineNumber: number) => void;
   actionSlot?: ReactNode;
+  tutorialGuide?: ReactNode;
 }
 
-const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps) => {
+const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot, tutorialGuide }: PRViewerProps) => {
   const translations = useTranslations();
   const viewerText = translations.work.prViewer;
   const requestLabel = translations.work.actions.request;
@@ -23,6 +24,7 @@ const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps
         title={viewerText.title}
         titleHint={<TutorialHint text={viewerText.hintSelect} />}
       >
+        {tutorialGuide && <div className={styles.tutorialGuideSlot}>{tutorialGuide}</div>}
         <div className={styles.prPlaceholder}>
           <p>{viewerText.placeholder}</p>
         </div>
@@ -37,6 +39,7 @@ const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps
       title={viewerText.title}
       titleHint={<TutorialHint text={viewerText.hintLines} />}
     >
+      {tutorialGuide && <div className={styles.tutorialGuideSlot}>{tutorialGuide}</div>}
       <article className={styles.prMeta}>
         <header>
           <h2>{pr.title}</h2>

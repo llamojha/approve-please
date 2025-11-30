@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import {
   MAX_METER_VALUE,
   MIN_METER_VALUE,
@@ -15,6 +15,7 @@ import {
   DaySummary,
   DayQuote,
   FalsePositiveRecord,
+  GameMode,
   GamePhase,
   LanguagePreference,
   LineExcerpt,
@@ -67,6 +68,7 @@ interface GameContextValue {
     restartGame: () => void;
     setLanguagePreference: (preference: LanguagePreference) => void;
   };
+  mode: GameMode;
 }
 
 type GameAction =
@@ -286,9 +288,27 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
-export const GameProvider = ({ children }: { children: React.ReactNode }) => {
+export const GameProvider = ({ children, mode = 'game' }: { children: React.ReactNode; mode?: GameMode }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
   const translations = useTranslations();
+  const queueLength = state.queue.length;
+  const tutorialDecisions = state.counters.prsApproved + state.counters.prsRejected;
+  const hasCurrentPR = Boolean(state.currentPR);
+
+  useEffect(() => {
+    if (mode !== 'tutorial') {
+      return;
+    }
+    if (state.phase !== 'WORK') {
+      return;
+    }
+    if (tutorialDecisions < 2) {
+      return;
+    }
+    if (queueLength === 0 && !hasCurrentPR) {
+      dispatch({ type: 'SET_PHASE', phase: 'SUMMARY' });
+    }
+  }, [mode, state.phase, tutorialDecisions, queueLength, hasCurrentPR]);
 
   const startWork = useCallback(() => {
     dispatch({ type: 'SET_PHASE', phase: 'WORK' });
@@ -459,7 +479,8 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         advanceToNextDay,
         restartGame,
         setLanguagePreference
-      }
+      },
+      mode
     }),
     [
       state,
@@ -471,7 +492,8 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       requestChanges,
       advanceToNextDay,
       restartGame,
-      setLanguagePreference
+      setLanguagePreference,
+      mode
     ]
   );
 

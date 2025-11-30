@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import styles from '../../styles/Desk.module.css';
 import { BugKind } from '../../types';
 import { DecisionResult } from '../../context/GameContext';
@@ -13,6 +14,7 @@ interface ActionPanelProps {
   canRequest: boolean;
   selectedLines: number;
   feedback: { message: string; status: DecisionResult['status'] } | null;
+  tutorialGuide?: ReactNode;
 }
 
 const bugKinds: BugKind[] = ['logic', 'security', 'performance', 'style'];
@@ -25,7 +27,8 @@ const ActionPanel = ({
   disableApprove,
   canRequest,
   selectedLines,
-  feedback
+  feedback,
+  tutorialGuide
 }: ActionPanelProps) => {
   const translations = useTranslations();
   const actionText = translations.work.actions;
@@ -40,6 +43,7 @@ const ActionPanel = ({
         </div>
         <TutorialHint text={actionText.tutorial} />
       </div>
+      {tutorialGuide && <div className={styles.tutorialGuideSlot}>{tutorialGuide}</div>}
       <div className={styles.actionButtons}>
         <div className={styles.actionButtonGroup}>
           <button

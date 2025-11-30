@@ -5,11 +5,12 @@ import { useGameState } from '../context/GameContext';
 export const useGameClock = () => {
   const {
     state: { phase },
-    actions: { tickWorkMinute }
+    actions: { tickWorkMinute },
+    mode
   } = useGameState();
 
   useEffect(() => {
-    if (phase !== 'WORK') {
+    if (phase !== 'WORK' || mode === 'tutorial') {
       return;
     }
     const interval = setInterval(() => {
@@ -19,5 +20,5 @@ export const useGameClock = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [phase, tickWorkMinute]);
+  }, [phase, mode, tickWorkMinute]);
 };

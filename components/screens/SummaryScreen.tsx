@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
 import { formatMeterValue, meterColorFromValue } from '../../utils/helpers';
@@ -7,10 +8,14 @@ import { BugKind } from '../../types';
 const SummaryScreen = () => {
   const {
     state: { currentDay, counters, meters, prodIncidents, falsePositiveRecords },
-    actions: { advanceToNextDay, restartGame }
+    actions: { advanceToNextDay, restartGame },
+    mode
   } = useGameState();
+  const router = useRouter();
   const translations = useTranslations();
   const summaryText = translations.summary;
+  const tutorialSummary = translations.tutorial.summary;
+  const isTutorial = mode === 'tutorial';
   const counterLabels = translations.shared.counters;
   const meterLabels = translations.shared.meters;
   const incidentsText = translations.incidents;
@@ -45,11 +50,15 @@ const SummaryScreen = () => {
     return { label: incidentsText.reasonMixed, isClean: false };
   };
 
+  const summaryHeading = isTutorial ? tutorialSummary.heading : summaryText.heading(currentDay);
+  const summaryTagline = isTutorial ? tutorialSummary.tagline : summaryText.endOfDay;
+
   return (
     <main className={styles.screenShell}>
       <section className={styles.screenCard}>
-        <p className="muted">{summaryText.endOfDay}</p>
-        <h1>{summaryText.heading(currentDay)}</h1>
+        <p className="muted">{summaryTagline}</p>
+        <h1>{summaryHeading}</h1>
+        {isTutorial && <p className={styles.tutorialSummaryIntro}>{tutorialSummary.body}</p>}
         <div className={`${styles.summaryGrid} ${styles.summaryGridWide}`}>
           <div className={`${styles.summaryCard} ${styles.summaryCardApproved}`}>
             <small>{counterLabels.prsApproved}</small>
@@ -91,16 +100,33 @@ const SummaryScreen = () => {
           </div>
         </div>
         <div className={styles.screenActions}>
-          <button type="button" className={styles.screenButton} onClick={advanceToNextDay}>
-            {summaryText.continueButton(currentDay + 1)}
-          </button>
-          <button
-            type="button"
-            className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
-            onClick={restartGame}
-          >
-            {summaryText.restartButton}
-          </button>
+          {isTutorial ? (
+            <>
+              <button type="button" className={styles.screenButton} onClick={() => router.push('/game')}>
+                {tutorialSummary.startCta}
+              </button>
+              <button
+                type="button"
+                className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
+                onClick={restartGame}
+              >
+                {tutorialSummary.restartCta}
+              </button>
+            </>
+          ) : (
+            <>
+              <button type="button" className={styles.screenButton} onClick={advanceToNextDay}>
+                {summaryText.continueButton(currentDay + 1)}
+              </button>
+              <button
+                type="button"
+                className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
+                onClick={restartGame}
+              >
+                {summaryText.restartButton}
+              </button>
+            </>
+          )}
         </div>
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>

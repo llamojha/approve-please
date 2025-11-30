@@ -1,27 +1,7 @@
-import BriefingScreen from '../components/screens/BriefingScreen';
-import GameOverScreen from '../components/screens/GameOverScreen';
-import SummaryScreen from '../components/screens/SummaryScreen';
-import WorkScreen from '../components/screens/WorkScreen';
-import { useGameState } from '../context/GameContext';
+import GameView from '../components/screens/GameView';
 
 const GamePage = () => {
-  const {
-    state: { phase }
-  } = useGameState();
-
-  if (phase === 'BRIEFING') {
-    return <BriefingScreen />;
-  }
-
-  if (phase === 'WORK') {
-    return <WorkScreen />;
-  }
-
-  if (phase === 'SUMMARY') {
-    return <SummaryScreen />;
-  }
-
-  return <GameOverScreen />;
+  return <GameView />;
 };
 
 export default GamePage;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { PullRequest } from '../../types';
@@ -9,6 +9,7 @@ interface QueuePanelProps {
   queue: PullRequest[];
   currentId: string | null;
   onSelect: (id: string) => void;
+  tutorialGuide?: ReactNode;
 }
 
 interface RenderQueueEntry {
@@ -24,7 +25,7 @@ const importanceHue: Record<PullRequest['importance'], string> = {
   high: '#f87171'
 };
 
-const QueuePanel = ({ queue, currentId, onSelect }: QueuePanelProps) => {
+const QueuePanel = ({ queue, currentId, onSelect, tutorialGuide }: QueuePanelProps) => {
   const translations = useTranslations();
   const queueText = translations.work.queue;
   const importanceLabels = translations.shared.importance;
@@ -118,6 +119,7 @@ const QueuePanel = ({ queue, currentId, onSelect }: QueuePanelProps) => {
       title={queueText.title}
       titleHint={<TutorialHint text={queueText.hint} />}
     >
+      {tutorialGuide && <div className={styles.tutorialGuideSlot}>{tutorialGuide}</div>}
       <ul className={styles.queueList}>
         {renderQueue.length === 0 && <li className={styles.queueEmpty}>{queueText.empty}</li>}
         {renderQueue.map(({ pr, isDeparting }) => {

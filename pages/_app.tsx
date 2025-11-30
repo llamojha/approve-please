@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import { SITE_METADATA } from '../constants/siteMetadata';
 import { GameProvider } from '../context/GameContext';
@@ -6,14 +7,20 @@ import { UIPreferencesProvider } from '../context/UIPreferencesContext';
 import { LocaleProvider } from '../context/LocaleContext';
 import '../styles/globals.css';
 import HydrationErrorBoundary from '../components/common/HydrationErrorBoundary';
+import type { GameMode } from '../types';
 
-export default function App({ Component, pageProps }: AppProps) {
+type NextPageWithMode<P = {}, IP = P> = NextPage<P, IP> & { pageMode?: GameMode };
+
+type AppPropsWithMode = AppProps & { Component: NextPageWithMode };
+
+export default function App({ Component, pageProps }: AppPropsWithMode) {
   const socialImageUrl = `${SITE_METADATA.url}${SITE_METADATA.image}`;
+  const pageMode = Component.pageMode ?? 'game';
 
   return (
     <LocaleProvider>
       <UIPreferencesProvider>
-        <GameProvider>
+        <GameProvider mode={pageMode} key={pageMode}>
           <Head>
           <title>{SITE_METADATA.title}</title>
           <meta name="description" content={SITE_METADATA.description} />

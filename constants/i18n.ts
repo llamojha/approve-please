@@ -91,6 +91,7 @@ export const TRANSLATIONS = {
       languageHeader: 'Preferred Language',
       languageSubtitle: 'Docs & config PRs always appear.',
       startCta: 'Start Your Day',
+      tutorialCta: 'Play Tutorial Mode',
       comingSoon: '(soon)',
       languageOptions: languagePreferenceLabels.en
     },
@@ -151,9 +152,67 @@ export const TRANSLATIONS = {
       reasonClean: 'not a bug',
       reasonMixed: 'mixed bugs'
     },
+    tutorial: {
+      badge: 'Tutorial Mode',
+      stepLabel: (current: number, total: number) => `Step ${current}/${total}`,
+      steps: {
+        queue: {
+          title: 'Meet the queue',
+          body: 'Click the first PR titled "README cleanup". It\'s a safe warm-up to see how reviews flow.'
+        },
+        clean: {
+          title: 'Approve the cleanup',
+          body: 'Skim the diff to confirm it just trims copy. Hit Approve (A) once everything looks spotless.'
+        },
+        bug: {
+          title: 'Catch the leak',
+          body: 'The next PR exposes an API key near the bottom. Highlight that line before escalating.'
+        },
+        request: {
+          title: 'Request changes',
+          body: 'Choose Request Changes (R) with the Security bug type so the author knows to rotate the key.'
+        },
+        complete: {
+          title: 'Nice work',
+          body: 'You just practiced both review calls—approving clean diffs and stopping obvious risks.'
+        }
+      },
+      summary: {
+        tagline: 'Guided warm-up complete',
+        heading: 'Tutorial Results',
+        body: 'You walked through the two calls you’ll make all week: greenlight clean work and halt leaks on sight.',
+        startCta: 'Start Campaign',
+        restartCta: 'Replay Tutorial'
+      },
+      overlay: {
+        queue: {
+          title: 'Start here',
+          body: 'Click the "README cleanup" PR to load it. Only this window stays interactive until you do.'
+        },
+        clean: {
+          title: 'Approve the cleanup',
+          body: 'Scan the diff to confirm it just trims phrasing. Approve it once everything looks safe.'
+        },
+        bug: {
+          title: 'Spot the leak',
+          body: 'Scroll to the bottom of this diff. Highlight the exposed API key line before you escalate.'
+        },
+        request: {
+          title: 'Escalate securely',
+          body: 'Use Request Changes with the Security bug type so the author rotates the key immediately.'
+        },
+        complete: {
+          title: 'Warm-up complete',
+          body: 'You just practiced both review calls: greenlight clean work and stop obvious leaks on sight.'
+        }
+      }
+    },
     work: {
       clock: {
-        label: 'Current Time'
+        label: 'Current Time',
+        tutorialLabel: 'Tutorial Mode',
+        tutorialValue: 'Paused',
+        tutorialCopy: 'Time is frozen so you can explore every panel without pressure.'
       },
       queue: {
         title: 'PR Queue',
@@ -259,6 +318,7 @@ export const TRANSLATIONS = {
       languageHeader: 'Lenguaje preferido',
       languageSubtitle: 'Los PRs de docs y configuración siempre aparecerán.',
       startCta: 'Comienza tu día',
+      tutorialCta: 'Jugar el tutorial',
       comingSoon: '(pronto)',
       languageOptions: languagePreferenceLabels.es
     },
@@ -319,9 +379,67 @@ export const TRANSLATIONS = {
       reasonClean: 'sin bug real',
       reasonMixed: 'bugs mixtos'
     },
+    tutorial: {
+      badge: 'Modo tutorial',
+      stepLabel: (current: number, total: number) => `Paso ${current}/${total}`,
+      steps: {
+        queue: {
+          title: 'Conoce la cola',
+          body: 'Abre el primer PR llamado "README cleanup". Es un cambio seguro para entender el flujo.'
+        },
+        clean: {
+          title: 'Aprueba la limpieza',
+          body: 'Revisa el diff y confirma que solo ajusta texto. Pulsa Aprobar (A) cuando se vea impecable.'
+        },
+        bug: {
+          title: 'Detecta la filtración',
+          body: 'El siguiente PR expone una API key al final. Resalta esa línea antes de escalarlo.'
+        },
+        request: {
+          title: 'Pide cambios',
+          body: 'Usa Solicitar cambios (R) con el tipo Seguridad para que el autor rote la clave.'
+        },
+        complete: {
+          title: 'Buen trabajo',
+          body: 'Ya practicaste las dos decisiones clave: aprobar diffs limpios y frenar riesgos obvios.'
+        }
+      },
+      summary: {
+        tagline: 'Calentamiento guiado completo',
+        heading: 'Resultados del tutorial',
+        body: 'Repasaste las dos llamadas que harás a diario: dar luz verde al trabajo limpio y detener filtraciones al instante.',
+        startCta: 'Iniciar campaña',
+        restartCta: 'Repetir tutorial'
+      },
+      overlay: {
+        queue: {
+          title: 'Empieza aquí',
+          body: 'Haz clic en el PR "README cleanup" para abrirlo. Solo esta ventana queda interactiva hasta que lo hagas.'
+        },
+        clean: {
+          title: 'Aprueba la limpieza',
+          body: 'Revisa el diff y confirma que solo ajusta texto. Apruébalo cuando todo se vea seguro.'
+        },
+        bug: {
+          title: 'Detecta la filtración',
+          body: 'Desplázate al final del diff. Resalta la línea con la API key expuesta antes de escalarlo.'
+        },
+        request: {
+          title: 'Escala con seguridad',
+          body: 'Usa Solicitar cambios con el tipo Seguridad para que el autor rote la clave de inmediato.'
+        },
+        complete: {
+          title: 'Calentamiento completo',
+          body: 'Ya dominaste las dos decisiones clave: aprobar trabajo limpio y frenar filtraciones obvias al instante.'
+        }
+      }
+    },
     work: {
       clock: {
-        label: 'Hora actual'
+        label: 'Hora actual',
+        tutorialLabel: 'Modo tutorial',
+        tutorialValue: 'Pausado',
+        tutorialCopy: 'El tiempo está detenido para que practiques sin presión.'
       },
       queue: {
         title: 'Cola de PRs',

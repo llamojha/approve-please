@@ -84,8 +84,10 @@ export const usePRSpawner = () => {
       languagePreference,
     },
     actions: { enqueuePRs },
+    mode,
   } = useGameState();
   const { locale } = useLocale();
+  const isTutorial = mode === "tutorial";
 
   const trackerRef = useRef<WaveTracker>(getWaveTracker(currentDay));
   const workingPoolRef = useRef<PullRequestTemplate[]>([]);
@@ -128,14 +130,14 @@ export const usePRSpawner = () => {
   );
 
   const spawnSpecific = useCallback(
-    (templateIds: string[], day: number): PullRequest[] => {
+    (templateIds: string[], day: number, options?: { skipPreference?: boolean }): PullRequest[] => {
       const results: PullRequest[] = [];
       templateIds.forEach((templateId) => {
         const template = templateMap.get(templateId);
         if (!template) {
           return;
         }
-        if (!templateMatchesPreference(template, languagePreference)) {
+        if (!options?.skipPreference && !templateMatchesPreference(template, languagePreference)) {
           return;
         }
         spawnCountRef.current += 1;
@@ -192,40 +194,44 @@ export const usePRSpawner = () => {
       return scriptedWaves.some((wave) => wave.atMinute === minute);
     };
 
-    DEFAULT_WAVE_MINUTES.forEach((minute) => {
-      if (currentTime >= minute && !triggeredWaves.has(minute)) {
-        triggeredWaves.add(minute);
-        if (shouldSkipDefaultWave(minute)) {
-          return;
+    if (!isTutorial) {
+      DEFAULT_WAVE_MINUTES.forEach((minute) => {
+        if (currentTime >= minute && !triggeredWaves.has(minute)) {
+          triggeredWaves.add(minute);
+          if (shouldSkipDefaultWave(minute)) {
+            return;
+          }
+          const count = minute === 0 ? 2 : pickWeightedWaveCount();
+          const prs = drawBatch(count, currentDay);
+          if (prs.length > 0) {
+            enqueuePRs(prs);
+          }
         }
-        const count = minute === 0 ? 2 : pickWeightedWaveCount();
-        const prs = drawBatch(count, currentDay);
-        if (prs.length > 0) {
-          enqueuePRs(prs);
-        }
-      }
-    });
+      });
+    }
 
     scriptedWaves.forEach((wave, index) => {
       const key = `${wave.atMinute}-${index}`;
       if (currentTime >= wave.atMinute && !triggeredScripted.has(key)) {
         triggeredScripted.add(key);
-        const prs = spawnSpecific(wave.templateIds, currentDay);
+        const prs = spawnSpecific(wave.templateIds, currentDay, { skipPreference: isTutorial });
         if (prs.length > 0) {
           enqueuePRs(prs);
         }
       }
     });
 
-    const currentHour = Math.floor(currentTime / 60);
-    const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
-    if (withinHourlyWindow && currentHour !== lastHourlyCheckRef.current) {
-      lastHourlyCheckRef.current = currentHour;
-      const totalQueue = queue.length + (currentPR ? 1 : 0);
-      if (totalQueue === 0) {
-        const prs = drawBatch(1, currentDay);
-        if (prs.length > 0) {
-          enqueuePRs(prs);
+    if (!isTutorial) {
+      const currentHour = Math.floor(currentTime / 60);
+      const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
+      if (withinHourlyWindow && currentHour !== lastHourlyCheckRef.current) {
+        lastHourlyCheckRef.current = currentHour;
+        const totalQueue = queue.length + (currentPR ? 1 : 0);
+        if (totalQueue === 0) {
+          const prs = drawBatch(1, currentDay);
+          if (prs.length > 0) {
+            enqueuePRs(prs);
+          }
         }
       }
     }
@@ -238,6 +244,7 @@ export const usePRSpawner = () => {
     currentPR,
     spawnSpecific,
     drawBatch,
+    isTutorial,
   ]);
 };
 

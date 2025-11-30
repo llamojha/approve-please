@@ -114,6 +114,13 @@ const IndexPage = () => {
               />
             </svg>
           </button>
+          <button
+            type="button"
+            className="landing__cta landing__cta--secondary"
+            onClick={() => router.push('/tutorial')}
+          >
+            <span>{landing.tutorialCta}</span>
+          </button>
         </div>
       </section>
       <style jsx>{`
@@ -349,6 +356,16 @@ const IndexPage = () => {
         .landing__cta:hover svg,
         .landing__cta:focus-visible svg {
           transform: translateX(3px);
+        }
+        .landing__cta--secondary {
+          background: rgba(15, 23, 42, 0.7);
+          color: #e2e8f0;
+          border: 1px solid rgba(148, 163, 184, 0.6);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        .landing__cta--secondary:hover,
+        .landing__cta--secondary:focus-visible {
+          box-shadow: 0 10px 20px rgba(2, 6, 23, 0.6);
         }
       `}</style>
     </main>
