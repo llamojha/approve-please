@@ -100,7 +100,7 @@ const IndexPage = () => {
           <button
             type="button"
             className="landing__cta"
-            onClick={() => router.push('/game')}
+            onClick={() => router.push('./game')}
           >
             <span>{landing.startCta}</span>
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -134,7 +134,7 @@ const IndexPage = () => {
           border: 1px solid var(--border);
           overflow: hidden;
           box-shadow: 0 20px 50px rgba(2, 6, 23, 0.8);
-          background: url('/social-card-no-title.png') center/cover no-repeat;
+          background: url('social-card-no-title.png') center/cover no-repeat;
           color: #f8fafc;
           display: flex;
           flex-direction: column;
