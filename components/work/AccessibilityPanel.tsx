@@ -6,7 +6,7 @@ import { useTranslations } from '../../hooks/useTranslations';
 
 const AccessibilityPanel = () => {
   const { theme, toggleTheme } = useUIPreferences();
-  const isLight = theme === 'github-light';
+  const isLight = theme === 'githob-light';
   const translations = useTranslations();
   const accessibilityText = translations.work.accessibility;
 

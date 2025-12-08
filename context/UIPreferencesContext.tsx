@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
-type ThemeMode = 'github-dark' | 'github-light';
+type ThemeMode = 'githob-dark' | 'githob-light';
 
 interface UIPreferencesContextValue {
   theme: ThemeMode;
@@ -13,17 +13,17 @@ const UIPreferencesContext = createContext<UIPreferencesContextValue | undefined
 const STORAGE_KEY = 'approve-please.theme';
 
 const normalizeStoredTheme = (value: string | null): ThemeMode => {
-  if (value === 'github-light' || value === 'light' || value === 'default') {
-    return 'github-light';
+  if (value === 'githob-light' || value === 'light' || value === 'default') {
+    return 'githob-light';
   }
-  if (value === 'github-dark' || value === 'high-contrast' || value === 'dark') {
-    return 'github-dark';
+  if (value === 'githob-dark' || value === 'high-contrast' || value === 'dark') {
+    return 'githob-dark';
   }
-  return 'github-dark';
+  return 'githob-dark';
 };
 
 export const UIPreferencesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeMode>('github-dark');
+  const [theme, setTheme] = useState<ThemeMode>('githob-dark');
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -44,7 +44,7 @@ export const UIPreferencesProvider = ({ children }: { children: React.ReactNode 
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'github-light' ? 'github-dark' : 'github-light'));
+    setTheme((prev) => (prev === 'githob-light' ? 'githob-dark' : 'githob-light'));
   };
 
   const value = useMemo(

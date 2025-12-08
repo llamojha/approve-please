@@ -3,7 +3,6 @@ import styles from '../../styles/Desk.module.css';
 import { useGameState, DecisionResult } from '../../context/GameContext';
 import { useGameClock } from '../../hooks/useGameClock';
 import { usePRSpawner } from '../../hooks/usePRSpawner';
-import { BugKind } from '../../types';
 import { useAudioCue } from '../../hooks/useAudioCue';
 import ClockDisplay from '../work/ClockDisplay';
 import QueuePanel from '../work/QueuePanel';
@@ -28,7 +27,6 @@ const WorkScreen = () => {
   const { playCue, playArrivalCue } = useAudioCue();
 
   const [selectedLines, setSelectedLines] = useState<number[]>([]);
-  const [bugKind, setBugKind] = useState<BugKind>('logic');
   const [feedback, setFeedback] = useState<{ message: string; status: DecisionResult['status'] } | null>(null);
   const previousQueueLength = useRef(queue.length);
 
@@ -60,15 +58,15 @@ const WorkScreen = () => {
   }, [approveCurrentPR, playCue]);
 
   const handleRequestChanges = useCallback(() => {
-    const result = requestChanges({ selectedLines, bugKind });
+    const result = requestChanges({ selectedLines });
     setFeedback({ message: result.message, status: result.status });
     if (result.success) {
       setSelectedLines([]);
       playCue(360, 0.15);
     }
-  }, [requestChanges, selectedLines, bugKind, playCue]);
+  }, [requestChanges, selectedLines, playCue]);
 
-  const canRequest = Boolean(currentPR) && selectedLines.length > 0;
+  const canRequest = Boolean(currentPR);
   const canApprove = Boolean(currentPR);
 
   const queuedCount = queue.length;
@@ -112,8 +110,6 @@ const WorkScreen = () => {
             onToggleLine={toggleLine}
             actionSlot={
               <ActionPanel
-                bugKind={bugKind}
-                onBugKindChange={setBugKind}
                 onApprove={handleApprove}
                 onRequestChanges={handleRequestChanges}
                 disableApprove={!canApprove}

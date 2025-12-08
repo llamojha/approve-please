@@ -14,7 +14,7 @@
     'Segoe UI Emoji';
 }
 
-:root[data-theme='github-light'] {
+:root[data-theme='githob-light'] {
   --bg: #f6f8fa;
   --bg-panel: #ffffff;
   --bg-panel-light: #f0f3f6;
@@ -53,7 +53,16 @@ button {
   background: var(--bg-panel-light);
   color: var(--text);
   padding: 0.35rem 0.75rem;
-  transition: background 0.15s ease, border 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, border 0.15s ease, color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+button:hover:not(:disabled),
+button:focus-visible:not(:disabled) {
+  /*background: rgba(255, 255, 255, 0.08);*/
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
 }
 
 button:disabled {

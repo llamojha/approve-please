@@ -1,12 +1,9 @@
 import styles from '../../styles/Desk.module.css';
-import { BugKind } from '../../types';
 import { DecisionResult } from '../../context/GameContext';
 import TutorialHint from '../tutorial/TutorialHint';
 import { useTranslations } from '../../hooks/useTranslations';
 
 interface ActionPanelProps {
-  bugKind: BugKind;
-  onBugKindChange: (kind: BugKind) => void;
   onApprove: () => void;
   onRequestChanges: () => void;
   disableApprove: boolean;
@@ -15,11 +12,7 @@ interface ActionPanelProps {
   feedback: { message: string; status: DecisionResult['status'] } | null;
 }
 
-const bugKinds: BugKind[] = ['logic', 'security', 'performance', 'style'];
-
 const ActionPanel = ({
-  bugKind,
-  onBugKindChange,
   onApprove,
   onRequestChanges,
   disableApprove,
@@ -29,7 +22,6 @@ const ActionPanel = ({
 }: ActionPanelProps) => {
   const translations = useTranslations();
   const actionText = translations.work.actions;
-  const bugKindLabels = translations.shared.bugKinds;
 
   return (
     <div className={styles.actionBlock}>
@@ -65,22 +57,9 @@ const ActionPanel = ({
             <kbd className={styles.hotkeyBadge}>R</kbd>
           </button>
           <div className={styles.requestDetails}>
-            <p className={styles.requestLabel}>{actionText.requestLabel}</p>
-            <p className={styles.requestHelper}>{actionText.requestHelper}</p>
-            <div className={styles.bugKindButtons}>
-              {bugKinds.map((kind) => (
-                <button
-                  key={kind}
-                  type="button"
-                  className={[styles.bugKindButton, kind === bugKind ? styles.bugKindButtonActive : '']
-                    .filter(Boolean)
-                    .join(' ')}
-                  onClick={() => onBugKindChange(kind)}
-                >
-                  {bugKindLabels[kind] ?? kind}
-                </button>
-              ))}
-            </div>
+            {actionText.requestLabel ? <p className={styles.requestLabel}>{actionText.requestLabel}</p> : null}
+            {actionText.requestHelper ? <p className={styles.requestHelper}>{actionText.requestHelper}</p> : null}
+            <p className={styles.requestHelper}>{actionText.requestHelperBonus}</p>
           </div>
         </div>
       </div>
