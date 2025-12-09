@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
 import { formatMeterValue, meterColorFromValue } from '../../utils/helpers';
@@ -17,6 +18,9 @@ const GameOverScreen = () => {
   const incidentsText = translations.incidents;
   const bugKindLabels = translations.shared.bugKinds;
   const severityLabels = translations.shared.severity;
+  const [displayName, setDisplayName] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const toAlpha = (color: string, alpha: number) => {
     if (color.startsWith('hsl')) {
       return color.replace('hsl', 'hsla').replace(')', `, ${alpha})`);
@@ -68,6 +72,33 @@ const GameOverScreen = () => {
   };
 
   const reasonCopy = gameOverReason ? translations.gameOverReasons[gameOverReason] : gameOverText.defaultReason;
+  const daysPlayed = history.length + 1;
+
+  const submitToLeaderboard = async () => {
+    if (submitStatus === 'submitting') return;
+    setSubmitStatus('submitting');
+    setSubmitError(null);
+    try {
+      const res = await fetch('/api/leaderboard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          displayName: displayName.trim() || 'Anonymous reviewer',
+          cleanApprovals: finalCounters.cleanApprovals,
+          truePositives: finalCounters.truePositives,
+          daysPlayed
+        })
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || `Request failed (${res.status})`);
+      }
+      setSubmitStatus('success');
+    } catch (err) {
+      setSubmitStatus('error');
+      setSubmitError(err instanceof Error ? err.message : 'Failed to submit score.');
+    }
+  };
 
   return (
     <main className={styles.screenShell}>
@@ -119,6 +150,38 @@ const GameOverScreen = () => {
             {gameOverText.homeButton}
           </Link>
         </div>
+        <section className={styles.leaderboardForm}>
+          <div>
+            <strong>Save this run to the leaderboard</strong>
+            <p className="muted">Name is optional. Score = clean approvals + true positives + days played × 5.</p>
+          </div>
+          <div className={styles.leaderboardControls}>
+            <input
+              type="text"
+              className={styles.leaderboardInput}
+              maxLength={64}
+              placeholder="Your name (optional)"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              disabled={submitStatus === 'submitting' || submitStatus === 'success'}
+            />
+            <button
+              type="button"
+              className={styles.leaderboardSubmit}
+              onClick={submitToLeaderboard}
+              disabled={submitStatus === 'submitting' || submitStatus === 'success'}
+            >
+              {submitStatus === 'submitting' ? 'Saving…' : submitStatus === 'success' ? 'Saved' : 'Submit score'}
+            </button>
+            <Link className={`${styles.screenButton} ${styles.screenButtonSecondary}`} href="/leaderboard">
+              View leaderboard
+            </Link>
+          </div>
+          <div className={styles.leaderboardStatus}>
+            {submitStatus === 'success' && 'Saved! Your run is on the leaderboard.'}
+            {submitStatus === 'error' && submitError}
+          </div>
+        </section>
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{gameOverText.deployedHeading}</h3>

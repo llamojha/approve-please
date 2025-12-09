@@ -168,6 +168,61 @@
 .meterCard {
   color: inherit;
 }
+
+.leaderboardForm {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.leaderboardControls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.leaderboardInput {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--bg-panel-light);
+  color: var(--text);
+}
+
+.leaderboardSubmit {
+  background: #10b981;
+  color: #04111f;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.leaderboardSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.leaderboardSubmit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+}
+
+.leaderboardStatus {
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
 .gameOverTag {
   padding: 0.25rem 0.75rem;
   border-radius: 999px;

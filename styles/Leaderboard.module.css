@@ -1,0 +1,138 @@
+.page {
+  min-height: 100vh;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 3rem 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.shell {
+  width: min(1100px, 100%);
+  background: #0b1224;
+  border: 1px solid #1f2a44;
+  border-radius: 16px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+  padding: 1.75rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+}
+
+.meta {
+  color: #8ba0c2;
+  font-size: 0.95rem;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.table th,
+.table td {
+  padding: 0.9rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #1f2a44;
+}
+
+.table th {
+  color: #9ab7e5;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.table tr:hover td {
+  background: rgba(148, 163, 184, 0.05);
+}
+
+.rank {
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: #0b1224;
+  background: linear-gradient(135deg, #eab308, #f59e0b);
+  font-weight: 700;
+}
+
+.silver {
+  background: linear-gradient(135deg, #cbd5e1, #e2e8f0);
+  color: #0b1224;
+}
+
+.bronze {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #0b1224;
+}
+
+.score {
+  font-weight: 700;
+  color: #7dd3fc;
+}
+
+.muted {
+  color: #8ba0c2;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #10b981;
+  color: #041020;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.button.secondary {
+  background: #1f2a44;
+  color: #e2e8f0;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+}
+
+.empty {
+  padding: 1rem 0;
+}
