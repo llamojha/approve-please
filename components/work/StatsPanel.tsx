@@ -30,10 +30,6 @@ const StatsPanel = ({ counters }: StatsPanelProps) => {
           <small>{statsText.labels.cleanApprovals}</small>
           <strong>{counters.cleanApprovals}</strong>
         </div>
-        <div className={`${styles.statsCard} ${styles.statsCardFalse}`} title={statsText.tooltips.falsePositives}>
-          <small>{statsText.labels.falsePositives}</small>
-          <strong>{counters.falsePositives}</strong>
-        </div>
         <div className={`${styles.statsCard} ${styles.statsCardTrue}`} title={statsText.tooltips.truePositives}>
           <small>{statsText.labels.truePositives}</small>
           <strong>{counters.truePositives}</strong>

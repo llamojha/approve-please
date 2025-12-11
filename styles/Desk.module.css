@@ -491,6 +491,8 @@
   gap: 0.35rem;
   min-height: 90px;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .statsCardBugs {
@@ -516,6 +518,8 @@
   color: var(--muted);
   letter-spacing: 0.08em;
   line-height: 1.2;
+  text-align: center;
+  display: block;
 }
 
 .statsGrid strong {
@@ -618,7 +622,6 @@
 }
 
 .actionBlock {
-  background: rgba(15, 23, 42, 0.6);
   border-radius: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 1rem;
@@ -673,17 +676,45 @@
   justify-content: space-between;
   gap: 0.5rem;
   width: 100%;
+  transition: background 0.2s ease, border-color 0.2s ease, filter 0.2s ease, transform 0.2s ease;
 }
 
 .approveButton {
-  background: var(--success);
+  background:  #22c55e;
   color: #ffffff;
-  border-color: var(--success);
+  border-color: #16a34a;
+}
+.approveButton:hover {
+  background:  #1a9447;
+  border-color: #1a9447;
+  transform: translateY(-1px);
+}
+.approveButton:focus-visible {
+  background: #1a9447;
+  border-color: #1a9447;
+  outline: 2px solid rgba(74, 222, 128, 0.4);
+  outline-offset: 2px;
+  transform: translateY(-1px);
 }
 
 .requestButton {
-  background: rgba(248, 113, 113, 0.12);
-  color: var(--danger);
+  background: rgba(248, 113, 113);
+  color: #fff0f0;
+  border-color: rgba(248, 113, 113, 0.7);
+}
+.requestButton:hover {
+  background: rgba(210, 76, 46, 0.86);
+  border-color: rgba(210, 76, 46, 0.86);
+  color: #fff0f0;
+  transform: translateY(-1px);
+}
+.requestButton:focus-visible {
+  background: rgba(252, 165, 165, 0.9);
+  border-color: rgba(252, 165, 165, 0.9);
+  color:  #fff0f0;
+  outline: 2px solid rgba(252, 165, 165, 0.5);
+  outline-offset: 2px;
+  transform: translateY(-1px);
 }
 
 .requestDetails {

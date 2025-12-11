@@ -90,6 +90,7 @@ export const TRANSLATIONS = {
       },
       languageHeader: 'Preferred Language',
       languageSubtitle: 'Docs & config PRs always appear.',
+      tutorialCta: 'HOW TO PLAY',
       startCta: 'Start Your Day',
       comingSoon: '(soon)',
       languageOptions: languagePreferenceLabels.en
@@ -100,9 +101,9 @@ export const TRANSLATIONS = {
       daySummary: (day: number) => `Day ${day} Summary`,
       counters: {
         prsApproved: 'PRs Approved',
-        prsRejected: 'PRs Rejected',
+        prsRejected: 'Changes Requested',
         bugsToProd: 'Bugs to Prod',
-        truePositives: 'True Positives',
+        truePositives: 'Bugs Blocked',
         falsePositives: 'False Positives',
         cleanApprovals: 'Clean Approvals'
       },
@@ -118,7 +119,7 @@ export const TRANSLATIONS = {
       actualNone: 'none'
     },
     briefing: {
-      startButton: 'Start Day'
+      startButton: 'START DAY'
     },
     summary: {
       endOfDay: 'End of Day',
@@ -160,15 +161,15 @@ export const TRANSLATIONS = {
         hint: 'Pick a PR to load it into the diff view. New submissions show up automatically.',
         empty: 'No incoming PRs. Await the next wave.'
       },
-      prViewer: {
-        title: 'PR Details',
-        placeholder: 'Load a PR from the queue to begin review.',
-        hintSelect: 'Select a PR from the queue to inspect its summary and diff here.',
-        hintLines: 'Click any line number to flag suspected bugs before requesting changes.',
-        authorLabel: 'Author',
-        diffTip: (requestLabel: string) =>
-          `Tip: click the line number to highlight a suspicious row. Selected lines glow and count toward your ${requestLabel} justification.`
-      },
+        prViewer: {
+          title: 'PR Details',
+          placeholder: 'Load a PR from the queue to begin review.',
+          hintSelect: 'Select a PR from the queue to inspect its summary and diff here.',
+          hintLines: 'Click any line number to tag suspected bugs (optional, but earns bonus if correct).',
+          authorLabel: 'Author',
+          diffTip: (requestLabel: string) =>
+          `Tip: click a line number to highlight a suspicious row. Tagging the right line boosts satisfaction when you ${requestLabel}.`
+        },
       actions: {
         reviewLabel: 'Review Actions',
         selectedLines: (count: number) => `Selected lines: ${count}`,
@@ -176,12 +177,13 @@ export const TRANSLATIONS = {
         approve: 'Approve & Deploy',
         approveSubcopy: 'Greenlight it when the diff feels rock solid.',
         request: 'Request Changes',
-        requestTitle: 'Click the line number to highlight a suspicious row.',
-        requestLabel: 'Why block this deploy?',
-        requestHelper: 'Pick the closest issue type so the author knows what to fix.',
+        requestTitle: 'Tag the line for a bonus, or just request changes directly.',
+        requestLabel: '',
+        requestHelper: '',
+        requestHelperBonus: 'Bonus: tag the exact offending line to boost satisfaction.',
         legendApprove: 'Approve immediately when the diff looks clean.',
-        legendRequest: 'Request changes after highlighting the problematic lines.',
-        hotkeyHint: 'Need justification? Highlight lines in the diff, choose a bug type, then press R.'
+        legendRequest: 'Request changes; tagging the right line grants a bonus.',
+        hotkeyHint: 'Tag a line for bonus satisfaction, then press R — or request changes directly.'
       },
       rulebook: {
         empty: 'No directives today. Trust your instincts.'
@@ -190,29 +192,29 @@ export const TRANSLATIONS = {
         title: 'Metrics',
         labels: {
           approved: 'Approved',
-          rejected: 'Rejected',
+          rejected: 'Changes Requested',
           bugsToProd: 'Bugs to Prod',
-          truePositives: 'True Positives',
+          truePositives: 'Bugs Blocked',
           falsePositives: 'False Positives',
           cleanApprovals: 'Clean Approvals'
         },
         tooltips: {
           approved: 'PRs you merged today. These keep features flowing but risky ones can hurt stability.',
-          rejected: 'PRs you rejected with requested changes. Slows things down but can prevent incidents.',
+          rejected: 'PRs you blocked by requesting changes.',
           bugsToProd: 'Bugs that escaped to production from approved PRs. Too many will tank stability.',
-          truePositives: 'Correct catches where you called out a real bug before it shipped.',
+          truePositives: 'Requests where you tagged a real bug line and earned the bonus.',
           falsePositives: 'False alarms where you flagged a bug that wasn’t there, costing time and goodwill.',
           cleanApprovals: 'Bug-free approvals that kept features moving without hurting stability.'
         }
       },
       accessibility: {
         title: 'Theme',
-        hint: 'Swap between GitHub Light and GitHub Dark palettes.',
-        label: (isLight: boolean) => `GitHub ${isLight ? 'Light' : 'Dark'}`,
-        copy: 'Match the UI to the familiar GitHub aesthetic you prefer.',
-        button: (isLight: boolean) => `Switch to GitHub ${isLight ? 'Dark' : 'Light'}`,
+        hint: 'Swap between GitHob Light and GitHob Dark palettes.',
+        label: (isLight: boolean) => `GitHob ${isLight ? 'Light' : 'Dark'}`,
+        copy: 'Match the UI to the familiar GitHob aesthetic you prefer.',
+        button: (isLight: boolean) => `Switch to GitHob ${isLight ? 'Dark' : 'Light'}`,
         status: (isLight: boolean) => (isLight ? 'Light' : 'Dark'),
-        footnote: 'Colors and spacing track GitHub’s Primer tokens (canvas, borders, accent blues) for a native feel.'
+        footnote: 'Colors and spacing track GitHob’s Primer tokens (canvas, borders, accent blues) for a native feel.'
       }
     },
     meterTrend: (label: string) => `${label} dropping`,
@@ -221,10 +223,11 @@ export const TRANSLATIONS = {
     },
     decisions: {
       noPR: 'No PR loaded.',
-      highlightLine: 'Highlight at least one suspicious line.',
       bugSlip: 'Bug slipped to prod! Stability took a hit.',
       cleanMerge: 'PR merged cleanly. Velocity is happy.',
       niceCatch: 'Nice catch. You kept prod safe.',
+      requestBonus: 'Changes requested with bonus — great catch on the exact line.',
+      requestNoBonus: 'Changes requested. Tag the exact line next time for a bonus.',
       noMatching: 'No matching bug found. Velocity groans.'
     },
     gameOverReasons: {
@@ -258,6 +261,7 @@ export const TRANSLATIONS = {
       },
       languageHeader: 'Lenguaje preferido',
       languageSubtitle: 'Los PRs de docs y configuración siempre aparecerán.',
+      tutorialCta: 'Cómo jugar',
       startCta: 'Comienza tu día',
       comingSoon: '(pronto)',
       languageOptions: languagePreferenceLabels.es
@@ -268,9 +272,9 @@ export const TRANSLATIONS = {
       daySummary: (day: number) => `Resumen del Día ${day}`,
       counters: {
         prsApproved: 'PRs aprobados',
-        prsRejected: 'PRs rechazados',
+        prsRejected: 'Cambios solicitados',
         bugsToProd: 'Bugs a prod',
-        truePositives: 'Verdaderos positivos',
+        truePositives: 'Bugs bloqueados',
         falsePositives: 'Falsos positivos',
         cleanApprovals: 'Aprobaciones limpias'
       },
@@ -332,10 +336,10 @@ export const TRANSLATIONS = {
         title: 'Detalles del PR',
         placeholder: 'Carga un PR de la cola para empezar la revisión.',
         hintSelect: 'Selecciona un PR de la cola para ver aquí su resumen y diff.',
-        hintLines: 'Haz clic en cualquier número de línea para marcar bugs sospechosos antes de pedir cambios.',
+        hintLines: 'Haz clic en cualquier número de línea para marcar bugs sospechosos (opcional, pero da bonus si aciertas).',
         authorLabel: 'Autor',
         diffTip: (requestLabel: string) =>
-          `Tip: haz clic en el número de línea para resaltar una fila sospechosa. Las líneas seleccionadas brillan y cuentan para tu justificación de ${requestLabel}.`
+          `Tip: haz clic en un número de línea para resaltar una fila sospechosa. Etiquetar la línea correcta sube satisfacción cuando ${requestLabel}.`
       },
       actions: {
         reviewLabel: 'Acciones de revisión',
@@ -344,12 +348,13 @@ export const TRANSLATIONS = {
         approve: 'Aprobar y desplegar',
         approveSubcopy: 'Dale luz verde cuando el diff se sienta sólido.',
         request: 'Solicitar cambios',
-        requestTitle: 'Haz clic en el número de línea para resaltar una fila sospechosa.',
-        requestLabel: '¿Por qué bloquear este deploy?',
-        requestHelper: 'Elige el tipo de problema más cercano para que el autor sepa qué corregir.',
+        requestTitle: 'Etiqueta la línea para un bonus, o solo solicita cambios.',
+        requestLabel: '',
+        requestHelper: '',
+        requestHelperBonus: 'Bonus: etiqueta la línea exacta para subir satisfacción.',
         legendApprove: 'Aprueba de inmediato cuando el diff se vea limpio.',
-        legendRequest: 'Solicita cambios después de resaltar las líneas problemáticas.',
-        hotkeyHint: '¿Necesitas justificación? Resalta líneas en el diff, elige un tipo de bug y luego presiona R.'
+        legendRequest: 'Solicita cambios; etiquetar la línea correcta da bonus.',
+        hotkeyHint: 'Etiqueta una línea para el bonus de satisfacción y presiona R — o pide cambios directo.'
       },
       rulebook: {
         empty: 'Sin directrices hoy. Confía en tu instinto.'
@@ -358,29 +363,29 @@ export const TRANSLATIONS = {
         title: 'Métricas',
         labels: {
           approved: 'Aprobados',
-          rejected: 'Rechazados',
+          rejected: 'Cambios solicitados',
           bugsToProd: 'Bugs a prod',
-          truePositives: 'Verdaderos positivos',
+          truePositives: 'Bugs bloqueados',
           falsePositives: 'Falsos positivos',
           cleanApprovals: 'Aprobaciones limpias'
         },
         tooltips: {
           approved: 'PRs que aprobaste hoy. Mantienen el flujo de features pero los arriesgados dañan la estabilidad.',
-          rejected: 'PRs que rechazaste pidiendo cambios. Frenan un poco pero previenen incidentes.',
+          rejected: 'PRs que bloqueaste solicitando cambios.',
           bugsToProd: 'Bugs que se escaparon a producción desde PRs aprobados. Demasiados hunden la estabilidad.',
-          truePositives: 'Aciertos donde detectaste un bug real antes del deploy.',
+          truePositives: 'Solicitudes donde marcaste la línea correcta y obtuviste el bonus.',
           falsePositives: 'Falsas alarmas donde marcaste un bug inexistente, perdiendo tiempo y confianza.',
           cleanApprovals: 'Aprobaciones sin bugs que mantuvieron el flujo sin dañar la estabilidad.'
         }
       },
       accessibility: {
         title: 'Tema',
-        hint: 'Alterna entre las paletas GitHub Light y Dark.',
-        label: (isLight: boolean) => `GitHub ${isLight ? 'Claro' : 'Oscuro'}`,
-        copy: 'Haz que la UI coincida con la estética de GitHub que prefieres.',
-        button: (isLight: boolean) => `Cambiar a GitHub ${isLight ? 'Oscuro' : 'Claro'}`,
+        hint: 'Alterna entre las paletas GitHob Light y Dark.',
+        label: (isLight: boolean) => `GitHob ${isLight ? 'Claro' : 'Oscuro'}`,
+        copy: 'Haz que la UI coincida con la estética de GitHob que prefieres.',
+        button: (isLight: boolean) => `Cambiar a GitHob ${isLight ? 'Oscuro' : 'Claro'}`,
         status: (isLight: boolean) => (isLight ? 'Claro' : 'Oscuro'),
-        footnote: 'Los colores y espacios siguen los tokens Primer de GitHub (canvas, bordes, azules) para sentirse nativo.'
+        footnote: 'Los colores y espacios siguen los tokens Primer de GitHob (canvas, bordes, azules) para sentirse nativo.'
       }
     },
     meterTrend: (label: string) => `${label} en caída`,
@@ -389,10 +394,11 @@ export const TRANSLATIONS = {
     },
     decisions: {
       noPR: 'No hay PR cargado.',
-      highlightLine: 'Resalta al menos una línea sospechosa.',
       bugSlip: '¡Se coló un bug a prod! La estabilidad recibió un golpe.',
       cleanMerge: 'PR fusionado sin problemas. La velocidad está feliz.',
       niceCatch: 'Buen hallazgo. Mantuviste prod a salvo.',
+      requestBonus: 'Cambios solicitados con bonus: acertaste la línea exacta.',
+      requestNoBonus: 'Cambios solicitados. Etiqueta la línea exacta para obtener el bonus.',
       noMatching: 'No se encontró un bug coincidente. La velocidad se queja.'
     },
     gameOverReasons: {

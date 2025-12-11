@@ -6,7 +6,7 @@ import { BugKind } from '../../types';
 
 const SummaryScreen = () => {
   const {
-    state: { currentDay, counters, meters, prodIncidents, falsePositiveRecords },
+    state: { currentDay, counters, meters, prodIncidents },
     actions: { advanceToNextDay, restartGame }
   } = useGameState();
   const translations = useTranslations();
@@ -66,10 +66,6 @@ const SummaryScreen = () => {
           <div className={`${styles.summaryCard} ${styles.summaryCardBugs}`}>
             <small>{counterLabels.bugsToProd}</small>
             <h2>{counters.bugsToProd}</h2>
-          </div>
-          <div className={`${styles.summaryCard} ${styles.summaryCardFalse}`}>
-            <small>{counterLabels.falsePositives}</small>
-            <h2>{counters.falsePositives}</h2>
           </div>
           <div className={`${styles.summaryCard} ${styles.summaryCardTrue}`}>
             <small>{counterLabels.truePositives}</small>
@@ -139,53 +135,6 @@ const SummaryScreen = () => {
                   )}
                 </li>
               ))}
-            </ul>
-          </section>
-        )}
-        {falsePositiveRecords.length > 0 && (
-          <section className={styles.incidentSection}>
-            <h3>{summaryText.falseHeading}</h3>
-            <p className="muted">{summaryText.falseBody}</p>
-            <ul className={styles.incidentList}>
-              {falsePositiveRecords.map((record, index) => {
-                const reason = formatFalsePositiveReason(record.actualBugKinds);
-                const reasonClassNames = [styles.badge, styles.badgeReason, reason.isClean ? styles.badgeReasonClean : null]
-                  .filter(Boolean)
-                  .join(' ');
-                return (
-                  <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
-                    <div className={styles.incidentMeta}>
-                      <div>
-                        <strong>{record.title}</strong>
-                        <div className={styles.incidentSubline}>{incidentsText.authorOnly(record.author)}</div>
-                      </div>
-                      <div className={styles.incidentBadges}>
-                        <span className={reasonClassNames}>{reason.label}</span>
-                        <span className={`${styles.badge} ${styles.badgeNeutral}`}>
-                          {incidentsText.falseBadge(bugKindLabels[record.claimedKind] ?? record.claimedKind)}
-                        </span>
-                      </div>
-                    </div>
-                    <p className={styles.incidentNote}>
-                      {incidentsText.falseNote(
-                        bugKindLabels[record.claimedKind] ?? record.claimedKind,
-                        record.actualBugKinds.length > 0
-                          ? record.actualBugKinds
-                              .map((kind) => bugKindLabels[kind] ?? kind)
-                              .join(', ')
-                          : incidentsText.none
-                      )}
-                    </p>
-                    {record.selectedLines.length > 0 && (
-                      <ul className={styles.lineList}>
-                        {record.selectedLines.map((line) => (
-                          <li key={`${record.prId}-fp-${line.lineNumber}`}>L{line.lineNumber}: <code>{line.content || '…'}</code></li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                );
-              })}
             </ul>
           </section>
         )}

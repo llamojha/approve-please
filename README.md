@@ -4,7 +4,7 @@
 
 **Title:** Approve Please
 **Genre:** Narrative pr-sim / judgment game (inspired by *Papers, Please*) ([Wikipedia][1])
-**Fantasy:** You’re a software engineer whose whole job is **GitHub Pull Request Reviewer**. Work runs from **9:00–17:00**; during the day, waves of PRs arrive. You must quickly decide whether to **Approve** (deploy to prod) or **Request changes**, trying to balance **speed vs quality** like real-world code review tradeoffs. ([SmartBear Software][2])
+**Fantasy:** You’re a software engineer whose whole job is **GitHob Pull Request Reviewer**. Work runs from **9:00–17:00**; during the day, waves of PRs arrive. You must quickly decide whether to **Approve** (deploy to prod) or **Request changes**, trying to balance **speed vs quality** like real-world code review tradeoffs. ([SmartBear Software][2])
 
 **Target platform:** Web (desktop browser)
 **Tech stack:** React + Next.js (or plain React SPA), TypeScript recommended.
@@ -55,8 +55,8 @@ Each **day** is one loop:
      * You inspect according to the current rulebook.
      * You either:
 
-       * **Approve** → PR is merged & deployed; if it has hidden bugs, **production bug counter** increases.
-       * **Request Changes** → you must **mark the bug** (highlight line(s) and choose bug category). If correct, the PR is fixed; if you’re wrong or over-cautious, you lose time/credibility.
+      * **Approve** → PR is merged & deployed; if it has hidden bugs, **production bug counter** increases.
+      * **Request Changes** → optional line tagging for a bonus; no category selection. Tag the exact line to earn extra satisfaction, otherwise it’s just a standard reject.
 
 3. **End-of-Day Summary**
 
@@ -168,7 +168,7 @@ Main game screen is a split layout:
 
 2. Review snippet against rulebook.
 
-3. Optionally **highlight lines** and assign bug type.
+3. Optionally **highlight lines** for a bonus (no category selection).
 
 4. Choose action:
 
@@ -178,13 +178,12 @@ Main game screen is a split layout:
      * If there are bugs → bug meter increases; if high severity, may trigger events.
    * **Request Changes**
 
-     * Compare your marked bug lines/types vs actual `bugPatterns`.
-     * If you correctly flagged at least one bug:
+     * If you tagged a line that matches an actual bug:
 
-       * PR “fixed” off-screen, may reappear later as clean.
-     * If you rejected a **clean** PR or wrong lines:
+       * Earn a satisfaction bonus; PR “fixed” off-screen, may reappear later as clean.
+     * If you rejected without a matching tag:
 
-       * Count as false positive; decrease throughput/manager satisfaction.
+       * No bonus, but the reject still slows velocity.
 
 5. PR leaves desk; time keeps ticking; queue moves on.
 

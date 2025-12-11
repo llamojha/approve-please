@@ -4,6 +4,7 @@ import { LanguagePreference } from '../types';
 import { useLocale } from '../context/LocaleContext';
 import { useTranslations } from '../hooks/useTranslations';
 import { LOCALE_OPTIONS } from '../constants/i18n';
+import { useState, useMemo, useCallback } from 'react';
 
 interface LanguageOption {
   value: LanguagePreference;
@@ -29,6 +30,61 @@ const IndexPage = () => {
     state: { languagePreference },
     actions: { setLanguagePreference }
   } = useGameState();
+
+  const tutorialSlides = useMemo(
+    () => [
+      {
+        title: 'Pick a PR',
+        description: ['Queue on the left; click to load a PR into the diff.', 'Rulebook guides what to watch for.'],
+        imageAlt: 'Queue and PR selection',
+        imageSrc: '/tutorial-slide-1-placeholder.png'
+      },
+      {
+        title: 'Inspect the Diff',
+        description: ['Scroll the snippet; tag lines by clicking line numbers.', 'Use rulebook hints to spot risky code.'],
+        imageAlt: 'Diff view with selected line',
+        imageSrc: '/tutorial-slide-2-placeholder.png'
+      },
+      {
+        title: 'Approve vs Request Changes',
+        description: ['Approve when clean; request changes for risky diffs.', 'Tag the exact line for a satisfaction bonus.'],
+        imageAlt: 'Action buttons for approve and request changes',
+        imageSrc: '/tutorial-slide-3-placeholder.png'
+      },
+      {
+        title: 'Meters & Consequences',
+        description: ['Stability drops if bugs ship; velocity slows on rejects.', 'Good catches and clean approvals boost satisfaction.'],
+        imageAlt: 'Meter HUD showing stability, velocity, satisfaction',
+        imageSrc: '/tutorial-slide-4-placeholder.png'
+      },
+      {
+        title: 'Day Wrap',
+        description: ['End-of-day summary shows incidents and false positives.', 'Advance to the next day or restart if meters tank.'],
+        imageAlt: 'Summary screen after a workday',
+        imageSrc: '/tutorial-slide-5-placeholder.png'
+      },
+      {
+        title: 'Learn from Mistakes',
+        description: ['Review Deployed Bugs at day end to see what slipped.', 'Study the culprit lines to avoid repeating them.'],
+        imageAlt: 'Deployed Bugs section highlighting shipped issues',
+        imageSrc: '/tutorial-slide-6-placeholder.png'
+      }
+    ],
+    []
+  );
+
+  const [isTutorialOpen, setTutorialOpen] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const closeTutorial = useCallback(() => setTutorialOpen(false), []);
+  const nextSlide = useCallback(
+    () => setSlideIndex((prev) => (prev + 1) % tutorialSlides.length),
+    [tutorialSlides.length]
+  );
+  const prevSlide = useCallback(
+    () => setSlideIndex((prev) => (prev - 1 + tutorialSlides.length) % tutorialSlides.length),
+    [tutorialSlides.length]
+  );
 
   return (
     <main className="landing">
@@ -99,6 +155,16 @@ const IndexPage = () => {
         <div className="landing__actions">
           <button
             type="button"
+            className="landing__secondary"
+            onClick={() => {
+              setSlideIndex(0);
+              setTutorialOpen(true);
+            }}
+          >
+            {landing.tutorialCta}
+          </button>
+          <button
+            type="button"
             className="landing__cta"
             onClick={() => router.push('./game')}
           >
@@ -116,6 +182,56 @@ const IndexPage = () => {
           </button>
         </div>
       </section>
+      {isTutorialOpen && (
+        <div className="tutorial" role="dialog" aria-modal="true" aria-label="How to play">
+          <div className="tutorial__backdrop" onClick={closeTutorial} />
+          <div className="tutorial__content">
+            <button type="button" className="tutorial__close" onClick={closeTutorial} aria-label="Close tutorial">
+              ×
+            </button>
+            <div className="tutorial__body">
+              <div className="tutorial__image">
+                {tutorialSlides[slideIndex].imageSrc ? (
+                  <img
+                    className="tutorial__image-img"
+                    src={tutorialSlides[slideIndex].imageSrc}
+                    alt={tutorialSlides[slideIndex].imageAlt}
+                  />
+                ) : (
+                  <div className="tutorial__image-placeholder">
+                    <span>{tutorialSlides[slideIndex].imageAlt}</span>
+                    <small>Replace with screenshot</small>
+                  </div>
+                )}
+              </div>
+              <div className="tutorial__text">
+                <p className="tutorial__eyebrow">
+                  Slide {slideIndex + 1} of {tutorialSlides.length}
+                </p>
+                <h3>{tutorialSlides[slideIndex].title}</h3>
+                <ul>
+                  {tutorialSlides[slideIndex].description.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="tutorial__controls">
+              <button type="button" onClick={prevSlide} className="tutorial__nav">
+                ← Prev
+              </button>
+              <div className="tutorial__dots" aria-hidden="true">
+                {tutorialSlides.map((_, idx) => (
+                  <span key={idx} className={`tutorial__dot ${idx === slideIndex ? 'active' : ''}`} />
+                ))}
+              </div>
+              <button type="button" onClick={nextSlide} className="tutorial__nav">
+                Next →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .landing {
           min-height: 100vh;
@@ -125,6 +241,16 @@ const IndexPage = () => {
           padding: 0.125rem;
           background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 50%), var(--bg);
           position: relative;
+        }
+        .landing::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(56, 191, 248, 0.54) 1px, transparent 0);
+          background-size: 24px 24px;
+          opacity: 0.35;
+          pointer-events: none;
+          z-index: 0;
         }
         .landing__card {
           position: relative;
@@ -170,6 +296,10 @@ const IndexPage = () => {
         .landing__locale-toggle button.active {
           background: rgba(56, 189, 248, 0.85);
           color: #04111f;
+        }
+        .landing__locale-toggle button:hover:not(.active),
+        .landing__locale-toggle button:focus-visible:not(.active) {
+          background: rgba(255, 255, 255, 0.08);
         }
         .landing__locale-toggle button:focus-visible {
           outline: 2px solid var(--accent);
@@ -287,6 +417,11 @@ const IndexPage = () => {
           font-size: 0.9rem;
           transition: background 0.2s, border-color 0.2s;
         }
+        .landing__language-options button:hover:not(.active):not(:disabled),
+        .landing__language-options button:focus-visible:not(.active):not(:disabled) {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(148, 163, 184, 0.7);
+        }
         .landing__language-options button.active {
           border-color: var(--accent);
           background: rgba(56, 189, 248, 0.2);
@@ -314,6 +449,23 @@ const IndexPage = () => {
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
           backdrop-filter: blur(4px);
         }
+        .landing__secondary {
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          background: rgba(15, 23, 42, 0.6);
+          color: #f8fafc;
+          padding: 0.85rem 1.2rem;
+          border-radius: 0.85rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          cursor: pointer;
+          transition: border-color 0.2s, background 0.2s, transform 0.2s;
+        }
+        .landing__secondary:hover,
+        .landing__secondary:focus-visible {
+          border-color: var(--accent);
+          background: rgba(56, 189, 248, 0.24);
+          transform: translateY(-1px);
+        }
         .landing__cta {
           border: none;
           display: inline-flex;
@@ -323,7 +475,7 @@ const IndexPage = () => {
           width: 100%;
           padding: 1rem 1.5rem;
           border-radius: 0.85rem;
-          background: linear-gradient(120deg, rgba(56, 189, 248, 0.95), rgba(59, 130, 246, 0.95));
+          background: linear-gradient(120deg, rgba(46, 164, 223, 0.95), rgba(41, 121, 202, 0.95));
           color: #04111f;
           font-weight: 600;
           letter-spacing: 0.08em;
@@ -341,14 +493,179 @@ const IndexPage = () => {
           flex-shrink: 0;
           transition: transform 0.2s;
         }
-        .landing__cta:hover,
+        .landing__cta:hover {
+          transform: translateY(-2px);
+          background: linear-gradient(120deg, rgba(125, 211, 252, 1), rgba(147, 197, 253, 1));
+        }
         .landing__cta:focus-visible {
           transform: translateY(-2px);
-          box-shadow: 0 16px 30px rgba(15, 118, 209, 0.45);
+          background: rgba(125, 211, 252, 1);
+          outline: 2px solid rgba(125, 211, 252, 0.6);
+          outline-offset: 2px;
         }
         .landing__cta:hover svg,
         .landing__cta:focus-visible svg {
           transform: translateX(3px);
+        }
+        .tutorial {
+          position: fixed;
+          inset: 0;
+          z-index: 20;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+        }
+        .tutorial__backdrop {
+          position: absolute;
+          inset: 0;
+          background: rgba(4, 10, 21, 0.7);
+          backdrop-filter: blur(4px);
+        }
+        .tutorial__content {
+          position: relative;
+          width: min(900px, 100%);
+          background: rgba(10, 14, 24, 0.95);
+          border: 1px solid rgba(148, 163, 184, 0.3);
+          box-shadow: 0 25px 60px rgba(2, 6, 23, 0.7);
+          border-radius: 1rem;
+          padding: 1rem 1.25rem 1.25rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          z-index: 1;
+        }
+        .tutorial__close {
+          position: absolute;
+          top: 0.75rem;
+          right: 0.75rem;
+          border: none;
+          background: transparent;
+          color: #e2e8f0;
+          font-size: 1.5rem;
+          cursor: pointer;
+        }
+        .tutorial__body {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 1rem;
+          align-items: center;
+        }
+        .tutorial__image {
+          background: rgba(4, 10, 21, 0.6);
+          border: 1px dashed rgba(148, 163, 184, 0.35);
+          border-radius: 0.75rem;
+          padding: 0.75rem;
+          min-height: 320px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .tutorial__image-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 0.5rem;
+          background: rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .tutorial__image-placeholder {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.5rem;
+          background: repeating-linear-gradient(
+              -45deg,
+              rgba(148, 163, 184, 0.12),
+              rgba(148, 163, 184, 0.12) 10px,
+              rgba(148, 163, 184, 0.08) 10px,
+              rgba(148, 163, 184, 0.08) 20px
+            ),
+            rgba(15, 23, 42, 0.7);
+          color: #cbd5f5;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 1.5rem;
+          border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .tutorial__image-placeholder small {
+          color: #94a3b8;
+          margin-top: 0.35rem;
+          letter-spacing: 0.03em;
+        }
+        .tutorial__text h3 {
+          margin: 0.1rem 0 0.5rem;
+          font-size: 1.4rem;
+        }
+        .tutorial__text ul {
+          padding-left: 1.1rem;
+          margin: 0.25rem 0 0;
+          color: #cbd5f5;
+          line-height: 1.5;
+        }
+        .tutorial__text li {
+          margin-bottom: 0.35rem;
+        }
+        .tutorial__eyebrow {
+          margin: 0;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: #94a3b8;
+          font-size: 0.75rem;
+        }
+        .tutorial__controls {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+        }
+        .tutorial__nav {
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          background: rgba(4, 10, 21, 0.6);
+          color: #f8fafc;
+          padding: 0.5rem 0.9rem;
+          border-radius: 0.65rem;
+          cursor: pointer;
+          transition: border-color 0.2s, background 0.2s;
+        }
+        .tutorial__nav:hover,
+        .tutorial__nav:focus-visible {
+          border-color: var(--accent);
+          background: rgba(56, 189, 248, 0.12);
+        }
+        .tutorial__dots {
+          display: flex;
+          gap: 0.35rem;
+          align-items: center;
+          justify-content: center;
+          flex: 1;
+        }
+        .tutorial__dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 999px;
+          background: rgba(148, 163, 184, 0.5);
+        }
+        .tutorial__dot.active {
+          background: var(--accent);
+          box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+        }
+        @media (max-width: 800px) {
+          .tutorial__body {
+            grid-template-columns: 1fr;
+          }
+          .tutorial__image {
+            min-height: 220px;
+          }
+          .tutorial__controls {
+            flex-direction: column;
+          }
+          .tutorial__nav {
+            width: 100%;
+            text-align: center;
+          }
         }
       `}</style>
     </main>

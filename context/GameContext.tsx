@@ -5,7 +5,10 @@ import {
   WORK_DAY_MINUTES,
   QUEUE_PRESSURE_CHEVRON_CAP,
   QUEUE_AGING_MIN_DRAIN,
-  QUEUE_AGING_MAX_DRAIN
+  QUEUE_AGING_MAX_DRAIN,
+  SEVERITY_WEIGHTS,
+  REQUEST_CHANGES_EFFECTS,
+  APPROVAL_EFFECTS
 } from '../constants/game';
 import { DayMantra, getDayMantra } from '../data/dayMantras';
 import { getRandomDayQuote } from '../data/dayQuotes';
@@ -47,11 +50,11 @@ export interface DecisionResult {
   success: boolean;
   status: 'approved' | 'true-positive' | 'false-positive' | 'error';
   message: string;
+  bonusApplied?: boolean;
 }
 
 interface RequestChangesPayload {
   selectedLines: number[];
-  bugKind: BugKind;
 }
 
 interface GameContextValue {
@@ -308,8 +311,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const severityScore = (bugs: PullRequest['bugPatterns']) => {
-    const weight = { minor: 5, major: 12, critical: 20 } as const;
-    return bugs.reduce((total, bug) => total + weight[bug.severity], 0);
+    return bugs.reduce((total, bug) => total + SEVERITY_WEIGHTS[bug.severity], 0);
   };
 
   const approveCurrentPR = useCallback((): DecisionResult => {
@@ -320,8 +322,10 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     const hasBugs = current.bugPatterns.length > 0;
-    const counterDelta: Partial<Counters> = { prsApproved: 1 };
-    const meterDelta: Partial<MeterSet> = { velocity: hasBugs ? 2 : 4 };
+    const counterDelta: Partial<Counters> = { ...APPROVAL_EFFECTS.baseCounters };
+    const meterDelta: Partial<MeterSet> = {
+      velocity: hasBugs ? APPROVAL_EFFECTS.velocityOnBug : APPROVAL_EFFECTS.velocityOnClean
+    };
 
     if (hasBugs) {
       current.bugPatterns.forEach((pattern) => {
@@ -340,11 +344,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       });
       const score = severityScore(current.bugPatterns);
       counterDelta.bugsToProd = current.bugPatterns.length;
-      meterDelta.stability = -score;
-      meterDelta.satisfaction = -Math.ceil(score / 4);
+      meterDelta.stability = -score * APPROVAL_EFFECTS.stabilityPenaltyMultiplier;
+      meterDelta.satisfaction = -Math.ceil(score / APPROVAL_EFFECTS.satisfactionPenaltyDivisor);
     } else {
-      meterDelta.satisfaction = 2;
-      counterDelta.cleanApprovals = 1;
+      meterDelta.satisfaction = APPROVAL_EFFECTS.satisfactionOnClean;
+      counterDelta.cleanApprovals = APPROVAL_EFFECTS.cleanCounters.cleanApprovals;
     }
 
     dispatch({
@@ -362,58 +366,41 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   }, [state.currentPR, translations]);
 
   const requestChanges = useCallback(
-    ({ selectedLines, bugKind }: RequestChangesPayload): DecisionResult => {
+    ({ selectedLines }: RequestChangesPayload): DecisionResult => {
       const decisionCopy = translations.decisions;
       const current = state.currentPR;
       if (!current) {
         return { success: false, status: 'error', message: decisionCopy.noPR };
       }
 
-      if (selectedLines.length === 0) {
-        return { success: false, status: 'error', message: decisionCopy.highlightLine };
-      }
+      const hasMatchingLine =
+        selectedLines.length > 0 &&
+        current.bugPatterns.some((pattern) => pattern.lineNumbers.some((line) => selectedLines.includes(line)));
 
-      const matchingPattern = current.bugPatterns.find(
-        (pattern) =>
-          pattern.kind === bugKind && pattern.lineNumbers.some((line) => selectedLines.includes(line))
-      );
+      const counterDelta: Partial<Counters> = { ...REQUEST_CHANGES_EFFECTS.baseCounters };
+      const meterDelta: Partial<MeterSet> = { ...REQUEST_CHANGES_EFFECTS.baseMeters };
 
-      const counterDelta: Partial<Counters> = { prsRejected: 1 };
-      const meterDelta: Partial<MeterSet> = { velocity: -3 };
-
-      if (matchingPattern) {
-        counterDelta.truePositives = 1;
-        meterDelta.stability = 10;
-        meterDelta.satisfaction = 3;
+      if (hasMatchingLine) {
+        Object.assign(counterDelta, REQUEST_CHANGES_EFFECTS.hitCounters);
+        Object.assign(meterDelta, REQUEST_CHANGES_EFFECTS.hitMeters);
         dispatch({
           type: 'APPLY_DECISION',
           processedId: current.id,
           counterDelta,
           meterDelta
         });
-        return { success: true, status: 'true-positive', message: decisionCopy.niceCatch };
+        return { success: true, status: 'true-positive', message: decisionCopy.requestBonus, bonusApplied: true };
       }
 
-      counterDelta.falsePositives = 1;
-      meterDelta.satisfaction = -4;
-      dispatch({
-        type: 'LOG_FALSE_POSITIVE',
-        record: {
-          prId: current.id,
-          title: current.title,
-          author: current.author,
-          claimedKind: bugKind,
-          selectedLines: extractLineExcerpts(current.files, selectedLines),
-          actualBugKinds: current.bugPatterns.map((pattern) => pattern.kind)
-        }
-      });
+      Object.assign(counterDelta, REQUEST_CHANGES_EFFECTS.missCounters);
+      Object.assign(meterDelta, REQUEST_CHANGES_EFFECTS.missMeters);
       dispatch({
         type: 'APPLY_DECISION',
         processedId: current.id,
         counterDelta,
         meterDelta
       });
-      return { success: true, status: 'false-positive', message: decisionCopy.noMatching };
+      return { success: true, status: 'approved', message: decisionCopy.requestNoBonus, bonusApplied: false };
     },
     [state.currentPR, translations]
   );
