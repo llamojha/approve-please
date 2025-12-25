@@ -1,0 +1,36 @@
+{
+  "templateId": "css-023-relative-units-rem",
+  "title": "Convert spacing to rem units",
+  "author": "Grace H.",
+  "description": "Updates spacing values to use rem for better scalability.",
+  "tags": ["units", "spacing"],
+  "localized": {
+    "es": {
+      "title": "Convertir espaciado a unidades rem",
+      "description": "Actualiza valores de espaciado a rem para mejor escalabilidad.",
+      "tags": ["unidades", "espaciado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/spacing.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ":root {", "isNew": true },
+        { "lineNumber": 2, "content": "  font-size: 16px;", "isNew": true },
+        { "lineNumber": 3, "content": "}", "isNew": true },
+        { "lineNumber": 4, "content": "", "isNew": true },
+        { "lineNumber": 5, "content": ".section {", "isNew": true },
+        {
+          "lineNumber": 6,
+          "content": "  padding: 2rem 1.5rem;",
+          "isNew": true
+        },
+        { "lineNumber": 7, "content": "  margin-bottom: 1rem;", "isNew": true },
+        { "lineNumber": 8, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

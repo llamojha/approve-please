@@ -1,0 +1,29 @@
+{
+  "templateId": "css-009-margin-auto-centering",
+  "title": "Center container element",
+  "author": "Lisa T.",
+  "description": "Centers the main container using margin auto.",
+  "tags": ["layout", "centering"],
+  "localized": {
+    "es": {
+      "title": "Centrar elemento contenedor",
+      "description": "Centra el contenedor principal usando margin auto.",
+      "tags": ["layout", "centrado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/layout.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 10, "content": ".container {", "isNew": true },
+        { "lineNumber": 11, "content": "  max-width: 960px;", "isNew": true },
+        { "lineNumber": 12, "content": "  margin-left: auto;", "isNew": true },
+        { "lineNumber": 13, "content": "  margin-right: auto;", "isNew": true },
+        { "lineNumber": 14, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}

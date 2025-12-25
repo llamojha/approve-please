@@ -1,0 +1,46 @@
+{
+  "templateId": "css-022-media-query-syntax-error",
+  "title": "Hide desktop nav on mobile",
+  "author": "Frank M.",
+  "description": "Hides desktop navigation on small screens.",
+  "tags": ["responsive", "navigation"],
+  "localized": {
+    "es": {
+      "title": "Ocultar nav de escritorio en móvil",
+      "description": "Oculta navegación de escritorio en pantallas pequeñas.",
+      "tags": ["responsivo", "navegación"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/nav.css",
+      "language": "css",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "@media screen (max-width: 480px) {",
+          "isNew": true
+        },
+        { "lineNumber": 31, "content": "  .desktop-nav {", "isNew": true },
+        { "lineNumber": 32, "content": "    display: none;", "isNew": true },
+        { "lineNumber": 33, "content": "  }", "isNew": true },
+        { "lineNumber": 34, "content": "  .mobile-nav {", "isNew": true },
+        { "lineNumber": 35, "content": "    display: block;", "isNew": true },
+        { "lineNumber": 36, "content": "  }", "isNew": true },
+        { "lineNumber": 37, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [30],
+      "severity": "critical",
+      "description": "Missing 'and' keyword. Should be '@media screen and (max-width: 480px)'.",
+      "localizedDescription": {
+        "es": "Falta la palabra clave 'and'. Debería ser '@media screen and (max-width: 480px)'."
+      }
+    }
+  ],
+  "importance": "high"
+}

@@ -1,0 +1,45 @@
+{
+  "templateId": "css-004-class-selector-missing-dot",
+  "title": "Add button styles",
+  "author": "Ahmed K.",
+  "description": "Creates primary button styling with hover state.",
+  "tags": ["buttons", "ui"],
+  "localized": {
+    "es": {
+      "title": "Agregar estilos de botón",
+      "description": "Crea estilos de botón primario con estado hover.",
+      "tags": ["botones", "ui"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/buttons.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": "btn-primary {", "isNew": true },
+        {
+          "lineNumber": 2,
+          "content": "  background-color: #007bff;",
+          "isNew": true
+        },
+        { "lineNumber": 3, "content": "  color: white;", "isNew": true },
+        { "lineNumber": 4, "content": "  padding: 10px 20px;", "isNew": true },
+        { "lineNumber": 5, "content": "  border: none;", "isNew": true },
+        { "lineNumber": 6, "content": "  border-radius: 4px;", "isNew": true },
+        { "lineNumber": 7, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [1],
+      "severity": "critical",
+      "description": "Missing dot prefix for class selector. Should be '.btn-primary'.",
+      "localizedDescription": {
+        "es": "Falta el punto para el selector de clase. Debería ser '.btn-primary'."
+      }
+    }
+  ],
+  "importance": "high"
+}

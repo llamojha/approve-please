@@ -1,0 +1,38 @@
+{
+  "templateId": "css-008-box-model-padding",
+  "title": "Add card padding",
+  "author": "David H.",
+  "description": "Adds consistent padding to card components.",
+  "tags": ["cards", "spacing"],
+  "localized": {
+    "es": {
+      "title": "Agregar padding a tarjetas",
+      "description": "Agrega padding consistente a componentes de tarjeta.",
+      "tags": ["tarjetas", "espaciado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/cards.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".card {", "isNew": true },
+        {
+          "lineNumber": 2,
+          "content": "  padding: 16px 24px 16px 24px;",
+          "isNew": true
+        },
+        { "lineNumber": 3, "content": "  background: white;", "isNew": true },
+        { "lineNumber": 4, "content": "  border-radius: 8px;", "isNew": true },
+        {
+          "lineNumber": 5,
+          "content": "  box-shadow: 0 2px 4px rgba(0,0,0,0.1);",
+          "isNew": true
+        },
+        { "lineNumber": 6, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

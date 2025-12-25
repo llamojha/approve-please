@@ -1,0 +1,47 @@
+{
+  "templateId": "css-012-cascade-specificity-bug",
+  "title": "Override button color in modal",
+  "author": "Tom B.",
+  "description": "Attempts to change button color inside modals.",
+  "tags": ["buttons", "modals"],
+  "localized": {
+    "es": {
+      "title": "Sobrescribir color de botón en modal",
+      "description": "Intenta cambiar el color del botón dentro de modales.",
+      "tags": ["botones", "modales"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/modal.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 25, "content": ".modal .btn {", "isNew": true },
+        {
+          "lineNumber": 26,
+          "content": "  background: #28a745;",
+          "isNew": true
+        },
+        { "lineNumber": 27, "content": "}", "isNew": true },
+        { "lineNumber": 28, "content": "", "isNew": true },
+        {
+          "lineNumber": 29,
+          "content": "/* Existing rule in buttons.css: #form-container .btn { background: #007bff; } */",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [25],
+      "severity": "major",
+      "description": "Lower specificity than existing ID selector. This rule won't apply.",
+      "localizedDescription": {
+        "es": "Especificidad menor que el selector ID existente. Esta regla no se aplicará."
+      }
+    }
+  ],
+  "importance": "normal"
+}

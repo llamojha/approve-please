@@ -1,0 +1,47 @@
+{
+  "templateId": "css-046-nth-child-selector",
+  "title": "Alternate table row colors",
+  "author": "Derek S.",
+  "description": "Adds zebra striping to table rows for readability.",
+  "tags": ["tables", "styling"],
+  "localized": {
+    "es": {
+      "title": "Alternar colores de filas de tabla",
+      "description": "Agrega rayas de cebra a filas de tabla para legibilidad.",
+      "tags": ["tablas", "estilos"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/tables.css",
+      "language": "css",
+      "lines": [
+        {
+          "lineNumber": 10,
+          "content": ".data-table tr:nth-child(even) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "  background-color: #f8f9fa;",
+          "isNew": true
+        },
+        { "lineNumber": 12, "content": "}", "isNew": true },
+        { "lineNumber": 13, "content": "", "isNew": true },
+        {
+          "lineNumber": 14,
+          "content": ".data-table tr:hover {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "  background-color: #e9ecef;",
+          "isNew": true
+        },
+        { "lineNumber": 16, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}

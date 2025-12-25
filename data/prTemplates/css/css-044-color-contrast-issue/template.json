@@ -1,0 +1,47 @@
+{
+  "templateId": "css-044-color-contrast-issue",
+  "title": "Style disabled button",
+  "author": "Brian Q.",
+  "description": "Adds styling for disabled button state.",
+  "tags": ["buttons", "disabled"],
+  "localized": {
+    "es": {
+      "title": "Estilizar botón deshabilitado",
+      "description": "Agrega estilos para estado deshabilitado de botón.",
+      "tags": ["botones", "deshabilitado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/buttons.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 30, "content": ".btn:disabled {", "isNew": true },
+        {
+          "lineNumber": 31,
+          "content": "  background: #f0f0f0;",
+          "isNew": true
+        },
+        { "lineNumber": 32, "content": "  color: #d0d0d0;", "isNew": true },
+        {
+          "lineNumber": 33,
+          "content": "  cursor: not-allowed;",
+          "isNew": true
+        },
+        { "lineNumber": 34, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [32],
+      "severity": "major",
+      "description": "Color contrast ratio too low (#d0d0d0 on #f0f0f0). Fails WCAG accessibility guidelines.",
+      "localizedDescription": {
+        "es": "Ratio de contraste de color muy bajo (#d0d0d0 sobre #f0f0f0). No cumple guías de accesibilidad WCAG."
+      }
+    }
+  ],
+  "importance": "normal"
+}

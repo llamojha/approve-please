@@ -1,0 +1,37 @@
+{
+  "templateId": "css-005-attribute-selector",
+  "title": "Style external links",
+  "author": "Sofia L.",
+  "description": "Adds icon indicator for links that open in new tabs.",
+  "tags": ["links", "accessibility"],
+  "localized": {
+    "es": {
+      "title": "Estilizar enlaces externos",
+      "description": "Agrega indicador de icono para enlaces que abren en nuevas pestañas.",
+      "tags": ["enlaces", "accesibilidad"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/links.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 8, "content": "a[target=\"_blank\"] {", "isNew": true },
+        { "lineNumber": 9, "content": "  padding-right: 18px;", "isNew": true },
+        {
+          "lineNumber": 10,
+          "content": "  background: url('external.svg') no-repeat right center;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "  background-size: 14px;",
+          "isNew": true
+        },
+        { "lineNumber": 12, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

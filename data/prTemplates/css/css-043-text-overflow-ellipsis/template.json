@@ -1,0 +1,34 @@
+{
+  "templateId": "css-043-text-overflow-ellipsis",
+  "title": "Truncate long titles",
+  "author": "Amy P.",
+  "description": "Adds ellipsis for titles that exceed container width.",
+  "tags": ["text", "overflow"],
+  "localized": {
+    "es": {
+      "title": "Truncar títulos largos",
+      "description": "Agrega puntos suspensivos para títulos que exceden el ancho del contenedor.",
+      "tags": ["texto", "desbordamiento"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/titles.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".card-title {", "isNew": true },
+        { "lineNumber": 2, "content": "  white-space: nowrap;", "isNew": true },
+        { "lineNumber": 3, "content": "  overflow: hidden;", "isNew": true },
+        {
+          "lineNumber": 4,
+          "content": "  text-overflow: ellipsis;",
+          "isNew": true
+        },
+        { "lineNumber": 5, "content": "  max-width: 100%;", "isNew": true },
+        { "lineNumber": 6, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}

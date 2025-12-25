@@ -1,0 +1,45 @@
+{
+  "templateId": "css-050-scroll-behavior",
+  "title": "Enable smooth scrolling",
+  "author": "Hugo W.",
+  "description": "Adds smooth scroll behavior for anchor links.",
+  "tags": ["scroll", "ux"],
+  "localized": {
+    "es": {
+      "title": "Habilitar scroll suave",
+      "description": "Agrega comportamiento de scroll suave para enlaces ancla.",
+      "tags": ["scroll", "ux"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/base.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 5, "content": "html {", "isNew": true },
+        {
+          "lineNumber": 6,
+          "content": "  scroll-behavior: smooth;",
+          "isNew": true
+        },
+        { "lineNumber": 7, "content": "}", "isNew": true },
+        { "lineNumber": 8, "content": "", "isNew": true },
+        {
+          "lineNumber": 9,
+          "content": "@media (prefers-reduced-motion: reduce) {",
+          "isNew": true
+        },
+        { "lineNumber": 10, "content": "  html {", "isNew": true },
+        {
+          "lineNumber": 11,
+          "content": "    scroll-behavior: auto;",
+          "isNew": true
+        },
+        { "lineNumber": 12, "content": "  }", "isNew": true },
+        { "lineNumber": 13, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}

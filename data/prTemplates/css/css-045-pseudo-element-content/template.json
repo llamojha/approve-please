@@ -1,0 +1,32 @@
+{
+  "templateId": "css-045-pseudo-element-content",
+  "title": "Add required field indicator",
+  "author": "Carla R.",
+  "description": "Adds asterisk to required form field labels.",
+  "tags": ["forms", "pseudo-elements"],
+  "localized": {
+    "es": {
+      "title": "Agregar indicador de campo requerido",
+      "description": "Agrega asterisco a etiquetas de campos de formulario requeridos.",
+      "tags": ["formularios", "pseudo-elementos"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/forms.css",
+      "language": "css",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": ".form-label.required::after {",
+          "isNew": true
+        },
+        { "lineNumber": 21, "content": "  content: ' *';", "isNew": true },
+        { "lineNumber": 22, "content": "  color: #dc3545;", "isNew": true },
+        { "lineNumber": 23, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}

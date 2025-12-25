@@ -1,0 +1,29 @@
+{
+  "templateId": "css-040-flexbox-gap",
+  "title": "Add spacing to button group",
+  "author": "Xavier M.",
+  "description": "Uses gap property for consistent button spacing.",
+  "tags": ["buttons", "flexbox"],
+  "localized": {
+    "es": {
+      "title": "Agregar espaciado a grupo de botones",
+      "description": "Usa propiedad gap para espaciado consistente de botones.",
+      "tags": ["botones", "flexbox"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/button-group.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".button-group {", "isNew": true },
+        { "lineNumber": 2, "content": "  display: flex;", "isNew": true },
+        { "lineNumber": 3, "content": "  gap: 8px;", "isNew": true },
+        { "lineNumber": 4, "content": "  flex-wrap: wrap;", "isNew": true },
+        { "lineNumber": 5, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}
