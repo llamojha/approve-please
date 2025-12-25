@@ -1,0 +1,54 @@
+{
+  "templateId": "css-033-bem-naming",
+  "title": "Refactor card component to BEM",
+  "author": "Quinn F.",
+  "description": "Applies BEM naming convention to card component styles.",
+  "tags": ["bem", "refactor"],
+  "localized": {
+    "es": {
+      "title": "Refactorizar componente card a BEM",
+      "description": "Aplica convención de nombres BEM a estilos del componente card.",
+      "tags": ["bem", "refactorización"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/card.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".card {", "isNew": true },
+        { "lineNumber": 2, "content": "  background: white;", "isNew": true },
+        { "lineNumber": 3, "content": "  border-radius: 8px;", "isNew": true },
+        {
+          "lineNumber": 4,
+          "content": "  box-shadow: 0 2px 4px rgba(0,0,0,0.1);",
+          "isNew": true
+        },
+        { "lineNumber": 5, "content": "}", "isNew": true },
+        { "lineNumber": 6, "content": "", "isNew": true },
+        { "lineNumber": 7, "content": ".card__header {", "isNew": true },
+        { "lineNumber": 8, "content": "  padding: 16px;", "isNew": true },
+        {
+          "lineNumber": 9,
+          "content": "  border-bottom: 1px solid #eee;",
+          "isNew": true
+        },
+        { "lineNumber": 10, "content": "}", "isNew": true },
+        { "lineNumber": 11, "content": "", "isNew": true },
+        { "lineNumber": 12, "content": ".card__body {", "isNew": true },
+        { "lineNumber": 13, "content": "  padding: 16px;", "isNew": true },
+        { "lineNumber": 14, "content": "}", "isNew": true },
+        { "lineNumber": 15, "content": "", "isNew": true },
+        { "lineNumber": 16, "content": ".card--featured {", "isNew": true },
+        {
+          "lineNumber": 17,
+          "content": "  border: 2px solid #007bff;",
+          "isNew": true
+        },
+        { "lineNumber": 18, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

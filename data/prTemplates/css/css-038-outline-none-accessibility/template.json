@@ -1,0 +1,37 @@
+{
+  "templateId": "css-038-outline-none-accessibility",
+  "title": "Remove button focus outline",
+  "author": "Victor K.",
+  "description": "Removes default focus outline from buttons.",
+  "tags": ["buttons", "focus"],
+  "localized": {
+    "es": {
+      "title": "Eliminar outline de foco de botones",
+      "description": "Elimina el outline de foco predeterminado de los botones.",
+      "tags": ["botones", "foco"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/buttons.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 15, "content": ".btn:focus {", "isNew": true },
+        { "lineNumber": 16, "content": "  outline: none;", "isNew": true },
+        { "lineNumber": 17, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "security",
+      "lineNumbers": [16],
+      "severity": "critical",
+      "description": "Removing focus outline without replacement breaks keyboard accessibility. Add alternative focus indicator.",
+      "localizedDescription": {
+        "es": "Eliminar outline de foco sin reemplazo rompe la accesibilidad de teclado. Agrega indicador de foco alternativo."
+      }
+    }
+  ],
+  "importance": "high"
+}

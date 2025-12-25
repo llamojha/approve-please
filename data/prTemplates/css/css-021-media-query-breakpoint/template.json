@@ -1,0 +1,37 @@
+{
+  "templateId": "css-021-media-query-breakpoint",
+  "title": "Add tablet breakpoint",
+  "author": "Diana R.",
+  "description": "Adds responsive styles for tablet viewport sizes.",
+  "tags": ["responsive", "media-query"],
+  "localized": {
+    "es": {
+      "title": "Agregar breakpoint para tablet",
+      "description": "Agrega estilos responsivos para tamaños de viewport de tablet.",
+      "tags": ["responsivo", "media-query"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/responsive.css",
+      "language": "css",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "@media (max-width: 768px) {",
+          "isNew": true
+        },
+        { "lineNumber": 16, "content": "  .container {", "isNew": true },
+        { "lineNumber": 17, "content": "    padding: 0 15px;", "isNew": true },
+        { "lineNumber": 18, "content": "  }", "isNew": true },
+        { "lineNumber": 19, "content": "  ", "isNew": true },
+        { "lineNumber": 20, "content": "  .sidebar {", "isNew": true },
+        { "lineNumber": 21, "content": "    display: none;", "isNew": true },
+        { "lineNumber": 22, "content": "  }", "isNew": true },
+        { "lineNumber": 23, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

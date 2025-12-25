@@ -105,7 +105,7 @@ const createInitialState = (): GameState => {
   return {
     currentDay: 1,
     phase: 'BRIEFING',
-    languagePreference: 'any',
+    languagePreference: ['generic', 'typescript', 'python', 'java', 'rust', 'css'],
     currentTime: 0,
     queue: [],
     currentPR: null,

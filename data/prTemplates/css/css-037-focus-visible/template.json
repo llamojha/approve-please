@@ -1,0 +1,41 @@
+{
+  "templateId": "css-037-focus-visible",
+  "title": "Add keyboard focus styles",
+  "author": "Uma J.",
+  "description": "Adds visible focus indicators for keyboard navigation.",
+  "tags": ["accessibility", "focus"],
+  "localized": {
+    "es": {
+      "title": "Agregar estilos de foco de teclado",
+      "description": "Agrega indicadores de foco visibles para navegación por teclado.",
+      "tags": ["accesibilidad", "foco"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/focus.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".btn:focus-visible {", "isNew": true },
+        {
+          "lineNumber": 2,
+          "content": "  outline: 2px solid #007bff;",
+          "isNew": true
+        },
+        { "lineNumber": 3, "content": "  outline-offset: 2px;", "isNew": true },
+        { "lineNumber": 4, "content": "}", "isNew": true },
+        { "lineNumber": 5, "content": "", "isNew": true },
+        { "lineNumber": 6, "content": "a:focus-visible {", "isNew": true },
+        {
+          "lineNumber": 7,
+          "content": "  outline: 2px solid #007bff;",
+          "isNew": true
+        },
+        { "lineNumber": 8, "content": "  outline-offset: 2px;", "isNew": true },
+        { "lineNumber": 9, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

@@ -1,0 +1,51 @@
+{
+  "templateId": "css-013-important-overuse",
+  "title": "Force sidebar width",
+  "author": "Rachel G.",
+  "description": "Fixes sidebar width issue with !important.",
+  "tags": ["sidebar", "layout"],
+  "localized": {
+    "es": {
+      "title": "Forzar ancho de barra lateral",
+      "description": "Corrige problema de ancho de barra lateral con !important.",
+      "tags": ["barra lateral", "layout"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/sidebar.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 8, "content": ".sidebar {", "isNew": true },
+        {
+          "lineNumber": 9,
+          "content": "  width: 250px !important;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 10,
+          "content": "  background: #f5f5f5 !important;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "  padding: 20px !important;",
+          "isNew": true
+        },
+        { "lineNumber": 12, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [9, 10, 11],
+      "severity": "major",
+      "description": "Overuse of !important makes styles hard to override and maintain.",
+      "localizedDescription": {
+        "es": "Uso excesivo de !important dificulta sobrescribir y mantener los estilos."
+      }
+    }
+  ],
+  "importance": "normal"
+}

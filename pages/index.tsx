@@ -1,22 +1,22 @@
-import { useRouter } from 'next/router';
-import { useGameState } from '../context/GameContext';
-import { LanguagePreference } from '../types';
-import { useLocale } from '../context/LocaleContext';
-import { useTranslations } from '../hooks/useTranslations';
-import { LOCALE_OPTIONS } from '../constants/i18n';
-import { useState, useMemo, useCallback } from 'react';
+import { useRouter } from "next/router";
+import { useGameState } from "../context/GameContext";
+import { useLocale } from "../context/LocaleContext";
+import { useTranslations } from "../hooks/useTranslations";
+import { LOCALE_OPTIONS } from "../constants/i18n";
+import { useState, useMemo, useCallback } from "react";
 
 interface LanguageOption {
-  value: LanguagePreference;
+  value: string;
   disabled?: boolean;
 }
 
 const LANGUAGE_OPTIONS: LanguageOption[] = [
-  { value: 'any' },
-  { value: 'typescript' },
-  { value: 'python' },
-  { value: 'java' },
-  { value: 'rust' }
+  { value: "generic" },
+  { value: "typescript" },
+  { value: "python" },
+  { value: "java" },
+  { value: "rust" },
+  { value: "css" },
 ];
 
 const IndexPage = () => {
@@ -28,47 +28,65 @@ const IndexPage = () => {
 
   const {
     state: { languagePreference },
-    actions: { setLanguagePreference }
+    actions: { setLanguagePreference },
   } = useGameState();
 
   const tutorialSlides = useMemo(
     () => [
       {
-        title: 'Pick a PR',
-        description: ['Queue on the left; click to load a PR into the diff.', 'Rulebook guides what to watch for.'],
-        imageAlt: 'Queue and PR selection',
-        imageSrc: '/tutorial-slide-1-placeholder.png'
+        title: "Pick a PR",
+        description: [
+          "Queue on the left; click to load a PR into the diff.",
+          "Rulebook guides what to watch for.",
+        ],
+        imageAlt: "Queue and PR selection",
+        imageSrc: "/tutorial-slide-1-placeholder.png",
       },
       {
-        title: 'Inspect the Diff',
-        description: ['Scroll the snippet; tag lines by clicking line numbers.', 'Use rulebook hints to spot risky code.'],
-        imageAlt: 'Diff view with selected line',
-        imageSrc: '/tutorial-slide-2-placeholder.png'
+        title: "Inspect the Diff",
+        description: [
+          "Scroll the snippet; tag lines by clicking line numbers.",
+          "Use rulebook hints to spot risky code.",
+        ],
+        imageAlt: "Diff view with selected line",
+        imageSrc: "/tutorial-slide-2-placeholder.png",
       },
       {
-        title: 'Approve vs Request Changes',
-        description: ['Approve when clean; request changes for risky diffs.', 'Tag the exact line for a satisfaction bonus.'],
-        imageAlt: 'Action buttons for approve and request changes',
-        imageSrc: '/tutorial-slide-3-placeholder.png'
+        title: "Approve vs Request Changes",
+        description: [
+          "Approve when clean; request changes for risky diffs.",
+          "Tag the exact line for a satisfaction bonus.",
+        ],
+        imageAlt: "Action buttons for approve and request changes",
+        imageSrc: "/tutorial-slide-3-placeholder.png",
       },
       {
-        title: 'Meters & Consequences',
-        description: ['Stability drops if bugs ship; velocity slows on rejects.', 'Good catches and clean approvals boost satisfaction.'],
-        imageAlt: 'Meter HUD showing stability, velocity, satisfaction',
-        imageSrc: '/tutorial-slide-4-placeholder.png'
+        title: "Meters & Consequences",
+        description: [
+          "Stability drops if bugs ship; velocity slows on rejects.",
+          "Good catches and clean approvals boost satisfaction.",
+        ],
+        imageAlt: "Meter HUD showing stability, velocity, satisfaction",
+        imageSrc: "/tutorial-slide-4-placeholder.png",
       },
       {
-        title: 'Day Wrap',
-        description: ['End-of-day summary shows incidents and false positives.', 'Advance to the next day or restart if meters tank.'],
-        imageAlt: 'Summary screen after a workday',
-        imageSrc: '/tutorial-slide-5-placeholder.png'
+        title: "Day Wrap",
+        description: [
+          "End-of-day summary shows incidents and false positives.",
+          "Advance to the next day or restart if meters tank.",
+        ],
+        imageAlt: "Summary screen after a workday",
+        imageSrc: "/tutorial-slide-5-placeholder.png",
       },
       {
-        title: 'Learn from Mistakes',
-        description: ['Review Deployed Bugs at day end to see what slipped.', 'Study the culprit lines to avoid repeating them.'],
-        imageAlt: 'Deployed Bugs section highlighting shipped issues',
-        imageSrc: '/tutorial-slide-6-placeholder.png'
-      }
+        title: "Learn from Mistakes",
+        description: [
+          "Review Deployed Bugs at day end to see what slipped.",
+          "Study the culprit lines to avoid repeating them.",
+        ],
+        imageAlt: "Deployed Bugs section highlighting shipped issues",
+        imageSrc: "/tutorial-slide-6-placeholder.png",
+      },
     ],
     []
   );
@@ -82,18 +100,25 @@ const IndexPage = () => {
     [tutorialSlides.length]
   );
   const prevSlide = useCallback(
-    () => setSlideIndex((prev) => (prev - 1 + tutorialSlides.length) % tutorialSlides.length),
+    () =>
+      setSlideIndex(
+        (prev) => (prev - 1 + tutorialSlides.length) % tutorialSlides.length
+      ),
     [tutorialSlides.length]
   );
 
   return (
     <main className="landing">
-      <div className="landing__locale-toggle" role="group" aria-label={translations.localeToggleLabel}>
+      <div
+        className="landing__locale-toggle"
+        role="group"
+        aria-label={translations.localeToggleLabel}
+      >
         {LOCALE_OPTIONS.map(({ value, label }) => (
           <button
             type="button"
             key={value}
-            className={locale === value ? 'active' : ''}
+            className={locale === value ? "active" : ""}
             aria-pressed={locale === value}
             onClick={() => setLocale(value)}
           >
@@ -137,17 +162,33 @@ const IndexPage = () => {
               <button
                 type="button"
                 key={value}
-                className={`${languagePreference === value ? 'active' : ''} ${disabled ? 'disabled' : ''}`.trim()}
+                className={`${languagePreference.includes(value) ? "active" : ""} ${
+                  disabled ? "disabled" : ""
+                }`.trim()}
                 onClick={() => {
                   if (disabled) {
                     return;
                   }
-                  setLanguagePreference(value);
+                  if (
+                    languagePreference.length === 1 &&
+                    languagePreference[0] === value
+                  ) {
+                    return;
+                  }
+                  if (languagePreference.includes(value)) {
+                    setLanguagePreference(
+                      languagePreference.filter(
+                        (preference) => preference !== value
+                      )
+                    );
+                  } else {
+                    setLanguagePreference([...languagePreference, value]);
+                  }
                 }}
                 disabled={disabled}
               >
                 {languagePreferenceLabels[value] ?? value}
-                {disabled ? ` ${landing.comingSoon}` : ''}
+                {disabled ? ` ${landing.comingSoon}` : ""}
               </button>
             ))}
           </div>
@@ -166,7 +207,7 @@ const IndexPage = () => {
           <button
             type="button"
             className="landing__cta"
-            onClick={() => router.push('./game')}
+            onClick={() => router.push("./game")}
           >
             <span>{landing.startCta}</span>
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -183,10 +224,20 @@ const IndexPage = () => {
         </div>
       </section>
       {isTutorialOpen && (
-        <div className="tutorial" role="dialog" aria-modal="true" aria-label="How to play">
+        <div
+          className="tutorial"
+          role="dialog"
+          aria-modal="true"
+          aria-label="How to play"
+        >
           <div className="tutorial__backdrop" onClick={closeTutorial} />
           <div className="tutorial__content">
-            <button type="button" className="tutorial__close" onClick={closeTutorial} aria-label="Close tutorial">
+            <button
+              type="button"
+              className="tutorial__close"
+              onClick={closeTutorial}
+              aria-label="Close tutorial"
+            >
               ×
             </button>
             <div className="tutorial__body">
@@ -217,15 +268,28 @@ const IndexPage = () => {
               </div>
             </div>
             <div className="tutorial__controls">
-              <button type="button" onClick={prevSlide} className="tutorial__nav">
+              <button
+                type="button"
+                onClick={prevSlide}
+                className="tutorial__nav"
+              >
                 ← Prev
               </button>
               <div className="tutorial__dots" aria-hidden="true">
                 {tutorialSlides.map((_, idx) => (
-                  <span key={idx} className={`tutorial__dot ${idx === slideIndex ? 'active' : ''}`} />
+                  <span
+                    key={idx}
+                    className={`tutorial__dot ${
+                      idx === slideIndex ? "active" : ""
+                    }`}
+                  />
                 ))}
               </div>
-              <button type="button" onClick={nextSlide} className="tutorial__nav">
+              <button
+                type="button"
+                onClick={nextSlide}
+                className="tutorial__nav"
+              >
                 Next →
               </button>
             </div>
@@ -239,14 +303,22 @@ const IndexPage = () => {
           align-items: center;
           justify-content: center;
           padding: 0.125rem;
-          background: radial-gradient(circle at top, rgba(56, 189, 248, 0.15), transparent 50%), var(--bg);
+          background: radial-gradient(
+              circle at top,
+              rgba(56, 189, 248, 0.15),
+              transparent 50%
+            ),
+            var(--bg);
           position: relative;
         }
         .landing::before {
-          content: '';
+          content: "";
           position: absolute;
           inset: 0;
-          background-image: radial-gradient(rgba(56, 191, 248, 0.54) 1px, transparent 0);
+          background-image: radial-gradient(
+            rgba(56, 191, 248, 0.54) 1px,
+            transparent 0
+          );
           background-size: 24px 24px;
           opacity: 0.35;
           pointer-events: none;
@@ -260,7 +332,7 @@ const IndexPage = () => {
           border: 1px solid var(--border);
           overflow: hidden;
           box-shadow: 0 20px 50px rgba(2, 6, 23, 0.8);
-          background: url('social-card-no-title.png') center/cover no-repeat;
+          background: url("social-card-no-title.png") center/cover no-repeat;
           color: #f8fafc;
           display: flex;
           flex-direction: column;
@@ -418,7 +490,8 @@ const IndexPage = () => {
           transition: background 0.2s, border-color 0.2s;
         }
         .landing__language-options button:hover:not(.active):not(:disabled),
-        .landing__language-options button:focus-visible:not(.active):not(:disabled) {
+        .landing__language-options
+          button:focus-visible:not(.active):not(:disabled) {
           background: rgba(255, 255, 255, 0.06);
           border-color: rgba(148, 163, 184, 0.7);
         }
@@ -475,7 +548,11 @@ const IndexPage = () => {
           width: 100%;
           padding: 1rem 1.5rem;
           border-radius: 0.85rem;
-          background: linear-gradient(120deg, rgba(46, 164, 223, 0.95), rgba(41, 121, 202, 0.95));
+          background: linear-gradient(
+            120deg,
+            rgba(46, 164, 223, 0.95),
+            rgba(41, 121, 202, 0.95)
+          );
           color: #04111f;
           font-weight: 600;
           letter-spacing: 0.08em;
@@ -495,7 +572,11 @@ const IndexPage = () => {
         }
         .landing__cta:hover {
           transform: translateY(-2px);
-          background: linear-gradient(120deg, rgba(125, 211, 252, 1), rgba(147, 197, 253, 1));
+          background: linear-gradient(
+            120deg,
+            rgba(125, 211, 252, 1),
+            rgba(147, 197, 253, 1)
+          );
         }
         .landing__cta:focus-visible {
           transform: translateY(-2px);

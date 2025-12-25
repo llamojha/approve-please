@@ -1,0 +1,43 @@
+{
+  "templateId": "css-019-flexbox-direction-bug",
+  "title": "Stack mobile menu items",
+  "author": "Anna S.",
+  "description": "Changes flex direction for mobile menu layout.",
+  "tags": ["mobile", "flexbox"],
+  "localized": {
+    "es": {
+      "title": "Apilar elementos del menú móvil",
+      "description": "Cambia dirección flex para layout de menú móvil.",
+      "tags": ["móvil", "flexbox"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/mobile-nav.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 5, "content": ".mobile-menu {", "isNew": true },
+        { "lineNumber": 6, "content": "  display: flex;", "isNew": true },
+        {
+          "lineNumber": 7,
+          "content": "  flex-direction: columns;",
+          "isNew": true
+        },
+        { "lineNumber": 8, "content": "  gap: 10px;", "isNew": true },
+        { "lineNumber": 9, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [7],
+      "severity": "major",
+      "description": "Invalid value 'columns'. Should be 'column' (singular).",
+      "localizedDescription": {
+        "es": "Valor inválido 'columns'. Debería ser 'column' (singular)."
+      }
+    }
+  ],
+  "importance": "normal"
+}

@@ -1,0 +1,40 @@
+{
+  "templateId": "css-020-flexbox-justify-content",
+  "title": "Center modal content",
+  "author": "Peter K.",
+  "description": "Centers modal dialog both horizontally and vertically.",
+  "tags": ["modal", "centering"],
+  "localized": {
+    "es": {
+      "title": "Centrar contenido del modal",
+      "description": "Centra el diálogo modal horizontal y verticalmente.",
+      "tags": ["modal", "centrado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/modal.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".modal-overlay {", "isNew": true },
+        { "lineNumber": 2, "content": "  display: flex;", "isNew": true },
+        {
+          "lineNumber": 3,
+          "content": "  justify-content: center;",
+          "isNew": true
+        },
+        { "lineNumber": 4, "content": "  align-items: center;", "isNew": true },
+        { "lineNumber": 5, "content": "  position: fixed;", "isNew": true },
+        { "lineNumber": 6, "content": "  inset: 0;", "isNew": true },
+        {
+          "lineNumber": 7,
+          "content": "  background: rgba(0,0,0,0.5);",
+          "isNew": true
+        },
+        { "lineNumber": 8, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}
