@@ -77,6 +77,7 @@ export interface DayQuote {
 }
 
 export type LanguagePreference = string[];
+export type Difficulty = 'normal' | 'learning';
 
 export interface ScriptedWave {
   atMinute: number;

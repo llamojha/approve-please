@@ -4,6 +4,7 @@ import Panel from '../common/Panel';
 import { MeterSet, PullRequest } from '../../types';
 import { calculateQueueChevronCount } from '../../utils/helpers';
 import { useTranslations } from '../../hooks/useTranslations';
+import { useGameState } from '../../context/GameContext';
 
 interface MeterHudProps {
   meters: MeterSet;
@@ -11,7 +12,10 @@ interface MeterHudProps {
 }
 
 const MeterHud = ({ meters, queue }: MeterHudProps) => {
-  const chevrons = calculateQueueChevronCount(queue);
+  const {
+    state: { difficulty }
+  } = useGameState();
+  const chevrons = difficulty === 'learning' ? 0 : calculateQueueChevronCount(queue);
   const translations = useTranslations();
   const meterLabels = translations.shared.meters;
 

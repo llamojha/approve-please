@@ -19,6 +19,8 @@ const LANGUAGE_OPTIONS: LanguageOption[] = [
   { value: "css" },
 ];
 
+const DIFFICULTY_OPTIONS = ["normal", "learning"] as const;
+
 const IndexPage = () => {
   const router = useRouter();
   const { locale, setLocale } = useLocale();
@@ -27,8 +29,8 @@ const IndexPage = () => {
   const languagePreferenceLabels = landing.languageOptions;
 
   const {
-    state: { languagePreference },
-    actions: { setLanguagePreference },
+    state: { languagePreference, difficulty },
+    actions: { setLanguagePreference, setDifficulty },
   } = useGameState();
 
   const tutorialSlides = useMemo(
@@ -189,6 +191,24 @@ const IndexPage = () => {
               >
                 {languagePreferenceLabels[value] ?? value}
                 {disabled ? ` ${landing.comingSoon}` : ""}
+              </button>
+            ))}
+          </div>
+        </section>
+        <section className="landing__difficulty">
+          <div className="landing__difficulty-header">
+            <small>{landing.difficultyHeader}</small>
+            <span>{landing.difficultySubtitle}</span>
+          </div>
+          <div className="landing__difficulty-options">
+            {DIFFICULTY_OPTIONS.map((value) => (
+              <button
+                type="button"
+                key={value}
+                className={difficulty === value ? "active" : ""}
+                onClick={() => setDifficulty(value)}
+              >
+                {landing.difficultyOptions[value] ?? value}
               </button>
             ))}
           </div>
@@ -510,6 +530,57 @@ const IndexPage = () => {
         .landing__language-options button:disabled {
           cursor: not-allowed;
           opacity: 0.5;
+        }
+        .landing__difficulty {
+          border: 1px dashed rgba(148, 163, 184, 0.35);
+          border-radius: 0.75rem;
+          padding: 1rem 1.25rem;
+          background: rgba(4, 10, 21, 0.5);
+          backdrop-filter: blur(4px);
+        }
+        .landing__difficulty-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          gap: 1rem;
+          margin-bottom: 0.75rem;
+        }
+        .landing__difficulty-header small {
+          text-transform: uppercase;
+          color: #f1f5f9;
+          letter-spacing: 0.1em;
+        }
+        .landing__difficulty-header span {
+          color: #cbd5f5;
+          font-size: 0.85rem;
+        }
+        .landing__difficulty-options {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .landing__difficulty-options button {
+          border: 1px solid rgba(148, 163, 184, 0.4);
+          background: rgba(15, 23, 42, 0.6);
+          color: #f8fafc;
+          padding: 0.35rem 0.85rem;
+          border-radius: 999px;
+          font-size: 0.9rem;
+          transition: background 0.2s, border-color 0.2s;
+        }
+        .landing__difficulty-options button:hover:not(.active),
+        .landing__difficulty-options
+          button:focus-visible:not(.active) {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(148, 163, 184, 0.7);
+        }
+        .landing__difficulty-options button.active {
+          border-color: var(--accent);
+          background: rgba(56, 189, 248, 0.2);
+        }
+        .landing__difficulty-options button:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
         }
         .landing__actions {
           display: flex;

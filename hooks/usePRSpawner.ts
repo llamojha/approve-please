@@ -135,9 +135,6 @@ export const usePRSpawner = () => {
         if (!template) {
           return;
         }
-        if (!templateMatchesPreference(template, languagePreference)) {
-          return;
-        }
         spawnCountRef.current += 1;
         const pr = instantiatePullRequest(
           template,
