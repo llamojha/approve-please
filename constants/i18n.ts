@@ -72,6 +72,17 @@ const languagePreferenceLabels: Record<Locale, Record<string, string>> = {
   },
 };
 
+const difficultyLabels: Record<Locale, Record<string, string>> = {
+  en: {
+    normal: "Normal",
+    learning: "Learning",
+  },
+  es: {
+    normal: "Normal",
+    learning: "Aprendizaje",
+  },
+};
+
 export const TRANSLATIONS = {
   en: {
     localeToggleLabel: "Select language",
@@ -103,10 +114,13 @@ export const TRANSLATIONS = {
       },
       languageHeader: "Preferred Language",
       languageSubtitle: "Pick one or more. Add Generic for docs/config PRs.",
+      difficultyHeader: "Difficulty",
+      difficultySubtitle: "Learning mode disables queue penalties.",
       tutorialCta: "HOW TO PLAY",
       startCta: "Start Your Day",
       comingSoon: "(soon)",
       languageOptions: languagePreferenceLabels.en,
+      difficultyOptions: difficultyLabels.en,
     },
     shared: {
       operationsFallback: "Operations",
@@ -299,10 +313,13 @@ export const TRANSLATIONS = {
       },
       languageHeader: "Lenguaje preferido",
       languageSubtitle: "Elige uno o más. Agrega Genérico para PRs de docs/config.",
+      difficultyHeader: "Dificultad",
+      difficultySubtitle: "El modo aprendizaje desactiva las penalizaciones por cola.",
       tutorialCta: "Cómo jugar",
       startCta: "Comienza tu día",
       comingSoon: "(pronto)",
       languageOptions: languagePreferenceLabels.es,
+      difficultyOptions: difficultyLabels.es,
     },
     shared: {
       operationsFallback: "Operaciones",
