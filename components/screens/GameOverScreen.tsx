@@ -10,6 +10,7 @@ import {
   computeLeaderboardScore,
   sanitizeDisplayName,
 } from "../../utils/leaderboard";
+import LeaderboardModal from "../common/LeaderboardModal";
 
 const GameOverScreen = () => {
   const {
@@ -36,6 +37,7 @@ const GameOverScreen = () => {
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [showLeaderboardModal, setShowLeaderboardModal] = useState(false);
   const toAlpha = (color: string, alpha: number) => {
     if (color.startsWith("hsl")) {
       return color.replace("hsl", "hsla").replace(")", `, ${alpha})`);
@@ -248,12 +250,13 @@ const GameOverScreen = () => {
                   ? "Saved"
                   : "Submit score"}
               </button>
-              <Link
+              <button
+                type="button"
                 className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
-                href="/leaderboard"
+                onClick={() => setShowLeaderboardModal(true)}
               >
                 View leaderboard
-              </Link>
+              </button>
             </div>
             <div className={styles.leaderboardStatus}>
               {submitStatus === "success" &&
@@ -262,6 +265,10 @@ const GameOverScreen = () => {
             </div>
           </section>
         )}
+        <LeaderboardModal
+          isOpen={showLeaderboardModal}
+          onClose={() => setShowLeaderboardModal(false)}
+        />
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{gameOverText.deployedHeading}</h3>

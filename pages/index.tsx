@@ -4,6 +4,7 @@ import { useLocale } from "../context/LocaleContext";
 import { useTranslations } from "../hooks/useTranslations";
 import { LOCALE_OPTIONS } from "../constants/i18n";
 import { useState, useMemo, useCallback } from "react";
+import LeaderboardModal from "../components/common/LeaderboardModal";
 
 interface LanguageOption {
   value: string;
@@ -95,6 +96,7 @@ const IndexPage = () => {
 
   const [isTutorialOpen, setTutorialOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
 
   const closeTutorial = useCallback(() => setTutorialOpen(false), []);
   const nextSlide = useCallback(
@@ -164,9 +166,9 @@ const IndexPage = () => {
               <button
                 type="button"
                 key={value}
-                className={`${languagePreference.includes(value) ? "active" : ""} ${
-                  disabled ? "disabled" : ""
-                }`.trim()}
+                className={`${
+                  languagePreference.includes(value) ? "active" : ""
+                } ${disabled ? "disabled" : ""}`.trim()}
                 onClick={() => {
                   if (disabled) {
                     return;
@@ -223,6 +225,13 @@ const IndexPage = () => {
             }}
           >
             {landing.tutorialCta}
+          </button>
+          <button
+            type="button"
+            className="landing__secondary"
+            onClick={() => setLeaderboardOpen(true)}
+          >
+            🏆 Leaderboard
           </button>
           <button
             type="button"
@@ -316,6 +325,10 @@ const IndexPage = () => {
           </div>
         </div>
       )}
+      <LeaderboardModal
+        isOpen={isLeaderboardOpen}
+        onClose={() => setLeaderboardOpen(false)}
+      />
       <style jsx>{`
         .landing {
           min-height: 100vh;
@@ -569,8 +582,7 @@ const IndexPage = () => {
           transition: background 0.2s, border-color 0.2s;
         }
         .landing__difficulty-options button:hover:not(.active),
-        .landing__difficulty-options
-          button:focus-visible:not(.active) {
+        .landing__difficulty-options button:focus-visible:not(.active) {
           background: rgba(255, 255, 255, 0.06);
           border-color: rgba(148, 163, 184, 0.7);
         }
