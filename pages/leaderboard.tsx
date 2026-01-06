@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import styles from '../styles/Leaderboard.module.css';
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import styles from "../styles/Leaderboard.module.css";
+import { getSupabaseAnonClient } from "../utils/supabaseClient";
 
 type LeaderboardEntry = {
   displayName: string;
@@ -15,15 +16,18 @@ const rankBadge = (rank: number) => {
   if (rank === 1) return styles.badge;
   if (rank === 2) return `${styles.badge} ${styles.silver}`;
   if (rank === 3) return `${styles.badge} ${styles.bronze}`;
-  return '';
+  return "";
 };
 
 const formatDate = (value: string | null | undefined) => {
-  if (!value) return '—';
+  if (!value) return "—";
   try {
-    return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(
-      new Date(value)
-    );
+    return new Intl.DateTimeFormat(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(new Date(value));
   } catch {
     return value;
   }
@@ -40,16 +44,37 @@ const LeaderboardPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch('/api/leaderboard');
-        if (!res.ok) {
-          throw new Error(`Request failed (${res.status})`);
+        const supabase = getSupabaseAnonClient();
+        if (!supabase) {
+          throw new Error("Leaderboard is not configured.");
         }
-        const payload = await res.json();
+        const { data, error: fetchError } = await supabase
+          .from("leaderboard_entries")
+          .select(
+            "display_name, clean_approvals, true_positives, days_played, score, created_at"
+          )
+          .order("score", { ascending: false })
+          .order("created_at", { ascending: false })
+          .limit(100);
+        if (fetchError) {
+          throw new Error(fetchError.message);
+        }
         if (!alive) return;
-        setEntries(payload.entries ?? []);
+        setEntries(
+          (data ?? []).map((row) => ({
+            displayName: row.display_name ?? "Anonymous reviewer",
+            cleanApprovals: row.clean_approvals ?? 0,
+            truePositives: row.true_positives ?? 0,
+            daysPlayed: row.days_played ?? 0,
+            score: row.score ?? 0,
+            createdAt: row.created_at,
+          }))
+        );
       } catch (err) {
         if (!alive) return;
-        setError(err instanceof Error ? err.message : 'Failed to load leaderboard');
+        setError(
+          err instanceof Error ? err.message : "Failed to load leaderboard"
+        );
       } finally {
         if (alive) setLoading(false);
       }
@@ -83,7 +108,9 @@ const LeaderboardPage = () => {
         {loading && <div className={styles.muted}>Loading leaderboard…</div>}
         {error && <div className={styles.muted}>Error: {error}</div>}
         {!loading && !error && withRanks.length === 0 && (
-          <div className={`${styles.muted} ${styles.empty}`}>No entries yet. Finish a run and submit your score!</div>
+          <div className={`${styles.muted} ${styles.empty}`}>
+            No entries yet. Finish a run and submit your score!
+          </div>
         )}
 
         {!loading && !error && withRanks.length > 0 && (
@@ -102,16 +129,26 @@ const LeaderboardPage = () => {
               </thead>
               <tbody>
                 {withRanks.map((entry) => (
-                  <tr key={`${entry.displayName}-${entry.createdAt}-${entry.rank}`}>
+                  <tr
+                    key={`${entry.displayName}-${entry.createdAt}-${entry.rank}`}
+                  >
                     <td className={styles.rank}>
-                      {entry.rank <= 3 ? <span className={rankBadge(entry.rank)}>{entry.rank}</span> : entry.rank}
+                      {entry.rank <= 3 ? (
+                        <span className={rankBadge(entry.rank)}>
+                          {entry.rank}
+                        </span>
+                      ) : (
+                        entry.rank
+                      )}
                     </td>
                     <td>{entry.displayName}</td>
                     <td className={styles.score}>{entry.score}</td>
                     <td>{entry.cleanApprovals}</td>
                     <td>{entry.truePositives}</td>
                     <td>{entry.daysPlayed}</td>
-                    <td className={styles.muted}>{formatDate(entry.createdAt)}</td>
+                    <td className={styles.muted}>
+                      {formatDate(entry.createdAt)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
