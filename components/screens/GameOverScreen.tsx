@@ -10,7 +10,10 @@ import {
   computeLeaderboardScore,
   sanitizeDisplayName,
 } from "../../utils/leaderboard";
+<<<<<<< HEAD
 import LeaderboardModal from "../common/LeaderboardModal";
+=======
+>>>>>>> 0af72a8 (refactor(GameOverScreen): integrate Supabase leaderboard and improve code formatting)
 
 const GameOverScreen = () => {
   const {
