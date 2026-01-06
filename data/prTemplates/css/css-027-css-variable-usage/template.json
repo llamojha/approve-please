@@ -1,0 +1,41 @@
+{
+  "templateId": "css-027-css-variable-usage",
+  "title": "Apply theme colors to buttons",
+  "author": "Karen O.",
+  "description": "Uses CSS variables for consistent button theming.",
+  "tags": ["buttons", "variables"],
+  "localized": {
+    "es": {
+      "title": "Aplicar colores del tema a botones",
+      "description": "Usa variables CSS para tematización consistente de botones.",
+      "tags": ["botones", "variables"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/buttons.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 10, "content": ".btn-primary {", "isNew": true },
+        {
+          "lineNumber": 11,
+          "content": "  background-color: var(--color-primary);",
+          "isNew": true
+        },
+        { "lineNumber": 12, "content": "  color: white;", "isNew": true },
+        { "lineNumber": 13, "content": "}", "isNew": true },
+        { "lineNumber": 14, "content": "", "isNew": true },
+        { "lineNumber": 15, "content": ".btn-danger {", "isNew": true },
+        {
+          "lineNumber": 16,
+          "content": "  background-color: var(--color-danger);",
+          "isNew": true
+        },
+        { "lineNumber": 17, "content": "  color: white;", "isNew": true },
+        { "lineNumber": 18, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

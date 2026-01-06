@@ -17,6 +17,7 @@ import {
   Counters,
   DaySummary,
   DayQuote,
+  Difficulty,
   FalsePositiveRecord,
   GamePhase,
   LanguagePreference,
@@ -33,6 +34,7 @@ interface GameState {
   currentDay: number;
   phase: GamePhase;
   languagePreference: LanguagePreference;
+  difficulty: Difficulty;
   currentTime: number;
   queue: PullRequest[];
   currentPR: PullRequest | null;
@@ -69,6 +71,7 @@ interface GameContextValue {
     advanceToNextDay: () => void;
     restartGame: () => void;
     setLanguagePreference: (preference: LanguagePreference) => void;
+    setDifficulty: (difficulty: Difficulty) => void;
   };
 }
 
@@ -83,6 +86,7 @@ type GameAction =
   | { type: 'SET_GAME_OVER'; reason?: GameOverReasonKey }
   | { type: 'RESET_GAME' }
   | { type: 'SET_LANGUAGE_PREFERENCE'; preference: LanguagePreference }
+  | { type: 'SET_DIFFICULTY'; difficulty: Difficulty }
   | { type: 'LOG_PROD_INCIDENT'; incident: ProdIncident }
   | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord };
 
@@ -105,7 +109,8 @@ const createInitialState = (): GameState => {
   return {
     currentDay: 1,
     phase: 'BRIEFING',
-    languagePreference: 'any',
+    languagePreference: ['generic', 'typescript', 'python', 'java', 'rust', 'css'],
+    difficulty: 'normal',
     currentTime: 0,
     queue: [],
     currentPR: null,
@@ -134,7 +139,10 @@ const computeQueueDrain = (pressure: number): number => {
   return QUEUE_AGING_MIN_DRAIN + progress * (QUEUE_AGING_MAX_DRAIN - QUEUE_AGING_MIN_DRAIN);
 };
 
-const getQueueAgingDelta = (queue: PullRequest[]): Partial<MeterSet> | null => {
+const getQueueAgingDelta = (queue: PullRequest[], difficulty: Difficulty): Partial<MeterSet> | null => {
+  if (difficulty === 'learning') {
+    return null;
+  }
   if (queue.length === 0) {
     return null;
   }
@@ -214,7 +222,7 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
       const nextTime = Math.min(state.currentTime + action.minutes, WORK_DAY_MINUTES);
       const reachedEnd = nextTime >= WORK_DAY_MINUTES;
       const nextPhase: GamePhase = reachedEnd ? 'SUMMARY' : state.phase;
-      const queueAgingDelta = getQueueAgingDelta(state.queue);
+      const queueAgingDelta = getQueueAgingDelta(state.queue, state.difficulty);
       const meters = queueAgingDelta ? applyMeterDelta(state.meters, queueAgingDelta) : state.meters;
       const nextState = { ...state, currentTime: nextTime, phase: nextPhase, meters };
       return maybeGameOver(nextState);
@@ -269,12 +277,16 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
       return {
         ...resetState,
         languagePreference: state.languagePreference,
+        difficulty: state.difficulty,
         meters: createInitialMeters(),
         counters: createInitialCounters()
       };
     }
     case 'SET_LANGUAGE_PREFERENCE': {
       return { ...state, languagePreference: action.preference };
+    }
+    case 'SET_DIFFICULTY': {
+      return { ...state, difficulty: action.difficulty };
     }
     case 'LOG_PROD_INCIDENT': {
       return { ...state, prodIncidents: [...state.prodIncidents, action.incident] };
@@ -433,6 +445,10 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: 'SET_LANGUAGE_PREFERENCE', preference });
   }, []);
 
+  const setDifficulty = useCallback((difficulty: Difficulty) => {
+    dispatch({ type: 'SET_DIFFICULTY', difficulty });
+  }, []);
+
   const value = useMemo(
     () => ({
       state,
@@ -445,7 +461,8 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         requestChanges,
         advanceToNextDay,
         restartGame,
-        setLanguagePreference
+        setLanguagePreference,
+        setDifficulty
       }
     }),
     [
@@ -458,7 +475,8 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       requestChanges,
       advanceToNextDay,
       restartGame,
-      setLanguagePreference
+      setLanguagePreference,
+      setDifficulty
     ]
   );
 

@@ -1,0 +1,52 @@
+{
+  "templateId": "css-010-border-shorthand-error",
+  "title": "Add input field borders",
+  "author": "Marcus J.",
+  "description": "Styles form input fields with borders and focus states.",
+  "tags": ["forms", "inputs"],
+  "localized": {
+    "es": {
+      "title": "Agregar bordes a campos de entrada",
+      "description": "Estiliza campos de formulario con bordes y estados de foco.",
+      "tags": ["formularios", "inputs"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/forms.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 5, "content": ".form-input {", "isNew": true },
+        {
+          "lineNumber": 6,
+          "content": "  border: solid 1px #ccc;",
+          "isNew": true
+        },
+        { "lineNumber": 7, "content": "  padding: 8px 12px;", "isNew": true },
+        { "lineNumber": 8, "content": "  border-radius: 4px;", "isNew": true },
+        { "lineNumber": 9, "content": "}", "isNew": true },
+        { "lineNumber": 10, "content": "", "isNew": true },
+        { "lineNumber": 11, "content": ".form-input:focus {", "isNew": true },
+        {
+          "lineNumber": 12,
+          "content": "  border: solid 2px #007bff;",
+          "isNew": true
+        },
+        { "lineNumber": 13, "content": "  outline: none;", "isNew": true },
+        { "lineNumber": 14, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [6, 12],
+      "severity": "minor",
+      "description": "Border shorthand order should be: width style color (e.g., '1px solid #ccc').",
+      "localizedDescription": {
+        "es": "El orden del shorthand de border debería ser: ancho estilo color (ej: '1px solid #ccc')."
+      }
+    }
+  ],
+  "importance": "low"
+}

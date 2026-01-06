@@ -1,0 +1,46 @@
+{
+  "templateId": "css-039-z-index-magic-number",
+  "title": "Fix dropdown z-index",
+  "author": "Wendy L.",
+  "description": "Ensures dropdown menu appears above other content.",
+  "tags": ["dropdown", "z-index"],
+  "localized": {
+    "es": {
+      "title": "Corregir z-index del dropdown",
+      "description": "Asegura que el menú dropdown aparezca sobre otro contenido.",
+      "tags": ["dropdown", "z-index"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/dropdown.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 10, "content": ".dropdown-menu {", "isNew": true },
+        { "lineNumber": 11, "content": "  position: absolute;", "isNew": true },
+        { "lineNumber": 12, "content": "  top: 100%;", "isNew": true },
+        { "lineNumber": 13, "content": "  left: 0;", "isNew": true },
+        { "lineNumber": 14, "content": "  z-index: 999999;", "isNew": true },
+        { "lineNumber": 15, "content": "  background: white;", "isNew": true },
+        {
+          "lineNumber": 16,
+          "content": "  box-shadow: 0 4px 8px rgba(0,0,0,0.15);",
+          "isNew": true
+        },
+        { "lineNumber": 17, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [14],
+      "severity": "minor",
+      "description": "Magic number z-index. Use a defined scale (e.g., 100 for dropdowns) to maintain stacking context.",
+      "localizedDescription": {
+        "es": "Número mágico en z-index. Usa una escala definida (ej: 100 para dropdowns) para mantener contexto de apilamiento."
+      }
+    }
+  ],
+  "importance": "low"
+}

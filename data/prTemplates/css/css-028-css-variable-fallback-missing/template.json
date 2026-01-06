@@ -1,0 +1,54 @@
+{
+  "templateId": "css-028-css-variable-fallback-missing",
+  "title": "Add accent color to links",
+  "author": "Leo P.",
+  "description": "Applies accent color variable to link elements.",
+  "tags": ["links", "variables"],
+  "localized": {
+    "es": {
+      "title": "Agregar color de acento a enlaces",
+      "description": "Aplica variable de color de acento a elementos de enlace.",
+      "tags": ["enlaces", "variables"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/links.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": "a {", "isNew": true },
+        {
+          "lineNumber": 2,
+          "content": "  color: var(--color-accent);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 3,
+          "content": "  text-decoration: none;",
+          "isNew": true
+        },
+        { "lineNumber": 4, "content": "}", "isNew": true },
+        { "lineNumber": 5, "content": "", "isNew": true },
+        { "lineNumber": 6, "content": "a:hover {", "isNew": true },
+        {
+          "lineNumber": 7,
+          "content": "  text-decoration: underline;",
+          "isNew": true
+        },
+        { "lineNumber": 8, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [2],
+      "severity": "major",
+      "description": "CSS variable used without fallback. If --color-accent is undefined, links will have no color.",
+      "localizedDescription": {
+        "es": "Variable CSS usada sin fallback. Si --color-accent no está definida, los enlaces no tendrán color."
+      }
+    }
+  ],
+  "importance": "normal"
+}

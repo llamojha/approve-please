@@ -1,0 +1,46 @@
+{
+  "templateId": "css-002-selector-typo",
+  "title": "Style navigation links",
+  "author": "Carlos R.",
+  "description": "Adds hover effects to navigation menu items.",
+  "tags": ["navigation", "hover"],
+  "localized": {
+    "es": {
+      "title": "Estilizar enlaces de navegación",
+      "description": "Agrega efectos hover a los elementos del menú de navegación.",
+      "tags": ["navegación", "hover"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/nav.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 12, "content": ".nav-link {", "isNew": true },
+        { "lineNumber": 13, "content": "  color: #333;", "isNew": true },
+        {
+          "lineNumber": 14,
+          "content": "  text-decoration: none;",
+          "isNew": true
+        },
+        { "lineNumber": 15, "content": "}", "isNew": true },
+        { "lineNumber": 16, "content": "", "isNew": true },
+        { "lineNumber": 17, "content": ".nav-link:hovr {", "isNew": true },
+        { "lineNumber": 18, "content": "  color: #0066cc;", "isNew": true },
+        { "lineNumber": 19, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [17],
+      "severity": "major",
+      "description": "Typo in pseudo-class: 'hovr' should be 'hover'.",
+      "localizedDescription": {
+        "es": "Error tipográfico en pseudo-clase: 'hovr' debería ser 'hover'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

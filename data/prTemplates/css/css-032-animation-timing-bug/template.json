@@ -1,0 +1,47 @@
+{
+  "templateId": "css-032-animation-timing-bug",
+  "title": "Fade in page content",
+  "author": "Paula E.",
+  "description": "Adds fade-in animation to main content on load.",
+  "tags": ["animation", "fade"],
+  "localized": {
+    "es": {
+      "title": "Desvanecer contenido de página",
+      "description": "Agrega animación de desvanecimiento al contenido principal al cargar.",
+      "tags": ["animación", "desvanecimiento"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/animations.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": "@keyframes fadeIn {", "isNew": true },
+        { "lineNumber": 2, "content": "  from { opacity: 0; }", "isNew": true },
+        { "lineNumber": 3, "content": "  to { opacity: 1; }", "isNew": true },
+        { "lineNumber": 4, "content": "}", "isNew": true },
+        { "lineNumber": 5, "content": "", "isNew": true },
+        { "lineNumber": 6, "content": ".page-content {", "isNew": true },
+        {
+          "lineNumber": 7,
+          "content": "  animation: fadeIn 0.5s ease forwards;",
+          "isNew": true
+        },
+        { "lineNumber": 8, "content": "  opacity: 0;", "isNew": true },
+        { "lineNumber": 9, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [8],
+      "severity": "major",
+      "description": "Initial opacity:0 after animation declaration causes flash. Move opacity:0 before animation or use animation-fill-mode.",
+      "localizedDescription": {
+        "es": "Opacity:0 inicial después de la declaración de animación causa parpadeo. Mover opacity:0 antes de animation o usar animation-fill-mode."
+      }
+    }
+  ],
+  "importance": "normal"
+}

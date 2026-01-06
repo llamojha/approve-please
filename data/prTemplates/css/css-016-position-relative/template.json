@@ -1,0 +1,50 @@
+{
+  "templateId": "css-016-position-relative",
+  "title": "Add notification badge to icon",
+  "author": "Mike D.",
+  "description": "Positions notification count badge on icon using relative/absolute.",
+  "tags": ["notifications", "positioning"],
+  "localized": {
+    "es": {
+      "title": "Agregar badge de notificación al icono",
+      "description": "Posiciona badge de conteo de notificaciones en icono usando relative/absolute.",
+      "tags": ["notificaciones", "posicionamiento"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/notifications.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".icon-wrapper {", "isNew": true },
+        { "lineNumber": 2, "content": "  position: relative;", "isNew": true },
+        {
+          "lineNumber": 3,
+          "content": "  display: inline-block;",
+          "isNew": true
+        },
+        { "lineNumber": 4, "content": "}", "isNew": true },
+        { "lineNumber": 5, "content": "", "isNew": true },
+        { "lineNumber": 6, "content": ".notification-badge {", "isNew": true },
+        { "lineNumber": 7, "content": "  position: absolute;", "isNew": true },
+        { "lineNumber": 8, "content": "  top: -5px;", "isNew": true },
+        { "lineNumber": 9, "content": "  right: -5px;", "isNew": true },
+        {
+          "lineNumber": 10,
+          "content": "  background: #dc3545;",
+          "isNew": true
+        },
+        { "lineNumber": 11, "content": "  color: white;", "isNew": true },
+        { "lineNumber": 12, "content": "  border-radius: 50%;", "isNew": true },
+        { "lineNumber": 13, "content": "  width: 18px;", "isNew": true },
+        { "lineNumber": 14, "content": "  height: 18px;", "isNew": true },
+        { "lineNumber": 15, "content": "  font-size: 11px;", "isNew": true },
+        { "lineNumber": 16, "content": "  text-align: center;", "isNew": true },
+        { "lineNumber": 17, "content": "  line-height: 18px;", "isNew": true },
+        { "lineNumber": 18, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

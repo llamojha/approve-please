@@ -48,13 +48,13 @@ const templateMatchesPreference = (
 ): boolean => {
   const languages = getCodeLanguages(template.files);
   const isGeneric = languages.length === 0;
+  if (preference.length === 0) {
+    return true;
+  }
   if (isGeneric) {
-    return true;
+    return preference.includes("generic");
   }
-  if (preference === "any") {
-    return true;
-  }
-  return languages.includes(preference);
+  return languages.some((language) => preference.includes(language));
 };
 
 const getWaveTracker = (day: number): WaveTracker => {
@@ -133,9 +133,6 @@ export const usePRSpawner = () => {
       templateIds.forEach((templateId) => {
         const template = templateMap.get(templateId);
         if (!template) {
-          return;
-        }
-        if (!templateMatchesPreference(template, languagePreference)) {
           return;
         }
         spawnCountRef.current += 1;

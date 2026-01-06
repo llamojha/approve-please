@@ -1,0 +1,34 @@
+{
+  "templateId": "css-041-grid-layout",
+  "title": "Create product grid",
+  "author": "Yolanda N.",
+  "description": "Implements CSS Grid for product listing layout.",
+  "tags": ["grid", "layout"],
+  "localized": {
+    "es": {
+      "title": "Crear grid de productos",
+      "description": "Implementa CSS Grid para layout de listado de productos.",
+      "tags": ["grid", "layout"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/products.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".product-grid {", "isNew": true },
+        { "lineNumber": 2, "content": "  display: grid;", "isNew": true },
+        {
+          "lineNumber": 3,
+          "content": "  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));",
+          "isNew": true
+        },
+        { "lineNumber": 4, "content": "  gap: 24px;", "isNew": true },
+        { "lineNumber": 5, "content": "  padding: 20px;", "isNew": true },
+        { "lineNumber": 6, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

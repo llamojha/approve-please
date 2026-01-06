@@ -1,0 +1,45 @@
+{
+  "templateId": "css-047-flexbox-shrink-bug",
+  "title": "Fix sidebar collapse issue",
+  "author": "Eva T.",
+  "description": "Prevents sidebar from shrinking below minimum width.",
+  "tags": ["sidebar", "flexbox"],
+  "localized": {
+    "es": {
+      "title": "Corregir problema de colapso de barra lateral",
+      "description": "Previene que la barra lateral se reduzca por debajo del ancho mínimo.",
+      "tags": ["barra lateral", "flexbox"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/layout.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 15, "content": ".app-layout {", "isNew": true },
+        { "lineNumber": 16, "content": "  display: flex;", "isNew": true },
+        { "lineNumber": 17, "content": "}", "isNew": true },
+        { "lineNumber": 18, "content": "", "isNew": true },
+        { "lineNumber": 19, "content": ".sidebar {", "isNew": true },
+        { "lineNumber": 20, "content": "  width: 250px;", "isNew": true },
+        { "lineNumber": 21, "content": "}", "isNew": true },
+        { "lineNumber": 22, "content": "", "isNew": true },
+        { "lineNumber": 23, "content": ".main-content {", "isNew": true },
+        { "lineNumber": 24, "content": "  flex: 1;", "isNew": true },
+        { "lineNumber": 25, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [20],
+      "severity": "major",
+      "description": "Sidebar will shrink below 250px. Add 'flex-shrink: 0' or 'min-width: 250px' to prevent collapse.",
+      "localizedDescription": {
+        "es": "La barra lateral se reducirá por debajo de 250px. Agrega 'flex-shrink: 0' o 'min-width: 250px' para prevenir colapso."
+      }
+    }
+  ],
+  "importance": "normal"
+}

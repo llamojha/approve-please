@@ -1,0 +1,46 @@
+{
+  "templateId": "css-042-overflow-hidden-bug",
+  "title": "Fix card image overflow",
+  "author": "Zach O.",
+  "description": "Prevents images from overflowing card boundaries.",
+  "tags": ["cards", "overflow"],
+  "localized": {
+    "es": {
+      "title": "Corregir desbordamiento de imagen en tarjeta",
+      "description": "Previene que las imágenes desborden los límites de la tarjeta.",
+      "tags": ["tarjetas", "desbordamiento"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/card.css",
+      "language": "css",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": ".card-image-container {",
+          "isNew": true
+        },
+        { "lineNumber": 21, "content": "  overflow: hidden;", "isNew": true },
+        {
+          "lineNumber": 22,
+          "content": "  border-radius: 8px 8px 0 0;",
+          "isNew": true
+        },
+        { "lineNumber": 23, "content": "}", "isNew": true },
+        { "lineNumber": 24, "content": "", "isNew": true },
+        {
+          "lineNumber": 25,
+          "content": ".card-image-container img {",
+          "isNew": true
+        },
+        { "lineNumber": 26, "content": "  width: 100%;", "isNew": true },
+        { "lineNumber": 27, "content": "  height: auto;", "isNew": true },
+        { "lineNumber": 28, "content": "  display: block;", "isNew": true },
+        { "lineNumber": 29, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "low"
+}

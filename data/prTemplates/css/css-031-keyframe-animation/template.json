@@ -1,0 +1,57 @@
+{
+  "templateId": "css-031-keyframe-animation",
+  "title": "Add loading spinner animation",
+  "author": "Oscar D.",
+  "description": "Creates a rotating spinner using CSS keyframes.",
+  "tags": ["animation", "loading"],
+  "localized": {
+    "es": {
+      "title": "Agregar animación de spinner de carga",
+      "description": "Crea un spinner rotativo usando keyframes CSS.",
+      "tags": ["animación", "carga"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/spinner.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": "@keyframes spin {", "isNew": true },
+        {
+          "lineNumber": 2,
+          "content": "  from { transform: rotate(0deg); }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 3,
+          "content": "  to { transform: rotate(360deg); }",
+          "isNew": true
+        },
+        { "lineNumber": 4, "content": "}", "isNew": true },
+        { "lineNumber": 5, "content": "", "isNew": true },
+        { "lineNumber": 6, "content": ".spinner {", "isNew": true },
+        { "lineNumber": 7, "content": "  width: 40px;", "isNew": true },
+        { "lineNumber": 8, "content": "  height: 40px;", "isNew": true },
+        {
+          "lineNumber": 9,
+          "content": "  border: 3px solid #f3f3f3;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 10,
+          "content": "  border-top: 3px solid #007bff;",
+          "isNew": true
+        },
+        { "lineNumber": 11, "content": "  border-radius: 50%;", "isNew": true },
+        {
+          "lineNumber": 12,
+          "content": "  animation: spin 1s linear infinite;",
+          "isNew": true
+        },
+        { "lineNumber": 13, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}
