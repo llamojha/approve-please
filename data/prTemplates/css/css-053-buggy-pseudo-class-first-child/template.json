@@ -1,0 +1,37 @@
+{
+  "templateId": "css-053-buggy-pseudo-class-first-child",
+  "title": "Remove top margin from first paragraph",
+  "author": "James W.",
+  "description": "Uses :first-child to remove margin from the first paragraph in articles.",
+  "tags": ["typography", "spacing"],
+  "localized": {
+    "es": {
+      "title": "Eliminar margen superior del primer párrafo",
+      "description": "Usa :first-child para eliminar el margen del primer párrafo en artículos.",
+      "tags": ["tipografía", "espaciado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/article.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 15, "content": ".article-body p:first-child {", "isNew": true },
+        { "lineNumber": 16, "content": "  margin-top: 0", "isNew": true },
+        { "lineNumber": 17, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [16],
+      "severity": "minor",
+      "description": "Missing semicolon after property value.",
+      "localizedDescription": {
+        "es": "Falta punto y coma después del valor de la propiedad."
+      }
+    }
+  ],
+  "importance": "low"
+}

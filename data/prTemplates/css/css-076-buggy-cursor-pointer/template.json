@@ -1,0 +1,43 @@
+{
+  "templateId": "css-076-buggy-cursor-pointer",
+  "title": "Add pointer cursor to clickable elements",
+  "author": "Noah P.",
+  "description": "Sets cursor to pointer for interactive elements.",
+  "tags": ["cursor", "ux", "buttons"],
+  "localized": {
+    "es": {
+      "title": "Agregar cursor pointer a elementos clickeables",
+      "description": "Establece cursor pointer para elementos interactivos.",
+      "tags": ["cursor", "ux", "botones"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/interactive.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".clickable,", "isNew": true },
+        { "lineNumber": 2, "content": ".btn,", "isNew": true },
+        { "lineNumber": 3, "content": ".link {", "isNew": true },
+        { "lineNumber": 4, "content": "  cursor: ponter;", "isNew": true },
+        { "lineNumber": 5, "content": "}", "isNew": true },
+        { "lineNumber": 6, "content": "", "isNew": true },
+        { "lineNumber": 7, "content": ".disabled {", "isNew": true },
+        { "lineNumber": 8, "content": "  cursor: not-allowed;", "isNew": true },
+        { "lineNumber": 9, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [4],
+      "severity": "major",
+      "description": "Typo: 'ponter' should be 'pointer'.",
+      "localizedDescription": {
+        "es": "Error: 'ponter' debería ser 'pointer'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

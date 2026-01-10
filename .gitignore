@@ -21,3 +21,6 @@ pnpm-debug.log*
 .DS_Store
 .vscode/
 .idea/
+
+# Local reports
+pr-template-report.md

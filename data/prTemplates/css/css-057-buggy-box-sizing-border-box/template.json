@@ -1,0 +1,37 @@
+{
+  "templateId": "css-057-buggy-box-sizing-border-box",
+  "title": "Fix layout width calculations",
+  "author": "Nina P.",
+  "description": "Applies border-box sizing to prevent layout overflow issues.",
+  "tags": ["layout", "box-model"],
+  "localized": {
+    "es": {
+      "title": "Corregir cálculos de ancho del layout",
+      "description": "Aplica box-sizing border-box para prevenir problemas de desbordamiento.",
+      "tags": ["layout", "modelo-caja"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/base.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": "*, *::before, *::after {", "isNew": true },
+        { "lineNumber": 2, "content": "  box-sizing: border-bx;", "isNew": true },
+        { "lineNumber": 3, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [2],
+      "severity": "major",
+      "description": "Typo: 'border-bx' should be 'border-box'.",
+      "localizedDescription": {
+        "es": "Error: 'border-bx' debería ser 'border-box'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

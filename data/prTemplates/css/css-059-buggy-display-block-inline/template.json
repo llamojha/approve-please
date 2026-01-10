@@ -1,0 +1,41 @@
+{
+  "templateId": "css-059-buggy-display-block-inline",
+  "title": "Fix inline badge spacing",
+  "author": "Sandra W.",
+  "description": "Changes badge display to inline-block for proper spacing.",
+  "tags": ["badges", "display"],
+  "localized": {
+    "es": {
+      "title": "Corregir espaciado de badges inline",
+      "description": "Cambia display de badges a inline-block para espaciado correcto.",
+      "tags": ["badges", "display"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/badges.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".badge {", "isNew": true },
+        { "lineNumber": 2, "content": "  display: inline-blok;", "isNew": true },
+        { "lineNumber": 3, "content": "  padding: 4px 8px;", "isNew": true },
+        { "lineNumber": 4, "content": "  font-size: 12px;", "isNew": true },
+        { "lineNumber": 5, "content": "  border-radius: 12px;", "isNew": true },
+        { "lineNumber": 6, "content": "  background: #e0e0e0;", "isNew": true },
+        { "lineNumber": 7, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [2],
+      "severity": "major",
+      "description": "Typo: 'inline-blok' should be 'inline-block'.",
+      "localizedDescription": {
+        "es": "Error: 'inline-blok' debería ser 'inline-block'."
+      }
+    }
+  ],
+  "importance": "low"
+}

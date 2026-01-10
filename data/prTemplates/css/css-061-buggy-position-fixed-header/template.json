@@ -1,0 +1,43 @@
+{
+  "templateId": "css-061-buggy-position-fixed-header",
+  "title": "Make header sticky",
+  "author": "Julia F.",
+  "description": "Fixes header to top of viewport on scroll.",
+  "tags": ["header", "sticky"],
+  "localized": {
+    "es": {
+      "title": "Hacer header fijo",
+      "description": "Fija el header en la parte superior del viewport al hacer scroll.",
+      "tags": ["header", "fijo"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/header.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 10, "content": ".site-header {", "isNew": true },
+        { "lineNumber": 11, "content": "  position: fixed;", "isNew": true },
+        { "lineNumber": 12, "content": "  top: 0;", "isNew": true },
+        { "lineNumber": 13, "content": "  left: 0;", "isNew": true },
+        { "lineNumber": 14, "content": "  right: 0;", "isNew": true },
+        { "lineNumber": 15, "content": "  z-index: 1000;", "isNew": true },
+        { "lineNumber": 16, "content": "  backgrund: white;", "isNew": true },
+        { "lineNumber": 17, "content": "  box-shadow: 0 2px 4px rgba(0,0,0,0.1);", "isNew": true },
+        { "lineNumber": 18, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [16],
+      "severity": "major",
+      "description": "Typo: 'backgrund' should be 'background'.",
+      "localizedDescription": {
+        "es": "Error: 'backgrund' debería ser 'background'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

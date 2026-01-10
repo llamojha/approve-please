@@ -1,0 +1,112 @@
+{
+  "templateId": "pr-071-document-incident-escalation-runbook",
+  "title": "Document Incident Escalation runbook",
+  "author": "Akiko F.",
+  "description": "Adds an escalation runbook with severity tiers and contact matrix for on-call.",
+  "tags": [
+    "cleanup",
+    "docs",
+    "ops"
+  ],
+  "localized": {
+    "es": {
+      "title": "Documenta el runbook de escalación de incidentes",
+      "description": "Añade un runbook de escalación con niveles de severidad y matriz de contactos.",
+      "tags": [
+        "limpieza",
+        "documentación",
+        "ops"
+      ]
+    }
+  },
+  "importance": "low",
+  "files": [
+    {
+      "filename": "docs/incident-escalation.md",
+      "language": "markdown",
+      "lines": [
+        {
+          "lineNumber": 1,
+          "content": "# Incident Escalation Runbook",
+          "isNew": true
+        },
+        {
+          "lineNumber": 2,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 3,
+          "content": "## Severity Tiers",
+          "isNew": true
+        },
+        {
+          "lineNumber": 4,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 5,
+          "content": "| Tier | Impact | Response SLA |",
+          "isNew": true
+        },
+        {
+          "lineNumber": 6,
+          "content": "|------|--------|--------------|",
+          "isNew": true
+        },
+        {
+          "lineNumber": 7,
+          "content": "| P1 | Full outage | 15 min |",
+          "isNew": true
+        },
+        {
+          "lineNumber": 8,
+          "content": "| P2 | Degraded service | 30 min |",
+          "isNew": true
+        },
+        {
+          "lineNumber": 9,
+          "content": "| P3 | Minor issue | 4 hours |",
+          "isNew": true
+        },
+        {
+          "lineNumber": 10,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "## Escalation Steps",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "1. Page the primary on-call via PagerDuty.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "2. If no response in 10 min, escalate to secondary on-call.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "3. For P1 incidents, notify #incident-response Slack channel immediately.",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "4. Update the status page within 5 minutes of confirmed impact.",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": []
+}

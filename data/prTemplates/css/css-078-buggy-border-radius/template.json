@@ -1,0 +1,40 @@
+{
+  "templateId": "css-078-buggy-border-radius",
+  "title": "Round avatar images",
+  "author": "Paul S.",
+  "description": "Makes avatar images circular with border-radius.",
+  "tags": ["avatar", "images", "styling"],
+  "localized": {
+    "es": {
+      "title": "Redondear imágenes de avatar",
+      "description": "Hace las imágenes de avatar circulares con border-radius.",
+      "tags": ["avatar", "imágenes", "estilos"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/avatar.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".avatar {", "isNew": true },
+        { "lineNumber": 2, "content": "  width: 48px;", "isNew": true },
+        { "lineNumber": 3, "content": "  height: 48px;", "isNew": true },
+        { "lineNumber": 4, "content": "  border-raduis: 50%;", "isNew": true },
+        { "lineNumber": 5, "content": "  object-fit: cover;", "isNew": true },
+        { "lineNumber": 6, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [4],
+      "severity": "major",
+      "description": "Typo: 'border-raduis' should be 'border-radius'.",
+      "localizedDescription": {
+        "es": "Error: 'border-raduis' debería ser 'border-radius'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

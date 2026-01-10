@@ -1,0 +1,44 @@
+{
+  "templateId": "css-073-buggy-aspect-ratio",
+  "title": "Maintain video aspect ratio",
+  "author": "Gina V.",
+  "description": "Uses aspect-ratio for responsive video containers.",
+  "tags": ["video", "responsive"],
+  "localized": {
+    "es": {
+      "title": "Mantener relación de aspecto de video",
+      "description": "Usa aspect-ratio para contenedores de video responsivos.",
+      "tags": ["video", "responsivo"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/video.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".video-container {", "isNew": true },
+        { "lineNumber": 2, "content": "  width: 100%;", "isNew": true },
+        { "lineNumber": 3, "content": "  aspect-ratio: 16/9;", "isNew": true },
+        { "lineNumber": 4, "content": "  backgroud: #000;", "isNew": true },
+        { "lineNumber": 5, "content": "}", "isNew": true },
+        { "lineNumber": 6, "content": "", "isNew": true },
+        { "lineNumber": 7, "content": ".video-container iframe {", "isNew": true },
+        { "lineNumber": 8, "content": "  width: 100%;", "isNew": true },
+        { "lineNumber": 9, "content": "  height: 100%;", "isNew": true },
+        { "lineNumber": 10, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [4],
+      "severity": "major",
+      "description": "Typo: 'backgroud' should be 'background'.",
+      "localizedDescription": {
+        "es": "Error: 'backgroud' debería ser 'background'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

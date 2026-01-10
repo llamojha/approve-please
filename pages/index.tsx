@@ -159,42 +159,35 @@ const IndexPage = () => {
         <section className="landing__language">
           <div className="landing__language-header">
             <small>{landing.languageHeader}</small>
-            <span>{landing.languageSubtitle}</span>
+            <span>{languagePreference.length} selected</span>
           </div>
+          <p className="landing__language-hint">PRs will include code from selected languages</p>
           <div className="landing__language-options">
-            {LANGUAGE_OPTIONS.map(({ value, disabled }) => (
-              <button
-                type="button"
-                key={value}
-                className={`${
-                  languagePreference.includes(value) ? "active" : ""
-                } ${disabled ? "disabled" : ""}`.trim()}
-                onClick={() => {
-                  if (disabled) {
-                    return;
-                  }
-                  if (
-                    languagePreference.length === 1 &&
-                    languagePreference[0] === value
-                  ) {
-                    return;
-                  }
-                  if (languagePreference.includes(value)) {
-                    setLanguagePreference(
-                      languagePreference.filter(
-                        (preference) => preference !== value
-                      )
-                    );
-                  } else {
-                    setLanguagePreference([...languagePreference, value]);
-                  }
-                }}
-                disabled={disabled}
-              >
-                {languagePreferenceLabels[value] ?? value}
-                {disabled ? ` ${landing.comingSoon}` : ""}
-              </button>
-            ))}
+            {LANGUAGE_OPTIONS.map(({ value, disabled }) => {
+              const isSelected = languagePreference.includes(value);
+              const isLastSelected = languagePreference.length === 1 && isSelected;
+              return (
+                <button
+                  type="button"
+                  key={value}
+                  className={`${isSelected ? "active" : ""} ${disabled ? "disabled" : ""}`.trim()}
+                  onClick={() => {
+                    if (disabled || isLastSelected) return;
+                    if (isSelected) {
+                      setLanguagePreference(languagePreference.filter((p) => p !== value));
+                    } else {
+                      setLanguagePreference([...languagePreference, value]);
+                    }
+                  }}
+                  disabled={disabled}
+                  aria-pressed={isSelected}
+                  title={isLastSelected ? "At least one language required" : undefined}
+                >
+                  {languagePreferenceLabels[value] ?? value}
+                  {disabled ? ` ${landing.comingSoon}` : ""}
+                </button>
+              );
+            })}
           </div>
         </section>
         <section className="landing__difficulty">
@@ -507,6 +500,11 @@ const IndexPage = () => {
         .landing__language-header span {
           color: #cbd5f5;
           font-size: 0.85rem;
+        }
+        .landing__language-hint {
+          margin: 0 0 0.75rem;
+          font-size: 0.8rem;
+          color: #94a3b8;
         }
         .landing__language-options {
           display: flex;

@@ -1,4 +1,4 @@
-export type BugKind = 'logic' | 'security' | 'performance' | 'style';
+export type BugKind = 'logic' | 'security' | 'performance' | 'style' | 'accessibility';
 
 export interface BugPattern {
   kind: BugKind;

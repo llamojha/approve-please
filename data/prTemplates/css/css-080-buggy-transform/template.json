@@ -1,0 +1,41 @@
+{
+  "templateId": "css-080-buggy-transform",
+  "title": "Add scale effect on button hover",
+  "author": "Rachel U.",
+  "description": "Scales button slightly on hover for interactive feedback.",
+  "tags": ["buttons", "transform", "hover"],
+  "localized": {
+    "es": {
+      "title": "Agregar efecto scale en hover de botón",
+      "description": "Escala el botón ligeramente en hover para feedback interactivo.",
+      "tags": ["botones", "transform", "hover"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/buttons.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 15, "content": ".btn-scale {", "isNew": true },
+        { "lineNumber": 16, "content": "  transition: transform 0.15s ease;", "isNew": true },
+        { "lineNumber": 17, "content": "}", "isNew": true },
+        { "lineNumber": 18, "content": "", "isNew": true },
+        { "lineNumber": 19, "content": ".btn-scale:hover {", "isNew": true },
+        { "lineNumber": 20, "content": "  tranform: scale(1.05);", "isNew": true },
+        { "lineNumber": 21, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [20],
+      "severity": "major",
+      "description": "Typo: 'tranform' should be 'transform'.",
+      "localizedDescription": {
+        "es": "Error: 'tranform' debería ser 'transform'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

@@ -1,0 +1,42 @@
+{
+  "templateId": "css-075-buggy-opacity-hover",
+  "title": "Add hover fade effect to cards",
+  "author": "Mia K.",
+  "description": "Adds opacity transition on card hover for subtle feedback.",
+  "tags": ["cards", "hover", "opacity"],
+  "localized": {
+    "es": {
+      "title": "Agregar efecto fade hover a tarjetas",
+      "description": "Agrega transición de opacidad en hover de tarjetas.",
+      "tags": ["tarjetas", "hover", "opacidad"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/cards.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 10, "content": ".card {", "isNew": true },
+        { "lineNumber": 11, "content": "  opcaity: 1;", "isNew": true },
+        { "lineNumber": 12, "content": "  transition: opacity 0.2s ease;", "isNew": true },
+        { "lineNumber": 13, "content": "}", "isNew": true },
+        { "lineNumber": 14, "content": "", "isNew": true },
+        { "lineNumber": 15, "content": ".card:hover {", "isNew": true },
+        { "lineNumber": 16, "content": "  opacity: 0.8;", "isNew": true },
+        { "lineNumber": 17, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [11],
+      "severity": "major",
+      "description": "Typo: 'opcaity' should be 'opacity'.",
+      "localizedDescription": {
+        "es": "Error: 'opcaity' debería ser 'opacity'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

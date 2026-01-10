@@ -1,0 +1,39 @@
+{
+  "templateId": "css-072-buggy-clamp-responsive-font",
+  "title": "Add fluid typography",
+  "author": "Felix U.",
+  "description": "Implements responsive font sizing using clamp().",
+  "tags": ["typography", "responsive"],
+  "localized": {
+    "es": {
+      "title": "Agregar tipografía fluida",
+      "description": "Implementa tamaño de fuente responsivo usando clamp().",
+      "tags": ["tipografía", "responsivo"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/typography.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 10, "content": ".hero-title {", "isNew": true },
+        { "lineNumber": 11, "content": "  font-size: clamp(2rem 5vw, 4rem);", "isNew": true },
+        { "lineNumber": 12, "content": "  line-height: 1.2;", "isNew": true },
+        { "lineNumber": 13, "content": "  font-weight: 700;", "isNew": true },
+        { "lineNumber": 14, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [11],
+      "severity": "major",
+      "description": "Missing comma in clamp(): should be 'clamp(2rem, 5vw, 4rem)'.",
+      "localizedDescription": {
+        "es": "Falta coma en clamp(): debería ser 'clamp(2rem, 5vw, 4rem)'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

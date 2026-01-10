@@ -12,12 +12,14 @@ const bugKindLabels: Record<Locale, Record<BugKind, string>> = {
     security: "security",
     performance: "performance",
     style: "style",
+    accessibility: "accessibility",
   },
   es: {
     logic: "lógica",
     security: "seguridad",
     performance: "rendimiento",
     style: "estilo",
+    accessibility: "accesibilidad",
   },
 };
 

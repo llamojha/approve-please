@@ -1,0 +1,42 @@
+{
+  "templateId": "css-077-buggy-text-decoration",
+  "title": "Remove link underlines in nav",
+  "author": "Olivia R.",
+  "description": "Removes default underline from navigation links.",
+  "tags": ["links", "navigation", "typography"],
+  "localized": {
+    "es": {
+      "title": "Eliminar subrayado de enlaces en nav",
+      "description": "Elimina subrayado por defecto de enlaces de navegación.",
+      "tags": ["enlaces", "navegación", "tipografía"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/nav.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 5, "content": ".nav-link {", "isNew": true },
+        { "lineNumber": 6, "content": "  text-decoraton: none;", "isNew": true },
+        { "lineNumber": 7, "content": "  color: inherit;", "isNew": true },
+        { "lineNumber": 8, "content": "}", "isNew": true },
+        { "lineNumber": 9, "content": "", "isNew": true },
+        { "lineNumber": 10, "content": ".nav-link:hover {", "isNew": true },
+        { "lineNumber": 11, "content": "  text-decoration: underline;", "isNew": true },
+        { "lineNumber": 12, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [6],
+      "severity": "major",
+      "description": "Typo: 'text-decoraton' should be 'text-decoration'.",
+      "localizedDescription": {
+        "es": "Error: 'text-decoraton' debería ser 'text-decoration'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

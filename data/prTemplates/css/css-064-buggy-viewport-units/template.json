@@ -1,0 +1,41 @@
+{
+  "templateId": "css-064-buggy-viewport-units",
+  "title": "Full-height hero section",
+  "author": "Henry T.",
+  "description": "Creates a full viewport height hero section.",
+  "tags": ["hero", "viewport"],
+  "localized": {
+    "es": {
+      "title": "Sección hero de altura completa",
+      "description": "Crea una sección hero con altura completa del viewport.",
+      "tags": ["hero", "viewport"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/hero.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": ".hero {", "isNew": true },
+        { "lineNumber": 2, "content": "  min-height: 100 vh;", "isNew": true },
+        { "lineNumber": 3, "content": "  display: flex;", "isNew": true },
+        { "lineNumber": 4, "content": "  align-items: center;", "isNew": true },
+        { "lineNumber": 5, "content": "  justify-content: center;", "isNew": true },
+        { "lineNumber": 6, "content": "  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);", "isNew": true },
+        { "lineNumber": 7, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [2],
+      "severity": "major",
+      "description": "Invalid value: '100 vh' has a space, should be '100vh'.",
+      "localizedDescription": {
+        "es": "Valor inválido: '100 vh' tiene un espacio, debería ser '100vh'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

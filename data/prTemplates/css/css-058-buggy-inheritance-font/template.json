@@ -1,0 +1,40 @@
+{
+  "templateId": "css-058-buggy-inheritance-font",
+  "title": "Set global font family",
+  "author": "Kevin L.",
+  "description": "Applies consistent font family across the application.",
+  "tags": ["typography", "fonts"],
+  "localized": {
+    "es": {
+      "title": "Establecer familia de fuente global",
+      "description": "Aplica familia de fuente consistente en toda la aplicación.",
+      "tags": ["tipografía", "fuentes"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/typography.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 1, "content": "body {", "isNew": true },
+        { "lineNumber": 2, "content": "  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;", "isNew": true },
+        { "lineNumber": 3, "content": "  font-size: 16;", "isNew": true },
+        { "lineNumber": 4, "content": "  line-height: 1.5;", "isNew": true },
+        { "lineNumber": 5, "content": "  color: #333;", "isNew": true },
+        { "lineNumber": 6, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [3],
+      "severity": "major",
+      "description": "Missing unit: font-size '16' needs 'px' or other unit.",
+      "localizedDescription": {
+        "es": "Falta unidad: font-size '16' necesita 'px' u otra unidad."
+      }
+    }
+  ],
+  "importance": "normal"
+}
