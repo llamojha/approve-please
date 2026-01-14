@@ -200,6 +200,47 @@ const IndexPage = () => {
               <button
                 type="button"
                 key={value}
+                className={`${
+                  languagePreference.includes(value) ? "active" : ""
+                } ${disabled ? "disabled" : ""}`.trim()}
+                onClick={() => {
+                  if (disabled) {
+                    return;
+                  }
+                  if (
+                    languagePreference.length === 1 &&
+                    languagePreference[0] === value
+                  ) {
+                    return;
+                  }
+                  if (languagePreference.includes(value)) {
+                    setLanguagePreference(
+                      languagePreference.filter(
+                        (preference) => preference !== value
+                      )
+                    );
+                  } else {
+                    setLanguagePreference([...languagePreference, value]);
+                  }
+                }}
+                disabled={disabled}
+              >
+                {languagePreferenceLabels[value] ?? value}
+                {disabled ? ` ${landing.comingSoon}` : ""}
+              </button>
+            ))}
+          </div>
+        </section>
+        <section className="landing__difficulty">
+          <div className="landing__difficulty-header">
+            <small>{landing.difficultyHeader}</small>
+            <span>{landing.difficultySubtitle}</span>
+          </div>
+          <div className="landing__difficulty-options">
+            {DIFFICULTY_OPTIONS.map((value) => (
+              <button
+                type="button"
+                key={value}
                 className={difficulty === value ? "active" : ""}
                 onClick={() => setDifficulty(value)}
               >
