@@ -220,9 +220,9 @@ const GameOverScreen = () => {
           <section className={styles.leaderboardForm}>
             <div>
               <strong>Save this run to the leaderboard</strong>
-              <p className="muted">
+              <p className="muted" style={{ fontSize: "0.85em" }}>
                 Your score: <strong>{finalScore}</strong> (clean approvals +
-                true positives + days played × 5)
+                bugs blocked + days played × 5)
               </p>
             </div>
             <div className={styles.leaderboardControls}>

@@ -119,6 +119,62 @@ export const TRANSLATIONS = {
       difficultyHeader: "Difficulty",
       difficultySubtitle: "Learning mode disables queue penalties.",
       tutorialCta: "HOW TO PLAY",
+      tutorialSlides: [
+        {
+          title: "Pick a PR",
+          description: [
+            "Queue on the left; click to load a PR into the diff.",
+            "Rulebook guides what to watch for.",
+          ],
+          imageAlt: "Queue and PR selection",
+        },
+        {
+          title: "Inspect the Diff",
+          description: [
+            "Scroll the snippet; tag lines by clicking line numbers.",
+            "Use rulebook hints to spot risky code.",
+          ],
+          imageAlt: "Diff view with selected line",
+        },
+        {
+          title: "Approve vs Request Changes",
+          description: [
+            "Approve when clean; request changes for risky diffs.",
+            "Tag the exact line for a satisfaction bonus.",
+          ],
+          imageAlt: "Action buttons for approve and request changes",
+        },
+        {
+          title: "Meters & Consequences",
+          description: [
+            "Stability drops if bugs ship; velocity slows on rejects.",
+            "Good catches and clean approvals boost satisfaction.",
+          ],
+          imageAlt: "Meter HUD showing stability, velocity, satisfaction",
+        },
+        {
+          title: "Day Wrap",
+          description: [
+            "End-of-day summary shows incidents and false positives.",
+            "Advance to the next day or restart if meters tank.",
+          ],
+          imageAlt: "Summary screen with stats",
+        },
+        {
+          title: "Learn from Mistakes",
+          description: [
+            "Review Deployed Bugs at day end to see what slipped.",
+            "Study the culprit lines to avoid repeating them.",
+          ],
+          imageAlt: "Deployed Bugs section highlighting shipped issues",
+        },
+      ],
+      tutorialNav: {
+        prev: "← Prev",
+        next: "Next →",
+        slideOf: (current: number, total: number) =>
+          `Slide ${current} of ${total}`,
+      },
       startCta: "Start Your Day",
       comingSoon: "(soon)",
       languageOptions: languagePreferenceLabels.en,
@@ -314,10 +370,69 @@ export const TRANSLATIONS = {
         },
       },
       languageHeader: "Lenguaje preferido",
-      languageSubtitle: "Elige uno o más. Agrega Genérico para PRs de docs/config.",
+      languageSubtitle:
+        "Elige uno o más. Agrega Genérico para PRs de docs/config.",
       difficultyHeader: "Dificultad",
-      difficultySubtitle: "El modo aprendizaje desactiva las penalizaciones por cola.",
+      difficultySubtitle:
+        "El modo aprendizaje desactiva las penalizaciones por cola.",
       tutorialCta: "Cómo jugar",
+      tutorialSlides: [
+        {
+          title: "Elige un PR",
+          description: [
+            "La cola está a la izquierda; haz clic para cargar un PR en el diff.",
+            "El reglamento te guía sobre qué buscar.",
+          ],
+          imageAlt: "Cola y selección de PR",
+        },
+        {
+          title: "Inspecciona el Diff",
+          description: [
+            "Desplázate por el código; marca líneas haciendo clic en los números.",
+            "Usa las pistas del reglamento para detectar código riesgoso.",
+          ],
+          imageAlt: "Vista de diff con línea seleccionada",
+        },
+        {
+          title: "Aprobar vs Solicitar Cambios",
+          description: [
+            "Aprueba cuando esté limpio; solicita cambios para diffs riesgosos.",
+            "Marca la línea exacta para un bonus de satisfacción.",
+          ],
+          imageAlt: "Botones de acción para aprobar y solicitar cambios",
+        },
+        {
+          title: "Medidores y Consecuencias",
+          description: [
+            "La estabilidad baja si se despliegan bugs; la velocidad baja con rechazos.",
+            "Las buenas capturas y aprobaciones limpias aumentan la satisfacción.",
+          ],
+          imageAlt:
+            "HUD de medidores mostrando estabilidad, velocidad, satisfacción",
+        },
+        {
+          title: "Fin del Día",
+          description: [
+            "El resumen del día muestra incidentes y falsos positivos.",
+            "Avanza al siguiente día o reinicia si los medidores caen.",
+          ],
+          imageAlt: "Pantalla de resumen con estadísticas",
+        },
+        {
+          title: "Aprende de los Errores",
+          description: [
+            "Revisa los Bugs Desplegados al final del día para ver qué se escapó.",
+            "Estudia las líneas culpables para no repetirlos.",
+          ],
+          imageAlt: "Sección de Bugs Desplegados resaltando problemas enviados",
+        },
+      ],
+      tutorialNav: {
+        prev: "← Anterior",
+        next: "Siguiente →",
+        slideOf: (current: number, total: number) =>
+          `Diapositiva ${current} de ${total}`,
+      },
       startCta: "Comienza tu día",
       comingSoon: "(pronto)",
       languageOptions: languagePreferenceLabels.es,
