@@ -1,0 +1,45 @@
+{
+  "templateId": "css-068-buggy-transition-basic",
+  "title": "Add button hover transition",
+  "author": "Nathan R.",
+  "description": "Adds smooth transition effect to button hover states.",
+  "tags": ["transitions", "buttons"],
+  "localized": {
+    "es": {
+      "title": "Agregar transición hover a botones",
+      "description": "Agrega efecto de transición suave a estados hover de botones.",
+      "tags": ["transiciones", "botones"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/buttons.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 20, "content": ".btn {", "isNew": true },
+        { "lineNumber": 21, "content": "  padding: 10px 20px;", "isNew": true },
+        { "lineNumber": 22, "content": "  background: #007bff;", "isNew": true },
+        { "lineNumber": 23, "content": "  color: white;", "isNew": true },
+        { "lineNumber": 24, "content": "  border: none;", "isNew": true },
+        { "lineNumber": 25, "content": "  transiton: background-color 0.2s ease;", "isNew": true },
+        { "lineNumber": 26, "content": "}", "isNew": true },
+        { "lineNumber": 27, "content": "", "isNew": true },
+        { "lineNumber": 28, "content": ".btn:hover {", "isNew": true },
+        { "lineNumber": 29, "content": "  background: #0056b3;", "isNew": true },
+        { "lineNumber": 30, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [25],
+      "severity": "major",
+      "description": "Typo: 'transiton' should be 'transition'.",
+      "localizedDescription": {
+        "es": "Error: 'transiton' debería ser 'transition'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

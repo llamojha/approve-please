@@ -34,64 +34,22 @@ const IndexPage = () => {
     actions: { setLanguagePreference, setDifficulty },
   } = useGameState();
 
+  const imageSrcs = [
+    "/tutorial-slide-1-placeholder.png",
+    "/tutorial-slide-2-placeholder.png",
+    "/tutorial-slide-3-placeholder.png",
+    "/tutorial-slide-4-placeholder.png",
+    "/tutorial-slide-5-placeholder.png",
+    "/tutorial-slide-6-placeholder.png",
+  ];
+
   const tutorialSlides = useMemo(
-    () => [
-      {
-        title: "Pick a PR",
-        description: [
-          "Queue on the left; click to load a PR into the diff.",
-          "Rulebook guides what to watch for.",
-        ],
-        imageAlt: "Queue and PR selection",
-        imageSrc: "/tutorial-slide-1-placeholder.png",
-      },
-      {
-        title: "Inspect the Diff",
-        description: [
-          "Scroll the snippet; tag lines by clicking line numbers.",
-          "Use rulebook hints to spot risky code.",
-        ],
-        imageAlt: "Diff view with selected line",
-        imageSrc: "/tutorial-slide-2-placeholder.png",
-      },
-      {
-        title: "Approve vs Request Changes",
-        description: [
-          "Approve when clean; request changes for risky diffs.",
-          "Tag the exact line for a satisfaction bonus.",
-        ],
-        imageAlt: "Action buttons for approve and request changes",
-        imageSrc: "/tutorial-slide-3-placeholder.png",
-      },
-      {
-        title: "Meters & Consequences",
-        description: [
-          "Stability drops if bugs ship; velocity slows on rejects.",
-          "Good catches and clean approvals boost satisfaction.",
-        ],
-        imageAlt: "Meter HUD showing stability, velocity, satisfaction",
-        imageSrc: "/tutorial-slide-4-placeholder.png",
-      },
-      {
-        title: "Day Wrap",
-        description: [
-          "End-of-day summary shows incidents and false positives.",
-          "Advance to the next day or restart if meters tank.",
-        ],
-        imageAlt: "Summary screen after a workday",
-        imageSrc: "/tutorial-slide-5-placeholder.png",
-      },
-      {
-        title: "Learn from Mistakes",
-        description: [
-          "Review Deployed Bugs at day end to see what slipped.",
-          "Study the culprit lines to avoid repeating them.",
-        ],
-        imageAlt: "Deployed Bugs section highlighting shipped issues",
-        imageSrc: "/tutorial-slide-6-placeholder.png",
-      },
-    ],
-    []
+    () =>
+      landing.tutorialSlides?.map((slide, idx) => ({
+        ...slide,
+        imageSrc: imageSrcs[idx] ?? "",
+      })) ?? [],
+    [landing.tutorialSlides]
   );
 
   const [isTutorialOpen, setTutorialOpen] = useState(false);
@@ -159,42 +117,46 @@ const IndexPage = () => {
         <section className="landing__language">
           <div className="landing__language-header">
             <small>{landing.languageHeader}</small>
-            <span>{landing.languageSubtitle}</span>
+            <span>{languagePreference.length} selected</span>
           </div>
+          <p className="landing__language-hint">
+            PRs will include code from selected languages
+          </p>
           <div className="landing__language-options">
-            {LANGUAGE_OPTIONS.map(({ value, disabled }) => (
-              <button
-                type="button"
-                key={value}
-                className={`${
-                  languagePreference.includes(value) ? "active" : ""
-                } ${disabled ? "disabled" : ""}`.trim()}
-                onClick={() => {
-                  if (disabled) {
-                    return;
+            {LANGUAGE_OPTIONS.map(({ value, disabled }) => {
+              const isSelected = languagePreference.includes(value);
+              const isLastSelected =
+                languagePreference.length === 1 && isSelected;
+              return (
+                <button
+                  type="button"
+                  key={value}
+                  className={`${isSelected ? "active" : ""} ${
+                    disabled ? "disabled" : ""
+                  }`.trim()}
+                  onClick={() => {
+                    if (disabled || isLastSelected) return;
+                    if (isSelected) {
+                      setLanguagePreference(
+                        languagePreference.filter((p) => p !== value)
+                      );
+                    } else {
+                      setLanguagePreference([...languagePreference, value]);
+                    }
+                  }}
+                  disabled={disabled}
+                  aria-pressed={isSelected}
+                  title={
+                    isLastSelected
+                      ? "At least one language required"
+                      : undefined
                   }
-                  if (
-                    languagePreference.length === 1 &&
-                    languagePreference[0] === value
-                  ) {
-                    return;
-                  }
-                  if (languagePreference.includes(value)) {
-                    setLanguagePreference(
-                      languagePreference.filter(
-                        (preference) => preference !== value
-                      )
-                    );
-                  } else {
-                    setLanguagePreference([...languagePreference, value]);
-                  }
-                }}
-                disabled={disabled}
-              >
-                {languagePreferenceLabels[value] ?? value}
-                {disabled ? ` ${landing.comingSoon}` : ""}
-              </button>
-            ))}
+                >
+                  {languagePreferenceLabels[value] ?? value}
+                  {disabled ? ` ${landing.comingSoon}` : ""}
+                </button>
+              );
+            })}
           </div>
         </section>
         <section className="landing__difficulty">
@@ -210,7 +172,7 @@ const IndexPage = () => {
                 className={difficulty === value ? "active" : ""}
                 onClick={() => setDifficulty(value)}
               >
-                {landing.difficultyOptions[value] ?? value}
+                {landing.difficultyOptions?.[value] ?? value}
               </button>
             ))}
           </div>
@@ -286,7 +248,10 @@ const IndexPage = () => {
               </div>
               <div className="tutorial__text">
                 <p className="tutorial__eyebrow">
-                  Slide {slideIndex + 1} of {tutorialSlides.length}
+                  {landing.tutorialNav?.slideOf(
+                    slideIndex + 1,
+                    tutorialSlides.length
+                  )}
                 </p>
                 <h3>{tutorialSlides[slideIndex].title}</h3>
                 <ul>
@@ -302,7 +267,7 @@ const IndexPage = () => {
                 onClick={prevSlide}
                 className="tutorial__nav"
               >
-                ← Prev
+                {landing.tutorialNav?.prev}
               </button>
               <div className="tutorial__dots" aria-hidden="true">
                 {tutorialSlides.map((_, idx) => (
@@ -319,7 +284,7 @@ const IndexPage = () => {
                 onClick={nextSlide}
                 className="tutorial__nav"
               >
-                Next →
+                {landing.tutorialNav?.next}
               </button>
             </div>
           </div>
@@ -507,6 +472,11 @@ const IndexPage = () => {
         .landing__language-header span {
           color: #cbd5f5;
           font-size: 0.85rem;
+        }
+        .landing__language-hint {
+          margin: 0 0 0.75rem;
+          font-size: 0.8rem;
+          color: #94a3b8;
         }
         .landing__language-options {
           display: flex;

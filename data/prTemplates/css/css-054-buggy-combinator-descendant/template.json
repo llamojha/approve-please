@@ -1,0 +1,43 @@
+{
+  "templateId": "css-054-buggy-combinator-descendant",
+  "title": "Style nested list items",
+  "author": "Elena M.",
+  "description": "Applies different styling to nested list items in sidebar.",
+  "tags": ["lists", "sidebar"],
+  "localized": {
+    "es": {
+      "title": "Estilizar elementos de lista anidados",
+      "description": "Aplica estilos diferentes a elementos de lista anidados en la barra lateral.",
+      "tags": ["listas", "barra lateral"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/sidebar.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 20, "content": ".sidebar ul li {", "isNew": true },
+        { "lineNumber": 21, "content": "  padding: 8px 12px;", "isNew": true },
+        { "lineNumber": 22, "content": "  border-bottom: 1px solid #eee;", "isNew": true },
+        { "lineNumber": 23, "content": "}", "isNew": true },
+        { "lineNumber": 24, "content": "", "isNew": true },
+        { "lineNumber": 25, "content": ".sidebar ul ul li {", "isNew": true },
+        { "lineNumber": 26, "content": "  padding-left: 24px;", "isNew": true },
+        { "lineNumber": 27, "content": "  font-siz: 0.9em;", "isNew": true },
+        { "lineNumber": 28, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [27],
+      "severity": "major",
+      "description": "Typo: 'font-siz' should be 'font-size'.",
+      "localizedDescription": {
+        "es": "Error: 'font-siz' debería ser 'font-size'."
+      }
+    }
+  ],
+  "importance": "normal"
+}

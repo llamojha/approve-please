@@ -34,7 +34,7 @@
   ],
   "bugPatterns": [
     {
-      "kind": "security",
+      "kind": "accessibility",
       "lineNumbers": [32],
       "severity": "major",
       "description": "Color contrast ratio too low (#d0d0d0 on #f0f0f0). Fails WCAG accessibility guidelines.",

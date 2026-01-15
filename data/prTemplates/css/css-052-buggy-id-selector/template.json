@@ -1,0 +1,39 @@
+{
+  "templateId": "css-052-buggy-id-selector",
+  "title": "Style main content area",
+  "author": "Priya S.",
+  "description": "Applies padding and max-width to the main content container.",
+  "tags": ["layout", "spacing"],
+  "localized": {
+    "es": {
+      "title": "Estilizar área de contenido principal",
+      "description": "Aplica padding y max-width al contenedor de contenido principal.",
+      "tags": ["layout", "espaciado"]
+    }
+  },
+  "files": [
+    {
+      "filename": "styles/main.css",
+      "language": "css",
+      "lines": [
+        { "lineNumber": 5, "content": "#main-content {", "isNew": true },
+        { "lineNumber": 6, "content": "  max-width: 1200;", "isNew": true },
+        { "lineNumber": 7, "content": "  margin: 0 auto;", "isNew": true },
+        { "lineNumber": 8, "content": "  padding: 20px;", "isNew": true },
+        { "lineNumber": 9, "content": "}", "isNew": true }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [6],
+      "severity": "major",
+      "description": "Missing unit: '1200' needs a unit like 'px' to work.",
+      "localizedDescription": {
+        "es": "Falta unidad: '1200' necesita una unidad como 'px' para funcionar."
+      }
+    }
+  ],
+  "importance": "normal"
+}

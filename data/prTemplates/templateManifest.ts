@@ -50,6 +50,36 @@ import tpl_css_047_flexbox_shrink_bug from './css/css-047-flexbox-shrink-bug/tem
 import tpl_css_048_clamp_responsive_font from './css/css-048-clamp-responsive-font/template.json';
 import tpl_css_049_aspect_ratio from './css/css-049-aspect-ratio/template.json';
 import tpl_css_050_scroll_behavior from './css/css-050-scroll-behavior/template.json';
+import tpl_css_051_buggy_basic_color_styling from './css/css-051-buggy-basic-color-styling/template.json';
+import tpl_css_052_buggy_id_selector from './css/css-052-buggy-id-selector/template.json';
+import tpl_css_053_buggy_pseudo_class_first_child from './css/css-053-buggy-pseudo-class-first-child/template.json';
+import tpl_css_054_buggy_combinator_descendant from './css/css-054-buggy-combinator-descendant/template.json';
+import tpl_css_055_buggy_box_model_padding from './css/css-055-buggy-box-model-padding/template.json';
+import tpl_css_056_buggy_margin_auto_centering from './css/css-056-buggy-margin-auto-centering/template.json';
+import tpl_css_057_buggy_box_sizing_border_box from './css/css-057-buggy-box-sizing-border-box/template.json';
+import tpl_css_058_buggy_inheritance_font from './css/css-058-buggy-inheritance-font/template.json';
+import tpl_css_059_buggy_display_block_inline from './css/css-059-buggy-display-block-inline/template.json';
+import tpl_css_060_buggy_position_relative from './css/css-060-buggy-position-relative/template.json';
+import tpl_css_061_buggy_position_fixed_header from './css/css-061-buggy-position-fixed-header/template.json';
+import tpl_css_062_buggy_media_query_breakpoint from './css/css-062-buggy-media-query-breakpoint/template.json';
+import tpl_css_063_buggy_relative_units_rem from './css/css-063-buggy-relative-units-rem/template.json';
+import tpl_css_064_buggy_viewport_units from './css/css-064-buggy-viewport-units/template.json';
+import tpl_css_065_buggy_percentage_width from './css/css-065-buggy-percentage-width/template.json';
+import tpl_css_066_buggy_css_variable_definition from './css/css-066-buggy-css-variable-definition/template.json';
+import tpl_css_067_buggy_css_variable_usage from './css/css-067-buggy-css-variable-usage/template.json';
+import tpl_css_068_buggy_transition_basic from './css/css-068-buggy-transition-basic/template.json';
+import tpl_css_069_buggy_bem_naming from './css/css-069-buggy-bem-naming/template.json';
+import tpl_css_070_buggy_flexbox_gap from './css/css-070-buggy-flexbox-gap/template.json';
+import tpl_css_071_buggy_grid_layout from './css/css-071-buggy-grid-layout/template.json';
+import tpl_css_072_buggy_clamp_responsive_font from './css/css-072-buggy-clamp-responsive-font/template.json';
+import tpl_css_073_buggy_aspect_ratio from './css/css-073-buggy-aspect-ratio/template.json';
+import tpl_css_074_buggy_scroll_behavior from './css/css-074-buggy-scroll-behavior/template.json';
+import tpl_css_075_buggy_opacity_hover from './css/css-075-buggy-opacity-hover/template.json';
+import tpl_css_076_buggy_cursor_pointer from './css/css-076-buggy-cursor-pointer/template.json';
+import tpl_css_077_buggy_text_decoration from './css/css-077-buggy-text-decoration/template.json';
+import tpl_css_078_buggy_border_radius from './css/css-078-buggy-border-radius/template.json';
+import tpl_css_079_buggy_box_shadow from './css/css-079-buggy-box-shadow/template.json';
+import tpl_css_080_buggy_transform from './css/css-080-buggy-transform/template.json';
 import tpl_pr_000_onboarding_readme_update from './generic/pr-000-onboarding-readme/template.json';
 import tpl_pr_001_document_usage_analytics_runbook from './generic/pr-001-document-usage-analytics-runbook/template.json';
 import tpl_pr_001_sanitize_readme_api_key from './generic/pr-001-sanitize-readme-api-key/template.json';
@@ -63,7 +93,7 @@ import tpl_pr_040_document_report_export_runbook from './generic/pr-040-document
 import tpl_pr_043_document_api_gateway_runbook from './generic/pr-043-document-api-gateway-runbook/template.json';
 import tpl_pr_052_alert_for_cron_orchestrator_latency from './generic/pr-052-alert-for-cron-orchestrator-latency/template.json';
 import tpl_pr_055_document_notification_center_runbook from './generic/pr-055-document-notification-center-runbook/template.json';
-import tpl_pr_071_document_schema_diff_runbook from './generic/pr-071-document-schema-diff-runbook/template.json';
+import tpl_pr_071_document_incident_escalation_runbook from './generic/pr-071-document-incident-escalation-runbook/template.json';
 import tpl_pr_074_alert_for_device_heartbeat_latency from './generic/pr-074-alert-for-device-heartbeat-latency/template.json';
 import tpl_pr_078_alert_for_warranty_center_latency from './generic/pr-078-alert-for-warranty-center-latency/template.json';
 import tpl_pr_091_alert_for_gremlin_mitigation_latency from './generic/pr-091-alert-for-gremlin-mitigation-latency/template.json';
@@ -362,6 +392,36 @@ export const templateManifest = [
   tpl_css_048_clamp_responsive_font,
   tpl_css_049_aspect_ratio,
   tpl_css_050_scroll_behavior,
+  tpl_css_051_buggy_basic_color_styling,
+  tpl_css_052_buggy_id_selector,
+  tpl_css_053_buggy_pseudo_class_first_child,
+  tpl_css_054_buggy_combinator_descendant,
+  tpl_css_055_buggy_box_model_padding,
+  tpl_css_056_buggy_margin_auto_centering,
+  tpl_css_057_buggy_box_sizing_border_box,
+  tpl_css_058_buggy_inheritance_font,
+  tpl_css_059_buggy_display_block_inline,
+  tpl_css_060_buggy_position_relative,
+  tpl_css_061_buggy_position_fixed_header,
+  tpl_css_062_buggy_media_query_breakpoint,
+  tpl_css_063_buggy_relative_units_rem,
+  tpl_css_064_buggy_viewport_units,
+  tpl_css_065_buggy_percentage_width,
+  tpl_css_066_buggy_css_variable_definition,
+  tpl_css_067_buggy_css_variable_usage,
+  tpl_css_068_buggy_transition_basic,
+  tpl_css_069_buggy_bem_naming,
+  tpl_css_070_buggy_flexbox_gap,
+  tpl_css_071_buggy_grid_layout,
+  tpl_css_072_buggy_clamp_responsive_font,
+  tpl_css_073_buggy_aspect_ratio,
+  tpl_css_074_buggy_scroll_behavior,
+  tpl_css_075_buggy_opacity_hover,
+  tpl_css_076_buggy_cursor_pointer,
+  tpl_css_077_buggy_text_decoration,
+  tpl_css_078_buggy_border_radius,
+  tpl_css_079_buggy_box_shadow,
+  tpl_css_080_buggy_transform,
   tpl_pr_000_onboarding_readme_update,
   tpl_pr_001_document_usage_analytics_runbook,
   tpl_pr_001_sanitize_readme_api_key,
@@ -375,7 +435,7 @@ export const templateManifest = [
   tpl_pr_043_document_api_gateway_runbook,
   tpl_pr_052_alert_for_cron_orchestrator_latency,
   tpl_pr_055_document_notification_center_runbook,
-  tpl_pr_071_document_schema_diff_runbook,
+  tpl_pr_071_document_incident_escalation_runbook,
   tpl_pr_074_alert_for_device_heartbeat_latency,
   tpl_pr_078_alert_for_warranty_center_latency,
   tpl_pr_091_alert_for_gremlin_mitigation_latency,

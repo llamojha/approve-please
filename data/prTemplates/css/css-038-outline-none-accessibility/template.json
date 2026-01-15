@@ -24,7 +24,7 @@
   ],
   "bugPatterns": [
     {
-      "kind": "security",
+      "kind": "accessibility",
       "lineNumbers": [16],
       "severity": "critical",
       "description": "Removing focus outline without replacement breaks keyboard accessibility. Add alternative focus indicator.",
