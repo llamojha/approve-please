@@ -1,0 +1,40 @@
+{
+  "templateId": "js-021-invalid-typeof-assignment",
+  "title": "Invalid typeof assignment",
+  "author": "Nora I.",
+  "description": "Adds type normalization branch before enqueue.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/queue/type-normalizer.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 41,
+          "content": "  typeof = getType(payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "  return payload;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        41
+      ],
+      "severity": "major",
+      "description": "Attempts to assign to typeof, causing a syntax error."
+    }
+  ]
+}

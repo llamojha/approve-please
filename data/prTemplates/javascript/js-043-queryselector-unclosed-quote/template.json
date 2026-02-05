@@ -1,0 +1,40 @@
+{
+  "templateId": "js-043-queryselector-unclosed-quote",
+  "title": "querySelector selector string unclosed",
+  "author": "Nora I.",
+  "description": "Adds save button lookup for click wiring.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/dom/save-button.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 31,
+          "content": "  const button = document.querySelector('.save-button);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 32,
+          "content": "  return button;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        31
+      ],
+      "severity": "major",
+      "description": "Selector string is unclosed, causing a syntax error."
+    }
+  ]
+}

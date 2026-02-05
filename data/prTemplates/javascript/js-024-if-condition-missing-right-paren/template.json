@@ -1,0 +1,45 @@
+{
+  "templateId": "js-024-if-condition-missing-right-paren",
+  "title": "If condition missing right parenthesis",
+  "author": "Nora I.",
+  "description": "Adds ready-state gate for worker startup.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/workers/startup-gate.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 32,
+          "content": "  if (status === 'ready' {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 33,
+          "content": "    bootWorker();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 34,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        32
+      ],
+      "severity": "major",
+      "description": "If condition is missing a closing parenthesis, causing a syntax error."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "templateId": "js-041-console-log-unclosed-parenthesis",
+  "title": "Console log missing closing parenthesis",
+  "author": "Nora I.",
+  "description": "Adds startup logging for queue workers.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/logging/startup-log.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 3,
+          "content": "  console.log('queue ready';",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        3
+      ],
+      "severity": "major",
+      "description": "console.log call is missing a closing parenthesis, causing syntax error."
+    }
+  ]
+}

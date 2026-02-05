@@ -1,0 +1,40 @@
+{
+  "templateId": "js-017-unclosed-string-literal",
+  "title": "Unclosed string in status message",
+  "author": "Nora I.",
+  "description": "Adds a new queue pause status message.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/alerts/status-message.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 44,
+          "content": "  const message = 'Queue paused for deploy;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "  return message;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        44
+      ],
+      "severity": "major",
+      "description": "String literal is not closed, causing a syntax error."
+    }
+  ]
+}

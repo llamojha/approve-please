@@ -1,0 +1,35 @@
+{
+  "templateId": "js-046-addeventlistener-callback-unclosed-brace",
+  "title": "addEventListener callback missing closing brace",
+  "author": "Nora I.",
+  "description": "Adds inline callback for save action.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/dom/save-listener.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 27,
+          "content": "  button.addEventListener('click', (event) => { submit(event); );",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        27
+      ],
+      "severity": "major",
+      "description": "Inline callback body is unclosed, causing syntax error."
+    }
+  ]
+}

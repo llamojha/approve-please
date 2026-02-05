@@ -1,0 +1,55 @@
+{
+  "templateId": "js-012-style-sloppy",
+  "title": "Observability toggles",
+  "author": "Jess F.",
+  "description": "Adds quick toggle for verbose logging.",
+  "tags": [
+    "devex"
+  ],
+  "localized": {
+    "es": {
+      "title": "Toggles de observabilidad",
+      "description": "Agrega un toggle r\u00e1pido para logging verboso.",
+      "tags": [
+        "devex"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/logger/index.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 5,
+          "content": "  let verbose = false;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "  // TODO: remove before GA",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "  export const setVerbose = (value) => { verbose = value; };",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        12
+      ],
+      "severity": "minor",
+      "description": "Obvious TODO left in production file.",
+      "localizedDescription": {
+        "es": "Qued\u00f3 un TODO evidente en un archivo de producci\u00f3n."
+      }
+    }
+  ],
+  "importance": "low"
+}

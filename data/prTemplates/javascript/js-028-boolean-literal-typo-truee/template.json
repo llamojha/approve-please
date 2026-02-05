@@ -1,0 +1,45 @@
+{
+  "templateId": "js-028-boolean-literal-typo-truee",
+  "title": "Boolean literal typo truee",
+  "author": "Nora I.",
+  "description": "Adds static feature gate for emergency mode.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/flags/emergency-mode.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 11,
+          "content": "  if (truee) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "    enableEmergencyMode();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        11
+      ],
+      "severity": "major",
+      "description": "Uses truee instead of true, causing a ReferenceError at runtime."
+    }
+  ]
+}

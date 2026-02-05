@@ -1,0 +1,40 @@
+{
+  "templateId": "js-037-arrow-function-missing-fat-arrow",
+  "title": "Arrow function missing fat arrow",
+  "author": "Nora I.",
+  "description": "Adds helper to sum backlog counters.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/backlog/sum-counters.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 16,
+          "content": "  const sum = (a, b) { return a + b; };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 17,
+          "content": "  return sum(2, 3);",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        16
+      ],
+      "severity": "major",
+      "description": "Arrow function is missing =>, causing a syntax error."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "templateId": "js-008-logic-boundary-check",
+  "title": "Invoice grace period fix",
+  "author": "Amira V.",
+  "description": "Allow invoices within a small grace window before alerting finance.",
+  "tags": [
+    "bugfix",
+    "billing"
+  ],
+  "localized": {
+    "es": {
+      "title": "Fix del per\u00edodo de gracia de facturas",
+      "description": "Permite facturas dentro de una peque\u00f1a ventana de gracia antes de alertar a finanzas.",
+      "tags": [
+        "correcci\u00f3n",
+        "billing"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/lib/invoice.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 42,
+          "content": "  if (daysPastDue > graceDays) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 43,
+          "content": "    return sendCollectionsNotice(invoice);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 44,
+          "content": "  }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 45,
+          "content": "  return waitForPayment(invoice);",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        42
+      ],
+      "severity": "major",
+      "description": "Should be >= to include final allowed day.",
+      "localizedDescription": {
+        "es": "Debe ser >= para incluir el \u00faltimo d\u00eda permitido."
+      }
+    }
+  ],
+  "importance": "normal"
+}

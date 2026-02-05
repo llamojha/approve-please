@@ -1,0 +1,45 @@
+{
+  "templateId": "js-034-while-condition-unclosed-parenthesis",
+  "title": "While condition unclosed parenthesis",
+  "author": "Nora I.",
+  "description": "Adds polling loop for status updates.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/polling/status-loop.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 20,
+          "content": "  while (hasNext( {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 21,
+          "content": "    pullNext();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        20
+      ],
+      "severity": "major",
+      "description": "While condition is malformed and missing parenthesis, causing syntax error."
+    }
+  ]
+}

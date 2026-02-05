@@ -1,0 +1,40 @@
+{
+  "templateId": "js-018-template-literal-missing-brace",
+  "title": "Template literal missing closing brace",
+  "author": "Nora I.",
+  "description": "Adds queue label formatting for the workboard.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/ui/queue-label.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 18,
+          "content": "  const label = `${ticket.id}-${ticket.state`;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "  return label;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        18
+      ],
+      "severity": "major",
+      "description": "Template literal interpolation is missing a closing brace, causing a syntax error."
+    }
+  ]
+}

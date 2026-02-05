@@ -1,0 +1,45 @@
+{
+  "templateId": "js-032-for-header-missing-semicolon",
+  "title": "For loop header missing semicolon",
+  "author": "Nora I.",
+  "description": "Adds pass over queue items for warmup.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/warmup/queue-pass.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 13,
+          "content": "  for (let i = 0 i < items.length; i++) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 14,
+          "content": "    process(items[i]);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        13
+      ],
+      "severity": "major",
+      "description": "For loop header is missing a semicolon, causing a syntax error."
+    }
+  ]
+}

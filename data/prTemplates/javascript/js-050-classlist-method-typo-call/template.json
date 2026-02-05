@@ -1,0 +1,40 @@
+{
+  "templateId": "js-050-classlist-method-typo-call",
+  "title": "classList method typo call",
+  "author": "Nora I.",
+  "description": "Adds active class toggling for status chips.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/dom/status-chip.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 30,
+          "content": "  const element = { classList: { add() {} } };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "  element.classList.toggel('active');",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        31
+      ],
+      "severity": "major",
+      "description": "Calls misspelled classList method toggel, causing TypeError at runtime."
+    }
+  ]
+}

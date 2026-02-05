@@ -1,0 +1,40 @@
+{
+  "templateId": "js-022-invalid-numeric-literal",
+  "title": "Invalid numeric literal format",
+  "author": "Nora I.",
+  "description": "Adds throttling delay constant for retry logic.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/retry/throttle-delay.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "  const delayMs = 1__000;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "  return delayMs;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        14
+      ],
+      "severity": "major",
+      "description": "Numeric literal uses invalid separator placement, causing a syntax error."
+    }
+  ]
+}

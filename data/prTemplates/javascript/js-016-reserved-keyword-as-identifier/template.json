@@ -1,0 +1,40 @@
+{
+  "templateId": "js-016-reserved-keyword-as-identifier",
+  "title": "Reserved keyword used as identifier",
+  "author": "Nora I.",
+  "description": "Adds classification state for customer tier routing.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/routing/tier-state.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 12,
+          "content": "  const class = 'priority';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 13,
+          "content": "  return class;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        12
+      ],
+      "severity": "major",
+      "description": "Uses reserved keyword class as a variable name, causing a syntax error."
+    }
+  ]
+}

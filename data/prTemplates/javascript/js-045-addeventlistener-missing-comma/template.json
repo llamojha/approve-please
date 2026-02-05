@@ -1,0 +1,35 @@
+{
+  "templateId": "js-045-addeventlistener-missing-comma",
+  "title": "addEventListener missing comma",
+  "author": "Nora I.",
+  "description": "Adds submit click listener for primary button.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/dom/submit-listener.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 24,
+          "content": "  button.addEventListener('click' handleSubmit);",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        24
+      ],
+      "severity": "major",
+      "description": "addEventListener arguments are missing a comma, causing syntax error."
+    }
+  ]
+}

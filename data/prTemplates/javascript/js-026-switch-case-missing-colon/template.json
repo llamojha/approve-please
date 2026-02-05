@@ -1,0 +1,60 @@
+{
+  "templateId": "js-026-switch-case-missing-colon",
+  "title": "Switch case missing colon",
+  "author": "Nora I.",
+  "description": "Adds response mapping for priority tiers.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/routing/tier-mapper.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 47,
+          "content": "  switch (tier) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 48,
+          "content": "    case 'pro'",
+          "isNew": true
+        },
+        {
+          "lineNumber": 49,
+          "content": "      return 5;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 50,
+          "content": "    default:",
+          "isNew": true
+        },
+        {
+          "lineNumber": 51,
+          "content": "      return 1;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 52,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        48
+      ],
+      "severity": "major",
+      "description": "Switch case label is missing a colon, causing a syntax error."
+    }
+  ]
+}

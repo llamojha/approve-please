@@ -1,0 +1,40 @@
+{
+  "templateId": "js-049-preventdefault-typo-call",
+  "title": "preventDefault typo call",
+  "author": "Nora I.",
+  "description": "Adds form submit guard in click handler.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/dom/prevent-submit.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "  const event = { preventDefault: () => {} };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "  event.preventDefualt();",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        23
+      ],
+      "severity": "major",
+      "description": "Misspells preventDefault as preventDefualt, causing TypeError at runtime."
+    }
+  ]
+}

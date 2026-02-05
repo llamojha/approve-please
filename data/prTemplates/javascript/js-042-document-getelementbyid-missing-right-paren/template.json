@@ -1,0 +1,40 @@
+{
+  "templateId": "js-042-document-getelementbyid-missing-right-paren",
+  "title": "getElementById call missing right parenthesis",
+  "author": "Nora I.",
+  "description": "Adds form lookup for settings submission.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/dom/settings-form.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 19,
+          "content": "  const form = document.getElementById('settings-form';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 20,
+          "content": "  return form;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        19
+      ],
+      "severity": "major",
+      "description": "DOM query call is missing a closing parenthesis, causing syntax error."
+    }
+  ]
+}
