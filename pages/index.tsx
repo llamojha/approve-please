@@ -14,6 +14,7 @@ interface LanguageOption {
 const LANGUAGE_OPTIONS: LanguageOption[] = [
   { value: "generic" },
   { value: "typescript" },
+  { value: "javascript" },
   { value: "python" },
   { value: "java" },
   { value: "rust" },

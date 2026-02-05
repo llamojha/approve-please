@@ -1,0 +1,61 @@
+{
+  "templateId": "js-013-tests-mandatory",
+  "title": "Feature flag cleanup",
+  "author": "Devon P.",
+  "description": "Removes an old feature flag that is on for everyone.",
+  "tags": [
+    "cleanup"
+  ],
+  "localized": {
+    "es": {
+      "title": "Cleanup de feature flags",
+      "description": "Remueve un feature flag viejo que ya est\u00e1 habilitado para todos.",
+      "tags": [
+        "limpieza"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/flags/flagRegistry.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 12,
+          "content": "  export const ACTIVE_FLAGS = ['atlas', 'phoenix'];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 19,
+          "content": "  // TODO: delete tests once QA signs off",
+          "isNew": true
+        }
+      ]
+    },
+    {
+      "filename": "tests/flags/flagRegistry.test.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 4,
+          "content": "  test('atlas flag', () => { expect(true).toBe(true); });",
+          "isNew": false
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        19
+      ],
+      "severity": "minor",
+      "description": "No new tests or justification provided.",
+      "localizedDescription": {
+        "es": "No se agregaron tests nuevos ni se explic\u00f3 la ausencia."
+      }
+    }
+  ],
+  "importance": "low"
+}

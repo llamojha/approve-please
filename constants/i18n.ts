@@ -59,6 +59,7 @@ const languagePreferenceLabels: Record<Locale, Record<string, string>> = {
   en: {
     generic: "Generic",
     typescript: "TypeScript",
+    javascript: "JavaScript",
     python: "Python",
     java: "Java",
     rust: "Rust",
@@ -67,6 +68,7 @@ const languagePreferenceLabels: Record<Locale, Record<string, string>> = {
   es: {
     generic: "Genérico",
     typescript: "TypeScript",
+    javascript: "JavaScript",
     python: "Python",
     java: "Java",
     rust: "Rust",

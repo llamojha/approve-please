@@ -1,0 +1,79 @@
+{
+  "templateId": "js-002-trigger-predicate-for-warranty-center",
+  "title": "Trigger predicate for Warranty Center",
+  "author": "Marina V.",
+  "description": "Adds a conditional helper that determines whether jobs should run.",
+  "tags": [
+    "bugfix",
+    "feature",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Predicado de trigger para Warranty Center",
+      "description": "Agrega un helper condicional que decide si corren los jobs.",
+      "tags": [
+        "correcci\u00f3n",
+        "funcionalidad",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rules/warranty-center.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 80,
+          "content": "  export function shouldTriggerWarrantyCenter(payload) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 81,
+          "content": "    if (payload.status = 'ready') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 82,
+          "content": "      return true;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 83,
+          "content": "    }",
+          "isNew": true
+        },
+        {
+          "lineNumber": 84,
+          "content": "  ",
+          "isNew": true
+        },
+        {
+          "lineNumber": 85,
+          "content": "    return payload.retryCount > 0;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 86,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        81
+      ],
+      "severity": "major",
+      "description": "Condition uses assignment instead of comparison, mutating payload.status.",
+      "localizedDescription": {
+        "es": "La condici\u00f3n usa asignaci\u00f3n en lugar de comparaci\u00f3n y modifica payload.status."
+      }
+    }
+  ]
+}

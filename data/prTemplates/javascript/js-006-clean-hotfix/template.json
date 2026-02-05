@@ -1,0 +1,58 @@
+{
+  "templateId": "js-006-clean-hotfix",
+  "title": "Crash guard for CSV importer",
+  "author": "Zoe L.",
+  "description": "Adds try/catch and good telemetry. Fully tested.",
+  "tags": [
+    "hotfix"
+  ],
+  "localized": {
+    "es": {
+      "title": "Crash guard para el importador CSV",
+      "description": "Agrega try/catch y buena telemetr\u00eda. Completamente testeado.",
+      "tags": [
+        "hotfix"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/importer/csv.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 101,
+          "content": "  try {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 102,
+          "content": "    return parseCsv(payload);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 103,
+          "content": "  } catch (err) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 104,
+          "content": "    captureException(err);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 105,
+          "content": "    throw err;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 106,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

@@ -1,0 +1,35 @@
+{
+  "templateId": "js-047-removeeventlistener-missing-right-paren",
+  "title": "removeEventListener missing right parenthesis",
+  "author": "Nora I.",
+  "description": "Adds cleanup hook for stale click handlers.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/dom/listener-cleanup.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 38,
+          "content": "  button.removeEventListener('click', onClick;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        38
+      ],
+      "severity": "major",
+      "description": "removeEventListener call is missing a closing parenthesis, causing syntax error."
+    }
+  ]
+}

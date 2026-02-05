@@ -1,0 +1,59 @@
+{
+  "templateId": "js-004-scaffold-tests-for-chat-escalation",
+  "title": "Scaffold tests for Chat Escalation",
+  "author": "Brielle S.",
+  "description": "Drops a placeholder spec awaiting follow-up coverage.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "tests"
+  ],
+  "localized": {
+    "es": {
+      "title": "Prepara tests para Chat Escalation",
+      "description": "Agrega un spec placeholder a la espera de cobertura posterior.",
+      "tags": [
+        "correcci\u00f3n",
+        "limpieza",
+        "pruebas"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "tests/chat-escalation.test.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 10,
+          "content": "  describe('Chat Escalation flows', () => {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 11,
+          "content": "    test.todo('add regression coverage for chat-escalation state machine');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 12,
+          "content": "  });",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        11
+      ],
+      "severity": "minor",
+      "description": "File only contains test.todo and no actual assertions.",
+      "localizedDescription": {
+        "es": "El archivo solo tiene test.todo y no incluye aserciones reales."
+      }
+    }
+  ]
+}

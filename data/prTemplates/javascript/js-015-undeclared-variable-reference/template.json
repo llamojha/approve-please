@@ -1,0 +1,40 @@
+{
+  "templateId": "js-015-undeclared-variable-reference",
+  "title": "Undeclared variable reference in total formatter",
+  "author": "Nora I.",
+  "description": "Adds formatting for invoice totals before dispatch.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/billing/total-formatter.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 34,
+          "content": "  const totalPice = 100 + 20;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 35,
+          "content": "  console.log(totalPrice.toFixed(2));",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        35
+      ],
+      "severity": "major",
+      "description": "References totalPrice which is never declared, causing a ReferenceError."
+    }
+  ]
+}

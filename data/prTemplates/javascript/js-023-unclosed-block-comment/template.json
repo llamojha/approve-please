@@ -1,0 +1,40 @@
+{
+  "templateId": "js-023-unclosed-block-comment",
+  "title": "Unclosed block comment in config loader",
+  "author": "Nora I.",
+  "description": "Adds temporary note while loading migration config.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/migrations/config-loader.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 5,
+          "content": "  /* temporary override for migration window",
+          "isNew": true
+        },
+        {
+          "lineNumber": 6,
+          "content": "  const enabled = true;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        5
+      ],
+      "severity": "major",
+      "description": "Block comment is never closed, causing a syntax error."
+    }
+  ]
+}

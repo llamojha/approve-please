@@ -1,0 +1,40 @@
+{
+  "templateId": "js-044-innerhtml-method-typo-call",
+  "title": "innerHTML typo called as method",
+  "author": "Nora I.",
+  "description": "Adds quick DOM status writer for test harness.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/dom/status-writer.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 45,
+          "content": "  const panel = { innerHTML: 'idle' };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 46,
+          "content": "  panel.innerHMTL('Ready');",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        46
+      ],
+      "severity": "major",
+      "description": "Calls misspelled innerHMTL method, causing TypeError at runtime."
+    }
+  ]
+}

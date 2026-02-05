@@ -1,0 +1,45 @@
+{
+  "templateId": "js-039-default-parameter-missing-equals",
+  "title": "Default parameter missing equals",
+  "author": "Nora I.",
+  "description": "Adds default limit for queue scanner.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/scanner/default-limit.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "  function normalize(limit 10) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 15,
+          "content": "    return limit;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        14
+      ],
+      "severity": "major",
+      "description": "Default parameter is missing equals sign, causing syntax error."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "templateId": "js-025-orphan-else-block",
+  "title": "Orphan else block",
+  "author": "Nora I.",
+  "description": "Adds fallback queue flush behavior.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/queue/fallback-flush.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 26,
+          "content": "  else {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 27,
+          "content": "    queue.flush();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 28,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        26
+      ],
+      "severity": "major",
+      "description": "Else block has no matching if statement, causing a syntax error."
+    }
+  ]
+}

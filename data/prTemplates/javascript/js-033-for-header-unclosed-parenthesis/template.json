@@ -1,0 +1,45 @@
+{
+  "templateId": "js-033-for-header-unclosed-parenthesis",
+  "title": "For loop header unclosed parenthesis",
+  "author": "Nora I.",
+  "description": "Adds metric collection over active nodes.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "low",
+  "files": [
+    {
+      "filename": "src/metrics/node-pass.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 29,
+          "content": "  for (let i = 0; i < items.length; i++ {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 30,
+          "content": "    capture(items[i]);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 31,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        29
+      ],
+      "severity": "major",
+      "description": "For loop header is missing closing parenthesis, causing a syntax error."
+    }
+  ]
+}

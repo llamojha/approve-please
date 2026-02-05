@@ -1,0 +1,69 @@
+{
+  "templateId": "js-005-load-chat-escalation-config",
+  "title": "Load Chat Escalation config",
+  "author": "Jonah R.",
+  "description": "Adds a helper that reloads config before evaluating feature logic.",
+  "tags": [
+    "bugfix",
+    "cleanup",
+    "performance"
+  ],
+  "localized": {
+    "es": {
+      "title": "Carga la configuraci\u00f3n de Chat Escalation",
+      "description": "Agrega un helper que recarga la config antes de evaluar la l\u00f3gica.",
+      "tags": [
+        "correcci\u00f3n",
+        "limpieza",
+        "rendimiento"
+      ]
+    }
+  },
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/config/chat-escalation.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 75,
+          "content": "  export function loadChatEscalationConfig(path = '/etc/service/chat-escalation.json') {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 76,
+          "content": "    const raw = fs.readFileSync(path, 'utf8');",
+          "isNew": true
+        },
+        {
+          "lineNumber": 77,
+          "content": "    const parsed = JSON.parse(raw);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 78,
+          "content": "    return parsed;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 79,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "performance",
+      "lineNumbers": [
+        76
+      ],
+      "severity": "major",
+      "description": "Uses blocking fs.readFileSync on every call in the request path.",
+      "localizedDescription": {
+        "es": "Usa fs.readFileSync (bloqueante) en cada llamada del request path."
+      }
+    }
+  ]
+}

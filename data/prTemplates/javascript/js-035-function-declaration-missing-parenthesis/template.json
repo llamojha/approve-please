@@ -1,0 +1,45 @@
+{
+  "templateId": "js-035-function-declaration-missing-parenthesis",
+  "title": "Function declaration missing parenthesis",
+  "author": "Nora I.",
+  "description": "Adds formatter for member display names.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/users/name-formatter.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 40,
+          "content": "  function formatUser name) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 41,
+          "content": "    return name.trim();",
+          "isNew": true
+        },
+        {
+          "lineNumber": 42,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        40
+      ],
+      "severity": "major",
+      "description": "Function declaration is missing opening parenthesis, causing syntax error."
+    }
+  ]
+}

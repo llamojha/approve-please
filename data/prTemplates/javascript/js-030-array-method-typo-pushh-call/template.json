@@ -1,0 +1,40 @@
+{
+  "templateId": "js-030-array-method-typo-pushh-call",
+  "title": "Array method typo pushh",
+  "author": "Nora I.",
+  "description": "Adds job id insertion into pending queue.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/queue/pending-jobs.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 37,
+          "content": "  const queue = [];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 38,
+          "content": "  queue.pushh('job-1');",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        38
+      ],
+      "severity": "major",
+      "description": "Calls pushh instead of push, causing a TypeError at runtime."
+    }
+  ]
+}

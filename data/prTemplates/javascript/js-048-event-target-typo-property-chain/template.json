@@ -1,0 +1,40 @@
+{
+  "templateId": "js-048-event-target-typo-property-chain",
+  "title": "event target typo in property chain",
+  "author": "Nora I.",
+  "description": "Adds manual event mutation for debug replay.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/dom/event-replay.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 15,
+          "content": "  const event = { target: null };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 16,
+          "content": "  event.taret.value = 'done';",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        16
+      ],
+      "severity": "major",
+      "description": "Uses misspelled event.taret and accesses value on undefined, causing TypeError."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "templateId": "js-029-array-literal-unclosed-bracket",
+  "title": "Array literal missing closing bracket",
+  "author": "Nora I.",
+  "description": "Adds default region list for uploader jobs.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/uploads/default-regions.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 22,
+          "content": "  const regions = ['us-east-1', 'eu-west-1';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 23,
+          "content": "  return regions;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        22
+      ],
+      "severity": "major",
+      "description": "Array literal is missing a closing bracket, causing a syntax error."
+    }
+  ]
+}

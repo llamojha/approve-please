@@ -1,0 +1,40 @@
+{
+  "templateId": "js-014-variable-init-missing-equals",
+  "title": "Variable init missing equals",
+  "author": "Nora I.",
+  "description": "Adds retry config parsing for queue startup.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/config/retry-limit.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 21,
+          "content": "  const retryLimit 3;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 22,
+          "content": "  return retryLimit;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        21
+      ],
+      "severity": "major",
+      "description": "Variable declaration is missing an equals sign, causing a syntax error."
+    }
+  ]
+}

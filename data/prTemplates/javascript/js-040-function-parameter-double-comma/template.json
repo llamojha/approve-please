@@ -1,0 +1,45 @@
+{
+  "templateId": "js-040-function-parameter-double-comma",
+  "title": "Function parameter list has double comma",
+  "author": "Nora I.",
+  "description": "Adds merge helper for rollout settings.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/rollout/merge-settings.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 7,
+          "content": "  function merge(a,, b) {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 8,
+          "content": "    return { ...a, ...b };",
+          "isNew": true
+        },
+        {
+          "lineNumber": 9,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        7
+      ],
+      "severity": "major",
+      "description": "Parameter list contains a double comma, causing a syntax error."
+    }
+  ]
+}

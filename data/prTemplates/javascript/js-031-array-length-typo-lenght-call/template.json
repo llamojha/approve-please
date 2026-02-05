@@ -1,0 +1,40 @@
+{
+  "templateId": "js-031-array-length-typo-lenght-call",
+  "title": "Array length typo lenght",
+  "author": "Nora I.",
+  "description": "Adds task count reporter for startup checks.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/startup/task-count.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 52,
+          "content": "  const tasks = ['lint', 'test'];",
+          "isNew": true
+        },
+        {
+          "lineNumber": 53,
+          "content": "  console.log(tasks.lenght.toString());",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        53
+      ],
+      "severity": "major",
+      "description": "Misspells length as lenght and calls toString on undefined, causing TypeError."
+    }
+  ]
+}

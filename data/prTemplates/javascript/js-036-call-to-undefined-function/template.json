@@ -1,0 +1,40 @@
+{
+  "templateId": "js-036-call-to-undefined-function",
+  "title": "Call to undefined function",
+  "author": "Nora I.",
+  "description": "Adds total calculator for dashboard cards.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "typo"
+  ],
+  "importance": "high",
+  "files": [
+    {
+      "filename": "src/dashboard/total-card.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 25,
+          "content": "  const result = calculateTotla(4, 5);",
+          "isNew": true
+        },
+        {
+          "lineNumber": 26,
+          "content": "  return result;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "logic",
+      "lineNumbers": [
+        25
+      ],
+      "severity": "major",
+      "description": "Calls misspelled function name calculateTotla, causing a ReferenceError."
+    }
+  ]
+}

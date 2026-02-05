@@ -1,0 +1,40 @@
+{
+  "templateId": "js-007-clean-refactor",
+  "title": "Improve notification copy",
+  "author": "Lia N.",
+  "description": "Refines toast messaging throughout onboarding.",
+  "tags": [
+    "ux",
+    "copy"
+  ],
+  "localized": {
+    "es": {
+      "title": "Mejora el copy de notificaciones",
+      "description": "Refina los mensajes de toast en todo el onboarding.",
+      "tags": [
+        "ux",
+        "copy"
+      ]
+    }
+  },
+  "files": [
+    {
+      "filename": "src/components/OnboardingToast.jsx",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 14,
+          "content": "  const title = success ? 'Welcome aboard!' : 'One more step';",
+          "isNew": true
+        },
+        {
+          "lineNumber": 18,
+          "content": "  return <Toast title={title} body={body} tone={tone} />;",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [],
+  "importance": "normal"
+}

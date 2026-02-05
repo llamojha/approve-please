@@ -1,0 +1,45 @@
+{
+  "templateId": "js-038-return-object-unclosed-brace",
+  "title": "Return object missing closing brace",
+  "author": "Nora I.",
+  "description": "Adds payload construction for result events.",
+  "tags": [
+    "bugfix",
+    "javascript",
+    "syntax"
+  ],
+  "importance": "normal",
+  "files": [
+    {
+      "filename": "src/events/result-payload.js",
+      "language": "javascript",
+      "lines": [
+        {
+          "lineNumber": 58,
+          "content": "  function buildPayload() {",
+          "isNew": true
+        },
+        {
+          "lineNumber": 59,
+          "content": "    return { status: 'ok', retries: 1;",
+          "isNew": true
+        },
+        {
+          "lineNumber": 60,
+          "content": "  }",
+          "isNew": true
+        }
+      ]
+    }
+  ],
+  "bugPatterns": [
+    {
+      "kind": "style",
+      "lineNumbers": [
+        59
+      ],
+      "severity": "major",
+      "description": "Returned object literal is unclosed, causing a syntax error."
+    }
+  ]
+}
