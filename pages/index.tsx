@@ -294,6 +294,7 @@ const IndexPage = () => {
       <LeaderboardModal
         isOpen={isLeaderboardOpen}
         onClose={() => setLeaderboardOpen(false)}
+        mode={difficulty}
       />
       <style jsx>{`
         .landing {
