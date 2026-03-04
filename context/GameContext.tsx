@@ -207,6 +207,10 @@ const maybeGameOver = (state: GameState): GameState => {
     return { ...state, phase: 'GAME_OVER', gameOverReason: 'satisfaction' };
   }
 
+  if (state.meters.velocity <= MIN_METER_VALUE) {
+    return { ...state, phase: 'GAME_OVER', gameOverReason: 'velocity' };
+  }
+
   return state;
 };
 

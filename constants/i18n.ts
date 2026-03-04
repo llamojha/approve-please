@@ -1,5 +1,5 @@
 import { BugKind, Locale } from "../types";
-export type GameOverReasonKey = "stability" | "satisfaction" | "generic";
+export type GameOverReasonKey = "stability" | "satisfaction" | "velocity" | "generic";
 
 export const LOCALE_OPTIONS = [
   { value: "en", label: "EN" },
@@ -340,6 +340,7 @@ export const TRANSLATIONS = {
     gameOverReasons: {
       stability: "Production melted down. The board needed a scapegoat.",
       satisfaction: "Management lost confidence in your judgment.",
+      velocity: "Delivery ground to a halt. The team moved on without you.",
       generic: "Leadership pulled you aside.",
     },
   },
@@ -597,6 +598,7 @@ export const TRANSLATIONS = {
     gameOverReasons: {
       stability: "La producción colapsó. El directorio necesitaba un culpable.",
       satisfaction: "La dirección perdió confianza en tu criterio.",
+      velocity: "Las entregas se detuvieron. El equipo siguió sin ti.",
       generic: "La dirección te llamó aparte.",
     },
   },
