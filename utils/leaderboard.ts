@@ -1,7 +1,10 @@
+import type { Difficulty } from '../types';
+
 export interface LeaderboardScoreInput {
   cleanApprovals: number;
   truePositives: number;
   daysPlayed: number;
+  mode: Difficulty;
 }
 
 export const computeLeaderboardScore = ({ cleanApprovals, truePositives, daysPlayed }: LeaderboardScoreInput) => {

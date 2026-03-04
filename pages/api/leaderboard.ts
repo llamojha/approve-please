@@ -2,17 +2,16 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseServiceClient } from '../../utils/supabaseClient';
 import { computeLeaderboardScore, parseNonNegativeInt, sanitizeDisplayName } from '../../utils/leaderboard';
+import type { Difficulty } from '../../types';
 
 const TRIM_LIMIT = 100;
+const VALID_MODES: Difficulty[] = ['normal', 'learning'];
 
-type LeaderboardRow = {
-  id: string;
-  display_name: string;
-  clean_approvals: number;
-  true_positives: number;
-  days_played: number;
-  score: number;
-  created_at: string;
+const parseMode = (value: unknown): Difficulty => {
+  if (typeof value === 'string' && VALID_MODES.includes(value as Difficulty)) {
+    return value as Difficulty;
+  }
+  return 'normal';
 };
 
 const getClientOrError = (res: NextApiResponse) => {
@@ -24,13 +23,16 @@ const getClientOrError = (res: NextApiResponse) => {
   return client;
 };
 
-const handleGet = async (_req: NextApiRequest, res: NextApiResponse) => {
+const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
   const supabase = getClientOrError(res);
   if (!supabase) return;
+
+  const mode = parseMode(req.query.mode);
 
   const { data, error } = await supabase
     .from('leaderboard_entries')
     .select('display_name, clean_approvals, true_positives, days_played, score, created_at')
+    .eq('mode', mode)
     .order('score', { ascending: false })
     .order('created_at', { ascending: false })
     .limit(TRIM_LIMIT);
@@ -52,10 +54,11 @@ const handleGet = async (_req: NextApiRequest, res: NextApiResponse) => {
   });
 };
 
-const trimLeaderboard = async (supabase: SupabaseClient) => {
+const trimLeaderboard = async (supabase: SupabaseClient, mode: Difficulty) => {
   const { data, error } = await supabase
     .from('leaderboard_entries')
     .select('id')
+    .eq('mode', mode)
     .order('score', { ascending: false })
     .order('created_at', { ascending: false })
     .range(TRIM_LIMIT, TRIM_LIMIT + 500);
@@ -78,13 +81,14 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const truePositives = parseNonNegativeInt(req.body?.truePositives);
   const daysPlayed = parseNonNegativeInt(req.body?.daysPlayed);
   const displayName = sanitizeDisplayName(req.body?.displayName);
+  const mode = parseMode(req.body?.mode);
 
   if (cleanApprovals === null || truePositives === null || daysPlayed === null) {
     res.status(400).json({ error: 'Invalid payload: expected non-negative integers.' });
     return;
   }
 
-  const score = computeLeaderboardScore({ cleanApprovals, truePositives, daysPlayed });
+  const score = computeLeaderboardScore({ cleanApprovals, truePositives, daysPlayed, mode });
 
   const { error, data } = await supabase
     .from('leaderboard_entries')
@@ -93,7 +97,8 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
       clean_approvals: cleanApprovals,
       true_positives: truePositives,
       days_played: daysPlayed,
-      score
+      score,
+      mode
     })
     .select('id')
     .limit(1)
@@ -104,7 +109,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  await trimLeaderboard(supabase);
+  await trimLeaderboard(supabase, mode);
 
   res.status(200).json({ id: data?.id, score });
 };

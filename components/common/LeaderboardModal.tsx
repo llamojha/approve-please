@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/LeaderboardModal.module.css";
 import { getSupabaseAnonClient } from "../../utils/supabaseClient";
 
+import type { Difficulty } from "../../types";
+
 type LeaderboardEntry = {
   displayName: string;
   cleanApprovals: number;
@@ -14,6 +16,7 @@ type LeaderboardEntry = {
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  mode: Difficulty;
 };
 
 const formatDate = (value: string | null | undefined) => {
@@ -28,7 +31,7 @@ const formatDate = (value: string | null | undefined) => {
   }
 };
 
-const LeaderboardModal = ({ isOpen, onClose }: Props) => {
+const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -49,6 +52,7 @@ const LeaderboardModal = ({ isOpen, onClose }: Props) => {
           .select(
             "display_name, clean_approvals, true_positives, days_played, score, created_at"
           )
+          .eq("mode", mode)
           .order("score", { ascending: false })
           .order("created_at", { ascending: false })
           .limit(50);
@@ -77,7 +81,7 @@ const LeaderboardModal = ({ isOpen, onClose }: Props) => {
     return () => {
       alive = false;
     };
-  }, [isOpen]);
+  }, [isOpen, mode]);
 
   if (!isOpen) return null;
 

@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import styles from "../../styles/Screen.module.css";
 import { useGameState } from "../../context/GameContext";
 import { formatMeterValue, meterColorFromValue } from "../../utils/helpers";
-import { Counters, BugKind } from "../../types";
+import { Counters, BugKind, Difficulty } from "../../types";
 import { useTranslations } from "../../hooks/useTranslations";
 import { getSupabaseAnonClient } from "../../utils/supabaseClient";
 import {
@@ -103,7 +103,6 @@ const GameOverScreen = () => {
     ? translations.gameOverReasons[gameOverReason]
     : gameOverText.defaultReason;
   const daysPlayed = history.length + 1;
-  const showLeaderboard = difficulty === "normal";
 
   const finalScore = useMemo(
     () =>
@@ -111,6 +110,7 @@ const GameOverScreen = () => {
         cleanApprovals: finalCounters.cleanApprovals,
         truePositives: finalCounters.truePositives,
         daysPlayed,
+        mode: difficulty,
       }),
     [finalCounters.cleanApprovals, finalCounters.truePositives, daysPlayed]
   );
@@ -130,6 +130,7 @@ const GameOverScreen = () => {
         true_positives: finalCounters.truePositives,
         days_played: daysPlayed,
         score: finalScore,
+        mode: difficulty,
       });
       if (error) {
         throw new Error(error.message);
@@ -216,8 +217,7 @@ const GameOverScreen = () => {
             {gameOverText.homeButton}
           </Link>
         </div>
-        {showLeaderboard && (
-          <section className={styles.leaderboardForm}>
+        <section className={styles.leaderboardForm}>
             <div>
               <strong>Save this run to the leaderboard</strong>
               <p className="muted" style={{ fontSize: "0.85em" }}>
@@ -265,10 +265,10 @@ const GameOverScreen = () => {
               {submitStatus === "error" && submitError}
             </div>
           </section>
-        )}
         <LeaderboardModal
           isOpen={showLeaderboardModal}
           onClose={() => setShowLeaderboardModal(false)}
+          mode={difficulty}
         />
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>

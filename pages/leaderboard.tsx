@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Leaderboard.module.css";
+import type { Difficulty } from "../types";
 import { getSupabaseAnonClient } from "../utils/supabaseClient";
+
+const MODES: Difficulty[] = ["normal", "learning"];
 
 type LeaderboardEntry = {
   displayName: string;
@@ -37,6 +40,7 @@ const LeaderboardPage = () => {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mode, setMode] = useState<Difficulty>("normal");
 
   useEffect(() => {
     let alive = true;
@@ -53,6 +57,7 @@ const LeaderboardPage = () => {
           .select(
             "display_name, clean_approvals, true_positives, days_played, score, created_at"
           )
+          .eq("mode", mode)
           .order("score", { ascending: false })
           .order("created_at", { ascending: false })
           .limit(100);
@@ -83,7 +88,7 @@ const LeaderboardPage = () => {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [mode]);
 
   const withRanks = useMemo(
     () => entries.map((entry, idx) => ({ ...entry, rank: idx + 1 })),
@@ -99,6 +104,16 @@ const LeaderboardPage = () => {
             <div className={styles.meta}>Top runs across all days</div>
           </div>
           <div className={styles.actions}>
+            {MODES.map((m) => (
+              <button
+                key={m}
+                type="button"
+                className={`${styles.button} ${m === mode ? "" : styles.secondary}`}
+                onClick={() => setMode(m)}
+              >
+                {m.charAt(0).toUpperCase() + m.slice(1)}
+              </button>
+            ))}
             <Link className={`${styles.button} ${styles.secondary}`} href="/">
               ← Back to Home
             </Link>
