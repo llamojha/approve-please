@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseServiceClient } from '../../utils/supabaseClient';
-import { computeLeaderboardScore, parseNonNegativeInt, sanitizeDisplayName } from '../../utils/leaderboard';
+import { parseNonNegativeInt, sanitizeDisplayName } from '../../utils/leaderboard';
 import type { Difficulty } from '../../types';
 
 const TRIM_LIMIT = 100;
@@ -88,8 +88,6 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const score = computeLeaderboardScore({ cleanApprovals, truePositives, daysPlayed, mode });
-
   const { error, data } = await supabase
     .from('leaderboard_entries')
     .insert({
@@ -97,10 +95,9 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
       clean_approvals: cleanApprovals,
       true_positives: truePositives,
       days_played: daysPlayed,
-      score,
       mode
     })
-    .select('id')
+    .select('id, score')
     .limit(1)
     .single();
 
@@ -111,7 +108,7 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
 
   await trimLeaderboard(supabase, mode);
 
-  res.status(200).json({ id: data?.id, score });
+  res.status(200).json({ id: data?.id, score: data?.score });
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
