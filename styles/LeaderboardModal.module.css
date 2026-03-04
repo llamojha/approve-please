@@ -49,6 +49,34 @@
   color: #fff;
 }
 
+.tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid #1e3a5f;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.5rem 0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #8899a6;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  color: #fff;
+}
+
+.tabActive {
+  color: #10b981;
+  border-bottom-color: #10b981;
+}
+
 .content {
   padding: 1rem 1.25rem;
   overflow-y: auto;

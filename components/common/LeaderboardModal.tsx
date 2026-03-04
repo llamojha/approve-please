@@ -31,10 +31,18 @@ const formatDate = (value: string | null | undefined) => {
   }
 };
 
+const MODES: Difficulty[] = ["normal", "learning"];
+
 const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
+  const [activeMode, setActiveMode] = useState<Difficulty>(mode);
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Sync activeMode when the modal opens with a different mode prop
+  useEffect(() => {
+    if (isOpen) setActiveMode(mode);
+  }, [isOpen, mode]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -52,7 +60,7 @@ const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
           .select(
             "display_name, clean_approvals, true_positives, days_played, score, created_at"
           )
-          .eq("mode", mode)
+          .eq("mode", activeMode)
           .order("score", { ascending: false })
           .order("created_at", { ascending: false })
           .limit(50);
@@ -81,7 +89,7 @@ const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
     return () => {
       alive = false;
     };
-  }, [isOpen, mode]);
+  }, [isOpen, activeMode]);
 
   if (!isOpen) return null;
 
@@ -97,6 +105,17 @@ const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
           >
             ×
           </button>
+        </div>
+        <div className={styles.tabs}>
+          {MODES.map((m) => (
+            <button
+              key={m}
+              className={`${styles.tab} ${m === activeMode ? styles.tabActive : ""}`}
+              onClick={() => setActiveMode(m)}
+            >
+              {m === "normal" ? "Normal" : "Learning"}
+            </button>
+          ))}
         </div>
         <div className={styles.content}>
           {loading && <div className={styles.muted}>Loading…</div>}
