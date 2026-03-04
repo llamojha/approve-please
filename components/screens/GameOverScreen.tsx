@@ -129,7 +129,6 @@ const GameOverScreen = () => {
         clean_approvals: finalCounters.cleanApprovals,
         true_positives: finalCounters.truePositives,
         days_played: daysPlayed,
-        score: finalScore,
         mode: difficulty,
       });
       if (error) {
