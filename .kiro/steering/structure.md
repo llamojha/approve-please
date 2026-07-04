@@ -60,6 +60,22 @@
 └── public/             # Static assets (images, favicon)
 ```
 
+## Styling Approach
+
+All component styles use CSS Modules (`*.module.css`). No `<style jsx>` or inline `style={}` for static rules.
+
+Acceptable inline styles: dynamic values computed at runtime (progress bar widths, meter fill percentages, conditional colors derived from game state).
+
+### CSS Migration (In Progress)
+
+`pages/index.tsx` still contains a large `<style jsx>` block (~400 lines) that needs extraction to a dedicated CSS Module (e.g. `styles/Landing.module.css`). A handful of components also use inline `style={}` for static layout rules that belong in CSS Modules:
+
+- `components/screens/GameOverScreen.tsx` — static margin, card styles
+- `components/screens/SummaryScreen.tsx` — static margin, card styles
+- `components/common/HydrationErrorBoundary.tsx` — fallback layout
+
+Components with only dynamic inline styles (ClockDisplay, MeterBar, QueuePanel) are fine as-is.
+
 ## PR Template Structure
 
 Each template is a JSON file in `data/prTemplates/<language>/<template-name>/template.json`:
@@ -70,6 +86,12 @@ Each template is a JSON file in `data/prTemplates/<language>/<template-name>/tem
 - `importance`: low | normal | high
 - `files`: Array of file diffs with line-by-line content
 - `bugPatterns`: Array of bugs with kind, lineNumbers, severity
+
+### Template Loading (Needs Refactor)
+
+Currently, a build script (`scripts/build-template-manifest.mjs`) walks the `data/prTemplates/` directory tree, finds every `template.json`, and generates a `templateManifest.ts` file with a static import per template. This produces a ~57KB generated file and requires running `npm run generate:templates` every time a template is added or removed.
+
+Target approach: templates should be auto-discovered from the filesystem at build time using Next.js `getStaticProps` (or equivalent), eliminating the manifest generation step. Drop a `template.json` into the right language folder and it's picked up automatically — no build script, no manifest file, no hardcoded imports.
 
 ## State Management
 
