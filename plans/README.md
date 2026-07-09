@@ -12,14 +12,14 @@ Note: `node_modules` may be absent in a fresh checkout — every plan starts wit
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001 | Test baseline (Vitest) + PR CI | P1 | M | — | TODO |
-| 002 | Settle deployment story, remove broken release workflow | P1 | S | — (001 recommended first) | TODO |
+| 001 | Test baseline (Vitest) + PR CI | P1 | M | — | DONE (2026-07-09; 63 tests; step 5 completed by orchestrator after pre-existing lint error fixed in c66e265) |
+| 002 | Settle deployment story, remove broken release workflow | P1 | S | — (001 recommended first) | DONE (2026-07-09; note: releases v1.0.0/v1.1.0 zips had 7+8 downloads — maintainer signed off on server-only anyway) |
 | 003 | Leaderboard through API route + input bounds + RLS runbook | P1 | M | 001, 002 | TODO |
 | 004 | Deterministic initial state + honest error boundary | P1 | S | 001 | TODO |
 | 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | TODO |
 | 006 | Dedupe screens + leaderboard client code | P2 | M | 003, 005 | TODO |
 | 007 | Lazy-load per-language template packs | P3 | L | 001 | TODO |
-| 008 | Compress oversized social-card assets | P3 | S | — | TODO |
+| 008 | Compress oversized social-card assets | P3 | S | — | DONE (2026-07-09; PNG→JPEG 2.76MB→289KB + 1.87MB→264KB; browser/OG-unfurl check pending) |
 | 009 | Dependency advisories + tsconfig target | P3 | S | 001 | TODO |
 | 010 | Learning-mode curriculum design spike | P3 | M | 001 (007 first if both run) | TODO |
 
