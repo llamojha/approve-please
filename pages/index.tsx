@@ -23,6 +23,15 @@ const LANGUAGE_OPTIONS: LanguageOption[] = [
 
 const DIFFICULTY_OPTIONS = ["normal", "learning"] as const;
 
+const imageSrcs = [
+  "/tutorial-slide-1-placeholder.png",
+  "/tutorial-slide-2-placeholder.png",
+  "/tutorial-slide-3-placeholder.png",
+  "/tutorial-slide-4-placeholder.png",
+  "/tutorial-slide-5-placeholder.png",
+  "/tutorial-slide-6-placeholder.png",
+];
+
 const IndexPage = () => {
   const router = useRouter();
   const { locale, setLocale } = useLocale();
@@ -34,15 +43,6 @@ const IndexPage = () => {
     state: { languagePreference, difficulty },
     actions: { setLanguagePreference, setDifficulty },
   } = useGameState();
-
-  const imageSrcs = [
-    "/tutorial-slide-1-placeholder.png",
-    "/tutorial-slide-2-placeholder.png",
-    "/tutorial-slide-3-placeholder.png",
-    "/tutorial-slide-4-placeholder.png",
-    "/tutorial-slide-5-placeholder.png",
-    "/tutorial-slide-6-placeholder.png",
-  ];
 
   const tutorialSlides = useMemo(
     () =>
