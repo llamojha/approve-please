@@ -30,7 +30,7 @@ import { clamp, calculateQueuePressure } from '../utils/helpers';
 import { GameOverReasonKey } from '../constants/i18n';
 import { useTranslations } from '../hooks/useTranslations';
 
-interface GameState {
+export interface GameState {
   currentDay: number;
   phase: GamePhase;
   languagePreference: LanguagePreference;
@@ -75,7 +75,7 @@ interface GameContextValue {
   };
 }
 
-type GameAction =
+export type GameAction =
   | { type: 'SET_PHASE'; phase: GamePhase }
   | { type: 'ADVANCE_TIME'; minutes: number }
   | { type: 'QUEUE_PRS'; prs: PullRequest[] }
@@ -105,7 +105,7 @@ const createInitialMeters = (): MeterSet => ({
   satisfaction: 100
 });
 
-const createInitialState = (): GameState => {
+export const createInitialState = (): GameState => {
   return {
     currentDay: 1,
     phase: 'BRIEFING',
@@ -127,7 +127,7 @@ const createInitialState = (): GameState => {
 
 const initialState: GameState = createInitialState();
 
-const computeQueueDrain = (pressure: number): number => {
+export const computeQueueDrain = (pressure: number): number => {
   if (pressure <= 0) {
     return 0;
   }
@@ -139,7 +139,7 @@ const computeQueueDrain = (pressure: number): number => {
   return QUEUE_AGING_MIN_DRAIN + progress * (QUEUE_AGING_MAX_DRAIN - QUEUE_AGING_MIN_DRAIN);
 };
 
-const getQueueAgingDelta = (queue: PullRequest[], difficulty: Difficulty): Partial<MeterSet> | null => {
+export const getQueueAgingDelta = (queue: PullRequest[], difficulty: Difficulty): Partial<MeterSet> | null => {
   if (difficulty === 'learning') {
     return null;
   }
@@ -194,7 +194,7 @@ const extractLineExcerpts = (files: PullRequest['files'], lineNumbers: number[])
   return excerpts;
 };
 
-const maybeGameOver = (state: GameState): GameState => {
+export const maybeGameOver = (state: GameState): GameState => {
   if (state.phase === 'GAME_OVER') {
     return state;
   }
@@ -214,7 +214,7 @@ const maybeGameOver = (state: GameState): GameState => {
   return state;
 };
 
-const gameReducer = (state: GameState, action: GameAction): GameState => {
+export const gameReducer = (state: GameState, action: GameAction): GameState => {
   switch (action.type) {
     case 'SET_PHASE': {
       return { ...state, phase: action.phase };
