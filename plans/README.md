@@ -19,7 +19,7 @@ Note: `node_modules` may be absent in a fresh checkout — every plan starts wit
 | 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | TODO |
 | 006 | Dedupe screens + leaderboard client code | P2 | M | 003, 005 | TODO |
 | 007 | Lazy-load per-language template packs | P3 | L | 001 | TODO |
-| 008 | Compress social cards + fix missing tutorial slide 6 | P3 | S | — | TODO |
+| 008 | Compress oversized social-card assets | P3 | S | — | TODO |
 | 009 | Dependency advisories + tsconfig target | P3 | S | 001 | TODO |
 | 010 | Learning-mode curriculum design spike | P3 | M | 001 (007 first if both run) | TODO |
 
@@ -35,6 +35,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
 
 ## Findings considered and rejected
 
+- **"Missing tutorial slide-6 image" (plan 008, withdrawn 2026-07-09)**: the original audit claimed `public/tutorial-slide-6-placeholder.png` didn't exist and `pages/index.tsx` referenced a 404. Wrong — the file exists (added in `18f2cb2`, present at the audit commit) and slide 6 renders. Plan 008 was amended to compression-only.
 - **`uniqueId` collision risk** (`utils/helpers.ts:19` — 4 base36 chars for PR ids): collision odds over a full run are negligible (~50 draws vs 1.7M space) and ids are also prefixed with templateId+day+index. Not worth doing.
 - **`advanceToNextDay` missing the velocity game-over check** (`context/GameContext.tsx:436`): unreachable in practice — every meter mutation already passes through `maybeGameOver` during WORK. Documented via a characterization test in plan 001 instead of a code change.
 - **tsconfig `target: es5` as a standalone finding**: folded into plan 009.
