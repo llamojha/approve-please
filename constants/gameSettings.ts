@@ -38,7 +38,7 @@ const DECISION_EFFECTS = {
     baseMeters: { velocity: -3 },
     hitCounters: { truePositives: 1 },
     hitMeters: { satisfaction: 5 },
-    missCounters: {},
+    missCounters: { falsePositives: 1 },
     missMeters: {}
   }
 } as const;
