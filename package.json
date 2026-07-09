@@ -1,8 +1,8 @@
 {
   "name": "approve-please",
   "version": "1.0.0",
-  "description": "## 1. Overview",
-  "main": "index.js",
+  "private": true,
+  "description": "Approve Please — a Papers, Please-style pull-request review game",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
