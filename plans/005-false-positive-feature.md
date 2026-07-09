@@ -1,5 +1,14 @@
 # Plan 005: Finish the false-positive tracking feature (wire counter, records, and status)
 
+> **Amendment (2026-07-09)**: execution correctly STOPped on STOP condition #1 —
+> `FalsePositiveRecord.claimedKind: BugKind` (types/index.ts:57) is required but
+> unpopulatable: `RequestChangesPayload` carries only `selectedLines`, no kind
+> picker exists anywhere, and `claimedKind` has zero producers/consumers
+> (verified: the type definition is its only occurrence repo-wide). Resolution:
+> **remove the `claimedKind` field from `FalsePositiveRecord`** — a dead field
+> from an earlier design. `types/index.ts` is added to the in-scope list for
+> that single deletion only. All other fields are populatable as planned.
+
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
 > next step. If anything in the "STOP conditions" section occurs, stop and
@@ -50,6 +59,7 @@ False-positive tracking (rejecting a PR that was actually clean, or tagging the 
 ## Scope
 
 **In scope** (the only files you should modify):
+- `types/index.ts` (ONLY to delete the dead `claimedKind` field from `FalsePositiveRecord` — see Amendment)
 - `context/GameContext.tsx` (dispatch `LOG_FALSE_POSITIVE`; return correct status; increment counter via settings)
 - `constants/gameSettings.ts` (`missCounters: { falsePositives: 1 }` — counter only, **no meter changes**)
 - `components/screens/SummaryScreen.tsx` (render the false-positive section; use the existing helper)
