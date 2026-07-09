@@ -20,7 +20,7 @@ export const SITE_METADATA: SiteMetadata = {
   description:
     'Step into Release Ops, review GitHob PRs under pressure, and balance stability, speed, and stakeholder satisfaction.',
   url: 'https://approve-please.amllamojha.com',
-  image: '/social-card.png',
+  image: '/social-card.jpg',
   imageAlt: 'Approve Please - Pull Request Review simulator showing a pull request queue and status meters.',
   keywords: [
     'Approve Please',
