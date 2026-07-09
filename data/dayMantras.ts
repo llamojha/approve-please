@@ -210,6 +210,8 @@ export const dayMantras: DayMantra[] = [
   }
 ];
 
+export const getDefaultDayMantra = (): DayMantra => dayMantras[0] ?? DEFAULT_MANTRA;
+
 export const getDayMantra = (): DayMantra => {
   if (dayMantras.length === 0) {
     return DEFAULT_MANTRA;

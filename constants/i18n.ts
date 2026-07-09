@@ -325,6 +325,8 @@ export const TRANSLATIONS = {
     meterTrend: (label: string) => `${label} dropping`,
     hydration: {
       refreshing: "Refreshing your session…",
+      crashed: "Something went wrong. Reload the page to continue.",
+      reloadButton: "Reload page",
     },
     decisions: {
       noPR: "No PR loaded.",
@@ -584,6 +586,8 @@ export const TRANSLATIONS = {
     meterTrend: (label: string) => `${label} en caída`,
     hydration: {
       refreshing: "Actualizando tu sesión…",
+      crashed: "Algo salió mal. Recarga la página para continuar.",
+      reloadButton: "Recargar página",
     },
     decisions: {
       noPR: "No hay PR cargado.",

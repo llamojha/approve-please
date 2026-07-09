@@ -15,7 +15,8 @@ import {
   QUEUE_AGING_MIN_DRAIN,
   WORK_DAY_MINUTES
 } from '../constants/gameSettings';
-import { getDayMantra } from '../data/dayMantras';
+import { getDayMantra, getDefaultDayMantra } from '../data/dayMantras';
+import { getDefaultDayQuote } from '../data/dayQuotes';
 import type { PullRequest } from '../types';
 
 const makePR = (id: string, importance: PullRequest['importance'] = 'normal'): PullRequest => ({
@@ -302,6 +303,55 @@ describe('gameReducer RESET_GAME', () => {
       falsePositives: 0,
       cleanApprovals: 0
     });
+  });
+});
+
+describe('gameReducer RANDOMIZE_DAY_FLAVOR', () => {
+  const flavor = {
+    mantra: { en: 'Randomized mantra', es: 'Mantra aleatorio' },
+    quote: {
+      speaker: 'Test Speaker',
+      role: { en: 'Tester', es: 'Probadora' },
+      text: { en: 'Randomized quote', es: 'Cita aleatoria' }
+    }
+  };
+
+  it('starts from deterministic defaults in the initial state', () => {
+    const state = createInitialState();
+    expect(state.currentMantra).toEqual(getDefaultDayMantra());
+    expect(state.dayQuote).toEqual(getDefaultDayQuote());
+  });
+
+  it('replaces mantra and quote on a fresh day-1 BRIEFING state', () => {
+    const state = createInitialState();
+    const next = gameReducer(state, { type: 'RANDOMIZE_DAY_FLAVOR', ...flavor });
+    expect(next.currentMantra).toEqual(flavor.mantra);
+    expect(next.dayQuote).toEqual(flavor.quote);
+  });
+
+  it('is a no-op (same state object) when phase is not BRIEFING', () => {
+    const phases = ['WORK', 'SUMMARY', 'GAME_OVER'] as const;
+    phases.forEach((phase) => {
+      const state = { ...createInitialState(), phase };
+      const next = gameReducer(state, { type: 'RANDOMIZE_DAY_FLAVOR', ...flavor });
+      expect(next).toBe(state);
+    });
+  });
+
+  it('is a no-op (same state object) when currentDay is not 1', () => {
+    const state = { ...createInitialState(), currentDay: 2 };
+    const next = gameReducer(state, { type: 'RANDOMIZE_DAY_FLAVOR', ...flavor });
+    expect(next).toBe(state);
+  });
+
+  it('is a no-op (same state object) when history is not empty', () => {
+    const base = createInitialState();
+    const state = {
+      ...base,
+      history: [{ day: 1, counters: { ...base.counters }, meters: { ...base.meters } }]
+    };
+    const next = gameReducer(state, { type: 'RANDOMIZE_DAY_FLAVOR', ...flavor });
+    expect(next).toBe(state);
   });
 });
 

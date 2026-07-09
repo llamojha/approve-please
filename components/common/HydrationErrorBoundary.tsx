@@ -9,6 +9,7 @@ interface HydrationErrorBoundaryProps {
 
 interface HydrationErrorBoundaryState {
   hasError: boolean;
+  isHydration: boolean;
   message?: string;
 }
 
@@ -21,37 +22,57 @@ const isHydrationError = (error: Error) => {
 
 class HydrationErrorBoundary extends Component<HydrationErrorBoundaryProps, HydrationErrorBoundaryState> {
   state: HydrationErrorBoundaryState = {
-    hasError: false
+    hasError: false,
+    isHydration: false
   };
   static contextType = LocaleContext;
   declare context: LocaleContextValue | undefined;
 
-  static getDerivedStateFromError(error: Error): HydrationErrorBoundaryState | null {
-    if (isHydrationError(error)) {
-      return { hasError: true, message: error.message };
-    }
-    return null;
+  static getDerivedStateFromError(error: Error): HydrationErrorBoundaryState {
+    return { hasError: true, isHydration: isHydrationError(error), message: error.message };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    if (isHydrationError(error)) {
-      if (typeof window !== 'undefined') {
-        Router.replace('/');
-      }
-    } else {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(error, errorInfo);
-      }
+    console.error(error, errorInfo);
+    if (isHydrationError(error) && typeof window !== 'undefined') {
+      // Belt-and-braces: initial state is deterministic now, so this path
+      // should never fire; keep the redirect for hydration errors only.
+      Router.replace('/');
     }
   }
 
   render() {
     if (this.state.hasError) {
       const locale: Locale = this.context?.locale ?? 'en';
-      const message = TRANSLATIONS[locale].hydration.refreshing;
+      const copy = TRANSLATIONS[locale].hydration;
+
+      if (this.state.isHydration) {
+        return (
+          <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: 'var(--bg)' }}>
+            <p style={{ color: 'var(--muted)' }}>{copy.refreshing}</p>
+          </div>
+        );
+      }
+
       return (
         <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: 'var(--bg)' }}>
-          <p style={{ color: 'var(--muted)' }}>{message}</p>
+          <div style={{ display: 'grid', gap: '16px', justifyItems: 'center' }}>
+            <p style={{ color: 'var(--muted)' }}>{copy.crashed}</p>
+            <button
+              type="button"
+              onClick={() => window.location.reload()}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '6px',
+                border: '1px solid var(--muted)',
+                background: 'transparent',
+                color: 'var(--muted)',
+                cursor: 'pointer'
+              }}
+            >
+              {copy.reloadButton}
+            </button>
+          </div>
         </div>
       );
     }
