@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/LeaderboardModal.module.css";
-import { getSupabaseAnonClient } from "../../utils/supabaseClient";
 
 import type { Difficulty } from "../../types";
+import type { LeaderboardEntryDto } from "../../utils/leaderboard";
 
-type LeaderboardEntry = {
-  displayName: string;
-  cleanApprovals: number;
-  truePositives: number;
-  daysPlayed: number;
-  score: number;
-  createdAt: string;
-};
+type LeaderboardEntry = LeaderboardEntryDto;
 
 type Props = {
   isOpen: boolean;
@@ -51,31 +44,13 @@ const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
       setLoading(true);
       setError(null);
       try {
-        const supabase = getSupabaseAnonClient();
-        if (!supabase) {
-          throw new Error("Leaderboard is not configured.");
+        const response = await fetch(`/api/leaderboard?mode=${activeMode}`);
+        const payload = await response.json().catch(() => null);
+        if (!response.ok) {
+          throw new Error(payload?.error ?? "Failed to load leaderboard");
         }
-        const { data, error: fetchError } = await supabase
-          .from("leaderboard_entries")
-          .select(
-            "display_name, clean_approvals, true_positives, days_played, score, created_at"
-          )
-          .eq("mode", activeMode)
-          .order("score", { ascending: false })
-          .order("created_at", { ascending: false })
-          .limit(50);
-        if (fetchError) throw new Error(fetchError.message);
         if (!alive) return;
-        setEntries(
-          (data ?? []).map((row) => ({
-            displayName: row.display_name ?? "Anonymous reviewer",
-            cleanApprovals: row.clean_approvals ?? 0,
-            truePositives: row.true_positives ?? 0,
-            daysPlayed: row.days_played ?? 0,
-            score: row.score ?? 0,
-            createdAt: row.created_at,
-          }))
-        );
+        setEntries(payload?.entries ?? []);
       } catch (err) {
         if (!alive) return;
         setError(

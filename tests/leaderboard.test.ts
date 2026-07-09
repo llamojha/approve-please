@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { computeLeaderboardScore, parseNonNegativeInt, sanitizeDisplayName } from '../utils/leaderboard';
+import {
+  MAX_LEADERBOARD_STAT,
+  computeLeaderboardScore,
+  parseBoundedInt,
+  parseNonNegativeInt,
+  sanitizeDisplayName
+} from '../utils/leaderboard';
 
 describe('computeLeaderboardScore', () => {
   it('scores cleanApprovals + truePositives + daysPlayed * 5', () => {
@@ -42,10 +48,35 @@ describe('parseNonNegativeInt', () => {
     expect(parseNonNegativeInt('42')).toBe(42);
   });
 
-  // Current behavior: magnitudes are unbounded. Plan 003 adds an upper bound
-  // and will flip this assertion when it lands.
-  it('currently accepts unbounded magnitudes', () => {
+  // parseNonNegativeInt itself stays unbounded; the API route now uses
+  // parseBoundedInt (plan 003) to cap magnitudes.
+  it('accepts unbounded magnitudes (bounding lives in parseBoundedInt)', () => {
     expect(parseNonNegativeInt(1e15)).toBe(1e15);
+  });
+});
+
+describe('parseBoundedInt', () => {
+  it('rejects values above MAX_LEADERBOARD_STAT', () => {
+    expect(parseBoundedInt(MAX_LEADERBOARD_STAT + 1)).toBeNull();
+    expect(parseBoundedInt(1e15)).toBeNull();
+    expect(parseBoundedInt('100001')).toBeNull();
+  });
+
+  it('accepts values at or below MAX_LEADERBOARD_STAT', () => {
+    expect(parseBoundedInt(MAX_LEADERBOARD_STAT)).toBe(MAX_LEADERBOARD_STAT);
+    expect(parseBoundedInt(0)).toBe(0);
+    expect(parseBoundedInt('42')).toBe(42);
+  });
+
+  it('keeps parseNonNegativeInt rejections', () => {
+    expect(parseBoundedInt(-1)).toBeNull();
+    expect(parseBoundedInt(NaN)).toBeNull();
+    expect(parseBoundedInt(Infinity)).toBeNull();
+    expect(parseBoundedInt('abc')).toBeNull();
+  });
+
+  it('floors floats within bounds', () => {
+    expect(parseBoundedInt(2.9)).toBe(2);
   });
 });
 
