@@ -332,7 +332,7 @@ const IndexPage = () => {
           border: 1px solid var(--border);
           overflow: hidden;
           box-shadow: 0 20px 50px rgba(2, 6, 23, 0.8);
-          background: url("social-card-no-title.png") center/cover no-repeat;
+          background: url("social-card-no-title.jpg") center/cover no-repeat;
           color: #f8fafc;
           display: flex;
           flex-direction: column;
