@@ -368,3 +368,20 @@ Once this runs, you can iterate with more bug types, more days, better writing, 
 [3]: https://www.codeant.ai/blogs/good-code-review-practices-guide?utm_source=chatgpt.com "The Complete Code Review Process for 2026"
 [4]: https://papersplease.fandom.com/wiki/Timeline?utm_source=chatgpt.com "Timeline | Papers Please Wiki - Fandom"
 [5]: https://nulab.com/learn/software-development/code-reviews/?utm_source=chatgpt.com "Choosing the best code review method: 4 types explained"
+
+## Development
+
+- `npm ci` — install dependencies (Node 20+)
+- Copy `.env.example` to `.env.local` and fill in the Supabase values
+  (`SUPABASE_SERVICE_ROLE_KEY` must never be exposed to the client or committed)
+- `npm run dev` — start the dev server
+- `npm run typecheck && npm run lint` — verification
+- `npm run generate:templates` — regenerate the PR template manifest after
+  adding/editing templates under `data/prTemplates/`
+
+## Deployment
+
+This app requires a Node/server deployment (e.g. Vercel or `next build && next start`):
+`pages/api/leaderboard.ts` is a server route holding the Supabase service-role key,
+which cannot exist in a static export. A previous static-HTML release workflow was
+removed for this reason (see plans/002-fix-release-pipeline.md).
