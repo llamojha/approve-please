@@ -375,7 +375,7 @@ Once this runs, you can iterate with more bug types, more days, better writing, 
 - Copy `.env.example` to `.env.local` and fill in the Supabase values
   (`SUPABASE_SERVICE_ROLE_KEY` must never be exposed to the client or committed)
 - `npm run dev` — start the dev server
-- `npm run typecheck && npm run lint` — verification
+- `npm run typecheck && npm run lint && npm test` — verification
 - `npm run generate:templates` — regenerate the PR template manifest after
   adding/editing templates under `data/prTemplates/`
 
