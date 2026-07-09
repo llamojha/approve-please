@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "lib": [
       "dom",
       "dom.iterable",
@@ -19,8 +19,7 @@
     "jsx": "react-jsx",
     "incremental": true,
     "types": [
-      "node",
-      "webpack-env"
+      "node"
     ]
   },
   "include": [
