@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import {
   MAX_METER_VALUE,
   MIN_METER_VALUE,
@@ -10,8 +10,8 @@ import {
   REQUEST_CHANGES_EFFECTS,
   APPROVAL_EFFECTS
 } from '../constants/game';
-import { DayMantra, getDayMantra } from '../data/dayMantras';
-import { getRandomDayQuote } from '../data/dayQuotes';
+import { DayMantra, getDayMantra, getDefaultDayMantra } from '../data/dayMantras';
+import { getDefaultDayQuote, getRandomDayQuote } from '../data/dayQuotes';
 import {
   BugKind,
   Counters,
@@ -88,7 +88,8 @@ export type GameAction =
   | { type: 'SET_LANGUAGE_PREFERENCE'; preference: LanguagePreference }
   | { type: 'SET_DIFFICULTY'; difficulty: Difficulty }
   | { type: 'LOG_PROD_INCIDENT'; incident: ProdIncident }
-  | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord };
+  | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord }
+  | { type: 'RANDOMIZE_DAY_FLAVOR'; mantra: DayMantra; quote: DayQuote };
 
 const createInitialCounters = (): Counters => ({
   bugsToProd: 0,
@@ -117,9 +118,9 @@ export const createInitialState = (): GameState => {
     meters: createInitialMeters(),
     counters: createInitialCounters(),
     history: [],
-    currentMantra: getDayMantra(),
+    currentMantra: getDefaultDayMantra(),
     gameOverReason: undefined,
-    dayQuote: getRandomDayQuote(),
+    dayQuote: getDefaultDayQuote(),
     prodIncidents: [],
     falsePositiveRecords: []
   };
@@ -298,6 +299,14 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
     case 'LOG_FALSE_POSITIVE': {
       return { ...state, falsePositiveRecords: [...state.falsePositiveRecords, action.record] };
     }
+    case 'RANDOMIZE_DAY_FLAVOR': {
+      // Only reshuffle the flavor on a fresh day-1 briefing; a mid-game remount
+      // must not overwrite the current day's mantra/quote.
+      if (state.phase !== 'BRIEFING' || state.currentDay !== 1 || state.history.length !== 0) {
+        return state;
+      }
+      return { ...state, currentMantra: action.mantra, dayQuote: action.quote };
+    }
     default:
       return state;
   }
@@ -308,6 +317,13 @@ const GameContext = createContext<GameContextValue | undefined>(undefined);
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
   const translations = useTranslations();
+
+  // The initial state is deterministic so server HTML and client hydration
+  // match; the random day flavor is applied after mount (effects never run
+  // during hydration's first pass).
+  useEffect(() => {
+    dispatch({ type: 'RANDOMIZE_DAY_FLAVOR', mantra: getDayMantra(), quote: getRandomDayQuote() });
+  }, []);
 
   const startWork = useCallback(() => {
     dispatch({ type: 'SET_PHASE', phase: 'WORK' });

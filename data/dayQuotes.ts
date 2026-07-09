@@ -255,6 +255,8 @@ export const dayQuotes: DayQuote[] = [
   }
 ];
 
+export const getDefaultDayQuote = (): DayQuote => dayQuotes[0] ?? DEFAULT_DAY_QUOTE;
+
 export const getRandomDayQuote = (): DayQuote => {
   if (dayQuotes.length === 0) {
     return DEFAULT_DAY_QUOTE;
