@@ -16,7 +16,7 @@ Note: `node_modules` may be absent in a fresh checkout — every plan starts wit
 | 002 | Settle deployment story, remove broken release workflow | P1 | S | — (001 recommended first) | DONE (2026-07-09; note: releases v1.0.0/v1.1.0 zips had 7+8 downloads — maintainer signed off on server-only anyway) |
 | 003 | Leaderboard through API route + input bounds + RLS runbook | P1 | M | 001, 002 | DONE (2026-07-09; 74 tests; maintainer must run docs/leaderboard-security.md RLS steps in Supabase) |
 | 004 | Deterministic initial state + honest error boundary | P1 | S | 001 | DONE (2026-07-09; 68 tests; in-browser /game hydration check pending) |
-| 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | TODO |
+| 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | DONE (2026-07-10; amended: dead claimedKind removed; note: StatsPanel doesn't show falsePositives — follow-up decision) |
 | 006 | Dedupe screens + leaderboard client code | P2 | M | 003, 005 | TODO |
 | 007 | Lazy-load per-language template packs | P3 | L | 001 | DONE (2026-07-09; /game first load −404.5KB (−39%); day-1 pacing playtest pending) |
 | 008 | Compress oversized social-card assets | P3 | S | — | DONE (2026-07-09; PNG→JPEG 2.76MB→289KB + 1.87MB→264KB; browser/OG-unfurl check pending) |
