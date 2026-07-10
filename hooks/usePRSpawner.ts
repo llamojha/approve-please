@@ -8,6 +8,7 @@ import {
 import { PullRequest, LanguagePreference, ScriptedWave } from "../types";
 import { instantiatePullRequest } from "../utils/pr";
 import { getCodeLanguages } from "../utils/language";
+import { orderForLearning } from "../utils/curriculum"; // SPIKE(plan 010): learning-mode curriculum prototype
 import { useLocale } from "../context/LocaleContext";
 
 // Scripted (tutorial) waves only reference generic templates, which are
@@ -88,6 +89,7 @@ export const usePRSpawner = () => {
       queue,
       currentPR,
       languagePreference,
+      difficulty, // SPIKE(plan 010): gates the learning-mode ordering branches below
     },
     actions: { enqueuePRs },
   } = useGameState();
@@ -104,6 +106,9 @@ export const usePRSpawner = () => {
     (count: number, day: number): PullRequest[] => {
       const results: PullRequest[] = [];
       for (let i = 0; i < count; i += 1) {
+        if (workingPoolRef.current.length === 0 && difficulty === "learning") { // SPIKE(plan 010): learning-mode refill
+          workingPoolRef.current = orderForLearning(basePoolRef.current, day); // SPIKE: refill keeps curriculum order — no reshuffle on exhaustion (known spike simplification: repeats arrive in the same order each refill)
+        } // SPIKE(plan 010)
         if (workingPoolRef.current.length === 0) {
           workingPoolRef.current = shuffle(basePoolRef.current);
         }
@@ -130,7 +135,10 @@ export const usePRSpawner = () => {
       }
       return results;
     },
-    [locale]
+    [
+      locale,
+      difficulty, // SPIKE(plan 010): dep for the learning-mode refill branch above
+    ]
   );
 
   const spawnSpecific = useCallback(
@@ -171,6 +179,10 @@ export const usePRSpawner = () => {
         templateMatchesPreference(template, languagePreference)
       );
       basePoolRef.current = basePool;
+      if (difficulty === "learning") { // SPIKE(plan 010): learning mode orders the pool by curriculum tier for the current day; normal mode falls through to the pre-spike shuffle untouched
+        workingPoolRef.current = orderForLearning(basePool, currentDay); // SPIKE: deterministic curriculum order (see docs/learning-mode-curriculum.md)
+        return; // SPIKE: skip the normal-mode shuffle below
+      } // SPIKE(plan 010)
       workingPoolRef.current = shuffle(basePool);
     };
 
@@ -211,7 +223,11 @@ export const usePRSpawner = () => {
     return () => {
       cancelled = true;
     };
-  }, [currentDay, languagePreference]);
+  }, [
+    currentDay,
+    languagePreference,
+    difficulty, // SPIKE(plan 010): re-derive pools when the mode changes so learning ordering applies
+  ]);
 
   useEffect(() => {
     const key = `${currentDay}`;
