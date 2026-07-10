@@ -427,12 +427,22 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       Object.assign(counterDelta, REQUEST_CHANGES_EFFECTS.missCounters);
       Object.assign(meterDelta, REQUEST_CHANGES_EFFECTS.missMeters);
       dispatch({
+        type: 'LOG_FALSE_POSITIVE',
+        record: {
+          prId: current.id,
+          title: current.title,
+          author: current.author,
+          selectedLines: extractLineExcerpts(current.files, selectedLines),
+          actualBugKinds: current.bugPatterns.map((pattern) => pattern.kind)
+        }
+      });
+      dispatch({
         type: 'APPLY_DECISION',
         processedId: current.id,
         counterDelta,
         meterDelta
       });
-      return { success: true, status: 'approved', message: decisionCopy.requestNoBonus, bonusApplied: false };
+      return { success: true, status: 'false-positive', message: decisionCopy.requestNoBonus, bonusApplied: false };
     },
     [state.currentPR, translations]
   );

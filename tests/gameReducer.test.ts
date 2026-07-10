@@ -13,11 +13,12 @@ import {
   MIN_METER_VALUE,
   QUEUE_AGING_IMPORTANCE_WEIGHT,
   QUEUE_AGING_MIN_DRAIN,
+  REQUEST_CHANGES_EFFECTS,
   WORK_DAY_MINUTES
 } from '../constants/gameSettings';
 import { getDayMantra, getDefaultDayMantra } from '../data/dayMantras';
 import { getDefaultDayQuote } from '../data/dayQuotes';
-import type { PullRequest } from '../types';
+import type { FalsePositiveRecord, PullRequest } from '../types';
 
 const makePR = (id: string, importance: PullRequest['importance'] = 'normal'): PullRequest => ({
   id,
@@ -215,6 +216,49 @@ describe('gameReducer APPLY_DECISION', () => {
     expect(next.meters.stability).toBe(MIN_METER_VALUE);
     expect(next.phase).toBe('GAME_OVER');
     expect(next.gameOverReason).toBe('stability');
+  });
+});
+
+describe('gameReducer false-positive tracking', () => {
+  const makeRecord = (prId: string): FalsePositiveRecord => ({
+    prId,
+    title: `PR ${prId}`,
+    author: 'test-author',
+    selectedLines: [{ lineNumber: 1, content: 'const value = 1;' }],
+    actualBugKinds: []
+  });
+
+  it('LOG_FALSE_POSITIVE appends a record', () => {
+    const state = workState();
+    const record = makeRecord('a');
+    const next = gameReducer(state, { type: 'LOG_FALSE_POSITIVE', record });
+    expect(next.falsePositiveRecords).toEqual([record]);
+
+    const second = makeRecord('b');
+    const after = gameReducer(next, { type: 'LOG_FALSE_POSITIVE', record: second });
+    expect(after.falsePositiveRecords).toEqual([record, second]);
+  });
+
+  it('RESET_FOR_DAY clears falsePositiveRecords', () => {
+    const state = workState({ falsePositiveRecords: [makeRecord('a')] });
+    const next = gameReducer(state, { type: 'RESET_FOR_DAY', nextDay: 2, mantra: getDayMantra() });
+    expect(next.falsePositiveRecords).toEqual([]);
+  });
+
+  it('APPLY_DECISION carrying missCounters increments counters.falsePositives by 1', () => {
+    const a = makePR('a');
+    const state = workState({ queue: [a], currentPR: a });
+    const next = gameReducer(state, {
+      type: 'APPLY_DECISION',
+      processedId: a.id,
+      counterDelta: { ...REQUEST_CHANGES_EFFECTS.baseCounters, ...REQUEST_CHANGES_EFFECTS.missCounters },
+      meterDelta: { ...REQUEST_CHANGES_EFFECTS.baseMeters, ...REQUEST_CHANGES_EFFECTS.missMeters }
+    });
+    expect(REQUEST_CHANGES_EFFECTS.missCounters).toEqual({ falsePositives: 1 });
+    expect(next.counters.falsePositives).toBe(state.counters.falsePositives + 1);
+    expect(next.counters.prsRejected).toBe(state.counters.prsRejected + 1);
+    // miss path must not grant the true-positive credit
+    expect(next.counters.truePositives).toBe(state.counters.truePositives);
   });
 });
 

@@ -242,6 +242,7 @@ export const TRANSLATIONS = {
       none: "none",
       reasonClean: "not a bug",
       reasonMixed: "mixed bugs",
+      rejectedWithoutCause: "Rejected without cause.",
     },
     work: {
       clock: {
@@ -503,6 +504,7 @@ export const TRANSLATIONS = {
       none: "ninguno",
       reasonClean: "sin bug real",
       reasonMixed: "bugs mixtos",
+      rejectedWithoutCause: "Rechazado sin motivo.",
     },
     work: {
       clock: {

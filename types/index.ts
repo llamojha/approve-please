@@ -54,7 +54,6 @@ export interface FalsePositiveRecord {
   prId: string;
   title: string;
   author: string;
-  claimedKind: BugKind;
   selectedLines: LineExcerpt[];
   actualBugKinds: BugKind[];
 }
