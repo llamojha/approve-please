@@ -1,5 +1,19 @@
 # Execution plan: running plans 001–010 in parallel waves
 
+> **Progress (paused 2026-07-10)**: Waves 1–3 are DONE and merged into
+> `preview` (plans 001–005, 007–010; suite green: 92/92 tests, lint/typecheck/
+> build clean). **Only wave 4 — plan 006 (dedup refactor) — remains**; its
+> executor was stopped before making any changes, and its branch/worktree were
+> cleaned up. To resume: dispatch a plan-executor for plan 006 from the
+> current `preview` tip (all its dependencies have landed; brief it that 003
+> already API-routed the two leaderboard call sites and 005 gave SummaryScreen's
+> `formatFalsePositiveReason` its caller, and that usePRSpawner's SPIKE lines
+> from 010 are out of scope). Orchestration notes accumulated during execution:
+> per-agent dev servers must use unique ports (3000 collides across worktrees);
+> agent worktrees may check out stale HEADs — always branch from the stated
+> `preview` tip. Merged-plan follow-ups for the maintainer are listed at the
+> bottom of this file and in the plan index's status column.
+
 Orchestration model: the main session (orchestrator) dispatches one
 `plan-executor` agent per plan, each in an **isolated worktree** on its own
 branch. When an executor finishes, a `plan-verifier` agent audits the branch
