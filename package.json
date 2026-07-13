@@ -1,14 +1,15 @@
 {
   "name": "approve-please",
   "version": "1.0.0",
-  "description": "## 1. Overview",
-  "main": "index.js",
+  "private": true,
+  "description": "Approve Please — a Papers, Please-style pull-request review game",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "generate:templates": "node scripts/build-template-manifest.mjs"
   },
   "keywords": [],
@@ -16,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.87.1",
-    "next": "16.0.10",
+    "next": "^16.2.10",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -25,11 +26,11 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
-    "@types/webpack-env": "^1.18.8",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
     "@typescript-eslint/parser": "^8.46.4",
     "eslint": "^9.39.1",
-    "eslint-config-next": "^16.0.3",
-    "typescript": "^5.9.3"
+    "eslint-config-next": "^16.2.10",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
   }
 }

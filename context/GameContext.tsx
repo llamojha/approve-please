@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import {
   MAX_METER_VALUE,
   MIN_METER_VALUE,
@@ -10,8 +10,8 @@ import {
   REQUEST_CHANGES_EFFECTS,
   APPROVAL_EFFECTS
 } from '../constants/game';
-import { DayMantra, getDayMantra } from '../data/dayMantras';
-import { getRandomDayQuote } from '../data/dayQuotes';
+import { DayMantra, getDayMantra, getDefaultDayMantra } from '../data/dayMantras';
+import { getDefaultDayQuote, getRandomDayQuote } from '../data/dayQuotes';
 import {
   BugKind,
   Counters,
@@ -30,7 +30,7 @@ import { clamp, calculateQueuePressure } from '../utils/helpers';
 import { GameOverReasonKey } from '../constants/i18n';
 import { useTranslations } from '../hooks/useTranslations';
 
-interface GameState {
+export interface GameState {
   currentDay: number;
   phase: GamePhase;
   languagePreference: LanguagePreference;
@@ -75,7 +75,7 @@ interface GameContextValue {
   };
 }
 
-type GameAction =
+export type GameAction =
   | { type: 'SET_PHASE'; phase: GamePhase }
   | { type: 'ADVANCE_TIME'; minutes: number }
   | { type: 'QUEUE_PRS'; prs: PullRequest[] }
@@ -88,7 +88,8 @@ type GameAction =
   | { type: 'SET_LANGUAGE_PREFERENCE'; preference: LanguagePreference }
   | { type: 'SET_DIFFICULTY'; difficulty: Difficulty }
   | { type: 'LOG_PROD_INCIDENT'; incident: ProdIncident }
-  | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord };
+  | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord }
+  | { type: 'RANDOMIZE_DAY_FLAVOR'; mantra: DayMantra; quote: DayQuote };
 
 const createInitialCounters = (): Counters => ({
   bugsToProd: 0,
@@ -105,7 +106,7 @@ const createInitialMeters = (): MeterSet => ({
   satisfaction: 100
 });
 
-const createInitialState = (): GameState => {
+export const createInitialState = (): GameState => {
   return {
     currentDay: 1,
     phase: 'BRIEFING',
@@ -117,9 +118,9 @@ const createInitialState = (): GameState => {
     meters: createInitialMeters(),
     counters: createInitialCounters(),
     history: [],
-    currentMantra: getDayMantra(),
+    currentMantra: getDefaultDayMantra(),
     gameOverReason: undefined,
-    dayQuote: getRandomDayQuote(),
+    dayQuote: getDefaultDayQuote(),
     prodIncidents: [],
     falsePositiveRecords: []
   };
@@ -127,7 +128,7 @@ const createInitialState = (): GameState => {
 
 const initialState: GameState = createInitialState();
 
-const computeQueueDrain = (pressure: number): number => {
+export const computeQueueDrain = (pressure: number): number => {
   if (pressure <= 0) {
     return 0;
   }
@@ -139,7 +140,7 @@ const computeQueueDrain = (pressure: number): number => {
   return QUEUE_AGING_MIN_DRAIN + progress * (QUEUE_AGING_MAX_DRAIN - QUEUE_AGING_MIN_DRAIN);
 };
 
-const getQueueAgingDelta = (queue: PullRequest[], difficulty: Difficulty): Partial<MeterSet> | null => {
+export const getQueueAgingDelta = (queue: PullRequest[], difficulty: Difficulty): Partial<MeterSet> | null => {
   if (difficulty === 'learning') {
     return null;
   }
@@ -194,7 +195,7 @@ const extractLineExcerpts = (files: PullRequest['files'], lineNumbers: number[])
   return excerpts;
 };
 
-const maybeGameOver = (state: GameState): GameState => {
+export const maybeGameOver = (state: GameState): GameState => {
   if (state.phase === 'GAME_OVER') {
     return state;
   }
@@ -214,7 +215,7 @@ const maybeGameOver = (state: GameState): GameState => {
   return state;
 };
 
-const gameReducer = (state: GameState, action: GameAction): GameState => {
+export const gameReducer = (state: GameState, action: GameAction): GameState => {
   switch (action.type) {
     case 'SET_PHASE': {
       return { ...state, phase: action.phase };
@@ -298,6 +299,14 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
     case 'LOG_FALSE_POSITIVE': {
       return { ...state, falsePositiveRecords: [...state.falsePositiveRecords, action.record] };
     }
+    case 'RANDOMIZE_DAY_FLAVOR': {
+      // Only reshuffle the flavor on a fresh day-1 briefing; a mid-game remount
+      // must not overwrite the current day's mantra/quote.
+      if (state.phase !== 'BRIEFING' || state.currentDay !== 1 || state.history.length !== 0) {
+        return state;
+      }
+      return { ...state, currentMantra: action.mantra, dayQuote: action.quote };
+    }
     default:
       return state;
   }
@@ -308,6 +317,13 @@ const GameContext = createContext<GameContextValue | undefined>(undefined);
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
   const translations = useTranslations();
+
+  // The initial state is deterministic so server HTML and client hydration
+  // match; the random day flavor is applied after mount (effects never run
+  // during hydration's first pass).
+  useEffect(() => {
+    dispatch({ type: 'RANDOMIZE_DAY_FLAVOR', mantra: getDayMantra(), quote: getRandomDayQuote() });
+  }, []);
 
   const startWork = useCallback(() => {
     dispatch({ type: 'SET_PHASE', phase: 'WORK' });
@@ -411,12 +427,22 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       Object.assign(counterDelta, REQUEST_CHANGES_EFFECTS.missCounters);
       Object.assign(meterDelta, REQUEST_CHANGES_EFFECTS.missMeters);
       dispatch({
+        type: 'LOG_FALSE_POSITIVE',
+        record: {
+          prId: current.id,
+          title: current.title,
+          author: current.author,
+          selectedLines: extractLineExcerpts(current.files, selectedLines),
+          actualBugKinds: current.bugPatterns.map((pattern) => pattern.kind)
+        }
+      });
+      dispatch({
         type: 'APPLY_DECISION',
         processedId: current.id,
         counterDelta,
         meterDelta
       });
-      return { success: true, status: 'approved', message: decisionCopy.requestNoBonus, bonusApplied: false };
+      return { success: true, status: 'false-positive', message: decisionCopy.requestNoBonus, bonusApplied: false };
     },
     [state.currentPR, translations]
   );

@@ -12,16 +12,16 @@ Note: `node_modules` may be absent in a fresh checkout — every plan starts wit
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001 | Test baseline (Vitest) + PR CI | P1 | M | — | TODO |
-| 002 | Settle deployment story, remove broken release workflow | P1 | S | — (001 recommended first) | TODO |
-| 003 | Leaderboard through API route + input bounds + RLS runbook | P1 | M | 001, 002 | TODO |
-| 004 | Deterministic initial state + honest error boundary | P1 | S | 001 | TODO |
-| 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | TODO |
+| 001 | Test baseline (Vitest) + PR CI | P1 | M | — | DONE (2026-07-09; 63 tests; step 5 completed by orchestrator after pre-existing lint error fixed in c66e265) |
+| 002 | Settle deployment story, remove broken release workflow | P1 | S | — (001 recommended first) | DONE (2026-07-09; note: releases v1.0.0/v1.1.0 zips had 7+8 downloads — maintainer signed off on server-only anyway) |
+| 003 | Leaderboard through API route + input bounds + RLS runbook | P1 | M | 001, 002 | DONE (2026-07-09; 74 tests; maintainer must run docs/leaderboard-security.md RLS steps in Supabase) |
+| 004 | Deterministic initial state + honest error boundary | P1 | S | 001 | DONE (2026-07-09; 68 tests; in-browser /game hydration check pending) |
+| 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | DONE (2026-07-10; amended: dead claimedKind removed; note: StatsPanel doesn't show falsePositives — follow-up decision) |
 | 006 | Dedupe screens + leaderboard client code | P2 | M | 003, 005 | TODO |
-| 007 | Lazy-load per-language template packs | P3 | L | 001 | TODO |
-| 008 | Compress social cards + fix missing tutorial slide 6 | P3 | S | — | TODO |
-| 009 | Dependency advisories + tsconfig target | P3 | S | 001 | TODO |
-| 010 | Learning-mode curriculum design spike | P3 | M | 001 (007 first if both run) | TODO |
+| 007 | Lazy-load per-language template packs | P3 | L | 001 | DONE (2026-07-09; /game first load −404.5KB (−39%); day-1 pacing playtest pending) |
+| 008 | Compress oversized social-card assets | P3 | S | — | DONE (2026-07-09; PNG→JPEG 2.76MB→289KB + 1.87MB→264KB; browser/OG-unfurl check pending) |
+| 009 | Dependency advisories + tsconfig target | P3 | S | 001 | DONE (2026-07-09; 0 high/critical; residual postcss moderate documented — next 16.2.10 still pins postcss 8.4.31) |
+| 010 | Learning-mode curriculum design spike | P3 | M | 001 (007 first if both run) | DONE (2026-07-10; tiers T1=156/T2=139/T3=95; maintainer: answer docs/learning-mode-curriculum.md "Open questions") |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
@@ -35,6 +35,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
 
 ## Findings considered and rejected
 
+- **"Missing tutorial slide-6 image" (plan 008, withdrawn 2026-07-09)**: the original audit claimed `public/tutorial-slide-6-placeholder.png` didn't exist and `pages/index.tsx` referenced a 404. Wrong — the file exists (added in `18f2cb2`, present at the audit commit) and slide 6 renders. Plan 008 was amended to compression-only.
 - **`uniqueId` collision risk** (`utils/helpers.ts:19` — 4 base36 chars for PR ids): collision odds over a full run are negligible (~50 draws vs 1.7M space) and ids are also prefixed with templateId+day+index. Not worth doing.
 - **`advanceToNextDay` missing the velocity game-over check** (`context/GameContext.tsx:436`): unreachable in practice — every meter mutation already passes through `maybeGameOver` during WORK. Documented via a characterization test in plan 001 instead of a code change.
 - **tsconfig `target: es5` as a standalone finding**: folded into plan 009.

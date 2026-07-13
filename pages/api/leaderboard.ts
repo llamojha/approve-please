@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getSupabaseServiceClient } from '../../utils/supabaseClient';
-import { parseNonNegativeInt, sanitizeDisplayName } from '../../utils/leaderboard';
+import { parseBoundedInt, sanitizeDisplayName } from '../../utils/leaderboard';
+import type { LeaderboardEntryDto } from '../../utils/leaderboard';
 import type { Difficulty } from '../../types';
 
 const TRIM_LIMIT = 100;
 const VALID_MODES: Difficulty[] = ['normal', 'learning'];
 
-const parseMode = (value: unknown): Difficulty => {
+export const parseMode = (value: unknown): Difficulty => {
   if (typeof value === 'string' && VALID_MODES.includes(value as Difficulty)) {
     return value as Difficulty;
   }
@@ -38,20 +39,21 @@ const handleGet = async (req: NextApiRequest, res: NextApiResponse) => {
     .limit(TRIM_LIMIT);
 
   if (error) {
-    res.status(500).json({ error: error.message });
+    console.error('[leaderboard]', error);
+    res.status(500).json({ error: 'Leaderboard temporarily unavailable.' });
     return;
   }
 
-  res.status(200).json({
-    entries: (data ?? []).map((row) => ({
-      displayName: row.display_name ?? 'Anonymous reviewer',
-      cleanApprovals: row.clean_approvals ?? 0,
-      truePositives: row.true_positives ?? 0,
-      daysPlayed: row.days_played ?? 0,
-      score: row.score ?? 0,
-      createdAt: row.created_at
-    }))
-  });
+  const entries: LeaderboardEntryDto[] = (data ?? []).map((row) => ({
+    displayName: row.display_name ?? 'Anonymous reviewer',
+    cleanApprovals: row.clean_approvals ?? 0,
+    truePositives: row.true_positives ?? 0,
+    daysPlayed: row.days_played ?? 0,
+    score: row.score ?? 0,
+    createdAt: row.created_at
+  }));
+
+  res.status(200).json({ entries });
 };
 
 const trimLeaderboard = async (supabase: SupabaseClient, mode: Difficulty) => {
@@ -77,14 +79,14 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
   const supabase = getClientOrError(res);
   if (!supabase) return;
 
-  const cleanApprovals = parseNonNegativeInt(req.body?.cleanApprovals);
-  const truePositives = parseNonNegativeInt(req.body?.truePositives);
-  const daysPlayed = parseNonNegativeInt(req.body?.daysPlayed);
+  const cleanApprovals = parseBoundedInt(req.body?.cleanApprovals);
+  const truePositives = parseBoundedInt(req.body?.truePositives);
+  const daysPlayed = parseBoundedInt(req.body?.daysPlayed);
   const displayName = sanitizeDisplayName(req.body?.displayName);
   const mode = parseMode(req.body?.mode);
 
   if (cleanApprovals === null || truePositives === null || daysPlayed === null) {
-    res.status(400).json({ error: 'Invalid payload: expected non-negative integers.' });
+    res.status(400).json({ error: 'Invalid payload: expected non-negative integers within bounds.' });
     return;
   }
 
@@ -102,7 +104,8 @@ const handlePost = async (req: NextApiRequest, res: NextApiResponse) => {
     .single();
 
   if (error) {
-    res.status(500).json({ error: error.message });
+    console.error('[leaderboard]', error);
+    res.status(500).json({ error: 'Leaderboard temporarily unavailable.' });
     return;
   }
 

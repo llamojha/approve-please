@@ -2,18 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Leaderboard.module.css";
 import type { Difficulty } from "../types";
-import { getSupabaseAnonClient } from "../utils/supabaseClient";
+import type { LeaderboardEntryDto } from "../utils/leaderboard";
 
 const MODES: Difficulty[] = ["normal", "learning"];
 
-type LeaderboardEntry = {
-  displayName: string;
-  cleanApprovals: number;
-  truePositives: number;
-  daysPlayed: number;
-  score: number;
-  createdAt: string;
-};
+type LeaderboardEntry = LeaderboardEntryDto;
 
 const rankBadge = (rank: number) => {
   if (rank === 1) return styles.badge;
@@ -48,33 +41,13 @@ const LeaderboardPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const supabase = getSupabaseAnonClient();
-        if (!supabase) {
-          throw new Error("Leaderboard is not configured.");
-        }
-        const { data, error: fetchError } = await supabase
-          .from("leaderboard_entries")
-          .select(
-            "display_name, clean_approvals, true_positives, days_played, score, created_at"
-          )
-          .eq("mode", mode)
-          .order("score", { ascending: false })
-          .order("created_at", { ascending: false })
-          .limit(100);
-        if (fetchError) {
-          throw new Error(fetchError.message);
+        const response = await fetch(`/api/leaderboard?mode=${mode}`);
+        const payload = await response.json().catch(() => null);
+        if (!response.ok) {
+          throw new Error(payload?.error ?? "Failed to load leaderboard");
         }
         if (!alive) return;
-        setEntries(
-          (data ?? []).map((row) => ({
-            displayName: row.display_name ?? "Anonymous reviewer",
-            cleanApprovals: row.clean_approvals ?? 0,
-            truePositives: row.true_positives ?? 0,
-            daysPlayed: row.days_played ?? 0,
-            score: row.score ?? 0,
-            createdAt: row.created_at,
-          }))
-        );
+        setEntries(payload?.entries ?? []);
       } catch (err) {
         if (!alive) return;
         setError(

@@ -1,0 +1,13 @@
+{
+  "name": "translation-update-agent",
+  "version": "1.0.0",
+  "description": "Fallback (agent edits): when a write tool touches a locale-bearing file, review en/es parity",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A write tool is about to run. ONLY act if it targets one of these locale-bearing files; otherwise do nothing and let the write proceed:\n- constants/i18n.ts\n- data/dayMantras.ts\n- data/dayQuotes.ts\n- data/prTemplates/<lang>/<name>/template.json\n\nIf it does, run the matching en/es parity check. Do NOT auto-translate silently — summarize a short diff report first, then propose the missing/updated `es` entries as a suggested diff, preserving the existing informal, second-person, game-narrative voice used elsewhere in the es content.\n\nSHAPE A — constants/i18n.ts (single TRANSLATIONS object keyed by locale):\n1. Deep-diff the `en` object against `es` key-by-key, including nested objects and array entries like tutorialSlides.\n2. List keys present in `en` but missing/empty in `es`.\n3. List keys present in `es` but missing in `en`.\n4. Flag keys where the `es` string is still an untouched copy of `en` or contains English words.\n5. Preserve function-valued entries (e.g. dayHeading, queueAwaiting) — match parameter signatures exactly between locales.\n6. Confirm LOCALE_OPTIONS and the Locale type in types/index.ts only reference locales that exist as full keys in TRANSLATIONS.\n\nSHAPE B — data/dayMantras.ts and data/dayQuotes.ts (arrays of objects with { en, es } fields):\n1. For every entry, confirm each localized field has BOTH an `en` and a non-empty `es` value.\n2. List entries missing `es` (or with `es` equal to `en`).\n3. Confirm no entry has `es` without a corresponding `en`.\n\nSHAPE C — data/prTemplates/<lang>/<name>/template.json (en base; es optional overrides):\n1. `en` base fields (title, description) are required; `localized.es` is optional but if present must cover title and description.\n2. If `localized.es` exists, flag any es field that is empty or identical to the en base.\n3. For each bugPattern, if `localizedDescription` exists it should include `es`; flag partial/empty `localizedDescription.es`.\n4. Do not require es overrides where none exist — only flag partial/inconsistent localization."
+  }
+}

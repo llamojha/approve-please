@@ -1,13 +1,20 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useGameState } from "../context/GameContext";
-import { prTemplates, PullRequestTemplate } from "../data/prs";
+import {
+  eagerTemplates,
+  templateLoaders,
+  PullRequestTemplate,
+} from "../data/prs";
 import { PullRequest, LanguagePreference, ScriptedWave } from "../types";
 import { instantiatePullRequest } from "../utils/pr";
 import { getCodeLanguages } from "../utils/language";
+import { orderForLearning } from "../utils/curriculum"; // SPIKE(plan 010): learning-mode curriculum prototype
 import { useLocale } from "../context/LocaleContext";
 
+// Scripted (tutorial) waves only reference generic templates, which are
+// bundled eagerly — so day-1 lookups stay synchronous.
 const templateMap = new Map(
-  prTemplates.map((template) => [template.templateId, template])
+  eagerTemplates.map((template) => [template.templateId, template])
 );
 const DEFAULT_WAVE_MINUTES = [0, 60, 180, 360];
 const WEIGHTED_WAVE_COUNTS = [
@@ -82,6 +89,7 @@ export const usePRSpawner = () => {
       queue,
       currentPR,
       languagePreference,
+      difficulty, // SPIKE(plan 010): gates the learning-mode ordering branches below
     },
     actions: { enqueuePRs },
   } = useGameState();
@@ -98,6 +106,9 @@ export const usePRSpawner = () => {
     (count: number, day: number): PullRequest[] => {
       const results: PullRequest[] = [];
       for (let i = 0; i < count; i += 1) {
+        if (workingPoolRef.current.length === 0 && difficulty === "learning") { // SPIKE(plan 010): learning-mode refill
+          workingPoolRef.current = orderForLearning(basePoolRef.current, day); // SPIKE: refill keeps curriculum order — no reshuffle on exhaustion (known spike simplification: repeats arrive in the same order each refill)
+        } // SPIKE(plan 010)
         if (workingPoolRef.current.length === 0) {
           workingPoolRef.current = shuffle(basePoolRef.current);
         }
@@ -124,7 +135,10 @@ export const usePRSpawner = () => {
       }
       return results;
     },
-    [locale]
+    [
+      locale,
+      difficulty, // SPIKE(plan 010): dep for the learning-mode refill branch above
+    ]
   );
 
   const spawnSpecific = useCallback(
@@ -158,15 +172,62 @@ export const usePRSpawner = () => {
   );
 
   useEffect(() => {
-    const basePool = prTemplates.filter((template) =>
-      templateMatchesPreference(template, languagePreference)
-    );
+    let cancelled = false;
 
-    basePoolRef.current = basePool;
-    workingPoolRef.current = shuffle(basePool);
+    const applyPools = (templates: PullRequestTemplate[]) => {
+      const basePool = templates.filter((template) =>
+        templateMatchesPreference(template, languagePreference)
+      );
+      basePoolRef.current = basePool;
+      if (difficulty === "learning") { // SPIKE(plan 010): learning mode orders the pool by curriculum tier for the current day; normal mode falls through to the pre-spike shuffle untouched
+        workingPoolRef.current = orderForLearning(basePool, currentDay); // SPIKE: deterministic curriculum order (see docs/learning-mode-curriculum.md)
+        return; // SPIKE: skip the normal-mode shuffle below
+      } // SPIKE(plan 010)
+      workingPoolRef.current = shuffle(basePool);
+    };
+
+    // Seed synchronously from the eager (generic) pack so the day-1 scripted
+    // tutorial wave and early draws never wait on a lazy-loaded chunk.
+    applyPools(eagerTemplates);
     spawnCountRef.current = 0;
     lastHourlyCheckRef.current = -1;
-  }, [currentDay, languagePreference]);
+
+    // Empty preference means "everything" (see templateMatchesPreference),
+    // so load every pack; otherwise only the selected languages' packs.
+    const selectedLoaders =
+      languagePreference.length === 0
+        ? Object.values(templateLoaders)
+        : Object.entries(templateLoaders)
+            .filter(([language]) => languagePreference.includes(language))
+            .map(([, loader]) => loader);
+
+    if (selectedLoaders.length > 0) {
+      Promise.all(selectedLoaders.map((loader) => loader()))
+        .then((packs) => {
+          if (cancelled) {
+            // A newer effect run (day/preference change) owns the pool now.
+            return;
+          }
+          applyPools([...eagerTemplates, ...packs.flat()]);
+        })
+        .catch((error) => {
+          if (process.env.NODE_ENV !== "production") {
+            console.error(
+              "[Spawner] Failed to load language template packs",
+              error
+            );
+          }
+        });
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    currentDay,
+    languagePreference,
+    difficulty, // SPIKE(plan 010): re-derive pools when the mode changes so learning ordering applies
+  ]);
 
   useEffect(() => {
     const key = `${currentDay}`;
@@ -191,12 +252,19 @@ export const usePRSpawner = () => {
 
     DEFAULT_WAVE_MINUTES.forEach((minute) => {
       if (currentTime >= minute && !triggeredWaves.has(minute)) {
-        triggeredWaves.add(minute);
         if (shouldSkipDefaultWave(minute)) {
+          triggeredWaves.add(minute);
           return;
         }
         const count = minute === 0 ? 2 : pickWeightedWaveCount();
         const prs = drawBatch(count, currentDay);
+        if (prs.length === 0 && basePoolRef.current.length === 0) {
+          // Lazy language packs may still be loading; leave the wave marker
+          // unset so this wave re-attempts on the next tick instead of being
+          // silently lost (waves must fire — see agent.md non-negotiables).
+          return;
+        }
+        triggeredWaves.add(minute);
         if (prs.length > 0) {
           enqueuePRs(prs);
         }

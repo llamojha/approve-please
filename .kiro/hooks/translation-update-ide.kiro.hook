@@ -1,0 +1,18 @@
+{
+  "name": "translation-update-ide",
+  "version": "1.0.0",
+  "description": "Primary (IDE): when a locale-bearing file is saved in the editor, review en/es parity",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "constants/i18n.ts",
+      "data/dayMantras.ts",
+      "data/dayQuotes.ts",
+      "data/prTemplates/**/template.json"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A locale-bearing file was just saved. This project ships English (en) and Spanish (es) content across a few different file shapes. First identify which shape the saved file matches, then run the matching parity check. Do NOT auto-translate silently — always summarize a short diff report first, then propose the missing/updated `es` entries as a suggested diff, preserving the existing informal, second-person, game-narrative voice used elsewhere in the es content.\n\nSHAPE A — constants/i18n.ts (single TRANSLATIONS object keyed by locale):\n1. Deep-diff the `en` object against `es` key-by-key, including nested objects and array entries like tutorialSlides.\n2. List keys present in `en` but missing/empty in `es` (untranslated additions).\n3. List keys present in `es` but missing in `en` (orphaned/stale entries).\n4. Flag keys where the `es` string is still an untouched copy of `en` or contains English words suggesting it wasn't translated.\n5. Preserve function-valued entries (e.g. dayHeading, queueAwaiting) — match parameter signatures exactly between locales.\n6. Confirm LOCALE_OPTIONS and the Locale type in types/index.ts only reference locales that exist as full keys in TRANSLATIONS.\n\nSHAPE B — data/dayMantras.ts and data/dayQuotes.ts (arrays of objects with { en, es } fields, sometimes nested under role/text):\n1. For every entry, confirm each localized field has BOTH an `en` and a non-empty `es` value.\n2. List entries missing `es` (or with `es` equal to `en`, indicating a forgotten translation).\n3. Confirm no entry has `es` without a corresponding `en`.\n\nSHAPE C — data/prTemplates/<lang>/<name>/template.json (en is the base; es is optional overrides):\n1. `en` base fields (title, description) are required; `localized.es` is optional but if present must cover title and description.\n2. If `localized.es` exists, flag any es field that is empty or identical to the en base (likely forgotten).\n3. For each bugPattern, if `localizedDescription` exists it should include `es`; flag bugs that have a base `description` and a partial/empty `localizedDescription.es`.\n4. Do not require es overrides where none exist — only flag partial/inconsistent localization, not the deliberate absence of a full es override."
+  }
+}

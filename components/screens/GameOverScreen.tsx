@@ -5,7 +5,6 @@ import { useGameState } from "../../context/GameContext";
 import { formatMeterValue, meterColorFromValue } from "../../utils/helpers";
 import { Counters, BugKind, Difficulty } from "../../types";
 import { useTranslations } from "../../hooks/useTranslations";
-import { getSupabaseAnonClient } from "../../utils/supabaseClient";
 import {
   computeLeaderboardScore,
   sanitizeDisplayName,
@@ -120,19 +119,20 @@ const GameOverScreen = () => {
     setSubmitStatus("submitting");
     setSubmitError(null);
     try {
-      const supabase = getSupabaseAnonClient();
-      if (!supabase) {
-        throw new Error("Leaderboard is not configured.");
-      }
-      const { error } = await supabase.from("leaderboard_entries").insert({
-        display_name: sanitizeDisplayName(displayName),
-        clean_approvals: finalCounters.cleanApprovals,
-        true_positives: finalCounters.truePositives,
-        days_played: daysPlayed,
-        mode: difficulty,
+      const response = await fetch("/api/leaderboard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          displayName: sanitizeDisplayName(displayName),
+          cleanApprovals: finalCounters.cleanApprovals,
+          truePositives: finalCounters.truePositives,
+          daysPlayed,
+          mode: difficulty,
+        }),
       });
-      if (error) {
-        throw new Error(error.message);
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        throw new Error(payload?.error ?? "Failed to submit score.");
       }
       setSubmitStatus("success");
     } catch (err) {

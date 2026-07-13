@@ -6,7 +6,7 @@ import { BugKind } from '../../types';
 
 const SummaryScreen = () => {
   const {
-    state: { currentDay, counters, meters, prodIncidents },
+    state: { currentDay, counters, meters, prodIncidents, falsePositiveRecords },
     actions: { advanceToNextDay, restartGame }
   } = useGameState();
   const translations = useTranslations();
@@ -135,6 +135,40 @@ const SummaryScreen = () => {
                   )}
                 </li>
               ))}
+            </ul>
+          </section>
+        )}
+        {falsePositiveRecords.length > 0 && (
+          <section className={styles.incidentSection}>
+            <h3>{summaryText.falseHeading}</h3>
+            <p className="muted">{summaryText.falseBody}</p>
+            <ul className={styles.incidentList}>
+              {falsePositiveRecords.map((record, index) => {
+                const reason = formatFalsePositiveReason(record.actualBugKinds);
+                return (
+                  <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
+                    <div className={styles.incidentMeta}>
+                      <div>
+                        <strong>{record.title}</strong>
+                        <div className={styles.incidentSubline}>{incidentsText.authorOnly(record.author)}</div>
+                      </div>
+                      <div className={styles.incidentBadges}>
+                        <span className={`${styles.badge} ${styles.badgeReason}`}>{reason.label}</span>
+                      </div>
+                    </div>
+                    {reason.isClean && <p className={styles.incidentNote}>{incidentsText.rejectedWithoutCause}</p>}
+                    {record.selectedLines.length > 0 && (
+                      <ul className={styles.lineList}>
+                        {record.selectedLines.map((line) => (
+                          <li key={`${record.prId}-${line.lineNumber}`}>
+                            L{line.lineNumber}: <code>{line.content || '…'}</code>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </section>
         )}
