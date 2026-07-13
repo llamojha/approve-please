@@ -205,6 +205,18 @@ export const dayMantras: DayMantra[] = [
     es: 'La confianza del usuario es frágil: nada de dark patterns bajo tu vigilancia.'
   },
   {
+    en: 'Merge-conflict monday - untangle before you approve.',
+    es: 'Lunes de conflictos de merge: desenreda antes de aprobar.'
+  },
+  {
+    en: 'Edge-case hunt - the happy path is never the whole story.',
+    es: 'Cacería de casos límite: el camino feliz nunca es toda la historia.'
+  },
+  {
+    en: 'Rollback readiness - approve only what you can undo fast.',
+    es: 'Listos para el rollback: aprueba solo lo que puedas revertir rápido.'
+  },
+  {
     en: "Remember: you're the last gate - ship what you'd sign your name to.",
     es: 'Recuerda: eres la última puerta. Solo envía lo que firmarías.'
   }
