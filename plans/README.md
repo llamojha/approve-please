@@ -17,7 +17,7 @@ Note: `node_modules` may be absent in a fresh checkout — every plan starts wit
 | 003 | Leaderboard through API route + input bounds + RLS runbook | P1 | M | 001, 002 | DONE (2026-07-09; 74 tests; maintainer must run docs/leaderboard-security.md RLS steps in Supabase) |
 | 004 | Deterministic initial state + honest error boundary | P1 | S | 001 | DONE (2026-07-09; 68 tests; in-browser /game hydration check pending) |
 | 005 | Finish false-positive tracking feature | P2 | M | 001 (before 006) | DONE (2026-07-10; amended: dead claimedKind removed; note: StatsPanel doesn't show falsePositives — follow-up decision) |
-| 006 | Dedupe screens + leaderboard client code | P2 | M | 003, 005 | TODO |
+| 006 | Dedupe screens + leaderboard client code | P2 | M | 003, 005 | DONE (2026-07-14; verifier APPROVE; net −62 lines; suite 92/92 green post-merge; browser pixel-check of screens + leaderboard mode-switch pending) |
 | 007 | Lazy-load per-language template packs | P3 | L | 001 | DONE (2026-07-09; /game first load −404.5KB (−39%); day-1 pacing playtest pending) |
 | 008 | Compress oversized social-card assets | P3 | S | — | DONE (2026-07-09; PNG→JPEG 2.76MB→289KB + 1.87MB→264KB; browser/OG-unfurl check pending) |
 | 009 | Dependency advisories + tsconfig target | P3 | S | 001 | DONE (2026-07-09; 0 high/critical; residual postcss moderate documented — next 16.2.10 still pins postcss 8.4.31) |
