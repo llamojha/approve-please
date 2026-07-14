@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/LeaderboardModal.module.css";
 
 import type { Difficulty } from "../../types";
-import type { LeaderboardEntryDto } from "../../utils/leaderboard";
-
-type LeaderboardEntry = LeaderboardEntryDto;
+import { useLeaderboardEntries } from "../../hooks/useLeaderboardEntries";
 
 type Props = {
   isOpen: boolean;
@@ -28,43 +26,16 @@ const MODES: Difficulty[] = ["normal", "learning"];
 
 const LeaderboardModal = ({ isOpen, onClose, mode }: Props) => {
   const [activeMode, setActiveMode] = useState<Difficulty>(mode);
-  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   // Sync activeMode when the modal opens with a different mode prop
   useEffect(() => {
     if (isOpen) setActiveMode(mode);
   }, [isOpen, mode]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    let alive = true;
-    const load = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(`/api/leaderboard?mode=${activeMode}`);
-        const payload = await response.json().catch(() => null);
-        if (!response.ok) {
-          throw new Error(payload?.error ?? "Failed to load leaderboard");
-        }
-        if (!alive) return;
-        setEntries(payload?.entries ?? []);
-      } catch (err) {
-        if (!alive) return;
-        setError(
-          err instanceof Error ? err.message : "Failed to load leaderboard"
-        );
-      } finally {
-        if (alive) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      alive = false;
-    };
-  }, [isOpen, activeMode]);
+  const { entries, loading, error } = useLeaderboardEntries(activeMode, {
+    limit: 50,
+    enabled: isOpen,
+  });
 
   if (!isOpen) return null;
 
