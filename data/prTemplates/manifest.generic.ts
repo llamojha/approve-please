@@ -1,6 +1,6 @@
 // Auto-generated manifest of pull-request templates (generic pack)
 import type { PullRequestTemplate } from '../../types';
-import tpl_pr_000_onboarding_readme_update from './generic/pr-000-onboarding-readme/template.json';
+import tpl_pr_000_onboarding_readme_update from './generic/pr-000-onboarding-readme-update/template.json';
 import tpl_pr_001_document_usage_analytics_runbook from './generic/pr-001-document-usage-analytics-runbook/template.json';
 import tpl_pr_001_sanitize_readme_api_key from './generic/pr-001-sanitize-readme-api-key/template.json';
 import tpl_pr_002_document_delta_sync_runbook from './generic/pr-002-document-delta-sync-runbook/template.json';

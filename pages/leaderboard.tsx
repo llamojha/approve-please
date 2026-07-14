@@ -1,12 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Leaderboard.module.css";
 import type { Difficulty } from "../types";
-import type { LeaderboardEntryDto } from "../utils/leaderboard";
+import { useLeaderboardEntries } from "../hooks/useLeaderboardEntries";
 
 const MODES: Difficulty[] = ["normal", "learning"];
-
-type LeaderboardEntry = LeaderboardEntryDto;
 
 const rankBadge = (rank: number) => {
   if (rank === 1) return styles.badge;
@@ -30,38 +28,10 @@ const formatDate = (value: string | null | undefined) => {
 };
 
 const LeaderboardPage = () => {
-  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [mode, setMode] = useState<Difficulty>("normal");
-
-  useEffect(() => {
-    let alive = true;
-    const load = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(`/api/leaderboard?mode=${mode}`);
-        const payload = await response.json().catch(() => null);
-        if (!response.ok) {
-          throw new Error(payload?.error ?? "Failed to load leaderboard");
-        }
-        if (!alive) return;
-        setEntries(payload?.entries ?? []);
-      } catch (err) {
-        if (!alive) return;
-        setError(
-          err instanceof Error ? err.message : "Failed to load leaderboard"
-        );
-      } finally {
-        if (alive) setLoading(false);
-      }
-    };
-    load();
-    return () => {
-      alive = false;
-    };
-  }, [mode]);
+  const { entries, loading, error } = useLeaderboardEntries(mode, {
+    limit: 100,
+  });
 
   const withRanks = useMemo(
     () => entries.map((entry, idx) => ({ ...entry, rank: idx + 1 })),

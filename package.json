@@ -4,13 +4,16 @@
   "private": true,
   "description": "Approve Please — a Papers, Please-style pull-request review game",
   "scripts": {
+    "predev": "npm run generate:templates",
     "dev": "next dev",
+    "prebuild": "npm run generate:templates",
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "generate:templates": "node scripts/build-template-manifest.mjs"
+    "generate:templates": "node scripts/build-template-manifest.mjs",
+    "templates:report": "node scripts/template-report.mjs"
   },
   "keywords": [],
   "author": "",

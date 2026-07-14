@@ -2,6 +2,7 @@ import { Component, ErrorInfo, ReactNode } from 'react';
 import Router from 'next/router';
 import { LocaleContext, LocaleContextValue } from '../../context/LocaleContext';
 import { Locale, TRANSLATIONS } from '../../constants/i18n';
+import styles from '../../styles/HydrationErrorBoundary.module.css';
 
 interface HydrationErrorBoundaryProps {
   children: ReactNode;
@@ -48,27 +49,20 @@ class HydrationErrorBoundary extends Component<HydrationErrorBoundaryProps, Hydr
 
       if (this.state.isHydration) {
         return (
-          <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: 'var(--bg)' }}>
-            <p style={{ color: 'var(--muted)' }}>{copy.refreshing}</p>
+          <div className={styles.root}>
+            <p className={styles.message}>{copy.refreshing}</p>
           </div>
         );
       }
 
       return (
-        <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: 'var(--bg)' }}>
-          <div style={{ display: 'grid', gap: '16px', justifyItems: 'center' }}>
-            <p style={{ color: 'var(--muted)' }}>{copy.crashed}</p>
+        <div className={styles.root}>
+          <div className={styles.content}>
+            <p className={styles.message}>{copy.crashed}</p>
             <button
               type="button"
               onClick={() => window.location.reload()}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '6px',
-                border: '1px solid var(--muted)',
-                background: 'transparent',
-                color: 'var(--muted)',
-                cursor: 'pointer'
-              }}
+              className={styles.reloadButton}
             >
               {copy.reloadButton}
             </button>

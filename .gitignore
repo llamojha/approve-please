@@ -19,7 +19,8 @@ pnpm-debug.log*
 
 # Editor cruft
 .DS_Store
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .idea/
 
 # Local reports

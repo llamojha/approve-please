@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Approve Please pull request template",
+  "type": "object",
+  "required": [
+    "templateId",
+    "title",
+    "author",
+    "description",
+    "tags",
+    "importance",
+    "files",
+    "bugPatterns"
+  ],
+  "properties": {
+    "templateId": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "importance": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high"
+      ]
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "filename",
+          "language",
+          "lines"
+        ],
+        "properties": {
+          "filename": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "lineNumber",
+                "content",
+                "isNew"
+              ],
+              "properties": {
+                "lineNumber": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "content": {
+                  "type": "string"
+                },
+                "isNew": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "bugPatterns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "kind",
+          "lineNumbers",
+          "severity"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "logic",
+              "security",
+              "performance",
+              "style",
+              "accessibility"
+            ]
+          },
+          "lineNumbers": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "minor",
+              "major",
+              "critical"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "localizedDescription": {
+            "type": "object",
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "es": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "localized": {
+      "type": "object",
+      "properties": {
+        "en": {
+          "$ref": "#/definitions/localizedMetadata"
+        },
+        "es": {
+          "$ref": "#/definitions/localizedMetadata"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "definitions": {
+    "localizedMetadata": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

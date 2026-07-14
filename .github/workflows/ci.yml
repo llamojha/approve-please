@@ -13,6 +13,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: npm run generate:templates && git diff --exit-code -- data/prTemplates
       - run: npm run typecheck
       - run: npm run lint
       - run: npm test

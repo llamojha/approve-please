@@ -335,7 +335,7 @@ For the **first playable version**, target:
 
 2. **PR System:**
 
-   * Hard-coded pool of ~20 PR templates with known bugs / no-bug variants.
+   * ~390 PR templates with known bugs / no-bug variants, auto-discovered from `data/prTemplates/`.
    * PR queue, viewer, highlighting, Approve / Request Changes.
 
 3. **Time & Waves:**
@@ -376,8 +376,16 @@ Once this runs, you can iterate with more bug types, more days, better writing, 
   (`SUPABASE_SERVICE_ROLE_KEY` must never be exposed to the client or committed)
 - `npm run dev` — start the dev server
 - `npm run typecheck && npm run lint && npm test` — verification
-- `npm run generate:templates` — regenerate the PR template manifest after
-  adding/editing templates under `data/prTemplates/`
+- `npm run generate:templates` — optionally validate templates and regenerate the
+  manifests immediately; this runs automatically before `npm run dev` and
+  `npm run build`
+
+### Add your own PRs
+
+Contribute a review scenario by adding a validated template under
+`data/prTemplates/`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow
+and the [PR template authoring guide](docs/pr-template-guide.md) for the JSON
+format, validation rules, tests, coverage report, and dev preview.
 
 ## Deployment
 

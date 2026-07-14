@@ -1,0 +1,25 @@
+.root {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+}
+
+.message {
+  color: var(--muted);
+}
+
+.content {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
+.reloadButton {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--muted);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
