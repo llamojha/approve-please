@@ -22,6 +22,7 @@ Note: `node_modules` may be absent in a fresh checkout — every plan starts wit
 | 008 | Compress oversized social-card assets | P3 | S | — | DONE (2026-07-09; PNG→JPEG 2.76MB→289KB + 1.87MB→264KB; browser/OG-unfurl check pending) |
 | 009 | Dependency advisories + tsconfig target | P3 | S | 001 | DONE (2026-07-09; 0 high/critical; residual postcss moderate documented — next 16.2.10 still pins postcss 8.4.31) |
 | 010 | Learning-mode curriculum design spike | P3 | M | 001 (007 first if both run) | DONE (2026-07-10; tiers T1=156/T2=139/T3=95; maintainer: answer docs/learning-mode-curriculum.md "Open questions") |
+| 011 | Finish CSS migration: extract landing-page styled-jsx to CSS Module | P2 | M | — | DONE (2026-07-14; CSS Modules only; 92 tests; Chrome interaction/responsive smoke passed) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 

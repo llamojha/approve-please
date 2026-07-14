@@ -57,7 +57,7 @@ const RunStatsCards = ({ counters, meters }: RunStatsCardsProps) => {
           <h2>{counters.truePositives}</h2>
         </div>
       </div>
-      <div className={`${styles.summaryGrid} ${styles.summaryGridWide}`} style={{ marginTop: '2rem' }}>
+      <div className={`${styles.summaryGrid} ${styles.summaryGridWide} ${styles.summaryGridSpaced}`}>
         <div className={`${styles.summaryCard} ${styles.meterCard}`} style={stabilityCardStyle}>
           <small>{meterLabels.stability}</small>
           <h2>{formatMeterValue(meters.stability)}%</h2>
