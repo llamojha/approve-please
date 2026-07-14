@@ -1,0 +1,8 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["data/prTemplates/**/template.json"],
+      "url": "./data/prTemplates/template.schema.json"
+    }
+  ]
+}

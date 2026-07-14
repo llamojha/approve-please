@@ -1,29 +1,42 @@
 # Contributing to Approve, Please
 
-Thanks for helping improve the game! This guide covers local setup, development workflow, and how to add new PR templates.
+The easiest way to contribute is to add your own pull-request review scenarios. Code, documentation, accessibility, localization, and gameplay improvements are also welcome.
 
 ## Setup
+
 - Install Node 20 (use `nvm use` if available).
-- Install deps: `npm install`.
+- Install dependencies with `npm install`.
 
 ## Common scripts
-- `npm run dev` – start the Next.js dev server.
-- `npm run lint` – lint the codebase.
-- `npm run typecheck` – TypeScript type check.
-- `npm run build` – production build.
 
-## Adding a new PR template
-1. Copy `docs/pr-template-guide.md` and fill in the sections for your scenario.
-2. Save the JSON as `data/prTemplates/<language>/<template-id>/template.json` (folder and file name match the `templateId`).
-3. Run `npm run generate:templates` to refresh `data/prTemplates/templateManifest.ts`.
-4. Verify in-game: start `npm run dev`, filter/select the new template language, and ensure the diff/bugs appear as expected.
+- `npm run dev` — validate and regenerate templates, then start the Next.js development server.
+- `npm run build` — validate and regenerate templates, then create a production build.
+- `npm run generate:templates` — optionally validate templates and regenerate manifests without starting or building the app.
+- `npm run templates:report` — report coverage by language, bug kind, severity, clean PRs, and missing Spanish metadata.
+- `npm test` — run the test suite, including English and Spanish template instantiation.
+- `npm run lint` — lint the codebase.
+- `npm run typecheck` — run the TypeScript type check.
 
-Tips:
-- Keep line numbers consistent and indent TS/JS with two spaces.
-- Provide `bugPatterns` for any hidden issues (kind, severity, line numbers, description).
-- Add optional `localized` entries for ES copy if you have them.
+Template generation runs automatically before `npm run dev` and `npm run build`; manual generation is only needed for immediate feedback.
+
+## Contribute your own PRs
+
+1. Choose an underserved language or bug kind with `npm run templates:report`.
+2. Author `data/prTemplates/<language>/<template-id>/template.json` using the worksheet and complete format in [`docs/pr-template-guide.md`](docs/pr-template-guide.md). For AI-assisted drafting, use [`.kiro/prompts/generate-pr-template.md`](.kiro/prompts/generate-pr-template.md). VS Code provides autocomplete and inline validation through the repository schema mapping.
+3. Run `npm run dev`. The automatic validator names every affected file and problem before the app starts.
+4. Open `/dev/templates/<template-id>` to review the real game rendering. Bug lines begin highlighted, the English/Spanish toggle checks localized content, and edits to template JSON hot-reload. This route is development-only and returns 404 in production.
+5. Run `npm test` to prove every template instantiates in English and Spanish, then run `npm run templates:report` to note the coverage improved by your contribution.
+
+Content house rules:
+
+- Submit batches of 10 or fewer templates per pull request.
+- Use a globally unique `templateId` that exactly matches its folder name.
+- Use two-space indentation everywhere, including code inside Markdown fences.
+- Annotate bugs only on changed lines where `isNew` is `true`.
+- Spanish `localized.es` metadata and localized bug descriptions are encouraged but optional.
 
 ## Pull request expectations
-- Keep changes scoped and include context in your PR description.
-- Run `npm run lint` and `npm run typecheck` before submitting.
+
+- Keep changes scoped and explain what changed and why.
+- Run `npm run typecheck`, `npm run lint`, and `npm test` before submitting.
 - For gameplay tuning, adjust values in `constants/gameSettings.ts` and describe the intended effect.
