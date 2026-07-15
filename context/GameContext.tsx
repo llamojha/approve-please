@@ -46,6 +46,7 @@ export interface GameState {
   dayQuote: DayQuote;
   prodIncidents: ProdIncident[];
   falsePositiveRecords: FalsePositiveRecord[];
+  deliveredWaveIds: string[];
 }
 
 export interface DecisionResult {
@@ -64,6 +65,7 @@ interface GameContextValue {
   actions: {
     startWork: () => void;
     enqueuePRs: (prs: PullRequest[]) => void;
+    deliverWave: (waveId: string, prs: PullRequest[]) => void;
     selectPR: (id: string) => void;
     tickWorkMinute: () => void;
     approveCurrentPR: () => DecisionResult;
@@ -79,6 +81,7 @@ export type GameAction =
   | { type: 'SET_PHASE'; phase: GamePhase }
   | { type: 'ADVANCE_TIME'; minutes: number }
   | { type: 'QUEUE_PRS'; prs: PullRequest[] }
+  | { type: 'DELIVER_WAVE'; waveId: string; prs: PullRequest[] }
   | { type: 'SET_CURRENT_PR'; id: string | null }
   | { type: 'APPLY_DECISION'; processedId: string; counterDelta: Partial<Counters>; meterDelta: Partial<MeterSet> }
   | { type: 'RESET_FOR_DAY'; nextDay: number; mantra: DayMantra }
@@ -122,7 +125,8 @@ export const createInitialState = (): GameState => {
     gameOverReason: undefined,
     dayQuote: getDefaultDayQuote(),
     prodIncidents: [],
-    falsePositiveRecords: []
+    falsePositiveRecords: [],
+    deliveredWaveIds: []
   };
 };
 
@@ -240,6 +244,23 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
       const nextCurrent = state.currentPR ?? mergedQueue[0] ?? null;
       return { ...state, queue: mergedQueue, currentPR: nextCurrent };
     }
+    case 'DELIVER_WAVE': {
+      if (state.deliveredWaveIds.includes(action.waveId)) {
+        return state;
+      }
+      const deliveredWaveIds = [...state.deliveredWaveIds, action.waveId];
+      if (action.prs.length === 0) {
+        return { ...state, deliveredWaveIds };
+      }
+      const mergedQueue = [...state.queue, ...action.prs];
+      const nextCurrent = state.currentPR ?? mergedQueue[0] ?? null;
+      return {
+        ...state,
+        queue: mergedQueue,
+        currentPR: nextCurrent,
+        deliveredWaveIds
+      };
+    }
     case 'SET_CURRENT_PR': {
       if (!action.id) {
         return { ...state, currentPR: null };
@@ -268,7 +289,8 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
         gameOverReason: undefined,
         dayQuote: getRandomDayQuote(),
         prodIncidents: [],
-        falsePositiveRecords: []
+        falsePositiveRecords: [],
+        deliveredWaveIds: []
       };
     }
     case 'PUSH_SUMMARY': {
@@ -336,6 +358,10 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const enqueuePRs = useCallback((prs: PullRequest[]) => {
     dispatch({ type: 'QUEUE_PRS', prs });
+  }, []);
+
+  const deliverWave = useCallback((waveId: string, prs: PullRequest[]) => {
+    dispatch({ type: 'DELIVER_WAVE', waveId, prs });
   }, []);
 
   const selectPR = useCallback((id: string) => {
@@ -485,6 +511,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       actions: {
         startWork,
         enqueuePRs,
+        deliverWave,
         selectPR,
         tickWorkMinute,
         approveCurrentPR,
@@ -499,6 +526,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       state,
       startWork,
       enqueuePRs,
+      deliverWave,
       selectPR,
       tickWorkMinute,
       approveCurrentPR,

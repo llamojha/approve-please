@@ -26,12 +26,6 @@ const pickWeightedWaveCount = (): number => {
   return WEIGHTED_WAVE_COUNTS[index];
 };
 
-interface WaveTracker {
-  waves: Set<number>;
-  scripted: Set<string>;
-}
-
-const waveTrackerStore = new Map<number, WaveTracker>();
 const tutorialWaves: Record<number, ScriptedWave[]> = {
   1: [
     {
@@ -64,22 +58,6 @@ const templateMatchesPreference = (
   return languages.some((language) => preference.includes(language));
 };
 
-const getWaveTracker = (day: number): WaveTracker => {
-  const existing = waveTrackerStore.get(day);
-  if (existing) {
-    return existing;
-  }
-  const tracker: WaveTracker = { waves: new Set(), scripted: new Set() };
-  waveTrackerStore.set(day, tracker);
-  return tracker;
-};
-
-const resetWaveTracker = (day: number): WaveTracker => {
-  const tracker: WaveTracker = { waves: new Set(), scripted: new Set() };
-  waveTrackerStore.set(day, tracker);
-  return tracker;
-};
-
 export const usePRSpawner = () => {
   const {
     state: {
@@ -88,19 +66,18 @@ export const usePRSpawner = () => {
       currentDay,
       queue,
       currentPR,
+      deliveredWaveIds,
       languagePreference,
       difficulty, // SPIKE(plan 010): gates the learning-mode ordering branches below
     },
-    actions: { enqueuePRs },
+    actions: { deliverWave },
   } = useGameState();
   const { locale } = useLocale();
 
-  const trackerRef = useRef<WaveTracker>(getWaveTracker(currentDay));
   const workingPoolRef = useRef<PullRequestTemplate[]>([]);
   const basePoolRef = useRef<PullRequestTemplate[]>([]);
   const spawnCountRef = useRef(0);
-  const trackerResetKeyRef = useRef<string>("");
-  const lastHourlyCheckRef = useRef<number>(-1);
+  const pendingDeliveriesRef = useRef<Map<string, PullRequest[]>>(new Map());
 
   const drawBatch = useCallback(
     (count: number, day: number): PullRequest[] => {
@@ -189,8 +166,6 @@ export const usePRSpawner = () => {
     // Seed synchronously from the eager (generic) pack so the day-1 scripted
     // tutorial wave and early draws never wait on a lazy-loaded chunk.
     applyPools(eagerTemplates);
-    spawnCountRef.current = 0;
-    lastHourlyCheckRef.current = -1;
 
     // Empty preference means "everything" (see templateMatchesPreference),
     // so load every pack; otherwise only the selected languages' packs.
@@ -230,75 +205,107 @@ export const usePRSpawner = () => {
   ]);
 
   useEffect(() => {
-    const key = `${currentDay}`;
-    if (trackerResetKeyRef.current === key) {
-      return;
-    }
-    trackerResetKeyRef.current = key;
-    trackerRef.current = resetWaveTracker(currentDay);
-  }, [currentDay]);
-
-  useEffect(() => {
     if (phase !== "WORK") {
       return;
     }
 
     const scriptedWaves = getScriptedWavesForDay(currentDay);
-    const triggeredWaves = trackerRef.current.waves;
-    const triggeredScripted = trackerRef.current.scripted;
+    const delivered = new Set(deliveredWaveIds);
+    deliveredWaveIds.forEach((waveId) => {
+      pendingDeliveriesRef.current.delete(waveId);
+    });
+    const prepareDelivery = (
+      waveId: string,
+      create: () => PullRequest[],
+      consumesWorkingPool: boolean
+    ): PullRequest[] => {
+      const pending = pendingDeliveriesRef.current.get(waveId);
+      if (pending) {
+        if (consumesWorkingPool) {
+          pending.forEach((pr) => {
+            const templateIndex = workingPoolRef.current.findIndex(
+              (template) => template.templateId === pr.templateId
+            );
+            if (templateIndex >= 0) {
+              workingPoolRef.current.splice(templateIndex, 1);
+            }
+          });
+        }
+        return pending;
+      }
+      const prs = create();
+      if (prs.length > 0) {
+        pendingDeliveriesRef.current.set(waveId, prs);
+      }
+      return prs;
+    };
+    const deliver = (waveId: string, prs: PullRequest[] = []) => {
+      delivered.add(waveId);
+      deliverWave(waveId, prs);
+    };
     const shouldSkipDefaultWave = (minute: number): boolean => {
       return scriptedWaves.some((wave) => wave.atMinute === minute);
     };
 
     DEFAULT_WAVE_MINUTES.forEach((minute) => {
-      if (currentTime >= minute && !triggeredWaves.has(minute)) {
+      const waveId = `default:${minute}`;
+      if (currentTime >= minute && !delivered.has(waveId)) {
         if (shouldSkipDefaultWave(minute)) {
-          triggeredWaves.add(minute);
+          deliver(waveId);
           return;
         }
         const count = minute === 0 ? 2 : pickWeightedWaveCount();
-        const prs = drawBatch(count, currentDay);
+        const prs = prepareDelivery(
+          waveId,
+          () => drawBatch(count, currentDay),
+          true
+        );
         if (prs.length === 0 && basePoolRef.current.length === 0) {
           // Lazy language packs may still be loading; leave the wave marker
           // unset so this wave re-attempts on the next tick instead of being
           // silently lost (waves must fire — see agent.md non-negotiables).
           return;
         }
-        triggeredWaves.add(minute);
-        if (prs.length > 0) {
-          enqueuePRs(prs);
-        }
+        deliver(waveId, prs);
       }
     });
 
     scriptedWaves.forEach((wave, index) => {
-      const key = `${wave.atMinute}-${index}`;
-      if (currentTime >= wave.atMinute && !triggeredScripted.has(key)) {
-        triggeredScripted.add(key);
-        const prs = spawnSpecific(wave.templateIds, currentDay);
-        if (prs.length > 0) {
-          enqueuePRs(prs);
-        }
+      const waveId = `scripted:${wave.atMinute}:${index}`;
+      if (currentTime >= wave.atMinute && !delivered.has(waveId)) {
+        const prs = prepareDelivery(
+          waveId,
+          () => spawnSpecific(wave.templateIds, currentDay),
+          false
+        );
+        deliver(waveId, prs);
       }
     });
 
     const currentHour = Math.floor(currentTime / 60);
+    const hourlyWaveId = `hourly:${currentHour}`;
     const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
-    if (withinHourlyWindow && currentHour !== lastHourlyCheckRef.current) {
-      lastHourlyCheckRef.current = currentHour;
+    if (withinHourlyWindow && !delivered.has(hourlyWaveId)) {
       const totalQueue = queue.length + (currentPR ? 1 : 0);
       if (totalQueue === 0) {
-        const prs = drawBatch(1, currentDay);
+        const prs = prepareDelivery(
+          hourlyWaveId,
+          () => drawBatch(1, currentDay),
+          true
+        );
         if (prs.length > 0) {
-          enqueuePRs(prs);
+          deliver(hourlyWaveId, prs);
         }
+      } else {
+        deliver(hourlyWaveId);
       }
     }
   }, [
     phase,
     currentTime,
     currentDay,
-    enqueuePRs,
+    deliveredWaveIds,
+    deliverWave,
     queue,
     currentPR,
     spawnSpecific,
