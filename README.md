@@ -387,6 +387,74 @@ Contribute a review scenario by adding a validated template under
 and the [PR template authoring guide](docs/pr-template-guide.md) for the JSON
 format, validation rules, tests, coverage report, and dev preview.
 
+## Kiro PR Template MCP
+
+This repository includes a custom local stdio MCP server that connects Kiro to
+Approve Please's real filesystem-backed content pipeline. No database is needed:
+`data/prTemplates/**/template.json` is the persistent catalog, and the generated
+TypeScript manifests are what the game imports. The server does not return fake
+cards and does not require API keys or other secrets. Without this MCP, Kiro can
+edit files as a general coding task, but it cannot discover the catalog, invoke
+the content validator, or perform a guarded add as named first-class tools.
+
+The integration gives Kiro three first-class tools:
+
+- `list_templates` accepts an optional `{ "language": "typescript" }` and returns
+  sorted IDs, titles, paths, languages, and bug kinds from the validated catalog.
+- `validate_template` accepts `{ "language": "...", "template": { ... } }` and
+  returns either the safe target path or the real pipeline diagnostics without
+  writing files.
+- `add_template` accepts the same candidate and returns the created path plus
+  manifest status. It refuses traversal, duplicates, and overwrites, writes
+  formatted JSON atomically, and regenerates the manifests. If generation
+  fails, it removes the newly added card.
+
+### Setup in Kiro
+
+1. Install Node 20+ and run `npm ci`.
+2. Open this repository as the Kiro workspace. The checked-in
+   [`.kiro/settings/mcp.json`](.kiro/settings/mcp.json) launches
+   `npm run --silent mcp:templates`; `--silent` keeps stdout reserved for MCP.
+3. Start a new Kiro session, then use `/mcp` or run
+   `kiro-cli mcp list` to confirm `approve-please-templates` is loaded.
+   Diagnose startup with
+   `kiro-cli mcp status --name approve-please-templates`.
+4. Ask Kiro to list templates or author a candidate. Review and approve the
+   `add_template` mutation before it writes game data. Avoid running a separate
+   `add_template` or `npm run generate:templates` process during that brief add;
+   writes are serialized within one MCP server process.
+
+The candidate object uses the format documented in
+[`docs/pr-template-guide.md`](docs/pr-template-guide.md). A successful add lands
+at `data/prTemplates/<language>/<templateId>/template.json`. Run `npm run dev`
+and open `/dev/templates/<templateId>` to inspect it in the real `PRViewer`, or
+refresh the game to play the new card.
+
+To verify the integration directly:
+
+```bash
+npm run generate:templates
+npx vitest run tests/templateMcp.test.ts tests/templateMcpStdio.test.ts
+npm run typecheck
+npm run lint
+npm test
+```
+
+### 30–60 second demo flow
+
+1. Show `.kiro/settings/mcp.json` and note that the local stdio integration has
+   no keys and uses the game's files rather than a database.
+2. Ask Kiro to list TypeScript cards; show IDs read from the real catalog.
+3. Ask for “a sneaky PR with a hidden security bug.” First validate a prepared
+   bad draft whose bug points at an unchanged line, showing the real validator
+   reject it without creating a file.
+4. Correct the line, validate again, then approve `add_template`.
+5. Show the new JSON and generated manifest entry, open
+   `/dev/templates/<templateId>`, and display the playable card.
+
+Future work could convert GitHub diffs into cards or use Kiro as a live NPC, but
+both are intentionally outside this small content-authoring integration.
+
 ## Deployment
 
 This app requires a Node/server deployment (e.g. Vercel or `next build && next start`):
