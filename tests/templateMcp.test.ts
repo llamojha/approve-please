@@ -84,6 +84,26 @@ describe('template MCP service', () => {
     });
   });
 
+  it('ignores stale staging directories left by an interrupted add', async () => {
+    const root = await createFixture();
+    const stagingDirectory = path.join(
+      root,
+      'typescript/.typescript-interrupted.deadbeef.tmp'
+    );
+    await fs.mkdir(stagingDirectory, { recursive: true });
+    await fs.writeFile(
+      path.join(stagingDirectory, 'template.json'),
+      `${JSON.stringify(makeTemplate('typescript-interrupted'), null, 2)}\n`,
+      'utf8'
+    );
+    const service = createTemplateService({ root, regenerate: async () => undefined });
+
+    const result = await service.listTemplates({ language: 'typescript' });
+
+    expect(result).toEqual({ ok: true, count: 0, templates: [] });
+    await expect(fs.stat(stagingDirectory)).resolves.toBeDefined();
+  });
+
   it('validates a candidate without writing to disk', async () => {
     const root = await createFixture();
     const service = createTemplateService({ root, regenerate: async () => undefined });

@@ -43,7 +43,7 @@ export const readTemplates = async (dir) => {
     const entries = await fs.readdir(current, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(current, entry.name);
-      if (entry.isDirectory()) {
+      if (entry.isDirectory() && !entry.name.startsWith('.')) {
         stack.push(fullPath);
       } else if (entry.isFile() && entry.name === 'template.json') {
         results.push(fullPath);

@@ -328,10 +328,9 @@ export const createTemplateService = ({
     }
 
     const targetDirectory = path.dirname(candidate.target);
-    const languageDirectory = path.dirname(targetDirectory);
     const stagingDirectory = path.join(
-      languageDirectory,
-      `.${candidate.templateId}.${randomUUID()}.tmp`
+      path.dirname(root),
+      `.approve-please-template.${candidate.templateId}.${randomUUID()}.tmp`
     );
     let published = false;
     try {
