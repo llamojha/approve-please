@@ -79,3 +79,89 @@ button:disabled {
 #__next {
   min-height: 100vh;
 }
+
+/* ============================================================
+   Llamojha design system — "UI refresh" tokens (Work screen 2a / 1e).
+   Additive: the --bg / --accent / --success tokens above stay in
+   use by Landing, Leaderboard and the rest of the app. These new
+   names are consumed by Desk.module.css only.
+   Deep navy-black canvas, a single warm gold accent, cool teal for data.
+   ============================================================ */
+:root {
+  /* Ink / surfaces */
+  --ink-900: #06090f;
+  --ink-800: #080c16;
+  --ink-700: #0b1120;
+  --ink-600: #111a2d;
+  --ink-500: #18243b;
+  --ink-400: #243353;
+
+  /* Text on dark */
+  --white: #ffffff;
+  --slate-100: #e6ebf2;
+  --slate-200: #c2ccda;
+  --slate-300: #9aa6b8;
+  --slate-400: #6e7a8e;
+  --slate-500: #4e5872;
+
+  /* Gold — primary accent */
+  --gold-100: #fff1c4;
+  --gold-300: #ffe38a;
+  --gold-500: #ffd666;
+  --gold-600: #f2c14e;
+  --gold-700: #d6a537;
+
+  /* Teal — data / constellation signal */
+  --teal-300: #5fe3d2;
+  --teal-500: #3dd6c4;
+  --teal-700: #1f6e66;
+
+  /* Work-screen status colours (kept distinct from the global --success/--danger) */
+  --wk-success: #4ecb8e;
+  --wk-danger: #f2657a;
+
+  /* Lines & borders (on dark) */
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-accent: rgba(255, 214, 102, 0.45);
+
+  /* Accent system */
+  --accent-soft: rgba(255, 214, 102, 0.12);
+  --focus-ring: rgba(255, 214, 102, 0.55);
+  --glow-gold: 0 0 0 1px rgba(255, 214, 102, 0.35), 0 8px 30px rgba(255, 214, 102, 0.18);
+
+  /* Fonts */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-geist: 'Geist', 'Helvetica Neue', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
+}
+
+/* Light-theme flip for the refreshed Work screen. The DARK/LIGHT toggle
+   in the ops rail sets data-theme='githob-light'; remap surfaces + text so
+   the same markup reads as a coherent light variant. Gold/teal accents hold. */
+:root[data-theme='githob-light'] {
+  --ink-900: #dfe4ec;
+  --ink-800: #eef1f6;
+  --ink-700: #ffffff;
+  --ink-600: #ffffff;
+  --ink-500: #e7ecf3;
+  --ink-400: #cdd5e0;
+
+  --white: #0b1020;
+  --slate-100: #1f2430;
+  --slate-200: #333c4c;
+  --slate-300: #55607a;
+  --slate-400: #6b7690;
+  --slate-500: #9aa6b8;
+
+  --gold-100: #7a5b12;
+
+  --border-subtle: rgba(9, 13, 24, 0.08);
+  --border-default: rgba(9, 13, 24, 0.14);
+  --border-strong: rgba(9, 13, 24, 0.24);
+  --border-accent: rgba(196, 152, 24, 0.55);
+
+  --accent-soft: rgba(214, 165, 55, 0.16);
+  --glow-gold: 0 0 0 1px rgba(214, 165, 55, 0.4), 0 8px 30px rgba(214, 165, 55, 0.18);
+}

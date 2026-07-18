@@ -2,6 +2,8 @@ import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
 import { useTranslations } from '../../hooks/useTranslations';
 import { useLocale } from '../../context/LocaleContext';
+import { minutesToClock } from '../../utils/helpers';
+import { WORK_DAY_MINUTES } from '../../constants/game';
 
 const BriefingScreen = () => {
   const {
@@ -19,20 +21,24 @@ const BriefingScreen = () => {
   return (
     <main className={styles.screenShell}>
       <section className={styles.screenCard}>
-        <h1>{translations.shared.dayHeading(currentDay, dayDescriptor)}</h1>
+        <span className={styles.eyebrow}>— {translations.briefing.eyebrow(currentDay)}</span>
+        <h1>{dayDescriptor}</h1>
         {dayQuote && quoteText && (
           <blockquote className={styles.briefingQuote}>
             <p>&ldquo;{quoteText}&rdquo;</p>
             <footer>
               — {dayQuote.speaker}
-              {quoteRole ? `, ${quoteRole}` : ''}
+              {quoteRole ? ` · ${quoteRole}` : ''}
             </footer>
           </blockquote>
         )}
         <div className={styles.screenActions}>
           <button type="button" className={styles.screenButton} onClick={startWork}>
-            {translations.briefing.startButton}
+            {translations.briefing.startButton} →
           </button>
+          <span className={styles.shiftMeta}>
+            {minutesToClock(0)} — {minutesToClock(WORK_DAY_MINUTES)}
+          </span>
         </div>
       </section>
     </main>

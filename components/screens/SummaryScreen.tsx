@@ -18,7 +18,7 @@ const SummaryScreen = () => {
   return (
     <main className={styles.screenShell}>
       <section className={styles.screenCard}>
-        <p className="muted">{summaryText.endOfDay}</p>
+        <span className={styles.eyebrow}>— {summaryText.endOfDay.toUpperCase()} · DAY {currentDay}</span>
         <h1>{summaryText.heading(currentDay)}</h1>
         <RunStatsCards counters={counters} meters={meters} />
         <div className={styles.screenActions}>
@@ -36,7 +36,7 @@ const SummaryScreen = () => {
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{summaryText.deployedHeading}</h3>
-            <p className="muted">{summaryText.deployedBody}</p>
+            <p>{summaryText.deployedBody}</p>
             <ul className={styles.incidentList}>
               {prodIncidents.map((incident, index) => (
                 <li key={`${incident.prId}-${incident.bugKind}-${index}`} className={styles.incidentItem}>
@@ -76,7 +76,7 @@ const SummaryScreen = () => {
         {falsePositiveRecords.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{summaryText.falseHeading}</h3>
-            <p className="muted">{summaryText.falseBody}</p>
+            <p>{summaryText.falseBody}</p>
             <ul className={styles.incidentList}>
               {falsePositiveRecords.map((record, index) => {
                 const reason = formatFalsePositiveReason(record.actualBugKinds, incidentsText, bugKindLabels);

@@ -8,7 +8,7 @@ interface ActionPanelProps {
   onRequestChanges: () => void;
   disableApprove: boolean;
   canRequest: boolean;
-  selectedLines: number;
+  selectedLines: number[];
   feedback: { message: string; status: DecisionResult['status'] } | null;
 }
 
@@ -22,58 +22,43 @@ const ActionPanel = ({
 }: ActionPanelProps) => {
   const translations = useTranslations();
   const actionText = translations.work.actions;
+  const tagged = selectedLines.length;
+  const tagList = [...selectedLines].sort((a, b) => a - b).map((line) => `L${line}`).join(' · ');
 
   return (
-    <div className={styles.actionBlock}>
-      <div className={styles.actionIntro}>
-        <div>
-          <p className={styles.actionLabel}>{actionText.reviewLabel}</p>
-          <p className={styles.selectionHint}>{actionText.selectedLines(selectedLines)}</p>
-        </div>
-        <TutorialHint text={actionText.tutorial} />
-      </div>
+    <div className={styles.actionBar}>
+      {tagged > 0 ? (
+        <span className={styles.actionTagStatus}>
+          {actionText.selectedLines(tagged).toUpperCase()} <span className={styles.actionTagLines}>· {tagList}</span>
+          <TutorialHint text={actionText.tutorial} />
+        </span>
+      ) : (
+        <span className={`${styles.actionTagStatus} ${styles.actionTagStatusEmpty}`}>
+          CLICK A LINE № TO TAG IT
+          <TutorialHint text={actionText.tutorial} />
+        </span>
+      )}
       <div className={styles.actionButtons}>
-        <div className={styles.actionButtonGroup}>
-          <button
-            type="button"
-            className={`${styles.actionButton} ${styles.approveButton}`}
-            onClick={onApprove}
-            disabled={disableApprove}
-          >
-            <span>{actionText.approve}</span>
-            <kbd className={styles.hotkeyBadge}>A</kbd>
-          </button>
-          <p className={styles.actionSubcopy}>{actionText.approveSubcopy}</p>
-        </div>
-        <div className={`${styles.actionButtonGroup} ${styles.requestGroup}`}>
-          <button
-            type="button"
-            className={`${styles.actionButton} ${styles.requestButton}`}
-            onClick={onRequestChanges}
-            disabled={!canRequest}
-            title={!canRequest ? actionText.requestTitle : undefined}
-          >
-            <span>{actionText.request}</span>
-            <kbd className={styles.hotkeyBadge}>R</kbd>
-          </button>
-          <div className={styles.requestDetails}>
-            {actionText.requestLabel ? <p className={styles.requestLabel}>{actionText.requestLabel}</p> : null}
-            {actionText.requestHelper ? <p className={styles.requestHelper}>{actionText.requestHelper}</p> : null}
-            <p className={styles.requestHelper}>{actionText.requestHelperBonus}</p>
-          </div>
-        </div>
-      </div>
-      <ul className={styles.shortcutLegend}>
-        <li>
-          <kbd className={styles.hotkeyBadge}>A</kbd>
-          <span>{actionText.legendApprove}</span>
-        </li>
-        <li>
+        <button
+          type="button"
+          className={`${styles.actionButton} ${styles.requestButton}`}
+          onClick={onRequestChanges}
+          disabled={!canRequest}
+          title={!canRequest ? actionText.requestTitle : undefined}
+        >
+          <span>{actionText.request.toUpperCase()}</span>
           <kbd className={styles.hotkeyBadge}>R</kbd>
-          <span>{actionText.legendRequest}</span>
-        </li>
-      </ul>
-      <p className={styles.hotkeyHint}>{actionText.hotkeyHint}</p>
+        </button>
+        <button
+          type="button"
+          className={`${styles.actionButton} ${styles.approveButton}`}
+          onClick={onApprove}
+          disabled={disableApprove}
+        >
+          <span>{actionText.approve.toUpperCase()}</span>
+          <kbd className={styles.hotkeyBadge}>A</kbd>
+        </button>
+      </div>
       {feedback && <p className={`${styles.feedback} ${styles[`feedback-${feedback.status}`]}`}>{feedback.message}</p>}
     </div>
   );

@@ -1,22 +1,16 @@
 import styles from '../../styles/Screen.module.css';
 import { useTranslations } from '../../hooks/useTranslations';
-import { formatMeterValue, meterColorFromValue } from '../../utils/helpers';
+import { formatMeterValue } from '../../utils/helpers';
 import { Counters, MeterSet } from '../../types';
 
-const toAlpha = (color: string, alpha: number) => {
-  if (color.startsWith('hsl')) {
-    return color.replace('hsl', 'hsla').replace(')', `, ${alpha})`);
+const meterFill = (value: number): string => {
+  if (value < 34) {
+    return 'var(--wk-danger)';
   }
-  return color;
-};
-
-const meterCardStyle = (value: number) => {
-  const base = meterColorFromValue(value);
-  return {
-    background: `linear-gradient(135deg, ${toAlpha(base, 0.25)}, ${toAlpha(base, 0.1)})`,
-    borderColor: base,
-    color: '#fff'
-  };
+  if (value < 67) {
+    return 'var(--gold-500)';
+  }
+  return 'var(--teal-500)';
 };
 
 interface RunStatsCardsProps {
@@ -29,47 +23,46 @@ const RunStatsCards = ({ counters, meters }: RunStatsCardsProps) => {
   const counterLabels = translations.shared.counters;
   const meterLabels = translations.shared.meters;
 
-  const stabilityCardStyle = meterCardStyle(meters.stability);
-  const velocityCardStyle = meterCardStyle(meters.velocity);
-  const satisfactionCardStyle = meterCardStyle(meters.satisfaction);
+  const ledger: { key: string; label: string; value: number; tone?: string }[] = [
+    { key: 'approved', label: counterLabels.prsApproved, value: counters.prsApproved },
+    { key: 'rejected', label: counterLabels.prsRejected, value: counters.prsRejected },
+    { key: 'clean', label: counterLabels.cleanApprovals, value: counters.cleanApprovals, tone: styles.ledgerClean },
+    { key: 'bugs', label: counterLabels.bugsToProd, value: counters.bugsToProd, tone: styles.ledgerBugs },
+    { key: 'false', label: counterLabels.falsePositives, value: counters.falsePositives },
+    { key: 'true', label: counterLabels.truePositives, value: counters.truePositives, tone: styles.ledgerTrue }
+  ];
+
+  const meterItems = [
+    { key: 'stability', label: meterLabels.stability, value: meters.stability },
+    { key: 'velocity', label: meterLabels.velocity, value: meters.velocity },
+    { key: 'satisfaction', label: meterLabels.satisfaction, value: meters.satisfaction }
+  ];
 
   return (
     <>
-      <div className={`${styles.summaryGrid} ${styles.summaryGridWide}`}>
-        <div className={`${styles.summaryCard} ${styles.summaryCardApproved}`}>
-          <small>{counterLabels.prsApproved}</small>
-          <h2>{counters.prsApproved}</h2>
-        </div>
-        <div className={`${styles.summaryCard} ${styles.summaryCardRejected}`}>
-          <small>{counterLabels.prsRejected}</small>
-          <h2>{counters.prsRejected}</h2>
-        </div>
-        <div className={`${styles.summaryCard} ${styles.summaryCardTrue}`}>
-          <small>{counterLabels.cleanApprovals}</small>
-          <h2>{counters.cleanApprovals}</h2>
-        </div>
-        <div className={`${styles.summaryCard} ${styles.summaryCardBugs}`}>
-          <small>{counterLabels.bugsToProd}</small>
-          <h2>{counters.bugsToProd}</h2>
-        </div>
-        <div className={`${styles.summaryCard} ${styles.summaryCardTrue}`}>
-          <small>{counterLabels.truePositives}</small>
-          <h2>{counters.truePositives}</h2>
-        </div>
+      <div className={styles.ledger}>
+        {ledger.map((cell) => (
+          <div key={cell.key} className={[styles.ledgerCell, cell.tone].filter(Boolean).join(' ')}>
+            <span className={styles.ledgerLabel}>{cell.label.toUpperCase()}</span>
+            <div className={styles.ledgerValue}>{cell.value}</div>
+          </div>
+        ))}
       </div>
-      <div className={`${styles.summaryGrid} ${styles.summaryGridWide} ${styles.summaryGridSpaced}`}>
-        <div className={`${styles.summaryCard} ${styles.meterCard}`} style={stabilityCardStyle}>
-          <small>{meterLabels.stability}</small>
-          <h2>{formatMeterValue(meters.stability)}%</h2>
-        </div>
-        <div className={`${styles.summaryCard} ${styles.meterCard}`} style={velocityCardStyle}>
-          <small>{meterLabels.velocity}</small>
-          <h2>{formatMeterValue(meters.velocity)}%</h2>
-        </div>
-        <div className={`${styles.summaryCard} ${styles.meterCard}`} style={satisfactionCardStyle}>
-          <small>{meterLabels.satisfaction}</small>
-          <h2>{formatMeterValue(meters.satisfaction)}%</h2>
-        </div>
+      <div className={styles.meterRow}>
+        {meterItems.map((meter) => (
+          <div key={meter.key}>
+            <div className={styles.meterHead}>
+              <span className={styles.meterLabel}>{meter.label.toUpperCase()}</span>
+              <span className={styles.meterValue}>{formatMeterValue(meter.value)}%</span>
+            </div>
+            <div className={styles.meterTrack}>
+              <span
+                className={styles.meterFill}
+                style={{ width: `${Math.max(0, Math.min(100, meter.value))}%`, background: meterFill(meter.value) }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -208,6 +208,7 @@ export const TRANSLATIONS = {
     },
     briefing: {
       startButton: "START DAY",
+      eyebrow: (day: number) => `MORNING BRIEFING · DAY ${day}`,
     },
     summary: {
       endOfDay: "End of Day",
@@ -470,6 +471,7 @@ export const TRANSLATIONS = {
     },
     briefing: {
       startButton: "Comenzar el día",
+      eyebrow: (day: number) => `BRIEFING MATUTINO · DÍA ${day}`,
     },
     summary: {
       endOfDay: "Fin del día",
