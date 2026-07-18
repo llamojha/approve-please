@@ -1,4 +1,3 @@
-import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { DayQuote } from '../../types';
 import { useTranslations } from '../../hooks/useTranslations';
@@ -18,19 +17,21 @@ const RulebookPanel = ({ day, dayQuote, mantra }: RulebookPanelProps) => {
   const quoteRole = dayQuote ? dayQuote.role[locale] ?? dayQuote.role.en : null;
 
   return (
-    <Panel title={translations.shared.dayHeading(day, descriptor)}>
+    <div className={styles.railCard}>
+      <span className={styles.railEyebrow}>— DAY {day}</span>
+      <p className={styles.briefMantra}>{descriptor}</p>
       {dayQuote && quoteText ? (
-        <blockquote className={styles.briefingQuote}>
-          <p>&ldquo;{quoteText}&rdquo;</p>
-          <footer>
-            — {dayQuote.speaker}
-            {quoteRole ? `, ${quoteRole}` : ''}
+        <blockquote className={styles.briefQuote}>
+          {`“${quoteText}”`}
+          <footer className={styles.briefQuoteFooter}>
+            — {dayQuote.speaker.toUpperCase()}
+            {quoteRole ? ` · ${quoteRole.toUpperCase()}` : ''}
           </footer>
         </blockquote>
       ) : (
         <p className={styles.rulebookEmpty}>{translations.work.rulebook.empty}</p>
       )}
-    </Panel>
+    </div>
   );
 };
 

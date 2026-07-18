@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "approve-please-templates": {
+      "command": "npm",
+      "args": [
+        "run",
+        "--silent",
+        "mcp:templates"
+      ],
+      "timeout": 120000,
+      "disabled": false
+    }
+  }
+}

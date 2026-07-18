@@ -1,7 +1,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve('data/prTemplates');
+const DEFAULT_ROOT = path.resolve('data/prTemplates');
 const EAGER_LANGUAGE = 'generic';
 const BUG_KINDS = new Set(['logic', 'security', 'performance', 'style', 'accessibility']);
 const SEVERITIES = new Set(['minor', 'major', 'critical']);
@@ -33,7 +34,7 @@ const toIdentifier = (templateId, seen) => {
   return name;
 };
 
-const readTemplates = async (dir) => {
+export const readTemplates = async (dir) => {
   const stack = [dir];
   const results = [];
 
@@ -42,7 +43,7 @@ const readTemplates = async (dir) => {
     const entries = await fs.readdir(current, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(current, entry.name);
-      if (entry.isDirectory()) {
+      if (entry.isDirectory() && !entry.name.startsWith('.')) {
         stack.push(fullPath);
       } else if (entry.isFile() && entry.name === 'template.json') {
         results.push(fullPath);
@@ -53,8 +54,8 @@ const readTemplates = async (dir) => {
   return results.sort(comparePaths);
 };
 
-const listLanguageFolders = async () => {
-  const entries = await fs.readdir(ROOT, { withFileTypes: true });
+export const listLanguageFolders = async (root = DEFAULT_ROOT) => {
+  const entries = await fs.readdir(root, { withFileTypes: true });
   return entries
     .filter((entry) => entry.isDirectory())
     .map((entry) => entry.name)
@@ -122,7 +123,7 @@ const validateLocalized = (localized, file, diagnostics) => {
   });
 };
 
-const validateTemplate = (template, file, diagnostics) => {
+export const validateTemplate = (template, file, diagnostics) => {
   if (!isObject(template)) {
     diagnostics.push({ file, message: 'Template root must be an object.' });
     return;
@@ -261,12 +262,12 @@ const validateTemplate = (template, file, diagnostics) => {
   });
 };
 
-const discoverAndValidateTemplates = async (languages) => {
+export const discoverAndValidateTemplates = async (languages, root = DEFAULT_ROOT) => {
   const diagnostics = [];
   const templates = [];
 
   for (const language of languages) {
-    const files = await readTemplates(path.join(ROOT, language));
+    const files = await readTemplates(path.join(root, language));
     for (const file of files) {
       let template;
       try {
@@ -299,7 +300,7 @@ const discoverAndValidateTemplates = async (languages) => {
   return { diagnostics, templates };
 };
 
-const buildLanguagePack = (language, templates) => {
+const buildLanguagePack = (language, templates, root = DEFAULT_ROOT) => {
   const seen = new Set();
   const imports = [
     `// Auto-generated manifest of pull-request templates (${language} pack)`,
@@ -308,7 +309,7 @@ const buildLanguagePack = (language, templates) => {
   const items = [];
 
   templates.forEach(({ file, template }) => {
-    const rel = path.relative(ROOT, file).split(path.sep).join('/');
+    const rel = path.relative(root, file).split(path.sep).join('/');
     const name = toIdentifier(template.templateId, seen);
     imports.push(`import ${name} from './${rel}';`);
     items.push(name);
@@ -347,8 +348,8 @@ const buildAggregator = (languages) => {
   ].join('\n');
 };
 
-const writeManifestsWithRollback = async (outputs, languages) => {
-  const temporaryDirectory = await fs.mkdtemp(path.join(path.dirname(ROOT), '.manifest-tmp-'));
+const writeManifestsWithRollback = async (outputs, languages, root = DEFAULT_ROOT) => {
+  const temporaryDirectory = await fs.mkdtemp(path.join(path.dirname(root), '.manifest-tmp-'));
   const originals = new Map();
   try {
     await Promise.all(
@@ -358,13 +359,13 @@ const writeManifestsWithRollback = async (outputs, languages) => {
     );
 
     const expected = new Set(languages.map((language) => `manifest.${language}.ts`));
-    const entries = await fs.readdir(ROOT, { withFileTypes: true });
+    const entries = await fs.readdir(root, { withFileTypes: true });
     const staleTargets = entries
       .filter(
         (entry) =>
           entry.isFile() && /^manifest\..+\.ts$/.test(entry.name) && !expected.has(entry.name)
       )
-      .map((entry) => path.join(ROOT, entry.name));
+      .map((entry) => path.join(root, entry.name));
     const affectedTargets = new Set([...outputs.keys(), ...staleTargets]);
 
     for (const target of affectedTargets) {
@@ -396,31 +397,39 @@ const writeManifestsWithRollback = async (outputs, languages) => {
       throw error;
     }
   } finally {
-    await fs.rm(temporaryDirectory, { recursive: true, force: true });
+    await fs.rm(temporaryDirectory, { recursive: true, force: true }).catch(() => undefined);
   }
 };
 
-const printDiagnostics = (diagnostics, templateCount) => {
+const printDiagnostics = (diagnostics, templateCount, log = console.log) => {
   const ordered = [...diagnostics].sort(
     (left, right) => comparePaths(relativePath(left.file), relativePath(right.file)) || left.message.localeCompare(right.message)
   );
-  console.log(`Template validation: ${templateCount} template(s) checked; ${ordered.length} error(s).`);
-  ordered.forEach(({ file, message }) => console.log(`${relativePath(file)}: ${message}`));
+  log(`Template validation: ${templateCount} template(s) checked; ${ordered.length} error(s).`);
+  ordered.forEach(({ file, message }) => log(`${relativePath(file)}: ${message}`));
 };
 
-const buildManifest = async () => {
-  const languages = await listLanguageFolders();
+export const buildManifest = async ({
+  root = DEFAULT_ROOT,
+  reportOnly: shouldReportOnly = reportOnly,
+  log = console.log
+} = {}) => {
+  const languages = await listLanguageFolders(root);
   if (!languages.includes(EAGER_LANGUAGE)) {
     throw new Error(
       `Missing required '${EAGER_LANGUAGE}' template folder — the day-1 tutorial templates must live there.`
     );
   }
 
-  const { diagnostics, templates } = await discoverAndValidateTemplates(languages);
-  printDiagnostics(diagnostics, templates.length);
-  if (reportOnly) {
-    console.log('Report-only mode: no manifests were written.');
-    return;
+  const { diagnostics, templates } = await discoverAndValidateTemplates(languages, root);
+  if (log) {
+    printDiagnostics(diagnostics, templates.length, log);
+  }
+  if (shouldReportOnly) {
+    if (log) {
+      log('Report-only mode: no manifests were written.');
+    }
+    return { diagnostics, templates };
   }
   if (diagnostics.length > 0) {
     throw new Error('Template validation failed; manifests were not written.');
@@ -429,14 +438,18 @@ const buildManifest = async () => {
   const outputs = new Map();
   languages.forEach((language) => {
     const packTemplates = templates.filter((entry) => entry.language === language);
-    outputs.set(path.join(ROOT, `manifest.${language}.ts`), buildLanguagePack(language, packTemplates));
+    outputs.set(path.join(root, `manifest.${language}.ts`), buildLanguagePack(language, packTemplates, root));
   });
-  outputs.set(path.join(ROOT, 'templateManifest.ts'), buildAggregator(languages));
-  await writeManifestsWithRollback(outputs, languages);
+  outputs.set(path.join(root, 'templateManifest.ts'), buildAggregator(languages));
+  await writeManifestsWithRollback(outputs, languages, root);
+  return { diagnostics, templates };
 };
 
-buildManifest().catch((error) => {
-  console.error('Failed to build template manifest');
-  console.error(error);
-  process.exit(1);
-});
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (isDirectRun) {
+  buildManifest().catch((error) => {
+    console.error('Failed to build template manifest');
+    console.error(error);
+    process.exit(1);
+  });
+}

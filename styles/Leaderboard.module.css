@@ -1,7 +1,9 @@
 .page {
   min-height: 100vh;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: var(--ink-900);
+  background-image: radial-gradient(120% 120% at 50% 0%, rgba(17, 26, 45, 0.55) 0%, rgba(6, 9, 15, 0) 55%);
+  color: var(--slate-200);
+  font-family: var(--font-geist);
   padding: 3rem 1.5rem;
   display: flex;
   align-items: center;
@@ -10,31 +12,37 @@
 
 .shell {
   width: min(1100px, 100%);
-  background: #0b1224;
-  border: 1px solid #1f2a44;
+  background: var(--ink-800);
+  border: 1px solid var(--border-default);
   border-radius: 16px;
-  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
-  padding: 1.75rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  padding: 2.25rem 2rem;
 }
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .title {
   margin: 0;
-  font-size: 1.6rem;
-  letter-spacing: -0.01em;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--white);
 }
 
 .meta {
-  color: #8ba0c2;
-  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate-400);
+  margin-top: 8px;
 }
 
 .tableWrap {
@@ -45,67 +53,79 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 700px;
+  min-width: 720px;
 }
 
 .table th,
 .table td {
-  padding: 0.9rem 0.75rem;
+  padding: 12px 10px;
   text-align: left;
-  border-bottom: 1px solid #1f2a44;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .table th {
-  color: #9ab7e5;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+  font-weight: 400;
+  border-bottom-color: var(--border-default);
+}
+
+.table td {
+  font-size: 13.5px;
+  color: var(--slate-100);
 }
 
 .table tr:hover td {
-  background: rgba(148, 163, 184, 0.05);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .rank {
-  font-weight: 700;
-  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--slate-400);
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.6rem;
+  justify-content: center;
+  min-width: 1.6rem;
+  padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  font-size: 0.85rem;
-  color: #0b1224;
-  background: linear-gradient(135deg, #eab308, #f59e0b);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-900);
+  background: var(--gold-500);
   font-weight: 700;
 }
 
 .silver {
-  background: linear-gradient(135deg, #cbd5e1, #e2e8f0);
-  color: #0b1224;
+  background: var(--slate-200);
 }
 
 .bronze {
-  background: linear-gradient(135deg, #f97316, #fb923c);
-  color: #0b1224;
+  background: var(--gold-700);
+  color: var(--ink-900);
 }
 
 .score {
-  font-weight: 700;
-  color: #7dd3fc;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--teal-300);
 }
 
 .muted {
-  color: #8ba0c2;
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--slate-500);
 }
 
 .actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 
@@ -113,26 +133,40 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #10b981;
-  color: #041020;
-  border: none;
-  border-radius: 10px;
-  padding: 0.65rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold-500);
+  color: var(--ink-900);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 10px 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  text-decoration: none;
+  transition: filter 0.15s ease, transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
 .button.secondary {
-  background: #1f2a44;
-  color: #e2e8f0;
+  background: transparent;
+  border-color: var(--border-default);
+  color: var(--slate-300);
 }
 
 .button:hover {
+  filter: brightness(1.06);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+}
+
+.button.secondary:hover {
+  filter: none;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-strong);
+  color: var(--slate-100);
 }
 
 .empty {
-  padding: 1rem 0;
+  padding: 2rem 0;
+  text-align: center;
 }

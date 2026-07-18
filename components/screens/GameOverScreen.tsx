@@ -115,7 +115,7 @@ const GameOverScreen = () => {
       <section className={styles.screenCard}>
         <span className={styles.gameOverTag}>{gameOverText.tag}</span>
         <h1>{gameOverText.heading(currentDay)}</h1>
-        <p>{reasonCopy}</p>
+        <p className={styles.screenLede}>{reasonCopy}</p>
         <RunStatsCards counters={finalCounters} meters={meters} />
         <div className={styles.screenActions}>
           <button
@@ -133,53 +133,47 @@ const GameOverScreen = () => {
           </Link>
         </div>
         <section className={styles.leaderboardForm}>
-            <div>
-              <strong>Save this run to the leaderboard</strong>
-              <p className={`muted ${styles.mutedSmall}`}>
-                Your score: <strong>{finalScore}</strong> (clean approvals +
-                bugs blocked + days played × 5)
-              </p>
-            </div>
-            <div className={styles.leaderboardControls}>
-              <input
-                type="text"
-                className={styles.leaderboardInput}
-                maxLength={64}
-                placeholder="Your name (optional)"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                disabled={
-                  submitStatus === "submitting" || submitStatus === "success"
-                }
-              />
-              <button
-                type="button"
-                className={styles.leaderboardSubmit}
-                onClick={submitToLeaderboard}
-                disabled={
-                  submitStatus === "submitting" || submitStatus === "success"
-                }
-              >
-                {submitStatus === "submitting"
-                  ? "Saving…"
-                  : submitStatus === "success"
-                  ? "Saved"
-                  : "Submit score"}
-              </button>
-              <button
-                type="button"
-                className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
-                onClick={() => setShowLeaderboardModal(true)}
-              >
-                View leaderboard
-              </button>
-            </div>
-            <div className={styles.leaderboardStatus}>
-              {submitStatus === "success" &&
-                "Saved! Your run is on the leaderboard."}
-              {submitStatus === "error" && submitError}
-            </div>
-          </section>
+          <div className={styles.leaderboardHead}>
+            <span className={styles.eyebrow}>— SAVE THIS RUN</span>
+            <span className={styles.leaderboardScore}>
+              SCORE {finalScore} <small>= CLEAN + BLOCKED + DAYS×5</small>
+            </span>
+          </div>
+          <div className={styles.leaderboardControls}>
+            <input
+              type="text"
+              className={styles.leaderboardInput}
+              maxLength={64}
+              placeholder="Your name (optional)"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              disabled={submitStatus === "submitting" || submitStatus === "success"}
+            />
+            <button
+              type="button"
+              className={styles.leaderboardSubmit}
+              onClick={submitToLeaderboard}
+              disabled={submitStatus === "submitting" || submitStatus === "success"}
+            >
+              {submitStatus === "submitting"
+                ? "SAVING…"
+                : submitStatus === "success"
+                ? "SAVED"
+                : "SUBMIT SCORE"}
+            </button>
+            <button
+              type="button"
+              className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
+              onClick={() => setShowLeaderboardModal(true)}
+            >
+              VIEW LEADERBOARD
+            </button>
+          </div>
+          <div className={styles.leaderboardStatus}>
+            {submitStatus === "success" && "Saved! Your run is on the leaderboard."}
+            {submitStatus === "error" && submitError}
+          </div>
+        </section>
         <LeaderboardModal
           isOpen={showLeaderboardModal}
           onClose={() => setShowLeaderboardModal(false)}
@@ -188,7 +182,7 @@ const GameOverScreen = () => {
         {prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{gameOverText.deployedHeading}</h3>
-            <p className="muted">{gameOverText.deployedBody}</p>
+            <p>{gameOverText.deployedBody}</p>
             <ul className={styles.incidentList}>
               {prodIncidents.map((incident, index) => (
                 <li

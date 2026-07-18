@@ -1,4 +1,3 @@
-import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { Counters } from '../../types';
 import { useTranslations } from '../../hooks/useTranslations';
@@ -10,32 +9,57 @@ interface StatsPanelProps {
 const StatsPanel = ({ counters }: StatsPanelProps) => {
   const translations = useTranslations();
   const statsText = translations.work.stats;
+  const labels = statsText.labels;
+
+  const rows: { key: string; label: string; value: number; rowClass?: string; tooltip: string }[] = [
+    { key: 'approved', label: labels.approved, value: counters.prsApproved, tooltip: statsText.tooltips.approved },
+    { key: 'rejected', label: labels.rejected, value: counters.prsRejected, tooltip: statsText.tooltips.rejected },
+    {
+      key: 'clean',
+      label: labels.cleanApprovals,
+      value: counters.cleanApprovals,
+      rowClass: styles.ledgerRowClean,
+      tooltip: statsText.tooltips.cleanApprovals
+    },
+    {
+      key: 'bugs',
+      label: labels.bugsToProd,
+      value: counters.bugsToProd,
+      rowClass: styles.ledgerRowBugs,
+      tooltip: statsText.tooltips.bugsToProd
+    },
+    {
+      key: 'false',
+      label: labels.falsePositives,
+      value: counters.falsePositives,
+      rowClass: styles.ledgerRowFalse,
+      tooltip: statsText.tooltips.falsePositives
+    },
+    {
+      key: 'true',
+      label: labels.truePositives,
+      value: counters.truePositives,
+      rowClass: styles.ledgerRowTrue,
+      tooltip: statsText.tooltips.truePositives
+    }
+  ];
 
   return (
-    <Panel title={statsText.title}>
-      <div className={styles.statsGrid}>
-        <div className={styles.statsCard} title={statsText.tooltips.approved}>
-          <small>{statsText.labels.approved}</small>
-          <strong>{counters.prsApproved}</strong>
-        </div>
-        <div className={styles.statsCard} title={statsText.tooltips.rejected}>
-          <small>{statsText.labels.rejected}</small>
-          <strong>{counters.prsRejected}</strong>
-        </div>
-        <div className={`${styles.statsCard} ${styles.statsCardBugs}`} title={statsText.tooltips.bugsToProd}>
-          <small>{statsText.labels.bugsToProd}</small>
-          <strong>{counters.bugsToProd}</strong>
-        </div>
-        <div className={`${styles.statsCard} ${styles.statsCardTrue}`} title={statsText.tooltips.cleanApprovals}>
-          <small>{statsText.labels.cleanApprovals}</small>
-          <strong>{counters.cleanApprovals}</strong>
-        </div>
-        <div className={`${styles.statsCard} ${styles.statsCardTrue}`} title={statsText.tooltips.truePositives}>
-          <small>{statsText.labels.truePositives}</small>
-          <strong>{counters.truePositives}</strong>
-        </div>
+    <div className={styles.railCard}>
+      <span className={styles.railEyebrow}>{statsText.title.toUpperCase()}</span>
+      <div className={styles.ledger}>
+        {rows.map((row) => (
+          <div
+            key={row.key}
+            className={[styles.ledgerRow, row.rowClass].filter(Boolean).join(' ')}
+            title={row.tooltip}
+          >
+            <span className={styles.ledgerLabel}>{row.label.toUpperCase()}</span>
+            <span className={styles.ledgerValue}>{row.value}</span>
+          </div>
+        ))}
       </div>
-    </Panel>
+    </div>
   );
 };
 

@@ -4,14 +4,13 @@ import { useGameState, DecisionResult } from '../../context/GameContext';
 import { useGameClock } from '../../hooks/useGameClock';
 import { usePRSpawner } from '../../hooks/usePRSpawner';
 import { useAudioCue } from '../../hooks/useAudioCue';
-import ClockDisplay from '../work/ClockDisplay';
 import QueuePanel from '../work/QueuePanel';
 import PRViewer from '../work/PRViewer';
 import RulebookPanel from '../work/RulebookPanel';
 import StatsPanel from '../work/StatsPanel';
 import ActionPanel from '../work/ActionPanel';
 import AccessibilityPanel from '../work/AccessibilityPanel';
-import MeterHud from '../work/MeterHud';
+import StatusStrip from '../work/StatusStrip';
 import { useTranslations } from '../../hooks/useTranslations';
 import { useLocale } from '../../context/LocaleContext';
 
@@ -69,8 +68,6 @@ const WorkScreen = () => {
   const canRequest = Boolean(currentPR);
   const canApprove = Boolean(currentPR);
 
-  const queuedCount = queue.length;
-
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       if (event.repeat) {
@@ -94,40 +91,38 @@ const WorkScreen = () => {
     return () => window.removeEventListener('keydown', handler);
   }, [handleApprove, handleRequestChanges, canApprove, canRequest]);
 
+  const mantra = currentMantra?.[locale] ?? currentMantra?.en ?? translations.shared.operationsFallback;
+
   return (
     <main className={styles.deskShell}>
-      <div className={styles.desk}>
-        <div className={styles.leftColumn}>
-          <ClockDisplay currentTime={currentTime} />
-          <QueuePanel queue={queue} currentId={currentPR?.id ?? null} onSelect={selectPR} />
-          <p className={styles.queueHint}>{translations.shared.queueAwaiting(queuedCount)}</p>
-        </div>
-        <div className={styles.centerColumn}>
-          <MeterHud meters={meters} queue={queue} />
-          <PRViewer
-            pr={currentPR}
-            selectedLines={selectedLines}
-            onToggleLine={toggleLine}
-            actionSlot={
-              <ActionPanel
-                onApprove={handleApprove}
-                onRequestChanges={handleRequestChanges}
-                disableApprove={!canApprove}
-                canRequest={canRequest}
-                selectedLines={selectedLines.length}
-                feedback={feedback}
-              />
-            }
-          />
-        </div>
-        <div className={styles.rightColumn}>
-          <RulebookPanel
-            day={currentDay}
-            mantra={currentMantra?.[locale] ?? currentMantra?.en ?? translations.shared.operationsFallback}
-            dayQuote={dayQuote}
-          />
-          <StatsPanel counters={counters} />
-          <AccessibilityPanel />
+      <div className={styles.deskFrame}>
+        <StatusStrip day={currentDay} currentTime={currentTime} meters={meters} />
+        <div className={styles.deskGrid}>
+          <aside className={styles.inboxCol}>
+            <QueuePanel queue={queue} currentId={currentPR?.id ?? null} onSelect={selectPR} />
+          </aside>
+          <section className={styles.stageCol}>
+            <PRViewer
+              pr={currentPR}
+              selectedLines={selectedLines}
+              onToggleLine={toggleLine}
+              actionSlot={
+                <ActionPanel
+                  onApprove={handleApprove}
+                  onRequestChanges={handleRequestChanges}
+                  disableApprove={!canApprove}
+                  canRequest={canRequest}
+                  selectedLines={selectedLines}
+                  feedback={feedback}
+                />
+              }
+            />
+          </section>
+          <aside className={styles.opsCol}>
+            <RulebookPanel day={currentDay} mantra={mantra} dayQuote={dayQuote} />
+            <StatsPanel counters={counters} />
+            <AccessibilityPanel />
+          </aside>
         </div>
       </div>
     </main>

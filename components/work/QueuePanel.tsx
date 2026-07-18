@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import Panel from '../common/Panel';
 import styles from '../../styles/Desk.module.css';
 import { PullRequest } from '../../types';
 import TutorialHint from '../tutorial/TutorialHint';
 import { useTranslations } from '../../hooks/useTranslations';
+import { WORK_DAY_MINUTES } from '../../constants/game';
+import { minutesToClock, shortPrNumber, summarizeDiff } from '../../utils/helpers';
 
 interface QueuePanelProps {
   queue: PullRequest[];
@@ -18,10 +19,10 @@ interface RenderQueueEntry {
 
 const EXIT_ANIMATION_MS = 600;
 
-const importanceHue: Record<PullRequest['importance'], string> = {
-  low: '#6ee7b7',
-  normal: '#fcd34d',
-  high: '#f87171'
+const importanceClass: Record<PullRequest['importance'], string> = {
+  low: styles.importanceLow,
+  normal: styles.importanceNormal,
+  high: styles.importanceHigh
 };
 
 const QueuePanel = ({ queue, currentId, onSelect }: QueuePanelProps) => {
@@ -113,15 +114,23 @@ const QueuePanel = ({ queue, currentId, onSelect }: QueuePanelProps) => {
     []
   );
 
+  const awaitingCount = queue.length;
+
   return (
-    <Panel
-      title={queueText.title}
-      titleHint={<TutorialHint text={queueText.hint} />}
-    >
+    <>
+      <div className={styles.inboxHeader}>
+        <span className={styles.inboxHeaderLabel}>
+          — {queueText.title.toUpperCase()} · {awaitingCount.toString().padStart(3, '0')}
+        </span>
+        <span className={styles.inboxHeaderEnds}>
+          <TutorialHint text={queueText.hint} /> {minutesToClock(WORK_DAY_MINUTES)}
+        </span>
+      </div>
       <ul className={styles.queueList}>
         {renderQueue.length === 0 && <li className={styles.queueEmpty}>{queueText.empty}</li>}
         {renderQueue.map(({ pr, isDeparting }) => {
           const isArriving = Boolean(arrivingIds[pr.id]);
+          const summary = summarizeDiff(pr);
           const className = [
             styles.queueItem,
             pr.id === currentId ? styles.queueItemActive : '',
@@ -132,28 +141,28 @@ const QueuePanel = ({ queue, currentId, onSelect }: QueuePanelProps) => {
             .join(' ');
           return (
             <li key={pr.id}>
-              <button
-                type="button"
-                className={className}
-                onClick={() => onSelect(pr.id)}
-                disabled={isDeparting}
-              >
-                <div>
-                  <strong>{pr.title}</strong>
-                  <p>{pr.author}</p>
+              <button type="button" className={className} onClick={() => onSelect(pr.id)} disabled={isDeparting}>
+                <div className={styles.queueTopRow}>
+                  <span className={styles.queueMeta}>
+                    {shortPrNumber(pr.id)} · {pr.author}
+                  </span>
+                  <span className={`${styles.importanceTag} ${importanceClass[pr.importance]}`}>
+                    {(importanceLabels[pr.importance] ?? pr.importance).toUpperCase()}
+                  </span>
                 </div>
-                <span
-                  className={styles.importanceTag}
-                  style={{ background: importanceHue[pr.importance] }}
-                >
-                  {importanceLabels[pr.importance] ?? pr.importance}
-                </span>
+                <div className={styles.queueTitle}>{pr.title}</div>
+                <div className={styles.queueSummary}>
+                  {summary.fileCount} file{summary.fileCount === 1 ? '' : 's'} · +{summary.additions} −
+                  {summary.removals}
+                  {summary.language ? ` · ${summary.language}` : ''}
+                </div>
               </button>
             </li>
           );
         })}
       </ul>
-    </Panel>
+      <div className={styles.inboxFooter}>{translations.shared.queueAwaiting(awaitingCount).toUpperCase()}</div>
+    </>
   );
 };
 
