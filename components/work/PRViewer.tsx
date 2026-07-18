@@ -67,7 +67,7 @@ const PRViewer = ({ pr, selectedLines, onToggleLine, actionSlot }: PRViewerProps
             <header className={styles.diffHeader}>
               <span className={styles.diffFilename}>{file.filename}</span>
               <span className={styles.diffHint}>
-                CLICK A LINE № TO TAG IT
+                {viewerText.tagPrompt.toUpperCase()}
                 <TutorialHint text={viewerText.hintLines} />
               </span>
             </header>

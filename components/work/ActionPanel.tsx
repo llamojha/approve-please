@@ -22,6 +22,7 @@ const ActionPanel = ({
 }: ActionPanelProps) => {
   const translations = useTranslations();
   const actionText = translations.work.actions;
+  const tagPrompt = translations.work.prViewer.tagPrompt;
   const tagged = selectedLines.length;
   const tagList = [...selectedLines].sort((a, b) => a - b).map((line) => `L${line}`).join(' · ');
 
@@ -34,7 +35,7 @@ const ActionPanel = ({
         </span>
       ) : (
         <span className={`${styles.actionTagStatus} ${styles.actionTagStatusEmpty}`}>
-          CLICK A LINE № TO TAG IT
+          {tagPrompt.toUpperCase()}
           <TutorialHint text={actionText.tutorial} />
         </span>
       )}

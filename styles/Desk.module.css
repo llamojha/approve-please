@@ -49,6 +49,12 @@
 
 .stripTrail {
   min-width: 0;
+  justify-self: end;
+}
+
+/* Theme toggle surfaced in the strip only when the ops rail is folded away. */
+.stripTheme {
+  display: none;
 }
 
 .stripDay {
@@ -1003,6 +1009,10 @@
   .stripMeters {
     gap: 20px;
   }
+
+  .stripTheme {
+    display: inline-flex;
+  }
 }
 
 /* ============================================================
@@ -1027,7 +1037,12 @@
   }
 
   .stripTrail {
-    display: none;
+    justify-self: stretch;
+  }
+
+  .stripTheme {
+    display: flex;
+    justify-content: center;
   }
 
   .stripMeters {

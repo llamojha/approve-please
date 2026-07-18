@@ -3,6 +3,7 @@ import { MeterSet } from '../../types';
 import { WORK_DAY_MINUTES } from '../../constants/game';
 import { minutesToClock, formatMeterValue, clamp } from '../../utils/helpers';
 import { useTranslations } from '../../hooks/useTranslations';
+import ThemeToggle from './ThemeToggle';
 
 interface StatusStripProps {
   day: number;
@@ -62,7 +63,13 @@ const StatusStrip = ({ day, currentTime, meters }: StatusStripProps) => {
         <StripMeter label={meterLabels.velocity} short="VEL" value={meters.velocity} />
         <StripMeter label={meterLabels.satisfaction} short="SAT" value={meters.satisfaction} />
       </div>
-      <div className={styles.stripTrail} aria-hidden="true" />
+      {/* Ops rail (which holds the theme toggle) is hidden ≤1040px, so surface
+          the toggle here for tablet/mobile. Hidden by CSS on wide screens. */}
+      <div className={styles.stripTrail}>
+        <div className={styles.stripTheme}>
+          <ThemeToggle />
+        </div>
+      </div>
     </header>
   );
 };

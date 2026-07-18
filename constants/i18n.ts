@@ -262,6 +262,7 @@ export const TRANSLATIONS = {
         hintLines:
           "Click any line number to tag suspected bugs (optional, but earns bonus if correct).",
         authorLabel: "Author",
+        tagPrompt: "Click a line № to tag it",
         diffTip: (requestLabel: string) =>
           `Tip: click a line number to highlight a suspicious row. Tagging the right line boosts satisfaction when you ${requestLabel}.`,
       },
@@ -525,6 +526,7 @@ export const TRANSLATIONS = {
         hintLines:
           "Haz clic en cualquier número de línea para marcar bugs sospechosos (opcional, pero da bonus si aciertas).",
         authorLabel: "Autor",
+        tagPrompt: "Haz clic en una línea № para marcarla",
         diffTip: (requestLabel: string) =>
           `Tip: haz clic en un número de línea para resaltar una fila sospechosa. Etiquetar la línea correcta sube satisfacción cuando ${requestLabel}.`,
       },
