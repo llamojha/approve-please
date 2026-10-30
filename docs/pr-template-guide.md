@@ -141,3 +141,9 @@ The preview gallery is intentionally development-only. Both `/dev/templates` and
 - [ ] `npm run generate:templates` and `npm test` pass.
 - [ ] The template was reviewed at `/dev/templates/<template-id>`.
 - [ ] The pull request contains at most 10 templates.
+
+## Refresh foundation metadata
+
+Templates may optionally include authorId, localized reactions, rowId/kind on rows, and file-qualified lineRefs on bugs. Keep author, isNew and numeric lineNumbers for compatibility. false means context, not deletion; removal is unsupported. Explicit lineRefs must project to the same lineNumbers. Bug numbers must remain unambiguous across the PR until the live viewer migrates to scoped selection. These fields are preserved but character UI and new review semantics are not yet active.
+
+The shared browser-safe validator returns field paths, diagnostic codes and messages. Normal generation additionally checks folder names and repository-wide uniqueness. Report-only output is diagnostic, not an exit-code validation gate. See the adjacent content-contract.md and review-behavior-contract.md for examples and the migration boundary.

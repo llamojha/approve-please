@@ -51,7 +51,8 @@
         ],
         "properties": {
           "filename": {
-            "type": "string"
+            "type": "string",
+            "pattern": "\\S"
           },
           "language": {
             "type": "string"
@@ -76,6 +77,18 @@
                 },
                 "isNew": {
                   "type": "boolean"
+                },
+                "rowId": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "addition",
+                    "context"
+                  ],
+                  "description": "Must agree with isNew. Removal rows are not supported."
                 }
               }
             }
@@ -133,6 +146,28 @@
               }
             },
             "additionalProperties": false
+          },
+          "lineRefs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "filename",
+                "rowId"
+              ],
+              "properties": {
+                "filename": {
+                  "type": "string",
+                  "pattern": "\\S"
+                },
+                "rowId": {
+                  "type": "string",
+                  "pattern": "\\S"
+                }
+              }
+            }
           }
         }
       }
@@ -145,6 +180,28 @@
         },
         "es": {
           "$ref": "#/definitions/localizedMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "authorId": {
+      "type": "string",
+      "pattern": "\\S"
+    },
+    "reactions": {
+      "type": "object",
+      "properties": {
+        "clean-approval": {
+          "$ref": "#/definitions/reactionText"
+        },
+        "buggy-approval": {
+          "$ref": "#/definitions/reactionText"
+        },
+        "correct-rejection": {
+          "$ref": "#/definitions/reactionText"
+        },
+        "false-positive": {
+          "$ref": "#/definitions/reactionText"
         }
       },
       "additionalProperties": false
@@ -168,6 +225,18 @@
           "items": {
             "type": "string"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "reactionText": {
+      "type": "object",
+      "properties": {
+        "en": {
+          "type": "string"
+        },
+        "es": {
+          "type": "string"
         }
       },
       "additionalProperties": false

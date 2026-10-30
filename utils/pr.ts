@@ -36,6 +36,10 @@ export const instantiatePullRequest = (
     description,
     tags: [...tags],
     author,
+    ...(template.authorId ? { authorId: template.authorId } : {}),
+    ...(template.reactions ? { reactions: Object.fromEntries(
+      Object.entries(template.reactions).map(([outcome, translations]) => [outcome, { ...translations }])
+    ) } : {}),
     files: template.files.map((file) => ({
       ...file,
       lines: file.lines.map((line) => ({ ...line }))
@@ -43,6 +47,7 @@ export const instantiatePullRequest = (
     bugPatterns: template.bugPatterns.map((pattern) => ({
       kind: pattern.kind,
       lineNumbers: [...pattern.lineNumbers],
+      ...(pattern.lineRefs ? { lineRefs: pattern.lineRefs.map((ref) => ({ ...ref })) } : {}),
       severity: pattern.severity,
       description: pattern.localizedDescription?.[locale] ?? pattern.localizedDescription?.en ?? pattern.description
     })),

@@ -1,14 +1,25 @@
 export type BugKind = 'logic' | 'security' | 'performance' | 'style' | 'accessibility';
 
+export interface LineReference {
+  filename: string;
+  rowId: string;
+}
+
+export type DecisionOutcome = 'clean-approval' | 'buggy-approval' | 'correct-rejection' | 'false-positive';
+export type CharacterReactions = Partial<Record<DecisionOutcome, Partial<Record<Locale, string>>>>;
+
 export interface BugPattern {
   kind: BugKind;
   lineNumbers: number[];
+  lineRefs?: LineReference[];
   severity: 'minor' | 'major' | 'critical';
   description?: string;
   localizedDescription?: Partial<Record<Locale, string>>;
 }
 
 export interface PRLine {
+  rowId?: string;
+  kind?: 'addition' | 'context';
   lineNumber: number;
   content: string;
   isNew: boolean;
@@ -30,6 +41,8 @@ export interface PullRequest {
   templateId: string;
   title: string;
   author: string;
+  authorId?: string;
+  reactions?: CharacterReactions;
   description: string;
   tags: string[];
   files: PRFileDiff[];
@@ -105,4 +118,14 @@ export interface DaySummary {
   day: number;
   counters: Counters;
   meters: MeterSet;
+}
+
+export interface NormalizedPRLine extends PRLine {
+  rowId: string;
+  kind: 'addition' | 'context';
+}
+
+export interface NormalizedPullRequest extends PullRequest {
+  files: (Omit<PRFileDiff, 'lines'> & { lines: NormalizedPRLine[] })[];
+  bugPatterns: (BugPattern & { lineRefs: LineReference[] })[];
 }
