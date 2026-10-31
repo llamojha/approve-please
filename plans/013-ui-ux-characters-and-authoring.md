@@ -77,6 +77,8 @@ Create only Lucía/Diego's art study first. Each gets neutral, pleased and conce
 
 ## Phase 2: playable vertical slice
 
+Detailed execution checklist: `plans/014-live-desk-migration.md`. This supersedes earlier receipt presentation where it implies a persistent visible panel: outcomes must be announced without adding an acknowledgement or next button. The owner's landing-page request brings that part of Phase 3 Track A forward; the real work phase remains Phase 2 TODO.
+
 Three workers can now proceed against frozen contracts:
 
 | Owner | Files and responsibility |

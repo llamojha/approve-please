@@ -8,6 +8,8 @@ The team view shows neutral, pleased and concerned illustrated portraits, locali
 
 ## Integration boundary
 
+The production landing page `/` now shares the Afterhours palette, public coworker roster and new tutorial/leaderboard dialog presentation. See `docs/landing-refresh-validation.md`. The six-stage migration of the approved work desk into actual `/game` simulation is planned in `plans/014-live-desk-migration.md`; that migration is still TODO.
+
 This is a development-only preview. Production requests return 404. It uses local state and the pure evaluator; it has a local advancing clock and shift boundary, but no live GameContext clock, timed wave delivery, tutorial, campaign progression, save or leaderboard writes. The actual `/game` retains its existing desk/game loop and now shares the new audio controls and arrival notice. Production readiness tasks are explicit in `docs/ui-direction.md` and the roadmap.
 
 ## Verification

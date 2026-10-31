@@ -1,5 +1,6 @@
 import { designStudyCopy } from "./designStudyCopy";
 import { audioCopy } from "./audioCopy";
+import { landingPageCopy } from "./landingPageCopy";
 import { BugKind, Locale } from "../types";
 export type GameOverReasonKey = "stability" | "satisfaction" | "velocity" | "generic";
 
@@ -95,6 +96,7 @@ export const TRANSLATIONS = {
     audio: audioCopy.en,
     localeToggleLabel: "Select language",
     landing: {
+      refresh: landingPageCopy.en,
       title: "Approve Please",
       blurb:
         "Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.",
@@ -356,6 +358,7 @@ export const TRANSLATIONS = {
     audio: audioCopy.es,
     localeToggleLabel: "Seleccionar idioma",
     landing: {
+      refresh: landingPageCopy.es,
       title: "Aprueba Por Favor",
       blurb:
         "Entra en Operaciones de Lanzamiento. Revisa PRs, protege la estabilidad y procura no ser despedido.",
