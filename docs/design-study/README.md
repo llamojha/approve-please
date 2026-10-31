@@ -31,3 +31,7 @@ Latest follow-up gates: 524 tests pass with one worker; typecheck/build pass; li
 All queue cards and the active review display localized Low/Medium/High priority badges (Baja/Media/Alta). Priority remains the existing `low | normal | high` contract and is independent of clean/flawed editions. Badges use readable text as well as color, at 14 px minimum. The shared middle-priority label now reads Medium/Media in the existing live queue too.
 
 Verification: 525 tests pass with one worker; typecheck and production build pass; all 390 templates validate with manifests unchanged. Lint has zero errors and five existing warnings. Browser clock checks exercise 09:00 → 10:00 in 15 real seconds, pause/resume in settings, automatic advance, the 17:00 boundary, disabled verdicts, next-shift reset and preservation of pending PRs. Live tutorial/waves/scoring migration remains Phase 2.
+
+
+## Compact diff sizing
+Short snippets now determine the panel height instead of stretching to fill the viewport. The verdict bar follows the diff directly; long snippets retain an independent scroll area capped at 50vh/30rem and shrink further when needed. The code remains 16 px. Browser checks at 1440×1000, 1280×720 and 768×1024 reduced the five-line sample’s trailing gap from 334 px to 3 px, with the actions on screen. Long-diff scrolling, line selection, automatic rejection advance and 390 px mobile reflow remain working. See compact-diff.png.
