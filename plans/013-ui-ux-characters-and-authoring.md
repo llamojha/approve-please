@@ -1,6 +1,6 @@
 # Plan 013: UI, UX, coworkers and scenario authoring
 
-Status: PHASE 1 IMPLEMENTED (31 October 2026). Concrete visual review is the checkpoint before Phase 2.
+Status: PHASE 1 AND FULL-CAST PREVIEW IMPLEMENTED (31 October 2026). Owner requested all ten coworkers and product-like presentation. Live-game integration remains Phase 2.
 
 Goal: make Approve Please feel like a readable, responsive PR-review game with memorable developers, understandable consequences and a contribution workflow that does not require hand-authoring every JSON field.
 
@@ -63,7 +63,7 @@ Gate: all legacy scenarios instantiate in both locales; generator/editor validat
 
 ### Track B: UI concept
 
-UI owner creates a reviewable desk concept and flow notes in `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/docs/ui-direction.md`. Show desktop and narrow layouts, light/dark reading surfaces, pending/selected/empty states and a completed-decision receipt. Start with the code-review surface, not a marketing landing page. Give code more space and reduce repeated instruction panels. No fake tabs or controls.
+UI owner creates a reviewable desk concept and flow notes in `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/docs/ui-direction.md`. Show desktop and narrow layouts, light/dark reading surfaces, pending/selected/empty states and immediate verdict feedback without a blocking receipt panel. Start with the code-review surface, not a marketing landing page. Give code more space and reduce repeated instruction panels. No fake tabs or controls.
 
 Gate: choose a concrete visual treatment before applying it to every screen. The initial target is meaningful diff content plus both verdict actions visible at 1280×720; long diffs scroll within a usable review surface. Narrow layouts must keep rules and queue reachable.
 
@@ -81,8 +81,8 @@ Three workers can now proceed against frozen contracts:
 
 | Owner | Files and responsibility |
 | --- | --- |
-| Gameplay | `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/context/GameContext.tsx`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/constants/gameSettings.ts`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/hooks/useGameClock.ts`: apply evaluator result atomically, preserve last receipt, keep existing wave/tutorial behavior |
-| Desk UI | `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/components/screens/WorkScreen.tsx`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/components/work/`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/styles/Desk.module.css`: header, continuous diff, file selection, queue/rules access and persistent actions/receipt |
+| Gameplay | `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/context/GameContext.tsx`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/constants/gameSettings.ts`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/hooks/useGameClock.ts`: apply evaluator result atomically, retain structured decision data, advance automatically, keep existing wave/tutorial behavior |
+| Desk UI | `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/components/screens/WorkScreen.tsx`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/components/work/`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/styles/Desk.module.css`: header, continuous diff, file selection, queue/rules access and persistent actions and automatic swipe progression |
 | Characters/content | `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/data/characters.ts`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/utils/characterReactions.ts`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/components/common/CharacterAvatar.tsx`, `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/public/characters/`: two-character implementation and explicitly assigned scenario fixtures |
 
 The integrator owns `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/constants/i18n.ts`, shared type amendments and generated manifests. Workers submit required key/interface additions for one serialized integration. Portrait components get their own style module; character workers do not edit desk CSS.
@@ -203,7 +203,7 @@ Browser QA covers desktop 1280×720, phone 390×844, tablet 768×1024 and constr
 
 The study is development-only and has no live clock, save, leaderboard or production game integration. All later implementation still targets the preview branch.
 
-Final Phase1 gates:506 tests pass, typecheck/build pass,390 templates validate and manifests remain unchanged, lint has five pre-existing warnings. Production browser check confirms `/dev/design` returns404.
+Final Phase1 gates:506 tests pass, typecheck/build pass,390 templates validate and manifests remain unchanged, lint has five pre-existing warnings. Production browser check confirms `/dev/design` returns 404.
 
 
 ## Owner feedback — speed-first review loop
@@ -211,3 +211,15 @@ Final Phase1 gates:506 tests pass, typecheck/build pass,390 templates validate a
 - [x] Approve/reject applies the verdict once, swipes the review away in 200 ms, and automatically opens the next sample with cleared tags. Reduced motion skips the animation.
 - [ ] Carry this automatic progression into Phase 2 live gameplay; feedback must not require an extra click or pause.
 This supersedes the study's earlier persistent-receipt presentation. Meter changes remain immediate and results are announced to assistive technology.
+
+
+## Full cast and product presentation — owner request
+Owner explicitly requested all ten coworkers and production-like presentation, superseding the earlier hold on the remaining eight portrait sets.
+- [x] Deliver 30 optimized portraits: neutral, pleased and concerned for each of ten coworkers.
+- [x] Show the full cast with localized roles/personality and review scenarios.
+- [x] Replace Acme/sample labels with Afterhours / Small Hours and advancing PR identifiers.
+- [x] Remove study/reset controls from the main player-facing surface.
+- [x] Verify full-cast assets, browser flow and updated screenshots.
+Production release still requires the real clock/queue/tutorial/scoring integration listed in docs/ui-direction.md; the development route must not be presented as a deployable replacement for /game.
+
+Full-cast gates: 510 tests pass with one worker; typecheck/build pass; lint retains five existing warnings. Thirty 256×256 alpha portraits total 948,846 bytes (largest 33,757). Browser checks cover all thirty image loads, ten automatic advances, queue preservation when reviewing out of order, precise keyboard rejection, reduced motion, EN/ES, mobile dialogs and fixed handbook access on desktop/tablet. Production-server probe confirms the development route returns 404.

@@ -16,3 +16,59 @@ describe('design study route', () => {
     expect(await getServerSideProps({} as GetServerSidePropsContext)).toEqual({ props: {} });
   });
 });
+
+// Every coworker has both kinds of work; identity and title cannot reveal the answer.
+import { studyReview, studyTeam, initialStudyQueue, completeStudyReview } from '../constants/designStudyTeam';
+import { normalizePullRequest } from '../utils/templateNormalization';
+import { evaluateDecision } from '../utils/decision';
+
+describe('full team review scenarios', () => {
+  it('provides ten distinct identities and a clean/flawed edition for each', () => {
+    expect(new Set(studyTeam.map(person => person.id)).size).toBe(10);
+    for (let index = 0; index < 10; index += 1) {
+      const first = studyReview(index, 'en');
+      const second = studyReview(index + 10, 'es');
+      expect(first.authorId).toBe(second.authorId);
+      expect(first.bugPatterns.length + second.bugPatterns.length).toBe(1);
+      expect(first.id).not.toBe(second.id);
+      expect(studyReview(index, 'es').title).not.toBe(first.title);
+    }
+  });
+
+  it('evaluates every clean edition and every precisely tagged flawed edition', () => {
+    for (let index = 0; index < 20; index += 1) {
+      const pr = studyReview(index, 'en');
+      const flawed = pr.bugPatterns.length > 0;
+      const selected = pr.bugPatterns.flatMap(bug => bug.lineNumbers.map(number => ({ filename: pr.files[0].filename, rowId: `line-${number}` })));
+      const receipt = evaluateDecision(normalizePullRequest(pr), flawed ? 'request-changes' : 'approve', selected, { stability: 50, velocity: 50, satisfaction: 50 });
+      expect(receipt.outcome).toBe(flawed ? 'correct-rejection' : 'clean-approval');
+      if (flawed) expect(receipt.precision).toBe('precise');
+    }
+  });
+});
+
+describe('review queue', () => {
+  it('preserves earlier requests when reviewing a later selection', () => {
+    const queue = initialStudyQueue();
+    const selected = { ...queue, active: 7 };
+    expect(selected.pending).toEqual(queue.pending);
+    const next = completeStudyReview(selected);
+    expect(next.pending).toEqual([0, 1, 2, 3, 4, 5, 6, 8, 9, 10]);
+    expect(next.active).toBe(0);
+    expect(next.next).toBe(11);
+    expect(queue.pending).toHaveLength(10);
+  });
+
+  it('assigns fresh IDs without reintroducing completed requests', () => {
+    let queue = initialStudyQueue();
+    const completed = new Set<number>();
+    for (let index = 0; index < 25; index += 1) {
+      expect(completed.has(queue.active)).toBe(false);
+      completed.add(queue.active);
+      queue = completeStudyReview(queue);
+      expect(queue.pending).toHaveLength(10);
+      expect(new Set(queue.pending).size).toBe(10);
+      expect(queue.pending.every(id => !completed.has(id))).toBe(true);
+    }
+  });
+});

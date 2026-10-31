@@ -1,23 +1,19 @@
-# Phase 1 rendered study
+# Afterhours desk preview
 
-Open `/dev/design` on the development server. This is a replayable design study, not the production game. The production route returns 404. It shares the pure decision evaluator but has no live timer, spawning, save or leaderboard writes.
+Open `/dev/design` on the development server. The page presents the Afterhours studio's Small Hours repository with ten coworkers and twenty curated review editions. Each coworker submits both clean and flawed code. PR numbers start at #1042 and increase with the sequence; selecting a later item opens it while preserving earlier pending requests. A verdict removes only the reviewed PR, then opens the oldest pending item and replenishes the queue. The twenty editions repeat cyclically.
 
-Implemented and browser-checked on 31 October 2026:
+Approve/reject updates meters once and advances automatically after a 200 ms directional swipe. Reduced motion skips the animation. Optional tags clear on the next PR. There is no Last review panel, manual next arrow, Reset study control, study banner or arbitrary sample label. Structured results are announced to assistive technology. The header reports actual completed reviews rather than a simulated clock.
 
-- Desktop 1280×720: visible code, both verdicts and persistent receipt; independent diff/sidebar scrolling.
-- Phone 390×844: Spanish copy, horizontally scrollable code, sticky actions, reachable queue and handbook.
-- Tablet 768×1024: active/empty layouts; disabled actions in empty state.
-- Constrained 640×360 reflow: no document horizontal overflow. This checks CSS reflow, not actual OS/browser zoom behavior.
-- Clean approval, buggy rejection without tags and precise rejection produce expected sample deltas; receipt retains previous author on switching.
-- Keyboard Space tags a row; Enter submits; repeated submission is disabled. Native modal Escape returns focus to its trigger.
-- Light/dark portraits and six-expression study; every referenced image loads. Alpha PNGs are256×256 and31–33 KB each.
-- Light secondary text contrast corrected to5.76:1 on paper,5.18:1 on receipt and5.56:1 on additions.
+The team view shows neutral, pleased and concerned illustrated portraits, localized roles and personality lines for Lucía, Diego, Inés, Tessa, Ben, Jonah, Marta, Evan, Noel and Riya. Unknown/missing assets have an initials fallback with accessible names.
 
-Evidence: desktop-light.png, desktop-dark.png, mobile-es.png, tablet-empty.png, characters.png. Prompt set and asset manifest accompany the images. Independent review findings on contrast and completed-state clarity were addressed before this delivery.
+## Integration boundary
 
-Owner visual approval remains the checkpoint before Phase 2. Observed-user comprehension, exhaustive screen-reader testing and OS zoom checks are not claimed here; they remain in the later integration audit.
+This is a development-only preview. Production requests return 404. It uses local state and the pure evaluator; it has no real clock, incoming queue delivery, tutorial, shift completion, save or leaderboard writes. The actual `/game` is still the existing implementation. Production readiness tasks are explicit in `docs/ui-direction.md` and the roadmap.
 
-Validation:506 tests pass (single worker), typecheck and build pass,390 templates validate without manifest changes. Lint has five pre-existing warnings and no errors. A production-server browser request to `/dev/design` displayed404.
+## Verification
 
-## Speed-first revision
-Owner feedback removes the visible Last review panel and next arrow. Verdicts now update meters and automatically advance after a 200 ms directional swipe (instant with reduced motion). Desktop-light evidence is updated; other screenshots above record the earlier study. Verified both verdicts, cleared tags, reduced motion and phone overflow in a real browser; 13 targeted tests, typecheck and lint pass (five existing warnings).
+The initial Phase 1 evidence remains in Git history. Current screenshots cover desktop light/dark, Spanish phone/tablet and the complete team. All thirty portrait files decode in the browser, are 256×256 alpha PNGs, total 948,846 bytes and remain below 80 KB each. Automated coverage verifies every coworker has clean/flawed editions and that every edition normalizes and scores correctly. Browser checks cover automatic sequence advancement, cleared tags, the ten-person cast, keyboard dialogs and phone overflow.
+
+Prompts: `docs/design-study/prompts.md`. Asset provenance: `public/characters/studies/manifest.json`.
+
+Final gates: 510 tests pass (single worker), typecheck/build pass, 390 templates validate without generated changes, lint has zero errors and five pre-existing warnings. Production HTTP probe confirms 404. Independent review findings on queue preservation and missing-account handling are fixed. The phone and tablet retain reachable verdicts; the tablet/desktop queue scrolls independently with handbook access fixed in place.

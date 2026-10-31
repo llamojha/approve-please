@@ -14,12 +14,12 @@ Use warm off-white or deep slate reading surfaces, restrained borders, compact m
 │                │ │ Gutter · selection · readable diff         │ │
 │                │ │ Code scrolls within this region            │ │
 │                │ └────────────────────────────────────────────┘ │
-│ Rules access   │ Last decision: verdict · precision · deltas    │
+│ Rules access   │ Tags are optional; verdict advances the queue  │
 │                │ Request changes                Approve        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-Prioritize code and both verdict buttons in the first viewport. A completed receipt persists when the next PR arrives, labels the previous PR, and may include a short coworker reaction. Show selection count near actions; tags remain optional. Queue and rules are real controls. Conversation appears only when authored content exists. Show context rows without deletion markers.
+Prioritize code and both verdict buttons in the first viewport. Approve/reject updates meters once and advances automatically after a 200 ms directional swipe. There is no visible last-review panel or next button; feedback must not interrupt the speed-based loop. Reduced motion skips the swipe. Show selection count near actions; tags remain optional. Queue and rules are real controls. Conversation appears only when authored content exists. Show context rows without deletion markers.
 
 ## Narrow layout
 
@@ -29,7 +29,6 @@ Queue (count)     Rules
 PR title · author
 File selector
 Diff (horizontal code scroll if needed)
-Last decision (compact, expandable)
 Request changes          Approve
 ```
 
@@ -37,14 +36,26 @@ Use sticky actions without covering the last code row or focus target. Queue/rul
 
 ## Prototype checks
 
-- [x] Meaningful diff, verdict actions and receipt visible at 1280×720; diff scrolls independently.
+- [x] Meaningful diff and verdict actions visible at 1280×720; diff scrolls independently.
 - [x] Phone 390×844, tablet 768×1024 and desktop 1280×720; light/dark and Spanish checked. Reflow at 640×360 checked (equivalent CSS viewport reduction to 200% on 1280×720; not an OS zoom audit).
 - [x] Keyboard selection and verdict; queue/rules access, Escape and focus return checked.
-- [x] Clean approval, untagged buggy rejection and precise rejection have distinct text receipts and applied deltas. Comprehension testing with first-time players remains Phase 4.
+- [x] Clean approval, untagged buggy rejection and precise rejection evaluate independently; applied deltas update meters without a blocking receipt. Comprehension testing with first-time players remains Phase 4.
 - [x] Browser evidence saved under `docs/design-study/`; screenshots show the implemented concept.
 
 ## Scope boundary
 
-The study uses local, replayable fixtures and the pure evaluator. The preview-state selector demonstrates a real empty state with disabled actions. Completed samples are labeled Reviewed and cannot be submitted twice without replay. Locale copy goes through the shared translation table. Native dialogs provide focus containment, Escape and focus return. The page returns 404 in production. Existing `/game`, its timing, tutorial and leaderboard remain unchanged.
+The study uses local, replayable fixtures and the pure evaluator. Development controls do not belong in the player-facing layout. Verdicts are locked during transitions to prevent duplicate scoring. Locale copy goes through the shared translation table. Native dialogs provide focus containment, Escape and focus return. The page returns 404 in production. Existing `/game`, its timing, tutorial and leaderboard remain unchanged.
 
-The selected visual direction is warm ivory, violet accents and editorial portraits, with a slate dark variant. Lucía and Diego's six expression assets are present in the study, not placeholders. Review this concrete direction before applying it across the game.
+The selected visual direction is warm ivory, violet accents and editorial portraits, with a slate dark variant. The full ten-person roster uses neutral, pleased and concerned portraits. The preview establishes the selected visual treatment before live-game integration.
+
+## Full-team presentation
+
+The fictional studio is **Afterhours**, building **Small Hours** in `afterhours / small-hours`. Pull-request numbers identify pending requests, starting at #1042. Selecting a request preserves the others; each verdict removes only that request and appends the next unused ID. All ten coworkers share the established editorial portrait treatment. This presentation remains a development route until the live integration gates below pass.
+
+## Production readiness TODO
+
+- [ ] Integrate the real two-minute shift clock, queue delivery/aging and tutorial into the redesigned desk.
+- [ ] Wire evaluator/scoped selection into GameContext atomically; verify scoring and leaderboard compatibility.
+- [ ] Verify empty queue, end of shift, restart, navigation and pause using real game state.
+- [ ] Complete keyboard/screen-reader, mobile and first-time-player checks across the live loop.
+- [ ] Ship through the preview branch review; no main merge or deployment is implied by polished presentation.

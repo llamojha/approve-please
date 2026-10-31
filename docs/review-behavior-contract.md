@@ -29,13 +29,13 @@ Receipt fields identify the completed PR, author, verdict, outcome, correctness,
 
 ## Live integration boundary
 
-Current GameContext behavior is intentionally unchanged in this PR. In Phase 2, replace its evaluation and line-selection consumers together, apply one decision atomically, retain the receipt across the next PR, and translate outcome labels. Until then, catalog validation requires unambiguous numeric bug references even when explicit file/row references are supplied.
+Current GameContext behavior is intentionally unchanged in this PR. In Phase 2, replace its evaluation and line-selection consumers together, apply one decision atomically, retain structured outcome data without blocking progression, and translate assistive outcome labels. Until then, catalog validation requires unambiguous numeric bug references even when explicit file/row references are supplied.
 
 Preserve the opening clean README and exposed-key tutorial pair. No ordinary PR arrives before both are processed. Mandatory waves remain at minutes 0, 60, 180 and 360; minute 0 has two PRs. A shift lasts two real minutes. Guided onboarding must pause the shared simulation, including clock, aging, delivery, delayed loads and verdicts; a local UI timer is insufficient.
 
 ## TODO
 
-- [ ] Integrate evaluator, scoped selection and persistent receipts atomically in Phase 2.
+- [ ] Integrate evaluator, scoped selection and automatic swipe progression atomically in Phase 2.
 - [ ] Verify three outcomes in the browser and review mixed-tag policy with the owner.
 - [ ] Add shared pause API before guided onboarding.
 - [ ] Resolve resumed/practice leaderboard eligibility before persistence delivery.
