@@ -1,6 +1,6 @@
 # Plan 013: UI, UX, coworkers and scenario authoring
 
-Status: IN PROGRESS. Phase 0/1 foundation milestone started 30 October 2026.
+Status: PHASE 1 IMPLEMENTED (31 October 2026). Concrete visual review is the checkpoint before Phase 2.
 
 Goal: make Approve Please feel like a readable, responsive PR-review game with memorable developers, understandable consequences and a contribution workflow that does not require hand-authoring every JSON field.
 
@@ -164,7 +164,7 @@ Final acceptance: all retained legacy content works; new verdict matrix passes; 
 ## Milestone TODOs
 
 - [x] M0: behavior/content contracts and owner/file allocation recorded.
-- [ ] M1: legacy-compatible evaluator/validator/normalizer ready; desk direction and two-character treatment selected.
+- [x] M1: legacy-compatible evaluator/validator/normalizer ready; rendered desk direction and six-image two-character study delivered. Owner acceptance precedes Phase 2.
 - [ ] M2: three-scenario playable loop accepted in browser.
 - [ ] M3a: full player journey ready.
 - [ ] M3b: ten-character cast and balanced scenario batches ready.
@@ -185,9 +185,22 @@ Recommended first execution assignment: Phase 0 followed by the three Phase 1 tr
 - Parallel ownership: validation worker owns pure validator, CLI wrapper and validation tests; evaluation worker owns types, normalization, evaluation, schema and contracts; design worker owns UI/cast/art direction documents. Integrator owns roadmap and verification. These disjoint files use the existing assessment worktree; later overlapping implementation uses separate worktrees.
 - Prototype default: mixed correct/incorrect tags receive no precision bonus. This does not change current live scoring; verify the policy in the Phase 2 playable review.
 - [x] Validate and independently review the foundation changes before PR delivery.
-- [ ] Finish the two-character art study and choose the visual treatment in context.
+- [x] Finish the two-character art study and render the selected treatment in context.
 - [ ] Begin Phase 2 only after the foundation contracts are integrated into the preview branch.
 
 Verification: 504 tests pass with one worker, including 22 new foundation tests and all 390 scenarios normalized in EN/ES. Typecheck and production build pass. Lint has zero errors and five pre-existing warnings. Generation validates 390 scenarios and leaves manifests unchanged. Two pre-existing duplicate closing-brace numbers were corrected in a two-template batch; both previewed in English/Spanish with independent closing-line selection. Independent review found the numeric identity compatibility gap; fixed and re-reviewed without remaining blockers.
 
-M1 is partially complete: evaluator, normalizer, shared validator and design briefs are ready. Actual two-character art study, rendered desk and owner acceptance remain pending. No live evaluator migration, UI refresh or portrait production is claimed in this foundation PR. Production publication is not part of this milestone.
+The initial foundation commit left the art study and rendered desk pending. The Phase 1 follow-up now supplies both in the same PR; live game migration remains Phase 2.
+
+## Phase 1 visual delivery — 31 October 2026
+
+Same PR #12 and head branch. Added `/dev/design` with a responsive ivory/violet desk, dark theme, bilingual copy, selectable added/context lines, pure-evaluator sample decisions, persistent receipts, completed/empty states and accessible queue/rules dialogs. Separate team view displays six generated Lucía/Diego portraits at avatar and briefing sizes. Each optimized alpha PNG is under 33 KB.
+
+Browser QA covers desktop 1280×720, phone 390×844, tablet 768×1024 and constrained 640×360 reflow; clean approval, untagged and precise rejection; keyboard line selection/verdict; persistence across sample switch; EN/ES; empty state; Escape/focus return. Independent review found light secondary-text contrast and completed-state clarity issues, both corrected. Light secondary-text contrast now exceeds 5:1 on paper, receipt and addition surfaces.
+
+- [ ] Owner accepts or requests changes to the rendered direction before Phase 2. This is an acceptance checkpoint, not missing Phase 1 implementation.
+- [ ] Full screen-reader, OS zoom and observed first-time-user audits remain Phase 4.
+
+The study is development-only and has no live clock, save, leaderboard or production game integration. All later implementation still targets the preview branch.
+
+Final Phase1 gates:506 tests pass, typecheck/build pass,390 templates validate and manifests remain unchanged, lint has five pre-existing warnings. Production browser check confirms `/dev/design` returns404.

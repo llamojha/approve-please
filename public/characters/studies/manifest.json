@@ -1,0 +1,62 @@
+{
+  "generatedOn": "2026-10-30",
+  "tool": "Built-in image_gen",
+  "provenance": "Original fictional characters generated for this project. No external human likeness or third-party reference images supplied. Expression edits reference original neutral generations.",
+  "processing": "Resized to256×256 and palette PNG encoded with sharp; alpha retained. Original outputs retained in Codex generated_images.",
+  "assets": [
+    {
+      "name": "lucia-neutral",
+      "source": "exec-c046f39c-3547-495b-9e81-aec471633884.png",
+      "output": "/characters/studies/lucia-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31629,
+      "hasAlpha": true
+    },
+    {
+      "name": "lucia-pleased",
+      "source": "exec-bffaf60d-67d3-45e8-9b07-addce74949b7.png",
+      "output": "/characters/studies/lucia-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31009,
+      "hasAlpha": true
+    },
+    {
+      "name": "lucia-concerned",
+      "source": "exec-b3ee2fcc-2a6a-45a6-9af3-f31bf57b9f23.png",
+      "output": "/characters/studies/lucia-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31124,
+      "hasAlpha": true
+    },
+    {
+      "name": "diego-neutral",
+      "source": "exec-1991d8ea-8951-4bb3-b8a1-ea327e5d9ced.png",
+      "output": "/characters/studies/diego-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32034,
+      "hasAlpha": true
+    },
+    {
+      "name": "diego-pleased",
+      "source": "exec-d7b517a7-54b6-4a20-b9a0-d19f908655ce.png",
+      "output": "/characters/studies/diego-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32349,
+      "hasAlpha": true
+    },
+    {
+      "name": "diego-concerned",
+      "source": "exec-452b374d-c8d1-4ed4-8b04-9e1bb469a8cc.png",
+      "output": "/characters/studies/diego-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32478,
+      "hasAlpha": true
+    }
+  ]
+}

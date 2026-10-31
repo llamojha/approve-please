@@ -2,7 +2,7 @@
 
 ## Current refresh roadmap
 
-Plan 013 is IN PROGRESS: UI/UX refresh, developer-led coworkers and contributor authoring. It starts from main and excludes the existing open PRs. See `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/plans/013-ui-ux-characters-and-authoring.md` for phases, parallel ownership, acceptance gates and milestone TODOs. The foundation milestone is underway. Implementation PRs target `codex/ui-refresh-preview`, not `main`.
+Plan 013 is IN PROGRESS: UI/UX refresh, developer-led coworkers and contributor authoring. It starts from main and excludes the existing open PRs. See `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/plans/013-ui-ux-characters-and-authoring.md` for phases, parallel ownership, acceptance gates and milestone TODOs. Phase 1 implementation is complete, including the rendered desk and two-character study. Owner visual review precedes Phase 2. Implementation PRs target `codex/ui-refresh-preview`, not `main`.
 
 ## Earlier plans
 

@@ -15,12 +15,12 @@ Proposed ten-person cast. Names remain stable across EN/ES. Traits guide writing
 | noel / Noel | Security; calm, specific, asks about trust boundaries | Charcoal jacket, green lanyard | “Who controls that input?” / “¿Quién controla esa entrada?” |
 | riya / Riya | PM; direct, balances urgency and scope, sometimes underestimates dependencies | Coral blouse, release notebook | “Let's ship the safe part first.” / “Publiquemos primero la parte segura.” |
 
-Lucía and Diego are the first two implemented identities; Riya provides contextual copy. These descriptions do not imply that implementation or portraits are complete. Existing Diego (Release Mgr) remains a distinct legacy cameo, and Jules may remain an occasional CTO voice. No nationality-based personality traits or accents.
+Lucía and Diego are the first two implemented identities; Riya provides contextual copy. The two-character study now renders all six portraits in `/dev/design`; the full registry and live-game cast integration remain Phase 2/3 work. Existing Diego (Release Mgr) remains a distinct legacy cameo, and Jules may remain an occasional CTO voice. No nationality-based personality traits or accents.
 
 Reactions refer to the completed review: acknowledge a real catch, question an unnecessary rejection, or respond after consequences become known. Neutral expressions before verdicts must not leak answers. Keep responses brief enough for a receipt and give each character more than one emotional register.
 
 ## TODO
 
-- [ ] Implement two identities with guest fallback and three expressions each.
+- [x] Render two study identities, initials fallback on image failure and three expressions each.
 - [ ] Review them in the desk before producing the remaining eight sets.
 - [ ] Add scenario batches of at most ten, including both clean and flawed work.
