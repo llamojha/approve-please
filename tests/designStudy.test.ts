@@ -35,6 +35,19 @@ describe('full team review scenarios', () => {
     }
   });
 
+  it('offers all three priorities with both safe and flawed work at each level', () => {
+    const editions = Array.from({ length: 20 }, (_, index) => studyReview(index, 'en'));
+    for (const importance of ['low', 'normal', 'high']) {
+      const matching = editions.filter(pr => pr.importance === importance);
+      expect(matching.some(pr => pr.bugPatterns.length === 0)).toBe(true);
+      expect(matching.some(pr => pr.bugPatterns.length > 0)).toBe(true);
+    }
+    for (let index = 0; index < 10; index += 1) {
+      expect(editions[index].importance).toBe(editions[index + 10].importance);
+      expect(studyReview(index, 'es').importance).toBe(editions[index].importance);
+    }
+  });
+
   it('evaluates every clean edition and every precisely tagged flawed edition', () => {
     for (let index = 0; index < 20; index += 1) {
       const pr = studyReview(index, 'en');

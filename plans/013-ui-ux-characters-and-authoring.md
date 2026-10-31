@@ -235,3 +235,11 @@ Full-cast gates: 510 tests pass with one worker; typecheck/build pass; lint reta
 - [ ] Persist audio channel preferences across shifts/reloads with reliable resume behavior.
 - [ ] Finish full OS/browser-zoom, screen-reader and observed low-vision usability audit.
 Detailed implementation/verification: docs/audio-and-readability-plan.md and docs/readability-audit.md. This follow-up adds audio to the live desk but does not migrate the new desk's clock/queue/tutorial/scoring integration.
+
+
+## Clock and priority — owner follow-up
+- [x] Restore advancing 09:00–17:00 time and shift progress using the existing two-minute pace.
+- [x] Pause the local preview clock in dialogs/team view; stop verdicts at shift end and carry pending PRs forward when starting the next preview shift.
+- [x] Restore localized Low/Medium/High priority labels on queue cards and the active PR, independent of bug correctness.
+- [x] Verify clock pace, pause/resume, day boundary, auto-advance, next-shift carryover and narrow-screen readability.
+- [ ] Connect this presentation to live GameContext time, mandatory waves, tutorial and real campaign day transitions in Phase 2. The local preview clock does not replace those systems.

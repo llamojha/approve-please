@@ -47,12 +47,12 @@ const importanceLabels: Record<
 > = {
   en: {
     low: "Low",
-    normal: "Normal",
+    normal: "Medium",
     high: "High",
   },
   es: {
     low: "Baja",
-    normal: "Normal",
+    normal: "Media",
     high: "Alta",
   },
 };

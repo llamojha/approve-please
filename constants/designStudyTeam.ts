@@ -312,7 +312,7 @@ export function studyReview(sequence: number, locale: StudyLocale): PullRequest 
   // Alternating editions ensure no coworker's identity predicts correctness.
   const flawed = (sequence % studyTeam.length + Math.floor(sequence / studyTeam.length)) % 2 === 1;
   return { id: `afterhours-${1042 + sequence}`, templateId: `study-${person.id}-${flawed ? 'flawed' : 'clean'}`,
-    title: person.title[locale], author: person.name, authorId: person.id, description: '', tags: [], importance: 'normal', estimatedReviewSeconds: 30,
+    title: person.title[locale], author: person.name, authorId: person.id, description: '', tags: [], importance: (['low', 'normal', 'high'] as const)[sequence % studyTeam.length % 3], estimatedReviewSeconds: 30,
     files: [{ filename: person.filename, language: 'typescript', lines: person.lines.map((content, i) => ({ content: flawed && i + 1 === person.bugLine ? person.flawedLine : content, lineNumber: i + 1, isNew: true })) }],
     bugPatterns: flawed ? [{ kind: person.bugKind as BugKind, severity: person.bugKind === 'security' ? 'critical' : 'major', lineNumbers: [person.bugLine] }] : [] };
 }

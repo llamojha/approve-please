@@ -149,3 +149,29 @@
 .brandIcon { width:2rem; height:2rem; flex-shrink:0; font-size:1.5rem; }
 
 .preferences { max-width:100%; flex-wrap:wrap; }
+
+/* Time pressure and priority remain visible independently of code correctness. */
+.shiftbar strong { display:flex; align-items:baseline; gap:.375rem; font-variant-numeric:tabular-nums; }
+.shiftbar strong>span { display:inline; margin:0; }
+.clockNote { font-size:.875rem; color:var(--subtle); }
+.clockProgress { width:100%; height:.25rem; border:0; border-radius:1rem; overflow:hidden; background:var(--line); color:var(--purple); accent-color:var(--purple); }
+.clockProgress::-webkit-progress-bar { background:var(--line); }
+.clockProgress::-webkit-progress-value { background:var(--purple); }
+.clockProgress::-moz-progress-bar { background:var(--purple); }
+.priority { display:inline-flex; align-items:center; width:fit-content; border:1px solid currentColor; border-radius:1rem; padding:.125rem .5rem; font-size:.875rem; font-weight:600; line-height:1.5; }
+.queueItem>.priority { margin-top:.5rem; }
+.priority[data-priority='low'] { color:#276344; background:#edf5ef; }
+.priority[data-priority='normal'] { color:#77520a; background:#fff4d6; }
+.priority[data-priority='high'] { color:#a13043; background:#ffedf0; }
+.study[data-dark='true'] .priority[data-priority='low'] { color:#a9dfb9; background:#24372f; }
+.study[data-dark='true'] .priority[data-priority='normal'] { color:#f5d486; background:#403620; }
+.study[data-dark='true'] .priority[data-priority='high'] { color:#ffb1bf; background:#452734; }
+.shiftEnd { flex-shrink:0; padding:1rem; margin-bottom:1rem; border:1px solid var(--purple); border-radius:.5rem; background:var(--wash); }
+.shiftEnd h2 { font-size:1.25rem; margin:0; }
+.shiftEnd p { margin:.5rem 0 1rem; }
+.shiftEnd button { min-height:2.75rem; padding:.5rem 1rem; }
+@media(max-width:700px) {
+  .clockProgress { flex-basis:100%; }
+  .clockNote { margin-left:auto; }
+  .author>.priority { margin-left:0; }
+}
