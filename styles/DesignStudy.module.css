@@ -175,3 +175,10 @@
   .clockNote { margin-left:auto; }
   .author>.priority { margin-left:0; }
 }
+
+/* Author context stays between the branch and the diff, without stretching. */
+.authorNote { flex-shrink:0; border:1px solid var(--line); border-left:3px solid var(--purple); border-radius:.5rem; background:var(--surface); padding:.75rem 1rem; margin:0 0 .75rem; }
+.authorNote>div { display:flex; align-items:baseline; flex-wrap:wrap; gap:.25rem 1rem; }
+.authorNote h2 { font-size:.875rem; font-weight:650; margin:0; }
+.authorNote span { color:var(--subtle); font-size:.875rem; }
+.authorNote p { font-size:1rem; line-height:1.5; max-width:75ch; margin:.375rem 0 0; }

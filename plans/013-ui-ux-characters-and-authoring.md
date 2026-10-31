@@ -243,3 +243,9 @@ Detailed implementation/verification: docs/audio-and-readability-plan.md and doc
 - [x] Restore localized Low/Medium/High priority labels on queue cards and the active PR, independent of bug correctness.
 - [x] Verify clock pace, pause/resume, day boundary, auto-advance, next-shift carryover and narrow-screen readability.
 - [ ] Connect this presentation to live GameContext time, mandatory waves, tutorial and real campaign day transitions in Phase 2. The local preview clock does not replace those systems.
+
+
+## Developer context — owner follow-up
+- [x] Add individual EN/ES descriptions for all ten coworkers between the branch and code, via the existing PR description field.
+- [x] Keep descriptions identical across each author’s clean/flawed editions; verify author/text updates after automatic advance and narrow-screen wrapping.
+- [ ] During Phase 2 migration, use catalog PR descriptions and resolved author identities in this presentation.

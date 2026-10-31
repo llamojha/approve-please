@@ -35,3 +35,9 @@ Verification: 525 tests pass with one worker; typecheck and production build pas
 
 ## Compact diff sizing
 Short snippets now determine the panel height instead of stretching to fill the viewport. The verdict bar follows the diff directly; long snippets retain an independent scroll area capped at 50vh/30rem and shrink further when needed. The code remains 16 px. Browser checks at 1440×1000, 1280×720 and 768×1024 reduced the five-line sample’s trailing gap from 334 px to 3 px, with the actions on screen. Long-diff scrolling, line selection, automatic rejection advance and 390 px mobile reflow remain working. See compact-diff.png.
+
+
+## Developer descriptions
+Every coworker now has a bilingual, first-person PR description in the team data. It flows through the existing PullRequest.description field and appears between the branch line and code diff, with an author byline and 16 px body text. Clean/flawed editions share the same description so the prose provides intent without acting as an answer key. All ten authors, EN/ES switching, automatic advance and 320 px through desktop reflow were checked in the browser. See pr-description.png.
+
+Developer-description gates: 526 tests pass with one worker; typecheck and production build pass; all 390 templates validate. Lint retains five existing warnings and no errors.

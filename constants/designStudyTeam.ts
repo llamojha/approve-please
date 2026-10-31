@@ -20,6 +20,10 @@ export const studyTeam = [
     },
     "filename": "src/components/Welcome.tsx",
     "branch": "welcome-workspace",
+    "description": {
+      "en": "New workspaces currently greet you with a whole lot of nothing. I added a welcome message and a create-project button. One next step, no confetti cannon.",
+      "es": "Los espacios nuevos te reciben con un montón de nada. He añadido un mensaje de bienvenida y un botón para crear un proyecto. Un siguiente paso, sin cañón de confeti."
+    },
     "lines": [
       "export function Welcome({ onCreate }: Props) {",
       "  return (",
@@ -53,6 +57,10 @@ export const studyTeam = [
     },
     "filename": "src/api/account.ts",
     "branch": "account-observability",
+    "description": {
+      "en": "Last night’s account incident took three tabs and a lucky guess to trace. This adds context to the account lookup logs. I’d like the next on-call shift to involve less detective work.",
+      "es": "El incidente de cuentas de anoche necesitó tres pestañas y algo de suerte para seguirle la pista. Añado contexto a los logs de consulta de cuentas. Que la próxima guardia tenga menos trabajo de detective."
+    },
     "lines": [
       "export async function getAccount(req: Request) {",
       "  const session = await requireSession(req);",
@@ -89,6 +97,10 @@ export const studyTeam = [
     },
     "filename": "src/platform/workers.ts",
     "branch": "worker-ceiling",
+    "description": {
+      "en": "The worker setting accepts whatever number it gets handed. I’m putting a ceiling on it before someone discovers how expensive enthusiasm can be. Have a look at the bounds.",
+      "es": "El ajuste de workers acepta cualquier número que le pasen. Le pongo un límite antes de que alguien descubra lo caro que sale el entusiasmo. Echad un vistazo a los límites."
+    },
     "lines": [
       "export function workerCount(requested: number) {",
       "  const MAX_WORKERS = 8;",
@@ -118,6 +130,10 @@ export const studyTeam = [
     },
     "filename": "src/data/digest.ts",
     "branch": "quiet-day-digest",
+    "description": {
+      "en": "A workspace with no activity still needs a number in the daily digest. This keeps the averaging logic in one place. Quiet days deserve a row in the spreadsheet too.",
+      "es": "Un espacio sin actividad también necesita un número en el resumen diario. Centralizo aquí el cálculo de la media. Los días tranquilos también merecen una fila en la hoja de cálculo."
+    },
     "lines": [
       "export function averageActivity(counts: number[]) {",
       "  // A quiet workspace should report zero.",
@@ -147,6 +163,10 @@ export const studyTeam = [
     },
     "filename": "src/components/CommandTrigger.tsx",
     "branch": "command-menu",
+    "description": {
+      "en": "The command menu has a proper button now. Please give it a lap with just the keyboard; the mouse has already had plenty of attention.",
+      "es": "El menú de comandos ya tiene un botón como toca. Dadle una vuelta usando solo el teclado; el ratón ya ha recibido bastante atención."
+    },
     "lines": [
       "export function CommandTrigger({ open }: Props) {",
       "  return (",
@@ -179,6 +199,10 @@ export const studyTeam = [
     },
     "filename": "src/team/invitations.ts",
     "branch": "last-seat",
+    "description": {
+      "en": "I pulled the invitation check into a little helper so both screens use the same rule. Could someone double-check the last available seat? Off-by-one maths still makes me count on my fingers.",
+      "es": "He sacado la comprobación de invitaciones a una función para que las dos pantallas usen la misma regla. ¿Alguien puede revisar la última plaza disponible? Con estos límites todavía cuento con los dedos."
+    },
     "lines": [
       "export function canInvite(members: number, limit: number) {",
       "  // Each invitation needs one available seat.",
@@ -207,6 +231,10 @@ export const studyTeam = [
     },
     "filename": "src/testing/retry.ts",
     "branch": "bounded-retries",
+    "description": {
+      "en": "Moved the retry check into a shared helper. It should stop when a check passes or the attempt budget runs out. The test runner and I would both like to go home eventually.",
+      "es": "He pasado la comprobación de reintentos a una función común. Debe parar cuando pase la comprobación o se agoten los intentos. El ejecutor de pruebas y yo queremos irnos a casa en algún momento."
+    },
     "lines": [
       "export async function retryCheck(check: () => Promise<boolean>) {",
       "  for (let attempt = 0; attempt < 3; attempt += 1) {",
@@ -237,6 +265,10 @@ export const studyTeam = [
     },
     "filename": "src/ops/timeout.ts",
     "branch": "connection-deadline",
+    "description": {
+      "en": "The client wants milliseconds; our settings speak seconds. This helper handles the conversion and caps the wait. Ideally, the next connection timeout happens before my coffee goes cold.",
+      "es": "El cliente espera milisegundos y los ajustes hablan en segundos. Esta función convierte las unidades y limita la espera. A ver si la próxima conexión caduca antes de que se enfríe mi café."
+    },
     "lines": [
       "export function timeoutMs(seconds: number) {",
       "  // The client expects milliseconds, not seconds.",
@@ -265,6 +297,10 @@ export const studyTeam = [
     },
     "filename": "src/security/notes.ts",
     "branch": "workspace-boundary",
+    "description": {
+      "en": "Shared notes need the same access check wherever they’re opened. I’ve moved that decision here: workspace membership and account status both matter. Small function, fairly important door.",
+      "es": "Las notas compartidas necesitan la misma comprobación de acceso desde cualquier pantalla. Centralizo la decisión aquí: importan tanto el espacio de trabajo como el estado de la cuenta. Una función pequeña para una puerta bastante importante."
+    },
     "lines": [
       "export function canReadNote(user: User, note: Note) {",
       "  const sameWorkspace = user.workspaceId === note.workspaceId;",
@@ -293,6 +329,10 @@ export const studyTeam = [
     },
     "filename": "src/product/beta.ts",
     "branch": "beta-guest-list",
+    "description": {
+      "en": "The beta guest list is ready for the next cohort. This wires up the access decision for invited teams that have opted in. Let’s keep the launch small enough that we can still learn everyone’s name.",
+      "es": "La lista de la beta está lista para el siguiente grupo. Conecto la decisión de acceso para los equipos invitados que hayan dado su consentimiento. Que el lanzamiento sea lo bastante pequeño como para aprendernos los nombres."
+    },
     "lines": [
       "export function betaEnabled(team: Team, invitedIds: string[]) {",
       "  // Beta access requires both an invitation and consent.",
@@ -312,7 +352,7 @@ export function studyReview(sequence: number, locale: StudyLocale): PullRequest 
   // Alternating editions ensure no coworker's identity predicts correctness.
   const flawed = (sequence % studyTeam.length + Math.floor(sequence / studyTeam.length)) % 2 === 1;
   return { id: `afterhours-${1042 + sequence}`, templateId: `study-${person.id}-${flawed ? 'flawed' : 'clean'}`,
-    title: person.title[locale], author: person.name, authorId: person.id, description: '', tags: [], importance: (['low', 'normal', 'high'] as const)[sequence % studyTeam.length % 3], estimatedReviewSeconds: 30,
+    title: person.title[locale], author: person.name, authorId: person.id, description: person.description[locale], tags: [], importance: (['low', 'normal', 'high'] as const)[sequence % studyTeam.length % 3], estimatedReviewSeconds: 30,
     files: [{ filename: person.filename, language: 'typescript', lines: person.lines.map((content, i) => ({ content: flawed && i + 1 === person.bugLine ? person.flawedLine : content, lineNumber: i + 1, isNew: true })) }],
     bugPatterns: flawed ? [{ kind: person.bugKind as BugKind, severity: person.bugKind === 'security' ? 'critical' : 'major', lineNumbers: [person.bugLine] }] : [] };
 }

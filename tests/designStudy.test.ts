@@ -35,6 +35,21 @@ describe('full team review scenarios', () => {
     }
   });
 
+  it('gives every author localized context without revealing the clean/flawed edition', () => {
+    const descriptions = new Set<string>();
+    for (let index = 0; index < studyTeam.length; index += 1) {
+      const en = studyReview(index, 'en');
+      const es = studyReview(index, 'es');
+      expect(en.description.length).toBeGreaterThan(40);
+      expect(es.description.length).toBeGreaterThan(40);
+      expect(es.description).not.toBe(en.description);
+      expect(studyReview(index + studyTeam.length, 'en').description).toBe(en.description);
+      expect(studyReview(index + studyTeam.length, 'es').description).toBe(es.description);
+      descriptions.add(en.description);
+    }
+    expect(descriptions.size).toBe(studyTeam.length);
+  });
+
   it('offers all three priorities with both safe and flawed work at each level', () => {
     const editions = Array.from({ length: 20 }, (_, index) => studyReview(index, 'en'));
     for (const importance of ['low', 'normal', 'high']) {
