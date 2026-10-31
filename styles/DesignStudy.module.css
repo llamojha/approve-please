@@ -23,3 +23,12 @@
 @media(min-width:1051px) and (min-height:650px){.study{height:100vh;display:flex;flex-direction:column}.topbar,.previewBar,.shiftbar{flex-shrink:0}.workspace{height:auto;min-height:0;flex:1;width:100%;overflow:hidden}.main{min-height:0}.sidebar{min-height:0;overflow:auto}.diff{min-height:120px}.cast{overflow:auto;width:100%}}
 
 .study .codeLine:disabled{opacity:1;cursor:default}.study .codeLine:disabled:hover{background:inherit}.study .addition:disabled:hover{background:var(--addition)}.study .selected:disabled:hover{background:var(--wash)}
+
+/* Verdicts advance immediately after a short directional swipe. */
+.main{overflow-x:clip}
+.main[data-swipe='approve']{animation:reviewApprove .2s ease-in forwards}
+.main[data-swipe='request-changes']{animation:reviewReject .2s ease-in forwards}
+@keyframes reviewApprove{to{transform:translateX(45px);opacity:0}}
+@keyframes reviewReject{to{transform:translateX(-45px);opacity:0}}
+.screenReaderStatus{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.main[data-swipe]{animation:none}}

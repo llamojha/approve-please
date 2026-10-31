@@ -18,3 +18,6 @@ Evidence: desktop-light.png, desktop-dark.png, mobile-es.png, tablet-empty.png, 
 Owner visual approval remains the checkpoint before Phase 2. Observed-user comprehension, exhaustive screen-reader testing and OS zoom checks are not claimed here; they remain in the later integration audit.
 
 Validation:506 tests pass (single worker), typecheck and build pass,390 templates validate without manifest changes. Lint has five pre-existing warnings and no errors. A production-server browser request to `/dev/design` displayed404.
+
+## Speed-first revision
+Owner feedback removes the visible Last review panel and next arrow. Verdicts now update meters and automatically advance after a 200 ms directional swipe (instant with reduced motion). Desktop-light evidence is updated; other screenshots above record the earlier study. Verified both verdicts, cleared tags, reduced motion and phone overflow in a real browser; 13 targeted tests, typecheck and lint pass (five existing warnings).

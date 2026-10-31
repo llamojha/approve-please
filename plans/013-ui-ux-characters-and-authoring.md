@@ -204,3 +204,10 @@ Browser QA covers desktop 1280×720, phone 390×844, tablet 768×1024 and constr
 The study is development-only and has no live clock, save, leaderboard or production game integration. All later implementation still targets the preview branch.
 
 Final Phase1 gates:506 tests pass, typecheck/build pass,390 templates validate and manifests remain unchanged, lint has five pre-existing warnings. Production browser check confirms `/dev/design` returns404.
+
+
+## Owner feedback — speed-first review loop
+- [x] Remove the visible Last review panel and manual next arrow from the study.
+- [x] Approve/reject applies the verdict once, swipes the review away in 200 ms, and automatically opens the next sample with cleared tags. Reduced motion skips the animation.
+- [ ] Carry this automatic progression into Phase 2 live gameplay; feedback must not require an extra click or pause.
+This supersedes the study's earlier persistent-receipt presentation. Meter changes remain immediate and results are announced to assistive technology.
