@@ -223,3 +223,15 @@ Owner explicitly requested all ten coworkers and production-like presentation, s
 Production release still requires the real clock/queue/tutorial/scoring integration listed in docs/ui-direction.md; the development route must not be presented as a deployable replacement for /game.
 
 Full-cast gates: 510 tests pass with one worker; typecheck/build pass; lint retains five existing warnings. Thirty 256×256 alpha portraits total 948,846 bytes (largest 33,757). Browser checks cover all thirty image loads, ten automatic advances, queue preservation when reviewing out of order, precise keyboard rejection, reduced motion, EN/ES, mobile dialogs and fixed handbook access on desktop/tablet. Production-server probe confirms the development route returns 404.
+
+
+## Readability and adaptive audio — owner follow-up
+- [x] Increase body/code/actions to 16 px and supporting text to 14 px; replace fixed small type with rem sizing.
+- [x] Verify320 px reflow, doubled text size, increased text spacing and light/dark contrast; preserve reachable review actions.
+- [x] Add original instrumental music at 72–144 BPM based on the weakest meter, separate PR sounds and volume controls.
+- [x] Notify new PR IDs audibly, visually and through a polite announcement; existing selection does not notify.
+- [x] Integrate shared audio controls/arrival detection into the preview and existing WorkScreen.
+- [x] Verify user-gesture unlock, unsupported browsers, mute/volume, adaptive tempo, hidden-tab races and cleanup.
+- [ ] Persist audio channel preferences across shifts/reloads with reliable resume behavior.
+- [ ] Finish full OS/browser-zoom, screen-reader and observed low-vision usability audit.
+Detailed implementation/verification: docs/audio-and-readability-plan.md and docs/readability-audit.md. This follow-up adds audio to the live desk but does not migrate the new desk's clock/queue/tutorial/scoring integration.

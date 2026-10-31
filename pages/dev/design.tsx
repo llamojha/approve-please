@@ -1,4 +1,8 @@
 import Head from 'next/head';
+import AudioControls from '../../components/common/AudioControls';
+import PRArrivalNotice from '../../components/common/PRArrivalNotice';
+import { useAudioCue } from '../../hooks/useAudioCue';
+import { usePRArrivalNotice } from '../../hooks/usePRArrivalNotice';
 import Link from 'next/link';
 import type { GetServerSideProps } from 'next';
 import { useEffect, useRef, useState } from 'react';
@@ -25,7 +29,8 @@ function Portrait({ person, expression = 'neutral', size = 48 }: { person: Perso
   </span>;
 }
 export default function DesignStudy() {
-  const t = useTranslations().designStudy;
+  const translations = useTranslations();
+  const t = translations.designStudy;
   const { locale, setLocale } = useLocale();
   const [dark, setDark] = useState(false);
   const [swipe, setSwipe] = useState<ReviewVerdict | null>(null);
@@ -41,7 +46,9 @@ export default function DesignStudy() {
   const [selected, setSelected] = useState<number[]>([]);
   const [receipt, setReceipt] = useState<(DecisionReceipt & { person: Person }) | null>(null);
   const [meters, setMeters] = useState(initialMeters);
-  const [panel, setPanel] = useState<'rules' | 'queue' | null>(null);
+  const audio = useAudioCue(meters);
+  const arrivalNotice = usePRArrivalNotice(reviewQueue.pending.map(id => String(id)), audio.playArrivalCue);
+  const [panel, setPanel] = useState<'rules' | 'queue' | 'audio' | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const sidebar = useRef<HTMLElement>(null);
   useEffect(() => { sidebar.current?.querySelector('[aria-pressed="true"]')?.scrollIntoView({ block: 'nearest' }); }, [sequence]);
@@ -83,7 +90,7 @@ export default function DesignStudy() {
   const outcome = receipt ? ({ 'clean-approval': t.cleanOutcome, 'correct-rejection': t.caughtOutcome, 'buggy-approval': t.escapedOutcome, 'false-positive': t.falseOutcome }[receipt.outcome]) : '';
   return <div className={styles.study} data-dark={dark}>
     <Head><title>{`Approve Please · ${t.preview}`}</title></Head>
-    <header className={styles.topbar}><Link className={styles.brand} href="/dev/design"><span className={styles.brandIcon}>↳</span>approve<span>please</span><span className={styles.brandPeriod}>.</span></Link><nav aria-label={t.preview}><button aria-pressed={view === 'desk'} onClick={() => setView('desk')}>{t.desk}</button><button aria-pressed={view === 'cast'} onClick={() => setView('cast')}>{t.cast}</button></nav><div className={styles.preferences}><button aria-label={t.theme} onClick={() => setDark(!dark)}>{dark ? '☀' : '◐'} <span>{dark ? t.changeThemeLight : t.changeThemeDark}</span></button><button onClick={() => setLocale(locale === 'en' ? 'es' : 'en')} aria-label={locale === 'en' ? 'Cambiar a español' : 'Switch to English'}>{locale.toUpperCase()} ↔</button></div></header>
+    <header className={styles.topbar}><Link className={styles.brand} href="/dev/design"><span className={styles.brandIcon}>↳</span>approve<span>please</span><span className={styles.brandPeriod}>.</span></Link><nav aria-label={t.preview}><button aria-pressed={view === 'desk'} onClick={() => setView('desk')}>{t.desk}</button><button aria-pressed={view === 'cast'} onClick={() => setView('cast')}>{t.cast}</button></nav><div className={styles.preferences}><button aria-label={translations.audio.settings} onClick={() => setPanel('audio')}>♫ <span>{translations.audio.button}</span></button><button aria-label={t.theme} onClick={() => setDark(!dark)}>{dark ? '☀' : '◐'} <span>{dark ? t.changeThemeLight : t.changeThemeDark}</span></button><button onClick={() => setLocale(locale === 'en' ? 'es' : 'en')} aria-label={locale === 'en' ? 'Cambiar a español' : 'Switch to English'}>{locale.toUpperCase()} ↔</button></div></header>
     {view === 'cast' ? <main className={styles.cast}><span className={styles.eyebrow}>{t.cast}</span><h1>{t.teamHeading}</h1><p>{t.teamIntro}</p><div className={styles.castGrid}>{people.map(who => <section className={styles.castCard} key={who}><div className={styles.castName}><h2>{names[who]}</h2><span>{role(who)}</span></div><div className={styles.expressions}>{(['neutral', 'pleased', 'concerned'] as const).map(expression => <figure key={expression}><Portrait person={who} expression={expression} size={160} /><figcaption>{t[expression]}</figcaption></figure>)}</div><div className={styles.scale}><span>{t.scale}</span><Portrait person={who} size={32} /><Portrait person={who} size={48} /></div><blockquote>“{studyTeam.find(p => p.id === who)!.quote[locale]}”</blockquote></section>)}</div><p>{t.portraitNote}</p><button className={styles.primary} onClick={() => setView('desk')}>{t.back} ↗</button></main> : <>
       <div className={styles.shiftbar}><div><span className={styles.eyebrow}>{t.shift}</span><strong>{reviewedCount}<span> {t.reviewCount}</span></strong></div><div className={styles.meters}>{(Object.keys(meters) as (keyof MeterSet)[]).map(key => <div key={key}><span>{t[key]}<b>{meters[key]}<small>/100</small></b></span><i><em style={{ width: `${meters[key]}%` }} /></i></div>)}</div><span className={styles.shiftStamp}>↗ <span>{t.deskTitle}</span></span></div>
       <div className={styles.workspace}><aside ref={sidebar} className={styles.sidebar}><h1>{t.queue}</h1><p>{t.queueHint}</p><div className={styles.queueList}>{queue}</div><div className={styles.sidebarBottom}><span className={styles.handbookIcon}>⌘</span><h3>{t.rulesIntro}</h3><button onClick={() => setPanel('rules')}>{t.rules} ↗</button><small>{t.liveRules}</small></div></aside>
@@ -93,7 +100,8 @@ export default function DesignStudy() {
       <span className={styles.screenReaderStatus} role="status">{receipt ? `${names[receipt.person]}: ${outcome} ${precision}` : ''}</span>
 </main></div>
     </>}
-    <dialog ref={dialog} className={styles.dialog} onCancel={e => { e.preventDefault(); setPanel(null); }} onClick={e => { if (e.target === dialog.current) setPanel(null); }} aria-labelledby="study-dialog-title"><div className={styles.dialogTop}><h2 id="study-dialog-title">{panel === 'queue' ? t.queue : t.handbookTitle}</h2><button onClick={() => setPanel(null)} aria-label={t.close}>×</button></div>{panel === 'queue' ? queue : <><span className={styles.handbookIcon}>⌘</span><h3>{t.rulesIntro}</h3><p>{t.rulesBody}</p><p>{t.emptySelection}</p><small>{t.rulesNote}</small></>}</dialog>
+    <PRArrivalNotice notice={arrivalNotice} />
+    <dialog ref={dialog} className={styles.dialog} onCancel={e => { e.preventDefault(); setPanel(null); }} onClick={e => { if (e.target === dialog.current) setPanel(null); }} aria-labelledby="study-dialog-title"><div className={styles.dialogTop}><h2 id="study-dialog-title">{panel === 'queue' ? t.queue : panel === 'audio' ? translations.audio.title : t.handbookTitle}</h2><button onClick={() => setPanel(null)} aria-label={t.close}>×</button></div>{panel === 'queue' ? queue : panel === 'audio' ? <AudioControls audio={audio} /> : <><span className={styles.handbookIcon}>⌘</span><h3>{t.rulesIntro}</h3><p>{t.rulesBody}</p><p>{t.emptySelection}</p><small>{t.rulesNote}</small></>}</dialog>
   </div>;
 }
 export const getServerSideProps: GetServerSideProps = async () => process.env.NODE_ENV === 'production' ? { notFound: true } : { props: {} };

@@ -8,7 +8,7 @@ The team view shows neutral, pleased and concerned illustrated portraits, locali
 
 ## Integration boundary
 
-This is a development-only preview. Production requests return 404. It uses local state and the pure evaluator; it has no real clock, incoming queue delivery, tutorial, shift completion, save or leaderboard writes. The actual `/game` is still the existing implementation. Production readiness tasks are explicit in `docs/ui-direction.md` and the roadmap.
+This is a development-only preview. Production requests return 404. It uses local state and the pure evaluator; it has no real clock, incoming queue delivery, tutorial, shift completion, save or leaderboard writes. The actual `/game` retains its existing desk/game loop and now shares the new audio controls and arrival notice. Production readiness tasks are explicit in `docs/ui-direction.md` and the roadmap.
 
 ## Verification
 
@@ -17,3 +17,11 @@ The initial Phase 1 evidence remains in Git history. Current screenshots cover d
 Prompts: `docs/design-study/prompts.md`. Asset provenance: `public/characters/studies/manifest.json`.
 
 Final gates: 510 tests pass (single worker), typecheck/build pass, 390 templates validate without generated changes, lint has zero errors and five pre-existing warnings. Production HTTP probe confirms 404. Independent review findings on queue preservation and missing-account handling are fixed. The phone and tablet retain reachable verdicts; the tablet/desktop queue scrolls independently with handbook access fixed in place.
+
+
+## Readability and adaptive audio
+The desk now uses 16 px code/body/actions and 14 px supporting text, with relative sizing, larger controls and wrapping at narrow widths. Detailed checks and limitations are in docs/readability-audit.md.
+
+Open Sound to enable background music and/or PR chimes. Both start off; volume starts at 25%. The instrumental rhythm speeds up as the lowest meter falls (72–144 BPM). New PR IDs produce a short two-note chime when enabled, and a visual/polite notice regardless of audio. Selecting an already queued PR is silent. The same controls are available in the existing live WorkScreen.
+
+Latest follow-up gates: 524 tests pass with one worker; typecheck/build pass; lint retains five existing warnings. Audio controls are shown in audio-settings.png; pr-arrival.png shows the non-blocking notice.

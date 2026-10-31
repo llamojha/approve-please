@@ -44,7 +44,7 @@ Use sticky actions without covering the last code row or focus target. Queue/rul
 
 ## Scope boundary
 
-The study uses local, replayable fixtures and the pure evaluator. Development controls do not belong in the player-facing layout. Verdicts are locked during transitions to prevent duplicate scoring. Locale copy goes through the shared translation table. Native dialogs provide focus containment, Escape and focus return. The page returns 404 in production. Existing `/game`, its timing, tutorial and leaderboard remain unchanged.
+The study uses local, replayable fixtures and the pure evaluator. Development controls do not belong in the player-facing layout. Verdicts are locked during transitions to prevent duplicate scoring. Locale copy goes through the shared translation table. Native dialogs provide focus containment, Escape and focus return. The page returns 404 in production. The existing `/game` keeps its current desk, timing, tutorial and leaderboard; shared opt-in audio and incoming-PR notices are now integrated.
 
 The selected visual direction is warm ivory, violet accents and editorial portraits, with a slate dark variant. The full ten-person roster uses neutral, pleased and concerned portraits. The preview establishes the selected visual treatment before live-game integration.
 
@@ -59,3 +59,7 @@ The fictional studio is **Afterhours**, building **Small Hours** in `afterhours 
 - [ ] Verify empty queue, end of shift, restart, navigation and pause using real game state.
 - [ ] Complete keyboard/screen-reader, mobile and first-time-player checks across the live loop.
 - [ ] Ship through the preview branch review; no main merge or deployment is implied by polished presentation.
+
+
+## Readability and sound
+Use 16 px body/code/actions and 14 px supporting labels, with rem units and no phone-specific shrinking. See docs/readability-audit.md for measured contrast, enlargement/reflow checks and limits. Background music and PR sounds have separate opt-in toggles and volume under Sound. The original instrumental rhythm follows the weakest meter from 72 to 144 BPM; a two-note chime plus visual/polite notice announces new queue IDs. The legacy live desk receives these audio/arrival features without changing the shift/spawner/scoring rules.

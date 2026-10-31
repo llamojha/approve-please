@@ -1,4 +1,5 @@
 import { designStudyCopy } from "./designStudyCopy";
+import { audioCopy } from "./audioCopy";
 import { BugKind, Locale } from "../types";
 export type GameOverReasonKey = "stability" | "satisfaction" | "velocity" | "generic";
 
@@ -91,6 +92,7 @@ const difficultyLabels: Record<Locale, Record<string, string>> = {
 export const TRANSLATIONS = {
   en: {
     designStudy: designStudyCopy.en,
+    audio: audioCopy.en,
     localeToggleLabel: "Select language",
     landing: {
       title: "Approve Please",
@@ -351,6 +353,7 @@ export const TRANSLATIONS = {
   },
   es: {
     designStudy: designStudyCopy.es,
+    audio: audioCopy.es,
     localeToggleLabel: "Seleccionar idioma",
     landing: {
       title: "Aprueba Por Favor",

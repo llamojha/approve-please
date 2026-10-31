@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from '../../styles/Desk.module.css';
 import { useGameState, DecisionResult } from '../../context/GameContext';
 import { useGameClock } from '../../hooks/useGameClock';
 import { usePRSpawner } from '../../hooks/usePRSpawner';
 import { useAudioCue } from '../../hooks/useAudioCue';
+import { usePRArrivalNotice } from '../../hooks/usePRArrivalNotice';
+import AudioControls from '../common/AudioControls';
+import PRArrivalNotice from '../common/PRArrivalNotice';
+import Panel from '../common/Panel';
 import ClockDisplay from '../work/ClockDisplay';
 import QueuePanel from '../work/QueuePanel';
 import PRViewer from '../work/PRViewer';
@@ -24,23 +28,17 @@ const WorkScreen = () => {
   const { locale } = useLocale();
   useGameClock();
   usePRSpawner();
-  const { playCue, playArrivalCue } = useAudioCue();
+  const audio = useAudioCue(meters);
+  const { playCue, playArrivalCue } = audio;
+  const arrivalNotice = usePRArrivalNotice(queue.map(pr => pr.id), playArrivalCue);
 
   const [selectedLines, setSelectedLines] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<{ message: string; status: DecisionResult['status'] } | null>(null);
-  const previousQueueLength = useRef(queue.length);
 
   useEffect(() => {
     setSelectedLines([]);
     setFeedback(null);
   }, [currentPR?.id]);
-
-  useEffect(() => {
-    if (queue.length > previousQueueLength.current) {
-      playArrivalCue();
-    }
-    previousQueueLength.current = queue.length;
-  }, [queue.length, playArrivalCue]);
 
   const toggleLine = (lineNumber: number) => {
     setSelectedLines((prev) =>
@@ -96,6 +94,7 @@ const WorkScreen = () => {
 
   return (
     <main className={styles.deskShell}>
+      <PRArrivalNotice notice={arrivalNotice} />
       <div className={styles.desk}>
         <div className={styles.leftColumn}>
           <ClockDisplay currentTime={currentTime} />
@@ -128,6 +127,7 @@ const WorkScreen = () => {
           />
           <StatsPanel counters={counters} />
           <AccessibilityPanel />
+          <Panel title={translations.audio.title}><AudioControls audio={audio} /></Panel>
         </div>
       </div>
     </main>
