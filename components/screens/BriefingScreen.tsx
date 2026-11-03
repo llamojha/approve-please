@@ -19,7 +19,9 @@ const BriefingScreen = () => {
   return (
     <main className={styles.screenShell}>
       <section className={styles.screenCard}>
+        <p className={styles.eyebrow}>{translations.briefing.eyebrow}</p>
         <h1>{translations.shared.dayHeading(currentDay, dayDescriptor)}</h1>
+        <p className={styles.screenLead}>{translations.briefing.body}</p>
         {dayQuote && quoteText && (
           <blockquote className={styles.briefingQuote}>
             <p>&ldquo;{quoteText}&rdquo;</p>

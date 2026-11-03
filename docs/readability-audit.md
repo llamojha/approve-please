@@ -21,8 +21,9 @@ Body copy uses a 1.5 line height; code uses 28 px line boxes with padding. The d
 - Increased text spacing: line height 1.5, letter spacing 0.12em, word spacing 0.16em and paragraph spacing 2em. Desk controls remain reachable at desktop,390 px and 320 px widths.
 - Normal-state text contrast measured from rendered foreground/background colors: minimum 5.177:1 in light and 5.774:1 in dark, excluding decorative art/glyphs. These exceed the 4.5:1 normal-text target in the tested desk states.
 - Spanish phone approve/reject and keyboard line tagging still advance correctly. Dialogs retain Escape/focus-return behavior.
+- The live `/game` desk was checked at 390×844 and 320×740 with doubled root text. The queue dialog does not pause the simulation; handbook/audio dialogs do. Verdict actions stack at the narrow doubled-text breakpoint so their labels remain complete.
 - Updated desktop light/dark, phone, tablet and team screenshots are in docs/design-study/.
 
-The 14/16 px scale is a readability choice, not a WCAG minimum font size or complete accessibility certification. Full screen-reader, OS/browser-zoom, forced-colors and observed low-vision usability checks remain future work.
+The 14/16 px scale is a readability choice, not a WCAG minimum font size or complete accessibility certification. Full observed screen-reader, forced-colors and low-vision usability sessions remain future work.
 
 References: [text contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [text resizing](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html), [reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html).

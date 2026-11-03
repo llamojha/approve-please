@@ -1,6 +1,6 @@
 # Plan 013: UI, UX, coworkers and scenario authoring
 
-Status: PHASE 1 AND FULL-CAST PREVIEW IMPLEMENTED (31 October 2026). Owner requested all ten coworkers and product-like presentation. Live-game integration remains Phase 2.
+Status: LIVE PLAYER JOURNEY IMPLEMENTED ON PREVIEW BRANCH (2 November 2026). The contributor workshop and save/resume remain later phases.
 
 Goal: make Approve Please feel like a readable, responsive PR-review game with memorable developers, understandable consequences and a contribution workflow that does not require hand-authoring every JSON field.
 
@@ -77,7 +77,7 @@ Create only Lucía/Diego's art study first. Each gets neutral, pleased and conce
 
 ## Phase 2: playable vertical slice
 
-Detailed execution checklist: `plans/014-live-desk-migration.md`. This supersedes earlier receipt presentation where it implies a persistent visible panel: outcomes must be announced without adding an acknowledgement or next button. The owner's landing-page request brings that part of Phase 3 Track A forward; the real work phase remains Phase 2 TODO.
+Detailed execution checklist: `plans/014-live-desk-migration.md`. The live work phase now uses the approved shared desk, immediate 200 ms progression and structured announcements without an acknowledgement or next button.
 
 Three workers can now proceed against frozen contracts:
 
@@ -167,9 +167,9 @@ Final acceptance: all retained legacy content works; new verdict matrix passes; 
 
 - [x] M0: behavior/content contracts and owner/file allocation recorded.
 - [x] M1: legacy-compatible evaluator/validator/normalizer ready; rendered desk direction and six-image two-character study delivered. Owner acceptance precedes Phase 2.
-- [ ] M2: three-scenario playable loop accepted in browser.
-- [ ] M3a: full player journey ready.
-- [ ] M3b: ten-character cast and balanced scenario batches ready.
+- [x] M2: clean approval, untagged buggy rejection and precise rejection loop verified in the real game.
+- [x] M3a: landing, briefing, work, summary/game-over and next-day/restart presentation ready.
+- [x] M3b: ten-character cast and an explicit ten-scenario production batch ready; guest authors preserved.
 - [ ] M3c: contributor workshop produces valid playable exports.
 - [ ] M4: pause/recovery and integration checks pass; usability observations recorded.
 - [ ] M5: independent review, release gates and rollout/rollback note complete.
@@ -188,7 +188,7 @@ Recommended first execution assignment: Phase 0 followed by the three Phase 1 tr
 - Prototype default: mixed correct/incorrect tags receive no precision bonus. This does not change current live scoring; verify the policy in the Phase 2 playable review.
 - [x] Validate and independently review the foundation changes before PR delivery.
 - [x] Finish the two-character art study and render the selected treatment in context.
-- [ ] Begin Phase 2 only after the foundation contracts are integrated into the preview branch.
+- [x] Phase 2 live-desk integration completed after the foundation contracts were integrated.
 
 Verification: 504 tests pass with one worker, including 22 new foundation tests and all 390 scenarios normalized in EN/ES. Typecheck and production build pass. Lint has zero errors and five pre-existing warnings. Generation validates 390 scenarios and leaves manifests unchanged. Two pre-existing duplicate closing-brace numbers were corrected in a two-template batch; both previewed in English/Spanish with independent closing-line selection. Independent review found the numeric identity compatibility gap; fixed and re-reviewed without remaining blockers.
 
@@ -200,7 +200,7 @@ Same PR #12 and head branch. Added `/dev/design` with a responsive ivory/violet 
 
 Browser QA covers desktop 1280×720, phone 390×844, tablet 768×1024 and constrained 640×360 reflow; clean approval, untagged and precise rejection; keyboard line selection/verdict; persistence across sample switch; EN/ES; empty state; Escape/focus return. Independent review found light secondary-text contrast and completed-state clarity issues, both corrected. Light secondary-text contrast now exceeds 5:1 on paper, receipt and addition surfaces.
 
-- [ ] Owner accepts or requests changes to the rendered direction before Phase 2. This is an acceptance checkpoint, not missing Phase 1 implementation.
+- [x] Owner accepted the rendered direction and requested completion of the live implementation.
 - [ ] Full screen-reader, OS zoom and observed first-time-user audits remain Phase 4.
 
 The study is development-only and has no live clock, save, leaderboard or production game integration. All later implementation still targets the preview branch.
@@ -211,7 +211,7 @@ Final Phase1 gates:506 tests pass, typecheck/build pass,390 templates validate a
 ## Owner feedback — speed-first review loop
 - [x] Remove the visible Last review panel and manual next arrow from the study.
 - [x] Approve/reject applies the verdict once, swipes the review away in 200 ms, and automatically opens the next sample with cleared tags. Reduced motion skips the animation.
-- [ ] Carry this automatic progression into Phase 2 live gameplay; feedback must not require an extra click or pause.
+- [x] Carry this automatic progression into live gameplay; feedback requires no extra click or pause.
 This supersedes the study's earlier persistent-receipt presentation. Meter changes remain immediate and results are announced to assistive technology.
 
 
@@ -222,7 +222,7 @@ Owner explicitly requested all ten coworkers and production-like presentation, s
 - [x] Replace Acme/sample labels with Afterhours / Small Hours and advancing PR identifiers.
 - [x] Remove study/reset controls from the main player-facing surface.
 - [x] Verify full-cast assets, browser flow and updated screenshots.
-Production release still requires the real clock/queue/tutorial/scoring integration listed in docs/ui-direction.md; the development route must not be presented as a deployable replacement for /game.
+The real clock/queue/tutorial/scoring integration now runs at `/game`; `/dev/design` remains a private fixture and is not a deployable replacement.
 
 Full-cast gates: 510 tests pass with one worker; typecheck/build pass; lint retains five existing warnings. Thirty 256×256 alpha portraits total 948,846 bytes (largest 33,757). Browser checks cover all thirty image loads, ten automatic advances, queue preservation when reviewing out of order, precise keyboard rejection, reduced motion, EN/ES, mobile dialogs and fixed handbook access on desktop/tablet. Production-server probe confirms the development route returns 404.
 
@@ -244,10 +244,10 @@ Detailed implementation/verification: docs/audio-and-readability-plan.md and doc
 - [x] Pause the local preview clock in dialogs/team view; stop verdicts at shift end and carry pending PRs forward when starting the next preview shift.
 - [x] Restore localized Low/Medium/High priority labels on queue cards and the active PR, independent of bug correctness.
 - [x] Verify clock pace, pause/resume, day boundary, auto-advance, next-shift carryover and narrow-screen readability.
-- [ ] Connect this presentation to live GameContext time, mandatory waves, tutorial and real campaign day transitions in Phase 2. The local preview clock does not replace those systems.
+- [x] Connect this presentation to live GameContext time, mandatory waves, tutorial and real campaign day transitions. The local preview clock remains isolated.
 
 
 ## Developer context — owner follow-up
 - [x] Add individual EN/ES descriptions for all ten coworkers between the branch and code, via the existing PR description field.
 - [x] Keep descriptions identical across each author’s clean/flawed editions; verify author/text updates after automatic advance and narrow-screen wrapping.
-- [ ] During Phase 2 migration, use catalog PR descriptions and resolved author identities in this presentation.
+- [x] Use catalog PR descriptions and resolved explicit author identities in the live presentation, with guest fallback.

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState, useMemo } from "react";
 import styles from "../../styles/Screen.module.css";
 import { useGameState } from "../../context/GameContext";
-import { Counters, Difficulty } from "../../types";
+import { Counters } from "../../types";
 import { useTranslations } from "../../hooks/useTranslations";
 import {
   computeLeaderboardScore,
@@ -11,6 +11,7 @@ import {
 
 import LeaderboardModal from "../common/LeaderboardModal";
 import RunStatsCards from "../common/RunStatsCards";
+import { formatFalsePositiveReason } from "../../utils/falsePositives";
 
 const GameOverScreen = () => {
   const {
@@ -21,6 +22,7 @@ const GameOverScreen = () => {
       meters,
       history,
       prodIncidents,
+      falsePositiveRecords,
       difficulty,
     },
     actions: { restartGame },
@@ -78,7 +80,7 @@ const GameOverScreen = () => {
         daysPlayed,
         mode: difficulty,
       }),
-    [finalCounters.cleanApprovals, finalCounters.truePositives, daysPlayed]
+    [finalCounters.cleanApprovals, finalCounters.truePositives, daysPlayed, difficulty]
   );
 
   const submitToLeaderboard = async () => {
@@ -99,13 +101,13 @@ const GameOverScreen = () => {
       });
       if (!response.ok) {
         const payload = await response.json().catch(() => null);
-        throw new Error(payload?.error ?? "Failed to submit score.");
+        throw new Error(payload?.error ?? gameOverText.leaderboard.error);
       }
       setSubmitStatus("success");
     } catch (err) {
       setSubmitStatus("error");
       setSubmitError(
-        err instanceof Error ? err.message : "Failed to submit score."
+        err instanceof Error ? err.message : gameOverText.leaderboard.error
       );
     }
   };
@@ -134,10 +136,9 @@ const GameOverScreen = () => {
         </div>
         <section className={styles.leaderboardForm}>
             <div>
-              <strong>Save this run to the leaderboard</strong>
+              <strong>{gameOverText.leaderboard.heading}</strong>
               <p className={`muted ${styles.mutedSmall}`}>
-                Your score: <strong>{finalScore}</strong> (clean approvals +
-                bugs blocked + days played × 5)
+                {gameOverText.leaderboard.score(finalScore)}
               </p>
             </div>
             <div className={styles.leaderboardControls}>
@@ -145,7 +146,7 @@ const GameOverScreen = () => {
                 type="text"
                 className={styles.leaderboardInput}
                 maxLength={64}
-                placeholder="Your name (optional)"
+                placeholder={gameOverText.leaderboard.namePlaceholder}
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 disabled={
@@ -161,22 +162,22 @@ const GameOverScreen = () => {
                 }
               >
                 {submitStatus === "submitting"
-                  ? "Saving…"
+                  ? gameOverText.leaderboard.saving
                   : submitStatus === "success"
-                  ? "Saved"
-                  : "Submit score"}
+                  ? gameOverText.leaderboard.saved
+                  : gameOverText.leaderboard.submit}
               </button>
               <button
                 type="button"
                 className={`${styles.screenButton} ${styles.screenButtonSecondary}`}
                 onClick={() => setShowLeaderboardModal(true)}
               >
-                View leaderboard
+                {gameOverText.leaderboard.view}
               </button>
             </div>
             <div className={styles.leaderboardStatus}>
               {submitStatus === "success" &&
-                "Saved! Your run is on the leaderboard."}
+                gameOverText.leaderboard.success}
               {submitStatus === "error" && submitError}
             </div>
           </section>
@@ -230,14 +231,30 @@ const GameOverScreen = () => {
                   {incident.lines.length > 0 && (
                     <ul className={styles.lineList}>
                       {incident.lines.map((line) => (
-                        <li key={`${incident.prId}-${line.lineNumber}`}>
-                          L{line.lineNumber}: <code>{line.content || "…"}</code>
+                        <li key={`${incident.prId}-${line.filename ?? 'file'}-${line.rowId ?? line.lineNumber}`}>
+                          {line.filename ? `${line.filename}:` : 'L'}{line.lineNumber}: <code>{line.content || "…"}</code>
                         </li>
                       ))}
                     </ul>
                   )}
                 </li>
               ))}
+            </ul>
+          </section>
+        )}
+        {falsePositiveRecords.length > 0 && (
+          <section className={styles.incidentSection}>
+            <h3>{gameOverText.falseHeading}</h3>
+            <p className="muted">{gameOverText.falseBody}</p>
+            <ul className={styles.incidentList}>
+              {falsePositiveRecords.map((record, index) => {
+                const reason = formatFalsePositiveReason(record.actualBugKinds, incidentsText, bugKindLabels);
+                return <li key={`${record.prId}-${index}`} className={styles.incidentItem}>
+                  <div className={styles.incidentMeta}><div><strong>{record.title}</strong><div className={styles.incidentSubline}>{incidentsText.authorOnly(record.author)}</div></div><div className={styles.incidentBadges}><span className={`${styles.badge} ${styles.badgeReason}`}>{reason.label}</span></div></div>
+                  {reason.isClean && <p className={styles.incidentNote}>{incidentsText.rejectedWithoutCause}</p>}
+                  {record.selectedLines.length > 0 && <ul className={styles.lineList}>{record.selectedLines.map(line => <li key={`${record.prId}-${line.filename ?? 'file'}-${line.rowId ?? line.lineNumber}`}>{line.filename ? `${line.filename}:` : 'L'}{line.lineNumber}: <code>{line.content || '…'}</code></li>)}</ul>}
+                </li>;
+              })}
             </ul>
           </section>
         )}

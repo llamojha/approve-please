@@ -8,6 +8,7 @@ import rustTemplates from '../data/prTemplates/manifest.rust';
 import typescriptTemplates from '../data/prTemplates/manifest.typescript';
 import type { PullRequest, PullRequestTemplate } from '../types';
 import { instantiatePullRequest } from '../utils/pr';
+import { characters } from '../data/characters';
 
 const templatePacks: ReadonlyArray<readonly [language: string, templates: PullRequestTemplate[]]> = [
   ['css', cssTemplates],
@@ -27,6 +28,10 @@ const expectInstantiatedPullRequest = (pr: PullRequest): void => {
 };
 
 describe('generated PR template instantiation', () => {
+  it('assigns one production scenario to every established coworker', () => {
+    const assigned = new Set(templatePacks.flatMap(([, templates]) => templates.map(template => template.authorId).filter(Boolean)));
+    expect(assigned).toEqual(new Set(characters.map(character => character.id)));
+  });
   templatePacks.forEach(([language, templates]) => {
     [...templates]
       .sort((left, right) => left.templateId.localeCompare(right.templateId))

@@ -346,3 +346,177 @@
 .mutedSmall {
   font-size: 0.85em;
 }
+
+/* The campaign boundaries share the light Afterhours system used by the landing and desk. */
+.screenShell {
+  padding: clamp(1rem, 4vw, 3rem);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(124, 58, 237, 0.13), transparent 28rem),
+    #f4f0e8;
+  color: #211a2f;
+}
+
+.screenCard {
+  width: min(920px, 100%);
+  padding: clamp(1.25rem, 4vw, 3.25rem);
+  background: rgba(255, 253, 248, 0.97);
+  border-color: #d9d0e6;
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 70px rgba(54, 37, 84, 0.14);
+}
+
+.screenCard h1,
+.screenCard h2,
+.screenCard h3 {
+  color: #211a2f;
+}
+
+.screenCard :global(.muted) {
+  color: #62586f;
+}
+
+.screenCard h1 {
+  margin-bottom: 0.65rem;
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: #6d28d9;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.screenLead {
+  max-width: 64ch;
+  margin: 0 0 1.5rem;
+  color: #62586f;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.briefingQuote {
+  border-left-color: #7c3aed;
+  background: #f3eefb;
+  color: #4f465b;
+}
+
+.briefingQuote footer {
+  color: #6d28d9;
+}
+
+.screenButton {
+  min-height: 44px;
+  background: #6d28d9;
+  color: #fff;
+}
+
+.screenButton:hover,
+.screenButton:focus-visible {
+  background: #5b21b6;
+}
+
+.screenButton:focus-visible,
+.leaderboardSubmit:focus-visible,
+.leaderboardInput:focus-visible {
+  outline: 3px solid rgba(109, 40, 217, 0.3);
+  outline-offset: 2px;
+}
+
+.screenButtonSecondary {
+  border: 1px solid #d9d0e6;
+  background: #f3eefb;
+  color: #4c1d95;
+}
+
+.screenButtonSecondary:hover,
+.screenButtonSecondary:focus-visible {
+  background: #e9ddf7;
+}
+
+.summaryCard,
+.summaryCardApproved,
+.summaryCardRejected,
+.incidentItem {
+  border-color: #ded6e8;
+  background: #faf7f1;
+  color: #211a2f;
+}
+
+.summaryCardBugs {
+  border-color: #efaaaa;
+  background: #fff0f0;
+  color: #8a1c1c;
+}
+
+.summaryCardTrue {
+  border-color: #91c89a;
+  background: #edf8ef;
+  color: #1d642a;
+}
+
+.summaryCardFalse {
+  border-color: #dfbe69;
+  background: #fff8e7;
+  color: #74500a;
+}
+
+.summaryGrid small,
+.incidentSubline,
+.incidentNote,
+.leaderboardStatus {
+  color: #62586f;
+}
+
+.leaderboardForm {
+  border-color: #d9d0e6;
+  background: #f3eefb;
+}
+
+.leaderboardInput {
+  min-height: 44px;
+  border-color: #b8abc8;
+  background: #fffdf8;
+  color: #211a2f;
+}
+
+.leaderboardSubmit {
+  min-height: 44px;
+  background: #2f7d43;
+  color: #fff;
+}
+
+.gameOverTag {
+  background: #8a1c1c;
+  color: #fff;
+}
+
+.lineList code {
+  background: #eee8f3;
+}
+
+@media (max-width: 640px) {
+  .screenShell {
+    align-items: flex-start;
+  }
+
+  .screenActions,
+  .leaderboardControls {
+    flex-direction: column;
+  }
+
+  .screenButton,
+  .leaderboardInput,
+  .leaderboardSubmit {
+    width: 100%;
+    max-width: none;
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+}

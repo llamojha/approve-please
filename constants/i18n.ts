@@ -214,6 +214,8 @@ export const TRANSLATIONS = {
     },
     briefing: {
       startButton: "START DAY",
+      eyebrow: "AFTERHOURS · SHIFT BRIEFING",
+      body: "The queue opens at 09:00. Keep stability, velocity and team trust above zero until 17:00.",
     },
     summary: {
       endOfDay: "End of Day",
@@ -237,6 +239,17 @@ export const TRANSLATIONS = {
       deployedBody: "Final day incidents that melted prod.",
       falseHeading: "False Positives",
       falseBody: "Where you slowed velocity on the final day.",
+      leaderboard: {
+        heading: "Save this run to the leaderboard",
+        score: (score: number) => `Your score: ${score} (clean approvals + bugs blocked + days played × 5)`,
+        namePlaceholder: "Your name (optional)",
+        saving: "Saving…",
+        saved: "Saved",
+        submit: "Submit score",
+        view: "View leaderboard",
+        success: "Saved! Your run is on the leaderboard.",
+        error: "Failed to submit score.",
+      },
     },
     incidents: {
       byline: (author: string, bugKindLabel: string) =>
@@ -479,6 +492,8 @@ export const TRANSLATIONS = {
     },
     briefing: {
       startButton: "Comenzar el día",
+      eyebrow: "AFTERHOURS · INICIO DEL TURNO",
+      body: "La cola abre a las 09:00. Mantén la estabilidad, la velocidad y la confianza por encima de cero hasta las 17:00.",
     },
     summary: {
       endOfDay: "Fin del día",
@@ -502,6 +517,17 @@ export const TRANSLATIONS = {
       deployedBody: "Incidentes del último día que derritieron prod.",
       falseHeading: "Falsos positivos",
       falseBody: "Dónde bajaste la velocidad en el último día.",
+      leaderboard: {
+        heading: "Guarda esta partida en la clasificación",
+        score: (score: number) => `Tu puntuación: ${score} (aprobaciones limpias + errores bloqueados + días jugados × 5)`,
+        namePlaceholder: "Tu nombre (opcional)",
+        saving: "Guardando…",
+        saved: "Guardada",
+        submit: "Enviar puntuación",
+        view: "Ver clasificación",
+        success: "Guardada. Tu partida ya aparece en la clasificación.",
+        error: "No se pudo enviar la puntuación.",
+      },
     },
     incidents: {
       byline: (author: string, bugKindLabel: string) =>

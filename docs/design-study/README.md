@@ -8,9 +8,9 @@ The team view shows neutral, pleased and concerned illustrated portraits, locali
 
 ## Integration boundary
 
-The production landing page `/` now shares the Afterhours palette, public coworker roster and new tutorial/leaderboard dialog presentation. See `docs/landing-refresh-validation.md`. The six-stage migration of the approved work desk into actual `/game` simulation is planned in `plans/014-live-desk-migration.md`; that migration is still TODO.
+The production landing page `/` shares the Afterhours palette, public coworker roster and tutorial/leaderboard dialog presentation. The actual `/game` work phase now renders the same shared `ReviewDesk`, `CodeDiff` and `CharacterAvatar` components over the real GameContext queue, clock, meters, tutorial waves and decision evaluator. See `docs/landing-refresh-validation.md`, `docs/live-desk-validation.md` and `plans/014-live-desk-migration.md`.
 
-This is a development-only preview. Production requests return 404. It uses local state and the pure evaluator; it has a local advancing clock and shift boundary, but no live GameContext clock, timed wave delivery, tutorial, campaign progression, save or leaderboard writes. The actual `/game` retains its existing desk/game loop and now shares the new audio controls and arrival notice. Production readiness tasks are explicit in `docs/ui-direction.md` and the roadmap.
+The `/dev/design` route remains a development-only fixture and returns 404 in production. Its local queue and timer remain deliberately isolated. `/game` owns the real simulation and uses the shared presentation only; authoring routes remain private. Save/resume and the contributor workshop remain later roadmap work and are not implied by the desk migration.
 
 ## Verification
 
@@ -18,13 +18,13 @@ The initial Phase 1 evidence remains in Git history. Current screenshots cover d
 
 Prompts: `docs/design-study/prompts.md`. Asset provenance: `public/characters/studies/manifest.json`.
 
-Final gates: 510 tests pass (single worker), typecheck/build pass, 390 templates validate without generated changes, lint has zero errors and five pre-existing warnings. Production HTTP probe confirms 404. Independent review findings on queue preservation and missing-account handling are fixed. The phone and tablet retain reachable verdicts; the tablet/desktop queue scrolls independently with handbook access fixed in place.
+Current integrated evidence is recorded in `docs/live-desk-validation.md`. The phone and tablet retain reachable verdicts; the desktop queue scrolls independently with handbook access fixed in place.
 
 
 ## Readability and adaptive audio
 The desk now uses 16 px code/body/actions and 14 px supporting text, with relative sizing, larger controls and wrapping at narrow widths. Detailed checks and limitations are in docs/readability-audit.md.
 
-Open Sound to enable background music and/or PR chimes. Both start off; volume starts at 25%. The instrumental rhythm speeds up as the lowest meter falls (72–144 BPM). New PR IDs produce a short two-note chime when enabled, and a visual/polite notice regardless of audio. Selecting an already queued PR is silent. The same controls are available in the existing live WorkScreen.
+Open Sound to enable background music and/or PR chimes. Both start off; volume starts at 25%. The instrumental rhythm speeds up as the lowest meter falls (72–144 BPM). New PR IDs produce a short two-note chime when enabled, and a visual/polite notice regardless of audio. Selecting an already queued PR is silent. The same controls are available in the shared live review desk.
 
 Latest follow-up gates: 524 tests pass with one worker; typecheck/build pass; lint retains five existing warnings. Audio controls are shown in audio-settings.png; pr-arrival.png shows the non-blocking notice.
 
@@ -32,7 +32,7 @@ Latest follow-up gates: 524 tests pass with one worker; typecheck/build pass; li
 ## Clock and PR priority restoration
 All queue cards and the active review display localized Low/Medium/High priority badges (Baja/Media/Alta). Priority remains the existing `low | normal | high` contract and is independent of clean/flawed editions. Badges use readable text as well as color, at 14 px minimum. The shared middle-priority label now reads Medium/Media in the existing live queue too.
 
-Verification: 525 tests pass with one worker; typecheck and production build pass; all 390 templates validate with manifests unchanged. Lint has zero errors and five existing warnings. Browser clock checks exercise 09:00 → 10:00 in 15 real seconds, pause/resume in settings, automatic advance, the 17:00 boundary, disabled verdicts, next-shift reset and preservation of pending PRs. Live tutorial/waves/scoring migration remains Phase 2.
+The live adapter uses GameContext time, mandatory waves, campaign day boundaries and scoring. The fixture route still keeps its own local shift controls for design work.
 
 
 ## Compact diff sizing
@@ -42,4 +42,4 @@ Short snippets now determine the panel height instead of stretching to fill the 
 ## Developer descriptions
 Every coworker now has a bilingual, first-person PR description in the team data. It flows through the existing PullRequest.description field and appears between the branch line and code diff, with an author byline and 16 px body text. Clean/flawed editions share the same description so the prose provides intent without acting as an answer key. All ten authors, EN/ES switching, automatic advance and 320 px through desktop reflow were checked in the browser. See pr-description.png.
 
-Developer-description gates: 526 tests pass with one worker; typecheck and production build pass; all 390 templates validate. Lint retains five existing warnings and no errors.
+Catalog descriptions and explicit coworker identities now flow through the production desk. Guest authors retain initials fallbacks.

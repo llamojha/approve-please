@@ -32,6 +32,8 @@ export interface PRFileDiff {
 }
 
 export interface LineExcerpt {
+  filename?: string;
+  rowId?: string;
   lineNumber: number;
   content: string;
 }

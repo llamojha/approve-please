@@ -4,12 +4,12 @@ import { useGameState } from '../context/GameContext';
 
 export const useGameClock = () => {
   const {
-    state: { phase },
+    state: { phase, simulationPaused },
     actions: { tickWorkMinute }
   } = useGameState();
 
   useEffect(() => {
-    if (phase !== 'WORK') {
+    if (phase !== 'WORK' || simulationPaused) {
       return;
     }
     const interval = setInterval(() => {
@@ -19,5 +19,5 @@ export const useGameClock = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [phase, tickWorkMinute]);
+  }, [phase, simulationPaused, tickWorkMinute]);
 };

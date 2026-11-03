@@ -31,7 +31,7 @@ interface WaveTracker {
   scripted: Set<string>;
 }
 
-const waveTrackerStore = new Map<number, WaveTracker>();
+const waveTrackerStore = new Map<string, WaveTracker>();
 const tutorialWaves: Record<number, ScriptedWave[]> = {
   1: [
     {
@@ -49,7 +49,7 @@ const getScriptedWavesForDay = (day: number): ScriptedWave[] => {
   return tutorialWaves[day] ?? [];
 };
 
-const templateMatchesPreference = (
+export const templateMatchesPreference = (
   template: PullRequestTemplate,
   preference: LanguagePreference
 ): boolean => {
@@ -59,24 +59,24 @@ const templateMatchesPreference = (
     return true;
   }
   if (isGeneric) {
-    return preference.includes("generic");
+    return true;
   }
   return languages.some((language) => preference.includes(language));
 };
 
-const getWaveTracker = (day: number): WaveTracker => {
-  const existing = waveTrackerStore.get(day);
+export const tutorialBlocksLaterWave = (day: number, minute: number, queue: PullRequest[]): boolean => {
+  if (day !== 1 || minute <= 0) return false;
+  const tutorialTemplateIds = new Set(tutorialWaves[1]?.flatMap(wave => wave.templateIds) ?? []);
+  return queue.some(pr => tutorialTemplateIds.has(pr.templateId));
+};
+
+const getWaveTracker = (key: string): WaveTracker => {
+  const existing = waveTrackerStore.get(key);
   if (existing) {
     return existing;
   }
   const tracker: WaveTracker = { waves: new Set(), scripted: new Set() };
-  waveTrackerStore.set(day, tracker);
-  return tracker;
-};
-
-const resetWaveTracker = (day: number): WaveTracker => {
-  const tracker: WaveTracker = { waves: new Set(), scripted: new Set() };
-  waveTrackerStore.set(day, tracker);
+  waveTrackerStore.set(key, tracker);
   return tracker;
 };
 
@@ -84,18 +84,19 @@ export const usePRSpawner = () => {
   const {
     state: {
       phase,
+      runId,
       currentTime,
       currentDay,
       queue,
-      currentPR,
       languagePreference,
       difficulty, // SPIKE(plan 010): gates the learning-mode ordering branches below
+      simulationPaused,
     },
     actions: { enqueuePRs },
   } = useGameState();
   const { locale } = useLocale();
 
-  const trackerRef = useRef<WaveTracker>(getWaveTracker(currentDay));
+  const trackerRef = useRef<WaveTracker>(getWaveTracker(`${runId}:${currentDay}`));
   const workingPoolRef = useRef<PullRequestTemplate[]>([]);
   const basePoolRef = useRef<PullRequestTemplate[]>([]);
   const spawnCountRef = useRef(0);
@@ -168,7 +169,7 @@ export const usePRSpawner = () => {
       });
       return results;
     },
-    [languagePreference, locale]
+    [locale]
   );
 
   useEffect(() => {
@@ -230,16 +231,16 @@ export const usePRSpawner = () => {
   ]);
 
   useEffect(() => {
-    const key = `${currentDay}`;
+    const key = `${runId}:${currentDay}`;
     if (trackerResetKeyRef.current === key) {
       return;
     }
     trackerResetKeyRef.current = key;
-    trackerRef.current = resetWaveTracker(currentDay);
-  }, [currentDay]);
+    trackerRef.current = getWaveTracker(key);
+  }, [currentDay, runId]);
 
   useEffect(() => {
-    if (phase !== "WORK") {
+    if (phase !== "WORK" || simulationPaused) {
       return;
     }
 
@@ -254,6 +255,9 @@ export const usePRSpawner = () => {
       if (currentTime >= minute && !triggeredWaves.has(minute)) {
         if (shouldSkipDefaultWave(minute)) {
           triggeredWaves.add(minute);
+          return;
+        }
+        if (tutorialBlocksLaterWave(currentDay, minute, queue)) {
           return;
         }
         const count = minute === 0 ? 2 : pickWeightedWaveCount();
@@ -283,24 +287,26 @@ export const usePRSpawner = () => {
     });
 
     const currentHour = Math.floor(currentTime / 60);
-    const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
+    const withinHourlyWindow = currentDay > 1 && currentHour >= 1 && currentHour <= 7;
     if (withinHourlyWindow && currentHour !== lastHourlyCheckRef.current) {
-      lastHourlyCheckRef.current = currentHour;
-      const totalQueue = queue.length + (currentPR ? 1 : 0);
+      const totalQueue = queue.length;
       if (totalQueue === 0) {
         const prs = drawBatch(1, currentDay);
         if (prs.length > 0) {
+          lastHourlyCheckRef.current = currentHour;
           enqueuePRs(prs);
         }
+      } else {
+        lastHourlyCheckRef.current = currentHour;
       }
     }
   }, [
     phase,
+    simulationPaused,
     currentTime,
     currentDay,
     enqueuePRs,
     queue,
-    currentPR,
     spawnSpecific,
     drawBatch,
   ]);

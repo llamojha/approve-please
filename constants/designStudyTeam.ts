@@ -1,15 +1,11 @@
+import { characters } from '../data/characters';
 import type { BugKind, PullRequest } from '../types';
 
 export type StudyLocale = 'en' | 'es';
 export type StudyExpression = 'neutral' | 'pleased' | 'concerned';
-export const studyTeam = [
+const studyScenarios = [
   {
     "id": "lucia",
-    "name": "Lucía Navarro",
-    "role": {
-      "en": "Frontend developer",
-      "es": "Desarrolladora frontend"
-    },
     "quote": {
       "en": "The first empty screen is part of the product, too.",
       "es": "La primera pantalla vacía también es producto."
@@ -42,11 +38,6 @@ export const studyTeam = [
   },
   {
     "id": "diego",
-    "name": "Diego Martín",
-    "role": {
-      "en": "Backend developer",
-      "es": "Desarrollador backend"
-    },
     "quote": {
       "en": "Small diff. Still deserves a proper look.",
       "es": "Pocos cambios. Merecen una buena revisión."
@@ -82,11 +73,6 @@ export const studyTeam = [
   },
   {
     "id": "ines",
-    "name": "Inés Romero",
-    "role": {
-      "en": "Platform developer",
-      "es": "Desarrolladora de plataforma"
-    },
     "quote": {
       "en": "A setup worth running twice.",
       "es": "Una configuración que merece repetirse."
@@ -115,11 +101,6 @@ export const studyTeam = [
   },
   {
     "id": "tessa",
-    "name": "Tessa",
-    "role": {
-      "en": "Data developer",
-      "es": "Desarrolladora de datos"
-    },
     "quote": {
       "en": "The empty dataset deserves a test too.",
       "es": "El conjunto vacío también merece una prueba."
@@ -148,11 +129,6 @@ export const studyTeam = [
   },
   {
     "id": "ben",
-    "name": "Ben",
-    "role": {
-      "en": "Design engineer",
-      "es": "Ingeniero de diseño"
-    },
     "quote": {
       "en": "Looks right. Now let’s check how it behaves.",
       "es": "Se ve bien. Ahora comprobemos cómo se comporta."
@@ -184,11 +160,6 @@ export const studyTeam = [
   },
   {
     "id": "jonah",
-    "name": "Jonah",
-    "role": {
-      "en": "Junior developer",
-      "es": "Desarrollador júnior"
-    },
     "quote": {
       "en": "Can we add that case to the test?",
       "es": "¿Podemos añadir ese caso a la prueba?"
@@ -216,11 +187,6 @@ export const studyTeam = [
   },
   {
     "id": "marta",
-    "name": "Marta",
-    "role": {
-      "en": "QA automation engineer",
-      "es": "Ingeniera de automatización QA"
-    },
     "quote": {
       "en": "Reproduced. Keeping the regression case.",
       "es": "Reproducido. Conservo la prueba de regresión."
@@ -250,11 +216,6 @@ export const studyTeam = [
   },
   {
     "id": "evan",
-    "name": "Evan",
-    "role": {
-      "en": "Site reliability engineer",
-      "es": "Ingeniero de fiabilidad"
-    },
     "quote": {
       "en": "One less surprise at three in the morning.",
       "es": "Una sorpresa menos a las tres de la mañana."
@@ -282,11 +243,6 @@ export const studyTeam = [
   },
   {
     "id": "noel",
-    "name": "Noel",
-    "role": {
-      "en": "Security engineer",
-      "es": "Ingeniero de seguridad"
-    },
     "quote": {
       "en": "Who controls that input?",
       "es": "¿Quién controla esa entrada?"
@@ -314,11 +270,6 @@ export const studyTeam = [
   },
   {
     "id": "riya",
-    "name": "Riya",
-    "role": {
-      "en": "Product manager",
-      "es": "Responsable de producto"
-    },
     "quote": {
       "en": "Let’s ship the safe part first.",
       "es": "Publiquemos primero la parte segura."
@@ -345,6 +296,12 @@ export const studyTeam = [
     "bugKind": "logic"
   }
 ] as const;
+
+// Public names and roles have one source; this module alone owns study answers.
+export const studyTeam = studyScenarios.map(scenario => ({
+  ...scenario,
+  ...characters.find(character => character.id === scenario.id)!,
+}));
 
 export type StudyPerson = typeof studyTeam[number]['id'];
 export function studyReview(sequence: number, locale: StudyLocale): PullRequest {

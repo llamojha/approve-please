@@ -5,6 +5,7 @@ import {
   gameReducer,
   getQueueAgingDelta,
   maybeGameOver,
+  resolveDecisionSelection,
   GameState
 } from '../context/GameContext';
 import {
@@ -13,11 +14,11 @@ import {
   MIN_METER_VALUE,
   QUEUE_AGING_IMPORTANCE_WEIGHT,
   QUEUE_AGING_MIN_DRAIN,
-  REQUEST_CHANGES_EFFECTS,
   WORK_DAY_MINUTES
 } from '../constants/gameSettings';
 import { getDayMantra, getDefaultDayMantra } from '../data/dayMantras';
 import { getDefaultDayQuote } from '../data/dayQuotes';
+import { normalizePullRequest } from '../utils/templateNormalization';
 import type { FalsePositiveRecord, PullRequest } from '../types';
 
 const makePR = (id: string, importance: PullRequest['importance'] = 'normal'): PullRequest => ({
@@ -166,56 +167,131 @@ describe('gameReducer QUEUE_PRS', () => {
   });
 });
 
-describe('gameReducer APPLY_DECISION', () => {
-  it('removes the processed PR, advances currentPR, and applies deltas', () => {
+describe('gameReducer atomic review decisions', () => {
+  it('removes the PR, advances the queue and applies evaluated clean-approval effects', () => {
     const a = makePR('a');
     const b = makePR('b');
     const state = workState({ queue: [a, b], currentPR: a });
-    const next = gameReducer(state, {
-      type: 'APPLY_DECISION',
-      processedId: a.id,
-      counterDelta: { ...APPROVAL_EFFECTS.baseCounters, ...APPROVAL_EFFECTS.cleanCounters },
-      meterDelta: {
-        velocity: APPROVAL_EFFECTS.velocityOnClean,
-        satisfaction: APPROVAL_EFFECTS.satisfactionOnClean
-      }
-    });
+    const next = gameReducer(state, { type: 'REVIEW_PR', prId: a.id, verdict: 'approve', selectedRefs: [] });
     expect(next.queue).toEqual([b]);
     expect(next.currentPR).toBe(b);
-    expect(next.counters.prsApproved).toBe(state.counters.prsApproved + APPROVAL_EFFECTS.baseCounters.prsApproved);
-    expect(next.counters.cleanApprovals).toBe(
-      state.counters.cleanApprovals + APPROVAL_EFFECTS.cleanCounters.cleanApprovals
-    );
-    // meters started at MAX, so positive deltas clamp to MAX_METER_VALUE
-    expect(next.meters.velocity).toBe(MAX_METER_VALUE);
-    expect(next.meters.satisfaction).toBe(MAX_METER_VALUE);
+    expect(next.counters.prsApproved).toBe(APPROVAL_EFFECTS.baseCounters.prsApproved);
+    expect(next.counters.cleanApprovals).toBe(APPROVAL_EFFECTS.cleanCounters.cleanApprovals);
+    expect(next.meters).toEqual(state.meters);
+    expect(next.lastDecision).toMatchObject({ outcome: 'clean-approval', appliedMeterDelta: { stability: 0, velocity: 0, satisfaction: 0 } });
+    expect(next.decisionReceipts).toEqual([next.lastDecision]);
   });
 
-  it('sets currentPR to null when the queue empties', () => {
+  it('records actual capped meter deltas from the reducer state after a preceding timer tick', () => {
     const a = makePR('a');
-    const state = workState({ queue: [a], currentPR: a });
-    const next = gameReducer(state, {
-      type: 'APPLY_DECISION',
-      processedId: a.id,
-      counterDelta: {},
-      meterDelta: {}
-    });
+    const state = workState({ queue: [a], currentPR: a, meters: { stability: 100, velocity: 99, satisfaction: 99 } });
+    const afterTick = gameReducer(state, { type: 'ADVANCE_TIME', minutes: 1 });
+    const next = gameReducer(afterTick, { type: 'REVIEW_PR', prId: a.id, verdict: 'approve', selectedRefs: [] });
+    expect(next.lastDecision?.appliedMeterDelta.velocity).toBeCloseTo(100 - afterTick.meters.velocity);
+    expect(next.lastDecision?.appliedMeterDelta.satisfaction).toBeCloseTo(100 - afterTick.meters.satisfaction);
     expect(next.queue).toEqual([]);
     expect(next.currentPR).toBeNull();
   });
 
-  it('clamps meters to MIN_METER_VALUE and triggers game over', () => {
+  it('logs all buggy-approval incidents in the same transition and ignores duplicate verdicts', () => {
     const a = makePR('a');
-    const state = workState({ queue: [a], currentPR: a });
-    const next = gameReducer(state, {
-      type: 'APPLY_DECISION',
-      processedId: a.id,
-      counterDelta: {},
-      meterDelta: { stability: -(MAX_METER_VALUE * 2) }
-    });
+    a.bugPatterns = [
+      { kind: 'logic', severity: 'major', lineNumbers: [1] },
+      { kind: 'security', severity: 'critical', lineNumbers: [1] }
+    ];
+    const state = workState({ queue: [a], currentPR: a, meters: { stability: 50, velocity: 50, satisfaction: 50 } });
+    const action = { type: 'REVIEW_PR', prId: a.id, verdict: 'approve', selectedRefs: [] } as const;
+    const next = gameReducer(state, { ...action, selectedRefs: [] });
+    expect(next.counters).toMatchObject({ bugsToProd: 2, prsApproved: 1, cleanApprovals: 0 });
+    expect(next.prodIncidents).toHaveLength(2);
+    expect(next.prodIncidents[0].lines).toEqual([{ filename: 'index.ts', rowId: 'line-1', lineNumber: 1, content: 'const value = 1;' }]);
+    expect(next.meters).toEqual({ stability: 18, velocity: 52, satisfaction: 42 });
+    expect(next.lastDecision?.outcome).toBe('buggy-approval');
+    expect(gameReducer(next, { ...action, selectedRefs: [] })).toBe(next);
+  });
+
+  it('clamps a fatal decision, records its incident and receipt, then ends the game', () => {
+    const a = makePR('a');
+    a.bugPatterns = [{ kind: 'security', severity: 'critical', lineNumbers: [1] }];
+    const state = workState({ queue: [a], currentPR: a, meters: { stability: 2, velocity: 50, satisfaction: 50 } });
+    const next = gameReducer(state, { type: 'REVIEW_PR', prId: a.id, verdict: 'approve', selectedRefs: [] });
     expect(next.meters.stability).toBe(MIN_METER_VALUE);
+    expect(next.lastDecision?.appliedMeterDelta.stability).toBe(-2);
+    expect(next.prodIncidents).toHaveLength(1);
     expect(next.phase).toBe('GAME_OVER');
     expect(next.gameOverReason).toBe('stability');
+  });
+
+  it('uses file-scoped rows and awards no precision bonus for the same number in the wrong file', () => {
+    const a = makePR('a');
+    a.files.push({ ...a.files[0], filename: 'second.ts' });
+    a.bugPatterns = [{ kind: 'logic', severity: 'major', lineNumbers: [1], lineRefs: [{ filename: 'second.ts', rowId: 'line-1' }] }];
+    const state = workState({ queue: [a], currentPR: a, meters: { stability: 50, velocity: 50, satisfaction: 50 } });
+    const wrong = gameReducer(state, { type: 'REVIEW_PR', prId: a.id, verdict: 'request-changes', selectedRefs: [{ filename: 'index.ts', rowId: 'line-1' }] });
+    expect(wrong.lastDecision).toMatchObject({ outcome: 'correct-rejection', precision: 'inaccurate', bonusApplied: false });
+    expect(wrong.counters).toMatchObject({ prsRejected: 1, falsePositives: 0, truePositives: 0 });
+    expect(wrong.falsePositiveRecords).toEqual([]);
+    expect(wrong.meters).toEqual({ stability: 50, velocity: 47, satisfaction: 50 });
+    const right = gameReducer(state, { type: 'REVIEW_PR', prId: a.id, verdict: 'request-changes', selectedRefs: [{ filename: 'second.ts', rowId: 'line-1' }] });
+    expect(right.lastDecision).toMatchObject({ precision: 'precise', bonusApplied: true });
+    expect(right.counters.truePositives).toBe(1);
+    expect(right.meters.satisfaction).toBe(55);
+    const mixed = gameReducer(state, { type: 'REVIEW_PR', prId: a.id, verdict: 'request-changes', selectedRefs: [{ filename: 'second.ts', rowId: 'line-1' }, { filename: 'index.ts', rowId: 'line-1' }] });
+    expect(mixed.lastDecision).toMatchObject({ precision: 'mixed', bonusApplied: false });
+    expect(() => resolveDecisionSelection(normalizePullRequest(a), { selectedLines: [1] })).toThrow('ambiguous');
+  });
+
+  it('treats untagged buggy rejections as correct without false-positive or precision credit', () => {
+    const a = makePR('a');
+    a.bugPatterns = [{ kind: 'logic', severity: 'minor', lineNumbers: [1] }];
+    const state = workState({ queue: [a], currentPR: a });
+    const next = gameReducer(state, { type: 'REVIEW_PR', prId: a.id, verdict: 'request-changes', selectedRefs: [] });
+    expect(next.lastDecision).toMatchObject({ outcome: 'correct-rejection', precision: 'untagged', correct: true });
+    expect(next.counters).toMatchObject({ prsRejected: 1, truePositives: 0, falsePositives: 0 });
+    expect(next.falsePositiveRecords).toEqual([]);
+    expect(next.prodIncidents).toEqual([]);
+  });
+
+  it('resets the decision ledger for a new day or restart while preserving the intended meter policy', () => {
+    const a = makePR('a');
+    const reviewed = gameReducer(workState({ queue: [a], currentPR: a, meters: { stability: 70, velocity: 70, satisfaction: 70 } }), {
+      type: 'REVIEW_PR', prId: a.id, verdict: 'approve', selectedRefs: []
+    });
+    const nextDay = gameReducer(reviewed, { type: 'RESET_FOR_DAY', nextDay: 2, mantra: getDayMantra() });
+    expect(nextDay.lastDecision).toBeNull();
+    expect(nextDay.decisionReceipts).toEqual([]);
+    expect(nextDay.meters).toEqual(reviewed.meters);
+    const restarted = gameReducer(reviewed, { type: 'RESET_GAME' });
+    expect(restarted.lastDecision).toBeNull();
+    expect(restarted.decisionReceipts).toEqual([]);
+    expect(restarted.meters).toEqual({ stability: 100, velocity: 100, satisfaction: 100 });
+  });
+
+  it('adapts unambiguous legacy selections and copies explicit references', () => {
+    const pr = normalizePullRequest(makePR('a'));
+    expect(resolveDecisionSelection(pr, { selectedLines: [1] })).toEqual([{ filename: 'index.ts', rowId: 'line-1' }]);
+    expect(() => resolveDecisionSelection(pr, { selectedLines: [999] })).toThrow('Missing');
+    const refs = [{ filename: 'index.ts', rowId: 'line-1' }];
+    const selected = resolveDecisionSelection(pr, { selectedRefs: refs });
+    expect(selected).toEqual(refs);
+    expect(selected[0]).not.toBe(refs[0]);
+  });
+
+  it('ignores off-phase, stale, absent and invalid decisions without partial records', () => {
+    const a = makePR('a');
+    const b = makePR('b');
+    const state = workState({ queue: [a, b], currentPR: a });
+    const action = { type: 'REVIEW_PR', prId: a.id, verdict: 'approve' } as const;
+    for (const phase of ['BRIEFING', 'SUMMARY', 'GAME_OVER'] as const) {
+      const inactive = { ...state, phase };
+      expect(gameReducer(inactive, { ...action, selectedRefs: [] })).toBe(inactive);
+    }
+    expect(gameReducer(state, { ...action, prId: b.id, selectedRefs: [] })).toBe(state);
+    expect(gameReducer(state, { ...action, selectedRefs: [{ filename: 'missing.ts', rowId: 'line-1' }] })).toBe(state);
+    const absent = { ...state, queue: [] };
+    expect(gameReducer(absent, { ...action, selectedRefs: [] })).toBe(absent);
+    const processed = gameReducer(state, { ...action, selectedRefs: [] });
+    expect(gameReducer(processed, { type: 'QUEUE_PRS', prs: [a, b] })).toBe(processed);
   });
 });
 
@@ -245,20 +321,20 @@ describe('gameReducer false-positive tracking', () => {
     expect(next.falsePositiveRecords).toEqual([]);
   });
 
-  it('APPLY_DECISION carrying missCounters increments counters.falsePositives by 1', () => {
+  it('records a clean rejection and false-positive count atomically', () => {
     const a = makePR('a');
     const state = workState({ queue: [a], currentPR: a });
     const next = gameReducer(state, {
-      type: 'APPLY_DECISION',
-      processedId: a.id,
-      counterDelta: { ...REQUEST_CHANGES_EFFECTS.baseCounters, ...REQUEST_CHANGES_EFFECTS.missCounters },
-      meterDelta: { ...REQUEST_CHANGES_EFFECTS.baseMeters, ...REQUEST_CHANGES_EFFECTS.missMeters }
+      type: 'REVIEW_PR', prId: a.id, verdict: 'request-changes', selectedRefs: [{ filename: 'index.ts', rowId: 'line-1' }]
     });
-    expect(REQUEST_CHANGES_EFFECTS.missCounters).toEqual({ falsePositives: 1 });
     expect(next.counters.falsePositives).toBe(state.counters.falsePositives + 1);
     expect(next.counters.prsRejected).toBe(state.counters.prsRejected + 1);
-    // miss path must not grant the true-positive credit
     expect(next.counters.truePositives).toBe(state.counters.truePositives);
+    expect(next.falsePositiveRecords).toEqual([{
+      prId: a.id, title: a.title, author: a.author, actualBugKinds: [],
+      selectedLines: [{ filename: 'index.ts', rowId: 'line-1', lineNumber: 1, content: 'const value = 1;' }]
+    }]);
+    expect(next.lastDecision?.outcome).toBe('false-positive');
   });
 });
 
@@ -413,10 +489,8 @@ describe('advanceToNextDay end-of-day check (characterization)', () => {
       meters: { stability: 50, velocity: 1, satisfaction: 50 }
     });
     const next = gameReducer(state, {
-      type: 'APPLY_DECISION',
-      processedId: a.id,
-      counterDelta: {},
-      meterDelta: { velocity: -1 }
+      type: 'REVIEW_PR',
+      prId: a.id, verdict: 'request-changes', selectedRefs: []
     });
     expect(next.phase).toBe('GAME_OVER');
     expect(next.gameOverReason).toBe('velocity');

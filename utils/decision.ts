@@ -24,7 +24,7 @@ export interface DecisionReceipt {
   metersAfter: MeterSet;
 }
 
-/** Proposed semantics for the new desk/workshop. Live gameplay is not migrated yet. */
+/** Shared decision semantics for the live desk, fixture study and future authoring tools. */
 export const evaluateDecision = (
   pr: NormalizedPullRequest, verdict: ReviewVerdict, selectedLines: LineReference[], meters: MeterSet
 ): DecisionReceipt => {

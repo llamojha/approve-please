@@ -1,7 +1,8 @@
 {
   "templateId": "pr-000-onboarding-readme-update",
   "title": "README onboarding reminder",
-  "author": "Lena Q.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a short reminder in the README for new reviewers about highlighting bugs.",
   "tags": [
     "docs",
@@ -15,7 +16,7 @@
         "documentación",
         "tutorial"
       ],
-      "author": "Lena Q."
+      "author": "Lucía Navarro"
     }
   },
   "importance": "low",
