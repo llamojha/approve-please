@@ -216,6 +216,10 @@ export const TRANSLATIONS = {
       startButton: "START DAY",
       eyebrow: "AFTERHOURS · SHIFT BRIEFING",
       body: "The queue opens at 09:00. Keep stability, velocity and team trust above zero until 17:00.",
+      savedHeading: "A saved shift is waiting",
+      savedBody: "Resume exactly where you stopped. The game clock did not advance while you were away.",
+      resumeButton: "RESUME SHIFT",
+      newButton: "START A NEW RUN",
     },
     summary: {
       endOfDay: "End of Day",
@@ -249,6 +253,7 @@ export const TRANSLATIONS = {
         view: "View leaderboard",
         success: "Saved! Your run is on the leaderboard.",
         error: "Failed to submit score.",
+        resumedRun: "Resumed runs stay in practice mode and are not submitted to the leaderboard.",
       },
     },
     incidents: {
@@ -494,6 +499,10 @@ export const TRANSLATIONS = {
       startButton: "Comenzar el día",
       eyebrow: "AFTERHOURS · INICIO DEL TURNO",
       body: "La cola abre a las 09:00. Mantén la estabilidad, la velocidad y la confianza por encima de cero hasta las 17:00.",
+      savedHeading: "Hay un turno guardado",
+      savedBody: "Continúa exactamente donde lo dejaste. El reloj no avanzó mientras estabas fuera.",
+      resumeButton: "CONTINUAR TURNO",
+      newButton: "EMPEZAR PARTIDA NUEVA",
     },
     summary: {
       endOfDay: "Fin del día",
@@ -527,6 +536,7 @@ export const TRANSLATIONS = {
         view: "Ver clasificación",
         success: "Guardada. Tu partida ya aparece en la clasificación.",
         error: "No se pudo enviar la puntuación.",
+        resumedRun: "Las partidas reanudadas permanecen en modo práctica y no se envían a la clasificación.",
       },
     },
     incidents: {

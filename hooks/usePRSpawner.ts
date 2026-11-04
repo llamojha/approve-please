@@ -91,8 +91,10 @@ export const usePRSpawner = () => {
       languagePreference,
       difficulty, // SPIKE(plan 010): gates the learning-mode ordering branches below
       simulationPaused,
+      deliveryMarkers,
+      spawnedTemplateIds,
     },
-    actions: { enqueuePRs },
+    actions: { enqueuePRs, markDelivery, recordSpawnedTemplates },
   } = useGameState();
   const { locale } = useLocale();
 
@@ -176,9 +178,10 @@ export const usePRSpawner = () => {
     let cancelled = false;
 
     const applyPools = (templates: PullRequestTemplate[]) => {
-      const basePool = templates.filter((template) =>
-        templateMatchesPreference(template, languagePreference)
-      );
+      const alreadySpawned = new Set(spawnedTemplateIds);
+      const eligible = templates.filter((template) => templateMatchesPreference(template, languagePreference));
+      const unseen = eligible.filter(template => !alreadySpawned.has(template.templateId));
+      const basePool = unseen.length > 0 ? unseen : eligible;
       basePoolRef.current = basePool;
       if (difficulty === "learning") { // SPIKE(plan 010): learning mode orders the pool by curriculum tier for the current day; normal mode falls through to the pre-spike shuffle untouched
         workingPoolRef.current = orderForLearning(basePool, currentDay); // SPIKE: deterministic curriculum order (see docs/learning-mode-curriculum.md)
@@ -228,16 +231,21 @@ export const usePRSpawner = () => {
     currentDay,
     languagePreference,
     difficulty, // SPIKE(plan 010): re-derive pools when the mode changes so learning ordering applies
+    spawnedTemplateIds,
   ]);
 
   useEffect(() => {
     const key = `${runId}:${currentDay}`;
-    if (trackerResetKeyRef.current === key) {
-      return;
+    if (trackerResetKeyRef.current !== key) {
+      trackerResetKeyRef.current = key;
+      trackerRef.current = getWaveTracker(key);
     }
-    trackerResetKeyRef.current = key;
-    trackerRef.current = getWaveTracker(key);
-  }, [currentDay, runId]);
+    deliveryMarkers.forEach(marker => {
+      if (marker.startsWith('default:')) trackerRef.current.waves.add(Number(marker.slice('default:'.length)));
+      if (marker.startsWith('scripted:')) trackerRef.current.scripted.add(marker.slice('scripted:'.length));
+      if (marker.startsWith('hourly:')) lastHourlyCheckRef.current = Math.max(lastHourlyCheckRef.current, Number(marker.slice('hourly:'.length)));
+    });
+  }, [currentDay, deliveryMarkers, runId]);
 
   useEffect(() => {
     if (phase !== "WORK" || simulationPaused) {
@@ -255,6 +263,7 @@ export const usePRSpawner = () => {
       if (currentTime >= minute && !triggeredWaves.has(minute)) {
         if (shouldSkipDefaultWave(minute)) {
           triggeredWaves.add(minute);
+          markDelivery(`default:${minute}`);
           return;
         }
         if (tutorialBlocksLaterWave(currentDay, minute, queue)) {
@@ -271,6 +280,8 @@ export const usePRSpawner = () => {
         triggeredWaves.add(minute);
         if (prs.length > 0) {
           enqueuePRs(prs);
+          recordSpawnedTemplates(prs.map(pr => pr.templateId));
+          markDelivery(`default:${minute}`);
         }
       }
     });
@@ -282,6 +293,8 @@ export const usePRSpawner = () => {
         const prs = spawnSpecific(wave.templateIds, currentDay);
         if (prs.length > 0) {
           enqueuePRs(prs);
+          recordSpawnedTemplates(prs.map(pr => pr.templateId));
+          markDelivery(`scripted:${key}`);
         }
       }
     });
@@ -295,6 +308,8 @@ export const usePRSpawner = () => {
         if (prs.length > 0) {
           lastHourlyCheckRef.current = currentHour;
           enqueuePRs(prs);
+          recordSpawnedTemplates(prs.map(pr => pr.templateId));
+          markDelivery(`hourly:${currentHour}`);
         }
       } else {
         lastHourlyCheckRef.current = currentHour;
@@ -306,6 +321,8 @@ export const usePRSpawner = () => {
     currentTime,
     currentDay,
     enqueuePRs,
+    markDelivery,
+    recordSpawnedTemplates,
     queue,
     spawnSpecific,
     drawBatch,

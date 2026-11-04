@@ -24,6 +24,7 @@ const GameOverScreen = () => {
       prodIncidents,
       falsePositiveRecords,
       difficulty,
+      leaderboardEligible,
     },
     actions: { restartGame },
   } = useGameState();
@@ -141,6 +142,7 @@ const GameOverScreen = () => {
                 {gameOverText.leaderboard.score(finalScore)}
               </p>
             </div>
+            {!leaderboardEligible && <p className={`muted ${styles.mutedSmall}`}>{gameOverText.leaderboard.resumedRun}</p>}
             <div className={styles.leaderboardControls}>
               <input
                 type="text"
@@ -150,7 +152,7 @@ const GameOverScreen = () => {
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 disabled={
-                  submitStatus === "submitting" || submitStatus === "success"
+                  !leaderboardEligible || submitStatus === "submitting" || submitStatus === "success"
                 }
               />
               <button
@@ -158,7 +160,7 @@ const GameOverScreen = () => {
                 className={styles.leaderboardSubmit}
                 onClick={submitToLeaderboard}
                 disabled={
-                  submitStatus === "submitting" || submitStatus === "success"
+                  !leaderboardEligible || submitStatus === "submitting" || submitStatus === "success"
                 }
               >
                 {submitStatus === "submitting"

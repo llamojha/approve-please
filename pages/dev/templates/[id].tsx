@@ -90,9 +90,7 @@ const TemplatePreview = ({ template, language }: TemplatePreviewProps) => {
               Bug lines start highlighted. Click a diff row to toggle its review highlight.
             </p>
           </div>
-          <Link className={styles.backLink} href="/dev/templates">
-            Back to gallery
-          </Link>
+          <div className={styles.headerActions}><Link className={styles.primaryLink} href={`/dev/templates/new?duplicate=${encodeURIComponent(template.templateId)}`}>Duplicate in workshop</Link><Link className={styles.backLink} href="/dev/templates">Back to gallery</Link></div>
         </header>
 
         <fieldset className={styles.localeToggle}>

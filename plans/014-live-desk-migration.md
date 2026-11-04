@@ -1,6 +1,6 @@
 # Approved desk → live game implementation plan
 
-**Status:** IMPLEMENTED AND VERIFIED LOCALLY (3 November 2026). Landing and gameplay migration ship together in preview PR #12.
+**Status:** IMPLEMENTED AND VERIFIED LOCALLY (4 November 2026). Landing and gameplay migration ship together in preview PR #12.
 
 **Goal:** Play the real campaign through the approved Afterhours desk: actual clock, catalog PRs, optional file-scoped tags, immediate verdict feedback, swipe progression and recognizable coworkers.
 
@@ -65,7 +65,7 @@
 ## 6. Verify and deliver on preview
 **Files:** update `docs/design-study/README.md`, `docs/readability-audit.md`, `plans/013-ui-ux-characters-and-authoring.md`; create `docs/live-desk-validation.md`.
 
-- [x] Run targeted tests first, then `npm run typecheck`, `npm run lint`, `npm test -- --maxWorkers=1`, `npm run generate:templates`, `npm run build`. All 539 tests pass; typecheck, lint and production build pass; 390 templates validate without generated-manifest changes.
+- [x] Run targeted tests first, then `npm run typecheck`, `npm run lint`, `npm test -- --maxWorkers=1`, `npm run generate:templates`, `npm run build`. All 549 tests pass; typecheck, lint and production build pass; 390 templates validate without generated-manifest changes.
 - [x] Browser proof: complete a shift, show mandatory arrivals, optional/precise rejection, multi-file tagging, day transition, empty queue, game-over/restart, audio opt-in and notice behavior. Campaign transitions and interaction behavior have browser coverage; reducer tests cover terminal and restart state without publishing leaderboard QA data.
 - [x] Check 320 px phone, tablet, desktop, 200% text/zoom, long Spanish copy, keyboard-only, focus return, contrast and reduced motion. Browser checks are complete; observed usability, screen-reader and forced-colors sessions remain release research.
 - [x] Keep `/dev/design` and authoring routes 404 in production; `/game` uses the real desk. Production-server probes return 200 for `/` and `/game`, and 404 for `/dev/design` and `/dev/templates`.

@@ -22,7 +22,7 @@ export default function IndexPage() {
   const translations = useTranslations();
   const landing = translations.landing;
   const t = landing.refresh;
-  const { state: { languagePreference, difficulty }, actions: { setLanguagePreference, setDifficulty } } = useGameState();
+  const { state: { languagePreference, difficulty }, savedRun, actions: { setLanguagePreference, setDifficulty, resumeSavedRun, discardSavedRun } } = useGameState();
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
   const [leaderboardOpen, setLeaderboardOpen] = useState(false);
@@ -91,7 +91,7 @@ export default function IndexPage() {
           <div className={styles.setupForm}>
             <fieldset className={styles.languages}><legend>{t.languageLegend}</legend><p id="language-hint">{t.languageHint}</p><div className={styles.languageOptions} aria-describedby="language-hint">{languages.map(value => <button key={value} type="button" aria-pressed={languagePreference.includes(value)} onClick={() => toggleLanguage(value)} title={languagePreference.length === 1 && languagePreference.includes(value) ? t.minimumLanguage : undefined}><span aria-hidden="true">{languagePreference.includes(value) ? '✓' : '+'}</span>{value === 'generic' ? t.genericLabel : landing.languageOptions[value] ?? value}</button>)}</div><small aria-live="polite">{t.selected(languagePreference.length)} · {t.minimumLanguage}</small></fieldset>
             <fieldset className={styles.difficulty}><legend>{t.difficultyLegend}</legend><div>{difficulties.map(value => <label key={value} className={difficulty === value ? styles.selectedDifficulty : ''}><input type="radio" name="difficulty" value={value} checked={difficulty === value} onChange={() => setDifficulty(value)} /><span><strong>{value === 'normal' ? t.normalTitle : t.learningTitle}</strong><span>{value === 'normal' ? t.normalDescription : t.learningDescription}</span></span></label>)}</div></fieldset>
-            <button type="button" className={`${styles.primary} ${styles.start}`} onClick={() => router.push('/game')}>{t.start}<span aria-hidden="true">→</span></button><p className={styles.startHint}>{t.startHint}</p>
+            {savedRun ? <div className={styles.resumeBlock}><button type="button" className={`${styles.primary} ${styles.start}`} onClick={() => { resumeSavedRun(); void router.push('/game'); }}>{t.resume(savedRun.state.currentDay)}<span aria-hidden="true">→</span></button><p className={styles.startHint}>{t.resumeHint(new Date(savedRun.savedAt).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' }))}</p><button type="button" className={styles.newRun} onClick={() => { discardSavedRun(); void router.push('/game'); }}>{t.newRun}</button></div> : <><button type="button" className={`${styles.primary} ${styles.start}`} onClick={() => { discardSavedRun(); void router.push('/game'); }}>{t.start}<span aria-hidden="true">→</span></button><p className={styles.startHint}>{t.startHint}</p></>}
           </div>
         </section>
         <section className={styles.team} aria-labelledby="team-title"><div><h2 id="team-title">{t.teamHeading}</h2><p>{t.teamIntro}</p></div><ul>{characters.map(person => <li key={person.id}><Image unoptimized src={`/characters/studies/${person.id}-neutral.png`} alt="" width={64} height={64} /><strong>{person.name.split(' ')[0]}</strong><span>{person.role[locale]}</span></li>)}</ul></section>

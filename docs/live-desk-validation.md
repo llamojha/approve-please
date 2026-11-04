@@ -1,4 +1,4 @@
-# Live desk migration validation — 3 November 2026
+# Live desk migration validation — 4 November 2026
 
 The approved Afterhours review design now powers the real `/game` work phase. Shared presentation components render GameContext state; `/dev/design` remains a fixture adapter and stays unavailable in production.
 
@@ -32,9 +32,9 @@ Screenshots: `docs/design-study/live-desk-desktop.png`, `docs/design-study/live-
 
 - Focused reducer/evaluator/normalization/lifecycle/template checks cover atomic decisions, pause, duplicate/stale actions, file identity, tutorial gating, generic eligibility, full coworker assignment and both locales.
 - All 390 templates validate and generated manifests remain structurally valid.
-- All 539 tests pass across 16 files; typecheck, lint and the optimized production build pass.
+- All 549 tests pass across 18 files; typecheck, lint and the optimized production build pass.
 - Production probes return 200 for `/` and `/game`, and 404 for `/dev/design` and `/dev/templates`.
 
 ## Limits
 
-This migration does not add save/resume, hosted author publishing or a database change. The full observed screen-reader, forced-colors and first-time-player usability sessions remain release research; keyboard semantics, reflow and programmatic labels have browser coverage. Rollback is the previous `WorkScreen` adapter; scoring and content contracts remain independently testable.
+Versioned local save/resume and persistent audio preferences are now included. Hosted author publishing and database changes remain outside scope. Independent keyboard, reflow, forced-colors, reduced-motion and programmatic-label checks have browser coverage; human participant research remains distinct follow-up evidence. Rollback is the previous `WorkScreen` adapter; scoring and content contracts remain independently testable.

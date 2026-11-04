@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import {
   MAX_METER_VALUE,
   MIN_METER_VALUE,
@@ -29,6 +29,7 @@ import { GameOverReasonKey } from '../constants/i18n';
 import { useTranslations } from '../hooks/useTranslations';
 import { evaluateDecision, type DecisionReceipt, type ReviewVerdict } from '../utils/decision';
 import { lineReferenceKey, normalizePullRequest } from '../utils/templateNormalization';
+import { clearSavedRun, isMeaningfulRun, readSavedRun, RUN_SAVE_STORAGE_KEY, type RunSaveEnvelope, writeSavedRun } from '../utils/runPersistence';
 
 export interface GameState {
   runId: number;
@@ -50,6 +51,9 @@ export interface GameState {
   lastDecision: DecisionReceipt | null;
   decisionReceipts: DecisionReceipt[];
   simulationPaused: boolean;
+  deliveryMarkers: string[];
+  leaderboardEligible: boolean;
+  spawnedTemplateIds: string[];
 }
 
 export interface DecisionResult {
@@ -68,6 +72,8 @@ export interface RequestChangesPayload {
 
 interface GameContextValue {
   state: GameState;
+  savedRun: RunSaveEnvelope | null;
+  savedRunPromptPending: boolean;
   actions: {
     startWork: () => void;
     enqueuePRs: (prs: PullRequest[]) => void;
@@ -80,6 +86,10 @@ interface GameContextValue {
     setLanguagePreference: (preference: LanguagePreference) => void;
     setDifficulty: (difficulty: Difficulty) => void;
     setSimulationPaused: (paused: boolean) => void;
+    markDelivery: (marker: string) => void;
+    recordSpawnedTemplates: (templateIds: string[]) => void;
+    resumeSavedRun: () => void;
+    discardSavedRun: () => void;
   };
 }
 
@@ -98,7 +108,10 @@ export type GameAction =
   | { type: 'SET_SIMULATION_PAUSED'; paused: boolean }
   | { type: 'LOG_PROD_INCIDENT'; incident: ProdIncident }
   | { type: 'LOG_FALSE_POSITIVE'; record: FalsePositiveRecord }
-  | { type: 'RANDOMIZE_DAY_FLAVOR'; mantra: DayMantra; quote: DayQuote };
+  | { type: 'RANDOMIZE_DAY_FLAVOR'; mantra: DayMantra; quote: DayQuote }
+  | { type: 'MARK_DELIVERY'; marker: string }
+  | { type: 'RECORD_SPAWNED_TEMPLATES'; templateIds: string[] }
+  | { type: 'RESTORE_RUN'; state: GameState };
 
 const createInitialCounters = (): Counters => ({
   bugsToProd: 0,
@@ -135,7 +148,10 @@ export const createInitialState = (): GameState => {
     falsePositiveRecords: [],
     lastDecision: null,
     decisionReceipts: [],
-    simulationPaused: false
+    simulationPaused: false,
+    deliveryMarkers: [],
+    leaderboardEligible: true,
+    spawnedTemplateIds: []
   };
 };
 
@@ -321,7 +337,9 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
         falsePositiveRecords: [],
         lastDecision: null,
         decisionReceipts: [],
-        simulationPaused: false
+        simulationPaused: false,
+        deliveryMarkers: [],
+        spawnedTemplateIds: []
       };
     }
     case 'PUSH_SUMMARY': {
@@ -365,6 +383,22 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
       }
       return { ...state, currentMantra: action.mantra, dayQuote: action.quote };
     }
+    case 'MARK_DELIVERY': {
+      if (state.deliveryMarkers.includes(action.marker)) return state;
+      return { ...state, deliveryMarkers: [...state.deliveryMarkers, action.marker] };
+    }
+    case 'RECORD_SPAWNED_TEMPLATES': {
+      if (action.templateIds.length === 0) return state;
+      const seen = new Set(state.spawnedTemplateIds);
+      const next = action.templateIds.filter(templateId => !seen.has(templateId) && seen.add(templateId));
+      return next.length ? { ...state, spawnedTemplateIds: [...state.spawnedTemplateIds, ...next] } : state;
+    }
+    case 'RESTORE_RUN': {
+      const currentPR = action.state.currentPR
+        ? action.state.queue.find(pr => pr.id === action.state.currentPR?.id) ?? null
+        : null;
+      return { ...action.state, currentPR, simulationPaused: false, leaderboardEligible: false };
+    }
     default:
       return state;
   }
@@ -374,11 +408,32 @@ const GameContext = createContext<GameContextValue | undefined>(undefined);
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
+  const [savedRun, setSavedRun] = useState<RunSaveEnvelope | null>(null);
+  const [savedRunPromptPending, setSavedRunPromptPending] = useState(false);
+  const [persistenceEnabled, setPersistenceEnabled] = useState(false);
   const translations = useTranslations();
   const decisionLocks = useRef(new Set<string>());
   const dayTransitionLock = useRef<number | null>(null);
   useEffect(() => { decisionLocks.current.clear(); }, [state.currentDay]);
   useEffect(() => { dayTransitionLock.current = null; }, [state.currentDay, state.runId]);
+
+  useEffect(() => {
+    const saved = readSavedRun(window.localStorage);
+    setSavedRun(saved);
+    setSavedRunPromptPending(saved !== null);
+    setPersistenceEnabled(saved === null);
+    if (!saved && window.localStorage.getItem(RUN_SAVE_STORAGE_KEY)) clearSavedRun(window.localStorage);
+  }, []);
+
+  useEffect(() => {
+    if (!persistenceEnabled) return;
+    if (!isMeaningfulRun(state)) {
+      clearSavedRun(window.localStorage);
+      setSavedRun(null);
+      return;
+    }
+    setSavedRun(writeSavedRun(window.localStorage, state));
+  }, [persistenceEnabled, state]);
 
   // The initial state is deterministic so server HTML and client hydration
   // match; the random day flavor is applied after mount (effects never run
@@ -471,9 +526,34 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: 'SET_SIMULATION_PAUSED', paused });
   }, []);
 
+  const markDelivery = useCallback((marker: string) => {
+    dispatch({ type: 'MARK_DELIVERY', marker });
+  }, []);
+
+  const recordSpawnedTemplates = useCallback((templateIds: string[]) => {
+    dispatch({ type: 'RECORD_SPAWNED_TEMPLATES', templateIds });
+  }, []);
+
+  const resumeSavedRun = useCallback(() => {
+    if (!savedRun) return;
+    setPersistenceEnabled(true);
+    setSavedRunPromptPending(false);
+    dispatch({ type: 'RESTORE_RUN', state: savedRun.state });
+  }, [savedRun]);
+
+  const discardSavedRun = useCallback(() => {
+    setPersistenceEnabled(true);
+    clearSavedRun(window.localStorage);
+    setSavedRun(null);
+    setSavedRunPromptPending(false);
+    dispatch({ type: 'RESET_GAME' });
+  }, []);
+
   const value = useMemo(
     () => ({
       state,
+      savedRun,
+      savedRunPromptPending,
       actions: {
         startWork,
         enqueuePRs,
@@ -485,7 +565,11 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         restartGame,
         setLanguagePreference,
         setDifficulty,
-        setSimulationPaused
+        setSimulationPaused,
+        markDelivery,
+        recordSpawnedTemplates,
+        resumeSavedRun,
+        discardSavedRun
       }
     }),
     [
@@ -500,7 +584,13 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       restartGame,
       setLanguagePreference,
       setDifficulty,
-      setSimulationPaused
+      setSimulationPaused,
+      markDelivery,
+      recordSpawnedTemplates,
+      resumeSavedRun,
+      discardSavedRun,
+      savedRun,
+      savedRunPromptPending
     ]
   );
 

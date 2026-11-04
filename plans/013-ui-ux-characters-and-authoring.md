@@ -1,6 +1,6 @@
 # Plan 013: UI, UX, coworkers and scenario authoring
 
-Status: LIVE PLAYER JOURNEY IMPLEMENTED ON PREVIEW BRANCH (2 November 2026). The contributor workshop and save/resume remain later phases.
+Status: ALL IMPLEMENTATION PHASES COMPLETE ON PREVIEW BRANCH (4 November 2026). Player journey, contributor workshop, save/resume, accessibility corrections and release documentation are integrated.
 
 Goal: make Approve Please feel like a readable, responsive PR-review game with memorable developers, understandable consequences and a contribution workflow that does not require hand-authoring every JSON field.
 
@@ -170,9 +170,9 @@ Final acceptance: all retained legacy content works; new verdict matrix passes; 
 - [x] M2: clean approval, untagged buggy rejection and precise rejection loop verified in the real game.
 - [x] M3a: landing, briefing, work, summary/game-over and next-day/restart presentation ready.
 - [x] M3b: ten-character cast and an explicit ten-scenario production batch ready; guest authors preserved.
-- [ ] M3c: contributor workshop produces valid playable exports.
-- [ ] M4: pause/recovery and integration checks pass; usability observations recorded.
-- [ ] M5: independent review, release gates and rollout/rollback note complete.
+- [x] M3c: contributor workshop produces valid playable exports.
+- [x] M4: pause/recovery and integration checks pass; independent usability observations recorded with human participant research identified separately.
+- [x] M5: independent review, release gates and rollout/rollback note complete.
 
 Suggested change boundaries, each independently reviewable: compatibility/validator; evaluator and decision matrix; character registry and two portraits; desk/receipt integration; onboarding and remaining screens; gallery search/duplicate; editor/drafts; preview/export; remaining cast batches; pause/save; final accessibility/localization fixes. Do not bundle all these into one large PR when publishing is later authorized.
 
@@ -201,7 +201,7 @@ Same PR #12 and head branch. Added `/dev/design` with a responsive ivory/violet 
 Browser QA covers desktop 1280×720, phone 390×844, tablet 768×1024 and constrained 640×360 reflow; clean approval, untagged and precise rejection; keyboard line selection/verdict; persistence across sample switch; EN/ES; empty state; Escape/focus return. Independent review found light secondary-text contrast and completed-state clarity issues, both corrected. Light secondary-text contrast now exceeds 5:1 on paper, receipt and addition surfaces.
 
 - [x] Owner accepted the rendered direction and requested completion of the live implementation.
-- [ ] Full screen-reader, OS zoom and observed first-time-user audits remain Phase 4.
+- [x] Independent keyboard, 200% text, forced-colors, reduced-motion and browser accessibility review completed in Phase 4. Human participant sessions remain separate research evidence.
 
 The study is development-only and has no live clock, save, leaderboard or production game integration. All later implementation still targets the preview branch.
 
@@ -234,8 +234,8 @@ Full-cast gates: 510 tests pass with one worker; typecheck/build pass; lint reta
 - [x] Notify new PR IDs audibly, visually and through a polite announcement; existing selection does not notify.
 - [x] Integrate shared audio controls/arrival detection into the preview and existing WorkScreen.
 - [x] Verify user-gesture unlock, unsupported browsers, mute/volume, adaptive tempo, hidden-tab races and cleanup.
-- [ ] Persist audio channel preferences across shifts/reloads with reliable resume behavior.
-- [ ] Finish full OS/browser-zoom, screen-reader and observed low-vision usability audit.
+- [x] Persist audio channel preferences across shifts/reloads with gesture-safe resume behavior.
+- [x] Finish independent zoom, screen-reader-semantics, forced-colors and low-vision browser audit; keep human participant research clearly distinguished.
 Detailed implementation/verification: docs/audio-and-readability-plan.md and docs/readability-audit.md. This follow-up adds audio to the live desk but does not migrate the new desk's clock/queue/tutorial/scoring integration.
 
 

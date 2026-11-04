@@ -11,6 +11,7 @@ Goal: readable text in the refreshed desk, quiet instrumental music that acceler
 - [x] Integrate the same audio controls/arrival detection into pages/dev/design.tsx and components/screens/WorkScreen.tsx.
 - [x] Browser-verify sound starts from an explicit gesture, mute/volume, faster tempo under pressure, fresh PR cue, unchanged selection behavior, and lifecycle cleanup.
 - [x] Run targeted tests, typecheck, lint/build; refresh screenshots and update preview-targeted PR12.
+- [x] Persist music, notification and volume choices. Restore enabled channels after the next user gesture so browser autoplay policy remains respected.
 
 ## Defaults and boundary
 Original procedural synth music, fixed pitches with rhythmic tempo from 72 to 144 BPM based on the lowest stability/velocity/satisfaction meter. Tension changes tempo rather than loudness. Separate music and notification toggles begin off; volume starts at 25%. No external audio downloads, dependencies or licensing assumptions. The visual new-PR notice is available with audio off. The actual game's queue/timer/scoring semantics remain intact; its existing sound hook is extended rather than changing the game loop.
@@ -27,6 +28,6 @@ Audio follows [Web Audio user-control guidance](https://developer.mozilla.org/en
 ## Verified behavior
 Separate music/notification channels begin off at 25% volume. The preview and existing WorkScreen share the engine. In the browser, no AudioContext exists before opt-in; user activation starts one running context. With falling meters the preview tempo increased from 91 to 118 BPM while pitches remained fixed. An analyser measured nonzero, unclipped output. The notification-only path schedules exactly two notes for a new queue ID; selecting an existing PR is silent. The visible notice and polite announcement work with audio off.
 
-Keyboard volume,200% text in the audio dialog, unsupported-browser fallback and live-game controls were browser-checked. Eleven audio tests cover scheduling, independent mute/volume, failed unlock, cleanup, hidden tabs and rapid visibility transitions; three arrival tests cover same-length replacement, selection/reorder silence and distinct batch counts. Channel choices currently apply to the mounted review screen and reset off when it is recreated; persistence across shifts/reloads is a future preference improvement.
+Keyboard volume, 200% text in the audio dialog, unsupported-browser fallback and live-game controls were browser-checked. Eleven audio tests cover scheduling, independent mute/volume, failed unlock, cleanup, hidden tabs and rapid visibility transitions; three arrival tests cover same-length replacement, selection/reorder silence and distinct batch counts. Channel choices and volume now persist across shifts and reloads; enabled channels resume after the next user gesture to respect browser autoplay policy.
 
 Final validation: 524 tests pass with one worker; typecheck/build pass; 390 templates validate with no generated manifest changes. Lint has zero errors and five existing warnings. Screenshots include audio-settings.png and pr-arrival.png as well as the updated readable desk/team/mobile/tablet views.

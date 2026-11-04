@@ -102,7 +102,7 @@ const WorkScreen = () => {
     const handler = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       const editable = target?.matches('input, textarea, select, [contenteditable="true"]');
-      if (event.repeat || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || editable || panel || outgoing || simulationPaused) return;
+      if (event.repeat || event.defaultPrevented || !event.altKey || event.ctrlKey || event.metaKey || editable || panel || outgoing || simulationPaused) return;
       if (event.key.toLowerCase() === 'a' && currentPR) { event.preventDefault(); decide('approve'); }
       else if (event.key.toLowerCase() === 'r' && currentPR) { event.preventDefault(); decide('request-changes'); }
     };

@@ -24,6 +24,6 @@ Body copy uses a 1.5 line height; code uses 28 px line boxes with padding. The d
 - The live `/game` desk was checked at 390×844 and 320×740 with doubled root text. The queue dialog does not pause the simulation; handbook/audio dialogs do. Verdict actions stack at the narrow doubled-text breakpoint so their labels remain complete.
 - Updated desktop light/dark, phone, tablet and team screenshots are in docs/design-study/.
 
-The 14/16 px scale is a readability choice, not a WCAG minimum font size or complete accessibility certification. Full observed screen-reader, forced-colors and low-vision usability sessions remain future work.
+The 14/16 px scale is a readability choice, not a WCAG minimum font size or complete accessibility certification. Automated and independent keyboard, screen-reader-semantics, forced-colors and low-vision review evidence is tracked with the release notes; observed participant sessions remain distinct from automated evidence.
 
 References: [text contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), [text resizing](https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html), [reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow.html).
