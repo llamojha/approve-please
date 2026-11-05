@@ -1,6 +1,7 @@
 import { Locale, PullRequest, PRLocalizedMetadata } from '../types';
 import { PullRequestTemplate } from '../data/prs';
 import { uniqueId } from './helpers';
+import { getCharacter, reactionsForCharacter, type CharacterId } from '../data/characters';
 
 const pickLocalizedField = <T>(
   key: keyof PRLocalizedMetadata,
@@ -26,7 +27,10 @@ export const instantiatePullRequest = (
   const title = pickLocalizedField('title', localizedMeta, fallbackMeta, template.title);
   const description = pickLocalizedField('description', localizedMeta, fallbackMeta, template.description);
   const tags = pickLocalizedField('tags', localizedMeta, fallbackMeta, template.tags);
-  const author = pickLocalizedField('author', localizedMeta, fallbackMeta, template.author);
+  const assignedCharacter = getCharacter(template.authorId);
+  const author = assignedCharacter?.name ?? pickLocalizedField('author', localizedMeta, fallbackMeta, template.author);
+  const authorId = template.authorId;
+  const reactions = template.reactions ?? (assignedCharacter ? reactionsForCharacter(assignedCharacter.id as CharacterId) : undefined);
 
   return {
     id: `${template.templateId}-d${day}-${index}-${uniqueId('pr')}`,
@@ -36,6 +40,10 @@ export const instantiatePullRequest = (
     description,
     tags: [...tags],
     author,
+    ...(authorId ? { authorId } : {}),
+    ...(reactions ? { reactions: Object.fromEntries(
+      Object.entries(reactions).map(([outcome, translations]) => [outcome, { ...translations }])
+    ) } : {}),
     files: template.files.map((file) => ({
       ...file,
       lines: file.lines.map((line) => ({ ...line }))
@@ -43,6 +51,7 @@ export const instantiatePullRequest = (
     bugPatterns: template.bugPatterns.map((pattern) => ({
       kind: pattern.kind,
       lineNumbers: [...pattern.lineNumbers],
+      ...(pattern.lineRefs ? { lineRefs: pattern.lineRefs.map((ref) => ({ ...ref })) } : {}),
       severity: pattern.severity,
       description: pattern.localizedDescription?.[locale] ?? pattern.localizedDescription?.en ?? pattern.description
     })),

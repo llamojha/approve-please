@@ -1,3 +1,6 @@
+import { designStudyCopy } from "./designStudyCopy";
+import { audioCopy } from "./audioCopy";
+import { landingPageCopy } from "./landingPageCopy";
 import { BugKind, Locale } from "../types";
 export type GameOverReasonKey = "stability" | "satisfaction" | "velocity" | "generic";
 
@@ -45,12 +48,12 @@ const importanceLabels: Record<
 > = {
   en: {
     low: "Low",
-    normal: "Normal",
+    normal: "Medium",
     high: "High",
   },
   es: {
     low: "Baja",
-    normal: "Normal",
+    normal: "Media",
     high: "Alta",
   },
 };
@@ -89,8 +92,11 @@ const difficultyLabels: Record<Locale, Record<string, string>> = {
 
 export const TRANSLATIONS = {
   en: {
+    designStudy: designStudyCopy.en,
+    audio: audioCopy.en,
     localeToggleLabel: "Select language",
     landing: {
+      refresh: landingPageCopy.en,
       title: "Approve Please",
       blurb:
         "Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.",
@@ -208,6 +214,12 @@ export const TRANSLATIONS = {
     },
     briefing: {
       startButton: "START DAY",
+      eyebrow: "AFTERHOURS · SHIFT BRIEFING",
+      body: "The queue opens at 09:00. Keep stability, velocity and team trust above zero until 17:00.",
+      savedHeading: "A saved shift is waiting",
+      savedBody: "Resume exactly where you stopped. The game clock did not advance while you were away.",
+      resumeButton: "RESUME SHIFT",
+      newButton: "START A NEW RUN",
     },
     summary: {
       endOfDay: "End of Day",
@@ -231,6 +243,18 @@ export const TRANSLATIONS = {
       deployedBody: "Final day incidents that melted prod.",
       falseHeading: "False Positives",
       falseBody: "Where you slowed velocity on the final day.",
+      leaderboard: {
+        heading: "Save this run to the leaderboard",
+        score: (score: number) => `Your score: ${score} (clean approvals + bugs blocked + days played × 5)`,
+        namePlaceholder: "Your name (optional)",
+        saving: "Saving…",
+        saved: "Saved",
+        submit: "Submit score",
+        view: "View leaderboard",
+        success: "Saved! Your run is on the leaderboard.",
+        error: "Failed to submit score.",
+        resumedRun: "Resumed runs stay in practice mode and are not submitted to the leaderboard.",
+      },
     },
     incidents: {
       byline: (author: string, bugKindLabel: string) =>
@@ -348,8 +372,11 @@ export const TRANSLATIONS = {
     },
   },
   es: {
+    designStudy: designStudyCopy.es,
+    audio: audioCopy.es,
     localeToggleLabel: "Seleccionar idioma",
     landing: {
+      refresh: landingPageCopy.es,
       title: "Aprueba Por Favor",
       blurb:
         "Entra en Operaciones de Lanzamiento. Revisa PRs, protege la estabilidad y procura no ser despedido.",
@@ -470,6 +497,12 @@ export const TRANSLATIONS = {
     },
     briefing: {
       startButton: "Comenzar el día",
+      eyebrow: "AFTERHOURS · INICIO DEL TURNO",
+      body: "La cola abre a las 09:00. Mantén la estabilidad, la velocidad y la confianza por encima de cero hasta las 17:00.",
+      savedHeading: "Hay un turno guardado",
+      savedBody: "Continúa exactamente donde lo dejaste. El reloj no avanzó mientras estabas fuera.",
+      resumeButton: "CONTINUAR TURNO",
+      newButton: "EMPEZAR PARTIDA NUEVA",
     },
     summary: {
       endOfDay: "Fin del día",
@@ -493,6 +526,18 @@ export const TRANSLATIONS = {
       deployedBody: "Incidentes del último día que derritieron prod.",
       falseHeading: "Falsos positivos",
       falseBody: "Dónde bajaste la velocidad en el último día.",
+      leaderboard: {
+        heading: "Guarda esta partida en la clasificación",
+        score: (score: number) => `Tu puntuación: ${score} (aprobaciones limpias + errores bloqueados + días jugados × 5)`,
+        namePlaceholder: "Tu nombre (opcional)",
+        saving: "Guardando…",
+        saved: "Guardada",
+        submit: "Enviar puntuación",
+        view: "Ver clasificación",
+        success: "Guardada. Tu partida ya aparece en la clasificación.",
+        error: "No se pudo enviar la puntuación.",
+        resumedRun: "Las partidas reanudadas permanecen en modo práctica y no se envían a la clasificación.",
+      },
     },
     incidents: {
       byline: (author: string, bugKindLabel: string) =>

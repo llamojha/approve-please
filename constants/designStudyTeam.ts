@@ -1,0 +1,331 @@
+import { characters } from '../data/characters';
+import type { BugKind, PullRequest } from '../types';
+
+export type StudyLocale = 'en' | 'es';
+export type StudyExpression = 'neutral' | 'pleased' | 'concerned';
+const studyScenarios = [
+  {
+    "id": "lucia",
+    "quote": {
+      "en": "The first empty screen is part of the product, too.",
+      "es": "La primera pantalla vacía también es producto."
+    },
+    "title": {
+      "en": "Give new workspaces a proper welcome",
+      "es": "Dar la bienvenida a los espacios nuevos"
+    },
+    "filename": "src/components/Welcome.tsx",
+    "branch": "welcome-workspace",
+    "description": {
+      "en": "New workspaces currently greet you with a whole lot of nothing. I added a welcome message and a create-project button. One next step, no confetti cannon.",
+      "es": "Los espacios nuevos te reciben con un montón de nada. He añadido un mensaje de bienvenida y un botón para crear un proyecto. Un siguiente paso, sin cañón de confeti."
+    },
+    "lines": [
+      "export function Welcome({ onCreate }: Props) {",
+      "  return (",
+      "    <section aria-label=\"Your workspace\">",
+      "      <h2>Good things start small.</h2>",
+      "      <button type=\"button\" onClick={onCreate}>",
+      "        Create a project",
+      "      </button>",
+      "    </section>",
+      "  );",
+      "}"
+    ],
+    "bugLine": 5,
+    "flawedLine": "      <button type=\"button\" onClick={() => onCreate}>",
+    "bugKind": "logic"
+  },
+  {
+    "id": "diego",
+    "quote": {
+      "en": "Small diff. Still deserves a proper look.",
+      "es": "Pocos cambios. Merecen una buena revisión."
+    },
+    "title": {
+      "en": "Make account logs useful after midnight",
+      "es": "Registros de cuentas útiles de madrugada"
+    },
+    "filename": "src/api/account.ts",
+    "branch": "account-observability",
+    "description": {
+      "en": "Last night’s account incident took three tabs and a lucky guess to trace. This adds context to the account lookup logs. I’d like the next on-call shift to involve less detective work.",
+      "es": "El incidente de cuentas de anoche necesitó tres pestañas y algo de suerte para seguirle la pista. Añado contexto a los logs de consulta de cuentas. Que la próxima guardia tenga menos trabajo de detective."
+    },
+    "lines": [
+      "export async function getAccount(req: Request) {",
+      "  const session = await requireSession(req);",
+      "  const account = await db.account.findUnique({",
+      "    where: { id: session.accountId },",
+      "  });",
+      "  if (!account) return new Response(null, { status: 404 });",
+      "",
+      "  logger.info(\"Account loaded\", {",
+      "    accountId: account.id,",
+      "    traceId: req.headers.get(\"x-request-id\"),",
+      "  });",
+      "  return Response.json({ name: account.name });",
+      "}"
+    ],
+    "bugLine": 10,
+    "flawedLine": "    accessToken: session.accessToken,",
+    "bugKind": "security"
+  },
+  {
+    "id": "ines",
+    "quote": {
+      "en": "A setup worth running twice.",
+      "es": "Una configuración que merece repetirse."
+    },
+    "title": {
+      "en": "Give the worker pool a sensible ceiling",
+      "es": "Poner un límite sensato al grupo de workers"
+    },
+    "filename": "src/platform/workers.ts",
+    "branch": "worker-ceiling",
+    "description": {
+      "en": "The worker setting accepts whatever number it gets handed. I’m putting a ceiling on it before someone discovers how expensive enthusiasm can be. Have a look at the bounds.",
+      "es": "El ajuste de workers acepta cualquier número que le pasen. Le pongo un límite antes de que alguien descubra lo caro que sale el entusiasmo. Echad un vistazo a los límites."
+    },
+    "lines": [
+      "export function workerCount(requested: number) {",
+      "  const MAX_WORKERS = 8;",
+      "  if (!Number.isFinite(requested)) return 1;",
+      "  const count = Math.floor(requested);",
+      "  return Math.max(1, Math.min(MAX_WORKERS, count));",
+      "}"
+    ],
+    "bugLine": 5,
+    "flawedLine": "  return Math.max(1, Math.max(MAX_WORKERS, count));",
+    "bugKind": "performance"
+  },
+  {
+    "id": "tessa",
+    "quote": {
+      "en": "The empty dataset deserves a test too.",
+      "es": "El conjunto vacío también merece una prueba."
+    },
+    "title": {
+      "en": "Count quiet days in the activity digest",
+      "es": "Contar los días tranquilos en el resumen"
+    },
+    "filename": "src/data/digest.ts",
+    "branch": "quiet-day-digest",
+    "description": {
+      "en": "A workspace with no activity still needs a number in the daily digest. This keeps the averaging logic in one place. Quiet days deserve a row in the spreadsheet too.",
+      "es": "Un espacio sin actividad también necesita un número en el resumen diario. Centralizo aquí el cálculo de la media. Los días tranquilos también merecen una fila en la hoja de cálculo."
+    },
+    "lines": [
+      "export function averageActivity(counts: number[]) {",
+      "  // A quiet workspace should report zero.",
+      "  if (counts.length === 0) return 0;",
+      "  const total = counts.reduce((sum, count) => sum + count, 0);",
+      "  return total / counts.length;",
+      "}"
+    ],
+    "bugLine": 3,
+    "flawedLine": "  if (counts.length < 0) return 0;",
+    "bugKind": "logic"
+  },
+  {
+    "id": "ben",
+    "quote": {
+      "en": "Looks right. Now let’s check how it behaves.",
+      "es": "Se ve bien. Ahora comprobemos cómo se comporta."
+    },
+    "title": {
+      "en": "Make the command menu a keyboard regular",
+      "es": "Abrir el menú de comandos con el teclado"
+    },
+    "filename": "src/components/CommandTrigger.tsx",
+    "branch": "command-menu",
+    "description": {
+      "en": "The command menu has a proper button now. Please give it a lap with just the keyboard; the mouse has already had plenty of attention.",
+      "es": "El menú de comandos ya tiene un botón como toca. Dadle una vuelta usando solo el teclado; el ratón ya ha recibido bastante atención."
+    },
+    "lines": [
+      "export function CommandTrigger({ open }: Props) {",
+      "  return (",
+      "    <button type=\"button\" onClick={open}",
+      "      aria-label=\"Open command menu\"",
+      "      tabIndex={0}>",
+      "      <SearchIcon aria-hidden=\"true\" />",
+      "    </button>",
+      "  );",
+      "}"
+    ],
+    "bugLine": 5,
+    "flawedLine": "      tabIndex={-1}>",
+    "bugKind": "accessibility"
+  },
+  {
+    "id": "jonah",
+    "quote": {
+      "en": "Can we add that case to the test?",
+      "es": "¿Podemos añadir ese caso a la prueba?"
+    },
+    "title": {
+      "en": "Let the last invitation take its seat",
+      "es": "Dejar sitio a la última invitación"
+    },
+    "filename": "src/team/invitations.ts",
+    "branch": "last-seat",
+    "description": {
+      "en": "I pulled the invitation check into a little helper so both screens use the same rule. Could someone double-check the last available seat? Off-by-one maths still makes me count on my fingers.",
+      "es": "He sacado la comprobación de invitaciones a una función para que las dos pantallas usen la misma regla. ¿Alguien puede revisar la última plaza disponible? Con estos límites todavía cuento con los dedos."
+    },
+    "lines": [
+      "export function canInvite(members: number, limit: number) {",
+      "  // Each invitation needs one available seat.",
+      "  const remaining = limit - members;",
+      "  return remaining > 0;",
+      "}"
+    ],
+    "bugLine": 4,
+    "flawedLine": "  return remaining >= 0;",
+    "bugKind": "logic"
+  },
+  {
+    "id": "marta",
+    "quote": {
+      "en": "Reproduced. Keeping the regression case.",
+      "es": "Reproducido. Conservo la prueba de regresión."
+    },
+    "title": {
+      "en": "Keep retry checks from becoming forever checks",
+      "es": "Evitar comprobaciones que se repiten para siempre"
+    },
+    "filename": "src/testing/retry.ts",
+    "branch": "bounded-retries",
+    "description": {
+      "en": "Moved the retry check into a shared helper. It should stop when a check passes or the attempt budget runs out. The test runner and I would both like to go home eventually.",
+      "es": "He pasado la comprobación de reintentos a una función común. Debe parar cuando pase la comprobación o se agoten los intentos. El ejecutor de pruebas y yo queremos irnos a casa en algún momento."
+    },
+    "lines": [
+      "export async function retryCheck(check: () => Promise<boolean>) {",
+      "  for (let attempt = 0; attempt < 3; attempt += 1) {",
+      "    const passed = await check();",
+      "    if (passed) return true;",
+      "  }",
+      "  return false;",
+      "}"
+    ],
+    "bugLine": 2,
+    "flawedLine": "  for (let attempt = 0; attempt < 3; attempt -= 1) {",
+    "bugKind": "logic"
+  },
+  {
+    "id": "evan",
+    "quote": {
+      "en": "One less surprise at three in the morning.",
+      "es": "Una sorpresa menos a las tres de la mañana."
+    },
+    "title": {
+      "en": "Give sleepy connections a deadline",
+      "es": "Poner plazo a las conexiones dormidas"
+    },
+    "filename": "src/ops/timeout.ts",
+    "branch": "connection-deadline",
+    "description": {
+      "en": "The client wants milliseconds; our settings speak seconds. This helper handles the conversion and caps the wait. Ideally, the next connection timeout happens before my coffee goes cold.",
+      "es": "El cliente espera milisegundos y los ajustes hablan en segundos. Esta función convierte las unidades y limita la espera. A ver si la próxima conexión caduca antes de que se enfríe mi café."
+    },
+    "lines": [
+      "export function timeoutMs(seconds: number) {",
+      "  // The client expects milliseconds, not seconds.",
+      "  const bounded = Math.max(1, Math.min(seconds, 30));",
+      "  return bounded * 1000;",
+      "}"
+    ],
+    "bugLine": 4,
+    "flawedLine": "  return bounded / 1000;",
+    "bugKind": "logic"
+  },
+  {
+    "id": "noel",
+    "quote": {
+      "en": "Who controls that input?",
+      "es": "¿Quién controla esa entrada?"
+    },
+    "title": {
+      "en": "Keep shared notes inside their own workspace",
+      "es": "Mantener cada nota en su espacio de trabajo"
+    },
+    "filename": "src/security/notes.ts",
+    "branch": "workspace-boundary",
+    "description": {
+      "en": "Shared notes need the same access check wherever they’re opened. I’ve moved that decision here: workspace membership and account status both matter. Small function, fairly important door.",
+      "es": "Las notas compartidas necesitan la misma comprobación de acceso desde cualquier pantalla. Centralizo la decisión aquí: importan tanto el espacio de trabajo como el estado de la cuenta. Una función pequeña para una puerta bastante importante."
+    },
+    "lines": [
+      "export function canReadNote(user: User, note: Note) {",
+      "  const sameWorkspace = user.workspaceId === note.workspaceId;",
+      "  const activeMember = user.status === \"active\";",
+      "  return sameWorkspace && activeMember;",
+      "}"
+    ],
+    "bugLine": 4,
+    "flawedLine": "  return sameWorkspace || activeMember;",
+    "bugKind": "security"
+  },
+  {
+    "id": "riya",
+    "quote": {
+      "en": "Let’s ship the safe part first.",
+      "es": "Publiquemos primero la parte segura."
+    },
+    "title": {
+      "en": "Open the beta door for invited teams",
+      "es": "Abrir la beta a los equipos invitados"
+    },
+    "filename": "src/product/beta.ts",
+    "branch": "beta-guest-list",
+    "description": {
+      "en": "The beta guest list is ready for the next cohort. This wires up the access decision for invited teams that have opted in. Let’s keep the launch small enough that we can still learn everyone’s name.",
+      "es": "La lista de la beta está lista para el siguiente grupo. Conecto la decisión de acceso para los equipos invitados que hayan dado su consentimiento. Que el lanzamiento sea lo bastante pequeño como para aprendernos los nombres."
+    },
+    "lines": [
+      "export function betaEnabled(team: Team, invitedIds: string[]) {",
+      "  // Beta access requires both an invitation and consent.",
+      "  const invited = invitedIds.includes(team.id);",
+      "  return invited && team.betaConsent;",
+      "}"
+    ],
+    "bugLine": 4,
+    "flawedLine": "  return invited || team.betaConsent;",
+    "bugKind": "logic"
+  }
+] as const;
+
+// Public names and roles have one source; this module alone owns study answers.
+export const studyTeam = studyScenarios.map(scenario => ({
+  ...scenario,
+  ...characters.find(character => character.id === scenario.id)!,
+}));
+
+export type StudyPerson = typeof studyTeam[number]['id'];
+export function studyReview(sequence: number, locale: StudyLocale): PullRequest {
+  const person = studyTeam[sequence % studyTeam.length];
+  // Alternating editions ensure no coworker's identity predicts correctness.
+  const flawed = (sequence % studyTeam.length + Math.floor(sequence / studyTeam.length)) % 2 === 1;
+  return { id: `afterhours-${1042 + sequence}`, templateId: `study-${person.id}-${flawed ? 'flawed' : 'clean'}`,
+    title: person.title[locale], author: person.name, authorId: person.id, description: person.description[locale], tags: [], importance: (['low', 'normal', 'high'] as const)[sequence % studyTeam.length % 3], estimatedReviewSeconds: 30,
+    files: [{ filename: person.filename, language: 'typescript', lines: person.lines.map((content, i) => ({ content: flawed && i + 1 === person.bugLine ? person.flawedLine : content, lineNumber: i + 1, isNew: true })) }],
+    bugPatterns: flawed ? [{ kind: person.bugKind as BugKind, severity: person.bugKind === 'security' ? 'critical' : 'major', lineNumbers: [person.bugLine] }] : [] };
+}
+
+export interface StudyQueue {
+  pending: number[];
+  active: number;
+  next: number;
+}
+
+export function initialStudyQueue(): StudyQueue {
+  return { pending: Array.from({ length: studyTeam.length }, (_, index) => index), active: 0, next: studyTeam.length };
+}
+
+/** Consume only the reviewed request; browsing the queue never discards work. */
+export function completeStudyReview(queue: StudyQueue): StudyQueue {
+  const pending = [...queue.pending.filter(id => id !== queue.active), queue.next];
+  return { pending, active: pending[0], next: queue.next + 1 };
+}

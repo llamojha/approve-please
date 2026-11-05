@@ -19,11 +19,11 @@ const normalizeStoredTheme = (value: string | null): ThemeMode => {
   if (value === 'githob-dark' || value === 'high-contrast' || value === 'dark') {
     return 'githob-dark';
   }
-  return 'githob-dark';
+  return 'githob-light';
 };
 
 export const UIPreferencesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeMode>('githob-dark');
+  const [theme, setTheme] = useState<ThemeMode>('githob-light');
 
   useEffect(() => {
     if (typeof window === 'undefined') {

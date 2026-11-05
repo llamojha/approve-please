@@ -1,7 +1,8 @@
 {
   "templateId": "pr-001-sanitize-readme-api-key",
   "title": "README: remove exposed API key",
-  "author": "Noor T.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Scrubs a mistakenly committed API key from the docs.",
   "tags": [
     "docs",

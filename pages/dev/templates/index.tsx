@@ -96,6 +96,7 @@ const GalleryPage = () => {
   const [catalog, setCatalog] = useState<TemplateCatalogEntry[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [filters, setFilters] = useState<GalleryFilters>(INITIAL_FILTERS);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     let active = true;
@@ -119,8 +120,12 @@ const GalleryPage = () => {
 
   const languages = useMemo(() => (catalog ? getCatalogLanguages(catalog) : []), [catalog]);
   const visibleTemplates = useMemo(
-    () => (catalog ? filterTemplateCatalog(catalog, filters) : []),
-    [catalog, filters]
+    () => (catalog ? filterTemplateCatalog(catalog, filters).filter(({ template }) => {
+      const query = search.trim().toLocaleLowerCase();
+      return !query || [template.templateId, template.title, template.author, template.description]
+        .some(value => value.toLocaleLowerCase().includes(query));
+    }) : []),
+    [catalog, filters, search]
   );
 
   const updateFilter = <Key extends keyof GalleryFilters>(
@@ -161,9 +166,7 @@ const GalleryPage = () => {
               Inspect manifest content, coverage gaps, and the exact game preview for every template.
             </p>
           </div>
-          <Link className={styles.backLink} href="/">
-            Back to home
-          </Link>
+          <div className={styles.headerActions}><Link className={styles.primaryLink} href="/dev/templates/new">Create scenario</Link><Link className={styles.backLink} href="/">Back to home</Link></div>
         </header>
 
         {loadError && (
@@ -181,6 +184,10 @@ const GalleryPage = () => {
         {catalog && !loadError && (
           <>
             <section className={styles.filters} aria-label="Template filters">
+              <label>
+                Search
+                <input value={search} onChange={event => setSearch(event.target.value)} placeholder="ID, title, author…" />
+              </label>
               <label>
                 Language
                 <select value={filters.language} onChange={handleLanguageChange}>
@@ -268,6 +275,7 @@ const GalleryPage = () => {
                     >
                       Preview {template.templateId}
                     </Link>
+                    <Link className={styles.duplicateLink} href={`/dev/templates/new?duplicate=${encodeURIComponent(template.templateId)}`}>Duplicate in workshop</Link>
                   </li>
                 ))}
               </ul>

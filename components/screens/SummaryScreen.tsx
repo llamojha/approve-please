@@ -18,7 +18,7 @@ const SummaryScreen = () => {
   return (
     <main className={styles.screenShell}>
       <section className={styles.screenCard}>
-        <p className="muted">{summaryText.endOfDay}</p>
+        <p className={styles.eyebrow}>{summaryText.endOfDay}</p>
         <h1>{summaryText.heading(currentDay)}</h1>
         <RunStatsCards counters={counters} meters={meters} />
         <div className={styles.screenActions}>
@@ -64,7 +64,7 @@ const SummaryScreen = () => {
                   {incident.lines.length > 0 && (
                     <ul className={styles.lineList}>
                       {incident.lines.map((line) => (
-                        <li key={`${incident.prId}-${line.lineNumber}`}>L{line.lineNumber}: <code>{line.content || '…'}</code></li>
+                        <li key={`${incident.prId}-${line.filename ?? 'file'}-${line.rowId ?? line.lineNumber}`}>{line.filename ? `${line.filename}:` : 'L'}{line.lineNumber}: <code>{line.content || '…'}</code></li>
                       ))}
                     </ul>
                   )}
@@ -95,8 +95,8 @@ const SummaryScreen = () => {
                     {record.selectedLines.length > 0 && (
                       <ul className={styles.lineList}>
                         {record.selectedLines.map((line) => (
-                          <li key={`${record.prId}-${line.lineNumber}`}>
-                            L{line.lineNumber}: <code>{line.content || '…'}</code>
+                          <li key={`${record.prId}-${line.filename ?? 'file'}-${line.rowId ?? line.lineNumber}`}>
+                            {line.filename ? `${line.filename}:` : 'L'}{line.lineNumber}: <code>{line.content || '…'}</code>
                           </li>
                         ))}
                       </ul>
