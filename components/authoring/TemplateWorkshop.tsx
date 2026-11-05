@@ -213,7 +213,10 @@ export default function TemplateWorkshop({ initialTemplate }: { initialTemplate?
         <label>Filename<input value={file.filename} onChange={event => updateFile(index, { filename: event.target.value })} /></label>
         <label>Language<input value={file.language} onChange={event => updateFile(index, { language: event.target.value })} /></label>
         <FileLinesEditor key={`${index}-${template.templateId}`} file={file} onChange={lines => updateFile(index, { lines })} />
-        {template.files.length > 1 && <button type="button" className={styles.dangerButton} onClick={() => update('files', template.files.filter((_, fileIndex) => fileIndex !== index))}>Remove file</button>}
+        {template.files.length > 1 && <button type="button" className={styles.dangerButton} onClick={() => {
+          update('files', template.files.filter((_, fileIndex) => fileIndex !== index));
+          setSelected([]);
+        }}>Remove file</button>}
       </fieldset>)}
 
       <div className={styles.annotationPanel}>
