@@ -9,7 +9,7 @@ export interface ReviewDeskLabels {
   queue: string; rules: string; open: string; reviewedBadge: string; priority: string;
   branch: string; prDescription: string; authorNote: (name: string) => string;
   codeLabel: string; select: string; additions: string; selected: string; optional: string;
-  clear: string; request: string; approve: string;
+  clear: string; request: string; approve: string; tags: string; language: string;
 }
 export interface ReviewDeskProps {
   pullRequest: PullRequest;
@@ -46,6 +46,7 @@ export default function ReviewDesk({ pullRequest: pr, repository, number, branch
       <span className={styles.priority} data-priority={pr.importance}>{t.priority}: {importanceLabels[pr.importance]}</span>
     </div></div><span className={styles.prGlyph} aria-hidden>↳</span></div>
     {branch && <p className={styles.description}>{t.branch}: {branch}</p>}
+    {pr.tags.length > 0 && <div className={styles.tags} aria-label={t.tags}>{pr.tags.map(tag => <span key={tag}>{tag}</span>)}</div>}
     {pr.description && <section className={styles.authorNote} aria-label={t.prDescription}><div><h2>{t.prDescription}</h2><span>{t.authorNote(pr.author)}</span></div><p>{pr.description}</p></section>}
     {children}
     <CodeDiff files={pr.files} selected={selected} onToggle={onToggle} disabled={locked} labels={t} />

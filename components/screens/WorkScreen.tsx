@@ -11,13 +11,14 @@ import { useAudioCue } from '../../hooks/useAudioCue';
 import { usePRArrivalNotice } from '../../hooks/usePRArrivalNotice';
 import { useTranslations } from '../../hooks/useTranslations';
 import { useLocale } from '../../context/LocaleContext';
+import { useUIPreferences } from '../../context/UIPreferencesContext';
 import { getCharacter } from '../../data/characters';
-import { minutesToClock } from '../../utils/helpers';
+import { calculateQueueChevronCount, minutesToClock } from '../../utils/helpers';
 import type { LineReference, MeterSet, PullRequest } from '../../types';
 import type { DecisionReceipt, ReviewVerdict } from '../../utils/decision';
 import styles from '../../styles/LiveDesk.module.css';
 
-type Panel = 'queue' | 'rules' | 'audio' | null;
+type Panel = 'queue' | 'rules' | 'audio' | 'stats' | 'settings' | null;
 interface OutgoingReview {
   pr: PullRequest;
   verdict: ReviewVerdict;
@@ -30,12 +31,13 @@ const sameReference = (left: LineReference, right: LineReference) => left.filena
 
 const WorkScreen = () => {
   const {
-    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote, simulationPaused },
+    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote, simulationPaused, difficulty },
     actions: { selectPR, approveCurrentPR, requestChanges, setSimulationPaused }
   } = useGameState();
   const translations = useTranslations();
   const t = translations.designStudy;
   const { locale, setLocale } = useLocale();
+  const { theme, setTheme } = useUIPreferences();
   useGameClock();
   usePRSpawner();
   const audio = useAudioCue(meters);
@@ -50,7 +52,7 @@ const WorkScreen = () => {
 
   useEffect(() => setSelected([]), [currentPR?.id]);
   useEffect(() => {
-    setSimulationPaused(panel === 'rules' || panel === 'audio');
+    setSimulationPaused(panel !== null && panel !== 'queue');
     return () => setSimulationPaused(false);
   }, [panel, setSimulationPaused]);
   useEffect(() => {
@@ -124,19 +126,34 @@ const WorkScreen = () => {
   })}</div>;
   const clockProgress = Math.min(100, (currentTime / 480) * 100);
   const meterKeys = Object.keys(meters) as (keyof MeterSet)[];
+  const queuePressure = difficulty === 'learning' ? 0 : calculateQueueChevronCount(queue);
   const mantra = currentMantra?.[locale] ?? currentMantra?.en ?? translations.shared.operationsFallback;
   const quote = dayQuote.text[locale] ?? dayQuote.text.en;
   const branch = displayPR ? `feat/${displayPR.templateId.replace(/^pr-\d+-/, '')} → main` : '';
+  const statsText = translations.work.stats;
+  const stats = [
+    { key: 'approved', value: counters.prsApproved },
+    { key: 'rejected', value: counters.prsRejected },
+    { key: 'bugsToProd', value: counters.bugsToProd },
+    { key: 'cleanApprovals', value: counters.cleanApprovals },
+    { key: 'truePositives', value: counters.truePositives },
+    { key: 'falsePositives', value: counters.falsePositives }
+  ] as const;
+  const panelTitle = panel === 'queue' ? t.queue
+    : panel === 'audio' ? translations.audio.title
+      : panel === 'stats' ? t.stats
+        : panel === 'settings' ? t.settingsTitle
+          : t.handbookTitle;
 
-  return <div className={styles.shell}>
-    <header className={styles.topbar}><Link className={styles.brand} href="/"><span>↳</span>approve<strong>please</strong><b>.</b></Link><div className={styles.topActions}><button type="button" aria-label={translations.audio.button} onClick={() => setPanel('audio')}>♫ <span>{translations.audio.button}</span></button><button type="button" aria-label={t.rules} onClick={() => setPanel('rules')}>⌘ <span>{t.rules}</span></button><button type="button" onClick={() => setLocale(locale === 'en' ? 'es' : 'en')}>{locale.toUpperCase()} ↔</button></div></header>
-    <section className={styles.shiftbar} aria-label={t.clock}><div className={styles.clock}><span>{t.shift(currentDay)}</span><strong>{minutesToClock(currentTime)} <small>/ 17:00</small></strong><i><b style={{ width: `${clockProgress}%` }} /></i></div><div className={styles.meters}>{meterKeys.map(key => <div key={key}><span>{t[key]} <strong>{Math.round(meters[key])}<small>/100</small></strong></span><i><b style={{ width: `${meters[key]}%` }} /></i></div>)}</div><div className={styles.shiftNote}><strong>{mantra}</strong><span>{simulationPaused ? t.paused : `${counters.prsApproved + counters.prsRejected} ${t.reviewCount}`}</span></div></section>
+  return <div className={styles.shell} data-dark={theme === 'githob-dark'}>
+    <header className={styles.topbar}><Link className={styles.brand} href="/"><span>↳</span>approve<strong>please</strong><b>.</b></Link><div className={styles.topActions}><button type="button" aria-label={t.stats} onClick={() => setPanel('stats')}>▦ <span>{t.stats}</span></button><button type="button" aria-label={translations.audio.button} onClick={() => setPanel('audio')}>♫ <span>{translations.audio.button}</span></button><button type="button" aria-label={t.rules} onClick={() => setPanel('rules')}>⌘ <span>{t.rules}</span></button><button type="button" aria-label={t.settings} onClick={() => setPanel('settings')}>◐ <span>{t.settings}</span></button><button type="button" onClick={() => setLocale(locale === 'en' ? 'es' : 'en')}>{locale.toUpperCase()} ↔</button></div></header>
+    <section className={styles.shiftbar} aria-label={t.clock}><div className={styles.clock}><span>{t.shift(currentDay)}</span><strong>{minutesToClock(currentTime)} <small>/ 17:00</small></strong><i><b style={{ width: `${clockProgress}%` }} /></i></div><div className={styles.meters}>{meterKeys.map(key => <div key={key}><span>{t[key]} <strong>{Math.round(meters[key])}<small>/100</small></strong></span><i><b style={{ width: `${meters[key]}%` }} /></i>{queuePressure > 0 && key !== 'stability' && <small className={styles.queuePressure} title={t.queuePressureHint}>↓ {t.queuePressure(queuePressure)}</small>}</div>)}</div><div className={styles.shiftNote}><strong>{mantra}</strong><span>{simulationPaused ? t.paused : `${counters.prsApproved + counters.prsRejected} ${t.reviewCount}`}</span></div></section>
     <div className={styles.workspace}><aside className={styles.sidebar}><div><h1>{t.queue}</h1><p>{translations.shared.queueAwaiting(queue.length)}</p></div>{queuePanel}<section className={styles.handbook}><span>⌘</span><h2>{t.rulesIntro}</h2><p>{t.liveRules}</p><button type="button" onClick={() => setPanel('rules')}>{t.rules} ↗</button></section></aside>
       {displayPR ? <ReviewDesk pullRequest={displayPR} repository={t.repository} number={reviewNumber(displayPR.templateId)} branch={branch} authorRole={displayCharacter?.role[locale]} expression={expression} selected={displaySelected} onToggle={toggleLine} onClear={() => setSelected([])} onVerdict={decide} disabled={simulationPaused} swipe={outgoing?.verdict ?? null} queueCount={queue.length} onOpenQueue={() => setPanel('queue')} onOpenRules={() => setPanel('rules')} labels={t} importanceLabels={translations.shared.importance} status={status} />
         : <main className={styles.emptyDesk}><span>↳</span><h1>{translations.work.queue.empty}</h1><p>{translations.work.queue.hint}</p></main>}
     </div>
     <PRArrivalNotice notice={arrivalNotice} />
-    <dialog ref={dialog} className={styles.dialog} aria-labelledby="live-panel-title" onCancel={event => { event.preventDefault(); setPanel(null); }} onClick={event => { if (event.target === dialog.current) setPanel(null); }}><div className={styles.dialogTop}><h2 id="live-panel-title">{panel === 'queue' ? t.queue : panel === 'audio' ? translations.audio.title : t.handbookTitle}</h2><button type="button" onClick={() => setPanel(null)} aria-label={t.close}>×</button></div>{panel === 'queue' ? queuePanel : panel === 'audio' ? <AudioControls audio={audio} /> : <div className={styles.rules}><span>⌘</span><h3>{t.rulesIntro}</h3><p>{t.rulesBody}</p><p>{t.emptySelection}</p><blockquote>“{quote}”<footer>— {dayQuote.speaker}</footer></blockquote><small>{t.rulesNote}</small></div>}</dialog>
+    <dialog ref={dialog} className={styles.dialog} aria-labelledby="live-panel-title" onCancel={event => { event.preventDefault(); setPanel(null); }} onClick={event => { if (event.target === dialog.current) setPanel(null); }}><div className={styles.dialogTop}><h2 id="live-panel-title">{panelTitle}</h2><button type="button" onClick={() => setPanel(null)} aria-label={t.close}>×</button></div>{panel === 'queue' ? queuePanel : panel === 'audio' ? <AudioControls audio={audio} /> : panel === 'stats' ? <div className={styles.statsGrid}>{stats.map(item => <article key={item.key}><span>{statsText.labels[item.key]}</span><strong>{item.value}</strong><small>{statsText.tooltips[item.key]}</small></article>)}</div> : panel === 'settings' ? <div className={styles.settings}><p>{t.settingsIntro}</p><fieldset><legend>{t.currentTheme}</legend><button type="button" aria-pressed={theme === 'githob-light'} onClick={() => setTheme('githob-light')}><span>☀</span><strong>{t.lightTheme}</strong></button><button type="button" aria-pressed={theme === 'githob-dark'} onClick={() => setTheme('githob-dark')}><span>◐</span><strong>{t.darkTheme}</strong></button></fieldset></div> : <div className={styles.rules}><span>⌘</span><h3>{t.rulesIntro}</h3><p>{t.rulesBody}</p><p>{t.emptySelection}</p><blockquote>“{quote}”<footer>— {dayQuote.speaker}</footer></blockquote><small>{t.rulesNote}</small></div>}</dialog>
   </div>;
 };
 

@@ -238,7 +238,7 @@ export default function TemplateWorkshop({ initialTemplate }: { initialTemplate?
       <p className={styles.status} role="status">{status}</p>
       {diagnostics.length > 0 ? <ul className={styles.diagnostics} role="alert">{diagnostics.map((error, index) => <li key={`${error.path}-${index}`}><strong>{error.path}</strong>: {error.message}</li>)}</ul> : preview && <>
         <article className={styles.previewMeta}><span>{template.importance} priority</span><h3>{preview.title}</h3><p>{preview.author}</p><p>{preview.description}</p></article>
-        <CodeDiff files={preview.files} selected={selected} onToggle={toggleSelected} labels={{ codeLabel: 'Code changes', select: 'Select row', additions: 'additions' }} />
+        <CodeDiff files={preview.files} selected={selected} onToggle={toggleSelected} labels={{ codeLabel: 'Code changes', select: 'Select row', additions: 'additions', language: 'Language' }} />
         {outcomes && <div className={styles.outcomeGrid}><div><strong>Approve</strong><span>{outcomes.approve.outcome}</span><small>Stability {outcomes.approve.appliedMeterDelta.stability >= 0 ? '+' : ''}{outcomes.approve.appliedMeterDelta.stability}</small></div><div><strong>Request changes</strong><span>{outcomes.reject.outcome} · {outcomes.reject.precision}</span><small>Selected rows: {selected.length}</small></div></div>}
         <p className={styles.directoryNote}>Export to <code>data/prTemplates/&lt;language&gt;/{template.templateId}/template.json</code>, then run the repository template generator.</p>
       </>}
