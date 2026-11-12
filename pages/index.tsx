@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGameState } from '../context/GameContext';
 import { useLocale } from '../context/LocaleContext';
+import { useUIPreferences } from '../context/UIPreferencesContext';
 import { useTranslations } from '../hooks/useTranslations';
 import { LOCALE_OPTIONS } from '../constants/i18n';
 import { characters } from '../data/characters';
@@ -19,6 +20,7 @@ const riya = characters.find(person => person.id === 'riya')!;
 export default function IndexPage() {
   const router = useRouter();
   const { locale, setLocale } = useLocale();
+  const { theme, toggleTheme } = useUIPreferences();
   const translations = useTranslations();
   const landing = translations.landing;
   const t = landing.refresh;
@@ -29,6 +31,7 @@ export default function IndexPage() {
   const guide = useRef<HTMLDialogElement>(null);
   const slides = landing.tutorialSlides;
   const slide = slides[slideIndex];
+  const isDark = theme === 'githob-dark';
 
   useEffect(() => {
     if (!tutorialOpen) return;
@@ -51,13 +54,14 @@ export default function IndexPage() {
     } else setLanguagePreference([...languagePreference, value]);
   };
 
-  return <div className={styles.landing}>
+  return <div className={styles.landing} data-dark={isDark}>
     <Head><title>{`Approve Please · ${t.headline}`}</title><meta name="description" content={t.intro} /></Head>
     <div className={styles.shell}>
       <header className={styles.header}>
         <Link href="/" className={styles.brand} aria-label={t.home}><span aria-hidden="true">↳</span>approve<b>please</b><i>.</i></Link>
         <span className={styles.studio}>{t.studio}</span>
         <nav aria-label={t.home}><button onClick={openGuide}>{t.howToPlay}</button><button onClick={() => setLeaderboardOpen(true)}>{t.leaderboard}</button></nav>
+        <button type="button" className={styles.themeToggle} onClick={toggleTheme} aria-label={translations.designStudy.theme} aria-pressed={isDark}><span aria-hidden="true">{isDark ? '☀' : '◐'}</span><span>{isDark ? translations.designStudy.changeThemeLight : translations.designStudy.changeThemeDark}</span></button>
         <div className={styles.localeToggle} role="group" aria-label={translations.localeToggleLabel}>{LOCALE_OPTIONS.map(({ value, label }) => <button key={value} onClick={() => setLocale(value)} aria-pressed={locale === value}>{label}</button>)}</div>
       </header>
       <main>

@@ -347,7 +347,7 @@
   font-size: 0.85em;
 }
 
-/* The campaign boundaries share the light Afterhours system used by the landing and desk. */
+/* Campaign boundaries follow the saved Afterhours light/dark preference. */
 .screenShell {
   padding: clamp(1rem, 4vw, 3rem);
   background:
@@ -497,6 +497,98 @@
 
 .lineList code {
   background: #eee8f3;
+}
+
+:global(:root:not([data-theme='githob-light'])) .screenShell {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(185, 167, 255, 0.14), transparent 28rem),
+    #17141d;
+  color: #f2edf7;
+}
+
+:global(:root:not([data-theme='githob-light'])) .screenCard {
+  background: rgba(34, 30, 41, 0.98);
+  border-color: #443b4e;
+  box-shadow: 0 24px 70px rgba(5, 3, 8, 0.5);
+}
+
+:global(:root:not([data-theme='githob-light'])) .screenCard h1,
+:global(:root:not([data-theme='githob-light'])) .screenCard h2,
+:global(:root:not([data-theme='githob-light'])) .screenCard h3 {
+  color: #f2edf7;
+}
+
+:global(:root:not([data-theme='githob-light'])) .screenCard :global(.muted),
+:global(:root:not([data-theme='githob-light'])) .screenLead,
+:global(:root:not([data-theme='githob-light'])) .summaryGrid small,
+:global(:root:not([data-theme='githob-light'])) .incidentSubline,
+:global(:root:not([data-theme='githob-light'])) .incidentNote,
+:global(:root:not([data-theme='githob-light'])) .leaderboardStatus {
+  color: #bcb3c6;
+}
+
+:global(:root:not([data-theme='githob-light'])) .eyebrow,
+:global(:root:not([data-theme='githob-light'])) .briefingQuote footer {
+  color: #b9a7ff;
+}
+
+:global(:root:not([data-theme='githob-light'])) .briefingQuote {
+  border-left-color: #b9a7ff;
+  background: #302842;
+  color: #d7d0df;
+}
+
+:global(:root:not([data-theme='githob-light'])) .screenButtonSecondary {
+  border-color: #514565;
+  background: #302842;
+  color: #e0d6ff;
+}
+
+:global(:root:not([data-theme='githob-light'])) .screenButtonSecondary:hover,
+:global(:root:not([data-theme='githob-light'])) .screenButtonSecondary:focus-visible {
+  background: #3a304d;
+}
+
+:global(:root:not([data-theme='githob-light'])) .summaryCard,
+:global(:root:not([data-theme='githob-light'])) .summaryCardApproved,
+:global(:root:not([data-theme='githob-light'])) .summaryCardRejected,
+:global(:root:not([data-theme='githob-light'])) .incidentItem {
+  border-color: #443b4e;
+  background: #29242f;
+  color: #f2edf7;
+}
+
+:global(:root:not([data-theme='githob-light'])) .summaryCardBugs {
+  border-color: #8d5063;
+  background: #452734;
+  color: #ffccd5;
+}
+
+:global(:root:not([data-theme='githob-light'])) .summaryCardTrue {
+  border-color: #47745e;
+  background: #20362c;
+  color: #bde8ce;
+}
+
+:global(:root:not([data-theme='githob-light'])) .summaryCardFalse {
+  border-color: #806c3e;
+  background: #403620;
+  color: #f5d486;
+}
+
+:global(:root:not([data-theme='githob-light'])) .leaderboardForm {
+  border-color: #514565;
+  background: #302842;
+}
+
+:global(:root:not([data-theme='githob-light'])) .leaderboardInput {
+  border-color: #62566f;
+  background: #17141d;
+  color: #f2edf7;
+}
+
+:global(:root:not([data-theme='githob-light'])) .lineList code {
+  background: #302842;
 }
 
 @media (max-width: 640px) {

@@ -12,18 +12,18 @@ const UIPreferencesContext = createContext<UIPreferencesContextValue | undefined
 
 const STORAGE_KEY = 'approve-please.theme';
 
-const normalizeStoredTheme = (value: string | null): ThemeMode => {
+export const normalizeStoredTheme = (value: string | null): ThemeMode => {
   if (value === 'githob-light' || value === 'light' || value === 'default') {
     return 'githob-light';
   }
   if (value === 'githob-dark' || value === 'high-contrast' || value === 'dark') {
     return 'githob-dark';
   }
-  return 'githob-light';
+  return 'githob-dark';
 };
 
 export const UIPreferencesProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeMode>('githob-light');
+  const [theme, setTheme] = useState<ThemeMode>('githob-dark');
 
   useEffect(() => {
     if (typeof window === 'undefined') {
