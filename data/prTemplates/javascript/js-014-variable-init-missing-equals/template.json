@@ -34,7 +34,21 @@
         21
       ],
       "severity": "major",
-      "description": "Variable declaration is missing an equals sign, causing a syntax error."
+      "description": "Variable declaration is missing an equals sign, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la declaración de la variable le falta el signo igual, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Inicialización de variable sin signo igual",
+      "description": "Añade el análisis de la configuración de reintentos al iniciar la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

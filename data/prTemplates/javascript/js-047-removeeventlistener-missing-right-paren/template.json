@@ -29,7 +29,21 @@
         38
       ],
       "severity": "major",
-      "description": "removeEventListener call is missing a closing parenthesis, causing syntax error."
+      "description": "removeEventListener call is missing a closing parenthesis, causing syntax error.",
+      "localizedDescription": {
+        "es": "A la llamada a removeEventListener le falta el paréntesis de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis derecho ausente en removeEventListener",
+      "description": "Añade una limpieza para los listeners de clic obsoletos.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

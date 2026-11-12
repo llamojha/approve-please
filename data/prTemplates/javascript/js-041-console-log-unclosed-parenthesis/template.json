@@ -29,7 +29,21 @@
         3
       ],
       "severity": "major",
-      "description": "console.log call is missing a closing parenthesis, causing syntax error."
+      "description": "console.log call is missing a closing parenthesis, causing syntax error.",
+      "localizedDescription": {
+        "es": "A la llamada a console.log le falta el paréntesis de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis de cierre ausente en console.log",
+      "description": "Añade registros de inicio para los workers de la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

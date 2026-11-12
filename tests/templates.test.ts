@@ -28,6 +28,17 @@ const expectInstantiatedPullRequest = (pr: PullRequest): void => {
 };
 
 describe('generated PR template instantiation', () => {
+  it('provides Spanish metadata and bug explanations across the catalog', () => {
+    for (const [, templates] of templatePacks) {
+      for (const template of templates) {
+        expect(template.localized?.es, template.templateId).toBeDefined();
+        for (const bug of template.bugPatterns) {
+          if (bug.description) expect(bug.localizedDescription?.es, template.templateId).toBeTruthy();
+        }
+      }
+    }
+  });
+
   it('assigns one production scenario to every established coworker', () => {
     const assigned = new Set(templatePacks.flatMap(([, templates]) => templates.map(template => template.authorId).filter(Boolean)));
     expect(assigned).toEqual(new Set(characters.map(character => character.id)));

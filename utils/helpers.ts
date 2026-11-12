@@ -41,7 +41,7 @@ export const calculateQueueChevronCount = (queue: PullRequest[]): number => {
   if (pressure <= 0) {
     return 0;
   }
-  return Math.min(QUEUE_PRESSURE_CHEVRON_CAP, Math.round(pressure));
+  return Math.min(QUEUE_PRESSURE_CHEVRON_CAP, Math.ceil(pressure));
 };
 
 export const meterColorFromValue = (value: number): string => {

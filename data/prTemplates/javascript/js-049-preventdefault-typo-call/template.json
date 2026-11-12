@@ -34,7 +34,21 @@
         23
       ],
       "severity": "major",
-      "description": "Misspells preventDefault as preventDefualt, causing TypeError at runtime."
+      "description": "Misspells preventDefault as preventDefualt, causing TypeError at runtime.",
+      "localizedDescription": {
+        "es": "Escribe preventDefault como preventDefualt, lo que provoca un TypeError durante la ejecución."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Errata en la llamada a preventDefault",
+      "description": "Añade una protección contra el envío del formulario en el manejador de clic.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

@@ -36,7 +36,7 @@ Content house rules:
 - Use a globally unique `templateId` that exactly matches its folder name.
 - Use two-space indentation everywhere, including code inside Markdown fences.
 - Annotate bugs only on changed lines where `isNew` is `true`.
-- Spanish `localized.es` metadata and localized bug descriptions are encouraged but optional.
+- Include Spanish `localized.es` metadata and a Spanish `localizedDescription.es` for every authored bug description. The JSON schema keeps these fields optional for backward compatibility, but catalog tests require them for committed templates.
 
 ## Pull request expectations
 

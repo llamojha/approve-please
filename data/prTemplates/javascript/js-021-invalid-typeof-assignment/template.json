@@ -34,7 +34,21 @@
         41
       ],
       "severity": "major",
-      "description": "Attempts to assign to typeof, causing a syntax error."
+      "description": "Attempts to assign to typeof, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Intenta asignar un valor a typeof, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Asignación inválida a typeof",
+      "description": "Añade una rama de normalización de tipos antes de encolar.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

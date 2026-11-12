@@ -34,7 +34,21 @@
         16
       ],
       "severity": "major",
-      "description": "Arrow function is missing =>, causing a syntax error."
+      "description": "Arrow function is missing =>, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la función flecha le falta =>, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Flecha ausente en una función flecha",
+      "description": "Añade una función auxiliar para sumar los contadores pendientes.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

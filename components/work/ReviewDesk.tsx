@@ -8,7 +8,7 @@ import styles from '../../styles/ReviewDesk.module.css';
 export interface ReviewDeskLabels {
   queue: string; rules: string; open: string; reviewedBadge: string; priority: string;
   branch: string; prDescription: string; authorNote: (name: string) => string;
-  codeLabel: string; select: string; additions: string; selected: string; optional: string;
+  codeLabel: string; select: string; additions: string; selected: (count: number) => string; optional: string;
   clear: string; request: string; approve: string; tags: string; language: string;
 }
 export interface ReviewDeskProps {
@@ -50,7 +50,7 @@ export default function ReviewDesk({ pullRequest: pr, repository, number, branch
     {pr.description && <section className={styles.authorNote} aria-label={t.prDescription}><div><h2>{t.prDescription}</h2><span>{t.authorNote(pr.author)}</span></div><p>{pr.description}</p></section>}
     {children}
     <CodeDiff files={pr.files} selected={selected} onToggle={onToggle} disabled={locked} labels={t} />
-    <div className={styles.decisionBar}><div><strong>{selected.length ? `${selected.length} ${t.selected}` : t.optional}</strong>{selected.length > 0 && !locked && <button onClick={onClear}>{t.clear}</button>}</div><div className={styles.verdicts}><button data-review-action="request" className={styles.request} disabled={locked} onClick={() => onVerdict('request-changes')}>↶ {t.request}</button><button data-review-action="approve" className={styles.primary} disabled={locked} onClick={() => onVerdict('approve')}>✓ {t.approve}</button></div></div>
+    <div className={styles.decisionBar}><div><strong>{selected.length ? `${selected.length} ${t.selected(selected.length)}` : t.optional}</strong>{selected.length > 0 && !locked && <button onClick={onClear}>{t.clear}</button>}</div><div className={styles.verdicts}><button data-review-action="request" className={styles.request} disabled={locked} onClick={() => onVerdict('request-changes')}>↶ {t.request}</button><button data-review-action="approve" className={styles.primary} disabled={locked} onClick={() => onVerdict('approve')}>✓ {t.approve}</button></div></div>
     <span className={styles.screenReaderStatus} role="status">{status ?? ''}</span>
   </main>;
 }

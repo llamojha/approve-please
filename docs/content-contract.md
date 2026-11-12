@@ -4,7 +4,7 @@ Status: additive foundation. All 390 existing templates remain in their original
 
 ## Identity and localization
 
-Keep required author text for guests. Optional authorId refers to a future character registry and remains stable across EN/ES. Unknown IDs must use the guest fallback when portraits are integrated. Optional reactions are keyed by clean-approval, buggy-approval, correct-rejection and false-positive, each containing optional en/es strings. Instantiation preserves and copies this metadata. Display consumers will use selected locale, then English, then omit absent text.
+Keep required author text for guests. Optional authorId refers to the recurring character registry and remains stable across EN/ES. The supported IDs are `lucia`, `diego`, `ines`, `tessa`, `ben`, `jonah`, `marta`, `evan`, `noel` and `riya`; unknown IDs use the guest fallback. Optional reactions are keyed by clean-approval, buggy-approval, correct-rejection and false-positive, each containing optional en/es strings. Instantiation preserves and copies this metadata. The live desk uses the selected locale, then English, then omits absent text.
 
 Each row can supply rowId and kind (addition or context). Legacy isNew=true means addition; false means context, never deletion. Omitted row IDs derive deterministically as line-N. IDs and numeric line numbers must be unique within a file; filenames unique within a PR. Explicit kind must agree with isNew. Removed rows are unsupported and rejected. No file is written using an authored filename.
 
@@ -15,7 +15,7 @@ A bug keeps lineNumbers for existing consumers and may also supply lineRefs, eac
 ```json
 {
   "author": "Lucía Navarro",
-  "authorId": "lucia-navarro",
+  "authorId": "lucia",
   "reactions": {
     "correct-rejection": {"en": "Good catch. Adding the keyboard case.", "es": "Bien visto. Añado el caso con teclado."}
   },
@@ -38,5 +38,5 @@ Generator report-only mode remains diagnostic and may exit successfully with err
 ## TODO
 
 - [ ] Migrate live and preview selection to file/row identities together, then lift the catalog ambiguity guard.
-- [ ] Build player/author preview and draft export against these shared contracts.
-- [ ] Add character registry and locale fallback UI in the vertical slice.
+- [x] Build player/author preview and draft export against these shared contracts.
+- [x] Add character registry and locale fallback UI in the vertical slice.

@@ -34,7 +34,21 @@
         19
       ],
       "severity": "major",
-      "description": "DOM query call is missing a closing parenthesis, causing syntax error."
+      "description": "DOM query call is missing a closing parenthesis, causing syntax error.",
+      "localizedDescription": {
+        "es": "A la consulta del DOM le falta el paréntesis de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis derecho ausente en getElementById",
+      "description": "Añade la búsqueda del formulario para enviar los ajustes.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

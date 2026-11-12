@@ -6,7 +6,7 @@ This change targets `codex/ui-refresh-preview`. It does not merge to `main` or d
 
 - Independent code, browser and accessibility review completed with no actionable findings remaining.
 - Template generation validates all 390 templates; the contributor workshop export passes the same validator.
-- The full test suite passes 549 tests across 18 files, followed by typecheck, lint and production build gates.
+- The full test suite passes 555 tests across 19 files, followed by typecheck, lint and production build gates.
 - Production-route probes keep `/dev/design`, `/dev/templates`, `/dev/templates/new` and template preview routes private with HTTP 404 responses.
 
 ## Rollout

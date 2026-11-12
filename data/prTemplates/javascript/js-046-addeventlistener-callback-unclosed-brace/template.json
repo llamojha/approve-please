@@ -29,7 +29,21 @@
         27
       ],
       "severity": "major",
-      "description": "Inline callback body is unclosed, causing syntax error."
+      "description": "Inline callback body is unclosed, causing syntax error.",
+      "localizedDescription": {
+        "es": "El cuerpo del callback en línea no está cerrado, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en el callback de addEventListener",
+      "description": "Añade un callback en línea para la acción de guardar.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

@@ -34,7 +34,21 @@
         16
       ],
       "severity": "major",
-      "description": "Uses misspelled event.taret and accesses value on undefined, causing TypeError."
+      "description": "Uses misspelled event.taret and accesses value on undefined, causing TypeError.",
+      "localizedDescription": {
+        "es": "Usa event.taret, que está mal escrito, y accede a value sobre undefined, lo que provoca un TypeError."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Errata en target dentro de la cadena de propiedades del evento",
+      "description": "Añade la mutación manual de eventos para reproducir la depuración.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }
