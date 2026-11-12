@@ -65,4 +65,19 @@ describe('live desk context restoration', () => {
     expect(TRANSLATIONS.en.shared.meters.satisfaction).toBe('Team trust');
     expect(TRANSLATIONS.es.shared.meters.satisfaction).toBe('Confianza del equipo');
   });
+
+  it('makes shift start, practice mode and saved-run reset explicit in both locales', () => {
+    const english = TRANSLATIONS.en.landing.refresh;
+    const spanish = TRANSLATIONS.es.landing.refresh;
+    expect(english.takeSeat).toBe('Start your shift');
+    expect(english.learningTitle).toBe('Practice mode');
+    expect(english.learningDescription).toContain('waiting PRs do not drain');
+    expect(english.resume(2)).toContain('Day 2');
+    expect(english.newRun).toContain('Day 1');
+    expect(english.newRunHint).toContain('Clears this saved shift');
+    expect(spanish.takeSeat).toBe('Empezar mi turno');
+    expect(spanish.learningTitle).toBe('Modo de práctica');
+    expect(spanish.resume(2)).toContain('Día 2');
+    expect(spanish.newRun).toContain('día 1');
+  });
 });

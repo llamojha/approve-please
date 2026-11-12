@@ -142,7 +142,7 @@ export const TRANSLATIONS = {
             "Read the description, branch, tags and changed code before deciding.",
             "Tag suspect lines for a precision bonus. Tags are optional and do not replace your verdict.",
           ],
-          imageAlt: "Diff view with selected line",
+          imageAlt: "Pull request description and code diff",
         },
         {
           title: "Approve vs Request Changes",
@@ -166,7 +166,7 @@ export const TRANSLATIONS = {
             "New PRs appear in the queue with a visible notice; optional notification sounds can call them out.",
             "Background music is optional and increases its tempo as your weakest meter falls.",
           ],
-          imageAlt: "Sound controls and a new pull request notice",
+          imageAlt: "Sound controls for music and pull request notifications",
         },
         {
           title: "Review the Day",
@@ -424,7 +424,7 @@ export const TRANSLATIONS = {
             "Lee la descripción, la rama, las etiquetas y el código modificado antes de decidir.",
             "Marca líneas sospechosas para obtener una bonificación de precisión. Las marcas son opcionales y no sustituyen tu decisión.",
           ],
-          imageAlt: "Vista de diff con línea seleccionada",
+          imageAlt: "Descripción de la PR y diff de código",
         },
         {
           title: "Aprobar o solicitar cambios",
@@ -449,7 +449,7 @@ export const TRANSLATIONS = {
             "Las nuevas PR aparecen con un aviso visible; puedes activar sonidos opcionales para recibir la notificación.",
             "La música de fondo es opcional y acelera el ritmo cuando baja el medidor más débil.",
           ],
-          imageAlt: "Controles de sonido y aviso de una nueva pull request",
+          imageAlt: "Controles de música y notificaciones de nuevas pull requests",
         },
         {
           title: "Revisa el día",
