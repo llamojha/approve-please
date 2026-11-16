@@ -12,7 +12,7 @@ const UIPreferencesContext = createContext<UIPreferencesContextValue | undefined
 
 const STORAGE_KEY = 'approve-please.theme';
 
-const normalizeStoredTheme = (value: string | null): ThemeMode => {
+export const normalizeStoredTheme = (value: string | null): ThemeMode => {
   if (value === 'githob-light' || value === 'light' || value === 'default') {
     return 'githob-light';
   }

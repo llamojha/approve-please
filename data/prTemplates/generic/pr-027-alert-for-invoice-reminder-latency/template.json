@@ -1,7 +1,8 @@
 {
   "templateId": "pr-027-alert-for-invoice-reminder-latency",
   "title": "Alert for Invoice Reminder latency",
-  "author": "Priya S.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "cleanup",

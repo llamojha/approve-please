@@ -39,7 +39,21 @@
         11
       ],
       "severity": "major",
-      "description": "Uses truee instead of true, causing a ReferenceError at runtime."
+      "description": "Uses truee instead of true, causing a ReferenceError at runtime.",
+      "localizedDescription": {
+        "es": "Usa truee en lugar de true, lo que provoca un ReferenceError durante la ejecución."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Errata truee en un literal booleano",
+      "description": "Añade un feature flag estático para el modo de emergencia.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

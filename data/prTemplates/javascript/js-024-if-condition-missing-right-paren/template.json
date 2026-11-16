@@ -39,7 +39,21 @@
         32
       ],
       "severity": "major",
-      "description": "If condition is missing a closing parenthesis, causing a syntax error."
+      "description": "If condition is missing a closing parenthesis, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la condición if le falta el paréntesis de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis derecho ausente en una condición if",
+      "description": "Añade una comprobación del estado listo al iniciar el worker.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

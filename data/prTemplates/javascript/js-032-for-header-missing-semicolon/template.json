@@ -39,7 +39,21 @@
         13
       ],
       "severity": "major",
-      "description": "For loop header is missing a semicolon, causing a syntax error."
+      "description": "For loop header is missing a semicolon, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la cabecera del bucle for le falta un punto y coma, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Punto y coma ausente en la cabecera de un bucle for",
+      "description": "Añade un recorrido de los elementos de la cola para el calentamiento.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

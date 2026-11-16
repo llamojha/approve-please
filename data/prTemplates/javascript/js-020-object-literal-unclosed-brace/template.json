@@ -34,7 +34,21 @@
         27
       ],
       "severity": "major",
-      "description": "Object literal is missing a closing brace, causing a syntax error."
+      "description": "Object literal is missing a closing brace, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Al literal de objeto le falta una llave de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en un literal de objeto",
+      "description": "Añade valores predeterminados del analizador para las cargas de eventos entrantes.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

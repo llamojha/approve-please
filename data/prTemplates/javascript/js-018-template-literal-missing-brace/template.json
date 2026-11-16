@@ -34,7 +34,21 @@
         18
       ],
       "severity": "major",
-      "description": "Template literal interpolation is missing a closing brace, causing a syntax error."
+      "description": "Template literal interpolation is missing a closing brace, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la interpolación del literal de plantilla le falta una llave de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en un literal de plantilla",
+      "description": "Añade el formato de las etiquetas de cola del panel de trabajo.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

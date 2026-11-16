@@ -1,7 +1,8 @@
 {
   "templateId": "pr-007-document-kpi-dashboard-runbook",
   "title": "Document Kpi Dashboard runbook",
-  "author": "Pedro A.",
+  "author": "Riya",
+  "authorId": "riya",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "docs",

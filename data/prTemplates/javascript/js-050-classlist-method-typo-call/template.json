@@ -34,7 +34,21 @@
         31
       ],
       "severity": "major",
-      "description": "Calls misspelled classList method toggel, causing TypeError at runtime."
+      "description": "Calls misspelled classList method toggel, causing TypeError at runtime.",
+      "localizedDescription": {
+        "es": "Llama al método mal escrito toggel de classList, lo que provoca un TypeError durante la ejecución."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Errata en un método de classList",
+      "description": "Añade el cambio de la clase active de las etiquetas de estado.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

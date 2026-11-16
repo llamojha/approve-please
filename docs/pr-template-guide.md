@@ -18,7 +18,9 @@ Every template requires these top-level fields:
 - `importance`: `low`, `normal`, or `high`.
 - `files`: required, non-empty array of file diffs.
 - `bugPatterns`: required array. Use `[]` for a clean PR; do not omit it.
-- `localized`: optional locale metadata. Spanish (`localized.es`) is encouraged but not required.
+- `localized`: locale metadata. The schema keeps it optional for backward compatibility, but committed catalog templates must include Spanish (`localized.es`) metadata.
+
+Recurring coworkers can be selected with optional `authorId`. Use one of the exact registry IDs: `lucia`, `diego`, `ines`, `tessa`, `ben`, `jonah`, `marta`, `evan`, `noel`, or `riya`. Unknown IDs intentionally render as guest authors. The development workshop accepts this value in **Cast ID (optional)** and previews the matching portrait and localized role in the live desk.
 
 ### Files and lines
 
@@ -141,3 +143,9 @@ The preview gallery is intentionally development-only. Both `/dev/templates` and
 - [ ] `npm run generate:templates` and `npm test` pass.
 - [ ] The template was reviewed at `/dev/templates/<template-id>`.
 - [ ] The pull request contains at most 10 templates.
+
+## Refresh foundation metadata
+
+Templates may optionally include authorId, localized reactions, rowId/kind on rows, and file-qualified lineRefs on bugs. Keep author, isNew and numeric lineNumbers for compatibility. false means context, not deletion; removal is unsupported. Explicit lineRefs must project to the same lineNumbers. Bug numbers must remain unambiguous across the PR while catalog validation retains the legacy numeric guard. Character portraits, localized roles, reactions, file-scoped selection and the new review semantics are active in the live desk and contributor workshop.
+
+The shared browser-safe validator returns field paths, diagnostic codes and messages. Normal generation additionally checks folder names and repository-wide uniqueness. Report-only output is diagnostic, not an exit-code validation gate. See the adjacent content-contract.md and review-behavior-contract.md for examples and the migration boundary.

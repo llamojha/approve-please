@@ -34,7 +34,21 @@
         25
       ],
       "severity": "major",
-      "description": "Calls misspelled function name calculateTotla, causing a ReferenceError."
+      "description": "Calls misspelled function name calculateTotla, causing a ReferenceError.",
+      "localizedDescription": {
+        "es": "Llama a la función mal escrita calculateTotla, lo que provoca un ReferenceError."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llamada a una función no definida",
+      "description": "Añade el cálculo de totales de las tarjetas del panel.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

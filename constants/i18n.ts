@@ -1,3 +1,6 @@
+import { designStudyCopy } from "./designStudyCopy";
+import { audioCopy } from "./audioCopy";
+import { landingPageCopy } from "./landingPageCopy";
 import { BugKind, Locale } from "../types";
 export type GameOverReasonKey = "stability" | "satisfaction" | "velocity" | "generic";
 
@@ -45,12 +48,12 @@ const importanceLabels: Record<
 > = {
   en: {
     low: "Low",
-    normal: "Normal",
+    normal: "Medium",
     high: "High",
   },
   es: {
     low: "Baja",
-    normal: "Normal",
+    normal: "Media",
     high: "Alta",
   },
 };
@@ -89,8 +92,11 @@ const difficultyLabels: Record<Locale, Record<string, string>> = {
 
 export const TRANSLATIONS = {
   en: {
+    designStudy: designStudyCopy.en,
+    audio: audioCopy.en,
     localeToggleLabel: "Select language",
     landing: {
+      refresh: landingPageCopy.en,
       title: "Approve Please",
       blurb:
         "Step into Release Ops. Review PRs, hold the line on stability, and try not to get fired.",
@@ -111,9 +117,9 @@ export const TRANSLATIONS = {
             "Measures throughput. Approvals and quick reviews boost it, but false alarms drag it down.",
         },
         satisfaction: {
-          title: "Satisfaction",
+          title: "Team trust",
           description:
-            "Tracks leadership patience. Smart calls earn grace; needless delays or outages tank morale.",
+            "Tracks the team's confidence in your judgment. Smart calls earn trust; needless delays or outages lose it.",
         },
       },
       languageHeader: "Preferred Language",
@@ -125,50 +131,50 @@ export const TRANSLATIONS = {
         {
           title: "Pick a PR",
           description: [
-            "Queue on the left; click to load a PR into the diff.",
-            "Rulebook guides what to watch for.",
+            "Choose a PR from the queue to load it into the review desk.",
+            "Priority controls how much a waiting PR drains the team; it does not reveal whether the code is safe.",
           ],
           imageAlt: "Queue and PR selection",
         },
         {
           title: "Inspect the Diff",
           description: [
-            "Scroll the snippet; tag lines by clicking line numbers.",
-            "Use rulebook hints to spot risky code.",
+            "Read the description, branch, tags and changed code before deciding.",
+            "Tag suspect lines for a precision bonus. Tags are optional and do not replace your verdict.",
           ],
-          imageAlt: "Diff view with selected line",
+          imageAlt: "Pull request description and code diff",
         },
         {
           title: "Approve vs Request Changes",
           description: [
-            "Approve when clean; request changes for risky diffs.",
-            "Tag the exact line for a satisfaction bonus.",
+            "Approve safe changes or request changes when you find a bug.",
+            "The next PR arrives automatically after a short swipe. Use Alt+A or Alt+R to move faster.",
           ],
           imageAlt: "Action buttons for approve and request changes",
         },
         {
           title: "Meters & Consequences",
           description: [
-            "Stability drops if bugs ship; velocity slows on rejects.",
-            "Good catches and clean approvals boost satisfaction.",
+            "Shipped bugs hurt Stability. Waiting PRs drain Velocity and Team trust at the rate shown by the queue-drain chevrons.",
+            "High-priority work creates more pressure. Learning mode keeps the clock but disables queue drain.",
           ],
-          imageAlt: "Meter HUD showing stability, velocity, satisfaction",
+          imageAlt: "Meter HUD showing stability, velocity, team trust and queue-drain chevrons",
         },
         {
-          title: "Day Wrap",
+          title: "Sound & Arrivals",
           description: [
-            "End-of-day summary shows incidents and false positives.",
-            "Advance to the next day or restart if meters tank.",
+            "New PRs appear in the queue with a visible notice; optional notification sounds can call them out.",
+            "Background music is optional and increases its tempo as your weakest meter falls.",
           ],
-          imageAlt: "Summary screen with stats",
+          imageAlt: "Sound controls for music and pull request notifications",
         },
         {
-          title: "Learn from Mistakes",
+          title: "Review the Day",
           description: [
-            "Review Deployed Bugs at day end to see what slipped.",
-            "Study the culprit lines to avoid repeating them.",
+            "The day summary records escaped bugs and unnecessary rejections with the relevant lines.",
+            "Continue to the next shift, or restart when a meter reaches zero.",
           ],
-          imageAlt: "Deployed Bugs section highlighting shipped issues",
+          imageAlt: "End-of-day summary showing review outcomes",
         },
       ],
       tutorialNav: {
@@ -198,7 +204,7 @@ export const TRANSLATIONS = {
       meters: {
         stability: "Stability",
         velocity: "Velocity",
-        satisfaction: "Satisfaction",
+        satisfaction: "Team trust",
       },
       queueAwaiting: (count: number) => `${count} awaiting review`,
       bugKinds: bugKindLabels.en,
@@ -207,11 +213,27 @@ export const TRANSLATIONS = {
       actualNone: "none",
     },
     briefing: {
-      startButton: "START DAY",
+      startButton: "START SHIFT",
+      eyebrow: "MERGEWORKS · SHIFT BRIEFING",
+      body: "The queue opens at 09:00. Keep stability, velocity and team trust above zero until 17:00.",
+      savedHeading: "A saved shift is waiting",
+      savedBody: "Resume exactly where you stopped. The game clock did not advance while you were away.",
+      resumeButton: "RESUME SHIFT",
+      newButton: "START A NEW RUN",
     },
     summary: {
       endOfDay: "End of Day",
       heading: (day: number) => `Day ${day} Summary`,
+      intro: "Your shift, explained. Keep the calls that worked and review the ones that cost the team.",
+      wentWellHeading: "What went well",
+      wentWellBody: (clean: number, caught: number) => `${clean} safe ${clean === 1 ? "change" : "changes"} shipped and ${caught} ${caught === 1 ? "bug" : "bugs"} stopped before production.`,
+      learnHeading: "What to learn",
+      learnBody: (escaped: number, falsePositives: number) => `${escaped} ${escaped === 1 ? "bug escaped" : "bugs escaped"}; ${falsePositives} safe ${falsePositives === 1 ? "PR was" : "PRs were"} held back.`,
+      cleanHeading: "Clean shift",
+      cleanBody: "No missed bugs or unnecessary rejections today. Keep the same review discipline tomorrow.",
+      approvedUnsafe: "Approved · unsafe",
+      rejectedSafe: "Changes requested · safe",
+      evidenceHeading: "Evidence from the diff",
       continueButton: (nextDay: number) => `Continue to Day ${nextDay}`,
       restartButton: "Restart Game",
       deployedHeading: "Deployed Bugs",
@@ -231,6 +253,18 @@ export const TRANSLATIONS = {
       deployedBody: "Final day incidents that melted prod.",
       falseHeading: "False Positives",
       falseBody: "Where you slowed velocity on the final day.",
+      leaderboard: {
+        heading: "Save this run to the leaderboard",
+        score: (score: number) => `Your score: ${score} (clean approvals + bugs blocked + days played × 5)`,
+        namePlaceholder: "Your name (optional)",
+        saving: "Saving…",
+        saved: "Saved",
+        submit: "Submit score",
+        view: "View leaderboard",
+        success: "Saved! Your run is on the leaderboard.",
+        error: "Failed to submit score.",
+        resumedRun: "Resumed runs stay in practice mode and are not submitted to the leaderboard.",
+      },
     },
     incidents: {
       byline: (author: string, bugKindLabel: string) =>
@@ -262,7 +296,7 @@ export const TRANSLATIONS = {
           "Click any line number to tag suspected bugs (optional, but earns bonus if correct).",
         authorLabel: "Author",
         diffTip: (requestLabel: string) =>
-          `Tip: click a line number to highlight a suspicious row. Tagging the right line boosts satisfaction when you ${requestLabel}.`,
+          `Tip: click a line number to highlight a suspicious row. Tagging the right line boosts team trust when you ${requestLabel}.`,
       },
       actions: {
         reviewLabel: "Review Actions",
@@ -277,12 +311,12 @@ export const TRANSLATIONS = {
         requestLabel: "",
         requestHelper: "",
         requestHelperBonus:
-          "Bonus: tag the exact offending line to boost satisfaction.",
+          "Bonus: tag the exact offending line to boost team trust.",
         legendApprove: "Approve immediately when the diff looks clean.",
         legendRequest:
           "Request changes; tagging the right line grants a bonus.",
         hotkeyHint:
-          "Tag a line for bonus satisfaction, then press R — or request changes directly.",
+          "Tag a line for bonus team trust, then press R — or request changes directly.",
       },
       rulebook: {
         empty: "No directives today. Trust your instincts.",
@@ -348,8 +382,11 @@ export const TRANSLATIONS = {
     },
   },
   es: {
+    designStudy: designStudyCopy.es,
+    audio: audioCopy.es,
     localeToggleLabel: "Seleccionar idioma",
     landing: {
+      refresh: landingPageCopy.es,
       title: "Aprueba Por Favor",
       blurb:
         "Entra en Operaciones de Lanzamiento. Revisa PRs, protege la estabilidad y procura no ser despedido.",
@@ -370,9 +407,9 @@ export const TRANSLATIONS = {
             "Mide el ritmo de entrega. Las aprobaciones y revisiones rápidas lo suben, pero las falsas alarmas lo frenan.",
         },
         satisfaction: {
-          title: "Satisfacción",
+          title: "Confianza del equipo",
           description:
-            "Mide la paciencia del liderazgo. Las decisiones acertadas dan margen; los retrasos u outages innecesarios hunden la moral.",
+            "Mide la confianza del equipo en tu criterio. Las decisiones acertadas la refuerzan; los retrasos o incidentes innecesarios la reducen.",
         },
       },
       languageHeader: "Lenguaje preferido",
@@ -384,53 +421,53 @@ export const TRANSLATIONS = {
       tutorialCta: "Cómo jugar",
       tutorialSlides: [
         {
-          title: "Elige un PR",
+          title: "Elige una PR",
           description: [
-            "La cola está a la izquierda; haz clic para cargar un PR en el diff.",
-            "El reglamento te guía sobre qué buscar.",
+            "Elige una PR de la cola para cargarla en la mesa de revisión.",
+            "La prioridad determina cuánto desgasta al equipo mientras espera; no revela si el código es seguro.",
           ],
           imageAlt: "Cola y selección de PR",
         },
         {
-          title: "Inspecciona el Diff",
+          title: "Inspecciona el diff",
           description: [
-            "Desplázate por el código; marca líneas haciendo clic en los números.",
-            "Usa las pistas del reglamento para detectar código riesgoso.",
+            "Lee la descripción, la rama, las etiquetas y el código modificado antes de decidir.",
+            "Marca líneas sospechosas para obtener una bonificación de precisión. Las marcas son opcionales y no sustituyen tu decisión.",
           ],
-          imageAlt: "Vista de diff con línea seleccionada",
+          imageAlt: "Descripción de la PR y diff de código",
         },
         {
-          title: "Aprobar vs Solicitar Cambios",
+          title: "Aprobar o solicitar cambios",
           description: [
-            "Aprueba cuando esté limpio; solicita cambios para diffs riesgosos.",
-            "Marca la línea exacta para un bonus de satisfacción.",
+            "Aprueba los cambios seguros o solicita cambios cuando encuentres un error.",
+            "La siguiente PR aparece automáticamente tras un deslizamiento breve. Usa Alt+A o Alt+R para avanzar más rápido.",
           ],
           imageAlt: "Botones de acción para aprobar y solicitar cambios",
         },
         {
-          title: "Medidores y Consecuencias",
+          title: "Medidores y consecuencias",
           description: [
-            "La estabilidad baja si se despliegan bugs; la velocidad baja con rechazos.",
-            "Las buenas capturas y aprobaciones limpias aumentan la satisfacción.",
+            "Los errores desplegados reducen la Estabilidad. Las PR en espera reducen la Velocidad y la Confianza al ritmo indicado por los indicadores de desgaste de cola.",
+            "Las PR de prioridad alta generan más presión. El modo aprendizaje mantiene el reloj, pero desactiva el desgaste de la cola.",
           ],
           imageAlt:
-            "HUD de medidores mostrando estabilidad, velocidad, satisfacción",
+            "HUD con estabilidad, velocidad, confianza del equipo e indicadores de desgaste de cola",
         },
         {
-          title: "Fin del Día",
+          title: "Sonido y nuevas PR",
           description: [
-            "El resumen del día muestra incidentes y falsos positivos.",
-            "Avanza al siguiente día o reinicia si los medidores caen.",
+            "Las nuevas PR aparecen con un aviso visible; puedes activar sonidos opcionales para recibir la notificación.",
+            "La música de fondo es opcional y acelera el ritmo cuando baja el medidor más débil.",
           ],
-          imageAlt: "Pantalla de resumen con estadísticas",
+          imageAlt: "Controles de música y notificaciones de nuevas pull requests",
         },
         {
-          title: "Aprende de los Errores",
+          title: "Revisa el día",
           description: [
-            "Revisa los Bugs Desplegados al final del día para ver qué se escapó.",
-            "Estudia las líneas culpables para no repetirlos.",
+            "El resumen registra los errores desplegados y los rechazos innecesarios junto a las líneas relevantes.",
+            "Continúa con el siguiente turno o reinicia cuando un medidor llegue a cero.",
           ],
-          imageAlt: "Sección de Bugs Desplegados resaltando problemas enviados",
+          imageAlt: "Resumen de fin de día con los resultados de las revisiones",
         },
       ],
       tutorialNav: {
@@ -460,7 +497,7 @@ export const TRANSLATIONS = {
       meters: {
         stability: "Estabilidad",
         velocity: "Velocidad",
-        satisfaction: "Satisfacción",
+        satisfaction: "Confianza del equipo",
       },
       queueAwaiting: (count: number) => `${count} en espera de revisión`,
       bugKinds: bugKindLabels.es,
@@ -469,11 +506,27 @@ export const TRANSLATIONS = {
       actualNone: "ninguno",
     },
     briefing: {
-      startButton: "Comenzar el día",
+      startButton: "EMPEZAR TURNO",
+      eyebrow: "MERGEWORKS · INICIO DEL TURNO",
+      body: "La cola abre a las 09:00. Mantén la estabilidad, la velocidad y la confianza por encima de cero hasta las 17:00.",
+      savedHeading: "Hay un turno guardado",
+      savedBody: "Continúa exactamente donde lo dejaste. El reloj no avanzó mientras estabas fuera.",
+      resumeButton: "CONTINUAR TURNO",
+      newButton: "EMPEZAR PARTIDA NUEVA",
     },
     summary: {
       endOfDay: "Fin del día",
       heading: (day: number) => `Resumen del Día ${day}`,
+      intro: "Tu turno, explicado. Conserva lo que funcionó y revisa las decisiones que costaron al equipo.",
+      wentWellHeading: "Qué salió bien",
+      wentWellBody: (clean: number, caught: number) => `${clean} ${clean === 1 ? "cambio seguro integrado" : "cambios seguros integrados"} y ${caught} ${caught === 1 ? "error detenido" : "errores detenidos"} antes de producción.`,
+      learnHeading: "Qué aprender",
+      learnBody: (escaped: number, falsePositives: number) => `${escaped} ${escaped === 1 ? "error llegó" : "errores llegaron"} a producción; ${falsePositives} ${falsePositives === 1 ? "PR segura quedó" : "PR seguras quedaron"} bloqueada.`,
+      cleanHeading: "Turno limpio",
+      cleanBody: "Hoy no se escaparon errores ni rechazaste cambios seguros. Mantén el mismo criterio mañana.",
+      approvedUnsafe: "Aprobada · no era segura",
+      rejectedSafe: "Cambios solicitados · era segura",
+      evidenceHeading: "Evidencia en el diff",
       continueButton: (nextDay: number) => `Continuar al día ${nextDay}`,
       restartButton: "Reiniciar partida",
       deployedHeading: "Bugs desplegados",
@@ -493,6 +546,18 @@ export const TRANSLATIONS = {
       deployedBody: "Incidentes del último día que derritieron prod.",
       falseHeading: "Falsos positivos",
       falseBody: "Dónde bajaste la velocidad en el último día.",
+      leaderboard: {
+        heading: "Guarda esta partida en la clasificación",
+        score: (score: number) => `Tu puntuación: ${score} (aprobaciones limpias + errores bloqueados + días jugados × 5)`,
+        namePlaceholder: "Tu nombre (opcional)",
+        saving: "Guardando…",
+        saved: "Guardada",
+        submit: "Enviar puntuación",
+        view: "Ver clasificación",
+        success: "Guardada. Tu partida ya aparece en la clasificación.",
+        error: "No se pudo enviar la puntuación.",
+        resumedRun: "Las partidas reanudadas permanecen en modo práctica y no se envían a la clasificación.",
+      },
     },
     incidents: {
       byline: (author: string, bugKindLabel: string) =>
@@ -524,7 +589,7 @@ export const TRANSLATIONS = {
           "Haz clic en cualquier número de línea para marcar bugs sospechosos (opcional, pero da bonus si aciertas).",
         authorLabel: "Autor",
         diffTip: (requestLabel: string) =>
-          `Tip: haz clic en un número de línea para resaltar una fila sospechosa. Etiquetar la línea correcta sube satisfacción cuando ${requestLabel}.`,
+          `Consejo: haz clic en un número de línea para resaltar una fila sospechosa. Marcar la línea correcta aumenta la confianza del equipo cuando ${requestLabel}.`,
       },
       actions: {
         reviewLabel: "Acciones de revisión",
@@ -539,12 +604,12 @@ export const TRANSLATIONS = {
         requestLabel: "",
         requestHelper: "",
         requestHelperBonus:
-          "Bonus: etiqueta la línea exacta para subir satisfacción.",
+          "Bonificación: marca la línea exacta para aumentar la confianza del equipo.",
         legendApprove: "Aprueba de inmediato cuando el diff se vea limpio.",
         legendRequest:
           "Solicita cambios; etiquetar la línea correcta da bonus.",
         hotkeyHint:
-          "Etiqueta una línea para el bonus de satisfacción y presiona R — o pide cambios directo.",
+          "Marca una línea para obtener confianza adicional y pulsa R, o solicita cambios directamente.",
       },
       rulebook: {
         empty: "Sin directrices hoy. Confía en tu instinto.",

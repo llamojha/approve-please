@@ -39,7 +39,21 @@
         59
       ],
       "severity": "major",
-      "description": "Returned object literal is unclosed, causing a syntax error."
+      "description": "Returned object literal is unclosed, causing a syntax error.",
+      "localizedDescription": {
+        "es": "El literal de objeto devuelto no está cerrado, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en el objeto devuelto",
+      "description": "Añade la construcción de la carga de los eventos de resultado.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

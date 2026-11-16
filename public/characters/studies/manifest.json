@@ -1,0 +1,303 @@
+{
+  "generatedOn": "2026-10-30",
+  "tool": "Built-in image_gen",
+  "provenance": "Original fictional characters generated for this project. No external human likeness or third-party reference images supplied. Expression edits reference original neutral generations.",
+  "processing": "Resized to 256×256 and palette PNG encoded with sharp; alpha retained. Original outputs retained in Codex generated_images.",
+  "assets": [
+    {
+      "name": "lucia-neutral",
+      "source": "exec-c046f39c-3547-495b-9e81-aec471633884.png",
+      "output": "/characters/studies/lucia-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31629,
+      "hasAlpha": true
+    },
+    {
+      "name": "lucia-pleased",
+      "source": "exec-bffaf60d-67d3-45e8-9b07-addce74949b7.png",
+      "output": "/characters/studies/lucia-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31009,
+      "hasAlpha": true
+    },
+    {
+      "name": "lucia-concerned",
+      "source": "exec-b3ee2fcc-2a6a-45a6-9af3-f31bf57b9f23.png",
+      "output": "/characters/studies/lucia-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31124,
+      "hasAlpha": true
+    },
+    {
+      "name": "diego-neutral",
+      "source": "exec-1991d8ea-8951-4bb3-b8a1-ea327e5d9ced.png",
+      "output": "/characters/studies/diego-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32034,
+      "hasAlpha": true
+    },
+    {
+      "name": "diego-pleased",
+      "source": "exec-d7b517a7-54b6-4a20-b9a0-d19f908655ce.png",
+      "output": "/characters/studies/diego-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32349,
+      "hasAlpha": true
+    },
+    {
+      "name": "diego-concerned",
+      "source": "exec-452b374d-c8d1-4ed4-8b04-9e1bb469a8cc.png",
+      "output": "/characters/studies/diego-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32478,
+      "hasAlpha": true
+    },
+    {
+      "name": "ines-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-7ae8d935-2f9f-4073-a7f6-e43d77e86e56.png",
+      "output": "/characters/studies/ines-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 30838,
+      "hasAlpha": true
+    },
+    {
+      "name": "jonah-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-f0c9ef72-0ead-4d9c-81ca-6774e1eefb68.png",
+      "output": "/characters/studies/jonah-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31205,
+      "hasAlpha": true
+    },
+    {
+      "name": "ben-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-bf903af8-a1b5-4d87-ba61-32ac6c0e9743.png",
+      "output": "/characters/studies/ben-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 30787,
+      "hasAlpha": true
+    },
+    {
+      "name": "tessa-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-eb0c8db7-6e9e-4165-91c2-31fed124f106.png",
+      "output": "/characters/studies/tessa-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31527,
+      "hasAlpha": true
+    },
+    {
+      "name": "marta-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-b9213e1e-7c6c-410e-91bb-3bf856ea6c0e.png",
+      "output": "/characters/studies/marta-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32723,
+      "hasAlpha": true
+    },
+    {
+      "name": "evan-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-5fabdc2b-dc3d-4f03-90b3-c019c2517996.png",
+      "output": "/characters/studies/evan-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 29999,
+      "hasAlpha": true
+    },
+    {
+      "name": "noel-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-0e6ded9d-1eb1-4be9-9a17-269a1a92d413.png",
+      "output": "/characters/studies/noel-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32108,
+      "hasAlpha": true
+    },
+    {
+      "name": "riya-neutral",
+      "generatedOn": "2026-10-31",
+      "source": "exec-afae5dd7-f884-4c15-aa34-b6b850c70492.png",
+      "output": "/characters/studies/riya-neutral.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 33142,
+      "hasAlpha": true
+    },
+    {
+      "name": "tessa-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-f529842f-afd6-4f6a-9596-08be263f34a6.png",
+      "output": "/characters/studies/tessa-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31718,
+      "hasAlpha": true
+    },
+    {
+      "name": "ines-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-4bb9208b-2aa5-4dbc-ae52-cba0d91f0d7d.png",
+      "output": "/characters/studies/ines-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 30908,
+      "hasAlpha": true
+    },
+    {
+      "name": "ines-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-331d01cf-9560-40a0-84e7-6dd4bc0cc25f.png",
+      "output": "/characters/studies/ines-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31193,
+      "hasAlpha": true
+    },
+    {
+      "name": "tessa-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-e0fcc322-4c3b-4a26-bdbc-09fcca3b0842.png",
+      "output": "/characters/studies/tessa-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31781,
+      "hasAlpha": true
+    },
+    {
+      "name": "ben-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-f8dd7c15-28d4-44b9-b3b7-ba577d5364ad.png",
+      "output": "/characters/studies/ben-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 30859,
+      "hasAlpha": true
+    },
+    {
+      "name": "ben-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-9c87f31f-b2f3-41b3-b4d4-40a7fcda43d8.png",
+      "output": "/characters/studies/ben-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31419,
+      "hasAlpha": true
+    },
+    {
+      "name": "jonah-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-0053eb16-67c8-4224-bde2-af597bdee2ee.png",
+      "output": "/characters/studies/jonah-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31245,
+      "hasAlpha": true
+    },
+    {
+      "name": "jonah-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-ad9ec6dc-1235-4f21-835b-d5f5883f7d6c.png",
+      "output": "/characters/studies/jonah-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31117,
+      "hasAlpha": true
+    },
+    {
+      "name": "marta-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-87dc5735-2ead-40e6-b757-ecf172bcfd6a.png",
+      "output": "/characters/studies/marta-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 33250,
+      "hasAlpha": true
+    },
+    {
+      "name": "marta-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-17f94982-3ad6-49e4-842b-848877386851.png",
+      "output": "/characters/studies/marta-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 33757,
+      "hasAlpha": true
+    },
+    {
+      "name": "evan-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-68541e63-2da0-4c30-a669-17ee4fa90ba9.png",
+      "output": "/characters/studies/evan-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 29013,
+      "hasAlpha": true
+    },
+    {
+      "name": "evan-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-e5019200-d8e3-49f4-a18a-ba5d40fc6a29.png",
+      "output": "/characters/studies/evan-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 29370,
+      "hasAlpha": true
+    },
+    {
+      "name": "noel-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-cf834fe6-d09a-4f67-a66f-9f8275e7f64b.png",
+      "output": "/characters/studies/noel-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 31797,
+      "hasAlpha": true
+    },
+    {
+      "name": "noel-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-83ac03c0-fdd2-47e3-9a0e-1baefd2e1995.png",
+      "output": "/characters/studies/noel-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32079,
+      "hasAlpha": true
+    },
+    {
+      "name": "riya-pleased",
+      "generatedOn": "2026-10-31",
+      "source": "exec-d2e13249-159e-40dc-aaa4-826a30836908.png",
+      "output": "/characters/studies/riya-pleased.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 32783,
+      "hasAlpha": true
+    },
+    {
+      "name": "riya-concerned",
+      "generatedOn": "2026-10-31",
+      "source": "exec-a86489e7-8c43-45cf-8528-cfea7f063ae5.png",
+      "output": "/characters/studies/riya-concerned.png",
+      "width": 256,
+      "height": 256,
+      "bytes": 33605,
+      "hasAlpha": true
+    }
+  ],
+  "updatedOn": "2026-10-31"
+}

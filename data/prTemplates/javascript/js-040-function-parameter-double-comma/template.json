@@ -39,7 +39,21 @@
         7
       ],
       "severity": "major",
-      "description": "Parameter list contains a double comma, causing a syntax error."
+      "description": "Parameter list contains a double comma, causing a syntax error.",
+      "localizedDescription": {
+        "es": "La lista de parámetros contiene una coma doble, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Doble coma en la lista de parámetros",
+      "description": "Añade una función auxiliar para combinar los ajustes del despliegue.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

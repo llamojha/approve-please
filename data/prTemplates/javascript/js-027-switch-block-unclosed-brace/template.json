@@ -49,7 +49,21 @@
         63
       ],
       "severity": "major",
-      "description": "Switch statement is missing its closing brace, causing a syntax error."
+      "description": "Switch statement is missing its closing brace, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la sentencia switch le falta la llave de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en un bloque switch",
+      "description": "Añade el mapeo de escalado para la gravedad de la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

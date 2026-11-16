@@ -39,7 +39,21 @@
         26
       ],
       "severity": "major",
-      "description": "Else block has no matching if statement, causing a syntax error."
+      "description": "Else block has no matching if statement, causing a syntax error.",
+      "localizedDescription": {
+        "es": "El bloque else no tiene una sentencia if correspondiente, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Bloque else huérfano",
+      "description": "Añade un comportamiento alternativo para vaciar la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

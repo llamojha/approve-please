@@ -34,7 +34,21 @@
         5
       ],
       "severity": "major",
-      "description": "Block comment is never closed, causing a syntax error."
+      "description": "Block comment is never closed, causing a syntax error.",
+      "localizedDescription": {
+        "es": "El comentario de bloque no se cierra, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Comentario de bloque sin cerrar en el cargador de configuración",
+      "description": "Añade una nota temporal al cargar la configuración de migración.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }
