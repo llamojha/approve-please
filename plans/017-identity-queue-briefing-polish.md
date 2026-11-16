@@ -14,7 +14,7 @@ Bring the live game’s naming, pressure feedback, decision controls and shift b
 - [x] Restructure the briefing so the day, focus, guidance, coworker note and start action have a readable hierarchy.
 - [x] Turn the end-of-day screen into a learning recap with successful calls, missed PRs, decision labels and line-level evidence.
 - [x] Update targeted tests, run the project gates and verify the affected flows in a real browser.
-- [ ] Commit and push the completed change to the existing PR branch, then confirm CI.
+- [x] Commit and push the completed change to the existing PR branch, then confirm CI.
 
 ## Acceptance checks
 
