@@ -50,7 +50,7 @@ The selected visual direction is warm ivory, violet accents and editorial portra
 
 ## Full-team presentation
 
-The fictional studio is **Afterhours**, building **Small Hours** in `afterhours / small-hours`. Pull-request numbers identify pending requests, starting at #1042. Selecting a request preserves the others; each verdict removes only that request and appends the next unused ID. All ten coworkers share the established editorial portrait treatment. This presentation remains a development route until the live integration gates below pass.
+The fictional product team is **Mergeworks**, building **Launchpad** in `mergeworks / launchpad`. The name describes the code-review setting instead of asking players to decode an unexplained studio fiction. Pull-request numbers identify pending requests, starting at #1042. Selecting a request preserves the others; each verdict removes only that request and appends the next unused ID. All ten coworkers share the established editorial portrait treatment. This presentation remains a development route until the live integration gates below pass.
 
 ## Production readiness TODO
 

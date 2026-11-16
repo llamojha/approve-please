@@ -1,6 +1,6 @@
 export const landingPageCopy = {
   en: {
-    studio: 'An ordinary day at Afterhours',
+    studio: 'A code review shift at Mergeworks',
     eyebrow: 'A game of code, consequences & coworkers',
     headline: 'Ship happens.',
     headlineEnd: 'You’re on review.',
@@ -54,7 +54,7 @@ export const landingPageCopy = {
     home: 'Approve Please home',
   },
   es: {
-    studio: 'Un día cualquiera en Afterhours',
+    studio: 'Un turno de revisión en Mergeworks',
     eyebrow: 'Un juego de código, consecuencias y compañeros',
     headline: 'Alguien tiene',
     headlineEnd: 'que revisar esto.',

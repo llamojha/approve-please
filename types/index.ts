@@ -85,6 +85,7 @@ export interface PullRequestTemplate extends Omit<PullRequest, 'id' | 'estimated
 }
 
 export interface DayQuote {
+  characterId: string;
   speaker: string;
   role: Record<Locale, string>;
   text: Record<Locale, string>;

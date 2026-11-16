@@ -155,10 +155,10 @@ export const TRANSLATIONS = {
         {
           title: "Meters & Consequences",
           description: [
-            "Shipped bugs hurt Stability. Waiting PRs drain Velocity and Team trust at the rate shown by Queue pressure.",
+            "Shipped bugs hurt Stability. Waiting PRs drain Velocity and Team trust at the rate shown by the queue-drain chevrons.",
             "High-priority work creates more pressure. Learning mode keeps the clock but disables queue drain.",
           ],
-          imageAlt: "Meter HUD showing stability, velocity, team trust and queue pressure",
+          imageAlt: "Meter HUD showing stability, velocity, team trust and queue-drain chevrons",
         },
         {
           title: "Sound & Arrivals",
@@ -213,8 +213,8 @@ export const TRANSLATIONS = {
       actualNone: "none",
     },
     briefing: {
-      startButton: "START DAY",
-      eyebrow: "AFTERHOURS · SHIFT BRIEFING",
+      startButton: "START SHIFT",
+      eyebrow: "MERGEWORKS · SHIFT BRIEFING",
       body: "The queue opens at 09:00. Keep stability, velocity and team trust above zero until 17:00.",
       savedHeading: "A saved shift is waiting",
       savedBody: "Resume exactly where you stopped. The game clock did not advance while you were away.",
@@ -224,6 +224,16 @@ export const TRANSLATIONS = {
     summary: {
       endOfDay: "End of Day",
       heading: (day: number) => `Day ${day} Summary`,
+      intro: "Your shift, explained. Keep the calls that worked and review the ones that cost the team.",
+      wentWellHeading: "What went well",
+      wentWellBody: (clean: number, caught: number) => `${clean} safe ${clean === 1 ? "change" : "changes"} shipped and ${caught} ${caught === 1 ? "bug" : "bugs"} stopped before production.`,
+      learnHeading: "What to learn",
+      learnBody: (escaped: number, falsePositives: number) => `${escaped} ${escaped === 1 ? "bug escaped" : "bugs escaped"}; ${falsePositives} safe ${falsePositives === 1 ? "PR was" : "PRs were"} held back.`,
+      cleanHeading: "Clean shift",
+      cleanBody: "No missed bugs or unnecessary rejections today. Keep the same review discipline tomorrow.",
+      approvedUnsafe: "Approved · unsafe",
+      rejectedSafe: "Changes requested · safe",
+      evidenceHeading: "Evidence from the diff",
       continueButton: (nextDay: number) => `Continue to Day ${nextDay}`,
       restartButton: "Restart Game",
       deployedHeading: "Deployed Bugs",
@@ -437,11 +447,11 @@ export const TRANSLATIONS = {
         {
           title: "Medidores y consecuencias",
           description: [
-            "Los errores desplegados reducen la Estabilidad. Las PR en espera reducen la Velocidad y la Confianza al ritmo indicado por la presión de cola.",
+            "Los errores desplegados reducen la Estabilidad. Las PR en espera reducen la Velocidad y la Confianza al ritmo indicado por los indicadores de desgaste de cola.",
             "Las PR de prioridad alta generan más presión. El modo aprendizaje mantiene el reloj, pero desactiva el desgaste de la cola.",
           ],
           imageAlt:
-            "HUD con estabilidad, velocidad, confianza del equipo y presión de cola",
+            "HUD con estabilidad, velocidad, confianza del equipo e indicadores de desgaste de cola",
         },
         {
           title: "Sonido y nuevas PR",
@@ -496,8 +506,8 @@ export const TRANSLATIONS = {
       actualNone: "ninguno",
     },
     briefing: {
-      startButton: "Comenzar el día",
-      eyebrow: "AFTERHOURS · INICIO DEL TURNO",
+      startButton: "EMPEZAR TURNO",
+      eyebrow: "MERGEWORKS · INICIO DEL TURNO",
       body: "La cola abre a las 09:00. Mantén la estabilidad, la velocidad y la confianza por encima de cero hasta las 17:00.",
       savedHeading: "Hay un turno guardado",
       savedBody: "Continúa exactamente donde lo dejaste. El reloj no avanzó mientras estabas fuera.",
@@ -507,6 +517,16 @@ export const TRANSLATIONS = {
     summary: {
       endOfDay: "Fin del día",
       heading: (day: number) => `Resumen del Día ${day}`,
+      intro: "Tu turno, explicado. Conserva lo que funcionó y revisa las decisiones que costaron al equipo.",
+      wentWellHeading: "Qué salió bien",
+      wentWellBody: (clean: number, caught: number) => `${clean} ${clean === 1 ? "cambio seguro integrado" : "cambios seguros integrados"} y ${caught} ${caught === 1 ? "error detenido" : "errores detenidos"} antes de producción.`,
+      learnHeading: "Qué aprender",
+      learnBody: (escaped: number, falsePositives: number) => `${escaped} ${escaped === 1 ? "error llegó" : "errores llegaron"} a producción; ${falsePositives} ${falsePositives === 1 ? "PR segura quedó" : "PR seguras quedaron"} bloqueada.`,
+      cleanHeading: "Turno limpio",
+      cleanBody: "Hoy no se escaparon errores ni rechazaste cambios seguros. Mantén el mismo criterio mañana.",
+      approvedUnsafe: "Aprobada · no era segura",
+      rejectedSafe: "Cambios solicitados · era segura",
+      evidenceHeading: "Evidencia en el diff",
       continueButton: (nextDay: number) => `Continuar al día ${nextDay}`,
       restartButton: "Reiniciar partida",
       deployedHeading: "Bugs desplegados",

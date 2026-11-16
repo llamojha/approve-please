@@ -1,6 +1,6 @@
 # Recurring coworker guide
 
-Ten-person cast for the Afterhours studio, building Small Hours. Names remain stable across EN/ES. Traits guide writing, never predict whether someone's PR is correct. Every recurring submitter needs clean and flawed work. Preserve guest authors; do not mass-reassign the existing catalog.
+Ten-person cast for the Mergeworks product team, building Launchpad. Names remain stable across EN/ES. Traits guide writing, never predict whether someone's PR is correct. Every recurring submitter needs clean and flawed work. Preserve guest authors; do not mass-reassign the existing catalog.
 
 | Stable ID / name | Role and voice | Visual anchor | Example EN / ES |
 | --- | --- | --- | --- |

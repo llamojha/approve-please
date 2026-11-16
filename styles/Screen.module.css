@@ -347,7 +347,7 @@
   font-size: 0.85em;
 }
 
-/* Campaign boundaries follow the saved Afterhours light/dark preference. */
+/* Campaign boundaries follow the saved light/dark desk preference. */
 .screenShell {
   padding: clamp(1rem, 4vw, 3rem);
   background:
@@ -611,4 +611,172 @@
   .summaryGrid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Campaign transitions read like team handoffs, not marketing heroes. */
+.summaryShell { width: min(1080px, 100%); }
+.summaryShell > h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+
+.recapGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.recapCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  min-height: 9rem;
+  padding: 1.25rem;
+  border: 1px solid;
+  border-radius: 1rem;
+}
+
+.recapCard > span {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  font-weight: 900;
+}
+
+.recapCard h2 { margin: 0 0 .45rem; font-size: 1.25rem; }
+.recapCard p { margin: 0; color: #51485d; line-height: 1.55; }
+.recapPositive { border-color: #91c89a; background: #edf8ef; }
+.recapPositive > span { background: #d7efdc; color: #1d642a; }
+.recapAttention { border-color: #dfbe69; background: #fff8e7; }
+.recapAttention > span { background: #f8e9b9; color: #74500a; }
+
+.summaryShell .incidentSection {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ded6e8;
+}
+
+.summaryShell .incidentSection h3 { font-size: 1.5rem; }
+.summaryShell .incidentItem { border-left: 4px solid #b14a5f; padding: 1.1rem 1.25rem; }
+.decisionLabel { display: block; margin-bottom: .65rem; color: #9a3045; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.evidenceBlock { margin-top: 1rem; padding: .85rem 1rem; border-radius: .65rem; background: #eee8f3; }
+.evidenceBlock > strong { color: #4c1d95; font-size: .82rem; letter-spacing: .04em; }
+.evidenceBlock .lineList { overflow-x: auto; }
+.summaryStats { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #ded6e8; }
+.summaryStats .summaryGrid { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .75rem; }
+.summaryStats .summaryCard { min-height: 6.5rem; box-shadow: none; }
+.summaryStats .summaryGridSpaced { margin-top: .75rem; }
+
+:global(:root:not([data-theme='githob-light'])) .recapCard p { color: #d7d0df; }
+:global(:root:not([data-theme='githob-light'])) .recapPositive { border-color: #47745e; background: #20362c; }
+:global(:root:not([data-theme='githob-light'])) .recapPositive > span { background: #2b4939; color: #bde8ce; }
+:global(:root:not([data-theme='githob-light'])) .recapAttention { border-color: #806c3e; background: #403620; }
+:global(:root:not([data-theme='githob-light'])) .recapAttention > span { background: #564824; color: #f5d486; }
+:global(:root:not([data-theme='githob-light'])) .summaryShell .incidentSection,
+:global(:root:not([data-theme='githob-light'])) .summaryStats { border-color: #443b4e; }
+:global(:root:not([data-theme='githob-light'])) .decisionLabel { color: #ffb1bf; }
+:global(:root:not([data-theme='githob-light'])) .evidenceBlock { background: #302842; }
+:global(:root:not([data-theme='githob-light'])) .evidenceBlock > strong { color: #cfc1ff; }
+
+@media(max-width:700px) {
+  .recapGrid { grid-template-columns: 1fr; }
+  .recapCard { min-height: 0; }
+}
+
+.briefingCard {
+  width: min(860px, 100%);
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.briefingHeading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin-bottom: .75rem;
+}
+
+.briefingHeading > span {
+  margin-top: .35rem;
+  padding: .4rem .65rem;
+  border: 1px solid #c8b8e2;
+  border-radius: 999px;
+  background: #f3eefb;
+  color: #5b21b6;
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+
+.briefingCard .briefingHeading h1 {
+  max-width: 16ch;
+  margin: 0;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.02;
+}
+
+.briefingQuoteCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid #d9d0e6;
+  border-radius: 1rem;
+  background: #f8f3fc;
+}
+
+.briefingQuoteCard .briefingQuote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.briefingQuoteCard .briefingQuote p {
+  margin: 0;
+  color: #3f3749;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.briefingQuoteCard .briefingQuote footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem .65rem;
+  margin-top: .6rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.briefingQuoteCard .briefingQuote footer strong { color: #4c1d95; }
+.briefingQuoteCard .briefingQuote footer span { color: #62586f; }
+.briefingCard .screenActions { justify-content: flex-end; }
+.briefingCard .screenButton { flex: 0 1 18rem; }
+
+:global(:root:not([data-theme='githob-light'])) .briefingHeading > span {
+  border-color: #514565;
+  background: #302842;
+  color: #d9ccff;
+}
+
+:global(:root:not([data-theme='githob-light'])) .briefingQuoteCard {
+  border-color: #443b4e;
+  background: #292330;
+}
+
+:global(:root:not([data-theme='githob-light'])) .briefingQuoteCard .briefingQuote { background: transparent; }
+:global(:root:not([data-theme='githob-light'])) .briefingQuoteCard .briefingQuote p { color: #eee8f3; }
+:global(:root:not([data-theme='githob-light'])) .briefingQuoteCard .briefingQuote footer strong { color: #cfc1ff; }
+:global(:root:not([data-theme='githob-light'])) .briefingQuoteCard .briefingQuote footer span { color: #bcb3c6; }
+
+@media(max-width:600px) {
+  .briefingHeading { grid-template-columns: 1fr; gap: .75rem; }
+  .briefingHeading > span { width: fit-content; margin: 0; }
+  .briefingQuoteCard { grid-template-columns: 1fr; align-items: start; }
+  .briefingCard .screenActions { margin-top: 1.25rem; }
+  .briefingCard .screenButton { flex-basis: 100%; }
 }

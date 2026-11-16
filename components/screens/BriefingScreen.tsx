@@ -2,6 +2,7 @@ import styles from '../../styles/Screen.module.css';
 import { useGameState } from '../../context/GameContext';
 import { useTranslations } from '../../hooks/useTranslations';
 import { useLocale } from '../../context/LocaleContext';
+import CharacterAvatar from '../common/CharacterAvatar';
 
 const BriefingScreen = () => {
   const {
@@ -19,7 +20,7 @@ const BriefingScreen = () => {
   const quoteRole = dayQuote ? dayQuote.role[locale] ?? dayQuote.role.en : null;
 
   if (savedRun && savedRunPromptPending) {
-    return <main className={styles.screenShell}><section className={styles.screenCard}>
+    return <main className={styles.screenShell}><section className={`${styles.screenCard} ${styles.briefingCard}`}>
       <p className={styles.eyebrow}>{translations.briefing.eyebrow}</p>
       <h1>{translations.briefing.savedHeading}</h1>
       <p className={styles.screenLead}>{translations.briefing.savedBody}</p>
@@ -29,18 +30,21 @@ const BriefingScreen = () => {
 
   return (
     <main className={styles.screenShell}>
-      <section className={styles.screenCard}>
+      <section className={`${styles.screenCard} ${styles.briefingCard}`}>
         <p className={styles.eyebrow}>{translations.briefing.eyebrow}</p>
-        <h1>{translations.shared.dayHeading(currentDay, dayDescriptor)}</h1>
+        <div className={styles.briefingHeading}>
+          <span>{translations.designStudy.shift(currentDay)}</span>
+          <h1>{dayDescriptor}</h1>
+        </div>
         <p className={styles.screenLead}>{translations.briefing.body}</p>
         {dayQuote && quoteText && (
-          <blockquote className={styles.briefingQuote}>
-            <p>&ldquo;{quoteText}&rdquo;</p>
-            <footer>
-              — {dayQuote.speaker}
-              {quoteRole ? `, ${quoteRole}` : ''}
-            </footer>
-          </blockquote>
+          <div className={styles.briefingQuoteCard}>
+            <CharacterAvatar characterId={dayQuote.characterId} name={dayQuote.speaker} size={64} />
+            <blockquote className={styles.briefingQuote}>
+              <p>&ldquo;{quoteText}&rdquo;</p>
+              <footer><strong>{dayQuote.speaker}</strong>{quoteRole && <span>{quoteRole}</span>}</footer>
+            </blockquote>
+          </div>
         )}
         <div className={styles.screenActions}>
           <button type="button" className={styles.screenButton} onClick={startWork}>

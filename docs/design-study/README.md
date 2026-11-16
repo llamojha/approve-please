@@ -1,6 +1,6 @@
-# Afterhours desk preview
+# Mergeworks desk preview
 
-Open `/dev/design` on the development server. The page presents the Afterhours studio's Small Hours repository with ten coworkers and twenty curated review editions. Each coworker submits both clean and flawed code. PR numbers start at #1042 and increase with the sequence; selecting a later item opens it while preserving earlier pending requests. A verdict removes only the reviewed PR, then opens the oldest pending item and replenishes the queue. The twenty editions repeat cyclically.
+Open `/dev/design` on the development server. The page presents the Mergeworks team’s Launchpad repository with ten coworkers and twenty curated review editions. Each coworker submits both clean and flawed code. PR numbers start at #1042 and increase with the sequence; selecting a later item opens it while preserving earlier pending requests. A verdict removes only the reviewed PR, then opens the oldest pending item and replenishes the queue. The twenty editions repeat cyclically.
 
 Approve/reject updates meters once and advances automatically after a 200 ms directional swipe. Reduced motion skips the animation. Optional tags clear on the next PR. There is no Last review panel, manual next arrow, Reset study control, study banner or arbitrary sample label. Structured results are announced to assistive technology. The header shows the current time and a shift-progress bar alongside the completed-review count. The clock shares the game’s 09:00–17:00 window and two-minute real-time pace. It pauses in dialogs and the team view, stops at 17:00, and disables verdicts until the player starts the next shift. Pending PRs carry forward; local meters reset for the next preview shift.
 
@@ -8,7 +8,7 @@ The team view shows neutral, pleased and concerned illustrated portraits, locali
 
 ## Integration boundary
 
-The production landing page `/` shares the Afterhours palette, public coworker roster and tutorial/leaderboard dialog presentation. The actual `/game` work phase now renders the same shared `ReviewDesk`, `CodeDiff` and `CharacterAvatar` components over the real GameContext queue, clock, meters, tutorial waves and decision evaluator. See `docs/landing-refresh-validation.md`, `docs/live-desk-validation.md` and `plans/014-live-desk-migration.md`.
+The production landing page `/` shares the Mergeworks palette, public coworker roster and tutorial/leaderboard dialog presentation. The actual `/game` work phase now renders the same shared `ReviewDesk`, `CodeDiff` and `CharacterAvatar` components over the real GameContext queue, clock, meters, tutorial waves and decision evaluator. See `docs/landing-refresh-validation.md`, `docs/live-desk-validation.md` and `plans/014-live-desk-migration.md`.
 
 The `/dev/design` route remains a development-only fixture and returns 404 in production. Its local queue and timer remain deliberately isolated. `/game` owns the real simulation and uses the shared presentation only; authoring routes remain private. Save/resume and the contributor workshop remain later roadmap work and are not implied by the desk migration.
 

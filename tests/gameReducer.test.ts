@@ -430,6 +430,7 @@ describe('gameReducer RANDOMIZE_DAY_FLAVOR', () => {
   const flavor = {
     mantra: { en: 'Randomized mantra', es: 'Mantra aleatorio' },
     quote: {
+      characterId: 'riya',
       speaker: 'Test Speaker',
       role: { en: 'Tester', es: 'Probadora' },
       text: { en: 'Randomized quote', es: 'Cita aleatoria' }

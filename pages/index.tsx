@@ -76,7 +76,7 @@ export default function IndexPage() {
           <div className={styles.heroArt}>
             <div className={styles.paperBack} aria-hidden="true" />
             <article className={styles.preview} aria-label={t.previewLabel}>
-              <div className={styles.previewTop}><span>◇ afterhours / small-hours</span><span aria-hidden="true">↗</span></div>
+              <div className={styles.previewTop}><span>◇ mergeworks / launchpad</span><span aria-hidden="true">↗</span></div>
               <div className={styles.previewBody}><span className={styles.status}><span aria-hidden="true">●</span> {t.previewStatus}</span><h2>{t.previewTitle}</h2><div className={styles.previewAuthor}><Image unoptimized src="/characters/studies/riya-neutral.png" alt="" width={64} height={64} priority /><div><strong>{riya.name}</strong><span>{riya.role[locale]}</span></div></div><p className={styles.comment}>{t.previewComment}</p></div>
               <div className={styles.miniDiff} aria-hidden="true"><div>{t.previewFile}<span>+3</span></div><code><span>1  +  const change = &apos;tiny&apos;;</span><span>2  +  await ship(change);</span><span>3  +  // ...</span></code></div>
               <div className={styles.previewBottom}><span aria-hidden="true">↳</span>{t.pending}</div>

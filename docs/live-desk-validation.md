@@ -1,6 +1,6 @@
 # Live desk migration validation — 4 November 2026
 
-The approved Afterhours review design now powers the real `/game` work phase. Shared presentation components render GameContext state; `/dev/design` remains a fixture adapter and stays unavailable in production.
+The approved Mergeworks review design now powers the real `/game` work phase. Shared presentation components render GameContext state; `/dev/design` remains a fixture adapter and stays unavailable in production.
 
 ## Implemented behavior
 
@@ -13,7 +13,7 @@ The approved Afterhours review design now powers the real `/game` work phase. Sh
 - A/R shortcuts ignore repeat/modifier keys, editable controls, dialogs, paused state and the outgoing lock.
 - Handbook and audio dialogs pause clock, queue aging, deliveries and verdicts. The phone queue dialog remains live and gives no timing advantage.
 - Ten explicit catalog scenarios—one per established coworker—use the portrait/reaction registry. The opening pair are Lucía and Noel. All other catalog guests keep their authored names and initials fallback.
-- Landing, briefing, summary and game-over use the light Afterhours system. Game-over leaderboard copy is localized and final false positives remain reviewable.
+- Landing, briefing, summary and game-over use the shared Mergeworks light/dark system. Game-over leaderboard copy is localized and final false positives remain reviewable.
 
 ## Browser evidence
 

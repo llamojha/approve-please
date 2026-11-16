@@ -1,6 +1,6 @@
 export const audioCopy = {
   en: {
-    title: 'Afterhours radio', settings: 'Audio settings', button: 'Sound',
+    title: 'Mergeworks radio', settings: 'Audio settings', button: 'Sound',
     description: 'A quiet instrumental pulse. The rhythm picks up as your lowest team meter falls.',
     music: 'Background music', notifications: 'PR notification sounds', volume: 'Volume',
     test: 'Try the PR chime', off: 'Audio is off until you enable a channel.',
@@ -9,7 +9,7 @@ export const audioCopy = {
     arrival: (count: number) => count === 1 ? 'New PR in your queue' : count + ' new PRs in your queue'
   },
   es: {
-    title: 'Radio Afterhours', settings: 'Ajustes de audio', button: 'Sonido',
+    title: 'Radio Mergeworks', settings: 'Ajustes de audio', button: 'Sonido',
     description: 'Una base instrumental suave. El ritmo se acelera cuando baja el indicador más débil del equipo.',
     music: 'Música de fondo', notifications: 'Sonidos de nuevas PR', volume: 'Volumen',
     test: 'Probar el aviso de PR', off: 'El audio está apagado hasta que actives una opción.',

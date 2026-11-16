@@ -4,11 +4,14 @@
 @media(prefers-reduced-motion:reduce){.shell *{scroll-behavior:auto!important}}
 
 /* Restored context stays compact: dialogs replace the legacy permanent right rail. */
+.shell{--approve:#1f6a45;--approve-bg:#edf7f1;--approve-border:#78b293;--request:#9a3045;--request-bg:#fff0f3;--request-border:#d997a5}
 :global(:root[data-theme='githob-dark']) .shell{--paper:#17141d;--surface:#221e29;--ink:#f2edf7;--subtle:#bcb3c6;--line:#443b4e;--purple:#b9a7ff;--green:#82d7a7;--addition:#20362c;--wash:#302842;--code:#c1e6cf}
+:global(:root[data-theme='githob-dark']) .shell{--approve:#bde8ce;--approve-bg:#20362c;--approve-border:#47745e;--request:#ffccd5;--request-bg:#452734;--request-border:#8d5063}
 :global(:root[data-theme='githob-dark']) .topbar{background:rgba(34,30,41,.96)}
 :global(:root[data-theme='githob-dark']) .shiftbar{background:#211c29}
 :global(:root[data-theme='githob-dark']) .sidebar{background:#1d1924}
-.queuePressure{display:block;margin-top:4px;color:#8b520f;font-size:12px!important;font-weight:700!important}
+.queuePressure{display:flex;align-items:center;gap:5px;margin-top:5px;color:#8b520f;font-size:12px!important;font-weight:700!important;line-height:1.2}
+.pressureChevrons{display:inline-flex;gap:0;color:currentColor;font-size:17px;line-height:.7;letter-spacing:-3px;padding-right:3px}.pressureChevrons b{font:inherit}
 :global(:root[data-theme='githob-dark']) .queuePressure{color:#f0c879!important}
 .statsGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .statsGrid article{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
