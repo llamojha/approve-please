@@ -2,6 +2,8 @@
 
 The approved Mergeworks review design now powers the real `/game` work phase. Shared presentation components render GameContext state; `/dev/design` remains a fixture adapter and stays unavailable in production.
 
+Queue drain uses horizontal left-facing SVG chevrons immediately before the Velocity and Team trust values. The visible text label is removed; the count and explanation remain in the accessible name and hover title. No chevrons appear on Stability or in Practice mode. Verified at mobile width and with low and higher queue pressure.
+
 ## Implemented behavior
 
 - Real 09:00–17:00 two-minute shift clock, meters, queue and day state.

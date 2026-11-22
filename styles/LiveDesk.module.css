@@ -10,9 +10,11 @@
 :global(:root[data-theme='githob-dark']) .topbar{background:rgba(34,30,41,.96)}
 :global(:root[data-theme='githob-dark']) .shiftbar{background:#211c29}
 :global(:root[data-theme='githob-dark']) .sidebar{background:#1d1924}
-.queuePressure{display:flex;align-items:center;gap:5px;margin-top:5px;color:#8b520f;font-size:12px!important;font-weight:700!important;line-height:1.2}
-.pressureChevrons{display:inline-flex;gap:0;color:currentColor;font-size:17px;line-height:.7;letter-spacing:-3px;padding-right:3px}.pressureChevrons b{font:inherit}
-:global(:root[data-theme='githob-dark']) .queuePressure{color:#f0c879!important}
+.meters .queuePressure{display:inline-flex;vertical-align:middle;margin-right:7px;color:#a13b4d}
+.pressureChevrons{display:flex;flex-direction:row;color:inherit}
+.pressureChevrons svg{display:block;flex-shrink:0}
+.pressureChevrons svg+svg{margin-left:-1px}
+:global(:root[data-theme='githob-dark']) .queuePressure{color:#e79687}
 .statsGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .statsGrid article{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
 .statsGrid article>span{font-size:14px;font-weight:700}
