@@ -10,6 +10,7 @@ Implementation TODO:
 - [x] Deliver two/three/three/two PRs at simulated minutes 0/60/180/300 over six shifts through atomic, replay-safe reducer delivery.
 - [x] Support explicit removed rows in normalization, shared validation and the actual diff viewer. Keep legacy false-without-kind as context; use file/row references across files.
 - [x] Add beginner briefings, per-PR tasks and paused last-review explanations. Add a full day review log with incorrect decisions expanded, unreviewed queue entries and a six-shift finish.
+- [x] Use the task text as the PR description, replacing the placeholder author note and removing the separate task panel. Keep optional last-review explanations available.
 - [x] Remove the standalone course UI, keeping the content, and update the contributor documentation.
 - [x] Finish integrated browser checks and prepare the same PR #14 for publication and CI verification.
 

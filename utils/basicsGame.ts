@@ -3,7 +3,6 @@ import type { BasicsExercise } from '../data/basics/types';
 import { getCharacter } from '../data/characters';
 import type { Locale, PullRequest } from '../types';
 import { diffText } from './basics';
-import { basicsCopy } from '../constants/basicsCopy';
 
 export const basicsDay = (day: number) => basicsLessons[day - 1];
 export const basicsExercise = (templateId: string) => basicsExercises.find(item => `basics-${item.id}` === templateId);
@@ -20,7 +19,6 @@ export const pendingBasicsWaves = (day: number, minute: number, markers: string[
 };
 export const makeBasicsPR = (exercise: BasicsExercise, day: number, runId: number, locale: Locale, index: number): PullRequest => {
   const character = getCharacter(exercise.authorId)!;
-  const t = basicsCopy[locale];
   const files = exercise.files.map(file => ({ filename: file.filename, language: 'text',
     lines: diffText(file.before[locale], file.after[locale]).map((row, rowIndex) => ({
       rowId: row.id, lineNumber: rowIndex + 1, content: row.content, kind: row.kind, isNew: row.kind === 'addition'
@@ -29,7 +27,7 @@ export const makeBasicsPR = (exercise: BasicsExercise, day: number, runId: numbe
   const lineNumbers = lineRefs.map(ref => files.find(file => file.filename === ref.filename)!.lines.find(row => row.rowId === ref.rowId)!.lineNumber);
   return {
     id: `basics-${exercise.id}-d${day}-r${runId}`, templateId: `basics-${exercise.id}`, title: exercise.title[locale],
-    author: character.name, authorId: character.id, description: t.note, tags: [],
+    author: character.name, authorId: character.id, description: exercise.brief[locale], tags: [],
     importance: (['low','normal','high'] as const)[index % 3], estimatedReviewSeconds: 35, files,
     bugPatterns: lineRefs.length ? [{ kind: 'logic', severity: 'minor', lineRefs, lineNumbers: [...new Set(lineNumbers)], description: exercise.explanation[locale] }] : [],
     learningContext: { brief: exercise.brief[locale], explanation: exercise.explanation[locale] },

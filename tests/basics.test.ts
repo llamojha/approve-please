@@ -38,6 +38,7 @@ describe('beginner shift content', () => {
         const normalized = normalizePullRequest(pr);
         expect(exercise.brief[locale].length).toBeGreaterThan(20);
         expect(pr.learningContext?.explanation).toBe(exercise.explanation[locale]);
+        expect(pr.description).toBe(exercise.brief[locale]);
         const changed = new Set<string>();
         for (const file of exercise.files) {
           expect(file.filename.endsWith('.txt')).toBe(true);
