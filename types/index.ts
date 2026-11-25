@@ -19,7 +19,7 @@ export interface BugPattern {
 
 export interface PRLine {
   rowId?: string;
-  kind?: 'addition' | 'context';
+  kind?: 'addition' | 'context' | 'removal';
   lineNumber: number;
   content: string;
   isNew: boolean;
@@ -51,6 +51,7 @@ export interface PullRequest {
   bugPatterns: BugPattern[];
   importance: 'low' | 'normal' | 'high';
   estimatedReviewSeconds: number;
+  learningContext?: { brief: string; explanation: string };
 }
 
 export type Locale = 'en' | 'es';
@@ -93,6 +94,7 @@ export interface DayQuote {
 
 export type LanguagePreference = string[];
 export type Difficulty = 'normal' | 'learning';
+export type ContentTrack = 'code' | 'basics';
 
 export interface ScriptedWave {
   atMinute: number;
@@ -125,7 +127,7 @@ export interface DaySummary {
 
 export interface NormalizedPRLine extends PRLine {
   rowId: string;
-  kind: 'addition' | 'context';
+  kind: 'addition' | 'context' | 'removal';
 }
 
 export interface NormalizedPullRequest extends PullRequest {

@@ -1,0 +1,83 @@
+import { copy as c, textFile as f, issue as at, type ExerciseDraft } from './types';
+export const mixedPractice: ExerciseDraft[] = [
+  {
+    id: 'study-night',
+    title: c('Prepare the study night', 'Preparar la noche de estudio'),
+    brief: c('Move study night to Friday and add a 19:00 start in both files. Keep the quiet-room rule.', 'Pasa la noche de estudio al viernes y añade el inicio a las 19:00 en ambos archivos. Conserva la norma de silencio.'),
+    files: [f('event.txt', ['Day: Thursday', 'Quiet room: no calls'], ['Day: Friday', 'Start: 19:00', 'Quiet room: no calls'], ['Día: jueves', 'Sala tranquila: sin llamadas'], ['Día: viernes', 'Inicio: 19:00', 'Sala tranquila: sin llamadas']),f('calendar.txt', ['Thursday — Study night'], ['Friday 19:00 — Study night'], ['Jueves — Noche de estudio'], ['Viernes 19:00 — Noche de estudio'])],
+    issues: [],
+    explanation: c('Both files have the right day and time, and the quiet-room rule remains. All parts of the brief are satisfied.', 'Ambos archivos tienen el día y la hora correctos y se conserva la norma de silencio. Se cumple todo el encargo.')
+  },
+  {
+    id: 'kit-totals',
+    title: c('Record the donated kits', 'Registrar los kits donados'),
+    brief: c('There were 8 kits and 4 were donated, making 12 total. Keep the pickup location.', 'Había 8 kits y se donaron 4 más: 12 en total. Conserva el lugar de recogida.'),
+    files: [f('inventory.txt', ['Kits: 8', 'Pickup: reception'], ['Kits: 4', 'Pickup: reception'], ['Kits: 8', 'Recogida: recepción'], ['Kits: 4', 'Recogida: recepción'])],
+    issues: [at('inventory.txt','after',1)],
+    explanation: c('4 is the donation quantity, not the new total of 12. The brief gives enough information to check the arithmetic.', '4 es la cantidad donada, no el nuevo total de 12. El encargo aporta toda la información para comprobar la suma.')
+  },
+  {
+    id: 'session-merge',
+    title: c('Combine the two introductions', 'Unificar las dos introducciones'),
+    brief: c('Replace the separate welcome and introduction with one 09:00 introduction. Keep the 09:30 exercise.', 'Sustituye la bienvenida y la introducción separadas por una introducción a las 09:00. Conserva el ejercicio de las 09:30.'),
+    files: [f('schedule.txt', ['09:00 Welcome', '09:10 Introduction', '09:30 Exercise'], ['09:00 Introduction', '09:30 Exercise'], ['09:00 Bienvenida', '09:10 Introducción', '09:30 Ejercicio'], ['09:00 Introducción', '09:30 Ejercicio'])],
+    issues: [],
+    explanation: c('The two entries become one at the correct time and the exercise remains. More removed lines do not automatically mean a bad PR.', 'Las dos entradas se convierten en una a la hora correcta y se conserva el ejercicio. Más líneas eliminadas no implican una PR incorrecta.')
+  },
+  {
+    id: 'access-code',
+    title: c('Update classroom access instructions', 'Actualizar las instrucciones de acceso'),
+    brief: c('Replace “Ask at the desk” with “Collect a visitor badge”. Keep the instruction to return it before leaving.', 'Sustituye «Pregunta en el mostrador» por «Recoge una acreditación de visita». Conserva la instrucción de devolverla antes de salir.'),
+    files: [f('access.txt', ['Ask at the desk.', 'Return your badge before leaving.'], ['Collect a visitor badge.', 'Keep your badge after leaving.'], ['Pregunta en el mostrador.', 'Devuelve la acreditación antes de salir.'], ['Recoge una acreditación de visita.', 'Conserva la acreditación al salir.'])],
+    issues: [at('access.txt','after',2)],
+    explanation: c('The second instruction now says to keep the badge. That contradicts the requirement even though the first instruction is correct.', 'La segunda instrucción dice ahora que se conserve la acreditación. Contradice el requisito aunque la primera sea correcta.')
+  },
+  {
+    id: 'new-tutor',
+    title: c('Update the tutor handover', 'Actualizar el relevo de tutoría'),
+    brief: c('Tessa takes over from Riya on Monday only. Update the roster and contact note; Friday stays with Riya.', 'Tessa sustituye a Riya solo el lunes. Actualiza la lista y la nota de contacto; el viernes sigue con Riya.'),
+    files: [f('tutors.txt', ['Monday: Riya', 'Friday: Riya'], ['Monday: Tessa', 'Friday: Riya'], ['Lunes: Riya', 'Viernes: Riya'], ['Lunes: Tessa', 'Viernes: Riya']),f('contact.txt', ['Monday questions: Riya'], ['Monday questions: Tessa'], ['Dudas del lunes: Riya'], ['Dudas del lunes: Tessa'])],
+    issues: [],
+    explanation: c('Monday is updated in both files while Friday is preserved. The replacement is limited to the requested day.', 'Se actualiza el lunes en ambos archivos y se conserva el viernes. La sustitución se limita al día solicitado.')
+  },
+  {
+    id: 'cancelled-trip',
+    title: c('Remove the cancelled museum visit', 'Eliminar la visita al museo cancelada'),
+    brief: c('Remove the museum visit from both files. Keep the afternoon library visit.', 'Elimina la visita al museo de ambos archivos. Conserva la visita a la biblioteca por la tarde.'),
+    files: [f('itinerary.txt', ['10:00 Museum', '14:00 Library'], ['14:00 Library'], ['10:00 Museo', '14:00 Biblioteca'], ['14:00 Biblioteca']),f('reminders.txt', ['Bring museum ticket.', 'Bring library card.'], ['Bring museum ticket.'], ['Trae la entrada del museo.', 'Trae el carné de biblioteca.'], ['Trae la entrada del museo.'])],
+    issues: [at('reminders.txt','before',2)],
+    explanation: c('The reminder removes the library card instead of the cancelled museum ticket. Review deletions in every file, not only the itinerary.', 'El recordatorio elimina el carné de biblioteca en lugar de la entrada del museo cancelado. Revisa las eliminaciones de todos los archivos, no solo el itinerario.')
+  },
+  {
+    id: 'quiet-study',
+    title: c('Split the study spaces', 'Separar los espacios de estudio'),
+    brief: c('Keep room A quiet and designate room B for group work. Add both rules to the notice.', 'Mantén el aula A en silencio y destina el aula B al trabajo en grupo. Añade ambas normas al aviso.'),
+    files: [f('rooms.txt', ['Room A: quiet study'], ['Room A: quiet study', 'Room B: group work'], ['Aula A: estudio en silencio'], ['Aula A: estudio en silencio', 'Aula B: trabajo en grupo']),f('notice.txt', ['Study spaces'], ['Study spaces', 'Room A: quiet study', 'Room B: group work'], ['Espacios de estudio'], ['Espacios de estudio', 'Aula A: estudio en silencio', 'Aula B: trabajo en grupo'])],
+    issues: [],
+    explanation: c('The new group space does not replace the quiet space, and both rules appear in the notice.', 'El nuevo espacio de grupo no sustituye al espacio tranquilo y las dos normas aparecen en el aviso.')
+  },
+  {
+    id: 'print-budget',
+    title: c('Reduce the poster order', 'Reducir el pedido de carteles'),
+    brief: c('Reduce posters from 30 to 20 at €2 each. Update the total cost to €40 in the budget file.', 'Reduce los carteles de 30 a 20, a 2 € cada uno. Actualiza el coste total a 40 € en el presupuesto.'),
+    files: [f('order.txt', ['Posters: 30', 'Each: €2'], ['Posters: 20', 'Each: €2'], ['Carteles: 30', 'Unidad: 2 €'], ['Carteles: 20', 'Unidad: 2 €']),f('budget.txt', ['Poster total: €60'], ['Poster total: €20'], ['Total de carteles: 60 €'], ['Total de carteles: 20 €'])],
+    issues: [at('budget.txt','after',1)],
+    explanation: c('Twenty posters at €2 each cost €40, not €20. The second file must reflect the consequence of the first file’s change.', 'Veinte carteles a 2 € cuestan 40 €, no 20 €. El segundo archivo debe reflejar la consecuencia del cambio del primero.')
+  },
+  {
+    id: 'new-handover',
+    title: c('Prepare the next volunteer', 'Preparar el relevo de voluntariado'),
+    brief: c('Noel replaces Evan for Saturday. Keep Sunday with Evan and add the Saturday key-return reminder.', 'Noel sustituye a Evan el sábado. Mantén el domingo con Evan y añade el recordatorio de devolver la llave el sábado.'),
+    files: [f('rota.txt', ['Saturday: Evan', 'Sunday: Evan'], ['Saturday: Noel', 'Sunday: Evan'], ['Sábado: Evan', 'Domingo: Evan'], ['Sábado: Noel', 'Domingo: Evan']),f('handover.txt', ['Collect the room key.'], ['Collect the room key.', 'Saturday: return the key to reception.'], ['Recoge la llave del aula.'], ['Recoge la llave del aula.', 'Sábado: devuelve la llave en recepción.'])],
+    issues: [],
+    explanation: c('The roster and handover meet all three requirements. A complete review checks both additions and preserved commitments.', 'La lista y el relevo cumplen los tres requisitos. Una revisión completa comprueba tanto lo añadido como los compromisos conservados.')
+  },
+  {
+    id: 'final-showcase',
+    title: c('Publish the final showcase plan', 'Publicar el plan de la muestra final'),
+    brief: c('Move the showcase to Friday in hall D. Keep free entry and the 16:00 start in both files.', 'Pasa la muestra al viernes en la sala D. Mantén la entrada gratuita y el inicio a las 16:00 en ambos archivos.'),
+    files: [f('showcase.txt', ['Thursday, hall B', '16:00 — free entry'], ['Friday, hall D', '16:00 — free entry'], ['Jueves, sala B', '16:00 — entrada gratuita'], ['Viernes, sala D', '16:00 — entrada gratuita']),f('invitation.txt', ['Thursday, hall B', '16:00 — free entry'], ['Friday, hall D', '17:00 — €3 entry'], ['Jueves, sala B', '16:00 — entrada gratuita'], ['Viernes, sala D', '17:00 — entrada de 3 €'])],
+    issues: [at('invitation.txt','after',2)],
+    explanation: c('The invitation changes both time and price. Reject the PR and point to that line; an accurate first file cannot offset two mistakes in another.', 'La invitación cambia la hora y el precio. Rechaza la PR y señala esa línea; un primer archivo correcto no compensa dos errores en otro.')
+  }
+];

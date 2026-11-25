@@ -25,6 +25,7 @@ const GameOverScreen = () => {
       falsePositiveRecords,
       difficulty,
       leaderboardEligible,
+      contentTrack,
     },
     actions: { restartGame },
   } = useGameState();
@@ -135,7 +136,7 @@ const GameOverScreen = () => {
             {gameOverText.homeButton}
           </Link>
         </div>
-        <section className={styles.leaderboardForm}>
+        {contentTrack !== 'basics' && <section className={styles.leaderboardForm}>
             <div>
               <strong>{gameOverText.leaderboard.heading}</strong>
               <p className={`muted ${styles.mutedSmall}`}>
@@ -182,7 +183,7 @@ const GameOverScreen = () => {
                 gameOverText.leaderboard.success}
               {submitStatus === "error" && submitError}
             </div>
-          </section>
+          </section>}
         <LeaderboardModal
           isOpen={showLeaderboardModal}
           onClose={() => setShowLeaderboardModal(false)}

@@ -1,11 +1,12 @@
 import { APPROVAL_EFFECTS, REQUEST_CHANGES_EFFECTS, SEVERITY_WEIGHTS, gameSettings } from '../constants/gameSettings';
-import type { Counters, DecisionOutcome, LineReference, MeterSet, NormalizedPullRequest } from '../types';
+import type { Counters, DecisionOutcome, LineReference, MeterSet, NormalizedPullRequest, PullRequest } from '../types';
 import { lineReferenceKey } from './templateNormalization';
 
 export type ReviewVerdict = 'approve' | 'request-changes';
 export type PrecisionResult = 'not-applicable' | 'untagged' | 'precise' | 'inaccurate' | 'mixed';
 
 export interface DecisionReceipt {
+  learningContext?: PullRequest['learningContext'];
   prId: string;
   templateId: string;
   title: string;
@@ -77,5 +78,6 @@ export const evaluateDecision = (
   return { prId: pr.id, templateId: pr.templateId, title: pr.title, author: pr.author, authorId: pr.authorId,
     verdict, outcome, correct: outcome === 'clean-approval' || outcome === 'correct-rejection', precision,
     bonusApplied, matchedBugCount, totalBugCount: pr.bugPatterns.length, counterDelta,
-    requestedMeterDelta, appliedMeterDelta, metersAfter };
+    requestedMeterDelta, appliedMeterDelta, metersAfter,
+    ...(pr.learningContext ? { learningContext: { ...pr.learningContext } } : {}) };
 };

@@ -29,3 +29,4 @@
 .settings button>strong{font-size:15px}
 @media(max-width:900px){.topActions button span{display:none}.topActions{gap:5px}.topActions button{min-width:44px;padding:8px}.topbar{padding:0 16px}}
 @media(max-width:520px){.statsGrid,.settings fieldset{grid-template-columns:1fr}.topbar{gap:8px;padding:0 10px}.brand{font-size:0}.brand>span{margin-right:0}.brand strong,.brand b{display:none}.topActions{gap:2px}.topActions button{min-width:44px;padding:7px 5px}.topActions button:last-child{font-size:12px}}
+.reviewTools{display:flex;justify-content:flex-end;margin:0 0 12px}.reviewTools>button{padding:7px 10px;font-size:14px;min-height:44px;border-radius:6px}

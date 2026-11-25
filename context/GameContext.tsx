@@ -11,6 +11,7 @@ import { DayMantra, getDayMantra, getDefaultDayMantra } from '../data/dayMantras
 import { getDefaultDayQuote, getRandomDayQuote } from '../data/dayQuotes';
 import {
   Counters,
+  ContentTrack,
   DaySummary,
   DayQuote,
   Difficulty,
@@ -29,9 +30,10 @@ import { GameOverReasonKey } from '../constants/i18n';
 import { useTranslations } from '../hooks/useTranslations';
 import { evaluateDecision, type DecisionReceipt, type ReviewVerdict } from '../utils/decision';
 import { lineReferenceKey, normalizePullRequest } from '../utils/templateNormalization';
-import { clearSavedRun, isMeaningfulRun, readSavedRun, RUN_SAVE_STORAGE_KEY, type RunSaveEnvelope, writeSavedRun } from '../utils/runPersistence';
+import { BASICS_RUN_SAVE_STORAGE_KEY, clearSavedRun, isMeaningfulRun, readSavedRun, RUN_SAVE_STORAGE_KEY, type RunSaveEnvelope, writeSavedRun } from '../utils/runPersistence';
 
 export interface GameState {
+  contentTrack: ContentTrack;
   runId: number;
   currentDay: number;
   phase: GamePhase;
@@ -90,10 +92,14 @@ interface GameContextValue {
     recordSpawnedTemplates: (templateIds: string[]) => void;
     resumeSavedRun: () => void;
     discardSavedRun: () => void;
+    deliverPRs: (marker: string, prs: PullRequest[]) => void;
+    finishBasicsShift: () => void;
   };
 }
 
 export type GameAction =
+  | { type: 'FINISH_BASICS_SHIFT' }
+  | { type: 'DELIVER_PRS'; marker: string; prs: PullRequest[] }
   | { type: 'SET_PHASE'; phase: GamePhase }
   | { type: 'ADVANCE_TIME'; minutes: number }
   | { type: 'QUEUE_PRS'; prs: PullRequest[] }
@@ -128,13 +134,14 @@ const createInitialMeters = (): MeterSet => ({
   satisfaction: 100
 });
 
-export const createInitialState = (): GameState => {
+export const createInitialState = (contentTrack: ContentTrack = 'code'): GameState => {
   return {
     runId: 1,
+    contentTrack,
     currentDay: 1,
     phase: 'BRIEFING',
     languagePreference: ['generic', 'typescript'],
-    difficulty: 'normal',
+    difficulty: contentTrack === 'basics' ? 'learning' : 'normal',
     currentTime: 0,
     queue: [],
     currentPR: null,
@@ -150,12 +157,10 @@ export const createInitialState = (): GameState => {
     decisionReceipts: [],
     simulationPaused: false,
     deliveryMarkers: [],
-    leaderboardEligible: true,
+    leaderboardEligible: contentTrack === 'code',
     spawnedTemplateIds: []
   };
 };
-
-const initialState: GameState = createInitialState();
 
 export const computeQueueDrain = (pressure: number): number => {
   if (pressure <= 0) {
@@ -249,6 +254,16 @@ export const maybeGameOver = (state: GameState): GameState => {
 
 export const gameReducer = (state: GameState, action: GameAction): GameState => {
   switch (action.type) {
+    case 'FINISH_BASICS_SHIFT': {
+      if (state.contentTrack !== 'basics' || state.phase !== 'WORK' || state.simulationPaused || state.queue.length > 0 || state.decisionReceipts.length !== 10 || state.spawnedTemplateIds.length !== 10) return state;
+      return { ...state, phase: 'SUMMARY' };
+    }
+    case 'DELIVER_PRS': {
+      if (state.phase !== 'WORK' || state.simulationPaused || state.deliveryMarkers.includes(action.marker)) return state;
+      const next = gameReducer(state, { type: 'QUEUE_PRS', prs: action.prs });
+      return { ...next, deliveryMarkers: [...state.deliveryMarkers, action.marker],
+        spawnedTemplateIds: [...new Set([...state.spawnedTemplateIds, ...action.prs.map(pr => pr.templateId)])] };
+    }
     case 'SET_PHASE': {
       return { ...state, phase: action.phase, simulationPaused: action.phase === 'WORK' ? state.simulationPaused : false };
     }
@@ -349,7 +364,7 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
       return { ...state, phase: 'GAME_OVER', gameOverReason: action.reason ?? 'generic' };
     }
     case 'RESET_GAME': {
-      const resetState = createInitialState();
+      const resetState = createInitialState(state.contentTrack);
       return {
         ...resetState,
         runId: state.runId + 1,
@@ -406,8 +421,9 @@ export const gameReducer = (state: GameState, action: GameAction): GameState => 
 
 const GameContext = createContext<GameContextValue | undefined>(undefined);
 
-export const GameProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(gameReducer, initialState);
+export const GameProvider = ({ children, contentTrack = 'code' }: { children: React.ReactNode; contentTrack?: ContentTrack }) => {
+  const [state, dispatch] = useReducer(gameReducer, contentTrack, createInitialState);
+  const storageKey = contentTrack === 'basics' ? BASICS_RUN_SAVE_STORAGE_KEY : RUN_SAVE_STORAGE_KEY;
   const [savedRun, setSavedRun] = useState<RunSaveEnvelope | null>(null);
   const [savedRunPromptPending, setSavedRunPromptPending] = useState(false);
   const [persistenceEnabled, setPersistenceEnabled] = useState(false);
@@ -418,22 +434,23 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => { dayTransitionLock.current = null; }, [state.currentDay, state.runId]);
 
   useEffect(() => {
-    const saved = readSavedRun(window.localStorage);
+    const candidate = readSavedRun(window.localStorage, storageKey);
+    const saved = candidate?.state.contentTrack === contentTrack ? candidate : null;
     setSavedRun(saved);
     setSavedRunPromptPending(saved !== null);
     setPersistenceEnabled(saved === null);
-    if (!saved && window.localStorage.getItem(RUN_SAVE_STORAGE_KEY)) clearSavedRun(window.localStorage);
-  }, []);
+    if (!saved && window.localStorage.getItem(storageKey)) clearSavedRun(window.localStorage, storageKey);
+  }, [storageKey, contentTrack]);
 
   useEffect(() => {
     if (!persistenceEnabled) return;
     if (!isMeaningfulRun(state)) {
-      clearSavedRun(window.localStorage);
+      clearSavedRun(window.localStorage, storageKey);
       setSavedRun(null);
       return;
     }
-    setSavedRun(writeSavedRun(window.localStorage, state));
-  }, [persistenceEnabled, state]);
+    setSavedRun(writeSavedRun(window.localStorage, state, new Date(), storageKey));
+  }, [persistenceEnabled, state, storageKey]);
 
   // The initial state is deterministic so server HTML and client hydration
   // match; the random day flavor is applied after mount (effects never run
@@ -489,6 +506,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const requestChanges = useCallback((payload: RequestChangesPayload) => decideCurrentPR('request-changes', payload), [decideCurrentPR]);
 
   const advanceToNextDay = useCallback(() => {
+    if (state.contentTrack === 'basics' && state.currentDay >= 6) return;
     if (state.phase !== 'SUMMARY' || dayTransitionLock.current === state.currentDay) {
       return;
     }
@@ -543,11 +561,14 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const discardSavedRun = useCallback(() => {
     setPersistenceEnabled(true);
-    clearSavedRun(window.localStorage);
+    clearSavedRun(window.localStorage, storageKey);
     setSavedRun(null);
     setSavedRunPromptPending(false);
     dispatch({ type: 'RESET_GAME' });
-  }, []);
+  }, [storageKey]);
+
+  const deliverPRs = useCallback((marker: string, prs: PullRequest[]) => dispatch({ type: 'DELIVER_PRS', marker, prs }), []);
+  const finishBasicsShift = useCallback(() => dispatch({ type: 'FINISH_BASICS_SHIFT' }), []);
 
   const value = useMemo(
     () => ({
@@ -569,7 +590,9 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         markDelivery,
         recordSpawnedTemplates,
         resumeSavedRun,
-        discardSavedRun
+        discardSavedRun,
+        deliverPRs,
+        finishBasicsShift
       }
     }),
     [
@@ -589,6 +612,8 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       recordSpawnedTemplates,
       resumeSavedRun,
       discardSavedRun,
+      deliverPRs,
+      finishBasicsShift,
       savedRun,
       savedRunPromptPending
     ]

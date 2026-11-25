@@ -15,13 +15,13 @@ export const normalizePullRequest = (pr: PullRequest): NormalizedPullRequest => 
     return { ...file, lines: file.lines.map((line) => {
       const rowId = line.rowId ?? `line-${line.lineNumber}`;
       const kind = line.kind ?? (line.isNew ? 'addition' : 'context');
-      if (!rowId || !['addition', 'context'].includes(kind)) throw new Error('Unsupported row identity or kind');
+      if (!rowId || !['addition', 'context', 'removal'].includes(kind)) throw new Error('Unsupported row identity or kind');
       if ((kind === 'addition') !== line.isNew) throw new Error('kind and isNew disagree');
       const ref = { filename: file.filename, rowId };
       const key = lineReferenceKey(ref);
       if (byKey.has(key)) throw new Error(`Duplicate row identity: ${key}`);
       byKey.set(key, line.lineNumber);
-      if (kind === 'addition') additions.add(key);
+      if (kind !== 'context') additions.add(key);
       byNumber.set(line.lineNumber, [...(byNumber.get(line.lineNumber) ?? []), ref]);
       return { ...line, rowId, kind };
     }) };
@@ -36,7 +36,7 @@ export const normalizePullRequest = (pr: PullRequest): NormalizedPullRequest => 
     const numbers = lineRefs.map((ref) => {
       const number = byKey.get(lineReferenceKey(ref));
       if (number === undefined) throw new Error(`Unknown bug row: ${lineReferenceKey(ref)}`);
-      if (!additions.has(lineReferenceKey(ref))) throw new Error('Bug annotation must reference an addition');
+      if (!additions.has(lineReferenceKey(ref))) throw new Error('Bug annotation must reference an addition or removal');
       return number;
     });
     if (pattern.lineRefs && (numbers.some((n) => !pattern.lineNumbers.includes(n)) ||

@@ -13,14 +13,15 @@ export interface CodeDiffProps {
 export default function CodeDiff({ files, selected, onToggle, disabled = false, labels }: CodeDiffProps) {
   return <div className={styles.diffStack}>
     {files.map(file => <section key={file.filename} className={styles.diff} aria-label={`${labels.codeLabel}: ${file.filename}`}>
-      <div className={styles.fileHeader}><span>▧ <strong>{file.filename}</strong> <small aria-label={`${labels.language}: ${file.language}`}>{file.language}</small></span><span className={styles.additionCount}>+{file.lines.filter(line => line.kind === 'addition' || (!line.kind && line.isNew)).length} <span>{labels.additions}</span></span></div>
+      <div className={styles.fileHeader}><span>▧ <strong>{file.filename}</strong> <small aria-label={`${labels.language}: ${file.language}`}>{file.language}</small></span><span className={styles.additionCount}>+{file.lines.filter(line => line.kind === 'addition' || (!line.kind && line.isNew)).length} <span>{labels.additions}</span>{file.lines.some(line => line.kind === 'removal') && <> / −{file.lines.filter(line => line.kind === 'removal').length}</>}</span></div>
       <div className={styles.codeScroll} tabIndex={0} aria-label={`${labels.codeLabel}: ${file.filename}`}>
         {file.lines.map(line => {
           const reference = { filename: file.filename, rowId: line.rowId ?? `line-${line.lineNumber}` };
           const tagged = selected.some(item => item.filename === reference.filename && item.rowId === reference.rowId);
           const addition = line.kind === 'addition' || (!line.kind && line.isNew);
-          return <button key={reference.rowId} className={`${styles.codeLine} ${addition ? styles.addition : ''} ${tagged ? styles.selected : ''}`} disabled={disabled} aria-pressed={tagged} aria-label={`${labels.select} ${file.filename}:${line.lineNumber}: ${line.content}`} onClick={() => onToggle(reference)}>
-            <span className={styles.lineNumber}>{line.lineNumber}</span><span className={styles.lineMarker}>{tagged ? '●' : addition ? '+' : ' '}</span><code>{line.content || ' '}</code>
+          const removal = line.kind === 'removal';
+          return <button key={reference.rowId} className={`${styles.codeLine} ${addition ? styles.addition : removal ? styles.removal : ''} ${tagged ? styles.selected : ''}`} disabled={disabled} aria-pressed={tagged} aria-label={`${labels.select} ${file.filename}:${line.lineNumber}: ${removal ? '− ' : addition ? '+ ' : ''}${line.content}`} onClick={() => onToggle(reference)}>
+            <span className={styles.lineNumber}>{line.lineNumber}</span><span className={styles.lineMarker}>{tagged ? '●' : addition ? '+' : removal ? '−' : ' '}</span><code>{line.content || ' '}</code>
           </button>;
         })}
       </div>

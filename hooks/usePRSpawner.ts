@@ -84,6 +84,7 @@ export const usePRSpawner = () => {
   const {
     state: {
       phase,
+      contentTrack,
       runId,
       currentTime,
       currentDay,
@@ -175,6 +176,7 @@ export const usePRSpawner = () => {
   );
 
   useEffect(() => {
+    if (contentTrack === 'basics') return;
     let cancelled = false;
 
     const applyPools = (templates: PullRequestTemplate[]) => {
@@ -228,6 +230,7 @@ export const usePRSpawner = () => {
       cancelled = true;
     };
   }, [
+    contentTrack,
     currentDay,
     languagePreference,
     difficulty, // SPIKE(plan 010): re-derive pools when the mode changes so learning ordering applies
@@ -248,7 +251,7 @@ export const usePRSpawner = () => {
   }, [currentDay, deliveryMarkers, runId]);
 
   useEffect(() => {
-    if (phase !== "WORK" || simulationPaused) {
+    if (phase !== "WORK" || simulationPaused || contentTrack === 'basics') {
       return;
     }
 
@@ -316,6 +319,7 @@ export const usePRSpawner = () => {
       }
     }
   }, [
+    contentTrack,
     phase,
     simulationPaused,
     currentTime,
