@@ -1,7 +1,8 @@
 {
   "templateId": "rust-009-service-map-uploader",
   "title": "Add service map upload helper",
-  "author": "Priya Z.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds a convenience helper for posting service map snapshots to the mapping API.",
   "tags": [
     "integrations",

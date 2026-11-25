@@ -1,7 +1,8 @@
 {
   "templateId": "pr-018-tenant-lookup-for-usage-predictor",
   "title": "Tenant lookup for Usage Predictor",
-  "author": "Victor H.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a helper to fetch the latest tenant rows for reporting.",
   "tags": [
     "data",

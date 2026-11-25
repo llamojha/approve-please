@@ -1,7 +1,8 @@
 {
   "templateId": "pr-098-normalize-release-coordinator-payloads",
   "title": "Normalize Release Coordinator payloads",
-  "author": "Victor H.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a helper to normalize release coordinator inputs so downstream jobs stay consistent.",
   "tags": [
     "cleanup",

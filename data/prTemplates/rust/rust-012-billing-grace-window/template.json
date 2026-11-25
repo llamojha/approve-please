@@ -1,7 +1,8 @@
 {
   "templateId": "rust-012-billing-grace-window",
   "title": "Adjust billing grace window logic",
-  "author": "Kenji B.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Updates the helper that determines when invoices leave the grace period.",
   "tags": [
     "billing",

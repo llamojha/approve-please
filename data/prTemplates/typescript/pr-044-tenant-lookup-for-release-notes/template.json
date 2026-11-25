@@ -1,7 +1,8 @@
 {
   "templateId": "pr-044-tenant-lookup-for-release-notes",
   "title": "Tenant lookup for Release Notes",
-  "author": "Jonah R.",
+  "author": "Riya",
+  "authorId": "riya",
   "description": "Adds a helper to fetch the latest tenant rows for reporting.",
   "tags": [
     "cleanup",

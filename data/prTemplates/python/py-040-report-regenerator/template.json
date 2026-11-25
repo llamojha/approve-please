@@ -1,7 +1,8 @@
 {
   "templateId": "py-040-report-regenerator",
   "title": "Report renderer helper",
-  "author": "Mina F.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Renders analyst reports for each SLA segment.",
   "tags": [
     "performance",

@@ -1,7 +1,8 @@
 {
   "templateId": "css-072-buggy-clamp-responsive-font",
   "title": "Add fluid typography",
-  "author": "Felix U.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Implements responsive font sizing using clamp().",
   "tags": ["typography", "responsive"],
   "localized": {

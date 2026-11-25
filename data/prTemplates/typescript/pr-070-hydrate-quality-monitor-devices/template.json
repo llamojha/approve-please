@@ -1,7 +1,8 @@
 {
   "templateId": "pr-070-hydrate-quality-monitor-devices",
   "title": "Hydrate Quality Monitor devices",
-  "author": "Marina V.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a helper that pulls the full device matrix for reporting.",
   "tags": [
     "feature",

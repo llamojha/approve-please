@@ -1,7 +1,8 @@
 {
   "templateId": "java-039-distinct-sort-loop",
   "title": "Latency aggregation helper",
-  "author": "Mara X.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Aggregates per-endpoint latency buckets for dashboards.",
   "tags": [
     "performance",

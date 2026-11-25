@@ -1,7 +1,8 @@
 {
   "templateId": "css-030-transition-basic",
   "title": "Add button hover transition",
-  "author": "Nathan R.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds smooth transition effect to button hover states.",
   "tags": ["transitions", "buttons"],
   "localized": {

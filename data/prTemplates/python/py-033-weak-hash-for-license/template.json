@@ -1,7 +1,8 @@
 {
   "templateId": "py-033-weak-hash-for-license",
   "title": "License hash helper",
-  "author": "Ling T.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Hashes license payloads before writing to cache.",
   "tags": [
     "security",

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-004-normalize-chat-escalation-payloads",
   "title": "Normalize Chat Escalation payloads",
-  "author": "Kara Y.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a helper to normalize chat escalation inputs so downstream jobs stay consistent.",
   "tags": [
     "cleanup",

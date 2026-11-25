@@ -1,7 +1,8 @@
 {
   "templateId": "js-020-object-literal-unclosed-brace",
   "title": "Object literal missing closing brace",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds parser defaults for inbound event payloads.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         27
       ],
       "severity": "major",
-      "description": "Object literal is missing a closing brace, causing a syntax error."
+      "description": "Object literal is missing a closing brace, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Al literal de objeto le falta una llave de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en un literal de objeto",
+      "description": "Añade valores predeterminados del analizador para las cargas de eventos entrantes.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

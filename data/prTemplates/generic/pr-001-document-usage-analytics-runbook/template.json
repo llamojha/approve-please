@@ -1,7 +1,8 @@
 {
   "templateId": "pr-001-document-usage-analytics-runbook",
   "title": "Document Usage Analytics runbook",
-  "author": "Hank B.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "cleanup",

@@ -18,7 +18,9 @@ Every template requires these top-level fields:
 - `importance`: `low`, `normal`, or `high`.
 - `files`: required, non-empty array of file diffs.
 - `bugPatterns`: required array. Use `[]` for a clean PR; do not omit it.
-- `localized`: optional locale metadata. Spanish (`localized.es`) is encouraged but not required.
+- `localized`: locale metadata. The schema keeps it optional for backward compatibility, but committed catalog templates must include Spanish (`localized.es`) metadata.
+
+Every committed catalog template must select a coworker with `authorId`. Use one of the exact registry IDs: `lucia`, `diego`, `ines`, `tessa`, `ben`, `jonah`, `marta`, `evan`, `noel`, or `riya`. Set `author` to the matching canonical name in `data/characters.ts`; localized author names, when supplied, must match too. The development workshop's **Cast ID (optional)** field remains optional for external drafts, but must be filled before committing a catalog template. It previews the matching portrait and localized role. Catalog tests reject missing or unknown coworker IDs. Default character reactions are supplied automatically unless a template provides its own.
 
 ### Files and lines
 
@@ -48,7 +50,8 @@ Every bug line number must exist in a file diff and point to a changed line with
 {
   "templateId": "typescript-081-missing-focus-name",
   "title": "Add icon-only export action",
-  "author": "Avery N.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds an export button to the report toolbar.",
   "tags": [
     "reports",
@@ -89,7 +92,7 @@ Every bug line number must exist in a file diff and point to a changed line with
   "localized": {
     "es": {
       "title": "Agregar una acción de exportación solo con icono",
-      "author": "Avery N.",
+      "author": "Ben",
       "description": "Agrega un botón de exportación a la barra de herramientas de informes.",
       "tags": [
         "informes",
@@ -141,3 +144,9 @@ The preview gallery is intentionally development-only. Both `/dev/templates` and
 - [ ] `npm run generate:templates` and `npm test` pass.
 - [ ] The template was reviewed at `/dev/templates/<template-id>`.
 - [ ] The pull request contains at most 10 templates.
+
+## Refresh foundation metadata
+
+Committed catalog templates include a valid authorId and canonical author. The underlying schema still accepts guest authors for external drafts and backward compatibility. Localized reactions, rowId/kind on rows, and file-qualified lineRefs on bugs remain optional. Keep author, isNew and numeric lineNumbers for compatibility. false means context, not deletion; removal is unsupported. Explicit lineRefs must project to the same lineNumbers. Bug numbers must remain unambiguous across the PR while catalog validation retains the legacy numeric guard. Character portraits, localized roles, reactions, file-scoped selection and the new review semantics are active in the live desk and contributor workshop.
+
+The shared browser-safe validator returns field paths, diagnostic codes and messages. Normal generation additionally checks folder names and repository-wide uniqueness. Report-only output is diagnostic, not an exit-code validation gate. See the adjacent content-contract.md and review-behavior-contract.md for examples and the migration boundary.

@@ -1,7 +1,8 @@
 {
   "templateId": "rust-029-plaintext-webhook-signature",
   "title": "Webhook signature verifier",
-  "author": "Mina R.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds verification for partner webhook callbacks.",
   "tags": [
     "security",

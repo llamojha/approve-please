@@ -1,7 +1,8 @@
 {
   "templateId": "pr-010-tenant-lookup-for-marketing-journey",
   "title": "Tenant lookup for Marketing Journey",
-  "author": "Uma R.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds a helper to fetch the latest tenant rows for reporting.",
   "tags": [
     "bugfix",

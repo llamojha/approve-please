@@ -1,7 +1,8 @@
 {
   "templateId": "css-066-buggy-css-variable-definition",
   "title": "Define color palette variables",
-  "author": "Jack N.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Creates CSS custom properties for the color palette.",
   "tags": ["variables", "colors"],
   "localized": {

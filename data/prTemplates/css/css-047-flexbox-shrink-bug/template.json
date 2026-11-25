@@ -1,7 +1,8 @@
 {
   "templateId": "css-047-flexbox-shrink-bug",
   "title": "Fix sidebar collapse issue",
-  "author": "Eva T.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Prevents sidebar from shrinking below minimum width.",
   "tags": ["sidebar", "flexbox"],
   "localized": {

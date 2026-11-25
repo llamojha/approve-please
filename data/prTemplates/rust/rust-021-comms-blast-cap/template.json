@@ -1,7 +1,8 @@
 {
   "templateId": "rust-021-comms-blast-cap",
   "title": "Comms blast cap logic",
-  "author": "Devon Y.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Decides whether another marketing blast can be sent this minute.",
   "tags": [
     "logic",

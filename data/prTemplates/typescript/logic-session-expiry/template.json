@@ -1,7 +1,8 @@
 {
   "templateId": "logic-session-expiry",
   "title": "Session expiry enforcement",
-  "author": "Malik C.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Refresh tokens should not extend sessions beyond 30 days.",
   "tags": [
     "security",

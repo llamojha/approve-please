@@ -1,7 +1,8 @@
 {
   "templateId": "css-014-inheritance-font",
   "title": "Set global font family",
-  "author": "Kevin L.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Applies consistent font family across the application.",
   "tags": ["typography", "fonts"],
   "localized": {

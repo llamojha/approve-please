@@ -1,7 +1,8 @@
 {
   "templateId": "pr-036-add-survey-engine-panel",
   "title": "Add Survey Engine panel",
-  "author": "Terrence L.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Introduces a dashboard card that surfaces the latest survey engine metrics.",
   "tags": [
     "feature",

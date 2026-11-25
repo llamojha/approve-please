@@ -1,7 +1,8 @@
 {
   "templateId": "py-049-bare-except-handler",
   "title": "Payload parser helper",
-  "author": "Theo S.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Parses JSON payloads flowing through the resolver.",
   "tags": [
     "style",

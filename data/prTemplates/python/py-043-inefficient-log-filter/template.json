@@ -1,7 +1,8 @@
 {
   "templateId": "py-043-inefficient-log-filter",
   "title": "Log filter helper",
-  "author": "Sasha P.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Filters log lines by pattern before piping to support tooling.",
   "tags": [
     "performance",

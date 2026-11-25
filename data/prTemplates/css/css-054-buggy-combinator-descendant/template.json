@@ -1,7 +1,8 @@
 {
   "templateId": "css-054-buggy-combinator-descendant",
   "title": "Style nested list items",
-  "author": "Elena M.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Applies different styling to nested list items in sidebar.",
   "tags": ["lists", "sidebar"],
   "localized": {

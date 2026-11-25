@@ -1,7 +1,8 @@
 {
   "templateId": "css-080-buggy-transform",
   "title": "Add scale effect on button hover",
-  "author": "Rachel U.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Scales button slightly on hover for interactive feedback.",
   "tags": ["buttons", "transform", "hover"],
   "localized": {

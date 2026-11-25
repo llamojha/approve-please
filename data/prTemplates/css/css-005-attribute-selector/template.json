@@ -1,7 +1,8 @@
 {
   "templateId": "css-005-attribute-selector",
   "title": "Style external links",
-  "author": "Sofia L.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds icon indicator for links that open in new tabs.",
   "tags": ["links", "accessibility"],
   "localized": {

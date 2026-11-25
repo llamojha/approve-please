@@ -1,7 +1,8 @@
 {
   "templateId": "rust-045-disk-write-per-row",
   "title": "Row exporter helper",
-  "author": "Rosa W.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Exports billing rows to disk for reconciliation.",
   "tags": [
     "performance",

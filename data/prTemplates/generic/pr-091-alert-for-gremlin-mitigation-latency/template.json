@@ -1,7 +1,8 @@
 {
   "templateId": "pr-091-alert-for-gremlin-mitigation-latency",
   "title": "Alert for Gremlin Mitigation latency",
-  "author": "Wendy C.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "bugfix",

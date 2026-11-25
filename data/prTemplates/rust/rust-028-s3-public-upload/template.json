@@ -1,7 +1,8 @@
 {
   "templateId": "rust-028-s3-public-upload",
   "title": "Invoice attachment uploader",
-  "author": "Hector V.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds helper for uploading invoice PDFs to object storage.",
   "tags": [
     "security",

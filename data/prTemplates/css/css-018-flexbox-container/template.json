@@ -1,7 +1,8 @@
 {
   "templateId": "css-018-flexbox-container",
   "title": "Create flex navigation",
-  "author": "Chris A.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Converts navigation to flexbox layout for better alignment.",
   "tags": ["navigation", "flexbox"],
   "localized": {

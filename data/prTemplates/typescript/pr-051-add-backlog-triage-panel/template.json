@@ -1,7 +1,8 @@
 {
   "templateId": "pr-051-add-backlog-triage-panel",
   "title": "Add Backlog Triage panel",
-  "author": "Kara Y.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Introduces a dashboard card that surfaces the latest backlog triage metrics.",
   "tags": [
     "feature",

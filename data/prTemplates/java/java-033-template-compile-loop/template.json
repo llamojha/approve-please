@@ -1,7 +1,8 @@
 {
   "templateId": "java-033-template-compile-loop",
   "title": "Template compile loop",
-  "author": "Gia E.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Renders SLA email templates for each tenant.",
   "tags": [
     "performance",

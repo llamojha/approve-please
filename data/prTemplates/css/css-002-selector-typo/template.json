@@ -1,7 +1,8 @@
 {
   "templateId": "css-002-selector-typo",
   "title": "Style navigation links",
-  "author": "Carlos R.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds hover effects to navigation menu items.",
   "tags": ["navigation", "hover"],
   "localized": {

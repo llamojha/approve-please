@@ -1,7 +1,8 @@
 {
   "templateId": "js-029-array-literal-unclosed-bracket",
   "title": "Array literal missing closing bracket",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds default region list for uploader jobs.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         22
       ],
       "severity": "major",
-      "description": "Array literal is missing a closing bracket, causing a syntax error."
+      "description": "Array literal is missing a closing bracket, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Al literal de array le falta el corchete de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Corchete de cierre ausente en un literal de array",
+      "description": "Añade la lista predeterminada de regiones para los trabajos de carga.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

@@ -1,7 +1,8 @@
 {
   "templateId": "js-043-queryselector-unclosed-quote",
   "title": "querySelector selector string unclosed",
-  "author": "Nora I.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds save button lookup for click wiring.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         31
       ],
       "severity": "major",
-      "description": "Selector string is unclosed, causing a syntax error."
+      "description": "Selector string is unclosed, causing a syntax error.",
+      "localizedDescription": {
+        "es": "La cadena del selector no está cerrada, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Cadena de selector sin cerrar en querySelector",
+      "description": "Añade la búsqueda del botón Guardar para conectar el clic.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

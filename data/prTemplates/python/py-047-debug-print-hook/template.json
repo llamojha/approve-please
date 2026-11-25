@@ -1,7 +1,8 @@
 {
   "templateId": "py-047-debug-print-hook",
   "title": "Dispatch logging helper",
-  "author": "Evan K.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds lightweight logging around dispatch batches.",
   "tags": [
     "style",

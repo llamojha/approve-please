@@ -1,7 +1,8 @@
 {
   "templateId": "pr-014-admin-endpoint-for-traffic-shaper",
   "title": "Admin endpoint for Traffic Shaper",
-  "author": "Gabe K.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds an express route for admins to push configuration updates.",
   "tags": [
     "hotfix",

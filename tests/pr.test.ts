@@ -47,11 +47,13 @@ describe('instantiatePullRequest', () => {
     expect(template.tags).toEqual(['base-tag']);
   });
 
-  it('uses base fields for locale en without localized metadata', () => {
+  it('uses base fields for a guest author without localized metadata', () => {
     const pr = instantiatePullRequest(makeTemplate(), 1, 0, 'en');
     expect(pr.title).toBe('Base title');
     expect(pr.description).toBe('Base description');
     expect(pr.author).toBe('Base Author');
+    expect(pr.authorId).toBeUndefined();
+    expect(pr.reactions).toBeUndefined();
     expect(pr.tags).toEqual(['base-tag']);
   });
 
@@ -82,6 +84,20 @@ describe('instantiatePullRequest', () => {
     // neither locale provides author/tags -> base fields
     expect(pr.author).toBe('Base Author');
     expect(pr.tags).toEqual(['base-tag']);
+  });
+
+  it('preserves an explicitly authored coworker and reactions', () => {
+    const reactions = { 'clean-approval': { en: 'Explicit reaction' } } as const;
+    const pr = instantiatePullRequest(makeTemplate({ author: 'Lucía Navarro', authorId: 'lucia', reactions }), 1, 0, 'en');
+    expect(pr.author).toBe('Lucía Navarro');
+    expect(pr.authorId).toBe('lucia');
+    expect(pr.reactions).toEqual(reactions);
+  });
+
+  it('supplies localized registry reactions for an explicit coworker without template reactions', () => {
+    const pr = instantiatePullRequest(makeTemplate({ author: 'Old label', authorId: 'jonah' }), 1, 0, 'es');
+    expect(pr.author).toBe('Jonah');
+    expect(pr.reactions?.['correct-rejection']?.es).toContain('Gracias');
   });
 
   it('resolves bug pattern descriptions through the locale fallback chain', () => {

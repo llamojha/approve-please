@@ -1,7 +1,8 @@
 {
   "templateId": "css-019-flexbox-direction-bug",
   "title": "Stack mobile menu items",
-  "author": "Anna S.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Changes flex direction for mobile menu layout.",
   "tags": ["mobile", "flexbox"],
   "localized": {

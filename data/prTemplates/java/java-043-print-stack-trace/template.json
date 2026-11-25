@@ -1,7 +1,8 @@
 {
   "templateId": "java-043-print-stack-trace",
   "title": "Alert failure handler",
-  "author": "Quentin R.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Handles exceptions when sending alerts.",
   "tags": [
     "style",

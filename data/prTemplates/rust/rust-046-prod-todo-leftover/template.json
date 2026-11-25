@@ -1,7 +1,8 @@
 {
   "templateId": "rust-046-prod-todo-leftover",
   "title": "Payload sanitizer helper",
-  "author": "Ibrahim Y.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Wraps payloads before sending them to the command bus.",
   "tags": [
     "style",

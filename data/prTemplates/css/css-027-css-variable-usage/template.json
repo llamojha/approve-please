@@ -1,7 +1,8 @@
 {
   "templateId": "css-027-css-variable-usage",
   "title": "Apply theme colors to buttons",
-  "author": "Karen O.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Uses CSS variables for consistent button theming.",
   "tags": ["buttons", "variables"],
   "localized": {

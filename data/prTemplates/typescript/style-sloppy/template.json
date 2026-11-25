@@ -1,7 +1,8 @@
 {
   "templateId": "style-sloppy",
   "title": "Observability toggles",
-  "author": "Jess F.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds quick toggle for verbose logging.",
   "tags": [
     "devex"

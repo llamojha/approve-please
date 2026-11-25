@@ -1,7 +1,8 @@
 {
   "templateId": "css-036-universal-selector-performance",
   "title": "Reset element margins",
-  "author": "Tina I.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Applies margin reset to all elements in container.",
   "tags": ["reset", "margins"],
   "localized": {

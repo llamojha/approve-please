@@ -1,7 +1,8 @@
 {
   "templateId": "pr-030-chunk-sprint-health-records",
   "title": "Chunk Sprint Health records",
-  "author": "Oscar W.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds pagination helpers for sprint health batches.",
   "tags": [
     "bugfix",

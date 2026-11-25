@@ -1,7 +1,8 @@
 {
   "templateId": "rust-037-slow-metrics-serializer",
   "title": "Metrics serializer helper",
-  "author": "Naomi F.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Serializes metrics with a schema overlay before publishing.",
   "tags": [
     "performance",

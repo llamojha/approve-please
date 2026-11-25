@@ -1,7 +1,8 @@
 {
   "templateId": "pr-093-alert-for-cache-pruner-latency",
   "title": "Alert for Cache Pruner latency",
-  "author": "Wendy C.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "cleanup",

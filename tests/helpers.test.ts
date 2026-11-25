@@ -89,6 +89,12 @@ describe('calculateQueueChevronCount', () => {
     expect(calculateQueueChevronCount([])).toBe(0);
   });
 
+  it('keeps every active drain visible and distinguishes high priority', () => {
+    expect(calculateQueueChevronCount([prWithImportance('low')])).toBe(1);
+    expect(calculateQueueChevronCount([prWithImportance('normal')])).toBe(1);
+    expect(calculateQueueChevronCount([prWithImportance('high')])).toBe(2);
+  });
+
   it('caps at QUEUE_PRESSURE_CHEVRON_CAP', () => {
     const queue = Array.from({ length: 30 }, () => prWithImportance('high'));
     expect(calculateQueueChevronCount(queue)).toBe(QUEUE_PRESSURE_CHEVRON_CAP);

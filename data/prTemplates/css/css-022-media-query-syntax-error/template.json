@@ -1,7 +1,8 @@
 {
   "templateId": "css-022-media-query-syntax-error",
   "title": "Hide desktop nav on mobile",
-  "author": "Frank M.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Hides desktop navigation on small screens.",
   "tags": ["responsive", "navigation"],
   "localized": {

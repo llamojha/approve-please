@@ -1,7 +1,8 @@
 {
   "templateId": "rust-027-audit-sql-concat",
   "title": "Audit SQL fetch helper",
-  "author": "Yara B.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a helper to fetch audit log entries for a tenant.",
   "tags": [
     "security",

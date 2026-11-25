@@ -1,7 +1,8 @@
 {
   "templateId": "rust-042-aggregation-loop",
   "title": "Event aggregation helper",
-  "author": "Alma S.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Aggregates event durations for dashboards.",
   "tags": [
     "performance",

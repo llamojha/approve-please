@@ -1,7 +1,8 @@
 {
   "templateId": "pr-033-typescript-helper-for-ops-console-data",
   "title": "TypeScript helper for Ops Console data",
-  "author": "Nina L.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",

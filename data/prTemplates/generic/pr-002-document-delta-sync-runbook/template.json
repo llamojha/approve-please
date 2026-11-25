@@ -1,7 +1,8 @@
 {
   "templateId": "pr-002-document-delta-sync-runbook",
   "title": "Document Delta Sync runbook",
-  "author": "Victor H.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "docs",

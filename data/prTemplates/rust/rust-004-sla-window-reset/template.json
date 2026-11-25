@@ -1,7 +1,8 @@
 {
   "templateId": "rust-004-sla-window-reset",
   "title": "Add SLA window reset helper",
-  "author": "Mateo K.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds a context manager that temporarily resets the SLA tracking window during recalibration.",
   "tags": [
     "sla",

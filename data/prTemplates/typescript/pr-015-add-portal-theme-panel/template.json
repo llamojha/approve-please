@@ -1,7 +1,8 @@
 {
   "templateId": "pr-015-add-portal-theme-panel",
   "title": "Add Portal Theme panel",
-  "author": "Leo P.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Introduces a dashboard card that surfaces the latest portal theme metrics.",
   "tags": [
     "feature",

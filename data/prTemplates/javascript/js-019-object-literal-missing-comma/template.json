@@ -1,7 +1,8 @@
 {
   "templateId": "js-019-object-literal-missing-comma",
   "title": "Object literal missing comma",
-  "author": "Nora I.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds request timeout defaults for queue clients.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         9
       ],
       "severity": "major",
-      "description": "Object properties are missing a comma separator, causing a syntax error."
+      "description": "Object properties are missing a comma separator, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Falta una coma entre las propiedades del objeto, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Coma ausente en un literal de objeto",
+      "description": "Añade valores predeterminados de tiempo de espera para los clientes de la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

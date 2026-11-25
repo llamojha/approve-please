@@ -1,7 +1,8 @@
 {
   "templateId": "pr-063-hydrate-sprint-health-devices",
   "title": "Hydrate Sprint Health devices",
-  "author": "Pedro A.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper that pulls the full device matrix for reporting.",
   "tags": [
     "feature",

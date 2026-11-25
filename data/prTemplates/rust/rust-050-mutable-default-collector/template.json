@@ -1,7 +1,8 @@
 {
   "templateId": "rust-050-mutable-default-collector",
   "title": "Metric collector helper",
-  "author": "Keiko R.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Collects metrics before handing them to the exporter.",
   "tags": [
     "style",

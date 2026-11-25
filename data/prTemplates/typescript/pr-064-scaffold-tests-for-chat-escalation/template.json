@@ -1,7 +1,8 @@
 {
   "templateId": "pr-064-scaffold-tests-for-chat-escalation",
   "title": "Scaffold tests for Chat Escalation",
-  "author": "Brielle S.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Drops a placeholder spec awaiting follow-up coverage.",
   "tags": [
     "bugfix",

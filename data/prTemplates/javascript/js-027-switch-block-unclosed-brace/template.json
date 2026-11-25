@@ -1,7 +1,8 @@
 {
   "templateId": "js-027-switch-block-unclosed-brace",
   "title": "Switch block missing closing brace",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds escalation mapping for queue severity.",
   "tags": [
     "bugfix",
@@ -49,7 +50,21 @@
         63
       ],
       "severity": "major",
-      "description": "Switch statement is missing its closing brace, causing a syntax error."
+      "description": "Switch statement is missing its closing brace, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la sentencia switch le falta la llave de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Llave de cierre ausente en un bloque switch",
+      "description": "Añade el mapeo de escalado para la gravedad de la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

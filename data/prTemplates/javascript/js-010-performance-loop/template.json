@@ -1,7 +1,8 @@
 {
   "templateId": "js-010-performance-loop",
   "title": "Detailed project export",
-  "author": "Sal M.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds nested aggregation for CSV export.",
   "tags": [
     "feature",

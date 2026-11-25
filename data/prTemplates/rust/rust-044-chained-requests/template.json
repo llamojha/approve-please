@@ -1,7 +1,8 @@
 {
   "templateId": "rust-044-chained-requests",
   "title": "Score fetch helper",
-  "author": "Ilias C.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Fetches quality scores for a batch of experiment IDs.",
   "tags": [
     "performance",
