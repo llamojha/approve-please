@@ -50,7 +50,7 @@ export default function ReviewDesk({ pullRequest: pr, repository, number, branch
     {pr.description && <section className={styles.authorNote} aria-label={t.prDescription}><div><h2>{t.prDescription}</h2><span>{t.authorNote(pr.author)}</span></div><p>{pr.description}</p></section>}
     {children}
     <CodeDiff files={pr.files} selected={selected} onToggle={onToggle} disabled={locked} labels={t} />
-    <div className={styles.decisionBar}><div><strong>{selected.length ? `${selected.length} ${t.selected(selected.length)}` : t.optional}</strong>{selected.length > 0 && !locked && <button onClick={onClear}>{t.clear}</button>}</div><div className={styles.verdicts}><button data-review-action="request" className={styles.request} disabled={locked} onClick={() => onVerdict('request-changes')}>↶ {t.request}</button><button data-review-action="approve" className={styles.primary} disabled={locked} onClick={() => onVerdict('approve')}>✓ {t.approve}</button></div></div>
+    <div className={styles.decisionBar}><div><strong>{selected.length ? `${selected.length} ${t.selected(selected.length)}` : t.optional}</strong>{selected.length > 0 && !locked && <button onClick={onClear}>{t.clear}</button>}</div><div className={styles.verdicts}><button data-review-action="request" className={styles.request} disabled={locked} onClick={() => onVerdict('request-changes')}><span aria-hidden="true">✕</span> {t.request}</button><button data-review-action="approve" className={styles.primary} disabled={locked} onClick={() => onVerdict('approve')}>✓ {t.approve}</button></div></div>
     <span className={styles.screenReaderStatus} role="status">{status ?? ''}</span>
   </main>;
 }
