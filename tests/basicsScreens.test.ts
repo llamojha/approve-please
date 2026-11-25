@@ -22,7 +22,13 @@ describe('beginner summaries in the actual game screen', () => {
     state = game.gameReducer(state,{type:'ADVANCE_TIME',minutes:480});
     const html = render(state);
     expect(html).toContain('You approved');
-    expect(html).toContain('Needed a revision');
+    expect(html).toContain('Correct decision');
+    expect(html).toContain('✕ Reject');
+    expect(html).toContain('PR description');
+    expect(html).toContain('Lines to revisit');
+    expect(html).toContain('To revisit');
+    expect(html).toContain('/characters/studies/');
+    expect(html).not.toContain('The task · your source of truth');
     expect(html).toContain('Inés was removed.');
     expect(html).toContain('Still in the inbox');
     expect(html).toContain('They were not reviewed or scored.');

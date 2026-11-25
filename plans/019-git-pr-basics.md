@@ -1,5 +1,11 @@
 # PR basics in the shift game
 
+## Feedback UI polish TODO
+
+- [x] Replace the plain review disclosures with a scoped review log: portraits, compact headers, outcome badges, native accessible expand/collapse and an optional mistake filter.
+- [x] Structure expanded feedback into the player's decision, expected decision, PR description, explanation and relevant changed-line excerpts. Keep incorrect reviews expanded initially and preserve grading.
+- [x] Match purple/light/dark game colors, verify English/Spanish and mobile layouts in a real browser, then update the same PR after relevant checks.
+
 Goal: give IT beginners the actual Approve Please game with plain-text PRs instead of programming-language changes. Sixty bilingual scenarios, six shifts, the same ten coworkers.
 
 Approach: `/learn` renders the shared `GamePage`. The same provider/reducer, screens, clock, meters, inbox, audio, priority tags, shortcuts, swipe and day recaps run both tracks. The landing setup selects code review or PR basics. Both modes use the regular two-minute clock. Practice disables waiting penalties; normal retains queue pressure. Decisions retain consequences in either difficulty. No detached course dashboard, manual next-exercise button or retry workflow.
@@ -25,3 +31,5 @@ Delivery: PR #14 in `llamojha/approve-please`, source `codex/git-pr-basics`, bas
 Pacing correction: bring the next undelivered batch forward when the inbox is cleared, preserve existing delivery identities, and end a completed ten-review shift after the final swipe. No empty-queue wait at 10:00 and no three-times-slower beginner clock. Regression coverage checks scheduled arrival, early refill, old markers, no duplicates, completion guards and preservation of the original code-game behavior.
 
 Production browser pacing proof: resumed an existing practice save, reviewed ten unique PRs without waiting for scheduled waves and reached the summary automatically. On day two, clearing the opening pair delivered three fresh PRs at 09:03. Screenshot saved outside the repository as `instant-refill.jpg`.
+
+Feedback polish validation: 70 targeted tests passed; typecheck, lint and production build passed. Played a mixed day-three shift into the real recap (two correct decisions, a wrong rejection and a wrong approval), verified the mistake-only filter, native expansion, source-line evidence and pending work. Checked English dark mode and Spanish light mode at 320 px without horizontal overflow; corrected pending-row wrapping. Screenshots remain outside the repository.
