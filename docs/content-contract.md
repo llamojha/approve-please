@@ -8,7 +8,7 @@ Every committed catalog template has an authorId from the recurring character re
 
 The generated `coworkerManifest.ts` contains identity metadata only. Saved queues use it to refresh legacy author names, portraits and missing reactions on restore, without importing scenario packs or resetting run progress. Historical decision records remain unchanged.
 
-Each row can supply rowId and kind (addition or context). Legacy isNew=true means addition; false means context, never deletion. Omitted row IDs derive deterministically as line-N. IDs and numeric line numbers must be unique within a file; filenames unique within a PR. Explicit kind must agree with isNew. Removed rows are unsupported and rejected. No file is written using an authored filename.
+Each row can supply rowId and kind (addition, context or removal). Legacy isNew=true means addition; false without an explicit kind remains context. A removal must explicitly set kind=removal and isNew=false. Omitted row IDs derive deterministically as line-N. IDs and numeric line numbers must be unique within a file; filenames unique within a PR. Explicit kind must agree with isNew. Added and removed rows can be annotated through file-qualified references. No file is written using an authored filename.
 
 A bug keeps lineNumbers for existing consumers and may also supply lineRefs, each {filename, rowId}. Their projected numbers must agree. A bug must reference added code. Runtime normalization rejects missing/ambiguous legacy references. The pure evaluator can distinguish identical line numbers in different files through explicit references, but catalog validation still rejects ambiguous numeric bug lines until the live game migrates. Do not advertise such scenarios as playable yet.
 

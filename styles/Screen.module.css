@@ -780,3 +780,4 @@
   .briefingCard .screenActions { margin-top: 1.25rem; }
   .briefingCard .screenButton { flex-basis: 100%; }
 }
+.studentReview{margin:12px 0;padding:16px 18px;border:1px solid var(--border);border-radius:10px;background:var(--bg-panel)}.studentReview summary{cursor:pointer;line-height:1.5}.studentReview summary>span{display:inline-block;margin-right:12px;color:var(--accent)}.studentReview summary>strong{font-size:17px}.studentReview p{line-height:1.55}.studentReview ul{font:14px/1.6 ui-monospace,monospace}

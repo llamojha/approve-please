@@ -46,4 +46,4 @@ Content house rules:
 - For gameplay tuning, adjust values in `constants/gameSettings.ts` and describe the intended effect.
 ## Beginner PR lessons
 
-The plain-text student course lives separately at `/learn`. See [the learning content guide](docs/git-pr-basics.md) for bilingual briefs, before/after files, issue references and lesson validation. These exercises do not enter the timed game's code queue.
+Choose PR basics in the normal game setup to play beginner shifts with text PRs. See [the learning content guide](docs/git-pr-basics.md) for bilingual briefs, before/after files, issue references and shift validation. The scenarios use the real game engine and do not enter code-review runs.

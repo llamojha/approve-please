@@ -1,18 +1,22 @@
-# Git & PR basics
+# PR basics in the shift game
 
-Goal: introduce PR review to IT students who do not know a programming language. Ship 60 distinct bilingual plain-text scenarios, ten per lesson, with the existing ten coworkers.
+Goal: give IT beginners the actual Approve Please game with plain-text PRs instead of programming-language changes. Sixty bilingual scenarios, six shifts, the same ten coworkers.
 
-Scope: reading diffs, reviewing against an explicit brief, catching unintended edits, completeness, cross-file consistency and mixed practice. This teaches PR review; it is not a Git command-line course. No timer, pressure meters or leaderboard. Existing game saves and behavior remain independent.
+Approach: `/learn` renders the shared `GamePage`. The same provider/reducer, screens, clock, meters, inbox, audio, priority tags, shortcuts, swipe and day recaps run both tracks. The landing setup selects code review or PR basics. Practice gives beginners six-minute shifts without waiting penalties; normal uses the regular two-minute clock and queue pressure. Decisions retain consequences in either difficulty. No detached course dashboard, manual next-exercise button or retry workflow.
 
 Implementation TODO:
-- [x] Author six lesson packs in `data/basics/`, with requirements, before/after text, issue references and explanations in English and Spanish. Aim for 30 safe / 30 flawed PRs.
-- [x] Add a pure text-diff and review/progress model in `utils/basics.ts`, including safe restore of separate learning progress.
-- [x] Reuse `components/work/ReviewDesk.tsx` with an optional custom diff slot; add `components/basics/PlainTextDiff.tsx`, `/learn` in `pages/learn.tsx`, localized copy and responsive styles. Include onboarding, feedback, retries and lesson recaps.
-- [x] Add a visible entry from `pages/index.tsx`; document learning content contribution in `docs/git-pr-basics.md`.
-- [x] After implementation, test all 60 scenarios and both locales, diff correctness, progression and persistence. Run targeted tests, typecheck, lint/build, browser checks on desktop/mobile, and publish a PR from `codex/git-pr-basics` to `main`.
+- [x] Author 60 bilingual scenarios, half safe and half flawed; give every coworker both kinds of work.
+- [x] Add the beginner content track and separately keyed game save, preserving old code saves as the code track.
+- [x] Deliver two/three/three/two PRs at simulated minutes 0/90/180/300 over six shifts through atomic, replay-safe reducer delivery.
+- [x] Support explicit removed rows in normalization, shared validation and the actual diff viewer. Keep legacy false-without-kind as context; use file/row references across files.
+- [x] Add beginner briefings, per-PR tasks and paused last-review explanations. Add a full day review log with incorrect decisions expanded, unreviewed queue entries and a six-shift finish.
+- [x] Remove the standalone course UI, keeping the content, and update the contributor documentation.
+- [x] Finish integrated browser checks and prepare the same PR #14 for publication and CI verification.
 
-Validation: no programming language assumptions; every answer follows from the brief. All coworkers have safe and flawed PRs. Wrong decisions remain visible in recaps even after retry. Removed lines are actual removals, never disguised as context. Keyboard actions ignore typing/feedback and respect reduced motion. Verify main-game regression coverage and no shared save-key writes.
+Validation: all 60 scenarios pass bilingual content validation and real decision-engine checks. The integration test plays all six timed shifts through the actual reducer, verifying duplicate delivery protection, consequences, pressure, pausing, reset and isolated saves. The real summary screen has regression coverage for wrong approvals, unreviewed work, the six-shift finish and unchanged code progression. Full suite: 630 tests in 22 files; typecheck, lint, generation and production build passed.
 
-Risks: beginner content must not leak answers through author or title. Progress is local to a browser and can be restarted explicitly. The shared desk extension defaults to its existing behavior. Rollback is a normal feature revert; main game save format remains unchanged.
+Production-build browser proof: played a timed first shift into the recap and day-two briefing; intentionally approved the removed roster member, rejected a flagged wrong shelf location and left one PR unreviewed. Verified the three corresponding outcomes in the recap. Also verified translated active PRs, 320 px without page overflow, practice meters with no waiting drain, shared landing setup, separate reset/save behavior and resuming the original code PR. Screenshots live outside the repository as local review artifacts. GitHub checks on PR #14 are the publication gate.
 
-Validation completed: 627 tests in 21 files passed with one worker; typecheck, full lint, template generation and production build passed. Browser playthrough reviewed all 60 unique PRs through completion. Verified wrong first decision → correct retry → retained recap, reload retaining 60/60, removal tagging, Spanish copy and HTML language, keyboard R, light/dark themes, 320 px with no page overflow, landing entry and course reset preserving a meaningful game save. Screenshots are local review artifacts outside the repository. Delivery branch: `codex/git-pr-basics`, base: `main`.
+Risks and compatibility: student runs use `approve-please.basics-run.v1`, code runs retain `approve-please.run.v1`. Legacy code saves restore with contentTrack=code. Restarting one track never clears the other. Student runs do not submit to the code leaderboard. The earlier prototype's progress key remains untouched and is not converted into game scores. Rollback is a normal revert of the feature PR; do not delete saved data.
+
+Delivery: PR #14 in `llamojha/approve-please`, source `codex/git-pr-basics`, base `main`. The learning content guide tracks testing with actual beginners before curriculum expansion.

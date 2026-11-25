@@ -4,7 +4,7 @@ import { useGameState } from '../context/GameContext';
 
 export const useGameClock = () => {
   const {
-    state: { phase, simulationPaused },
+    state: { phase, simulationPaused, contentTrack, difficulty },
     actions: { tickWorkMinute }
   } = useGameState();
 
@@ -14,10 +14,10 @@ export const useGameClock = () => {
     }
     const interval = setInterval(() => {
       tickWorkMinute();
-    }, MS_PER_GAME_MINUTE);
+    }, MS_PER_GAME_MINUTE * (contentTrack === 'basics' && difficulty === 'learning' ? 3 : 1));
 
     return () => {
       clearInterval(interval);
     };
-  }, [phase, simulationPaused, tickWorkMinute]);
+  }, [phase, simulationPaused, tickWorkMinute, contentTrack, difficulty]);
 };

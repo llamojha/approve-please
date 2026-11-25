@@ -3,13 +3,21 @@ import { useGameState } from '../../context/GameContext';
 import { useTranslations } from '../../hooks/useTranslations';
 import { formatFalsePositiveReason } from '../../utils/falsePositives';
 import RunStatsCards from '../common/RunStatsCards';
+import Link from 'next/link';
+import { useLocale } from '../../context/LocaleContext';
+import { basicsCopy } from '../../constants/basicsCopy';
+import { basicsExercise, basicsDay } from '../../utils/basicsGame';
 
 const SummaryScreen = () => {
   const {
-    state: { currentDay, counters, meters, prodIncidents, falsePositiveRecords },
+    state: { currentDay, counters, meters, prodIncidents, falsePositiveRecords, contentTrack, decisionReceipts, queue },
     actions: { advanceToNextDay, restartGame }
   } = useGameState();
   const translations = useTranslations();
+  const { locale } = useLocale();
+  const beginner = contentTrack === 'basics';
+  const b = basicsCopy[locale];
+  const finished = beginner && currentDay >= 6;
   const summaryText = translations.summary;
   const incidentsText = translations.incidents;
   const bugKindLabels = translations.shared.bugKinds;
@@ -20,8 +28,8 @@ const SummaryScreen = () => {
     <main className={styles.screenShell}>
       <section className={`${styles.screenCard} ${styles.summaryShell}`}>
         <p className={styles.eyebrow}>{summaryText.endOfDay}</p>
-        <h1>{summaryText.heading(currentDay)}</h1>
-        <p className={styles.screenLead}>{summaryText.intro}</p>
+        <h1>{finished ? b.finished : summaryText.heading(currentDay)}</h1>
+        <p className={styles.screenLead}>{beginner ? finished ? b.finishedBody : b.recapBody : summaryText.intro}</p>
         <div className={styles.recapGrid}>
           <article className={`${styles.recapCard} ${styles.recapPositive}`}>
             <span aria-hidden="true">✓</span>
@@ -32,7 +40,12 @@ const SummaryScreen = () => {
             <div><h2>{hasLessons ? summaryText.learnHeading : summaryText.cleanHeading}</h2><p>{hasLessons ? summaryText.learnBody(counters.bugsToProd, counters.falsePositives) : summaryText.cleanBody}</p></div>
           </article>
         </div>
-        {prodIncidents.length > 0 && (
+        {beginner && <section className={styles.incidentSection}><h2>{b.recap} · {basicsDay(currentDay)?.title[locale]}</h2>{decisionReceipts.map(receipt => {
+          const exercise = basicsExercise(receipt.templateId);
+          if (!exercise) return null;
+          return <details key={receipt.prId} className={styles.studentReview} open={!receipt.correct}><summary><span>{receipt.correct ? '✓' : '↳'} {receipt.correct ? b.correct : b.missed}</span><strong>{exercise.title[locale]}</strong></summary><p>{receipt.author} · {receipt.verdict === 'approve' ? b.approved : b.rejected} · {exercise.issues.length ? b.expectedReject : b.expectedApprove}</p><p><strong>{b.brief}</strong>: {exercise.brief[locale]}</p><p>{exercise.explanation[locale]}</p>{exercise.issues.length > 0 && <ul>{exercise.issues.map(issue => <li key={`${issue.filename}-${issue.side}-${issue.line}`}>{issue.side === 'before' ? '−' : '+'} {issue.filename}:{issue.line}</li>)}</ul>}</details>;
+        })}{queue.length > 0 && <><h3>{b.unreviewed}</h3><p>{b.unreviewedBody}</p><ul>{queue.map(pr => <li key={pr.id}>{basicsExercise(pr.templateId)?.title[locale] ?? pr.title}</li>)}</ul></>}</section>}
+        {!beginner && prodIncidents.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{summaryText.deployedHeading}</h3>
             <p className="muted">{summaryText.deployedBody}</p>
@@ -73,7 +86,7 @@ const SummaryScreen = () => {
             </ul>
           </section>
         )}
-        {falsePositiveRecords.length > 0 && (
+        {!beginner && falsePositiveRecords.length > 0 && (
           <section className={styles.incidentSection}>
             <h3>{summaryText.falseHeading}</h3>
             <p className="muted">{summaryText.falseBody}</p>
@@ -110,8 +123,9 @@ const SummaryScreen = () => {
         )}
         <div className={styles.summaryStats}><RunStatsCards counters={counters} meters={meters} /></div>
         <div className={styles.screenActions}>
-          <button type="button" className={styles.screenButton} onClick={advanceToNextDay}>{summaryText.continueButton(currentDay + 1)}</button>
-          <button type="button" className={`${styles.screenButton} ${styles.screenButtonSecondary}`} onClick={restartGame}>{summaryText.restartButton}</button>
+          {!finished && <button type="button" className={styles.screenButton} onClick={advanceToNextDay}>{summaryText.continueButton(currentDay + 1)}</button>}
+          <button type="button" className={`${styles.screenButton} ${styles.screenButtonSecondary}`} onClick={restartGame}>{beginner ? b.restart : summaryText.restartButton}</button>
+          {beginner && <Link className={`${styles.screenButton} ${styles.screenButtonSecondary}`} href="/">{b.home}</Link>}
         </div>
       </section>
     </main>

@@ -7,13 +7,14 @@ import { LocaleProvider } from '../context/LocaleContext';
 import '../styles/globals.css';
 import HydrationErrorBoundary from '../components/common/HydrationErrorBoundary';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   const socialImageUrl = `${SITE_METADATA.url}${SITE_METADATA.image}`;
+  const contentTrack = router.pathname === '/learn' ? 'basics' : 'code';
 
   return (
     <LocaleProvider>
       <UIPreferencesProvider>
-        <GameProvider>
+        <GameProvider key={contentTrack} contentTrack={contentTrack}>
           <Head>
           <title>{SITE_METADATA.title}</title>
           <meta name="description" content={SITE_METADATA.description} />

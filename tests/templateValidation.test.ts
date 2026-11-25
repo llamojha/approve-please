@@ -44,20 +44,20 @@ describe('shared template validation', () => {
       .toEqual(['invalid_identity', 'invalid_enum', 'unsupported_locale', 'invalid_type']);
   });
 
-  it('rejects ambiguous legacy annotations and unsupported removal rows', () => {
+  it('rejects ambiguous legacy annotations and inconsistent removal rows', () => {
     const draft = fixture();
     draft.files.push({ ...draft.files[0], filename: 'second.ts' });
     expect(validateTemplate(draft).map(({ code }) => code)).toEqual(['ambiguous_line']);
     const removal = { ...fixture(), files: [{ ...fixture().files[0], lines: [{ ...fixture().files[0].lines[0], kind: 'removal' }] }] };
-    expect(validateTemplate(removal).map(({ code }) => code)).toEqual(['invalid_enum']);
+    expect(validateTemplate(removal).map(({ code }) => code)).toEqual(['inconsistent_kind']);
   });
 
-  it('keeps explicit references compatible with numeric live selection', () => {
+  it('uses explicit references to disambiguate equal numbers across files', () => {
     const draft = fixture();
     draft.files.push({ ...draft.files[0], filename: 'second.ts' });
     const explicit = { ...draft, bugPatterns: [{ ...draft.bugPatterns[0],
       lineRefs: [{ filename: 'index.ts', rowId: 'line-1' }] }] };
-    expect(validateTemplate(explicit).map(({ code }) => code)).toEqual(['ambiguous_line']);
+    expect(validateTemplate(explicit)).toEqual([]);
     const clean = { ...fixture(), bugPatterns: [], files: [{ ...fixture().files[0], lines: [
       { lineNumber: 1, rowId: 'one', content: 'a', isNew: true },
       { lineNumber: 1, rowId: 'two', content: 'b', isNew: true }

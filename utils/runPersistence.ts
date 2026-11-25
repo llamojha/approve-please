@@ -5,6 +5,7 @@ import { templateCoworkers } from '../data/prTemplates/coworkerManifest';
 import { getCharacter, reactionsForCharacter } from '../data/characters';
 
 export const RUN_SAVE_STORAGE_KEY = 'approve-please.run.v1';
+export const BASICS_RUN_SAVE_STORAGE_KEY = 'approve-please.basics-run.v1';
 export const RUN_SAVE_VERSION = 1;
 
 export interface RunSaveEnvelope {
@@ -28,6 +29,8 @@ export const validateSavedRun = (value: unknown): value is RunSaveEnvelope => {
   const envelope = value as Partial<RunSaveEnvelope>;
   if (envelope.version !== RUN_SAVE_VERSION || typeof envelope.savedAt !== 'string' || !envelope.state) return false;
   const state = envelope.state;
+  if (state.contentTrack !== undefined && state.contentTrack !== 'code' && state.contentTrack !== 'basics') return false;
+  if (state.contentTrack === 'basics' && state.currentDay > 6) return false;
   if (!Number.isInteger(state.runId) || state.runId < 1 || !Number.isInteger(state.currentDay) || state.currentDay < 1) return false;
   if (!phases.has(state.phase) || !Number.isFinite(state.currentTime) || state.currentTime < 0 || state.currentTime > WORK_DAY_MINUTES) return false;
   if (!Array.isArray(state.languagePreference) || state.languagePreference.some(value => typeof value !== 'string') || !difficulties.has(state.difficulty)) return false;
@@ -42,7 +45,10 @@ export const validateSavedRun = (value: unknown): value is RunSaveEnvelope => {
   if (!Array.isArray(state.prodIncidents) || !Array.isArray(state.falsePositiveRecords) || typeof state.simulationPaused !== 'boolean') return false;
   if (state.lastDecision !== null && !isObject(state.lastDecision)) return false;
   try {
-    state.queue.forEach(pr => normalizePullRequest(pr));
+    state.queue.forEach(pr => {
+      normalizePullRequest(pr);
+      if (pr.learningContext !== undefined && (!isObject(pr.learningContext) || typeof pr.learningContext.brief !== 'string' || typeof pr.learningContext.explanation !== 'string')) throw new Error('Invalid learning context');
+    });
   } catch {
     return false;
   }
@@ -50,8 +56,8 @@ export const validateSavedRun = (value: unknown): value is RunSaveEnvelope => {
   return true;
 };
 
-export const readSavedRun = (storage: Pick<Storage, 'getItem'>): RunSaveEnvelope | null => {
-  const raw = storage.getItem(RUN_SAVE_STORAGE_KEY);
+export const readSavedRun = (storage: Pick<Storage, 'getItem'>, storageKey = RUN_SAVE_STORAGE_KEY): RunSaveEnvelope | null => {
+  const raw = storage.getItem(storageKey);
   if (!raw) return null;
   try {
     const value: unknown = JSON.parse(raw);
@@ -64,16 +70,16 @@ export const readSavedRun = (storage: Pick<Storage, 'getItem'>): RunSaveEnvelope
       if (!authorId || !character) return pr;
       return { ...pr, authorId, author: character.name, reactions: pr.reactions ?? reactionsForCharacter(authorId) };
     });
-    return { ...value, state: { ...value.state, queue, currentPR: queue.find(pr => pr.id === value.state.currentPR?.id) ?? null } };
+    return { ...value, state: { ...value.state, contentTrack: value.state.contentTrack ?? 'code', queue, currentPR: queue.find(pr => pr.id === value.state.currentPR?.id) ?? null } };
   } catch {
     return null;
   }
 };
 
-export const writeSavedRun = (storage: Pick<Storage, 'setItem'>, state: GameState, now = new Date()): RunSaveEnvelope => {
+export const writeSavedRun = (storage: Pick<Storage, 'setItem'>, state: GameState, now = new Date(), storageKey = RUN_SAVE_STORAGE_KEY): RunSaveEnvelope => {
   const envelope: RunSaveEnvelope = { version: RUN_SAVE_VERSION, savedAt: now.toISOString(), state };
-  storage.setItem(RUN_SAVE_STORAGE_KEY, JSON.stringify(envelope));
+  storage.setItem(storageKey, JSON.stringify(envelope));
   return envelope;
 };
 
-export const clearSavedRun = (storage: Pick<Storage, 'removeItem'>): void => storage.removeItem(RUN_SAVE_STORAGE_KEY);
+export const clearSavedRun = (storage: Pick<Storage, 'removeItem'>, storageKey = RUN_SAVE_STORAGE_KEY): void => storage.removeItem(storageKey);

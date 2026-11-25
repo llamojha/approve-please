@@ -1,26 +1,32 @@
-# Git & PR basics
+# Beginner shifts: PR basics
 
-Open `/learn` from the landing page's “New to pull requests?” card. This course teaches PR review using ordinary text. It introduces branches, diffs, approval, rejection and a simulated merge outcome. It does not teach Git commands or claim to replace a Git lab.
+Choose **PR basics** in the landing page's normal shift setup. This is the same game with a different content track: the same briefing, 09:00–17:00 clock, three meters, coworker inbox, incoming-PR audio, shortcuts, approve/reject swipe and day summaries. `/learn` renders the real game screens and reducer; it is not a separate course dashboard.
 
-There are six lessons of ten PRs: first reviews, following a brief, accidental edits, completeness, multiple files and mixed practice. All 60 have English and Spanish briefs, file contents and explanations. Thirty are safe to approve; thirty need rejection. Each of the ten coworkers appears six times with both kinds of work.
+Sixty English/Spanish text PRs cover rosters, timetables, inventories and instructions across six shifts of ten. Thirty are safe; thirty need rejection. All ten coworkers have both safe and flawed work. The focus progresses through first reviews, following a brief, accidental edits, completeness, multiple files and mixed practice. This introduces branches, diffs and a simulated review/merge flow; it does not teach Git commands.
 
-There is no timer, queue penalty or leaderboard. Students can revisit any lesson, flag lines, read the explanation and retry. Lesson recaps retain the first decision even after a successful retry. Progress is stored locally under `approve-please:git-pr-basics:v1`; restarting the course does not reset the game save. Clearing browser data removes course progress. There are no accounts or teacher analytics.
+## Playing
 
-## Add a learning PR
+Practice difficulty is the beginner default: six real minutes per shift and no waiting-queue drain. Decisions still affect Stability, Velocity and Team trust and can end a run. Normal difficulty uses the original two-minute clock and queue pressure. PRs arrive at simulated minutes 0, 90, 180 and 300. Approving or rejecting automatically swipes to the next available PR; there is no next-exercise button.
 
-Edit the relevant lesson pack under `data/basics/`. These are separate from the programming-language catalog under `data/prTemplates/`; beginner PRs must never enter the timed game's random queue.
+Each PR displays an explicit task above the shared diff. Added and removed lines can be flagged, including accidental deletions. The optional **Last review** control opens an explanation in a clock-pausing game dialog. **How reviews work** explains the beginner rules and also pauses the clock. Shortcuts are Alt+A and Alt+R, matching the original game.
 
-Each exercise has a stable, globally unique `id`, localized `title`, an explicit `brief`, `files`, `issues` and an `explanation`. Use `copy(en, es)` for prose and `textFile(filename, beforeEn, afterEn, beforeEs, afterEs)` for the complete old and proposed text of a small `.txt` file. Both versions must genuinely differ. The diff is computed from these two versions; do not write `+` or `−` into the text itself.
+Day summaries explain every reviewed PR, expand incorrect decisions, identify the correct decision and list PRs still waiting at 17:00 without pretending they were reviewed. Advancing starts the next day's briefing. Shift six finishes the campaign and offers another beginner run or a return to the desk. Beginner scores do not enter the code-review leaderboard.
 
-An empty `issues` array means approval is correct. For a flawed PR, use `issue(filename, 'after', line)` to flag a wrong added line, or `issue(filename, 'before', line)` to flag a removal that must be restored. Line numbers are **one-based within that version of the file**. Refer to the same semantic problem in both languages; keep translated lines aligned. Missing information can be tested by an unintended removal. Avoid an omission with no changed line to discuss.
+Beginner runs use `approve-please.basics-run.v1`; code runs keep `approve-please.run.v1`. Both support the game's save/resume flow independently. Older code saves without a content-track field restore as code. The initial standalone prototype's browser progress is not promoted into game scores; its former storage key is left untouched.
 
-The brief is the source of truth. Give every date, quantity and constraint needed to judge the diff. The explanation must say exactly why the change meets or violates that brief. No programming knowledge, external policy lookup or guessing should be needed. Review the actual before/after meaning in both languages: automated checks verify references and coverage, not teaching quality.
+## Contributing scenarios
 
-Coworkers are assigned through the lesson rotation in `data/basics/index.ts`. Keep IDs stable when editing existing content so saved attempts still refer to the same exercise. The course currently promises 60 PRs and ten per lesson: adding more requires updating those visible totals, tests and curriculum deliberately.
+Edit the relevant pack in `data/basics/`. These scenarios remain separate from the programming-language catalog in `data/prTemplates/` and never enter a code-review run.
 
-After editing, run the existing `test` script with `tests/basics.test.ts`, then typecheck and lint. Preview `/learn` in both languages: check the requirement, both sides of the diff, evidence flags, wrong and right decisions, retry and recap. New content belongs in a feature PR against `main`, with the expected verdict and a brief validation note for reviewers.
+An exercise has a stable, globally unique `id`, bilingual `title`, an explicit `brief`, complete `files`, `issues` and an `explanation`. `copy(en, es)` stores prose. `textFile(filename, beforeEn, afterEn, beforeEs, afterEs)` supplies the full old and proposed text of a short `.txt` file; the renderer computes the diff. Do not insert `+` or `−` into file contents.
+
+An empty `issues` array means approval is correct. For a flawed PR, use `issue(filename, 'after', line)` for a wrong added line or `issue(filename, 'before', line)` for a removal that must be restored. These numbers are **one-based in that version of the source file**. Keep translated lines aligned and refer to the same semantic problem in both languages. The game adapter projects these locations into explicit file/row references, so equal numbers in different files cannot collide.
+
+Give every date, quantity and constraint needed to judge the diff in the brief. Explain exactly why the proposed change meets or violates it. Avoid guessing, external policies or programming knowledge. Review meaning in both languages: automated checks verify valid references and engine behavior, not teaching quality. Keep exercise IDs stable and preserve balanced assignments to the ten coworkers through the lesson rotation in `data/basics/index.ts`.
+
+After editing, run the existing test script with `tests/basics.test.ts`, then typecheck and lint. Preview a real beginner shift in both languages, including a removed-line rejection, wrong approval, automatic advancement, paused explanation and day recap. The integration suite runs all 60 PRs through the real reducer and checks separate saves. A seventh shift or more than ten PRs per shift requires an explicit curriculum and delivery-schedule update.
 
 ## Future work TODO
 
-- [ ] Test the first lesson with actual IT beginners and revise any unclear wording before expanding the curriculum.
-- [ ] Consider a separate Git-command lab if learners need branch creation, commits or conflict resolution. Those actions are outside this PR-review course.
+- [ ] Test the first shift with actual IT beginners and revise unclear wording before expanding the curriculum.
+- [ ] Consider a separate Git-command lab only if learners need branch creation, commits or conflict resolution.
