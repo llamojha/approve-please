@@ -1,7 +1,8 @@
 {
   "templateId": "py-045-disk-write-per-row",
   "title": "Row exporter helper",
-  "author": "Emi S.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Exports billing rows to disk for reconciliation.",
   "tags": [
     "performance",

@@ -1,7 +1,8 @@
 {
   "templateId": "js-023-unclosed-block-comment",
   "title": "Unclosed block comment in config loader",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds temporary note while loading migration config.",
   "tags": [
     "bugfix",

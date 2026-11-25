@@ -1,7 +1,8 @@
 {
   "templateId": "java-007-webhook-responder",
   "title": "Webhook responder helper",
-  "author": "Tal O.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper to wrap webhook responses with status metadata.",
   "tags": [
     "integrations"

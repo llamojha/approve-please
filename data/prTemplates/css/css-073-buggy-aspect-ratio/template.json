@@ -1,7 +1,8 @@
 {
   "templateId": "css-073-buggy-aspect-ratio",
   "title": "Maintain video aspect ratio",
-  "author": "Gina V.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Uses aspect-ratio for responsive video containers.",
   "tags": ["video", "responsive"],
   "localized": {

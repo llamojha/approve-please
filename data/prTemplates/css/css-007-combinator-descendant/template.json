@@ -1,7 +1,8 @@
 {
   "templateId": "css-007-combinator-descendant",
   "title": "Style nested list items",
-  "author": "Elena M.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Applies different styling to nested list items in sidebar.",
   "tags": ["lists", "sidebar"],
   "localized": {

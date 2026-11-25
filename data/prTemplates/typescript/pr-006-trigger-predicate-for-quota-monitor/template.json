@@ -1,7 +1,8 @@
 {
   "templateId": "pr-006-trigger-predicate-for-quota-monitor",
   "title": "Trigger predicate for Quota Monitor",
-  "author": "Uma R.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

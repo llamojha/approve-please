@@ -1,7 +1,8 @@
 {
   "templateId": "py-037-slow-metrics-serializer",
   "title": "Metrics serializer helper",
-  "author": "Oona W.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Serializes metrics with a schema overlay before publishing.",
   "tags": [
     "performance",

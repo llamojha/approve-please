@@ -1,7 +1,8 @@
 {
   "templateId": "pr-012-trigger-predicate-for-audit-pipeline",
   "title": "Trigger predicate for Audit Pipeline",
-  "author": "Simone B.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

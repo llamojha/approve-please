@@ -1,7 +1,8 @@
 {
   "templateId": "js-026-switch-case-missing-colon",
   "title": "Switch case missing colon",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds response mapping for priority tiers.",
   "tags": [
     "bugfix",

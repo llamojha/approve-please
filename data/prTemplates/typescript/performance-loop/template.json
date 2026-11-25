@@ -1,7 +1,8 @@
 {
   "templateId": "performance-loop",
   "title": "Detailed project export",
-  "author": "Sal M.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds nested aggregation for CSV export.",
   "tags": [
     "feature",

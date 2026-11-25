@@ -1,7 +1,8 @@
 {
   "templateId": "rust-019-release-batch-verifier",
   "title": "Release batch verification helper",
-  "author": "Silas F.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Examines job statuses to determine if a release batch can ship.",
   "tags": [
     "logic",

@@ -1,7 +1,8 @@
 {
   "templateId": "js-040-function-parameter-double-comma",
   "title": "Function parameter list has double comma",
-  "author": "Nora I.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds merge helper for rollout settings.",
   "tags": [
     "bugfix",

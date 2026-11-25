@@ -1,7 +1,8 @@
 {
   "templateId": "pr-009-load-cdn-purger-config",
   "title": "Load Cdn Purger config",
-  "author": "Terrence L.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a helper that reloads config before evaluating feature logic.",
   "tags": [
     "bugfix",

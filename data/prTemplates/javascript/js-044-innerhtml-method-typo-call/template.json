@@ -1,7 +1,8 @@
 {
   "templateId": "js-044-innerhtml-method-typo-call",
   "title": "innerHTML typo called as method",
-  "author": "Nora I.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds quick DOM status writer for test harness.",
   "tags": [
     "bugfix",

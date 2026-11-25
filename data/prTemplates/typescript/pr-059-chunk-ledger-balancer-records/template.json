@@ -1,7 +1,8 @@
 {
   "templateId": "pr-059-chunk-ledger-balancer-records",
   "title": "Chunk Ledger Balancer records",
-  "author": "Pedro A.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds pagination helpers for ledger balancer batches.",
   "tags": [
     "bugfix",

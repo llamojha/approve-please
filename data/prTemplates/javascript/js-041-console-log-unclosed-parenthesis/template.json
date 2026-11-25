@@ -1,7 +1,8 @@
 {
   "templateId": "js-041-console-log-unclosed-parenthesis",
   "title": "Console log missing closing parenthesis",
-  "author": "Nora I.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds startup logging for queue workers.",
   "tags": [
     "bugfix",

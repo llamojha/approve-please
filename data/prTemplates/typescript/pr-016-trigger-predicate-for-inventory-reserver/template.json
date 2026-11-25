@@ -1,7 +1,8 @@
 {
   "templateId": "pr-016-trigger-predicate-for-inventory-reserver",
   "title": "Trigger predicate for Inventory Reserver",
-  "author": "Sasha E.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

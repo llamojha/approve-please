@@ -1,7 +1,8 @@
 {
   "templateId": "py-020-sprint-risk-mapper",
   "title": "Sprint risk mapper",
-  "author": "Dani E.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Maps the blocker score into a risk tier for sprint health.",
   "tags": [
     "logic",

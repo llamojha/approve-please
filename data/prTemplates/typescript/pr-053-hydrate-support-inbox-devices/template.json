@@ -1,7 +1,8 @@
 {
   "templateId": "pr-053-hydrate-support-inbox-devices",
   "title": "Hydrate Support Inbox devices",
-  "author": "Simone B.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a helper that pulls the full device matrix for reporting.",
   "tags": [
     "feature",

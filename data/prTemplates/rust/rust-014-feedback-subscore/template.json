@@ -1,7 +1,8 @@
 {
   "templateId": "rust-014-feedback-subscore",
   "title": "Calibrate feedback sub-score helper",
-  "author": "Felix W.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Scores the feedback queue to decide when to page managers.",
   "tags": [
     "logic",

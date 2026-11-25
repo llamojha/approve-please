@@ -1,7 +1,8 @@
 {
   "templateId": "py-029-plaintext-webhook-signature",
   "title": "Webhook signature verifier",
-  "author": "Ben P.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds verification for partner webhook callbacks.",
   "tags": [
     "security",

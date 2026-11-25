@@ -1,7 +1,8 @@
 {
   "templateId": "pr-090-normalize-packet-analyzer-payloads",
   "title": "Normalize Packet Analyzer payloads",
-  "author": "Lena D.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper to normalize packet analyzer inputs so downstream jobs stay consistent.",
   "tags": [
     "cleanup",

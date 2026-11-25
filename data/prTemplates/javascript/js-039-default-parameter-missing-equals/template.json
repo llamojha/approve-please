@@ -1,7 +1,8 @@
 {
   "templateId": "js-039-default-parameter-missing-equals",
   "title": "Default parameter missing equals",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds default limit for queue scanner.",
   "tags": [
     "bugfix",

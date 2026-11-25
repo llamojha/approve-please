@@ -1,7 +1,8 @@
 {
   "templateId": "pr-082-temporary-debug-logger-for-delta-sync",
   "title": "Temporary debug logger for Delta Sync",
-  "author": "Akiko F.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds a helper so QA can inspect payloads while testing.",
   "tags": [
     "cleanup",

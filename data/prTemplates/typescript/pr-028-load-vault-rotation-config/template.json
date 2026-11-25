@@ -1,7 +1,8 @@
 {
   "templateId": "pr-028-load-vault-rotation-config",
   "title": "Load Vault Rotation config",
-  "author": "Brielle S.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a helper that reloads config before evaluating feature logic.",
   "tags": [
     "bugfix",

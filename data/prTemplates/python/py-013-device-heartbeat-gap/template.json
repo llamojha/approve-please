@@ -1,7 +1,8 @@
 {
   "templateId": "py-013-device-heartbeat-gap",
   "title": "Device heartbeat gap classifier",
-  "author": "Jonah V.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Classifies whether a heartbeat gap should trigger a page.",
   "tags": [
     "devices",

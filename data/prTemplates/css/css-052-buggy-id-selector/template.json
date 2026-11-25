@@ -1,7 +1,8 @@
 {
   "templateId": "css-052-buggy-id-selector",
   "title": "Style main content area",
-  "author": "Priya S.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Applies padding and max-width to the main content container.",
   "tags": ["layout", "spacing"],
   "localized": {

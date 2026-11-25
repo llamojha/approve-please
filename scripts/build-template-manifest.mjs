@@ -152,6 +152,18 @@ const buildAggregator = (languages) => {
   ].join('\n');
 };
 
+const buildCoworkerManifest = (templates) => [
+  '// Auto-generated identity-only index; scenario packs remain lazy-loaded.',
+  "import type { CharacterId } from '../characters';",
+  '',
+  'export const templateCoworkers: Readonly<Partial<Record<string, CharacterId>>> = {',
+  ...templates.filter(({ template }) => template.authorId).map(({ template }) =>
+    `  ${JSON.stringify(template.templateId)}: ${JSON.stringify(template.authorId)},`
+  ),
+  '};',
+  ''
+].join('\n');
+
 const writeManifestsWithRollback = async (outputs, languages) => {
   const temporaryDirectory = await fs.mkdtemp(path.join(path.dirname(ROOT), '.manifest-tmp-'));
   const originals = new Map();
@@ -237,6 +249,7 @@ const buildManifest = async () => {
     outputs.set(path.join(ROOT, `manifest.${language}.ts`), buildLanguagePack(language, packTemplates));
   });
   outputs.set(path.join(ROOT, 'templateManifest.ts'), buildAggregator(languages));
+  outputs.set(path.join(ROOT, 'coworkerManifest.ts'), buildCoworkerManifest(templates));
   await writeManifestsWithRollback(outputs, languages);
 };
 

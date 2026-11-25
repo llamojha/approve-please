@@ -1,7 +1,8 @@
 {
   "templateId": "js-036-call-to-undefined-function",
   "title": "Call to undefined function",
-  "author": "Nora I.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds total calculator for dashboard cards.",
   "tags": [
     "bugfix",

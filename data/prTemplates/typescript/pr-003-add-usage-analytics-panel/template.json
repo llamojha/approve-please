@@ -1,7 +1,8 @@
 {
   "templateId": "pr-003-add-usage-analytics-panel",
   "title": "Add Usage Analytics panel",
-  "author": "Noor T.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Introduces a dashboard card that surfaces the latest usage analytics metrics.",
   "tags": [
     "cleanup",

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-066-scaffold-tests-for-sprint-health",
   "title": "Scaffold tests for Sprint Health",
-  "author": "Brielle S.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Drops a placeholder spec awaiting follow-up coverage.",
   "tags": [
     "cleanup",

@@ -1,7 +1,8 @@
 {
   "templateId": "css-035-transition-all-performance",
   "title": "Add card hover effects",
-  "author": "Sam H.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds hover transition effects to product cards.",
   "tags": ["cards", "transitions"],
   "localized": {

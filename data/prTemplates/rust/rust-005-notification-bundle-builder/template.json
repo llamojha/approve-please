@@ -1,7 +1,8 @@
 {
   "templateId": "rust-005-notification-bundle-builder",
   "title": "Add notification bundle builder",
-  "author": "Bianca Q.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Wraps notification lists with generated metadata before sending to downstream channels.",
   "tags": [
     "notifications",

@@ -1,7 +1,8 @@
 {
   "templateId": "js-028-boolean-literal-typo-truee",
   "title": "Boolean literal typo truee",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds static feature gate for emergency mode.",
   "tags": [
     "bugfix",

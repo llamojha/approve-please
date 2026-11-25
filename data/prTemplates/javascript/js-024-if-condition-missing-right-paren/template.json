@@ -1,7 +1,8 @@
 {
   "templateId": "js-024-if-condition-missing-right-paren",
   "title": "If condition missing right parenthesis",
-  "author": "Nora I.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds ready-state gate for worker startup.",
   "tags": [
     "bugfix",

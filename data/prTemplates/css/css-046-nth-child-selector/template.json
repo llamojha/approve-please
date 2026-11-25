@@ -1,7 +1,8 @@
 {
   "templateId": "css-046-nth-child-selector",
   "title": "Alternate table row colors",
-  "author": "Derek S.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds zebra striping to table rows for readability.",
   "tags": ["tables", "styling"],
   "localized": {

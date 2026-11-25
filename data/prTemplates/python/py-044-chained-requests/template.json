@@ -1,7 +1,8 @@
 {
   "templateId": "py-044-chained-requests",
   "title": "Score fetch helper",
-  "author": "Luca H.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Fetches quality scores for a batch of experiment IDs.",
   "tags": [
     "performance",

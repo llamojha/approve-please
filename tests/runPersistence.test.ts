@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { createInitialState, gameReducer } from '../context/GameContext';
 import { AUDIO_PREFERENCES_STORAGE_KEY, defaultAudioPreferences, readAudioPreferences, writeAudioPreferences } from '../utils/audioPreferences';
 import { clearSavedRun, isMeaningfulRun, readSavedRun, RUN_SAVE_STORAGE_KEY, validateSavedRun, writeSavedRun } from '../utils/runPersistence';
+import javascriptTemplates from '../data/prTemplates/manifest.javascript';
+import { instantiatePullRequest } from '../utils/pr';
+import { getCharacter } from '../data/characters';
 
 const memoryStorage = () => {
   const values = new Map<string, string>();
@@ -14,6 +17,41 @@ const memoryStorage = () => {
 };
 
 describe('run persistence', () => {
+  it('upgrades legacy queued authors to catalog coworkers without losing run progress', () => {
+    const storage = memoryStorage();
+    const template = javascriptTemplates[0];
+    const queued = instantiatePullRequest(template, 2, 0, 'en');
+    delete queued.authorId;
+    delete queued.reactions;
+    queued.author = 'Legacy Guest';
+    const state = { ...createInitialState(), phase: 'WORK' as const, currentDay: 2, currentTime: 91,
+      queue: [queued], currentPR: queued, meters: { stability: 87, velocity: 65, satisfaction: 72 },
+      counters: { bugsToProd: 0, prsApproved: 3, prsRejected: 2, truePositives: 2, falsePositives: 0, cleanApprovals: 3 },
+      spawnedTemplateIds: [template.templateId], deliveryMarkers: ['default:0'] };
+    writeSavedRun(storage, state);
+    const restored = readSavedRun(storage)!.state;
+    expect(restored.queue[0].authorId).toBe(template.authorId);
+    expect(restored.queue[0].author).toBe(getCharacter(template.authorId)?.name);
+    expect(restored.queue[0].reactions?.['correct-rejection']?.en).toBeTruthy();
+    expect(restored.queue[0].reactions?.['correct-rejection']?.es).toBeTruthy();
+    expect(restored.currentPR).toBe(restored.queue[0]);
+    expect(restored.queue[0].files).toEqual(queued.files);
+    expect(restored.queue[0].bugPatterns).toEqual(queued.bugPatterns);
+    expect({ ...restored, queue: [], currentPR: null }).toEqual({ ...state, queue: [], currentPR: null });
+    expect(queued.author).toBe('Legacy Guest');
+    expect(storage.getItem(RUN_SAVE_STORAGE_KEY)).toContain('Legacy Guest');
+  });
+
+  it('preserves external guest snapshots and authored reactions when restoring', () => {
+    const storage = memoryStorage();
+    const guest = { ...instantiatePullRequest(javascriptTemplates[0], 1, 0, 'en'),
+      templateId: 'external-contributor-draft', author: 'Guest Contributor', authorId: undefined,
+      reactions: { 'clean-approval': { en: 'Custom response' } } };
+    const state = { ...createInitialState(), phase: 'WORK' as const, queue: [guest], currentPR: guest };
+    writeSavedRun(storage, state);
+    expect(readSavedRun(storage)?.state.queue[0]).toEqual(guest);
+  });
+
   it('round-trips meaningful state without advancing time', () => {
     const storage = memoryStorage();
     const state = { ...createInitialState(), phase: 'WORK' as const, currentTime: 91, deliveryMarkers: ['default:0', 'scripted:0-0'] };

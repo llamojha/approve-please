@@ -1,7 +1,8 @@
 {
   "templateId": "css-016-position-relative",
   "title": "Add notification badge to icon",
-  "author": "Mike D.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Positions notification count badge on icon using relative/absolute.",
   "tags": ["notifications", "positioning"],
   "localized": {

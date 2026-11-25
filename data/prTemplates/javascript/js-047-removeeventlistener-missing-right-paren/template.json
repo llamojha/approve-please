@@ -1,7 +1,8 @@
 {
   "templateId": "js-047-removeeventlistener-missing-right-paren",
   "title": "removeEventListener missing right parenthesis",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds cleanup hook for stale click handlers.",
   "tags": [
     "bugfix",

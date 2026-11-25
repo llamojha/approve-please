@@ -1,7 +1,8 @@
 {
   "templateId": "rust-034-allowlist-bypass",
   "title": "Control plane allowlist helper",
-  "author": "Eli M.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a helper to enforce deployer allowlists.",
   "tags": [
     "security",

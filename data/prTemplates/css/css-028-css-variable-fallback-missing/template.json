@@ -1,7 +1,8 @@
 {
   "templateId": "css-028-css-variable-fallback-missing",
   "title": "Add accent color to links",
-  "author": "Leo P.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Applies accent color variable to link elements.",
   "tags": ["links", "variables"],
   "localized": {

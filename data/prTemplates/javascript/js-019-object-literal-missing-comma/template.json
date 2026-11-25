@@ -1,7 +1,8 @@
 {
   "templateId": "js-019-object-literal-missing-comma",
   "title": "Object literal missing comma",
-  "author": "Nora I.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds request timeout defaults for queue clients.",
   "tags": [
     "bugfix",

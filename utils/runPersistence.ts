@@ -1,6 +1,8 @@
 import { WORK_DAY_MINUTES } from '../constants/game';
 import type { GameState } from '../context/GameContext';
 import { normalizePullRequest } from './templateNormalization';
+import { templateCoworkers } from '../data/prTemplates/coworkerManifest';
+import { getCharacter, reactionsForCharacter } from '../data/characters';
 
 export const RUN_SAVE_STORAGE_KEY = 'approve-please.run.v1';
 export const RUN_SAVE_VERSION = 1;
@@ -53,7 +55,16 @@ export const readSavedRun = (storage: Pick<Storage, 'getItem'>): RunSaveEnvelope
   if (!raw) return null;
   try {
     const value: unknown = JSON.parse(raw);
-    return validateSavedRun(value) ? value : null;
+    if (!validateSavedRun(value)) return null;
+    // Older saves retain complete PR snapshots, including the legacy guest names.
+    // Refresh only catalog identities; never reset a run or load scenario packs.
+    const queue = value.state.queue.map(pr => {
+      const authorId = templateCoworkers[pr.templateId];
+      const character = getCharacter(authorId);
+      if (!authorId || !character) return pr;
+      return { ...pr, authorId, author: character.name, reactions: pr.reactions ?? reactionsForCharacter(authorId) };
+    });
+    return { ...value, state: { ...value.state, queue, currentPR: queue.find(pr => pr.id === value.state.currentPR?.id) ?? null } };
   } catch {
     return null;
   }

@@ -1,7 +1,8 @@
 {
   "templateId": "css-031-keyframe-animation",
   "title": "Add loading spinner animation",
-  "author": "Oscar D.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Creates a rotating spinner using CSS keyframes.",
   "tags": ["animation", "loading"],
   "localized": {

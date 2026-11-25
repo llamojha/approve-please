@@ -1,7 +1,8 @@
 {
   "templateId": "pr-026-trigger-predicate-for-search-index",
   "title": "Trigger predicate for Search Index",
-  "author": "Harper N.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

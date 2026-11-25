@@ -1,7 +1,8 @@
 {
   "templateId": "js-046-addeventlistener-callback-unclosed-brace",
   "title": "addEventListener callback missing closing brace",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds inline callback for save action.",
   "tags": [
     "bugfix",

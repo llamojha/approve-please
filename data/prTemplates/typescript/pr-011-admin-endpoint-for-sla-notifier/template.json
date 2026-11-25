@@ -1,7 +1,8 @@
 {
   "templateId": "pr-011-admin-endpoint-for-sla-notifier",
   "title": "Admin endpoint for Sla Notifier",
-  "author": "Julian F.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds an express route for admins to push configuration updates.",
   "tags": [
     "docs",

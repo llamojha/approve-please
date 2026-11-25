@@ -1,7 +1,8 @@
 {
   "templateId": "java-009-segment-rollup-calculator",
   "title": "Segment rollup calculator",
-  "author": "Gabe R.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds helper to compute aggregated segment metrics for dashboards.",
   "tags": [
     "analytics",

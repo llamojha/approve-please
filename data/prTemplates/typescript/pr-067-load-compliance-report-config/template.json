@@ -1,7 +1,8 @@
 {
   "templateId": "pr-067-load-compliance-report-config",
   "title": "Load Compliance Report config",
-  "author": "Priya S.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a helper that reloads config before evaluating feature logic.",
   "tags": [
     "bugfix",

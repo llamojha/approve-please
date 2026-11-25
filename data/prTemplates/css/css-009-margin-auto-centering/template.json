@@ -1,7 +1,8 @@
 {
   "templateId": "css-009-margin-auto-centering",
   "title": "Center container element",
-  "author": "Lisa T.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Centers the main container using margin auto.",
   "tags": ["layout", "centering"],
   "localized": {

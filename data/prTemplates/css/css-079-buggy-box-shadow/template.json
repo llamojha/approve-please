@@ -1,7 +1,8 @@
 {
   "templateId": "css-079-buggy-box-shadow",
   "title": "Add drop shadow to modal",
-  "author": "Quinn T.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds box-shadow to modal for depth effect.",
   "tags": ["modal", "shadow", "styling"],
   "localized": {

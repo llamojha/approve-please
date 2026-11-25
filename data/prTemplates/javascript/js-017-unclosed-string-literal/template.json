@@ -1,7 +1,8 @@
 {
   "templateId": "js-017-unclosed-string-literal",
   "title": "Unclosed string in status message",
-  "author": "Nora I.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a new queue pause status message.",
   "tags": [
     "bugfix",

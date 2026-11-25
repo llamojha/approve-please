@@ -1,7 +1,8 @@
 {
   "templateId": "py-023-alert-silence-window",
   "title": "Alert silence window evaluator",
-  "author": "Zeke A.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Determines if an alert should remain silenced.",
   "tags": [
     "logic",

@@ -1,7 +1,8 @@
 {
   "templateId": "js-042-document-getelementbyid-missing-right-paren",
   "title": "getElementById call missing right parenthesis",
-  "author": "Nora I.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds form lookup for settings submission.",
   "tags": [
     "bugfix",

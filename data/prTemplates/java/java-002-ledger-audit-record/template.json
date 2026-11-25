@@ -1,7 +1,8 @@
 {
   "templateId": "java-002-ledger-audit-record",
   "title": "Ledger audit snapshot record",
-  "author": "Marco S.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Introduces an immutable audit snapshot record for downstream billing services.",
   "tags": [
     "billing",

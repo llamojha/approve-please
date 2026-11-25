@@ -1,7 +1,8 @@
 {
   "templateId": "js-025-orphan-else-block",
   "title": "Orphan else block",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds fallback queue flush behavior.",
   "tags": [
     "bugfix",

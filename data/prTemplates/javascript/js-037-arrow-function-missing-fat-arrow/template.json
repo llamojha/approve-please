@@ -1,7 +1,8 @@
 {
   "templateId": "js-037-arrow-function-missing-fat-arrow",
   "title": "Arrow function missing fat arrow",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds helper to sum backlog counters.",
   "tags": [
     "bugfix",

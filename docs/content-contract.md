@@ -4,7 +4,9 @@ Status: additive foundation. All 390 existing templates remain in their original
 
 ## Identity and localization
 
-Keep required author text for guests. Optional authorId refers to the recurring character registry and remains stable across EN/ES. The supported IDs are `lucia`, `diego`, `ines`, `tessa`, `ben`, `jonah`, `marta`, `evan`, `noel` and `riya`; unknown IDs use the guest fallback. Optional reactions are keyed by clean-approval, buggy-approval, correct-rejection and false-positive, each containing optional en/es strings. Instantiation preserves and copies this metadata. The live desk uses the selected locale, then English, then omits absent text.
+Every committed catalog template has an authorId from the recurring character registry and its canonical author name, stable across EN/ES. The supported IDs are `lucia`, `diego`, `ines`, `tessa`, `ben`, `jonah`, `marta`, `evan`, `noel` and `riya`. Catalog tests enforce complete coworker coverage, portraits and bilingual reactions. The schema keeps authorId optional for external drafts/backward compatibility, where unknown IDs use the guest fallback. Optional reactions are keyed by clean-approval, buggy-approval, correct-rejection and false-positive, each containing optional en/es strings. Instantiation preserves and copies supplied metadata and supplies default coworker reactions when absent. The live desk uses the selected locale, then English, then omits absent text.
+
+The generated `coworkerManifest.ts` contains identity metadata only. Saved queues use it to refresh legacy author names, portraits and missing reactions on restore, without importing scenario packs or resetting run progress. Historical decision records remain unchanged.
 
 Each row can supply rowId and kind (addition or context). Legacy isNew=true means addition; false means context, never deletion. Omitted row IDs derive deterministically as line-N. IDs and numeric line numbers must be unique within a file; filenames unique within a PR. Explicit kind must agree with isNew. Removed rows are unsupported and rejected. No file is written using an authored filename.
 

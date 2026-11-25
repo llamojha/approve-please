@@ -1,7 +1,8 @@
 {
   "templateId": "pr-060-chunk-training-module-records",
   "title": "Chunk Training Module records",
-  "author": "Gabe K.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds pagination helpers for training module batches.",
   "tags": [
     "bugfix",

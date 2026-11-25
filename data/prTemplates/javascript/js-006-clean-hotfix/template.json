@@ -1,7 +1,8 @@
 {
   "templateId": "js-006-clean-hotfix",
   "title": "Crash guard for CSV importer",
-  "author": "Zoe L.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds try/catch and good telemetry. Fully tested.",
   "tags": [
     "hotfix"

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-055-document-notification-center-runbook",
   "title": "Document Notification Center runbook",
-  "author": "Oscar W.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "docs",

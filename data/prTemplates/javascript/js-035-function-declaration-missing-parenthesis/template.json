@@ -1,7 +1,8 @@
 {
   "templateId": "js-035-function-declaration-missing-parenthesis",
   "title": "Function declaration missing parenthesis",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds formatter for member display names.",
   "tags": [
     "bugfix",

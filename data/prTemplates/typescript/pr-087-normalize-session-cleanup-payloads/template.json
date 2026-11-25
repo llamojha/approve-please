@@ -1,7 +1,8 @@
 {
   "templateId": "pr-087-normalize-session-cleanup-payloads",
   "title": "Normalize Session Cleanup payloads",
-  "author": "Wendy C.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a helper to normalize session cleanup inputs so downstream jobs stay consistent.",
   "tags": [
     "bugfix",

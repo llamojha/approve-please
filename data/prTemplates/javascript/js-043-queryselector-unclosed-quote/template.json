@@ -1,7 +1,8 @@
 {
   "templateId": "js-043-queryselector-unclosed-quote",
   "title": "querySelector selector string unclosed",
-  "author": "Nora I.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds save button lookup for click wiring.",
   "tags": [
     "bugfix",

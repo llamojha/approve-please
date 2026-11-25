@@ -1,7 +1,8 @@
 {
   "templateId": "java-036-synchronous-http-loop",
   "title": "Experiment score fetcher",
-  "author": "Jules K.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Fetches experiment scores for each id individually.",
   "tags": [
     "performance",

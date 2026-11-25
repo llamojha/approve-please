@@ -1,7 +1,8 @@
 {
   "templateId": "js-020-object-literal-unclosed-brace",
   "title": "Object literal missing closing brace",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds parser defaults for inbound event payloads.",
   "tags": [
     "bugfix",

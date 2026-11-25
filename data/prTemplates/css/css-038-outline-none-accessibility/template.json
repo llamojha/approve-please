@@ -1,7 +1,8 @@
 {
   "templateId": "css-038-outline-none-accessibility",
   "title": "Remove button focus outline",
-  "author": "Victor K.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Removes default focus outline from buttons.",
   "tags": ["buttons", "focus"],
   "localized": {

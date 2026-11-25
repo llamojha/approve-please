@@ -1,7 +1,8 @@
 {
   "templateId": "pr-083-normalize-access-request-payloads",
   "title": "Normalize Access Request payloads",
-  "author": "Lena D.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper to normalize access request inputs so downstream jobs stay consistent.",
   "tags": [
     "cleanup",

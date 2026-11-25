@@ -1,7 +1,8 @@
 {
   "templateId": "py-016-incident-slo-handoff",
   "title": "Incident SLO captain handoff logic",
-  "author": "Milo H.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Determines when to page the incident captain based on meter thresholds.",
   "tags": [
     "logic",

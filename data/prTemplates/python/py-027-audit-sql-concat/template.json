@@ -1,7 +1,8 @@
 {
   "templateId": "py-027-audit-sql-concat",
   "title": "Audit SQL fetch helper",
-  "author": "Diego S.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds a helper to fetch audit log entries for a tenant.",
   "tags": [
     "security",

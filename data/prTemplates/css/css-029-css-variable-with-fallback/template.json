@@ -1,7 +1,8 @@
 {
   "templateId": "css-029-css-variable-with-fallback",
   "title": "Add border radius variable",
-  "author": "Maria Q.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Uses CSS variable with fallback for border radius.",
   "tags": ["variables", "borders"],
   "localized": {

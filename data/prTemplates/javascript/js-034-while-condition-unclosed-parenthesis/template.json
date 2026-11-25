@@ -1,7 +1,8 @@
 {
   "templateId": "js-034-while-condition-unclosed-parenthesis",
   "title": "While condition unclosed parenthesis",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds polling loop for status updates.",
   "tags": [
     "bugfix",

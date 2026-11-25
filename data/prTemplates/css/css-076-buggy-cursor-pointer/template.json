@@ -1,7 +1,8 @@
 {
   "templateId": "css-076-buggy-cursor-pointer",
   "title": "Add pointer cursor to clickable elements",
-  "author": "Noah P.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Sets cursor to pointer for interactive elements.",
   "tags": ["cursor", "ux", "buttons"],
   "localized": {

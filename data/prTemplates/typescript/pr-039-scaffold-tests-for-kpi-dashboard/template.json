@@ -1,7 +1,8 @@
 {
   "templateId": "pr-039-scaffold-tests-for-kpi-dashboard",
   "title": "Scaffold tests for Kpi Dashboard",
-  "author": "Terrence L.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Drops a placeholder spec awaiting follow-up coverage.",
   "tags": [
     "cleanup",

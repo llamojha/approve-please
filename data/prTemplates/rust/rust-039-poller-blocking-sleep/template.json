@@ -1,7 +1,8 @@
 {
   "templateId": "rust-039-poller-blocking-sleep",
   "title": "Queue poller helper",
-  "author": "Rowan G.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Polls queue items and aggregates their statuses.",
   "tags": [
     "performance",

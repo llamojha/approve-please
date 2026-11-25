@@ -1,7 +1,8 @@
 {
   "templateId": "js-033-for-header-unclosed-parenthesis",
   "title": "For loop header unclosed parenthesis",
-  "author": "Nora I.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds metric collection over active nodes.",
   "tags": [
     "bugfix",

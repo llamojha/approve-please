@@ -1,7 +1,8 @@
 {
   "templateId": "java-024-permissive-cors-filter",
   "title": "CORS filter update",
-  "author": "Xiao T.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Tweaks the default CORS filter for the admin API.",
   "tags": [
     "security",

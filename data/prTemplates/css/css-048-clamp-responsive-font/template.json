@@ -1,7 +1,8 @@
 {
   "templateId": "css-048-clamp-responsive-font",
   "title": "Add fluid typography",
-  "author": "Felix U.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Implements responsive font sizing using clamp().",
   "tags": ["typography", "responsive"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "py-036-nplusone-tenant-lookup",
   "title": "Tenant profile hydrator",
-  "author": "Victor B.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Hydrates tenant profiles before rendering the overview.",
   "tags": [
     "performance",

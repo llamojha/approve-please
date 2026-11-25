@@ -1,7 +1,8 @@
 {
   "templateId": "pr-041-trigger-predicate-for-warranty-center",
   "title": "Trigger predicate for Warranty Center",
-  "author": "Marina V.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

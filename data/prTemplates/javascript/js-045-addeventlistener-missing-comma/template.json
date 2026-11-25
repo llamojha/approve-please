@@ -1,7 +1,8 @@
 {
   "templateId": "js-045-addeventlistener-missing-comma",
   "title": "addEventListener missing comma",
-  "author": "Nora I.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds submit click listener for primary button.",
   "tags": [
     "bugfix",

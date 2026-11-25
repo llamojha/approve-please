@@ -1,7 +1,8 @@
 {
   "templateId": "pr-084-hydrate-gremlin-mitigation-devices",
   "title": "Hydrate Gremlin Mitigation devices",
-  "author": "Noor T.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds a helper that pulls the full device matrix for reporting.",
   "tags": [
     "cleanup",

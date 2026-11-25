@@ -1,7 +1,8 @@
 {
   "templateId": "pr-075-admin-endpoint-for-feedback-loop",
   "title": "Admin endpoint for Feedback Loop",
-  "author": "Eli J.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds an express route for admins to push configuration updates.",
   "tags": [
     "bugfix",

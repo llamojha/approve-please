@@ -1,7 +1,8 @@
 {
   "templateId": "js-049-preventdefault-typo-call",
   "title": "preventDefault typo call",
-  "author": "Nora I.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds form submit guard in click handler.",
   "tags": [
     "bugfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-073-trigger-predicate-for-device-heartbeat",
   "title": "Trigger predicate for Device Heartbeat",
-  "author": "Julian F.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

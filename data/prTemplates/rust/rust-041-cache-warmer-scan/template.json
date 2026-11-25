@@ -1,7 +1,8 @@
 {
   "templateId": "rust-041-cache-warmer-scan",
   "title": "Feature cache hydrator helper",
-  "author": "Quinn E.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Hydrates feature flags into cache before a deploy.",
   "tags": [
     "performance",

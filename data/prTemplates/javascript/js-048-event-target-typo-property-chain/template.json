@@ -1,7 +1,8 @@
 {
   "templateId": "js-048-event-target-typo-property-chain",
   "title": "event target typo in property chain",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds manual event mutation for debug replay.",
   "tags": [
     "bugfix",

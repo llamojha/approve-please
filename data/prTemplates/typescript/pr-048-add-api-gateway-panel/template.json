@@ -1,7 +1,8 @@
 {
   "templateId": "pr-048-add-api-gateway-panel",
   "title": "Add Api Gateway panel",
-  "author": "Marina V.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Introduces a dashboard card that surfaces the latest api gateway metrics.",
   "tags": [
     "data",

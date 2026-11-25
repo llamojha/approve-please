@@ -1,7 +1,8 @@
 {
   "templateId": "java-013-tenancy-sla-check",
   "title": "Tenancy SLA check",
-  "author": "Milo Z.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Determines whether a tenant breached the uptime SLA.",
   "tags": [
     "logic",

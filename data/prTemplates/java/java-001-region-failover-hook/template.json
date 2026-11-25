@@ -1,7 +1,8 @@
 {
   "templateId": "java-001-region-failover-hook",
   "title": "Region failover hook builder",
-  "author": "Leila V.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper to build failover events with timestamps for the ops console.",
   "tags": [
     "backend",

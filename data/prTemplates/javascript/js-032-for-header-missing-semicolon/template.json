@@ -1,7 +1,8 @@
 {
   "templateId": "js-032-for-header-missing-semicolon",
   "title": "For loop header missing semicolon",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds pass over queue items for warmup.",
   "tags": [
     "bugfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "js-029-array-literal-unclosed-bracket",
   "title": "Array literal missing closing bracket",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds default region list for uploader jobs.",
   "tags": [
     "bugfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-005-admin-endpoint-for-invoice-reminder",
   "title": "Admin endpoint for Invoice Reminder",
-  "author": "Hank B.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds an express route for admins to push configuration updates.",
   "tags": [
     "docs",

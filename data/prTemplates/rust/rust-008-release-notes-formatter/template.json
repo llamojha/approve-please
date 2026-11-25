@@ -1,7 +1,8 @@
 {
   "templateId": "rust-008-release-notes-formatter",
   "title": "Add release notes formatter",
-  "author": "Adrian E.",
+  "author": "Riya",
+  "authorId": "riya",
   "description": "Provides a reusable formatter for release note entries before posting to Slack.",
   "tags": [
     "release",

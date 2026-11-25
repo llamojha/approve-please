@@ -34,6 +34,7 @@ Content house rules:
 
 - Submit batches of 10 or fewer templates per pull request.
 - Use a globally unique `templateId` that exactly matches its folder name.
+- Assign `authorId` to one of the ten coworkers and use that person's canonical `author` name from `data/characters.ts`. Every committed catalog PR must have a portrait; catalog tests enforce this.
 - Use two-space indentation everywhere, including code inside Markdown fences.
 - Annotate bugs only on changed lines where `isNew` is `true`.
 - Include Spanish `localized.es` metadata and a Spanish `localizedDescription.es` for every authored bug description. The JSON schema keeps these fields optional for backward compatibility, but catalog tests require them for committed templates.

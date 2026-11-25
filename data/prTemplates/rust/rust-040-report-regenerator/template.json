@@ -1,7 +1,8 @@
 {
   "templateId": "rust-040-report-regenerator",
   "title": "Report renderer helper",
-  "author": "Mabel T.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Renders analyst reports for each SLA segment.",
   "tags": [
     "performance",

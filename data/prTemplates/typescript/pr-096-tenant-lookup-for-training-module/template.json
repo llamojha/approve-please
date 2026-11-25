@@ -1,7 +1,8 @@
 {
   "templateId": "pr-096-tenant-lookup-for-training-module",
   "title": "Tenant lookup for Training Module",
-  "author": "Hank B.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds a helper to fetch the latest tenant rows for reporting.",
   "tags": [
     "bugfix",

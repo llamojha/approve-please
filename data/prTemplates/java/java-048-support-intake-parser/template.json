@@ -1,7 +1,8 @@
 {
   "templateId": "java-048-support-intake-parser",
   "title": "Support intake parser",
-  "author": "Vera Q.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Parses support payloads to determine urgency.",
   "tags": [
     "logic",
