@@ -10,6 +10,7 @@ import { useTranslations } from '../hooks/useTranslations';
 import { LOCALE_OPTIONS } from '../constants/i18n';
 import { characters } from '../data/characters';
 import LeaderboardModal from '../components/common/LeaderboardModal';
+import BrandMark from '../components/common/BrandMark';
 import styles from '../styles/Landing.module.css';
 
 const languages = ['generic', 'typescript', 'javascript', 'python', 'java', 'rust', 'css'];
@@ -58,7 +59,7 @@ export default function IndexPage() {
     <Head><title>{`Approve Please · ${t.headline}`}</title><meta name="description" content={t.intro} /></Head>
     <div className={styles.shell}>
       <header className={styles.header}>
-        <Link href="/" className={styles.brand} aria-label={t.home}><span aria-hidden="true">↳</span>approve<b>please</b><i>.</i></Link>
+        <Link href="/" className={styles.brand} aria-label={t.home}><span aria-hidden="true"><BrandMark fill /></span>approve<b>please</b><i>.</i></Link>
         <span className={styles.studio}>{t.studio}</span>
         <nav aria-label={t.home}><button onClick={openGuide}>{t.howToPlay}</button><button onClick={() => setLeaderboardOpen(true)}>{t.leaderboard}</button></nav>
         <button type="button" className={styles.themeToggle} onClick={toggleTheme} aria-label={translations.designStudy.theme} aria-pressed={isDark}><span aria-hidden="true">{isDark ? '☀' : '◐'}</span><span>{isDark ? translations.designStudy.changeThemeLight : translations.designStudy.changeThemeDark}</span></button>
