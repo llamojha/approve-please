@@ -35,8 +35,8 @@ const sameReference = (left: LineReference, right: LineReference) => left.filena
 
 const WorkScreen = () => {
   const {
-    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote, simulationPaused, difficulty, contentTrack },
-    actions: { selectPR, approveCurrentPR, requestChanges, setSimulationPaused }
+    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote, simulationPaused, difficulty, contentTrack, decisionReceipts },
+    actions: { selectPR, approveCurrentPR, requestChanges, setSimulationPaused, finishBasicsShift }
   } = useGameState();
   const translations = useTranslations();
   const t = translations.designStudy;
@@ -58,6 +58,9 @@ const WorkScreen = () => {
   const previousFocus = useRef<HTMLElement | null>(null);
 
   useEffect(() => setSelected([]), [currentPR?.id]);
+  useEffect(() => {
+    if (beginner && !outgoing && queue.length === 0 && decisionReceipts.length === 10 && !simulationPaused && panel === null) finishBasicsShift();
+  }, [beginner, outgoing, queue.length, decisionReceipts.length, simulationPaused, panel, finishBasicsShift]);
   useEffect(() => {
     setSimulationPaused(panel !== null && panel !== 'queue');
     return () => setSimulationPaused(false);

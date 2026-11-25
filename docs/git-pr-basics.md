@@ -6,7 +6,7 @@ Sixty English/Spanish text PRs cover rosters, timetables, inventories and instru
 
 ## Playing
 
-Practice difficulty is the beginner default: six real minutes per shift and no waiting-queue drain. Decisions still affect Stability, Velocity and Team trust and can end a run. Normal difficulty uses the original two-minute clock and queue pressure. PRs arrive at simulated minutes 0, 90, 180 and 300. Approving or rejecting automatically swipes to the next available PR; there is no next-exercise button.
+Both difficulties use the original two-minute shift clock. Practice, the beginner default, disables waiting-queue drain; normal retains queue pressure. Decisions affect Stability, Velocity and Team trust in either mode. PRs are scheduled for simulated minutes 0, 60, 180 and 300. Clearing the inbox brings the next undelivered batch forward immediately. Once all ten PRs are reviewed, the shift ends after the final swipe; otherwise it ends at 17:00. Saved delivery identities stay stable so older runs do not receive duplicate batches. There is no next-exercise button.
 
 Each PR displays an explicit task above the shared diff. Added and removed lines can be flagged, including accidental deletions. The optional **Last review** control opens an explanation in a clock-pausing game dialog. **How reviews work** explains the beginner rules and also pauses the clock. Shortcuts are Alt+A and Alt+R, matching the original game.
 

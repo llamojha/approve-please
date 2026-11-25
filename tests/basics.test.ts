@@ -4,7 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { basicsExercises, basicsLessons } from '../data/basics';
 import { characters } from '../data/characters';
 import { diffText, evidenceKeys, expectedVerdict, rowKey } from '../utils/basics';
-import { BASICS_WAVES, basicsDay, makeBasicsPR, localizeBasicsPR } from '../utils/basicsGame';
+import { BASICS_WAVES, basicsDay, basicsWaveMarker, makeBasicsPR, localizeBasicsPR, pendingBasicsWaves } from '../utils/basicsGame';
 import { createInitialState, gameReducer } from '../context/GameContext';
 import { normalizePullRequest } from '../utils/templateNormalization';
 import { evaluateDecision } from '../utils/decision';
@@ -70,6 +70,36 @@ describe('beginner shift content', () => {
 });
 
 describe('the actual shift engine with beginner content', () => {
+  it('delivers the next scheduled batch at 10:00, or earlier when the inbox is cleared', () => {
+    const opening = [basicsWaveMarker(1,BASICS_WAVES[0])];
+    expect(pendingBasicsWaves(1,0,[],true)).toEqual([BASICS_WAVES[0]]);
+    expect(pendingBasicsWaves(1,1,opening,false)).toEqual([]);
+    expect(pendingBasicsWaves(1,1,opening,true)).toEqual([BASICS_WAVES[1]]);
+    expect(pendingBasicsWaves(1,60,opening,false)).toEqual([BASICS_WAVES[1]]);
+    // Old saves use the same 90 marker even though the batch now arrives at minute 60.
+    expect(pendingBasicsWaves(1,60,['basics:1:0','basics:1:90'],false)).toEqual([]);
+    expect(pendingBasicsWaves(1,60,BASICS_WAVES.map(wave=>basicsWaveMarker(1,wave)),true)).toEqual([]);
+  });
+  it('lets a fast player clear ten PRs without waiting and ends only a completed beginner shift', () => {
+    let state = {...createInitialState('basics'),phase:'WORK' as const} as ReturnType<typeof createInitialState>;
+    expect(gameReducer(state,{type:'FINISH_BASICS_SHIFT'})).toBe(state);
+    for (let batch=0;batch<4;batch++) {
+      const due = pendingBasicsWaves(1,state.currentTime,state.deliveryMarkers,state.queue.length===0);
+      expect(due).toHaveLength(1);
+      const wave = due[0];
+      const prs = basicsDay(1)!.exercises.slice(wave.start,wave.end).map((item,index)=>makeBasicsPR(item,1,state.runId,'en',wave.start+index));
+      state = gameReducer(state,{type:'DELIVER_PRS',marker:basicsWaveMarker(1,wave),prs});
+      expect(gameReducer(state,{type:'FINISH_BASICS_SHIFT'})).toBe(state);
+      for (const pr of prs) state = gameReducer(state,{type:'REVIEW_PR',prId:pr.id,verdict:pr.bugPatterns.length?'request-changes':'approve',selectedRefs:pr.bugPatterns.flatMap(item=>item.lineRefs??[])});
+    }
+    expect(state.decisionReceipts).toHaveLength(10);
+    expect(new Set(state.decisionReceipts.map(receipt=>receipt.prId)).size).toBe(10);
+    expect(gameReducer({...state,simulationPaused:true},{type:'FINISH_BASICS_SHIFT'}).phase).toBe('WORK');
+    expect(gameReducer({...state,contentTrack:'code'},{type:'FINISH_BASICS_SHIFT'}).phase).toBe('WORK');
+    const finished = gameReducer(state,{type:'FINISH_BASICS_SHIFT'});
+    expect(finished.phase).toBe('SUMMARY'); expect(finished.currentTime).toBe(0);
+    expect(gameReducer(finished,{type:'FINISH_BASICS_SHIFT'})).toBe(finished);
+  });
   it('plays all 60 through six timed shifts, with atomic wave delivery and normal summaries', () => {
     let state = createInitialState('basics');
     expect(state.difficulty).toBe('learning'); expect(state.leaderboardEligible).toBe(false);
@@ -79,7 +109,7 @@ describe('the actual shift engine with beginner content', () => {
       for (const wave of BASICS_WAVES) {
         state = gameReducer(state,{type:'ADVANCE_TIME',minutes:wave.minute - state.currentTime});
         const prs = basicsDay(day)!.exercises.slice(wave.start,wave.end).map((item,index) => makeBasicsPR(item,day,state.runId,'en',wave.start + index));
-        const action = {type:'DELIVER_PRS' as const,marker:`basics:${day}:${wave.minute}`,prs};
+        const action = {type:'DELIVER_PRS' as const,marker:basicsWaveMarker(day,wave),prs};
         state = gameReducer(state,action);
         expect(gameReducer(state,action)).toBe(state);
         for (const pr of prs) {

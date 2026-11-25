@@ -8,9 +8,16 @@ import { basicsCopy } from '../constants/basicsCopy';
 export const basicsDay = (day: number) => basicsLessons[day - 1];
 export const basicsExercise = (templateId: string) => basicsExercises.find(item => `basics-${item.id}` === templateId);
 export const BASICS_WAVES = [
-  { minute: 0, start: 0, end: 2 }, { minute: 90, start: 2, end: 5 },
-  { minute: 180, start: 5, end: 8 }, { minute: 300, start: 8, end: 10 }
+  { minute: 0, key: 0, start: 0, end: 2 }, { minute: 60, key: 90, start: 2, end: 5 },
+  { minute: 180, key: 180, start: 5, end: 8 }, { minute: 300, key: 300, start: 8, end: 10 }
 ];
+// Keep delivery identities stable for runs saved before the pacing change.
+export const basicsWaveMarker = (day: number, wave: typeof BASICS_WAVES[number]) => `basics:${day}:${wave.key}`;
+export const pendingBasicsWaves = (day: number, minute: number, markers: string[], inboxEmpty: boolean) => {
+  const pending = BASICS_WAVES.filter(wave => !markers.includes(basicsWaveMarker(day,wave)));
+  const due = pending.filter(wave => wave.minute <= minute);
+  return due.length ? due : inboxEmpty ? pending.slice(0,1) : [];
+};
 export const makeBasicsPR = (exercise: BasicsExercise, day: number, runId: number, locale: Locale, index: number): PullRequest => {
   const character = getCharacter(exercise.authorId)!;
   const t = basicsCopy[locale];

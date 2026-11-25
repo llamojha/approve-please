@@ -93,10 +93,12 @@ interface GameContextValue {
     resumeSavedRun: () => void;
     discardSavedRun: () => void;
     deliverPRs: (marker: string, prs: PullRequest[]) => void;
+    finishBasicsShift: () => void;
   };
 }
 
 export type GameAction =
+  | { type: 'FINISH_BASICS_SHIFT' }
   | { type: 'DELIVER_PRS'; marker: string; prs: PullRequest[] }
   | { type: 'SET_PHASE'; phase: GamePhase }
   | { type: 'ADVANCE_TIME'; minutes: number }
@@ -252,6 +254,10 @@ export const maybeGameOver = (state: GameState): GameState => {
 
 export const gameReducer = (state: GameState, action: GameAction): GameState => {
   switch (action.type) {
+    case 'FINISH_BASICS_SHIFT': {
+      if (state.contentTrack !== 'basics' || state.phase !== 'WORK' || state.simulationPaused || state.queue.length > 0 || state.decisionReceipts.length !== 10 || state.spawnedTemplateIds.length !== 10) return state;
+      return { ...state, phase: 'SUMMARY' };
+    }
     case 'DELIVER_PRS': {
       if (state.phase !== 'WORK' || state.simulationPaused || state.deliveryMarkers.includes(action.marker)) return state;
       const next = gameReducer(state, { type: 'QUEUE_PRS', prs: action.prs });
@@ -562,6 +568,7 @@ export const GameProvider = ({ children, contentTrack = 'code' }: { children: Re
   }, [storageKey]);
 
   const deliverPRs = useCallback((marker: string, prs: PullRequest[]) => dispatch({ type: 'DELIVER_PRS', marker, prs }), []);
+  const finishBasicsShift = useCallback(() => dispatch({ type: 'FINISH_BASICS_SHIFT' }), []);
 
   const value = useMemo(
     () => ({
@@ -584,7 +591,8 @@ export const GameProvider = ({ children, contentTrack = 'code' }: { children: Re
         recordSpawnedTemplates,
         resumeSavedRun,
         discardSavedRun,
-        deliverPRs
+        deliverPRs,
+        finishBasicsShift
       }
     }),
     [
@@ -605,6 +613,7 @@ export const GameProvider = ({ children, contentTrack = 'code' }: { children: Re
       resumeSavedRun,
       discardSavedRun,
       deliverPRs,
+      finishBasicsShift,
       savedRun,
       savedRunPromptPending
     ]
