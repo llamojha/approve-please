@@ -1,7 +1,8 @@
 {
   "templateId": "pr-076-scaffold-tests-for-content-moderation",
   "title": "Scaffold tests for Content Moderation",
-  "author": "Priya S.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Drops a placeholder spec awaiting follow-up coverage.",
   "tags": [
     "cleanup",

@@ -1,7 +1,8 @@
 {
   "templateId": "css-032-animation-timing-bug",
   "title": "Fade in page content",
-  "author": "Paula E.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds fade-in animation to main content on load.",
   "tags": ["animation", "fade"],
   "localized": {

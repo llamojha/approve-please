@@ -1,7 +1,8 @@
 {
   "templateId": "pr-035-normalize-notification-center-payloads",
   "title": "Normalize Notification Center payloads",
-  "author": "Leo P.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a helper to normalize notification center inputs so downstream jobs stay consistent.",
   "tags": [
     "cleanup",

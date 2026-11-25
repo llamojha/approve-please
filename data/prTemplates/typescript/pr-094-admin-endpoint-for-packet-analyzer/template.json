@@ -1,7 +1,8 @@
 {
   "templateId": "pr-094-admin-endpoint-for-packet-analyzer",
   "title": "Admin endpoint for Packet Analyzer",
-  "author": "Simone B.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds an express route for admins to push configuration updates.",
   "tags": [
     "hotfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "js-017-unclosed-string-literal",
   "title": "Unclosed string in status message",
-  "author": "Nora I.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a new queue pause status message.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         44
       ],
       "severity": "major",
-      "description": "String literal is not closed, causing a syntax error."
+      "description": "String literal is not closed, causing a syntax error.",
+      "localizedDescription": {
+        "es": "El literal de cadena no está cerrado, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Cadena sin cerrar en el mensaje de estado",
+      "description": "Añade un nuevo mensaje de estado para la pausa de la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

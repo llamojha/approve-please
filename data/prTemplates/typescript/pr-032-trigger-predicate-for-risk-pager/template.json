@@ -1,7 +1,8 @@
 {
   "templateId": "pr-032-trigger-predicate-for-risk-pager",
   "title": "Trigger predicate for Risk Pager",
-  "author": "Julian F.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

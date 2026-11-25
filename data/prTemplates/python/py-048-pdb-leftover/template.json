@@ -1,7 +1,8 @@
 {
   "templateId": "py-048-pdb-leftover",
   "title": "Batch reconcile debugger hook",
-  "author": "Una M.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds richer inspection around the reconcile batch helper.",
   "tags": [
     "style",

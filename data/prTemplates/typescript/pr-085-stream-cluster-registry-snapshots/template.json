@@ -1,7 +1,8 @@
 {
   "templateId": "pr-085-stream-cluster-registry-snapshots",
   "title": "Stream Cluster Registry snapshots",
-  "author": "Noor T.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a Go helper that fetches snapshots for tooling.",
   "tags": [
     "bugfix",

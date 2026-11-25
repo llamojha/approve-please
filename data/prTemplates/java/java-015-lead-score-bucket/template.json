@@ -1,7 +1,8 @@
 {
   "templateId": "java-015-lead-score-bucket",
   "title": "Lead score bucketing helper",
-  "author": "Owen Y.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Maps lead scores into named tiers for the CRM export.",
   "tags": [
     "logic",

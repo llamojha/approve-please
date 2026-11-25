@@ -1,7 +1,8 @@
 {
   "templateId": "py-032-unvalidated-path-loader",
   "title": "Template loader helper",
-  "author": "Harriet G.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Loads markdown templates from disk for notifications.",
   "tags": [
     "security",

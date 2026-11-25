@@ -1,7 +1,8 @@
 {
   "templateId": "js-016-reserved-keyword-as-identifier",
   "title": "Reserved keyword used as identifier",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds classification state for customer tier routing.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         12
       ],
       "severity": "major",
-      "description": "Uses reserved keyword class as a variable name, causing a syntax error."
+      "description": "Uses reserved keyword class as a variable name, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Usa la palabra reservada class como nombre de variable, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Palabra reservada usada como identificador",
+      "description": "Añade el estado de clasificación para dirigir los niveles de cliente.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

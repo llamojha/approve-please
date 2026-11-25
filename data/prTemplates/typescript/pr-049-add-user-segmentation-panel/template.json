@@ -1,7 +1,8 @@
 {
   "templateId": "pr-049-add-user-segmentation-panel",
   "title": "Add User Segmentation panel",
-  "author": "Eli J.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Introduces a dashboard card that surfaces the latest user segmentation metrics.",
   "tags": [
     "bugfix",

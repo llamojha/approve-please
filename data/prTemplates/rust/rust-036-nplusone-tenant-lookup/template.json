@@ -1,7 +1,8 @@
 {
   "templateId": "rust-036-nplusone-tenant-lookup",
   "title": "Tenant profile hydrator",
-  "author": "Victor A.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Hydrates tenant profiles before rendering the overview.",
   "tags": [
     "performance",

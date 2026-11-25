@@ -1,7 +1,8 @@
 {
   "templateId": "rust-048-pdb-leftover",
   "title": "Batch reconcile debugger hook",
-  "author": "Gina P.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds richer inspection around the reconcile batch helper.",
   "tags": [
     "style",

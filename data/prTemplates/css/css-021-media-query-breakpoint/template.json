@@ -1,7 +1,8 @@
 {
   "templateId": "css-021-media-query-breakpoint",
   "title": "Add tablet breakpoint",
-  "author": "Diana R.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds responsive styles for tablet viewport sizes.",
   "tags": ["responsive", "media-query"],
   "localized": {

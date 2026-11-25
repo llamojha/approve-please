@@ -1,7 +1,8 @@
 {
   "templateId": "js-045-addeventlistener-missing-comma",
   "title": "addEventListener missing comma",
-  "author": "Nora I.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds submit click listener for primary button.",
   "tags": [
     "bugfix",
@@ -29,7 +30,21 @@
         24
       ],
       "severity": "major",
-      "description": "addEventListener arguments are missing a comma, causing syntax error."
+      "description": "addEventListener arguments are missing a comma, causing syntax error.",
+      "localizedDescription": {
+        "es": "A los argumentos de addEventListener les falta una coma, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Coma ausente en addEventListener",
+      "description": "Añade un listener de clic al botón principal de envío.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

@@ -1,7 +1,8 @@
 {
   "templateId": "rust-002-ledger-drift-snapshot",
   "title": "Add ledger drift snapshot helper",
-  "author": "Haruto C.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Introduces a dataclass for representing ledger drift deltas for downstream consumers.",
   "tags": [
     "data",

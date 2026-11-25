@@ -1,7 +1,8 @@
 {
   "templateId": "logic-boundary-check",
   "title": "Invoice grace period fix",
-  "author": "Amira V.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Allow invoices within a small grace window before alerting finance.",
   "tags": [
     "bugfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "rust-026-session-token-logger",
   "title": "Session token audit helper",
-  "author": "Owen S.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds logging around session token issuance for troubleshooting.",
   "tags": [
     "security",

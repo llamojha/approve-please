@@ -1,7 +1,8 @@
 {
   "templateId": "css-025-percentage-width",
   "title": "Responsive image sizing",
-  "author": "Irene V.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Makes images responsive using percentage widths.",
   "tags": ["images", "responsive"],
   "localized": {

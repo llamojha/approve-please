@@ -1,7 +1,8 @@
 {
   "templateId": "css-077-buggy-text-decoration",
   "title": "Remove link underlines in nav",
-  "author": "Olivia R.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Removes default underline from navigation links.",
   "tags": ["links", "navigation", "typography"],
   "localized": {

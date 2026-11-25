@@ -1,7 +1,8 @@
 {
   "templateId": "rust-032-unvalidated-path-loader",
   "title": "Template loader helper",
-  "author": "Dylan H.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Loads markdown templates from disk for notifications.",
   "tags": [
     "security",

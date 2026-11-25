@@ -1,7 +1,8 @@
 {
   "templateId": "java-011-session-lease-expirer",
   "title": "Session lease expirer",
-  "author": "Ivy D.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Updates the helper that determines whether a session lease expired.",
   "tags": [
     "logic",

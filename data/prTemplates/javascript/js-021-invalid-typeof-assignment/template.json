@@ -1,7 +1,8 @@
 {
   "templateId": "js-021-invalid-typeof-assignment",
   "title": "Invalid typeof assignment",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds type normalization branch before enqueue.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         41
       ],
       "severity": "major",
-      "description": "Attempts to assign to typeof, causing a syntax error."
+      "description": "Attempts to assign to typeof, causing a syntax error.",
+      "localizedDescription": {
+        "es": "Intenta asignar un valor a typeof, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Asignación inválida a typeof",
+      "description": "Añade una rama de normalización de tipos antes de encolar.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

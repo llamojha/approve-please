@@ -1,7 +1,8 @@
 {
   "templateId": "security-sql",
   "title": "Ad-hoc analytics endpoint",
-  "author": "Ravi K.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a quick endpoint so success can query invoices.",
   "tags": [
     "hotfix",

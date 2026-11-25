@@ -1,7 +1,8 @@
 {
   "templateId": "py-041-cache-warmer-scan",
   "title": "Feature cache hydrator helper",
-  "author": "Gus R.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Hydrates feature flags into cache before a deploy.",
   "tags": [
     "performance",

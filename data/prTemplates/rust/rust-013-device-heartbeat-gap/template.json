@@ -1,7 +1,8 @@
 {
   "templateId": "rust-013-device-heartbeat-gap",
   "title": "Device heartbeat gap classifier",
-  "author": "Rocio L.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Classifies whether a heartbeat gap should trigger a page.",
   "tags": [
     "devices",

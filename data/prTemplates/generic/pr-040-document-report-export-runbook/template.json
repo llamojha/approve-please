@@ -1,7 +1,8 @@
 {
   "templateId": "pr-040-document-report-export-runbook",
   "title": "Document Report Export runbook",
-  "author": "Casey D.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "bugfix",

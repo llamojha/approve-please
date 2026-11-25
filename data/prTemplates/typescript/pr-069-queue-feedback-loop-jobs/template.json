@@ -1,7 +1,8 @@
 {
   "templateId": "pr-069-queue-feedback-loop-jobs",
   "title": "Queue Feedback Loop jobs",
-  "author": "Malik O.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Streams vetted jobs into the async worker queue.",
   "tags": [
     "bugfix",

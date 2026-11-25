@@ -1,7 +1,8 @@
 {
   "templateId": "java-003-slo-threshold-check",
   "title": "SLO breach detector",
-  "author": "Harper C.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Updates the helper that decides when an SLO is out of bounds.",
   "tags": [
     "logic",

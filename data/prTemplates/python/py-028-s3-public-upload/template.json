@@ -1,7 +1,8 @@
 {
   "templateId": "py-028-s3-public-upload",
   "title": "Invoice attachment uploader",
-  "author": "Samira C.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds helper for uploading invoice PDFs to object storage.",
   "tags": [
     "security",

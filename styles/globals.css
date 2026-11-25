@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   --bg: #0d1117;
   --bg-panel: #161b22;
   --bg-panel-light: #1f242d;
@@ -15,6 +16,7 @@
 }
 
 :root[data-theme='githob-light'] {
+  color-scheme: light;
   --bg: #f6f8fa;
   --bg-panel: #ffffff;
   --bg-panel-light: #f0f3f6;

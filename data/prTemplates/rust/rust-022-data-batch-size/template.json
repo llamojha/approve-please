@@ -1,7 +1,8 @@
 {
   "templateId": "rust-022-data-batch-size",
   "title": "Data batch split helper",
-  "author": "Ravi P.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Checks whether a batch of records should be split before enqueueing.",
   "tags": [
     "logic",

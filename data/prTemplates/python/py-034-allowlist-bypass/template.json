@@ -1,7 +1,8 @@
 {
   "templateId": "py-034-allowlist-bypass",
   "title": "Control plane allowlist helper",
-  "author": "Casey U.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a helper to enforce deployer allowlists.",
   "tags": [
     "security",

@@ -1,7 +1,8 @@
 {
   "templateId": "java-027-webhook-signature-eq",
   "title": "Webhook signature checker",
-  "author": "Aida J.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds signature validation for billing webhooks.",
   "tags": [
     "security",

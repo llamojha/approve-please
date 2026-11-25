@@ -1,7 +1,8 @@
 {
   "templateId": "java-004-batch-capacity-guard",
   "title": "Batch capacity guard",
-  "author": "Noor H.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds a helper for determining when batch queues are full.",
   "tags": [
     "logic",

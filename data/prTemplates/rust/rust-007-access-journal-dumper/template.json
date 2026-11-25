@@ -1,7 +1,8 @@
 {
   "templateId": "rust-007-access-journal-dumper",
   "title": "Add access journal formatter",
-  "author": "Nuri V.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds a helper to normalize access journal rows before writing them to disk.",
   "tags": [
     "compliance",

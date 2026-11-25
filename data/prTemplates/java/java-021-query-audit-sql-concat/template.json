@@ -1,7 +1,8 @@
 {
   "templateId": "java-021-query-audit-sql-concat",
   "title": "Audit query helper",
-  "author": "Uma C.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds helper to fetch audit rows for a tenant.",
   "tags": [
     "security",

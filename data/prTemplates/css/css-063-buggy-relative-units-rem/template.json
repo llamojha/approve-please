@@ -1,7 +1,8 @@
 {
   "templateId": "css-063-buggy-relative-units-rem",
   "title": "Convert spacing to rem units",
-  "author": "Grace H.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Updates spacing values to use rem for better scalability.",
   "tags": ["units", "spacing"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "py-018-retry-budget-window",
   "title": "Retry budget guard",
-  "author": "Tessa R.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Determines if the retry budget has been consumed for the current window.",
   "tags": [
     "logic",

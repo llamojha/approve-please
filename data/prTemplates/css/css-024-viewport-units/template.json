@@ -1,7 +1,8 @@
 {
   "templateId": "css-024-viewport-units",
   "title": "Full-height hero section",
-  "author": "Henry T.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Creates a full viewport height hero section.",
   "tags": ["hero", "viewport"],
   "localized": {

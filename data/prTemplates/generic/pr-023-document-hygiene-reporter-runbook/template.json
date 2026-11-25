@@ -1,7 +1,8 @@
 {
   "templateId": "pr-023-document-hygiene-reporter-runbook",
   "title": "Document Hygiene Reporter runbook",
-  "author": "Priya S.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "docs",

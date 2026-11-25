@@ -1,7 +1,8 @@
 {
   "templateId": "css-060-buggy-position-relative",
   "title": "Add notification badge to icon",
-  "author": "Mike D.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Positions notification count badge on icon using relative/absolute.",
   "tags": ["notifications", "positioning"],
   "localized": {

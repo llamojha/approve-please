@@ -1,7 +1,8 @@
 {
   "templateId": "pr-046-typescript-helper-for-experiment-tracker-data",
   "title": "TypeScript helper for Experiment Tracker data",
-  "author": "Ivy P.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "py-030-service-key-hardcode",
   "title": "Service key header helper",
-  "author": "Lena H.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds helper headers for the partner sync client.",
   "tags": [
     "security",

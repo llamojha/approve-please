@@ -1,7 +1,8 @@
 {
   "templateId": "pr-045-temporary-debug-logger-for-report-export",
   "title": "Temporary debug logger for Report Export",
-  "author": "Oscar W.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds a helper so QA can inspect payloads while testing.",
   "tags": [
     "cleanup",

@@ -1,7 +1,8 @@
 {
   "templateId": "java-018-ops-rotation-picker",
   "title": "Ops rotation picker",
-  "author": "Rowan L.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Selects the correct on-call engineer rotation slot.",
   "tags": [
     "logic",

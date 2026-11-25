@@ -1,7 +1,8 @@
 {
   "templateId": "css-034-bem-naming-error",
   "title": "Add form field styles",
-  "author": "Rita G.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Styles form fields using BEM methodology.",
   "tags": ["bem", "forms"],
   "localized": {

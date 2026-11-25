@@ -1,7 +1,8 @@
 {
   "templateId": "py-010-carbon-cache-hydrator",
   "title": "Add carbon cache hydrator job",
-  "author": "Helena G.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Creates the job payload for hydrating the carbon cache dataset.",
   "tags": [
     "data",

@@ -1,7 +1,8 @@
 {
   "templateId": "rust-023-alert-silence-window",
   "title": "Alert silence window evaluator",
-  "author": "Leah D.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Determines if an alert should remain silenced.",
   "tags": [
     "logic",

@@ -1,7 +1,8 @@
 {
   "templateId": "java-025-debug-admin-override",
   "title": "Admin override helper",
-  "author": "Yara M.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a debug override flag to admin checks.",
   "tags": [
     "security",

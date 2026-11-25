@@ -1,7 +1,8 @@
 {
   "templateId": "clean-hotfix",
   "title": "Crash guard for CSV importer",
-  "author": "Zoe L.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds try/catch and good telemetry. Fully tested.",
   "tags": [
     "hotfix"

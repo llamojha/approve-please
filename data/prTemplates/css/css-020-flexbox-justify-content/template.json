@@ -1,7 +1,8 @@
 {
   "templateId": "css-020-flexbox-justify-content",
   "title": "Center modal content",
-  "author": "Peter K.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Centers modal dialog both horizontally and vertically.",
   "tags": ["modal", "centering"],
   "localized": {

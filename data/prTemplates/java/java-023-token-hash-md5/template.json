@@ -1,7 +1,8 @@
 {
   "templateId": "java-023-token-hash-md5",
   "title": "Token hash helper",
-  "author": "Willow F.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Introduces helper to hash tokens before caching.",
   "tags": [
     "security",

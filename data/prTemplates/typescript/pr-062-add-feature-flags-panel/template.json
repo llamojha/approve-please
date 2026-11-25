@@ -1,7 +1,8 @@
 {
   "templateId": "pr-062-add-feature-flags-panel",
   "title": "Add Feature Flags panel",
-  "author": "Ravi M.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Introduces a dashboard card that surfaces the latest feature flags metrics.",
   "tags": [
     "feature",

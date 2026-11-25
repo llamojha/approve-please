@@ -22,18 +22,22 @@ Template generation runs automatically before `npm run dev` and `npm run build`;
 ## Contribute your own PRs
 
 1. Choose an underserved language or bug kind with `npm run templates:report`.
-2. Author `data/prTemplates/<language>/<template-id>/template.json` using the worksheet and complete format in [`docs/pr-template-guide.md`](docs/pr-template-guide.md). For AI-assisted drafting, use [`.kiro/prompts/generate-pr-template.md`](.kiro/prompts/generate-pr-template.md). VS Code provides autocomplete and inline validation through the repository schema mapping.
-3. Run `npm run dev`. The automatic validator names every affected file and problem before the app starts.
-4. Open `/dev/templates/<template-id>` to review the real game rendering. Bug lines begin highlighted, the English/Spanish toggle checks localized content, and edits to template JSON hot-reload. This route is development-only and returns 404 in production.
-5. Run `npm test` to prove every template instantiates in English and Spanish, then run `npm run templates:report` to note the coverage improved by your contribution.
+2. Run `npm run dev`, then open `/dev/templates`. Search the catalog and either choose **Create scenario** or duplicate a nearby example.
+3. In `/dev/templates/new`, edit metadata, English/Spanish copy and diff rows. Diff rows use `number | + | code` for additions and `number | | code` for context. Select added rows in the player preview to annotate bugs.
+4. Check the simulated approve/request-changes outcomes. The workshop saves a valid draft locally, recovers it after reload, and rejects invalid imported JSON without replacing the current draft.
+5. Export `template.json` to `data/prTemplates/<language>/<template-id>/template.json`. The workshop shows the intended path; it never writes to the repository or production server.
+6. Run `npm run generate:templates`, `npm test -- --maxWorkers=1`, and `npm run templates:report`. Open `/dev/templates/<template-id>` for the final English/Spanish rendering.
+
+The worksheet and full format remain in [`docs/pr-template-guide.md`](docs/pr-template-guide.md). VS Code also provides schema autocomplete and inline validation. Development authoring routes return 404 in production.
 
 Content house rules:
 
 - Submit batches of 10 or fewer templates per pull request.
 - Use a globally unique `templateId` that exactly matches its folder name.
+- Assign `authorId` to one of the ten coworkers and use that person's canonical `author` name from `data/characters.ts`. Every committed catalog PR must have a portrait; catalog tests enforce this.
 - Use two-space indentation everywhere, including code inside Markdown fences.
 - Annotate bugs only on changed lines where `isNew` is `true`.
-- Spanish `localized.es` metadata and localized bug descriptions are encouraged but optional.
+- Include Spanish `localized.es` metadata and a Spanish `localizedDescription.es` for every authored bug description. The JSON schema keeps these fields optional for backward compatibility, but catalog tests require them for committed templates.
 
 ## Pull request expectations
 

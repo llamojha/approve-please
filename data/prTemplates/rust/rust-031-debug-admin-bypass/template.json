@@ -1,7 +1,8 @@
 {
   "templateId": "rust-031-debug-admin-bypass",
   "title": "Admin check helper",
-  "author": "Flora N.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a helper for checking whether a user can access admin tooling.",
   "tags": [
     "security",

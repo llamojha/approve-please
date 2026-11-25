@@ -1,7 +1,8 @@
 {
   "templateId": "pr-100-document-error-bucketing-runbook",
   "title": "Document Error Bucketing runbook",
-  "author": "Jonah R.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "docs",

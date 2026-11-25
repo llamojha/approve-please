@@ -1,7 +1,8 @@
 {
   "templateId": "js-034-while-condition-unclosed-parenthesis",
   "title": "While condition unclosed parenthesis",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds polling loop for status updates.",
   "tags": [
     "bugfix",
@@ -39,7 +40,21 @@
         20
       ],
       "severity": "major",
-      "description": "While condition is malformed and missing parenthesis, causing syntax error."
+      "description": "While condition is malformed and missing parenthesis, causing syntax error.",
+      "localizedDescription": {
+        "es": "La condición while está mal formada y le falta un paréntesis, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis sin cerrar en una condición while",
+      "description": "Añade un bucle de sondeo para las actualizaciones de estado.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

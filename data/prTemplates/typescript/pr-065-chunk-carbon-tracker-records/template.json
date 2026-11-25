@@ -1,7 +1,8 @@
 {
   "templateId": "pr-065-chunk-carbon-tracker-records",
   "title": "Chunk Carbon Tracker records",
-  "author": "Hank B.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds pagination helpers for carbon tracker batches.",
   "tags": [
     "bugfix",

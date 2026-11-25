@@ -1,7 +1,8 @@
 {
   "templateId": "css-071-buggy-grid-layout",
   "title": "Create product grid",
-  "author": "Yolanda N.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Implements CSS Grid for product listing layout.",
   "tags": ["grid", "layout"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "css-040-flexbox-gap",
   "title": "Add spacing to button group",
-  "author": "Xavier M.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Uses gap property for consistent button spacing.",
   "tags": ["buttons", "flexbox"],
   "localized": {

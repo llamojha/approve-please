@@ -1,7 +1,8 @@
 {
   "templateId": "css-045-pseudo-element-content",
   "title": "Add required field indicator",
-  "author": "Carla R.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds asterisk to required form field labels.",
   "tags": ["forms", "pseudo-elements"],
   "localized": {

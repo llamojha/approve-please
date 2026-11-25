@@ -1,7 +1,8 @@
 {
   "templateId": "pr-072-typescript-helper-for-content-moderation-data",
   "title": "TypeScript helper for Content Moderation data",
-  "author": "Ravi M.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds a raw SQL helper to fetch organization rows.",
   "tags": [
     "bugfix",

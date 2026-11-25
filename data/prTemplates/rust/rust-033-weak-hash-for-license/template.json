@@ -1,7 +1,8 @@
 {
   "templateId": "rust-033-weak-hash-for-license",
   "title": "License hash helper",
-  "author": "Sarai P.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Hashes license payloads before writing to cache.",
   "tags": [
     "security",

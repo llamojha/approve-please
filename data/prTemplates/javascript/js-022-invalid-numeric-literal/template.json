@@ -1,7 +1,8 @@
 {
   "templateId": "js-022-invalid-numeric-literal",
   "title": "Invalid numeric literal format",
-  "author": "Nora I.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds throttling delay constant for retry logic.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         14
       ],
       "severity": "major",
-      "description": "Numeric literal uses invalid separator placement, causing a syntax error."
+      "description": "Numeric literal uses invalid separator placement, causing a syntax error.",
+      "localizedDescription": {
+        "es": "El literal numérico coloca los separadores de forma inválida, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Formato de literal numérico inválido",
+      "description": "Añade la constante de espera de limitación para la lógica de reintentos.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

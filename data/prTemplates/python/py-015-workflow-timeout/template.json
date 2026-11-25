@@ -1,7 +1,8 @@
 {
   "templateId": "py-015-workflow-timeout",
   "title": "Workflow timeout detector",
-  "author": "Aria L.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Determines if a workflow exceeded the configured timeout.",
   "tags": [
     "logic",

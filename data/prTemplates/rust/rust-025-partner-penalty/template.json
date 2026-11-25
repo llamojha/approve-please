@@ -1,7 +1,8 @@
 {
   "templateId": "rust-025-partner-penalty",
   "title": "Partner penalty trigger",
-  "author": "Ivy C.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Determines if a partner should incur a penalty based on their error rate.",
   "tags": [
     "logic",

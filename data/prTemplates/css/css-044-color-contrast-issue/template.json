@@ -1,7 +1,8 @@
 {
   "templateId": "css-044-color-contrast-issue",
   "title": "Style disabled button",
-  "author": "Brian Q.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds styling for disabled button state.",
   "tags": ["buttons", "disabled"],
   "localized": {

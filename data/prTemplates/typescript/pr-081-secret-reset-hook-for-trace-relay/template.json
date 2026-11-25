@@ -1,7 +1,8 @@
 {
   "templateId": "pr-081-secret-reset-hook-for-trace-relay",
   "title": "Secret reset hook for Trace Relay",
-  "author": "Terrence L.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds a helper that rotates per-tenant secrets on demand.",
   "tags": [
     "performance",

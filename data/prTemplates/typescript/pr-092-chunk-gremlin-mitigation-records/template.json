@@ -1,7 +1,8 @@
 {
   "templateId": "pr-092-chunk-gremlin-mitigation-records",
   "title": "Chunk Gremlin Mitigation records",
-  "author": "Akiko F.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds pagination helpers for gremlin mitigation batches.",
   "tags": [
     "bugfix",

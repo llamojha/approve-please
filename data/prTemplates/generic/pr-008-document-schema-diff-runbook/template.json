@@ -1,7 +1,8 @@
 {
   "templateId": "pr-008-document-schema-diff-runbook",
   "title": "Document Schema Diff runbook",
-  "author": "Brielle S.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds lightweight runbook steps for the on-call rotation.",
   "tags": [
     "docs",

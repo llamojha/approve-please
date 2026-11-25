@@ -1,7 +1,8 @@
 {
   "templateId": "pr-088-scaffold-tests-for-smart-alerts",
   "title": "Scaffold tests for Smart Alerts",
-  "author": "Vivian G.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Drops a placeholder spec awaiting follow-up coverage.",
   "tags": [
     "cleanup",

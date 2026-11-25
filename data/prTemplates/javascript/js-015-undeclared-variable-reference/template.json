@@ -1,7 +1,8 @@
 {
   "templateId": "js-015-undeclared-variable-reference",
   "title": "Undeclared variable reference in total formatter",
-  "author": "Nora I.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds formatting for invoice totals before dispatch.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         35
       ],
       "severity": "major",
-      "description": "References totalPrice which is never declared, causing a ReferenceError."
+      "description": "References totalPrice which is never declared, causing a ReferenceError.",
+      "localizedDescription": {
+        "es": "Hace referencia a totalPrice, que no está declarada, y provoca un ReferenceError."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Referencia a variable no declarada en el formateador de totales",
+      "description": "Añade el formato de los totales de las facturas antes del envío.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

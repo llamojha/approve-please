@@ -1,7 +1,8 @@
 {
   "templateId": "pr-052-alert-for-cron-orchestrator-latency",
   "title": "Alert for Cron Orchestrator latency",
-  "author": "Vivian G.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "cleanup",

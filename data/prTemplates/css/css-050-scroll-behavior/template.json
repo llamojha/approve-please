@@ -1,7 +1,8 @@
 {
   "templateId": "css-050-scroll-behavior",
   "title": "Enable smooth scrolling",
-  "author": "Hugo W.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds smooth scroll behavior for anchor links.",
   "tags": ["scroll", "ux"],
   "localized": {

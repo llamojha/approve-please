@@ -1,7 +1,8 @@
 {
   "templateId": "css-056-buggy-margin-auto-centering",
   "title": "Center container element",
-  "author": "Lisa T.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Centers the main container using margin auto.",
   "tags": ["layout", "centering"],
   "localized": {

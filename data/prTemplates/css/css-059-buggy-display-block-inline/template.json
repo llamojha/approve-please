@@ -1,7 +1,8 @@
 {
   "templateId": "css-059-buggy-display-block-inline",
   "title": "Fix inline badge spacing",
-  "author": "Sandra W.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Changes badge display to inline-block for proper spacing.",
   "tags": ["badges", "display"],
   "localized": {

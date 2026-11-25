@@ -1,7 +1,8 @@
 {
   "templateId": "css-067-buggy-css-variable-usage",
   "title": "Apply theme colors to buttons",
-  "author": "Karen O.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Uses CSS variables for consistent button theming.",
   "tags": ["buttons", "variables"],
   "localized": {

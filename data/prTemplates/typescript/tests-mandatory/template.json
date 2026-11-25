@@ -1,7 +1,8 @@
 {
   "templateId": "tests-mandatory",
   "title": "Feature flag cleanup",
-  "author": "Devon P.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Removes an old feature flag that is on for everyone.",
   "tags": [
     "cleanup"

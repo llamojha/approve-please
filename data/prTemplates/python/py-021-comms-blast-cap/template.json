@@ -1,7 +1,8 @@
 {
   "templateId": "py-021-comms-blast-cap",
   "title": "Comms blast cap logic",
-  "author": "Noor T.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Decides whether another marketing blast can be sent this minute.",
   "tags": [
     "logic",

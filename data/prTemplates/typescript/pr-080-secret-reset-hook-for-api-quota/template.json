@@ -1,7 +1,8 @@
 {
   "templateId": "pr-080-secret-reset-hook-for-api-quota",
   "title": "Secret reset hook for Api Quota",
-  "author": "Vivian G.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a helper that rotates per-tenant secrets on demand.",
   "tags": [
     "docs",

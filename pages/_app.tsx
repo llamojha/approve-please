@@ -28,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
           <link rel="icon" sizes="any" href="/favicon.ico" />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="192x192" href="/icon-512.png" />
+          <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content={SITE_METADATA.siteName} />
           <meta property="og:title" content={SITE_METADATA.title} />

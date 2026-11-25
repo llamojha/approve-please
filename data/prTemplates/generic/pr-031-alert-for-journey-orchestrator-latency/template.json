@@ -1,7 +1,8 @@
 {
   "templateId": "pr-031-alert-for-journey-orchestrator-latency",
   "title": "Alert for Journey Orchestrator latency",
-  "author": "Harper N.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "cleanup",
