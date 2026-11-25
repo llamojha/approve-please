@@ -11,6 +11,7 @@ import { LOCALE_OPTIONS } from '../constants/i18n';
 import { characters } from '../data/characters';
 import LeaderboardModal from '../components/common/LeaderboardModal';
 import BrandMark from '../components/common/BrandMark';
+import { basicsCopy } from '../constants/basicsCopy';
 import styles from '../styles/Landing.module.css';
 
 const languages = ['generic', 'typescript', 'javascript', 'python', 'java', 'rust', 'css'];
@@ -85,6 +86,7 @@ export default function IndexPage() {
             <div className={styles.waitingPortraits} aria-hidden="true"><Image unoptimized src="/characters/studies/lucia-neutral.png" alt="" width={64} height={64} /><Image unoptimized src="/characters/studies/diego-neutral.png" alt="" width={64} height={64} /><span>+8</span></div>
           </div>
         </section>
+        <section className={styles.basicsEntry} aria-labelledby="basics-title"><div><p className={styles.eyebrow}>{basicsCopy[locale].name}</p><h2 id="basics-title">{basicsCopy[locale].entry}</h2><p>{basicsCopy[locale].entryBody}</p></div><Link href="/learn" className={styles.primary}>{basicsCopy[locale].entryAction} <span aria-hidden="true">→</span></Link></section>
         <section className={styles.stakes} aria-label={t.meterIntro}>
           <p>{t.meterIntro}</p>
           <div className={styles.stake}><span className={styles.green} aria-hidden="true">↟</span><div><strong>{translations.shared.meters.stability}</strong><span>{t.stability}</span></div></div>

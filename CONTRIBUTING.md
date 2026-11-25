@@ -44,3 +44,6 @@ Content house rules:
 - Keep changes scoped and explain what changed and why.
 - Run `npm run typecheck`, `npm run lint`, and `npm test` before submitting.
 - For gameplay tuning, adjust values in `constants/gameSettings.ts` and describe the intended effect.
+## Beginner PR lessons
+
+The plain-text student course lives separately at `/learn`. See [the learning content guide](docs/git-pr-basics.md) for bilingual briefs, before/after files, issue references and lesson validation. These exercises do not enter the timed game's code queue.

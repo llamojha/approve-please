@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="author" content={SITE_METADATA.author} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content={SITE_METADATA.themeColor} />
-          <link rel="canonical" href={SITE_METADATA.url} />
+          <link key="canonical" rel="canonical" href={SITE_METADATA.url} />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
           <link rel="icon" sizes="any" href="/favicon.ico" />
