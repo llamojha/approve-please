@@ -1,13 +1,83 @@
 import { copy as c, textFile as f, issue as at, type ExerciseDraft } from './types';
 export const multipleFiles: ExerciseDraft[] = [
-  { id: 'room-everywhere', title: c('Move the project showcase', 'Trasladar la muestra de proyectos'), brief: c('The showcase moves to hall C. Update both the invitation and the schedule.', 'La muestra pasa a la sala C. Actualiza la invitación y el horario.'), files: [f('invitation.txt', ['Showcase: hall A'], ['Showcase: hall C'], ['Muestra: sala A'], ['Muestra: sala C']),f('schedule.txt', ['14:00 Showcase, hall A'], ['14:00 Showcase, hall C'], ['14:00 Muestra, sala A'], ['14:00 Muestra, sala C'])], issues: [], explanation: c('Both documents point to hall C. Review every file in a PR before approving it.', 'Ambos documentos indican la sala C. Revisa todos los archivos de una PR antes de aprobarla.') },
-  { id: 'deadline-everywhere', title: c('Extend project applications', 'Ampliar las solicitudes de proyecto'), brief: c('Applications close on 18 June. Update the notice and the checklist.', 'Las solicitudes cierran el 18 de junio. Actualiza el aviso y la lista de comprobación.'), files: [f('notice.txt', ['Deadline: 15 June'], ['Deadline: 18 June'], ['Plazo: 15 de junio'], ['Plazo: 18 de junio']),f('checklist.txt', ['Apply by 15 June.'], ['Apply by 19 June.'], ['Solicita antes del 15 de junio.'], ['Solicita antes del 19 de junio.'])], issues: [at('checklist.txt','after',1)], explanation: c('The notice says 18 June but the checklist says 19 June. Both must match the brief, not just each other’s general intent.', 'El aviso indica el 18 de junio, pero la lista indica el 19. Ambos deben coincidir con el encargo, no solo con su intención general.') },
-  { id: 'rename-club', title: c('Rename the walking club', 'Renombrar el club de paseos'), brief: c('Rename “Trail Club” to “Campus Walkers” in the directory and welcome note. Keep Tuesday.', 'Cambia «Club de rutas» por «Paseos del campus» en el directorio y la bienvenida. Mantén el martes.'), files: [f('directory.txt', ['Trail Club — Tuesday'], ['Campus Walkers — Tuesday'], ['Club de rutas — martes'], ['Paseos del campus — martes']),f('welcome.txt', ['Welcome to Trail Club.'], ['Welcome to Campus Walkers.'], ['Bienvenidos al Club de rutas.'], ['Bienvenidos a Paseos del campus.'])], issues: [], explanation: c('The new name is consistent across both files and the meeting day is preserved.', 'El nombre nuevo coincide en ambos archivos y se conserva el día de reunión.') },
-  { id: 'departure-sync', title: c('Update the trip departure', 'Actualizar la salida de la excursión'), brief: c('Departure is 08:45 in both documents. Keep the 17:00 return.', 'La salida es a las 08:45 en ambos documentos. Mantén el regreso a las 17:00.'), files: [f('trip.txt', ['Departure: 08:30', 'Return: 17:00'], ['Departure: 08:45', 'Return: 17:00'], ['Salida: 08:30', 'Regreso: 17:00'], ['Salida: 08:45', 'Regreso: 17:00']),f('reminder.txt', ['Leave at 08:30.'], ['Leave at 09:45.'], ['Salimos a las 08:30.'], ['Salimos a las 09:45.'])], issues: [at('reminder.txt','after',1)], explanation: c('The reminder is one hour late. Correct information in the first file does not make the second file safe.', 'El recordatorio lleva una hora de retraso. Que el primer archivo sea correcto no hace correcto el segundo.') },
-  { id: 'accessible-entrance', title: c('Publish the step-free entrance', 'Publicar la entrada accesible'), brief: c('The step-free entrance is gate 2. Update the map key and visitor note.', 'La entrada sin escalones es la puerta 2. Actualiza la leyenda del mapa y la nota de visitas.'), files: [f('map-key.txt', ['Step-free entrance: gate 1'], ['Step-free entrance: gate 2'], ['Entrada sin escalones: puerta 1'], ['Entrada sin escalones: puerta 2']),f('visitors.txt', ['For step-free access, use gate 1.'], ['For step-free access, use gate 2.'], ['Para entrar sin escalones, usa la puerta 1.'], ['Para entrar sin escalones, usa la puerta 2.'])], issues: [], explanation: c('Both sources now give the same correct entrance. Consistency helps people trust shared information.', 'Ambas fuentes indican ahora la entrada correcta. La coherencia permite confiar en la información compartida.') },
-  { id: 'fee-consistency', title: c('Publish the new ticket price', 'Publicar el nuevo precio de entrada'), brief: c('Tickets now cost €4. Update the price list and payment instructions.', 'Las entradas cuestan ahora 4 €. Actualiza la lista de precios y las instrucciones de pago.'), files: [f('prices.txt', ['Ticket: €3'], ['Ticket: €4'], ['Entrada: 3 €'], ['Entrada: 4 €']),f('payment.txt', ['Pay €3 at reception.'], ['Pay €5 at reception.'], ['Paga 3 € en recepción.'], ['Paga 5 € en recepción.'])], issues: [at('payment.txt','after',1)], explanation: c('Payment instructions ask for €5 instead of €4. The authoritative price is stated in the brief.', 'Las instrucciones piden 5 € en lugar de 4 €. El precio de referencia está en el encargo.') },
-  { id: 'staff-contact', title: c('Change the equipment contact', 'Cambiar el contacto de material'), brief: c('Marta replaces Jonah as equipment contact in the staff list and borrowing guide.', 'Marta sustituye a Jonah como contacto de material en la lista de personal y la guía de préstamo.'), files: [f('staff.txt', ['Equipment: Jonah'], ['Equipment: Marta'], ['Material: Jonah'], ['Material: Marta']),f('borrowing.txt', ['Ask Jonah for equipment.'], ['Ask Marta for equipment.'], ['Pide el material a Jonah.'], ['Pide el material a Marta.'])], issues: [], explanation: c('Both references now name Marta. A consistent replacement is complete when all requested locations are updated.', 'Ambas referencias indican ahora a Marta. Una sustitución está completa cuando se actualizan todos los lugares solicitados.') },
-  { id: 'capacity-sync', title: c('Update the lab capacity', 'Actualizar el aforo del laboratorio'), brief: c('The lab capacity is now 18. Update both documents and keep both safety reminders.', 'El aforo del laboratorio pasa a 18. Actualiza ambos documentos y conserva ambos avisos de seguridad.'), files: [f('lab.txt', ['Capacity: 16', 'Keep exits clear.'], ['Capacity: 18', 'Keep exits clear.'], ['Aforo: 16', 'Mantén libres las salidas.'], ['Aforo: 18', 'Mantén libres las salidas.']),f('booking.txt', ['Maximum booking: 16', 'No food in the lab.'], ['Maximum booking: 18'], ['Máximo de reserva: 16', 'No se permite comida en el laboratorio.'], ['Máximo de reserva: 18'])], issues: [at('booking.txt','before',2)], explanation: c('The capacity matches in both files, but the food reminder was deleted. Cross-file agreement is necessary, not sufficient.', 'El aforo coincide en ambos archivos, pero se eliminó el aviso sobre comida. La coherencia entre archivos es necesaria, pero no suficiente.') },
-  { id: 'registration-contact', title: c('Update registration help', 'Actualizar la ayuda de inscripción'), brief: c('Replace help@campus.example with join@campus.example in both files.', 'Sustituye help@campus.example por join@campus.example en ambos archivos.'), files: [f('signup.txt', ['Help: help@campus.example'], ['Help: join@campus.example'], ['Ayuda: help@campus.example'], ['Ayuda: join@campus.example']),f('faq.txt', ['Questions? help@campus.example'], ['Questions? join@campus.example'], ['¿Dudas? help@campus.example'], ['¿Dudas? join@campus.example'])], issues: [], explanation: c('The email address is updated accurately in both places. This change is complete and consistent.', 'La dirección se actualiza correctamente en ambos lugares. El cambio es completo y coherente.') },
-  { id: 'same-but-wrong', title: c('Update the exhibition date', 'Actualizar la fecha de exposición'), brief: c('The exhibition is on 6 October. Update the poster and calendar.', 'La exposición es el 6 de octubre. Actualiza el cartel y el calendario.'), files: [f('poster.txt', ['Exhibition: 3 October'], ['Exhibition: 9 October'], ['Exposición: 3 de octubre'], ['Exposición: 9 de octubre']),f('calendar.txt', ['3 October — Exhibition'], ['9 October — Exhibition'], ['3 de octubre — Exposición'], ['9 de octubre — Exposición'])], issues: [at('poster.txt','after',1),at('calendar.txt','after',1)], explanation: c('Both files agree, but both say 9 instead of 6 October. Consistency alone cannot establish correctness.', 'Los archivos coinciden, pero ambos indican el 9 en lugar del 6 de octubre. Coincidir no basta para ser correctos.') }
+  {
+    id: 'room-everywhere',
+    title: c('Move the project showcase', 'Trasladar la muestra de proyectos'),
+    brief: c('The showcase moves to hall C. Update both the invitation and the schedule.', 'La muestra pasa a la sala C. Actualiza la invitación y el horario.'),
+    files: [f('invitation.txt', ['Showcase: hall A'], ['Showcase: hall C'], ['Muestra: sala A'], ['Muestra: sala C']),f('schedule.txt', ['14:00 Showcase, hall A'], ['14:00 Showcase, hall C'], ['14:00 Muestra, sala A'], ['14:00 Muestra, sala C'])],
+    issues: [],
+    explanation: c('Both documents point to hall C. Review every file in a PR before approving it.', 'Ambos documentos indican la sala C. Revisa todos los archivos de una PR antes de aprobarla.')
+  },
+  {
+    id: 'deadline-everywhere',
+    title: c('Extend project applications', 'Ampliar las solicitudes de proyecto'),
+    brief: c('Applications close on 18 June. Update the notice and the checklist.', 'Las solicitudes cierran el 18 de junio. Actualiza el aviso y la lista de comprobación.'),
+    files: [f('notice.txt', ['Deadline: 15 June'], ['Deadline: 18 June'], ['Plazo: 15 de junio'], ['Plazo: 18 de junio']),f('checklist.txt', ['Apply by 15 June.'], ['Apply by 19 June.'], ['Solicita antes del 15 de junio.'], ['Solicita antes del 19 de junio.'])],
+    issues: [at('checklist.txt','after',1)],
+    explanation: c('The notice says 18 June but the checklist says 19 June. Both must match the brief, not just each other’s general intent.', 'El aviso indica el 18 de junio, pero la lista indica el 19. Ambos deben coincidir con el encargo, no solo con su intención general.')
+  },
+  {
+    id: 'rename-club',
+    title: c('Rename the walking club', 'Renombrar el club de paseos'),
+    brief: c('Rename “Trail Club” to “Campus Walkers” in the directory and welcome note. Keep Tuesday.', 'Cambia «Club de rutas» por «Paseos del campus» en el directorio y la bienvenida. Mantén el martes.'),
+    files: [f('directory.txt', ['Trail Club — Tuesday'], ['Campus Walkers — Tuesday'], ['Club de rutas — martes'], ['Paseos del campus — martes']),f('welcome.txt', ['Welcome to Trail Club.'], ['Welcome to Campus Walkers.'], ['Bienvenidos al Club de rutas.'], ['Bienvenidos a Paseos del campus.'])],
+    issues: [],
+    explanation: c('The new name is consistent across both files and the meeting day is preserved.', 'El nombre nuevo coincide en ambos archivos y se conserva el día de reunión.')
+  },
+  {
+    id: 'departure-sync',
+    title: c('Update the trip departure', 'Actualizar la salida de la excursión'),
+    brief: c('Departure is 08:45 in both documents. Keep the 17:00 return.', 'La salida es a las 08:45 en ambos documentos. Mantén el regreso a las 17:00.'),
+    files: [f('trip.txt', ['Departure: 08:30', 'Return: 17:00'], ['Departure: 08:45', 'Return: 17:00'], ['Salida: 08:30', 'Regreso: 17:00'], ['Salida: 08:45', 'Regreso: 17:00']),f('reminder.txt', ['Leave at 08:30.'], ['Leave at 09:45.'], ['Salimos a las 08:30.'], ['Salimos a las 09:45.'])],
+    issues: [at('reminder.txt','after',1)],
+    explanation: c('The reminder is one hour late. Correct information in the first file does not make the second file safe.', 'El recordatorio lleva una hora de retraso. Que el primer archivo sea correcto no hace correcto el segundo.')
+  },
+  {
+    id: 'accessible-entrance',
+    title: c('Publish the step-free entrance', 'Publicar la entrada accesible'),
+    brief: c('The step-free entrance is gate 2. Update the map key and visitor note.', 'La entrada sin escalones es la puerta 2. Actualiza la leyenda del mapa y la nota de visitas.'),
+    files: [f('map-key.txt', ['Step-free entrance: gate 1'], ['Step-free entrance: gate 2'], ['Entrada sin escalones: puerta 1'], ['Entrada sin escalones: puerta 2']),f('visitors.txt', ['For step-free access, use gate 1.'], ['For step-free access, use gate 2.'], ['Para entrar sin escalones, usa la puerta 1.'], ['Para entrar sin escalones, usa la puerta 2.'])],
+    issues: [],
+    explanation: c('Both sources now give the same correct entrance. Consistency helps people trust shared information.', 'Ambas fuentes indican ahora la entrada correcta. La coherencia permite confiar en la información compartida.')
+  },
+  {
+    id: 'fee-consistency',
+    title: c('Publish the new ticket price', 'Publicar el nuevo precio de entrada'),
+    brief: c('Tickets now cost €4. Update the price list and payment instructions.', 'Las entradas cuestan ahora 4 €. Actualiza la lista de precios y las instrucciones de pago.'),
+    files: [f('prices.txt', ['Ticket: €3'], ['Ticket: €4'], ['Entrada: 3 €'], ['Entrada: 4 €']),f('payment.txt', ['Pay €3 at reception.'], ['Pay €5 at reception.'], ['Paga 3 € en recepción.'], ['Paga 5 € en recepción.'])],
+    issues: [at('payment.txt','after',1)],
+    explanation: c('Payment instructions ask for €5 instead of €4. The authoritative price is stated in the brief.', 'Las instrucciones piden 5 € en lugar de 4 €. El precio de referencia está en el encargo.')
+  },
+  {
+    id: 'staff-contact',
+    title: c('Change the equipment contact', 'Cambiar el contacto de material'),
+    brief: c('Marta replaces Jonah as equipment contact in the staff list and borrowing guide.', 'Marta sustituye a Jonah como contacto de material en la lista de personal y la guía de préstamo.'),
+    files: [f('staff.txt', ['Equipment: Jonah'], ['Equipment: Marta'], ['Material: Jonah'], ['Material: Marta']),f('borrowing.txt', ['Ask Jonah for equipment.'], ['Ask Marta for equipment.'], ['Pide el material a Jonah.'], ['Pide el material a Marta.'])],
+    issues: [],
+    explanation: c('Both references now name Marta. A consistent replacement is complete when all requested locations are updated.', 'Ambas referencias indican ahora a Marta. Una sustitución está completa cuando se actualizan todos los lugares solicitados.')
+  },
+  {
+    id: 'capacity-sync',
+    title: c('Update the lab capacity', 'Actualizar el aforo del laboratorio'),
+    brief: c('The lab capacity is now 18. Update both documents and keep both safety reminders.', 'El aforo del laboratorio pasa a 18. Actualiza ambos documentos y conserva ambos avisos de seguridad.'),
+    files: [f('lab.txt', ['Capacity: 16', 'Keep exits clear.'], ['Capacity: 18', 'Keep exits clear.'], ['Aforo: 16', 'Mantén libres las salidas.'], ['Aforo: 18', 'Mantén libres las salidas.']),f('booking.txt', ['Maximum booking: 16', 'No food in the lab.'], ['Maximum booking: 18'], ['Máximo de reserva: 16', 'No se permite comida en el laboratorio.'], ['Máximo de reserva: 18'])],
+    issues: [at('booking.txt','before',2)],
+    explanation: c('The capacity matches in both files, but the food reminder was deleted. Cross-file agreement is necessary, not sufficient.', 'El aforo coincide en ambos archivos, pero se eliminó el aviso sobre comida. La coherencia entre archivos es necesaria, pero no suficiente.')
+  },
+  {
+    id: 'registration-contact',
+    title: c('Update registration help', 'Actualizar la ayuda de inscripción'),
+    brief: c('Replace help@campus.example with join@campus.example in both files.', 'Sustituye help@campus.example por join@campus.example en ambos archivos.'),
+    files: [f('signup.txt', ['Help: help@campus.example'], ['Help: join@campus.example'], ['Ayuda: help@campus.example'], ['Ayuda: join@campus.example']),f('faq.txt', ['Questions? help@campus.example'], ['Questions? join@campus.example'], ['¿Dudas? help@campus.example'], ['¿Dudas? join@campus.example'])],
+    issues: [],
+    explanation: c('The email address is updated accurately in both places. This change is complete and consistent.', 'La dirección se actualiza correctamente en ambos lugares. El cambio es completo y coherente.')
+  },
+  {
+    id: 'same-but-wrong',
+    title: c('Update the exhibition date', 'Actualizar la fecha de exposición'),
+    brief: c('The exhibition is on 6 October. Update the poster and calendar.', 'La exposición es el 6 de octubre. Actualiza el cartel y el calendario.'),
+    files: [f('poster.txt', ['Exhibition: 3 October'], ['Exhibition: 9 October'], ['Exposición: 3 de octubre'], ['Exposición: 9 de octubre']),f('calendar.txt', ['3 October — Exhibition'], ['9 October — Exhibition'], ['3 de octubre — Exposición'], ['9 de octubre — Exposición'])],
+    issues: [at('poster.txt','after',1),at('calendar.txt','after',1)],
+    explanation: c('Both files agree, but both say 9 instead of 6 October. Consistency alone cannot establish correctness.', 'Los archivos coinciden, pero ambos indican el 9 en lugar del 6 de octubre. Coincidir no basta para ser correctos.')
+  }
 ];
