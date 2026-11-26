@@ -104,7 +104,9 @@ export const applyCommand = (room: GroupRoom, command: GroupCommand, auth: { hos
 };
 export const publicPR = (pr: PullRequest): PullRequest => ({
   id:pr.id, templateId:pr.templateId, title:pr.title, author:pr.author, authorId:pr.authorId,
-  description:pr.description,tags:pr.tags,files:pr.files,importance:pr.importance,estimatedReviewSeconds:pr.estimatedReviewSeconds,bugPatterns:[]
+  description:pr.description,tags:pr.tags,files:pr.files,importance:pr.importance,
+  // The solo estimate includes a hidden bug multiplier. Public timing must use visible content only.
+  estimatedReviewSeconds:Math.round(15+1.2*pr.files.reduce((total,file)=>total+file.lines.length,0)),bugPatterns:[]
 });
 const explanationFor = (pr: PullRequest, locale: 'en'|'es') => pr.learningContext?.explanation ??
   (pr.bugPatterns.map(bug=>bug.description).filter(Boolean).join(' ') || (pr.bugPatterns.length

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { applyCommand, createRoom, GroupError, parseSettings, snapshotRoom, tokenHash } from '../server/groupSessions';
+import { applyCommand, createRoom, GroupError, parseSettings, publicPR, snapshotRoom, tokenHash } from '../server/groupSessions';
 import { createMemoryRoomStore, getRoomStore, transactRoom } from '../server/groupSessionStore';
 import type { GroupRoom } from '../server/groupSessions';
 
@@ -26,6 +26,28 @@ describe('server-owned group sessions',()=>{
     const room=await createRoom({...settings,track:'code'},'host',now);
     expect(room.prs).toHaveLength(10);expect(room.prs.filter(pr=>pr.bugPatterns.length)).toHaveLength(5);
     expect(new Set(room.prs.map(pr=>pr.templateId)).size).toBe(10);
+  });
+  it('makes public estimates independent of bug annotations and private timing',async()=>{
+    const room=await createRoom({...settings,track:'code'},'host',now);
+    const buggy=room.prs.find(pr=>pr.bugPatterns.length)!;
+    const lineCount=buggy.files.reduce((total,file)=>total+file.lines.length,0);
+    const safe={...buggy,bugPatterns:[],estimatedReviewSeconds:Math.round(15+1.2*lineCount)};
+    expect(buggy.estimatedReviewSeconds).toBeGreaterThan(safe.estimatedReviewSeconds);
+    expect(publicPR(buggy)).toEqual(publicPR(safe));
+    expect(publicPR({...buggy,estimatedReviewSeconds:9999})).toEqual(publicPR(safe));
+  });
+  it('redacts answer-dependent timing throughout active code-room snapshots',async()=>{
+    const room=await createRoom({...settings,track:'code'},'host-secret',now);
+    const privateEstimates=room.prs.map(pr=>pr.estimatedReviewSeconds);
+    join(room);start(room);
+    const snapshot=snapshotRoom(room,{seat:'seat-one'},now+2000);
+    for(const pr of snapshot.queue) {
+      const count=pr.files.reduce((total,file)=>total+file.lines.length,0);
+      expect(pr.estimatedReviewSeconds).toBe(Math.round(15+1.2*count));
+      expect(pr.bugPatterns).toEqual([]);
+    }
+    expect(room.prs.map(pr=>pr.estimatedReviewSeconds)).toEqual(privateEstimates);
+    expect(snapshot.queue.some((pr,index)=>pr.estimatedReviewSeconds!==privateEstimates[index])).toBe(true);
   });
   it('rejects malformed settings and normalizes code days',()=>{
     for (const input of [null,{}, {...settings,day:7},{...settings,locale:'fr'},{...settings,durationSeconds:1},{...settings,track:'unknown'}]) throwsCode(()=>parseSettings(input),'invalid_settings');
