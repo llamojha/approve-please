@@ -1,7 +1,8 @@
 {
   "templateId": "css-043-text-overflow-ellipsis",
   "title": "Truncate long titles",
-  "author": "Amy P.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds ellipsis for titles that exceed container width.",
   "tags": ["text", "overflow"],
   "localized": {

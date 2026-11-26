@@ -1,7 +1,8 @@
 {
   "templateId": "css-051-buggy-basic-color-styling",
   "title": "Update header color scheme",
-  "author": "Maya C.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Changes the header text and background colors for better contrast.",
   "tags": ["styling", "colors"],
   "localized": {

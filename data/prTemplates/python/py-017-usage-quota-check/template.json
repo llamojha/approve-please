@@ -1,7 +1,8 @@
 {
   "templateId": "py-017-usage-quota-check",
   "title": "Add usage quota exhaustion helper",
-  "author": "Omar Y.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Determines when a tenant has exhausted its usage quota plus burst headroom.",
   "tags": [
     "logic",

@@ -1,7 +1,8 @@
 {
   "templateId": "rust-006-feature-flag-backfill",
   "title": "Add feature flag backfill request helper",
-  "author": "Gabe R.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Creates a structured payload for feature flag backfills so the orchestrator can audit requests.",
   "tags": [
     "feature-flags",

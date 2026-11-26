@@ -1,7 +1,8 @@
 {
   "templateId": "pr-068-load-chat-escalation-config",
   "title": "Load Chat Escalation config",
-  "author": "Jonah R.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a helper that reloads config before evaluating feature logic.",
   "tags": [
     "bugfix",

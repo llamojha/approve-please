@@ -1,7 +1,8 @@
 {
   "templateId": "css-008-box-model-padding",
   "title": "Add card padding",
-  "author": "David H.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds consistent padding to card components.",
   "tags": ["cards", "spacing"],
   "localized": {

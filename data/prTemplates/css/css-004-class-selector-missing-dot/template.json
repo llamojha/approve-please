@@ -1,7 +1,8 @@
 {
   "templateId": "css-004-class-selector-missing-dot",
   "title": "Add button styles",
-  "author": "Ahmed K.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Creates primary button styling with hover state.",
   "tags": ["buttons", "ui"],
   "localized": {

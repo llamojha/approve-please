@@ -1,7 +1,8 @@
 {
   "templateId": "js-035-function-declaration-missing-parenthesis",
   "title": "Function declaration missing parenthesis",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds formatter for member display names.",
   "tags": [
     "bugfix",
@@ -39,7 +40,21 @@
         40
       ],
       "severity": "major",
-      "description": "Function declaration is missing opening parenthesis, causing syntax error."
+      "description": "Function declaration is missing opening parenthesis, causing syntax error.",
+      "localizedDescription": {
+        "es": "A la declaración de la función le falta el paréntesis de apertura, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis ausente en una declaración de función",
+      "description": "Añade un formateador para los nombres visibles de miembros.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

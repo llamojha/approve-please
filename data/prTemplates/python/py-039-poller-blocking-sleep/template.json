@@ -1,7 +1,8 @@
 {
   "templateId": "py-039-poller-blocking-sleep",
   "title": "Queue poller helper",
-  "author": "Caleb I.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Polls queue items and aggregates their statuses.",
   "tags": [
     "performance",

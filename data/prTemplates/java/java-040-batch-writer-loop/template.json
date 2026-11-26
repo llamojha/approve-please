@@ -1,7 +1,8 @@
 {
   "templateId": "java-040-batch-writer-loop",
   "title": "Batch writer helper",
-  "author": "Nico R.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Exports ledger entries to disk for finance review.",
   "tags": [
     "performance",

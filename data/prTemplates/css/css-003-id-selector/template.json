@@ -1,7 +1,8 @@
 {
   "templateId": "css-003-id-selector",
   "title": "Style main content area",
-  "author": "Priya S.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Applies padding and max-width to the main content container.",
   "tags": ["layout", "spacing"],
   "localized": {

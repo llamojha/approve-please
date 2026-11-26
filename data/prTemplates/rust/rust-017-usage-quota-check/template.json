@@ -1,7 +1,8 @@
 {
   "templateId": "rust-017-usage-quota-check",
   "title": "Add usage quota exhaustion helper",
-  "author": "Carmen A.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Determines when a tenant has exhausted its usage quota plus burst headroom.",
   "tags": [
     "logic",

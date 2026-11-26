@@ -1,7 +1,8 @@
 {
   "templateId": "py-024-inventory-threshold",
   "title": "Inventory threshold guard",
-  "author": "Akira V.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Determines whether inventory needs to be replenished.",
   "tags": [
     "logic",

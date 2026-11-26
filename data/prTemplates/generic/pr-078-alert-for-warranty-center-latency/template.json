@@ -1,7 +1,8 @@
 {
   "templateId": "pr-078-alert-for-warranty-center-latency",
   "title": "Alert for Warranty Center latency",
-  "author": "Victor H.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "cleanup",

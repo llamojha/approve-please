@@ -1,7 +1,8 @@
 {
   "templateId": "css-011-box-sizing-border-box",
   "title": "Fix layout width calculations",
-  "author": "Nina P.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Applies border-box sizing to prevent layout overflow issues.",
   "tags": ["layout", "box-model"],
   "localized": {

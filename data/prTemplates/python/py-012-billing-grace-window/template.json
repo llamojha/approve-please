@@ -1,7 +1,8 @@
 {
   "templateId": "py-012-billing-grace-window",
   "title": "Adjust billing grace window logic",
-  "author": "Leo B.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Updates the helper that determines when invoices leave the grace period.",
   "tags": [
     "billing",

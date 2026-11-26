@@ -1,7 +1,8 @@
 {
   "templateId": "py-005-notification-bundle-builder",
   "title": "Add notification bundle builder",
-  "author": "Devon C.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Wraps notification lists with generated metadata before sending to downstream channels.",
   "tags": [
     "notifications",

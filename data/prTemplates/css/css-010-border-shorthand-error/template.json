@@ -1,7 +1,8 @@
 {
   "templateId": "css-010-border-shorthand-error",
   "title": "Add input field borders",
-  "author": "Marcus J.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Styles form input fields with borders and focus states.",
   "tags": ["forms", "inputs"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-061-trigger-predicate-for-hygiene-reporter",
   "title": "Trigger predicate for Hygiene Reporter",
-  "author": "Oscar W.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds a conditional helper that determines whether jobs should run.",
   "tags": [
     "bugfix",

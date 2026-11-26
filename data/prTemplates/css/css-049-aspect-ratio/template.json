@@ -1,7 +1,8 @@
 {
   "templateId": "css-049-aspect-ratio",
   "title": "Maintain video aspect ratio",
-  "author": "Gina V.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Uses aspect-ratio for responsive video containers.",
   "tags": ["video", "responsive"],
   "localized": {

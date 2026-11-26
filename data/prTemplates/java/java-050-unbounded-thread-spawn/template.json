@@ -1,7 +1,8 @@
 {
   "templateId": "java-050-unbounded-thread-spawn",
   "title": "Task processor helper",
-  "author": "Yuri L.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Spawns worker threads for each task in the backlog.",
   "tags": [
     "performance",

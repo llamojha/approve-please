@@ -1,7 +1,8 @@
 {
   "templateId": "pr-037-stream-incident-postmortem-snapshots",
   "title": "Stream Incident Postmortem snapshots",
-  "author": "Quinn Z.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds a Go helper that fetches snapshots for tooling.",
   "tags": [
     "bugfix",

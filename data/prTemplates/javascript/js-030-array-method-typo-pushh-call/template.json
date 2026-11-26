@@ -1,7 +1,8 @@
 {
   "templateId": "js-030-array-method-typo-pushh-call",
   "title": "Array method typo pushh",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds job id insertion into pending queue.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         38
       ],
       "severity": "major",
-      "description": "Calls pushh instead of push, causing a TypeError at runtime."
+      "description": "Calls pushh instead of push, causing a TypeError at runtime.",
+      "localizedDescription": {
+        "es": "Llama a pushh en lugar de push, lo que provoca un TypeError durante la ejecución."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Errata pushh en un método de array",
+      "description": "Añade la inserción de identificadores de trabajo en la cola pendiente.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

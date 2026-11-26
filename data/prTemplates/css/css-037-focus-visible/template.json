@@ -1,7 +1,8 @@
 {
   "templateId": "css-037-focus-visible",
   "title": "Add keyboard focus styles",
-  "author": "Uma J.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds visible focus indicators for keyboard navigation.",
   "tags": ["accessibility", "focus"],
   "localized": {

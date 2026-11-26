@@ -1,7 +1,8 @@
 {
   "templateId": "css-033-bem-naming",
   "title": "Refactor card component to BEM",
-  "author": "Quinn F.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Applies BEM naming convention to card component styles.",
   "tags": ["bem", "refactor"],
   "localized": {

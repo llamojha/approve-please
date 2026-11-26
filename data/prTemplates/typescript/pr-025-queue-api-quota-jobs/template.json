@@ -1,7 +1,8 @@
 {
   "templateId": "pr-025-queue-api-quota-jobs",
   "title": "Queue Api Quota jobs",
-  "author": "Eli J.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Streams vetted jobs into the async worker queue.",
   "tags": [
     "bugfix",

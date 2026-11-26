@@ -7,13 +7,14 @@ import { LocaleProvider } from '../context/LocaleContext';
 import '../styles/globals.css';
 import HydrationErrorBoundary from '../components/common/HydrationErrorBoundary';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps, router }: AppProps) {
   const socialImageUrl = `${SITE_METADATA.url}${SITE_METADATA.image}`;
+  const contentTrack = router.pathname === '/learn' ? 'basics' : 'code';
 
   return (
     <LocaleProvider>
       <UIPreferencesProvider>
-        <GameProvider>
+        <GameProvider key={contentTrack} contentTrack={contentTrack}>
           <Head>
           <title>{SITE_METADATA.title}</title>
           <meta name="description" content={SITE_METADATA.description} />
@@ -23,12 +24,12 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="author" content={SITE_METADATA.author} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content={SITE_METADATA.themeColor} />
-          <link rel="canonical" href={SITE_METADATA.url} />
+          <link key="canonical" rel="canonical" href={SITE_METADATA.url} />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
           <link rel="icon" sizes="any" href="/favicon.ico" />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="192x192" href="/icon-512.png" />
+          <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
           <meta property="og:type" content="website" />
           <meta property="og:site_name" content={SITE_METADATA.siteName} />
           <meta property="og:title" content={SITE_METADATA.title} />

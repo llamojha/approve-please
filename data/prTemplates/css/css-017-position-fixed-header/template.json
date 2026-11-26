@@ -1,7 +1,8 @@
 {
   "templateId": "css-017-position-fixed-header",
   "title": "Make header sticky",
-  "author": "Julia F.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Fixes header to top of viewport on scroll.",
   "tags": ["header", "sticky"],
   "localized": {

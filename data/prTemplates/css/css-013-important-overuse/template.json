@@ -1,7 +1,8 @@
 {
   "templateId": "css-013-important-overuse",
   "title": "Force sidebar width",
-  "author": "Rachel G.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Fixes sidebar width issue with !important.",
   "tags": ["sidebar", "layout"],
   "localized": {

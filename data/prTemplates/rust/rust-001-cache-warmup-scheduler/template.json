@@ -1,7 +1,8 @@
 {
   "templateId": "rust-001-cache-warmup-scheduler",
   "title": "Schedule cache warmer job hook",
-  "author": "Isela D.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper to enqueue the cache warmer job five minutes ahead with typed payload metadata.",
   "tags": [
     "backend",

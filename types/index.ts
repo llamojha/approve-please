@@ -1,14 +1,25 @@
 export type BugKind = 'logic' | 'security' | 'performance' | 'style' | 'accessibility';
 
+export interface LineReference {
+  filename: string;
+  rowId: string;
+}
+
+export type DecisionOutcome = 'clean-approval' | 'buggy-approval' | 'correct-rejection' | 'false-positive';
+export type CharacterReactions = Partial<Record<DecisionOutcome, Partial<Record<Locale, string>>>>;
+
 export interface BugPattern {
   kind: BugKind;
   lineNumbers: number[];
+  lineRefs?: LineReference[];
   severity: 'minor' | 'major' | 'critical';
   description?: string;
   localizedDescription?: Partial<Record<Locale, string>>;
 }
 
 export interface PRLine {
+  rowId?: string;
+  kind?: 'addition' | 'context' | 'removal';
   lineNumber: number;
   content: string;
   isNew: boolean;
@@ -21,6 +32,8 @@ export interface PRFileDiff {
 }
 
 export interface LineExcerpt {
+  filename?: string;
+  rowId?: string;
   lineNumber: number;
   content: string;
 }
@@ -30,12 +43,15 @@ export interface PullRequest {
   templateId: string;
   title: string;
   author: string;
+  authorId?: string;
+  reactions?: CharacterReactions;
   description: string;
   tags: string[];
   files: PRFileDiff[];
   bugPatterns: BugPattern[];
   importance: 'low' | 'normal' | 'high';
   estimatedReviewSeconds: number;
+  learningContext?: { brief: string; explanation: string };
 }
 
 export type Locale = 'en' | 'es';
@@ -70,6 +86,7 @@ export interface PullRequestTemplate extends Omit<PullRequest, 'id' | 'estimated
 }
 
 export interface DayQuote {
+  characterId: string;
   speaker: string;
   role: Record<Locale, string>;
   text: Record<Locale, string>;
@@ -77,6 +94,7 @@ export interface DayQuote {
 
 export type LanguagePreference = string[];
 export type Difficulty = 'normal' | 'learning';
+export type ContentTrack = 'code' | 'basics';
 
 export interface ScriptedWave {
   atMinute: number;
@@ -105,4 +123,14 @@ export interface DaySummary {
   day: number;
   counters: Counters;
   meters: MeterSet;
+}
+
+export interface NormalizedPRLine extends PRLine {
+  rowId: string;
+  kind: 'addition' | 'context' | 'removal';
+}
+
+export interface NormalizedPullRequest extends PullRequest {
+  files: (Omit<PRFileDiff, 'lines'> & { lines: NormalizedPRLine[] })[];
+  bugPatterns: (BugPattern & { lineRefs: LineReference[] })[];
 }

@@ -1,7 +1,8 @@
 {
   "templateId": "rust-038-chunky-archive-reader",
   "title": "Archive stream helper",
-  "author": "Iker Q.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Streams archive blobs to downstream processors.",
   "tags": [
     "performance",

@@ -1,7 +1,8 @@
 {
   "templateId": "css-006-pseudo-class-first-child",
   "title": "Remove top margin from first paragraph",
-  "author": "James W.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Uses :first-child to remove margin from the first paragraph in articles.",
   "tags": ["typography", "spacing"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "java-017-alert-debounce-window",
   "title": "Alert debounce window",
-  "author": "Quinn D.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Determines whether alerts should still be silenced.",
   "tags": [
     "logic",

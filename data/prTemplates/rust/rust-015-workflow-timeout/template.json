@@ -1,7 +1,8 @@
 {
   "templateId": "rust-015-workflow-timeout",
   "title": "Workflow timeout detector",
-  "author": "Noor M.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Determines if a workflow exceeded the configured timeout.",
   "tags": [
     "logic",

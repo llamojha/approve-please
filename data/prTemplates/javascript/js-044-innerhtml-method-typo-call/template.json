@@ -1,7 +1,8 @@
 {
   "templateId": "js-044-innerhtml-method-typo-call",
   "title": "innerHTML typo called as method",
-  "author": "Nora I.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds quick DOM status writer for test harness.",
   "tags": [
     "bugfix",
@@ -34,7 +35,21 @@
         46
       ],
       "severity": "major",
-      "description": "Calls misspelled innerHMTL method, causing TypeError at runtime."
+      "description": "Calls misspelled innerHMTL method, causing TypeError at runtime.",
+      "localizedDescription": {
+        "es": "Llama al método mal escrito innerHMTL, lo que provoca un TypeError durante la ejecución."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Errata en innerHTML llamado como método",
+      "description": "Añade un escritor rápido del estado del DOM al entorno de pruebas.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "errata"
+      ]
+    }
+  }
 }

@@ -1,7 +1,8 @@
 {
   "templateId": "py-035-lax-oauth-scope",
   "title": "OAuth scope validator",
-  "author": "Nolan X.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Validates that requested OAuth scopes are approved.",
   "tags": [
     "security",

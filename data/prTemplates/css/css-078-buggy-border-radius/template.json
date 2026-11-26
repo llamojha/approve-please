@@ -1,7 +1,8 @@
 {
   "templateId": "css-078-buggy-border-radius",
   "title": "Round avatar images",
-  "author": "Paul S.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Makes avatar images circular with border-radius.",
   "tags": ["avatar", "images", "styling"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-095-tenant-lookup-for-statuspage-writer",
   "title": "Tenant lookup for Statuspage Writer",
-  "author": "Ivy P.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a helper to fetch the latest tenant rows for reporting.",
   "tags": [
     "data",

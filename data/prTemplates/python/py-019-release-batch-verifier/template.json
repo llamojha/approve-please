@@ -1,7 +1,8 @@
 {
   "templateId": "py-019-release-batch-verifier",
   "title": "Release batch verification helper",
-  "author": "Quinn E.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Examines job statuses to determine if a release batch can ship.",
   "tags": [
     "logic",

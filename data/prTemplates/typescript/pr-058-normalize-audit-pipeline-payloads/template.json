@@ -1,7 +1,8 @@
 {
   "templateId": "pr-058-normalize-audit-pipeline-payloads",
   "title": "Normalize Audit Pipeline payloads",
-  "author": "Brielle S.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds a helper to normalize audit pipeline inputs so downstream jobs stay consistent.",
   "tags": [
     "bugfix",

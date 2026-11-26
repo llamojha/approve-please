@@ -1,7 +1,8 @@
 {
   "templateId": "css-041-grid-layout",
   "title": "Create product grid",
-  "author": "Yolanda N.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Implements CSS Grid for product listing layout.",
   "tags": ["grid", "layout"],
   "localized": {

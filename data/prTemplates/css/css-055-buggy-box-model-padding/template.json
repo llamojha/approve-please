@@ -1,7 +1,8 @@
 {
   "templateId": "css-055-buggy-box-model-padding",
   "title": "Add card padding",
-  "author": "David H.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds consistent padding to card components.",
   "tags": ["cards", "spacing"],
   "localized": {

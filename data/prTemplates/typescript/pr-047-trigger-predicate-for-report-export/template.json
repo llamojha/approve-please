@@ -1,7 +1,8 @@
 {
   "templateId": "pr-047-trigger-predicate-for-report-export",
   "title": "Trigger predicate for Report Export",
-  "author": "Gabe K.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds a conditional helper that determines whether jobs should run.",
  "tags": [
    "bugfix",

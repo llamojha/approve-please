@@ -1,7 +1,8 @@
 {
   "templateId": "pr-074-alert-for-device-heartbeat-latency",
   "title": "Alert for Device Heartbeat latency",
-  "author": "Brielle S.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a Prometheus rule for the new service.",
   "tags": [
     "bugfix",

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-019-temporary-debug-logger-for-runtime-metrics",
   "title": "Temporary debug logger for Runtime Metrics",
-  "author": "Sasha E.",
+  "author": "Marta",
+  "authorId": "marta",
   "description": "Adds a helper so QA can inspect payloads while testing.",
   "tags": [
     "cleanup",

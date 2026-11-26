@@ -1,7 +1,8 @@
 {
   "templateId": "pr-056-chunk-content-moderation-records",
   "title": "Chunk Content Moderation records",
-  "author": "Ivy P.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds pagination helpers for content moderation batches.",
   "tags": [
     "bugfix",

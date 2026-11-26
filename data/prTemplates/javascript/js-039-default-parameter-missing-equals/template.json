@@ -1,7 +1,8 @@
 {
   "templateId": "js-039-default-parameter-missing-equals",
   "title": "Default parameter missing equals",
-  "author": "Nora I.",
+  "author": "Diego Martín",
+  "authorId": "diego",
   "description": "Adds default limit for queue scanner.",
   "tags": [
     "bugfix",
@@ -39,7 +40,21 @@
         14
       ],
       "severity": "major",
-      "description": "Default parameter is missing equals sign, causing syntax error."
+      "description": "Default parameter is missing equals sign, causing syntax error.",
+      "localizedDescription": {
+        "es": "Al parámetro predeterminado le falta el signo igual, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Signo igual ausente en un parámetro predeterminado",
+      "description": "Añade el límite predeterminado del escáner de la cola.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

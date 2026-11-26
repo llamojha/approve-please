@@ -1,137 +1,173 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styles from '../../styles/Desk.module.css';
-import { useGameState, DecisionResult } from '../../context/GameContext';
+import Link from 'next/link';
+import CharacterAvatar, { type CharacterExpression } from '../common/CharacterAvatar';
+import BrandMark from '../common/BrandMark';
+import ReviewDesk from '../work/ReviewDesk';
+import AudioControls from '../common/AudioControls';
+import PRArrivalNotice from '../common/PRArrivalNotice';
+import { useGameState, type DecisionResult } from '../../context/GameContext';
 import { useGameClock } from '../../hooks/useGameClock';
 import { usePRSpawner } from '../../hooks/usePRSpawner';
+import { useBasicsSpawner } from '../../hooks/useBasicsSpawner';
+import { basicsDay, basicsExercise, localizeBasicsPR } from '../../utils/basicsGame';
+import { basicsCopy } from '../../constants/basicsCopy';
 import { useAudioCue } from '../../hooks/useAudioCue';
-import ClockDisplay from '../work/ClockDisplay';
-import QueuePanel from '../work/QueuePanel';
-import PRViewer from '../work/PRViewer';
-import RulebookPanel from '../work/RulebookPanel';
-import StatsPanel from '../work/StatsPanel';
-import ActionPanel from '../work/ActionPanel';
-import AccessibilityPanel from '../work/AccessibilityPanel';
-import MeterHud from '../work/MeterHud';
+import { usePRArrivalNotice } from '../../hooks/usePRArrivalNotice';
 import { useTranslations } from '../../hooks/useTranslations';
 import { useLocale } from '../../context/LocaleContext';
+import { useUIPreferences } from '../../context/UIPreferencesContext';
+import { getCharacter } from '../../data/characters';
+import { calculateQueueChevronCount, minutesToClock } from '../../utils/helpers';
+import type { LineReference, MeterSet, PullRequest } from '../../types';
+import type { DecisionReceipt, ReviewVerdict } from '../../utils/decision';
+import styles from '../../styles/LiveDesk.module.css';
+
+type Panel = 'queue' | 'rules' | 'audio' | 'stats' | 'settings' | 'last-review' | null;
+interface OutgoingReview {
+  pr: PullRequest;
+  verdict: ReviewVerdict;
+  receipt: DecisionReceipt;
+  selected: LineReference[];
+}
+
+const reviewNumber = (templateId: string) => 1000 + ([...templateId].reduce((value, letter) => (value * 33 + letter.charCodeAt(0)) >>> 0, 0) % 9000);
+const sameReference = (left: LineReference, right: LineReference) => left.filename === right.filename && left.rowId === right.rowId;
 
 const WorkScreen = () => {
   const {
-    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote },
-    actions: { selectPR, approveCurrentPR, requestChanges }
+    state: { queue, currentPR, currentTime, counters, meters, currentMantra, currentDay, dayQuote, simulationPaused, difficulty, contentTrack, decisionReceipts },
+    actions: { selectPR, approveCurrentPR, requestChanges, setSimulationPaused, finishBasicsShift }
   } = useGameState();
   const translations = useTranslations();
-  const { locale } = useLocale();
+  const t = translations.designStudy;
+  const { locale, setLocale } = useLocale();
+  const { theme, setTheme } = useUIPreferences();
+  const beginner = contentTrack === 'basics';
+  const b = basicsCopy[locale];
   useGameClock();
   usePRSpawner();
-  const { playCue, playArrivalCue } = useAudioCue();
+  useBasicsSpawner();
+  const audio = useAudioCue(meters);
+  const arrivalNotice = usePRArrivalNotice(queue.map(pr => pr.id), audio.playArrivalCue);
+  const [selected, setSelected] = useState<LineReference[]>([]);
+  const [outgoing, setOutgoing] = useState<OutgoingReview | null>(null);
+  const [panel, setPanel] = useState<Panel>(null);
+  const [status, setStatus] = useState('');
+  const decisionLocked = useRef(false);
+  const dialog = useRef<HTMLDialogElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
 
-  const [selectedLines, setSelectedLines] = useState<number[]>([]);
-  const [feedback, setFeedback] = useState<{ message: string; status: DecisionResult['status'] } | null>(null);
-  const previousQueueLength = useRef(queue.length);
-
+  useEffect(() => setSelected([]), [currentPR?.id]);
   useEffect(() => {
-    setSelectedLines([]);
-    setFeedback(null);
-  }, [currentPR?.id]);
-
+    if (beginner && !outgoing && queue.length === 0 && decisionReceipts.length === 10 && !simulationPaused && panel === null) finishBasicsShift();
+  }, [beginner, outgoing, queue.length, decisionReceipts.length, simulationPaused, panel, finishBasicsShift]);
   useEffect(() => {
-    if (queue.length > previousQueueLength.current) {
-      playArrivalCue();
+    setSimulationPaused(panel !== null && panel !== 'queue');
+    return () => setSimulationPaused(false);
+  }, [panel, setSimulationPaused]);
+  useEffect(() => {
+    if (panel) {
+      previousFocus.current = document.activeElement as HTMLElement | null;
+      dialog.current?.showModal();
+    } else {
+      dialog.current?.close();
+      previousFocus.current?.focus();
     }
-    previousQueueLength.current = queue.length;
-  }, [queue.length, playArrivalCue]);
+  }, [panel]);
+  useEffect(() => {
+    if (!outgoing) return;
+    const timer = window.setTimeout(() => {
+      setOutgoing(null);
+      decisionLocked.current = false;
+      window.requestAnimationFrame(() => document.querySelector<HTMLElement>('[data-review-action="approve"]:not(:disabled)')?.focus());
+    }, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 200);
+    return () => window.clearTimeout(timer);
+  }, [outgoing]);
 
-  const toggleLine = (lineNumber: number) => {
-    setSelectedLines((prev) =>
-      prev.includes(lineNumber) ? prev.filter((line) => line !== lineNumber) : [...prev, lineNumber]
-    );
-  };
-
-  const handleApprove = useCallback(() => {
-    const result = approveCurrentPR();
-    setFeedback({ message: result.message, status: result.status });
-    if (result.success) {
-      setSelectedLines([]);
-      playCue(520, 0.1);
+  const toggleLine = useCallback((reference: LineReference) => {
+    if (decisionLocked.current || simulationPaused) return;
+    setSelected(values => values.some(value => sameReference(value, reference))
+      ? values.filter(value => !sameReference(value, reference))
+      : [...values, reference]);
+  }, [simulationPaused]);
+  const outcomeMessage = useCallback((pr: PullRequest, result: DecisionResult) => {
+    const outcome = result.receipt?.outcome;
+    if (!outcome) return result.message;
+    return pr.reactions?.[outcome]?.[locale] ?? pr.reactions?.[outcome]?.en ?? result.message;
+  }, [locale]);
+  const decide = useCallback((verdict: ReviewVerdict) => {
+    const pr = currentPR;
+    if (!pr || decisionLocked.current || simulationPaused || panel !== null) return;
+    decisionLocked.current = true;
+    const result = verdict === 'approve' ? approveCurrentPR() : requestChanges({ selectedRefs: selected });
+    if (!result.success || !result.receipt) {
+      decisionLocked.current = false;
+      setStatus(result.message);
+      return;
     }
-  }, [approveCurrentPR, playCue]);
-
-  const handleRequestChanges = useCallback(() => {
-    const result = requestChanges({ selectedLines });
-    setFeedback({ message: result.message, status: result.status });
-    if (result.success) {
-      setSelectedLines([]);
-      playCue(360, 0.15);
-    }
-  }, [requestChanges, selectedLines, playCue]);
-
-  const canRequest = Boolean(currentPR);
-  const canApprove = Boolean(currentPR);
-
-  const queuedCount = queue.length;
-
+    const exercise = beginner ? basicsExercise(pr.templateId) : undefined;
+    setStatus(`${pr.author}: ${outcomeMessage(pr, result)}${exercise ? ` ${exercise.explanation[locale]}` : ''}`);
+    setOutgoing({ pr, verdict, receipt: result.receipt, selected: [...selected] });
+    if (verdict === 'approve') audio.playCue(520, 0.1);
+    else audio.playCue(360, 0.15);
+  }, [currentPR, simulationPaused, panel, approveCurrentPR, requestChanges, selected, outcomeMessage, audio, beginner, locale]);
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
-      if (event.repeat) {
-        return;
-      }
       const target = event.target as HTMLElement | null;
-      if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) {
-        return;
-      }
-      if ((event.key === 'a' || event.key === 'A') && canApprove) {
-        event.preventDefault();
-        handleApprove();
-      }
-      if ((event.key === 'r' || event.key === 'R') && canRequest) {
-        event.preventDefault();
-        handleRequestChanges();
-      }
+      const editable = target?.matches('input, textarea, select, [contenteditable="true"]');
+      if (event.repeat || event.defaultPrevented || !event.altKey || event.ctrlKey || event.metaKey || editable || panel || outgoing || simulationPaused) return;
+      if (event.key.toLowerCase() === 'a' && currentPR) { event.preventDefault(); decide('approve'); }
+      else if (event.key.toLowerCase() === 'r' && currentPR) { event.preventDefault(); decide('request-changes'); }
     };
-
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [handleApprove, handleRequestChanges, canApprove, canRequest]);
+  }, [currentPR, decide, outgoing, panel, simulationPaused]);
 
-  return (
-    <main className={styles.deskShell}>
-      <div className={styles.desk}>
-        <div className={styles.leftColumn}>
-          <ClockDisplay currentTime={currentTime} />
-          <QueuePanel queue={queue} currentId={currentPR?.id ?? null} onSelect={selectPR} />
-          <p className={styles.queueHint}>{translations.shared.queueAwaiting(queuedCount)}</p>
-        </div>
-        <div className={styles.centerColumn}>
-          <MeterHud meters={meters} queue={queue} />
-          <PRViewer
-            pr={currentPR}
-            selectedLines={selectedLines}
-            onToggleLine={toggleLine}
-            actionSlot={
-              <ActionPanel
-                onApprove={handleApprove}
-                onRequestChanges={handleRequestChanges}
-                disableApprove={!canApprove}
-                canRequest={canRequest}
-                selectedLines={selectedLines.length}
-                feedback={feedback}
-              />
-            }
-          />
-        </div>
-        <div className={styles.rightColumn}>
-          <RulebookPanel
-            day={currentDay}
-            mantra={currentMantra?.[locale] ?? currentMantra?.en ?? translations.shared.operationsFallback}
-            dayQuote={dayQuote}
-          />
-          <StatsPanel counters={counters} />
-          <AccessibilityPanel />
-        </div>
-      </div>
-    </main>
-  );
+  const snapshot = outgoing?.pr ?? currentPR;
+  const displayPR = snapshot && beginner ? localizeBasicsPR(snapshot,locale) : snapshot;
+  const displaySelected = outgoing?.selected ?? selected;
+  const displayCharacter = getCharacter(displayPR?.authorId);
+  const expression: CharacterExpression = outgoing ? outgoing.receipt.correct ? 'pleased' : 'concerned' : 'neutral';
+  const queuePanel = <div className={styles.queueList}>{queue.length === 0 ? <p className={styles.empty}>{translations.work.queue.empty}</p> : queue.map(snapshot => {
+    const pr = beginner ? localizeBasicsPR(snapshot,locale) : snapshot;
+    const character = getCharacter(pr.authorId);
+    return <button key={pr.id} type="button" className={pr.id === currentPR?.id ? styles.activeQueue : ''} aria-pressed={pr.id === currentPR?.id} disabled={Boolean(outgoing)} onClick={() => { selectPR(pr.id); setPanel(null); }}>
+      <CharacterAvatar characterId={pr.authorId} name={pr.author} size={34} />
+      <span><strong>{pr.title}</strong><small>{pr.author}{character ? ` · ${character.role[locale]}` : ''}</small></span>
+      <em data-priority={pr.importance}>{translations.shared.importance[pr.importance]}</em>
+    </button>;
+  })}</div>;
+  const clockProgress = Math.min(100, (currentTime / 480) * 100);
+  const meterKeys = Object.keys(meters) as (keyof MeterSet)[];
+  const queuePressure = difficulty === 'learning' ? 0 : calculateQueueChevronCount(queue);
+  const mantra = beginner ? `${b.name} · ${basicsDay(currentDay)?.focus[locale] ?? ''}` : currentMantra?.[locale] ?? currentMantra?.en ?? translations.shared.operationsFallback;
+  const quote = dayQuote.text[locale] ?? dayQuote.text.en;
+  const branch = displayPR ? `feat/${displayPR.templateId.replace(/^pr-\d+-/, '')} → main` : '';
+  const statsText = translations.work.stats;
+  const stats = [
+    { key: 'approved', value: counters.prsApproved },
+    { key: 'rejected', value: counters.prsRejected },
+    { key: 'bugsToProd', value: counters.bugsToProd },
+    { key: 'cleanApprovals', value: counters.cleanApprovals },
+    { key: 'truePositives', value: counters.truePositives },
+    { key: 'falsePositives', value: counters.falsePositives }
+  ] as const;
+  const panelTitle = panel === 'last-review' ? b.lastReview : panel === 'queue' ? t.queue
+    : panel === 'audio' ? translations.audio.title
+      : panel === 'stats' ? t.stats
+        : panel === 'settings' ? t.settingsTitle
+          : t.handbookTitle;
+
+  return <div className={styles.shell} data-dark={theme === 'githob-dark'}>
+    <header className={styles.topbar}><Link className={styles.brand} href="/"><span aria-hidden="true"><BrandMark /></span>approve<strong>please</strong><b>.</b></Link><div className={styles.topActions}><button type="button" aria-label={t.stats} onClick={() => setPanel('stats')}>▦ <span>{t.stats}</span></button><button type="button" aria-label={translations.audio.button} onClick={() => setPanel('audio')}>♫ <span>{translations.audio.button}</span></button><button type="button" aria-label={t.rules} onClick={() => setPanel('rules')}>⌘ <span>{t.rules}</span></button><button type="button" aria-label={t.settings} onClick={() => setPanel('settings')}>◐ <span>{t.settings}</span></button><button type="button" onClick={() => setLocale(locale === 'en' ? 'es' : 'en')}>{locale.toUpperCase()} ↔</button></div></header>
+    <section className={styles.shiftbar} aria-label={t.clock}><div className={styles.clock}><span>{t.shift(currentDay)}</span><strong>{minutesToClock(currentTime)} <small>/ 17:00</small></strong><i><b style={{ width: `${clockProgress}%` }} /></i></div><div className={styles.meters}>{meterKeys.map(key => <div key={key}><span>{t[key]} <strong>{queuePressure > 0 && key !== 'stability' && <span className={styles.queuePressure} role="img" title={t.queuePressureHint} aria-label={`${t.queuePressure(queuePressure)}. ${t.queuePressureHint}`}><span className={styles.pressureChevrons} aria-hidden="true">{Array.from({ length: queuePressure }, (_, index) => <svg key={index} width="8" height="14" viewBox="0 0 11 20" focusable="false"><path d="m8 3-5 7 5 7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}</span></span>}{Math.round(meters[key])}<small>/100</small></strong></span><i><b style={{ width: `${meters[key]}%` }} /></i></div>)}</div><div className={styles.shiftNote}><strong>{mantra}</strong><span>{simulationPaused ? t.paused : `${counters.prsApproved + counters.prsRejected} ${t.reviewCount}`}</span></div></section>
+    <div className={styles.workspace}><aside className={styles.sidebar}><div><h1>{t.queue}</h1><p>{translations.shared.queueAwaiting(queue.length)}</p></div>{queuePanel}<section className={styles.handbook}><span>⌘</span><h2>{beginner ? b.rulesTitle : t.rulesIntro}</h2><p>{beginner ? b.first : t.liveRules}</p><button type="button" onClick={() => setPanel('rules')}>{t.rules} ↗</button></section></aside>
+      {displayPR ? <ReviewDesk pullRequest={displayPR} repository={beginner ? 'mergeworks / team-notes' : t.repository} number={reviewNumber(displayPR.templateId)} branch={branch} authorRole={displayCharacter?.role[locale]} expression={expression} selected={displaySelected} onToggle={toggleLine} onClear={() => setSelected([])} onVerdict={decide} disabled={simulationPaused} swipe={outgoing?.verdict ?? null} queueCount={queue.length} onOpenQueue={() => setPanel('queue')} onOpenRules={() => setPanel('rules')} labels={t} importanceLabels={translations.shared.importance} status={status}>{beginner && status && <div className={styles.reviewTools}><button type="button" onClick={() => setPanel('last-review')}>↶ {b.lastReview}</button></div>}</ReviewDesk>
+        : <main className={styles.emptyDesk}><span>↳</span><h1>{translations.work.queue.empty}</h1><p>{translations.work.queue.hint}</p></main>}
+    </div>
+    <PRArrivalNotice notice={arrivalNotice} />
+    <dialog ref={dialog} className={styles.dialog} aria-labelledby="live-panel-title" onCancel={event => { event.preventDefault(); setPanel(null); }} onClick={event => { if (event.target === dialog.current) setPanel(null); }}><div className={styles.dialogTop}><h2 id="live-panel-title">{panelTitle}</h2><button type="button" onClick={() => setPanel(null)} aria-label={t.close}>×</button></div>{panel === 'last-review' ? <div className={styles.rules}><p>{status}</p></div> : panel === 'queue' ? queuePanel : panel === 'audio' ? <AudioControls audio={audio} /> : panel === 'stats' ? <div className={styles.statsGrid}>{stats.map(item => <article key={item.key}><span>{statsText.labels[item.key]}</span><strong>{item.value}</strong><small>{statsText.tooltips[item.key]}</small></article>)}</div> : panel === 'settings' ? <div className={styles.settings}><p>{t.settingsIntro}</p><fieldset><legend>{t.currentTheme}</legend><button type="button" aria-pressed={theme === 'githob-light'} onClick={() => setTheme('githob-light')}><span>☀</span><strong>{t.lightTheme}</strong></button><button type="button" aria-pressed={theme === 'githob-dark'} onClick={() => setTheme('githob-dark')}><span>◐</span><strong>{t.darkTheme}</strong></button></fieldset></div> : <div className={styles.rules}><span>⌘</span><h3>{beginner ? b.rulesTitle : t.rulesIntro}</h3><p>{beginner ? b.rules : t.rulesBody}</p>{!beginner && <p>{t.emptySelection}</p>}<blockquote>“{beginner ? b.teamQuote : quote}”<footer>— {dayQuote.speaker}</footer></blockquote><small>{beginner ? b.rulesNote : t.rulesNote}</small></div>}</dialog>
+  </div>;
 };
 
 export default WorkScreen;

@@ -1,7 +1,8 @@
 {
   "templateId": "pr-099-normalize-compliance-report-payloads",
   "title": "Normalize Compliance Report payloads",
-  "author": "Jonah R.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds a helper to normalize compliance report inputs so downstream jobs stay consistent.",
   "tags": [
     "cleanup",

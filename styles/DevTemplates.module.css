@@ -43,7 +43,9 @@
 }
 
 .backLink,
-.previewLink {
+.previewLink,
+.duplicateLink,
+.primaryLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -55,9 +57,24 @@
 }
 
 .backLink:hover,
-.previewLink:hover {
+.previewLink:hover,
+.duplicateLink:hover,
+.primaryLink:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.primaryLink {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
 }
 
 .filters {
@@ -79,7 +96,8 @@
   font-weight: 600;
 }
 
-.filters select {
+.filters select,
+.filters input {
   width: 100%;
   min-height: 2.35rem;
   border: 1px solid var(--border);
@@ -201,6 +219,256 @@
   margin-top: auto;
 }
 
+.duplicateLink {
+  align-self: flex-start;
+}
+
+.workshopLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.editor,
+.workshopPreview {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: var(--bg-panel);
+}
+
+.editor h2,
+.workshopPreview h2,
+.editor h3 {
+  margin: 0;
+}
+
+.fieldGrid,
+.fileEditor {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.fieldGrid label,
+.fileEditor label,
+.annotationPanel label {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.fieldGrid input,
+.fieldGrid textarea,
+.fieldGrid select,
+.fileEditor input,
+.fileEditor textarea,
+.annotationPanel input,
+.annotationPanel select,
+.importPanel textarea {
+  width: 100%;
+  min-height: 2.6rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--bg-panel-light);
+  color: var(--text);
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+}
+
+.fieldGrid textarea,
+.importPanel textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.wideField {
+  grid-column: 1 / -1;
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.fileEditor {
+  padding: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+}
+
+.fileEditor legend {
+  padding: 0 0.35rem;
+  font-weight: 700;
+}
+
+.codeInput {
+  min-height: 11rem !important;
+  resize: vertical;
+  font-family: 'SFMono-Regular', Consolas, monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.55;
+}
+
+.annotationPanel,
+.importPanel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+}
+
+.localeEditor {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+}
+
+.localeEditor summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.annotationPanel h3,
+.annotationPanel p,
+.annotationPanel > button,
+.annotation,
+.importPanel summary,
+.importPanel textarea,
+.importPanel > button,
+.importPanel .diagnostics {
+  grid-column: 1 / -1;
+}
+
+.annotationPanel p,
+.directoryNote {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.annotation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.importPanel {
+  display: block;
+}
+
+.importPanel summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.importPanel textarea,
+.importPanel > button {
+  margin-top: 0.75rem;
+}
+
+.diagnostics {
+  margin: 0.75rem 0 0;
+  padding: 0.75rem 0.75rem 0.75rem 1.75rem;
+  border: 1px solid var(--danger);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--danger) 10%, var(--bg-panel));
+}
+
+.diagnostics li + li {
+  margin-top: 0.35rem;
+}
+
+.previewMeta {
+  margin-bottom: 0.8rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  background: var(--bg-panel-light);
+}
+
+.previewMeta span {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.previewMeta h3 {
+  margin: 0.35rem 0;
+  font-size: 1.25rem;
+}
+
+.previewMeta p {
+  margin: 0.3rem 0 0;
+  line-height: 1.5;
+}
+
+.outcomeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.outcomeGrid div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--bg-panel-light);
+}
+
+.outcomeGrid span,
+.outcomeGrid small {
+  color: var(--muted);
+}
+
+.directoryNote {
+  margin-top: 1rem;
+}
+
+.directoryNote code {
+  overflow-wrap: anywhere;
+}
+
+.previewActions,
+.previewActions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.previewActions button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.dangerButton {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
 .localeToggle {
   display: flex;
   align-items: center;
@@ -289,6 +557,10 @@
   .previewLayout {
     grid-template-columns: 1fr;
   }
+
+  .workshopLayout {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
@@ -300,11 +572,22 @@
     flex-direction: column;
   }
 
+  .headerActions {
+    justify-content: flex-start;
+  }
+
   .filters {
     grid-template-columns: 1fr;
   }
 
   .localeToggle {
     flex-wrap: wrap;
+  }
+
+  .fieldGrid,
+  .fileEditor,
+  .annotationPanel,
+  .outcomeGrid {
+    grid-template-columns: 1fr;
   }
 }

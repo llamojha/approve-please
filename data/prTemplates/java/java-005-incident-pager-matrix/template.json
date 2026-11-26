@@ -1,7 +1,8 @@
 {
   "templateId": "java-005-incident-pager-matrix",
   "title": "Incident pager matrix helper",
-  "author": "Ravi E.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Introduces a helper to pick the right on-call contact by severity.",
   "tags": [
     "incident",

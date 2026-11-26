@@ -1,7 +1,8 @@
 {
   "templateId": "java-010-search-index-sampler",
   "title": "Search index sampler",
-  "author": "Helena Q.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper that samples index documents for diagnostics.",
   "tags": [
     "search",

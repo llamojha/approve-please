@@ -1,7 +1,8 @@
 {
   "templateId": "css-012-cascade-specificity-bug",
   "title": "Override button color in modal",
-  "author": "Tom B.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Attempts to change button color inside modals.",
   "tags": ["buttons", "modals"],
   "localized": {

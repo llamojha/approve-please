@@ -1,7 +1,8 @@
 {
   "templateId": "js-033-for-header-unclosed-parenthesis",
   "title": "For loop header unclosed parenthesis",
-  "author": "Nora I.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds metric collection over active nodes.",
   "tags": [
     "bugfix",
@@ -39,7 +40,21 @@
         29
       ],
       "severity": "major",
-      "description": "For loop header is missing closing parenthesis, causing a syntax error."
+      "description": "For loop header is missing closing parenthesis, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la cabecera del bucle for le falta el paréntesis de cierre, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Paréntesis sin cerrar en la cabecera de un bucle for",
+      "description": "Añade la recopilación de métricas de los nodos activos.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

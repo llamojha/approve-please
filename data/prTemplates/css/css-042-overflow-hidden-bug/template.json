@@ -1,7 +1,8 @@
 {
   "templateId": "css-042-overflow-hidden-bug",
   "title": "Fix card image overflow",
-  "author": "Zach O.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Prevents images from overflowing card boundaries.",
   "tags": ["cards", "overflow"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "py-003-runtime-health-pulse",
   "title": "Add runtime health pulse emitter",
-  "author": "Owen L.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Streams a lightweight pulse event when jitter exceeds tolerance so observability dashboards stay accurate.",
   "tags": [
     "observability",

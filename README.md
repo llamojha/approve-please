@@ -1,5 +1,9 @@
 # Approve Please – Design & Requirements Document
 
+## Group sessions (feature preview)
+
+Open `/group` to host a shared review day or join with a room code. Setup, server scoring, room privacy and activation prerequisites are documented in [the group-session guide](docs/group-sessions.md). Production access is disabled until the new migration and feature flag are configured; individual play remains unchanged.
+
 ## 1. Overview
 
 **Title:** Approve Please

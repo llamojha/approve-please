@@ -1,7 +1,8 @@
 {
   "templateId": "py-007-access-journal-dumper",
   "title": "Add access journal formatter",
-  "author": "Sasha K.",
+  "author": "Noel",
+  "authorId": "noel",
   "description": "Adds a helper to normalize access journal rows before writing them to disk.",
   "tags": [
     "compliance",

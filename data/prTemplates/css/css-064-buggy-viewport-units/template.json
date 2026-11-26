@@ -1,7 +1,8 @@
 {
   "templateId": "css-064-buggy-viewport-units",
   "title": "Full-height hero section",
-  "author": "Henry T.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Creates a full viewport height hero section.",
   "tags": ["hero", "viewport"],
   "localized": {

@@ -1,7 +1,8 @@
 {
   "templateId": "css-075-buggy-opacity-hover",
   "title": "Add hover fade effect to cards",
-  "author": "Mia K.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Adds opacity transition on card hover for subtle feedback.",
   "tags": ["cards", "hover", "opacity"],
   "localized": {

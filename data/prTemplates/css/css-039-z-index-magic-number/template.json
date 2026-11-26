@@ -1,7 +1,8 @@
 {
   "templateId": "css-039-z-index-magic-number",
   "title": "Fix dropdown z-index",
-  "author": "Wendy L.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Ensures dropdown menu appears above other content.",
   "tags": ["dropdown", "z-index"],
   "localized": {

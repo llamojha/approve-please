@@ -26,6 +26,12 @@ const pickWeightedWaveCount = (): number => {
   return WEIGHTED_WAVE_COUNTS[index];
 };
 
+interface WaveTracker {
+  waves: Set<number>;
+  scripted: Set<string>;
+}
+
+const waveTrackerStore = new Map<string, WaveTracker>();
 const tutorialWaves: Record<number, ScriptedWave[]> = {
   1: [
     {
@@ -43,7 +49,7 @@ const getScriptedWavesForDay = (day: number): ScriptedWave[] => {
   return tutorialWaves[day] ?? [];
 };
 
-const templateMatchesPreference = (
+export const templateMatchesPreference = (
   template: PullRequestTemplate,
   preference: LanguagePreference
 ): boolean => {
@@ -53,31 +59,52 @@ const templateMatchesPreference = (
     return true;
   }
   if (isGeneric) {
-    return preference.includes("generic");
+    return true;
   }
   return languages.some((language) => preference.includes(language));
+};
+
+export const tutorialBlocksLaterWave = (day: number, minute: number, queue: PullRequest[]): boolean => {
+  if (day !== 1 || minute <= 0) return false;
+  const tutorialTemplateIds = new Set(tutorialWaves[1]?.flatMap(wave => wave.templateIds) ?? []);
+  return queue.some(pr => tutorialTemplateIds.has(pr.templateId));
+};
+
+const getWaveTracker = (key: string): WaveTracker => {
+  const existing = waveTrackerStore.get(key);
+  if (existing) {
+    return existing;
+  }
+  const tracker: WaveTracker = { waves: new Set(), scripted: new Set() };
+  waveTrackerStore.set(key, tracker);
+  return tracker;
 };
 
 export const usePRSpawner = () => {
   const {
     state: {
       phase,
+      contentTrack,
+      runId,
       currentTime,
       currentDay,
       queue,
-      currentPR,
-      deliveredWaveIds,
       languagePreference,
       difficulty, // SPIKE(plan 010): gates the learning-mode ordering branches below
+      simulationPaused,
+      deliveryMarkers,
+      spawnedTemplateIds,
     },
-    actions: { deliverWave },
+    actions: { enqueuePRs, markDelivery, recordSpawnedTemplates },
   } = useGameState();
   const { locale } = useLocale();
 
+  const trackerRef = useRef<WaveTracker>(getWaveTracker(`${runId}:${currentDay}`));
   const workingPoolRef = useRef<PullRequestTemplate[]>([]);
   const basePoolRef = useRef<PullRequestTemplate[]>([]);
   const spawnCountRef = useRef(0);
-  const pendingDeliveriesRef = useRef<Map<string, PullRequest[]>>(new Map());
+  const trackerResetKeyRef = useRef<string>("");
+  const lastHourlyCheckRef = useRef<number>(-1);
 
   const drawBatch = useCallback(
     (count: number, day: number): PullRequest[] => {
@@ -145,16 +172,18 @@ export const usePRSpawner = () => {
       });
       return results;
     },
-    [languagePreference, locale]
+    [locale]
   );
 
   useEffect(() => {
+    if (contentTrack === 'basics') return;
     let cancelled = false;
 
     const applyPools = (templates: PullRequestTemplate[]) => {
-      const basePool = templates.filter((template) =>
-        templateMatchesPreference(template, languagePreference)
-      );
+      const alreadySpawned = new Set(spawnedTemplateIds);
+      const eligible = templates.filter((template) => templateMatchesPreference(template, languagePreference));
+      const unseen = eligible.filter(template => !alreadySpawned.has(template.templateId));
+      const basePool = unseen.length > 0 ? unseen : eligible;
       basePoolRef.current = basePool;
       if (difficulty === "learning") { // SPIKE(plan 010): learning mode orders the pool by curriculum tier for the current day; normal mode falls through to the pre-spike shuffle untouched
         workingPoolRef.current = orderForLearning(basePool, currentDay); // SPIKE: deterministic curriculum order (see docs/learning-mode-curriculum.md)
@@ -166,6 +195,8 @@ export const usePRSpawner = () => {
     // Seed synchronously from the eager (generic) pack so the day-1 scripted
     // tutorial wave and early draws never wait on a lazy-loaded chunk.
     applyPools(eagerTemplates);
+    spawnCountRef.current = 0;
+    lastHourlyCheckRef.current = -1;
 
     // Empty preference means "everything" (see templateMatchesPreference),
     // so load every pack; otherwise only the selected languages' packs.
@@ -199,115 +230,104 @@ export const usePRSpawner = () => {
       cancelled = true;
     };
   }, [
+    contentTrack,
     currentDay,
     languagePreference,
     difficulty, // SPIKE(plan 010): re-derive pools when the mode changes so learning ordering applies
+    spawnedTemplateIds,
   ]);
 
   useEffect(() => {
-    if (phase !== "WORK") {
+    const key = `${runId}:${currentDay}`;
+    if (trackerResetKeyRef.current !== key) {
+      trackerResetKeyRef.current = key;
+      trackerRef.current = getWaveTracker(key);
+    }
+    deliveryMarkers.forEach(marker => {
+      if (marker.startsWith('default:')) trackerRef.current.waves.add(Number(marker.slice('default:'.length)));
+      if (marker.startsWith('scripted:')) trackerRef.current.scripted.add(marker.slice('scripted:'.length));
+      if (marker.startsWith('hourly:')) lastHourlyCheckRef.current = Math.max(lastHourlyCheckRef.current, Number(marker.slice('hourly:'.length)));
+    });
+  }, [currentDay, deliveryMarkers, runId]);
+
+  useEffect(() => {
+    if (phase !== "WORK" || simulationPaused || contentTrack === 'basics') {
       return;
     }
 
     const scriptedWaves = getScriptedWavesForDay(currentDay);
-    const delivered = new Set(deliveredWaveIds);
-    deliveredWaveIds.forEach((waveId) => {
-      pendingDeliveriesRef.current.delete(waveId);
-    });
-    const prepareDelivery = (
-      waveId: string,
-      create: () => PullRequest[],
-      consumesWorkingPool: boolean
-    ): PullRequest[] => {
-      const pending = pendingDeliveriesRef.current.get(waveId);
-      if (pending) {
-        if (consumesWorkingPool) {
-          pending.forEach((pr) => {
-            const templateIndex = workingPoolRef.current.findIndex(
-              (template) => template.templateId === pr.templateId
-            );
-            if (templateIndex >= 0) {
-              workingPoolRef.current.splice(templateIndex, 1);
-            }
-          });
-        }
-        return pending;
-      }
-      const prs = create();
-      if (prs.length > 0) {
-        pendingDeliveriesRef.current.set(waveId, prs);
-      }
-      return prs;
-    };
-    const deliver = (waveId: string, prs: PullRequest[] = []) => {
-      delivered.add(waveId);
-      deliverWave(waveId, prs);
-    };
+    const triggeredWaves = trackerRef.current.waves;
+    const triggeredScripted = trackerRef.current.scripted;
     const shouldSkipDefaultWave = (minute: number): boolean => {
       return scriptedWaves.some((wave) => wave.atMinute === minute);
     };
 
     DEFAULT_WAVE_MINUTES.forEach((minute) => {
-      const waveId = `default:${minute}`;
-      if (currentTime >= minute && !delivered.has(waveId)) {
+      if (currentTime >= minute && !triggeredWaves.has(minute)) {
         if (shouldSkipDefaultWave(minute)) {
-          deliver(waveId);
+          triggeredWaves.add(minute);
+          markDelivery(`default:${minute}`);
+          return;
+        }
+        if (tutorialBlocksLaterWave(currentDay, minute, queue)) {
           return;
         }
         const count = minute === 0 ? 2 : pickWeightedWaveCount();
-        const prs = prepareDelivery(
-          waveId,
-          () => drawBatch(count, currentDay),
-          true
-        );
+        const prs = drawBatch(count, currentDay);
         if (prs.length === 0 && basePoolRef.current.length === 0) {
           // Lazy language packs may still be loading; leave the wave marker
           // unset so this wave re-attempts on the next tick instead of being
           // silently lost (waves must fire — see agent.md non-negotiables).
           return;
         }
-        deliver(waveId, prs);
+        triggeredWaves.add(minute);
+        if (prs.length > 0) {
+          enqueuePRs(prs);
+          recordSpawnedTemplates(prs.map(pr => pr.templateId));
+          markDelivery(`default:${minute}`);
+        }
       }
     });
 
     scriptedWaves.forEach((wave, index) => {
-      const waveId = `scripted:${wave.atMinute}:${index}`;
-      if (currentTime >= wave.atMinute && !delivered.has(waveId)) {
-        const prs = prepareDelivery(
-          waveId,
-          () => spawnSpecific(wave.templateIds, currentDay),
-          false
-        );
-        deliver(waveId, prs);
+      const key = `${wave.atMinute}-${index}`;
+      if (currentTime >= wave.atMinute && !triggeredScripted.has(key)) {
+        triggeredScripted.add(key);
+        const prs = spawnSpecific(wave.templateIds, currentDay);
+        if (prs.length > 0) {
+          enqueuePRs(prs);
+          recordSpawnedTemplates(prs.map(pr => pr.templateId));
+          markDelivery(`scripted:${key}`);
+        }
       }
     });
 
     const currentHour = Math.floor(currentTime / 60);
-    const hourlyWaveId = `hourly:${currentHour}`;
-    const withinHourlyWindow = currentHour >= 1 && currentHour <= 7;
-    if (withinHourlyWindow && !delivered.has(hourlyWaveId)) {
-      const totalQueue = queue.length + (currentPR ? 1 : 0);
+    const withinHourlyWindow = currentDay > 1 && currentHour >= 1 && currentHour <= 7;
+    if (withinHourlyWindow && currentHour !== lastHourlyCheckRef.current) {
+      const totalQueue = queue.length;
       if (totalQueue === 0) {
-        const prs = prepareDelivery(
-          hourlyWaveId,
-          () => drawBatch(1, currentDay),
-          true
-        );
+        const prs = drawBatch(1, currentDay);
         if (prs.length > 0) {
-          deliver(hourlyWaveId, prs);
+          lastHourlyCheckRef.current = currentHour;
+          enqueuePRs(prs);
+          recordSpawnedTemplates(prs.map(pr => pr.templateId));
+          markDelivery(`hourly:${currentHour}`);
         }
       } else {
-        deliver(hourlyWaveId);
+        lastHourlyCheckRef.current = currentHour;
       }
     }
   }, [
+    contentTrack,
     phase,
+    simulationPaused,
     currentTime,
     currentDay,
-    deliveredWaveIds,
-    deliverWave,
+    enqueuePRs,
+    markDelivery,
+    recordSpawnedTemplates,
     queue,
-    currentPR,
     spawnSpecific,
     drawBatch,
   ]);

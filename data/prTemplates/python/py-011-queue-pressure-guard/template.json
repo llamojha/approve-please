@@ -1,7 +1,8 @@
 {
   "templateId": "py-011-queue-pressure-guard",
   "title": "Tighten queue pressure guard",
-  "author": "Imani D.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Adds a helper that decides when the orchestrator queue is overloaded.",
   "tags": [
     "logic",

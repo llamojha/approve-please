@@ -1,7 +1,8 @@
 {
   "templateId": "js-026-switch-case-missing-colon",
   "title": "Switch case missing colon",
-  "author": "Nora I.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Adds response mapping for priority tiers.",
   "tags": [
     "bugfix",
@@ -54,7 +55,21 @@
         48
       ],
       "severity": "major",
-      "description": "Switch case label is missing a colon, causing a syntax error."
+      "description": "Switch case label is missing a colon, causing a syntax error.",
+      "localizedDescription": {
+        "es": "A la etiqueta case del switch le faltan los dos puntos, lo que provoca un error de sintaxis."
+      }
     }
-  ]
+  ],
+  "localized": {
+    "es": {
+      "title": "Dos puntos ausentes en un case de switch",
+      "description": "Añade el mapeo de respuestas para los niveles de prioridad.",
+      "tags": [
+        "corrección",
+        "javascript",
+        "sintaxis"
+      ]
+    }
+  }
 }

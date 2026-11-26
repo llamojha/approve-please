@@ -1,7 +1,8 @@
 {
   "templateId": "rust-016-incident-slo-handoff",
   "title": "Incident SLO captain handoff logic",
-  "author": "Theo G.",
+  "author": "Inés Romero",
+  "authorId": "ines",
   "description": "Determines when to page the incident captain based on meter thresholds.",
   "tags": [
     "logic",

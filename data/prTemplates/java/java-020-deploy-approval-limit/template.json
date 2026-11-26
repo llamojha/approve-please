@@ -1,7 +1,8 @@
 {
   "templateId": "java-020-deploy-approval-limit",
   "title": "Deploy approval limit checker",
-  "author": "Tessa U.",
+  "author": "Evan",
+  "authorId": "evan",
   "description": "Enforces the maximum number of approvals required per deploy.",
   "tags": [
     "logic",

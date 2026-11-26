@@ -1,7 +1,8 @@
 {
   "templateId": "css-074-buggy-scroll-behavior",
   "title": "Enable smooth scrolling",
-  "author": "Hugo W.",
+  "author": "Ben",
+  "authorId": "ben",
   "description": "Adds smooth scroll behavior for anchor links.",
   "tags": ["scroll", "ux"],
   "localized": {

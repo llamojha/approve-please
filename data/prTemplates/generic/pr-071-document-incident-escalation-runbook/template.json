@@ -1,7 +1,8 @@
 {
   "templateId": "pr-071-document-incident-escalation-runbook",
   "title": "Document Incident Escalation runbook",
-  "author": "Akiko F.",
+  "author": "Riya",
+  "authorId": "riya",
   "description": "Adds an escalation runbook with severity tiers and contact matrix for on-call.",
   "tags": [
     "cleanup",

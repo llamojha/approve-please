@@ -1,7 +1,8 @@
 {
   "templateId": "java-030-path-traversal-loader",
   "title": "Template loader helper",
-  "author": "Devon C.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Loads markdown templates from disk for notifications.",
   "tags": [
     "security",

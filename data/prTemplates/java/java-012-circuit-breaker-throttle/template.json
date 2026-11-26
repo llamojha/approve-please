@@ -1,7 +1,8 @@
 {
   "templateId": "java-012-circuit-breaker-throttle",
   "title": "Circuit breaker throttle",
-  "author": "Joon P.",
+  "author": "Tessa",
+  "authorId": "tessa",
   "description": "Adds a helper to decide if we should block requests based on failure rate.",
   "tags": [
     "logic",

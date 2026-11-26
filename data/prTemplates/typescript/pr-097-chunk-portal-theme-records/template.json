@@ -1,7 +1,8 @@
 {
   "templateId": "pr-097-chunk-portal-theme-records",
   "title": "Chunk Portal Theme records",
-  "author": "Casey D.",
+  "author": "Lucía Navarro",
+  "authorId": "lucia",
   "description": "Adds pagination helpers for portal theme batches.",
   "tags": [
     "bugfix",

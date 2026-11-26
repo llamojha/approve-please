@@ -1,7 +1,8 @@
 {
   "templateId": "clean-refactor",
   "title": "Improve notification copy",
-  "author": "Lia N.",
+  "author": "Riya",
+  "authorId": "riya",
   "description": "Refines toast messaging throughout onboarding.",
   "tags": [
     "ux",

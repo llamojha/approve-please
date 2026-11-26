@@ -1,7 +1,8 @@
 {
   "templateId": "css-026-css-variable-definition",
   "title": "Define color palette variables",
-  "author": "Jack N.",
+  "author": "Jonah",
+  "authorId": "jonah",
   "description": "Creates CSS custom properties for the color palette.",
   "tags": ["variables", "colors"],
   "localized": {
