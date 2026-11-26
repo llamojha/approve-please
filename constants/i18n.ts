@@ -1,3 +1,4 @@
+import { groupCopy } from "./groupCopy";
 import { designStudyCopy } from "./designStudyCopy";
 import { audioCopy } from "./audioCopy";
 import { landingPageCopy } from "./landingPageCopy";
@@ -92,6 +93,7 @@ const difficultyLabels: Record<Locale, Record<string, string>> = {
 
 export const TRANSLATIONS = {
   en: {
+    group: groupCopy.en,
     designStudy: designStudyCopy.en,
     audio: audioCopy.en,
     localeToggleLabel: "Select language",
@@ -382,6 +384,7 @@ export const TRANSLATIONS = {
     },
   },
   es: {
+    group: groupCopy.es,
     designStudy: designStudyCopy.es,
     audio: audioCopy.es,
     localeToggleLabel: "Seleccionar idioma",
