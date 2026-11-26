@@ -34,6 +34,7 @@
 .studio { font-size:.875rem; color:var(--subtle); margin-right:auto; }
 .header nav { display:flex; gap:.5rem; flex-wrap:wrap; }
 .header nav button { background:transparent; border-color:transparent; padding:.5rem .75rem; }
+.header nav a { display:inline-flex;align-items:center;padding:.5rem .75rem;border:1px solid var(--line);border-radius:6px;color:var(--ink);font-size:14px;text-decoration:none; }
 .localeToggle { display:flex; border:1px solid var(--line); border-radius:.5rem; padding:.125rem; }
 .localeToggle button { border-color:transparent; min-width:2.75rem; padding:.375rem; font-size:.875rem; }
 .localeToggle button[aria-pressed='true'] { background:var(--wash); color:var(--purple); font-weight:700; }

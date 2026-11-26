@@ -1,0 +1,60 @@
+.page{max-width:1120px;margin:0 auto;padding:48px 28px 72px;color:var(--ink)}
+.hero{max-width:760px;margin-bottom:32px}
+.eyebrow{font-size:13px;letter-spacing:.12em;font-weight:700;color:var(--purple);margin:0 0 14px}
+.hero h1{font-size:clamp(32px,5vw,58px);line-height:1.08;letter-spacing:-.035em;margin:0 0 18px}
+.hero>p:last-child{font-size:18px;line-height:1.6;color:var(--subtle);max-width:62ch}
+.forms{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:24px;min-width:0}
+.card h2{font-size:24px;margin:0 0 24px}
+.symbol{display:block;font-size:30px;color:var(--purple);margin-bottom:12px}
+.card label{display:block;font-size:14px;margin:18px 0 8px;font-weight:600}
+.card input,.card select{display:block;width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink);font:inherit;font-size:16px}
+.card button{margin-top:16px}
+.page button,.notice button{min-height:44px;border:1px solid var(--line);border-radius:7px;padding:10px 14px;background:var(--wash);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}
+.page button:disabled{opacity:.5;cursor:default}
+.page .primary{background:var(--purple);color:var(--paper);border-color:var(--purple)}
+.page button:focus-visible,.page input:focus-visible,.page select:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.muted{color:var(--subtle);font-size:15px;line-height:1.6}
+.error,.notice{border-left:3px solid var(--request-border);background:var(--request-bg);color:var(--request);padding:14px 18px;font-size:16px;line-height:1.5;margin-bottom:20px}
+.notice{margin:0}
+.notice button{margin-left:12px}
+.codeInput{text-transform:uppercase;letter-spacing:.2em;font-family:ui-monospace,monospace!important}
+.roomBanner{display:flex;align-items:center;flex-wrap:wrap;gap:20px;padding:20px 24px;border:1px solid var(--purple);border-radius:12px;background:var(--wash);margin-bottom:24px}
+.roomBanner>div{display:flex;flex-direction:column;gap:4px}
+.roomBanner strong{font-size:32px;letter-spacing:.15em;color:var(--purple);font-family:ui-monospace,monospace}
+.roomBanner span{font-size:13px;color:var(--subtle)}
+.roster{list-style:none;padding:0;display:grid;gap:12px}
+.roster li{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+.roster li>strong{flex:1;min-width:0;overflow-wrap:anywhere}
+.roster li>span:last-child{font-size:14px;color:var(--subtle)}
+.seat{display:grid;place-items:center;width:36px;height:36px;background:var(--wash);color:var(--purple);border-radius:50%;flex-shrink:0}
+.count{font-size:14px;color:var(--subtle);margin-left:10px;font-weight:400}
+.confirm{border:1px solid var(--request-border);border-radius:8px;padding:16px;margin-top:20px}
+.confirm button+button{margin-left:12px}
+.tableScroll{overflow:auto}
+.table{width:100%;border-collapse:collapse;font-size:15px;white-space:nowrap}
+.table th,.table td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line)}
+.table th{font-size:13px;color:var(--subtle);font-weight:600}
+.table tbody tr[data-me='true']{background:var(--wash)}
+.table td:nth-child(3){color:var(--purple);font-weight:700}
+.recapList{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.recapList li{padding:16px;border:1px solid var(--line);border-radius:9px}
+.recapList header{display:flex;justify-content:space-between;gap:16px;align-items:start}
+.recapList strong{font-size:16px}
+.recapList header>span{flex-shrink:0;color:var(--purple);font-size:14px}
+.recapList p{font-size:16px;line-height:1.6;color:var(--subtle);margin:10px 0 0}
+.expected{display:block;margin-top:8px;font-size:14px;color:var(--purple)}
+.groupStatus{font-size:14px;color:var(--subtle);line-height:1.5}
+.queueMobile{display:none}
+.waitingClock{color:var(--purple);font:600 28px ui-monospace,monospace}
+.audioPanel{padding:18px}
+.score{font-size:42px;font-weight:700;color:var(--purple);margin:16px 0}
+.score small{display:block;font:400 14px/1.6 sans-serif;color:var(--subtle)}
+@media(max-width:700px){.page{padding:30px 16px 48px}
+.forms{grid-template-columns:1fr;gap:0}
+.card{padding:20px}
+.roomBanner{padding:16px;gap:12px}
+.roomBanner strong{font-size:28px}
+.queueMobile{display:block}
+.recapList header{flex-direction:column;gap:6px}
+.roster li[data-playing='true']>span:last-child{margin-left:48px;flex-basis:100%}}

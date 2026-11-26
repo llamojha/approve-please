@@ -1,5 +1,9 @@
 # Implementation Plans
 
+## Group sessions
+
+Plan 020 (`plans/020-group-sessions.md`) implements shared review rooms on `codex/group-sessions`, based on main at `f760b50`. The local implementation includes host/player flows, server scoring and group feedback. Preview database activation and classroom testing remain explicit deployment gates.
+
 ## Current refresh roadmap
 
 Plan 013 is IN PROGRESS: UI/UX refresh, developer-led coworkers and contributor authoring. It starts from main and excludes the existing open PRs. See `/Users/amllamojha/.codex/worktrees/main-assessment/approve-please/plans/013-ui-ux-characters-and-authoring.md` for phases, parallel ownership, acceptance gates and milestone TODOs. Phase 1 implementation is complete, including the rendered desk; the owner requested a full ten-person cast and product-like Afterhours presentation in the same preview PR. Owner visual review precedes Phase 2. Implementation PRs target `codex/ui-refresh-preview`, not `main`.

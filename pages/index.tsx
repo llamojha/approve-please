@@ -64,7 +64,7 @@ export default function IndexPage() {
       <header className={styles.header}>
         <Link href="/" className={styles.brand} aria-label={t.home}><span aria-hidden="true"><BrandMark fill /></span>approve<b>please</b><i>.</i></Link>
         <span className={styles.studio}>{t.studio}</span>
-        <nav aria-label={t.home}><button onClick={openGuide}>{t.howToPlay}</button><button onClick={() => setLeaderboardOpen(true)}>{t.leaderboard}</button></nav>
+        <nav aria-label={t.home}><button onClick={openGuide}>{t.howToPlay}</button><button onClick={() => setLeaderboardOpen(true)}>{t.leaderboard}</button><Link href="/group">{translations.group.nav}</Link></nav>
         <button type="button" className={styles.themeToggle} onClick={toggleTheme} aria-label={translations.designStudy.theme} aria-pressed={isDark}><span aria-hidden="true">{isDark ? '☀' : '◐'}</span><span>{isDark ? translations.designStudy.changeThemeLight : translations.designStudy.changeThemeDark}</span></button>
         <div className={styles.localeToggle} role="group" aria-label={translations.localeToggleLabel}>{LOCALE_OPTIONS.map(({ value, label }) => <button key={value} onClick={() => setLocale(value)} aria-pressed={locale === value}>{label}</button>)}</div>
       </header>
